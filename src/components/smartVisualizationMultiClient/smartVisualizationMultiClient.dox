@@ -1,0 +1,42 @@
+/*!
+\page smartVisualizationMultiClient 2D Visualization Multi Client
+
+  A single client component which visualizes as set of PushNewest/PushTimed servers
+  by means of their default paint methods.
+  
+  \subsection sec_visualization_multi_client_options Ini File Options
+
+  Check example ini file. Most options are self explanatory. The old documentation 
+  on (no longer existing) command line options follows.
+  
+  The component accepts up to three command line arguments.
+  The \c "servers" option is required and indicates the servers which are to be 
+  visualized. An example is
+  \code
+    smartVisualizationMultiClient -servers="(smartNomad200BaseServer,basestate,basestate,3)"
+  \endcode
+  which causes subscription to the basestate PushTimed service named \c "basestate" at component
+  \c "smartNomad200BaseServer" with every third update being visualized.
+  The general syntax for the value of the \c "servers" argument is
+  \verbatim
+    ( "(" <component-name> "," <service-name> "," <datatype-name> "," <interval> ")" ) +
+  \endverbatim
+  A zero interval indicates a PushNewest service, a non-zero interval indicates a PushTimed 
+  service with the respective update interval.
+  Known data type names are \c "mobilelaserscan", \c "baseposition", \c "basestate", 
+  and \c "lasertrackingdata" (lower case version of the respective \c "Smart::Comm" 
+  prefixed class names).
+  
+  If you need to run multiple instances of this component, you have to give each of them
+  a unique component name:
+  \code
+    smartVisualizationMultiClient [-name=<component name>] ...
+  \endcode
+  The default name is \c "smartVisualizationMultiClient".
+
+  If you do not want to connect to the default visualization server \c "smartVisualizationServer",
+  you can indicate your desired visualization target with
+  \code
+    smartVisualizationMultiClient [-visserver=<visualization server name>] ...
+  \endcode
+*/

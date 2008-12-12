@@ -1,0 +1,59 @@
+// --------------------------------------------------------------------------
+//
+//  Copyright (C) 2003 Boris Kluge
+//
+//        schlegel@hs-ulm.de
+//
+//        Prof. Dr. Christian Schlegel
+//        University of Applied Sciences
+//        Prittwitzstr. 10
+//        D-89075 Ulm
+//        Germany
+//
+//  This file is part of the "SmartSoft Basic Communication Classes".
+//  It provides basic standardized data types for communication between
+//  different components in the mobile robotics context. These classes
+//  are designed to be used in conjunction with the SmartSoft Communication
+//  Library.
+//
+//  This library is free software; you can redistribute it and/or
+//  modify it under the terms of the GNU Lesser General Public
+//  License as published by the Free Software Foundation; either
+//  version 2.1 of the License, or (at your option) any later version.
+//
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//  Lesser General Public License for more details.
+//
+//  You should have received a copy of the GNU Lesser General Public
+//  License along with this library; if not, write to the Free Software
+//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+//  (partly based on work by Christian Schlegel and Pablo d'Angelo)
+//
+// --------------------------------------------------------------------------
+
+#ifndef _SMART_IDL_DIRECTION3D
+#define _SMART_IDL_DIRECTION3D
+
+module SmartIDL 
+{
+  // description of a 3d direction by azimuth and elevation.
+  // given azimuth a and elevation e, the direction is
+  //   d_x = cos a * cos e;
+  //   d_y = sin a * cos e;
+  //   d_z = sin e;
+  struct Direction3d
+  {
+    // the azimuth is the angle of the direction being projected into
+    // the x-y-plane and the positive x-axis
+    double azimuth;
+
+    // the elevation is the angle between the x-y-plane and the direction
+    double elevation;
+  };
+};
+
+#endif
+

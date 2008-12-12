@@ -1,0 +1,56 @@
+/*!
+\page page_basic-demo Basic demo with a Pioneer P3DX
+
+While the \ref page_core-examples gives an insight into the SmartSoft-Framework with its communication 
+patterns and objects, this section provides a first real-world scenario. In this scenario the 
+robot drives maximising his translation velocity while avoiding collisions.
+
+   Our reference robot setup:
+   - Pioneer P3DX (H8S Microcontroller) with AROS 1.13 <br>
+     we changed the baudrate of our robots to 115200 and the SIP (Server Information Packet) 
+     cycle to 25. (details: Pioneer Operations Manual - AROScf) <br>
+     Attentions for Player/Stage users: Changing the baudrate can cause problems with the 
+     connection between Player and your robot (Connection Timeout). It seems that Player 
+     connects to the robot by trying different baudrates stored in the bauds-array. As the 
+     baudrate 115200 is the fourth rate to try, a timeout occures before the connection is 
+     etablished. <br>
+     To solve the Problem you have to modify your p2os driver (<Player-Dir>/server/drivers/mixed/p2os/p2os.cc). 
+     Simply change the order of the baudrates in the bauds-array (line 544). The bauds-array looks like 
+     “int bauds[] = {B9600, B38400, B19200, <b>B115200</b>, B57600};” and should look like “int bauds[] = {<b>B115200</b>, B38400, B9600};”
+
+   - Laserscanner SICK LMS 200
+
+    Components:
+     - \e smartPioneerBaseserver
+     - \e smartLaserServer
+     - \e smartCdlServer 
+     - \e smartRobotConsole 
+
+
+    Run the demo:
+    - Be sure that the Corba Naming Service is running and the NameServiceIOR environment-variable is set corecctly!
+    (see \ref examples)
+
+    - Be sure that the interface-devices of your robot and the Laserscanner are set correctly. Please check:
+    \verbatim
+    $SMART_ROOT/src/components/smartPioneerBaseServer/smartPioneerBaseServer.ini
+    $SMART_ROOT/src/components/smartLaserServer/smartLaserServer.ini \endverbatim
+
+    - Now run the components:
+    \verbatim
+    # cd $SMART_ROOT
+    # bin/smartPioneerBaseServer
+    # bin/smartLaserServer
+    # bin/smartCdlServer
+    # bin/smartRobotConsole \endverbatim
+
+   Configure and start the CDL using the smartRobotConsole:
+    - choose “CDL parameter” to set each of the parameters: <br>
+      <tt>strategy(reactive)</tt> -> reactive collision-free driving <br>
+      <tt>freebehavior(activated)</tt> -> allow robot to free himself in stalled situations <br>
+      <tt>lookuptable(default)</tt> -> this sets the contour of the P3DX <br>
+      <tt>transvel(0)(800)</tt> -> set min/max translation velocity <br>
+      <tt>rotvel(-50)(50)</tt> -> set rotational velocities <br>
+    - now choose “CDL state” and “moverobot”
+
+*/

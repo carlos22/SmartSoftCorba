@@ -1,0 +1,51 @@
+/*!
+\page smart_basic_com-xml SmartSoft Communication and XML
+
+  SmartSoft is based on CORBA, therefore communicated data is described by IDL definitions,
+  and instances of such data are transmitted by means of CORBA.
+
+  Another approach for data exchange is given by XML techniques 
+  (<a href="http://www.w3schools.com/xml/default.asp">XML</a>, 
+   <a href="http://www.w3schools.com/dtd/default.asp">DTD</a>,
+   <a href="http://www.w3schools.com/schema/default.asp">Schema</a>, etc.).
+  XML Schema (XSD) provides a way of defining the structure of valid XML documents and 
+  allows the use of data types.
+
+  This document tries to describe the current implementations available in SmartSoft and 
+  to outline a possibly better approach for the future.
+
+  \subsection smart_xml_impl Current Implementation
+
+  Communication is completely based on types which are given by IDL definitions.
+  Capabilities of dealing with XML are merely an add-on.
+  Most C++ classes used as communicated types provide two methods
+  \code
+    void save_xml(std::ostream &os, const std::string &indent = "") const;
+    void load_xml(std::istream &is);
+  \endcode
+  which allow serialization and deserialization to/from streams conveying XML-formatted data.
+  But be warned that no "real" parsing or error checking is done during reading.
+  These functions where invented mainly for data logging and replay.
+
+  \subsection smart_xml_future Possible Future Direction
+
+  This section presents an idea of how to integrate XML and IDL.
+  The proposed approach is as following:
+
+  (1) Any type \c T used for communication is defined by an XML Schema \c T_xsd.
+
+  (2) A compiler (to be written) transforms the XML Schema \c T_xsd into an IDL definition \c T_idl.
+
+  (3) A similar compiler (to be written) transforms the XML Schema \c T_xsd into C++ code \c T_xform
+      which provides methods for (de)serializing instances of the IDL structure \c T_idl to/from
+      XML documents which conform to the XML Schema \c T_xsd.
+
+  (4) At the moment, C++ classes which are used for communication are something like wrappers around
+      the underlying IDL objects. Now, implement such C++ classes using the code generated
+      by the (existing) IDL compiler from \c T_idl (as previously), 
+      and use the code \c T_xform to implement methods for (de)serializing instances
+      of the class to/from XML.
+
+  Using XML Schema definitions as a starting point is proposed since I expect those to be
+  much easier to parse than IDL definitions (they simply are XML documents).
+*/

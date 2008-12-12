@@ -1,0 +1,2 @@
+// dummy
+#include "smartXmlOutputStream.hh"

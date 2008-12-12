@@ -1,0 +1,13 @@
+Makefile.depend
+obj
+tests
+*.ini
+*C.cc
+*C.hh
+*C.i
+*S.cc
+*S.hh
+*S.i
+*S_T.cc
+*S_T.hh
+*S_T.i

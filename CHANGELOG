@@ -1,0 +1,65 @@
+==========================================================================
+
+Changelog
+
+
+The changelog is organized in reverse order with the latest change at the
+head of the changelog. Each entry consists of the date where the change
+was carried out. It furthermore contains a short description of the change
+and of what all might be affected.
+
+==========================================================================
+
+09Jun2008	Adjustments due to migration to
+		Kernel 2.6.x / ACE+TAO 5.6.x => OpenSuSE 10.3
+
+		University of Applied Sciences Ulm	Christian Schlegel <schlegel@hs-ulm.de>
+
+==========================================================================
+
+14Feb2005	Adjustment of the header files due to new affiliations of
+		Christian Schlegel and Boris Kluge. Moved repository to
+		University of Applied Sciences Ulm	Christian Schlegel <schlegel@fh-ulm.de>
+
+==========================================================================
+
+22Sep2004	migration to ACE 5.4 / TAO 1.4		Christian Schlegel <schlegel@fh-ulm.de>
+
+==========================================================================
+
+16Jul2003	components/smartLaserReplayServer	Boris Kluge <kluge@faw.uni-ulm.de>
+
+	Added a component which replays laser scans from XML files, for example 
+	scans which have been recorded previously by the smartDataLoggingClient.
+	In principle it should be easy to extend this concept to other data types,
+	but since there is no common way of accessing the time stamp of a record,
+	timing the pushes on replay cannot be done in a generic way.
+
+==========================================================================
+
+10Jun2003	components/smartSpeechOutputServer	Boris Kluge <kluge@faw.uni-ulm.de>
+
+	Added a text2speech component "smartSpeechOutputServer".
+	This component does not provide text2speech capabilities on its
+	own, but acts as an adapter to text2speech packages like "mbrola". 
+	It can be even configured in a way such that no speech is output but 
+	the text goes for example to a logfile.
+	See smartSpeechOutputServer.dox for details on the component and mbrola.dox
+	for details on how to set up mbrola for the german language (which is not
+	straightforward!).
+
+==========================================================================
+
+05/27/03	smartSoftKernel/smartSoft	Christian Schlegel
+						schlegel@faw.uni-ulm.de
+
+	Removed the "SendServer<C>" argument in the call of "handleSend()"
+	of the SendServerHandler. The reason is that the handleSend() does
+  	not need to call the SendServer as is the case with the Query for
+	example where one has to provide the answer.
+
+	Look at the handleSend() member function of all derived classes of 
+	the SendServerHandler class and remove the first argument there.
+   	The "SmartQtSendServerHandler" and the "ThreadQueueSendHandler"
+	do not provide anymore the server reference which received the
+	command.

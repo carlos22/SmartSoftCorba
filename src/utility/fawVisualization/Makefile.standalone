@@ -1,0 +1,384 @@
+#--------------------------------------------------------------------------
+#
+#  Copyright (C) 2002 Boris Kluge
+#
+#        schlegel@hs-ulm.de
+#
+#        Prof. Dr. Christian Schlegel
+#        University of Applied Sciences
+#        Prittwitzstr. 10
+#        D-89075 Ulm
+#        Germany
+#
+#  This file is part of the "FAW Visualization Tools".
+#  Its goal is offline and online visualization of 2d geometric data
+#  and its export to various graphics file formats.
+#
+#  This library is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU Lesser General Public
+#  License as published by the Free Software Foundation; either
+#  version 2.1 of the License, or (at your option) any later version.
+#
+#  This library is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with this library; if not, write to the Free Software
+#  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+#
+#--------------------------------------------------------------------------
+ 
+NAME = fawVisualization
+
+##
+## System config variables
+##
+
+SHELL         = bash
+RM            = rm -rf
+ETAGS         = etags
+CC            = gcc
+CXX           = g++
+CPP           = gcc -E 
+AR            = ar r
+RANLIB        = ranlib
+MKDIR         = install -d
+INSTALL_TEXT  = install -m 664
+INSTALL_EXEC  = install -m 775 $(STRIP)
+INSTALL_LIB   = install -m 664
+INSTALL_H     = -$(SILENT) ln -s -f
+INSTALL_ETC   = -$(SILENT) ln -s
+CP            = cp
+ECHO          = @echo
+#SUDO          = sudo
+SUDO          = echo "* SUDO DID NOT DO:"
+LEX           = flex -i
+YACC          = yacc -dv
+CURSES_TYPE   = curses
+PERL          = perl
+AWK           = awk
+
+##
+## Architecture independence
+## This section will need much work to make the system truely portable
+##
+
+OS_NAME      = $(shell uname -s)
+OS_VER       = $(shell uname -r | $(AWK) '{print substr($$1,0,1)}' )
+OS_MINOR_VER = $(shell uname -r | $(AWK) '{print substr($$1,3,1)}' )
+CPU_TYPE     = $(shell uname -m)
+
+##
+## arch options
+##
+
+DEPEND      = Makefile.depend
+OBJ_DIR     = obj
+
+##
+## Install directories
+##
+
+PREFIX    = $(HOME)/software/orocos-chs
+
+INC_DIR   = $(PREFIX)/include
+LIB_DIR   = $(PREFIX)/lib
+BIN_DIR   = $(PREFIX)/bin
+
+##
+## Compilation options
+##
+
+INCLUDES   += -I. \
+              -I$(INC_DIR) \
+              -I/usr/include/ncurses \
+	      -I/usr/X11R6/include \
+	      -I/usr/local/X11R6/include \
+	      -I/usr/include/X11R6 \
+	      -I/usr/local/include/X11R6 \
+	      -I/usr/X11/include \
+	      -I/usr/local/X11/include \
+	      -I/usr/include/X11 \
+	      -I/usr/local/include/X11 \
+	      -I/usr/X11R5/include \
+	      -I/usr/local/X11R5/include \
+	      -I/usr/include/X11R5 \
+	      -I/usr/local/include/X11R5
+
+LIB_DIRS   += -L. \
+              -L$(OBJ_DIR) \
+              -L$(LIB_DIR) \
+	      -L/usr/X11R6/lib \
+	      -L/usr/local/X11R6/lib \
+	      -L/usr/lib/X11R6 \
+	      -L/usr/local/lib/X11R6 \
+	      -L/usr/X11/lib \
+	      -L/usr/local/X11/lib \
+	      -L/usr/lib/X11 \
+	      -L/usr/local/lib/X11 \
+	      -L/usr/X11R5/lib \
+	      -L/usr/local/X11R5/lib \
+	      -L/usr/lib/X11R5 \
+	      -L/usr/local/lib/X11R5 \
+	      -L/usr/lib/termcap
+
+CFLAGS     += $(OPT_FLAGS) $(USER_DEFINES) 
+#CFLAGS     += -W
+#CFLAGS     += -Wswitch
+#CFLAGS     += -Wuninitialized
+#CFLAGS     += -Wparentheses
+CFLAGS   += -Wall
+# CFLAGS   += -fno-common
+# CFLAGS   += -Wl,-warn-common
+# CFLAGS   += -Werror
+# CFLAGS   += -Wshadow
+CFLAGS     += -Wno-pmf-conversions
+CFLAGS     += -D_REENTRANT
+CFLAGS     += -D_POSIX_THREADS
+CFLAGS     += -D_POSIX_THREAD_SAFE_FUNCTIONS
+
+##
+## Either "@" for quiet or "" for verbose
+##
+
+SILENT = 
+
+##
+## Compiler optimization/debugging flags (-g -O2 can be combined)
+##
+
+OPT_FLAGS   = -g -O2
+
+##
+## uncomment to strip executables during installation
+##
+
+#STRIP = -s
+
+##
+## OS-specific libraries
+##
+
+ifeq ($(OS_NAME),Linux)
+OS_LIBS =
+else
+ifeq ($(OS_VER), 5)
+OS_LIBS = -lsocket -lnsl
+else
+OS_LIBS =
+endif
+endif
+
+
+
+
+
+
+ifeq ($(OS_NAME),Linux)
+LINUX_MAKEFILE = /usr/src/linux/Makefile
+
+VERSION = $(shell head -10 $(LINUX_MAKEFILE) | fgrep VERSION \
+	| fgrep = | fgrep -v "\#" | cut -d "=" -f 2 | tr -d ' ' )
+
+PATCHLEVEL = $(shell head -10 $(LINUX_MAKEFILE) | fgrep PATCHLEVEL \
+	| fgrep = | fgrep -v "\#" | cut -d "=" -f 2 | tr -d ' ' )
+
+SUBLEVEL = $(shell head -10 $(LINUX_MAKEFILE) | fgrep SUBLEVEL \
+	| fgrep = | fgrep -v "\#" | cut -d "=" -f 2 | tr -d ' ' )
+
+LINUX_VERSION_CODE = $(shell echo `expr $(VERSION) \\* 65536 + \
+	$(PATCHLEVEL) \\* 256 + $(SUBLEVEL)` )
+
+SMP = $(shell head -20 $(LINUX_MAKEFILE) | fgrep SMP | fgrep -v "_PROF" \
+	| fgrep = | fgrep -v "\#" | cut -d "=" -f 2 | tr -d ' ' )
+
+SMP_PROF = $(shell head -20 $(LINUX_MAKEFILE) | fgrep SMP_PROF \
+	| fgrep = | fgrep -v "\#" | cut -d "=" -f 2 | tr -d ' ' )
+endif
+
+##
+## Variables
+##
+
+DEPENDENCIES    += *.cc
+
+CLEAN_FILES     += *.moc.cc *.o *.a *~ core a.out obj doc
+
+DISTCLEAN_FILES += $(INC_DIR)/fawBoundingBox.hh \
+                   $(INC_DIR)/fawBoundingBoxComputationPainter.hh \
+                   $(INC_DIR)/fawDrawingAction.hh \
+                   $(INC_DIR)/fawDrawingCommunicationData.hh \
+                   $(INC_DIR)/fawDrawingGenericProxyShapeNode.hh \
+                   $(INC_DIR)/fawDrawingGroupNode.hh \
+                   $(INC_DIR)/fawDrawingNode.hh \
+                   $(INC_DIR)/fawDrawingNodeParent.hh \
+                   $(INC_DIR)/fawDrawingPoint.hh \
+                   $(INC_DIR)/fawDrawingPolygon.hh \
+                   $(INC_DIR)/fawDrawingPolygonNode.hh \
+                   $(INC_DIR)/fawDrawingPrintAction.hh \
+                   $(INC_DIR)/fawDrawingRenderAction.hh \
+                   $(INC_DIR)/fawDrawingShapeNode.hh \
+                   $(INC_DIR)/fawDrawingStoreReplayPainter.hh \
+                   $(INC_DIR)/fawDrawingStyle.hh \
+                   $(INC_DIR)/fawDrawingStyleNode.hh \
+                   $(INC_DIR)/fawDrawingTransformation.hh \
+                   $(INC_DIR)/fawDrawingTransformationNode.hh \
+                   $(INC_DIR)/fawDrawingWidget.hh \
+                   $(INC_DIR)/fawDrawingWidgetPainter.hh \
+                   $(INC_DIR)/fawDrawingWidgetRegionZoom.hh \
+                   $(INC_DIR)/fawDrawingWidgetTransformation.hh \
+                   $(INC_DIR)/fawFigObjects.hh \
+                   $(INC_DIR)/fawFigPainter.hh \
+                   $(INC_DIR)/fawPainter.hh \
+                   $(BIN_DIR)/fawVisualizationTest \
+                   $(LIB_DIR)/libfawVisualization.a
+
+##
+## local build variables
+##
+
+USER_DEFINES += -DQT_THREAD_SUPPORT
+
+INCLUDES += -I$(QTDIR)/include
+LIB_DIRS += -L$(QTDIR)/lib
+LFLAGS   += -Wl,-rpath,$(QTDIR)/lib
+
+FAW_VISUALIZATION_TEST_OBJ = $(OBJ_DIR)/fawVisualizationTest.o \
+                             $(OBJ_DIR)/fawVisualizationTest.moc.o 
+
+FAW_VISUALIZATION_LIB_OBJ  = $(OBJ_DIR)/fawBoundingBoxComputationPainter.o \
+                             $(OBJ_DIR)/fawDrawingGenericProxyShapeNode.o \
+                             $(OBJ_DIR)/fawDrawingGroupNode.o \
+                             $(OBJ_DIR)/fawDrawingNode.o \
+                             $(OBJ_DIR)/fawDrawingPolygon.o \
+                             $(OBJ_DIR)/fawDrawingPrintAction.o \
+                             $(OBJ_DIR)/fawDrawingRenderAction.o \
+                             $(OBJ_DIR)/fawDrawingStoreReplayPainter.o \
+                             $(OBJ_DIR)/fawDrawingStyle.o \
+                             $(OBJ_DIR)/fawDrawingStyleNode.o \
+                             $(OBJ_DIR)/fawDrawingTransformationNode.o \
+                             $(OBJ_DIR)/fawDrawingWidget.moc.o \
+                             $(OBJ_DIR)/fawDrawingWidget.o \
+                             $(OBJ_DIR)/fawDrawingWidgetPainter.o \
+                             $(OBJ_DIR)/fawDrawingWidgetRegionZoom.moc.o \
+                             $(OBJ_DIR)/fawDrawingWidgetRegionZoom.o \
+                             $(OBJ_DIR)/fawFigObjects.o \
+                             $(OBJ_DIR)/fawFigPainter.o \
+                             $(OBJ_DIR)/fawPainter.o
+
+VISUALIZATION_TEST_LIBS = -lfawVisualization -lqt -lm
+
+##
+## Compulsory rules
+##
+
+all:
+	$(MAKE) -f Makefile.standalone export $(DEPEND)
+	$(MAKE) -f Makefile.standalone build
+
+build: $(OBJ_DIR) $(LIB_DIR) $(BIN_DIR) \
+	$(LIB_DIR)/libfawVisualization.a \
+	$(BIN_DIR)/fawVisualizationTest
+
+export:
+	$(ECHO) "    ---- Installing header files"
+	$(SILENT) $(MKDIR) $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawBoundingBox.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawBoundingBoxComputationPainter.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawDrawingAction.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawDrawingCommunicationData.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawDrawingGenericProxyShapeNode.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawDrawingGroupNode.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawDrawingNode.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawDrawingNodeParent.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawDrawingPoint.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawDrawingPolygon.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawDrawingPolygonNode.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawDrawingPrintAction.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawDrawingRenderAction.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawDrawingShapeNode.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawDrawingStoreReplayPainter.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawDrawingStyle.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawDrawingStyleNode.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawDrawingTransformation.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawDrawingTransformationNode.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawDrawingWidget.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawDrawingWidgetPainter.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawDrawingWidgetRegionZoom.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawDrawingWidgetTransformation.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawFigObjects.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawFigPainter.hh $(INC_DIR)
+	$(INSTALL_H) `pwd`/fawPainter.hh $(INC_DIR)
+
+clean:
+	$(RM) $(CLEAN_FILES)
+
+distclean: clean
+	$(RM) $(DEPEND) Makefile.depend* $(DISTCLEAN_FILES)
+
+##
+## local rules
+##
+
+$(OBJ_DIR) $(LIB_DIR) $(BIN_DIR):
+	$(SILENT) $(MKDIR) $@
+
+$(BIN_DIR)/fawVisualizationTest: $(FAW_VISUALIZATION_TEST_OBJ) $(LIB_DIR)/libfawVisualization.a
+	$(ECHO) "    ---- Creating $@"
+	$(SILENT) $(CXX) $(LIB_DIRS) $(LFLAGS) -o $@ \
+                $(FAW_VISUALIZATION_TEST_OBJ) $(VISUALIZATION_TEST_LIBS)
+
+$(LIB_DIR)/libfawVisualization.a: $(FAW_VISUALIZATION_LIB_OBJ)
+	$(ECHO) "    ---- Creating $@"
+	$(SILENT) $(AR) $@ $(FAW_VISUALIZATION_LIB_OBJ)
+	$(SILENT) $(RANLIB) $@
+
+##
+## Standard suffix, version, packaging and dep rules
+##
+
+.SUFFIXES: .c .C .cc .o .i .S .s .l .y
+
+$(OBJ_DIR)/%.o %.o: %.cc
+	$(ECHO) "    ---- Compiling $< (C++)"
+	$(SILENT) $(CXX) $(CFLAGS) $(INCLUDES) -c -o $@ $<
+
+##
+## Dependencies
+##
+
+dep $(DEPEND) depend:
+ifeq ($(DEPENDENCIES),)
+else
+	$(ECHO) "    ---- Analysing dependencies for $(DEPENDENCIES)"
+	$(SILENT) $(CPP) -M $(CFLAGS) $(INCLUDES) $(DEPENDENCIES) 2> /dev/null | \
+	$(AWK) '{if (index($$0,".o:") > 0) printf "$(OBJ_DIR)/"; print $0}' \
+	> $(DEPEND)
+endif
+
+ifeq ($(DEPEND), $(wildcard $(DEPEND)))
+include $(DEPEND)
+endif
+
+fawVisualizationTest.moc.o: fawVisualizationTest.hh
+fawVisualizationTest.moc.cc: fawVisualizationTest.hh
+	$(QTDIR)/bin/moc fawVisualizationTest.hh -o fawVisualizationTest.moc.cc
+  
+fawDrawingWidget.moc.o: fawDrawingWidget.hh
+fawDrawingWidget.moc.cc: fawDrawingWidget.hh
+	$(QTDIR)/bin/moc fawDrawingWidget.hh -o fawDrawingWidget.moc.cc
+  
+fawDrawingWidgetRegionZoom.moc.o: fawDrawingWidgetRegionZoom.hh
+fawDrawingWidgetRegionZoom.moc.cc: fawDrawingWidgetRegionZoom.hh
+	$(QTDIR)/bin/moc fawDrawingWidgetRegionZoom.hh -o fawDrawingWidgetRegionZoom.moc.cc
+  
+fawVisualizationUpdateThread.moc.o: fawVisualizationUpdateThread.hh
+fawVisualizationUpdateThread.moc.cc: fawVisualizationUpdateThread.hh
+	$(QTDIR)/bin/moc fawVisualizationUpdateThread.hh -o fawVisualizationUpdateThread.moc.cc
+  
+fawVisualizationClientGUIThread.moc.o: fawVisualizationClientGUIThread.hh
+fawVisualizationClientGUIThread.moc.cc: fawVisualizationClientGUIThread.hh
+	$(QTDIR)/bin/moc fawVisualizationClientGUIThread.hh -o fawVisualizationClientGUIThread.moc.cc
+  

@@ -1,0 +1,13 @@
+fawDrawingCommunicationData.hh 
+fawDrawingStyle.hh 
+fawDrawingStoreReplayPainter.hh 
+fawDrawingTransformation.hh 
+fawDrawingWidget.hh 
+fawDrawingWidgetPainter.hh 
+fawDrawingWidgetRegionZoom.hh 
+fawDrawingWidgetTransformation.hh 
+fawFigPainter.hh 
+fawFigObjects.hh 
+fawPainter.hh 
+fawStreamPainter.hh
+fawZoomPanPainter.hh

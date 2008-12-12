@@ -1,0 +1,43 @@
+/*!
+\page page_utilities Utility Packages
+
+  \subsection sec_util_visualization FAW Visualization
+
+  This visualization package provides
+  - a Qt widget for metric 2d drawing which 
+    - can be zoomed and panned conveniently,
+    - offers many signals for mouse events with metric arguments,
+    - delegates repainting through a signal <tt>void redraw(Faw::Painter &painter)</tt>.
+    (see Faw::DrawingWidget)
+  - an output abstraction which provides a uniform interface (Faw::Painter) for output to
+    GUI widgets, xfig files (and various other formats by means of the <tt>fig2dev</tt>
+    package) (Faw::FigPainter), 
+    and storing/transmitting/replaying drawing actions (Faw::DrawingStoreReplayPainter).
+
+  \subsection sec_util_props Properties
+
+  Properties are described on their own page:
+  \ref page_property
+
+  \subsection sec_util_streams FAW Streams
+
+  The streams package provides
+  - stream decorators for on-the-fly compression and decompression,
+  - memory streams with output to efficient dynamic buffers,
+  - stream wrappers for file descriptors (not included anymore with gcc 3.x).
+  
+  \subsection sec_util_sick Smart SICK Interface
+
+  This SICK interface was initially taken from the 
+  <a href="http://playerstage.sourceforge.net/">Player Stage Project</a>
+  and adapted to our needs.
+  It provides "higher-level" access to the communication protocol of the SICK laser range finders.
+  
+  \subsection sec_util_smart_qt Smart/Qt Processing Patterns
+
+  Decorator templates Smart::QtPushTimedClient and Smart::QtPushNewestClient are provided
+  for SmartSoft client classes which simplify writing graphical user interfaces
+  for SmartSoft components using the Qt toolkit.
+  They use a common base class Smart::QtSignallingInterface for signalling events.
+  
+*/

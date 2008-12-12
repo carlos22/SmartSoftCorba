@@ -1,0 +1,3 @@
+// dummy.hh
+// "needed" since the Makefile runs a grep on all .hh files,
+// i.e. on its stdin if no .hh file exists...

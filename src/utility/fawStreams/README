@@ -1,0 +1,143 @@
+This directory provides some iostream, streambuf, and buffer classes.
+All of the methods are inlined, i.e. all you have to link against is 
+libz if you want to use compression. 
+Since the implementation of the iostreams differs notably between 
+gcc-2.95.2 and gcc-3.2, there are alternative implementations, which
+are marked by the infix "gcc2" for the vintage version.
+
+Comments on each file follow below.
+
+------------------
+FILES:
+fawDeflatingOutputStream.gcc2.hh
+fawDeflatingOutputStream.hh
+fawDeflatingOutputStreamBuf.gcc2.hh
+fawDeflatingOutputStreamBuf.hh
+
+COMMENT:
+Wrapper for ostream/streambuf. Data written to a DeflatingOutputStream
+is compressed and written to the associated ostream/streambuf.
+
+TESTS:
+fawDeflate.cc
+  If a filename FN is given on the command line, FN is deflated to FN.deflated,
+  otherwise stdin is deflated to stdout.
+
+------------------
+FILES:
+fawInflatingInputStream.gcc2.hh
+fawInflatingInputStream.hh
+fawInflatingInputStreamBuf.gcc2.hh
+fawInflatingInputStreamBuf.hh
+
+COMMENT:
+Wrapper for istream/streambuf. Data available from the associated istream/
+streambuf is assumed to be compressed and is inflated on reading.
+
+TESTS:
+fawInflate.cc
+  Complement to fawDeflate.
+  If a filename FN is given on the command line, FN is inflated to FN.inflated,
+  otherwise stdin is inflated to stdout.
+fawStreamCompressionTest.cc
+  If a command line argument "level" is given, deflates stdin with compression 
+  level "level" stdout. Otherwise, stdin is deflated to stdout.
+
+------------------
+FILES:
+fawDynamicBuffer.gcc2.hh
+fawDynamicBuffer.hh
+
+COMMENT:
+A dynamic buffer for long strings. Chunks of memory (several 100 bytes) are 
+allocated dynamically to hold the data. Appending is supported, deleting is
+unsupported.
+
+------------------
+FILES:
+fawMemoryStreamBuf.gcc2.hh
+fawMemoryStreamBuf.hh
+
+COMMENT:
+A streambuf that collaborates with the dynamic buffer above. A simple application
+example is compressing output in memory: create a dynamic buffer "buf", create a
+memory streambuf "sb" associated with "buf", create a deflating output streambuf
+"dos" connected to "sb", and write data to "dos". After closing "dos", the compressed
+data can be read from "buf".
+
+------------------
+FILES:
+fawBufferInputStream.gcc2.hh
+fawBufferInputStream.hh
+fawBufferInputStreamBuf.gcc2.hh
+fawBufferInputStreamBuf.hh
+
+COMMENT:
+Associate a streambuf/istream with any begin/end-pair of input-iterators.
+
+------------------
+FILES:
+fawBufferOutputStream.gcc2.hh
+fawBufferOutputStream.hh
+fawBufferOutputStreamBuf.gcc2.hh
+fawBufferOutputStreamBuf.hh
+
+COMMENT:
+Associate a streambuf/ostream with a begin/end-pair of output-iterators.
+Writing to the stream may fail if the buffer is full, i.e. the current
+iterator equals the end-iterator.
+
+TEST:
+fawBufferStreamsTest.cc
+  Create a buffer (vector<char>) in memory, associate streams to it, write to and 
+  read from the streams.
+
+------------------
+FILES:
+fawFileDesInputStream.gcc2.hh
+fawFileDesInputStream.hh
+fawFileDesInputStreamBuf.gcc2.hh
+fawFileDesInputStreamBuf.hh
+
+COMMENT:
+gcc-2.95.2 provides an ifstream ctor which accepts a file descriptors as argument. Since 
+the more STL-conforming gcc-3.2 does not provide such a ctor any more, I wrote an own class 
+for this purpose.
+
+------------------
+FILES:
+fawFileDesOutputStream.gcc2.hh
+fawFileDesOutputStream.hh
+fawFileDesOutputStreamBuf.gcc2.hh
+fawFileDesOutputStreamBuf.hh
+
+COMMENT:
+See comment on fawFileDesInputStream above.
+
+TEST:
+fawFileDesStreamsTest.cc
+  Send a file (given by its name on the command line) to /dev/null using
+  FileDesStreams. Not really usefull.
+
+------------------
+FILE:
+fawFileCompare.cc
+
+COMMENT:
+Used for debugging. Simply ignore it, or read the source code for more information.
+
+------------------
+FILE:
+fawStreamsTest.cc
+
+COMMENT:
+Stream data from stdin through a DeflatingOutputStream into a DynamicBuffer.
+Then, stream data from the buffer through a InflatingInputStream to stdout.
+Reports character counts (compression ratio).
+
+------------------
+FILE:
+fawMemoryStreamBufTest.cc
+
+COMMENT:
+Same as fawStreamsTest, without the deflating/inflating steps.

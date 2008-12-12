@@ -1,0 +1,28 @@
+/*!
+\page page_tutorial_client Writing Client Applications
+
+\section tutorial_client_01 Introduction
+
+In any client server applications, you need some means for communication
+between the client and the server.
+Classically, the client creates a socket connection to the server, sends
+commands, requests, etc. over the socket to the server, and receives the replies
+of the server back over the same socket. 
+Therefore, sockets can be seen as <b>communication end points</b>.
+
+OROCOS::SmartSoft provides templates of communication patterns, 
+which can be seen as typed communication end points.
+The typing is twofold:
+- There is a finite set of available communication patterns, and each communication end point
+  is an instance of one pattern.
+- The types of the data transmitted to the server and back to the client are fixed for
+  each communication end point.
+
+\section tutorial_client_02 Bar
+
+
+  
+\section tutorial_client_03 Whee
+  
+*/
+

@@ -1,0 +1,82 @@
+// --------------------------------------------------------------------------
+//
+//  Copyright (C) 2003 Boris Kluge
+//
+//        schlegel@hs-ulm.de
+//
+//        Prof. Dr. Christian Schlegel
+//        University of Applied Sciences
+//        Prittwitzstr. 10
+//        D-89075 Ulm
+//        Germany
+//
+//  This file is part of the "SmartSoft Basic Communication Classes".
+//  It provides basic standardized data types for communication between
+//  different components in the mobile robotics context. These classes
+//  are designed to be used in conjunction with the SmartSoft Communication
+//  Library.
+//
+//  This library is free software; you can redistribute it and/or
+//  modify it under the terms of the GNU Lesser General Public
+//  License as published by the Free Software Foundation; either
+//  version 2.1 of the License, or (at your option) any later version.
+//
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//  Lesser General Public License for more details.
+//
+//  You should have received a copy of the GNU Lesser General Public
+//  License along with this library; if not, write to the Free Software
+//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+//  (partly based on work by Christian Schlegel and Pablo d'Angelo)
+//
+// --------------------------------------------------------------------------
+
+#ifndef _SMART_IDL_LASERSCAN
+#define _SMART_IDL_LASERSCAN
+
+#include "smartTimeStamp.idl"
+
+module SmartIDL 
+{
+  struct LaserScanPoint
+  {
+    unsigned short index; // the position of the point in the scan point sequence
+    unsigned short distance; // distance in units as defined in containing LaserScan
+    char intensity; // intensity of reflected light (value = 0 .. 7)
+  };
+
+  struct LaserScan
+  {
+    boolean is_valid;
+
+    // the timestamp of the scan
+    TimeStamp time;
+
+    // sequence count of the scan
+    unsigned long update_count;
+
+    // the direction of the scan points, relative to the scanning device.
+    // zero angle is forward, angles increase counterclockwise.
+    // for example, the values for SICK devices are: 
+    //   start_angle = -9000, resolution = 50
+    // in a default mode.
+    // values for start_angle range from 0 to 35999
+    unsigned short start_angle; // [0.01 degrees]
+    unsigned short resolution;  // [0.01 degrees]
+
+    // distance unit in [mm],
+    // possible values are 1, 10, and 100.
+    // distance of scan point i in [mm] is scan_points[i].distance * length_unit
+    unsigned short length_unit;
+
+    // the scan points.
+    // the direction of scan point i is (first_angle + scan_points[i].index * resolution)
+    sequence<LaserScanPoint> scan_points;
+  };
+};
+
+#endif
+

@@ -1,0 +1,280 @@
+/*!
+\mainpage SmartSoft
+
+\section what What is SmartSoft ?
+
+SmartSoft is a component approach for robotics software based on communication patterns as core of a robotics component
+model. The framework assists the component developer, the application builder and the end user in building and using distributed
+components in such a way that the semantics of the interface of components is predefined by the communication patterns, irrespective
+of where they are applied. Dynamic wiring of components at run-time is explicitly supported by the wiring pattern which makes the
+major difference to other approaches. This allows to implement loosely coupled and distributed systems based on standardized
+components whose interaction can be adjusted according to the current context and requirements.
+
+
+\section desc Description
+
+This software package contains a CORBA based implementation of the SmartSoft communication patterns. The SmartSoft framework provides
+a component approach based on communication patterns and has been designed for robotics software. However, the framework is not limited
+at all to robotics applications.
+   
+
+   - <i>Components</i> are technically implemented as processes. A component 
+           can contain several threads and interacts with other components via 
+           predefined communication patterns and communciation objects. Components can be wired dynamically 
+           at runtime. 
+
+   - <i>Communication Patterns</i> assist the component builder and the application builder 
+           in building and using distributed components in such a way that the semantics of 
+           the interface is predefined by the patterns, irrespective of where they are applied. 
+           A communication pattern defines the communication mode, provides predefined access 
+           methods and hides all the communication and synchronization issues. It always 
+           consists of two complementary parts named the <i>service requestor</i> and the 
+           <i>service provider</i> representing a <i>client/server</i>, a <i>master/slave</i> 
+           or a <i>publisher/subscriber</i> relationship. 
+
+   - <i>Communication Objects</i> parameterize the communication pattern templates. They 
+           represent the content to be transmitted via a communication pattern. They are 
+           always transmitted <i>by value</i> to avoid fine grained intercomponent communication 
+           each time an attribute is accessed. Furthermore, object responsibilities are much
+           simpler with locally maintained objects than with remote objects. Communication 
+           objects are ordinary objects decorated with additional member functions for use 
+           by the framework. 
+
+   - <i>Service</i>. Each instantiation of a communication pattern provides a service. A 
+           service comprises the communication mode as defined by the communication pattern 
+           and the content as defined by the communication objects. 
+
+   The set of communication patterns comprises the following patterns: 
+
+    - send 
+      - @ref CHS::SendClient, @ref CHS::SendServer, @ref CHS::SendServerHandler
+    - query 
+      - @ref CHS::QueryClient, @ref CHS::QueryServer, @ref CHS::QueryServerHandler
+    - push newest
+      - @ref CHS::PushNewestClient, @ref CHS::PushNewestServer
+    - push timed 
+      - @ref CHS::PushTimedClient, @ref CHS::PushTimedServer, @ref CHS::PushTimedHandler
+    - event 
+      - @ref CHS::EventClient, @ref CHS::EventHandler, @ref CHS::EventServer, @ref CHS::EventTestHandler
+
+    and
+
+    - wiring 
+      - @ref CHS::WiringMaster, @ref CHS::WiringSlave
+
+    The framework explicitly supports dynamic wiring of components at run time by a separate 
+    wiring-pattern. Dynamic wiring can be considered as the pattern of robotics. Making both the
+    control flow and the data flow configurable from outside a component is for example the key 
+    to situated skill compositions and is required in nearly any robotic architecture. The dynamic
+    wiring pattern tightly interacts with the communication primitives and makes one of the major 
+    difference to other approaches. 
+
+    Additionally patterns mainly for user convenience are for example 
+
+    - state management pattern
+      - @ref CHS::SmartStateClient, @ref CHS::SmartStateServer
+    - parameter management
+      - @ref CHS::SmartParameter
+    - task management
+      - @ref CHS::SmartTask
+
+
+
+\section content What does the package contain ?
+
+   - The SmartSoft core provides the framework to built and assemble components. The SmartSoft core for example 
+     includes the communication patterns.
+ 
+   - A set of basic communication objects which cover the most basic data types needed for robotics communication.
+ 
+   - Utilities like a painter for easy visualization. The painter works with Qt and several other graphic formats.
+ 
+   - Basic components to interface to standard sensors like the SICK laser range finder and to standard mobile platforms.
+ 
+   - Other components providing high level skills like motion control, mapping etc.
+
+
+
+\section doc Documentation
+
+    Up-to-date documentation is generated automatically. The SmartSoft API documentation provides all necessary details 
+    on how to use the SmartSoft patterns.
+
+    @ref page_tutorial_overview gives a good general overview and a motivation behind the SmartSoft approach. 
+    This overview is highly recommended !
+
+    Further documentation can be found in the example directories. The example components contain user defined communication 
+    objects, examples of proposed file structures and Makefiles. The examples are ideal points to start when to learn how to 
+    use the communication patterns.
+
+    The amount of documentation is extended continuously.
+
+
+
+\section pub Publications
+
+    - C. Schlegel. The Challenge of Real-Time Robotics Behavior: An Applied Research Perspective. In Proc. SDIR-III, IEEE ICRA 2008, Pasadena, 2008.
+
+    - C. Schlegel. Software Engineering for Experimental Robotics. In Davide Brugali, editor, Communication Patterns as Key Towards Component Interoperability, Ausgabe 30. Springer, STAR series, 2007.
+
+    - C. Schlegel. Communication Patterns as Key Towards Component-Based Robotics. International Journal on Advanced Robotics Systems, Special Issue on Software Development and Integration in Robotics, 3(1):49-54,  03 2006.
+
+    - C. Schlegel. <a href="http://www.hs-ulm.de/users/cschlege/_downloads/phd-thesis-schlegel.pdf">Navigation and Execution for Mobile Robots in Dynamic Environments - An Integrated Approach.</a> PhD thesis, Computer Science Department, University of Ulm, 2004.
+
+    - C. Schlegel. A Component Approach for Robotics Software: Communication Patterns in the OROCOS Context. In <i>18. Fachtagung Autonome Mobile Systeme (AMS)</i>, Informatik aktuell, pages 253-263. Springer, Karlsruhe, December 2003.
+ 
+    - C. Schlegel and R. W&ouml;rz. The Software Framework SmartSoft for Implementing Sensorimotor Systems. In <i>Proceedings IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</i>, pages 1610-1616. Kyongju, Korea, October 1999.
+ 
+    - C. Schlegel and R. W&ouml;rz. Interfacing Different Layers of a Multilayer Architecture for Sensorimotor Systems using the Object-Oriented Framework SmartSoft. In <i>Proceedings 3rd European Workshop on Advanced Mobile Robots (EUROBOT)</i>. Z&uuml;rich, Switzerland, September 1999.
+ 
+    - C. Schlegel, R. W&ouml;rz. Der Softwarerahmen SmartSoft zur Implementierung sensomotorischer Systeme. In <i>14. Fachtagung Autonome Mobile Systeme (AMS)</i>, Informatik aktuell, pages 208-217. Springer, Karlsruhe, November 1998.
+
+
+
+\section dir_struct Overall directory structure
+
+   The communication patterns can be found in <tt>src/smartSoftKernel/smartSoft</tt>,
+   example components are in <tt>src/smartSoftKernel/smartExampleComponent*</tt>. The
+   communication objects are in subdirectories of <tt>src/interfaceClasses</tt> and
+   provided components are in subdirectories of <tt>src/components</tt>.
+
+
+   - <tt>src</tt> : Contains the sourcecode
+       - <tt>smartSoftKernel</tt> : subdirectories with the core of the framework
+           - <tt>smartSoft</tt> : the SmartSoft kernel sources
+           - <tt>smartExampleComponent*</tt> : examples illustrating the usage of the SmartSoft patterns
+       - <tt>interfaceClasses</tt> : subdirectories with communication objects. 
+                                     Communication objects are always built as library.
+       - <tt>components</tt> : subdirectories with readily available components
+       - <tt>utility</tt> : subdirectories with additional tools which do not
+                            depend on SmartSoft
+           - <tt>property</tt> : Extension to provide components with \ref page_property.
+   - <tt>include</tt> : links to all globally needed include files
+   - <tt>lib</tt> : all needed libraries
+   - <tt>bin</tt> : all binaries
+   - <tt>etc</tt> : links to globally needed parameter files etc.
+   - <tt>doc</tt> : the documentation
+
+
+
+\section install Installation
+
+  <b>Requirements </b>
+
+   - <a href="http://www.cs.wustl.edu/~schmidt/TAO.html"> TAO/ACE/CIAO</a> (ACE 5.6, TAO 1.6, and CIAO 0.6) <br>
+     <a href="http://download.dre.vanderbilt.edu/previous_versions/ACE+TAO+CIAO-5.6.tar.gz">link to the source archive</a>
+   - Tested on Linux (SuSE 10.3, gcc 4.2.1)
+   - Doxygen to generate documentation
+   - some commponents need qt3/qt3-devel and the boost library
+ 
+
+  <b> Recommended file structure</b>
+
+   - all <b>source-files</b> in /home/<username>/SOFTWARE/DOWNLOAD/
+
+   - <b>ACE_TAO</b> source-files in /home/<username>/SOFTWARE/ACE_wrappers-ACE+TAO+CIAO-5.6/ <br>
+     with link to: /home/<username>/SOFTWARE/ACE_wrappers
+     (create link: ln -s ACE_wrappers-ACE+TAO+CIAO-5.6 ACE_wrappers)
+
+   - <b>SmartSoft</b> source-files: 
+     /home/<username>/SOFTWARE/smartsoft-ACE-5.6+TAO-1.6 <br>
+     with link to: /home/<username>/SOFTWARE/smartsoft
+
+
+  <b>ACE+TAO installation</b>
+
+        - Download and unpack TAO (ACE 5.6 / TAO 1.6)
+       
+	Set environment variables:
+	\verbatim
+	# export ACE_ROOT=/home/<username>/SOFTWARE/ACE_wrappers
+        # export TAO_ROOT=$ACE_ROOT/TAO
+        # export LD_LIBRARY_PATH=$ACE_ROOT/lib:$LD_LIBRARY_PATH \endverbatim
+
+ 	Probably you want to set <tt>$ACE_ROOT</tt>, <tt>$TAO_ROOT</tt> and <tt>$SMART_ROOT</tt>
+   	somewhere inside your .bashrc so that they become permanent (recommended).
+
+	Create ACE configuration files:
+        - create config.h
+        \verbatim
+        # cd $ACE_ROOT/ace
+        # vi config.h \endverbatim
+        content of config.h
+        \verbatim
+	#include "ace/config-linux.h" 
+        \endverbatim
+	--> don't forget the newline at the end of the file
+
+        - create platform_macros.GNU
+        \verbatim
+	# cd $ACE_ROOT/include/makeinclude
+        # vi platform_macros.GNU \endverbatim
+	content of platform_macros.GNU
+        \verbatim
+	include $(ACE_ROOT)/include/makeinclude/platform_linux.GNU \endverbatim
+
+	\attention compilation of ACE + TAO can require several hours on slow machines.
+
+	
+	Build ACE and TAO:
+        \verbatim
+	# cd $ACE_ROOT
+        # time make \endverbatim
+	--> can require about 15 min\endverbatim
+
+	\verbatim
+        # cd $TAO_ROOT
+	# time make \endverbatim
+	--> can require more than 3 hours
+
+   <b>SmartSoft installation</b><br> 
+Go to the software directory and checkout the current release of the CORBA based communication patterns.
+     - <tt># cd software</tt>
+     - <tt># export CVSROOT=:pserver:anonymous@cvs.sourceforge.net:/cvsroot/smart-robotics</tt>
+     - <tt># cvs login</tt>
+     - <tt># cvs checkout orocos-smartsoft</tt>
+
+   Now build the framework and the example components:
+     - <tt># cd orocos-smartsoft</tt>
+     - <tt># export SMART_ROOT=`pwd`</tt>
+     - <tt># cd src</tt>
+     - <tt># make</tt>
+
+
+
+
+\section examples Examples
+
+   \attention Most examples do not unbind themself from the naming
+              service properly (they just abort on Ctrl-C). Therefore,
+              it might be necessary to restart the naming service
+              between two tests. Will be changed soon !
+
+   All Components depend on the CORBA NamingService, therefore it has
+   to be started before any components:
+   \verbatim
+   # $TAO_ROOT/orbsvcs/Naming_Service/Naming_Service -m 0 -ORBEndpoint iiop://localhost:9999 \endverbatim
+
+   Every Component needs to find the NamingService, this can be
+   done by setting the NameServiceIOR environment variable to
+   corbaloc:iiop:localhost:9999/NameService. It is a good idea also to add this export to your .bashrc.
+   
+   \verbatim
+   # export NameServiceIOR=corbaloc:iiop:localhost:9999/NameService \endverbatim
+
+   Another way is to add
+   \verbatim
+   -ORBInitRef NameService=corbaloc:iiop:localhost:9999/NameService \endverbatim
+   as argument when starting a component.
+
+   \ref page_core-examples  describes the examples for the core package.
+
+   \ref page_basic-demo describes a real-world example (Pioneer P3DX, Laserscanner, CDL)
+
+   \ref page_server-components describes the server components which are shipped with SmartSoft.
+
+   \ref page_client-components describes example clients using and demonstrating the above server components.
+
+   \ref page_utilities describes the utility packages used in many places.
+
+*/

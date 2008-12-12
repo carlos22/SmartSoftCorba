@@ -1,0 +1,41 @@
+This directory provides a template for generic transmittable class.
+It maps methods for object serialization
+
+  void save(std:::ostream&) const;
+  void load(std::istream&);
+
+to the CORBA::Any conversion methods
+
+  void get(CORBA::Any&) const;
+  void set(const CORBA::Any&);
+
+required by SmartSoft.
+This is achieved by streaming the serialized object into a memory buffer
+(possibly compressed) and converting this memory buffer to CORBA::Any.
+The other way round we create a (possibly inflating) memory input stream
+from the octet sequence stored in the CORBA::Any.
+
+This package requires the fawStreams package.
+
+FILES:
+fawGenericTransmittable.hh
+fawStreamOctetSequence.idl
+
+TEST:
+fawCompressedTransmissionTest.cc
+  Example for the approach described in the comment above.
+
+TEST:
+fawExampleData.hh
+fawExampleServerComponent.cc
+fawExampleClientComponent.cc
+  Query the user to fill an ExampleData record. Send the data to the server,
+  which will print it to stdout.
+  Note that the ExampleData class does not contain any reference to CORBA.
+
+To build the example components, type "make build-tests".
+To start the example components, type (each line in another terminal):
+
+  $TAO_ROOT/orbsvcs/Naming_Service/Naming_Service -m 0 -ORBEndpoint iiop://localhost:9999
+  ./tests/fawExampleServerComponent -ORBInitRef NameService=corbaloc:iiop:localhost:9999/NameService
+  ./tests/fawExampleClientComponent -ORBInitRef NameService=corbaloc:iiop:localhost:9999/NameService

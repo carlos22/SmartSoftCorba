@@ -1,0 +1,475 @@
+/*!
+\page page_developer_cvs_modules_file CVS Modules File for SmartSoft
+\verbatim
+# File CVSROOT/modules
+#
+# To edit this file, use the command sequence
+#     cvs -d $YOUR_CVSROOT co CVSROOT
+#     your_editor CVSROOT/modules
+#     cvs ci -m "Comment your changes" CVSROOT/modules
+#
+# Three different line formats are valid:
+#	key	-a    aliases...
+#	key [options] directory
+#	key [options] directory files...
+#
+# Where "options" are composed of:
+#	-i prog		Run "prog" on "cvs commit" from top-level of module.
+#	-o prog		Run "prog" on "cvs checkout" of module.
+#	-e prog		Run "prog" on "cvs export" of module.
+#	-t prog		Run "prog" on "cvs rtag" of module.
+#	-u prog		Run "prog" on "cvs update" of module.
+#	-d dir		Place module in directory "dir" instead of module name.
+#	-l		Top-level directory only -- do not recurse.
+#
+# NOTE:  If you change any of the "Run" options above, you'll have to
+# release and re-checkout any working directories of these modules.
+#
+# And "directory" is a path to a directory relative to $CVSROOT.
+#
+# The "-a" option specifies an alias.  An alias is interpreted as if
+# everything on the right of the "-a" had been typed on the command line.
+#
+# You can encode a module within a module by using the special '&'
+# character to interpose another module into the current module.  This
+# can be useful for creating a module that consists of many directories
+# spread out over the entire source repository.
+
+##
+## Standard (complete) SmartSoft Distribution
+##
+## The difference between "complete" and "gpl" is that a "cvs update" within 
+## the "complete" tree will fetch newly added packages, which does not hold
+## for the "gpl" tree (nor for the "lgpl" and "minimal" trees).
+##
+
+all -a orocos-smartsoft
+complete -a orocos-smartsoft
+
+orocos-smartsoft \
+	smartsoft-root \
+	&_src-complete
+
+_src-complete -d src \
+	&_kernel-complete \
+	&_interface_complete \
+	&_utility_complete \
+	&_component_complete
+
+_kernel-complete -d smartSoftKernel smartsoft-src/smartSoftKernel
+_interface_complete -d interfaceClasses smartsoft-src/interfaceClasses
+_utility_complete -d utility smartsoft-src/utility
+_component_complete -d components smartsoft-src/components
+
+##
+## Minimal SmartSoft Distribution
+##
+
+minimal -a orocos-smartsoft-minimal
+
+orocos-smartsoft-minimal \
+	smartsoft-root \
+	&_src-minimal
+
+_src-minimal -d src \
+	&_kernel-minimal
+
+_kernel-minimal -d smartSoftKernel \
+	&_kernel-smartSoft
+
+##
+## SmartSoft LGPL Distribution
+##
+
+lgpl -a orocos-smartsoft-lgpl
+
+orocos-smartsoft-lgpl \
+	smartsoft-root \
+	&_src-lgpl
+
+_src-lgpl -d src \
+	&_kernel-lgpl \
+	&_interface_lgpl \
+	&_utility_lgpl \
+	&_component_lgpl
+
+_kernel-lgpl -d smartSoftKernel \
+	&_kernel-smartSoft \
+	&_kernel-smartExampleComponent1 \
+	&_kernel-smartExampleComponent10 \
+	&_kernel-smartExampleComponent101 \
+	&_kernel-smartExampleComponent102 \
+	&_kernel-smartExampleComponent103 \
+	&_kernel-smartExampleComponent104 \
+	&_kernel-smartExampleComponent11 \
+	&_kernel-smartExampleComponent2 \
+	&_kernel-smartExampleComponent20 \
+	&_kernel-smartExampleComponent21 \
+	&_kernel-smartExampleComponent22 \
+	&_kernel-smartExampleComponent30 \
+	&_kernel-smartExampleComponent31 \
+	&_kernel-smartExampleComponent40 \
+	&_kernel-smartExampleComponent41 \
+	&_kernel-smartExampleComponent50 \
+	&_kernel-smartExampleComponent51 \
+	&_kernel-smartExampleComponent52 \
+	&_kernel-smartExampleComponent60 \
+	&_kernel-smartExampleComponent70 \
+	&_kernel-smartExampleComponent71 \
+	&_kernel-smartExampleComponent80 \
+	&_kernel-smartExampleComponent81 \
+	&_kernel-smartExampleComponent82
+
+_interface_lgpl -d interfaceClasses \
+	&_interface-fawGenericTransmittable \
+	&_interface-property \
+	&_interface-smartBasicComm \
+	&_interface-smartExampleEvent1 \
+	&_interface-smartExampleEvent2 \
+	&_interface-smartExamplePrint \
+	&_interface-smartExampleResult \
+	&_interface-smartExampleTime \
+	&_interface-smartExampleValues
+
+_utility_lgpl -d utility \
+	&_utility-dummyUtility \
+	&_utility-fawStreams \
+	&_utility-property \
+	&_utility-propertySmartSoft
+
+_component_lgpl -d components \
+	&_component-dummyComponent \
+	&_component-smartExampleJoystickNavigationClient \
+	&_component-smartJoystickServer \
+	&_component-smartLaserTrackingServer \
+	&_component-smartVideo4LinuxServer
+
+##
+## SmartSoft GPL Distribution
+##
+
+gpl -a orocos-smartsoft-gpl
+
+orocos-smartsoft-gpl \
+	smartsoft-root \
+	&_src-gpl
+
+_src-gpl -d src \
+	&_kernel-gpl \
+	&_interface_gpl \
+	&_utility_gpl \
+	&_component_gpl
+
+_kernel-gpl -d smartSoftKernel \
+	&_kernel-smartSoft \
+	&_kernel-smartExampleComponent1 \
+	&_kernel-smartExampleComponent10 \
+	&_kernel-smartExampleComponent101 \
+	&_kernel-smartExampleComponent102 \
+	&_kernel-smartExampleComponent103 \
+	&_kernel-smartExampleComponent104 \
+	&_kernel-smartExampleComponent11 \
+	&_kernel-smartExampleComponent2 \
+	&_kernel-smartExampleComponent20 \
+	&_kernel-smartExampleComponent21 \
+	&_kernel-smartExampleComponent22 \
+	&_kernel-smartExampleComponent30 \
+	&_kernel-smartExampleComponent31 \
+	&_kernel-smartExampleComponent40 \
+	&_kernel-smartExampleComponent41 \
+	&_kernel-smartExampleComponent50 \
+	&_kernel-smartExampleComponent51 \
+	&_kernel-smartExampleComponent52 \
+	&_kernel-smartExampleComponent60 \
+	&_kernel-smartExampleComponent70 \
+	&_kernel-smartExampleComponent71 \
+	&_kernel-smartExampleComponent80 \
+	&_kernel-smartExampleComponent81 \
+	&_kernel-smartExampleComponent82
+
+_interface_gpl -d interfaceClasses \
+	&_interface-fawGenericTransmittable \
+	&_interface-fawVisualization \
+	&_interface-property \
+	&_interface-smartBasicComm \
+	&_interface-smartExampleEvent1 \
+	&_interface-smartExampleEvent2 \
+	&_interface-smartExamplePrint \
+	&_interface-smartExampleResult \
+	&_interface-smartExampleTime \
+	&_interface-smartExampleValues
+
+_utility_gpl -d utility \
+	&_utility-dummyUtility \
+	&_utility-fawStreams \
+	&_utility-fawVisualization \
+	&_utility-property \
+	&_utility-propertySmartSoft \
+	&_utility-smartDefaultPaintMethods \
+	&_utility-smartQtProcessingPatterns \
+	&_utility-smartSickInterface
+
+_component_gpl -d components \
+	&_component-dummyComponent \
+	&_component-smartExampleBaseClient \
+	&_component-smartExampleJoystickNavigationClient \
+	&_component-smartExampleLaserClient \
+	&_component-smartExampleLaserTrackingClient \
+	&_component-smartJoystickServer \
+	&_component-smartLaserServer \
+	&_component-smartLaserTrackingServer \
+	&_component-smartLircServer \
+	&_component-smartNomad200BaseServer \
+	&_component-smartVideo4LinuxServer \
+	&_component-smartVideoClient \
+	&_component-smartVisualizationServer
+
+##
+## SmartSoft Packages
+##
+
+#
+# kernel packages
+#
+
+_kernel-smartSoft \
+	-d smartSoft \
+	smartsoft-src/smartSoftKernel/smartSoft
+
+_kernel-smartExampleComponent1 \
+	-d smartExampleComponent1 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent1
+
+_kernel-smartExampleComponent10 \
+	-d smartExampleComponent10 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent10
+
+_kernel-smartExampleComponent101 \
+	-d smartExampleComponent101 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent101
+
+_kernel-smartExampleComponent102 \
+	-d smartExampleComponent102 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent102
+
+_kernel-smartExampleComponent103 \
+	-d smartExampleComponent103 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent103
+
+_kernel-smartExampleComponent104 \
+	-d smartExampleComponent104 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent104
+
+_kernel-smartExampleComponent11 \
+	-d smartExampleComponent11 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent11
+
+_kernel-smartExampleComponent2 \
+	-d smartExampleComponent2 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent2
+
+_kernel-smartExampleComponent20 \
+	-d smartExampleComponent20 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent20
+
+_kernel-smartExampleComponent21 \
+	-d smartExampleComponent21 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent21
+
+_kernel-smartExampleComponent22 \
+	-d smartExampleComponent22 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent22
+
+_kernel-smartExampleComponent30 \
+	-d smartExampleComponent30 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent30
+
+_kernel-smartExampleComponent31 \
+	-d smartExampleComponent31 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent31
+
+_kernel-smartExampleComponent40 \
+	-d smartExampleComponent40 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent40
+
+_kernel-smartExampleComponent41 \
+	-d smartExampleComponent41 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent41
+
+_kernel-smartExampleComponent50 \
+	-d smartExampleComponent50 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent50
+
+_kernel-smartExampleComponent51 \
+	-d smartExampleComponent51 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent51
+
+_kernel-smartExampleComponent52 \
+	-d smartExampleComponent52 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent52
+
+_kernel-smartExampleComponent60 \
+	-d smartExampleComponent60 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent60
+
+_kernel-smartExampleComponent70 \
+	-d smartExampleComponent70 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent70
+
+_kernel-smartExampleComponent71 \
+	-d smartExampleComponent71 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent71
+
+_kernel-smartExampleComponent80 \
+	-d smartExampleComponent80 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent80
+
+_kernel-smartExampleComponent81 \
+	-d smartExampleComponent81 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent81
+
+_kernel-smartExampleComponent82 \
+	-d smartExampleComponent82 \
+	smartsoft-src/smartSoftKernel/smartExampleComponent82
+
+#
+# interface class packages
+#
+
+
+_interface-fawGenericTransmittable \
+	-d fawGenericTransmittable \
+	smartsoft-src/interfaceClasses/fawGenericTransmittable
+
+_interface-fawVisualization \
+	-d fawVisualization \
+	smartsoft-src/interfaceClasses/fawVisualization
+
+_interface-property \
+	-d property \
+	smartsoft-src/interfaceClasses/property
+
+_interface-smartBasicComm \
+	-d smartBasicComm \
+	smartsoft-src/interfaceClasses/smartBasicComm
+
+_interface-smartExampleEvent1 \
+	-d smartExampleEvent1 \
+	smartsoft-src/interfaceClasses/smartExampleEvent1
+
+_interface-smartExampleEvent2 \
+	-d smartExampleEvent2 \
+	smartsoft-src/interfaceClasses/smartExampleEvent2
+
+_interface-smartExamplePrint \
+	-d smartExamplePrint \
+	smartsoft-src/interfaceClasses/smartExamplePrint
+
+_interface-smartExampleResult \
+	-d smartExampleResult \
+	smartsoft-src/interfaceClasses/smartExampleResult
+
+_interface-smartExampleTime \
+	-d smartExampleTime \
+	smartsoft-src/interfaceClasses/smartExampleTime
+
+_interface-smartExampleValues \
+	-d smartExampleValues \
+	smartsoft-src/interfaceClasses/smartExampleValues
+
+#
+# utility packages
+#
+
+
+_utility\
+	-dummyUtility \
+	-d dummyUtility \
+	smartsoft-src/utility/dummyUtility
+
+_utility-fawStreams \
+	-d fawStreams \
+	smartsoft-src/utility/fawStreams
+
+_utility-fawVisualization \
+	-d fawVisualization \
+	smartsoft-src/utility/fawVisualization
+
+_utility-property \
+	-d property \
+	smartsoft-src/utility/property
+
+_utility-propertySmartSoft \
+	-d propertySmartSoft \
+	smartsoft-src/utility/propertySmartSoft
+
+_utility-smartDefaultPaintMethods \
+	-d smartDefaultPaintMethods \
+	smartsoft-src/utility/smartDefaultPaintMethods
+
+_utility-smartQtProcessingPatterns \
+	-d smartQtProcessingPatterns \
+	smartsoft-src/utility/smartQtProcessingPatterns
+
+_utility-smartSickInterface \
+	-d smartSickInterface \
+	smartsoft-src/utility/smartSickInterface
+
+#
+# component packages
+#
+
+
+_component-dummyComponent \
+	-d dummyComponent \
+	smartsoft-src/components/dummyComponent
+
+_component-smartExampleBaseClient \
+	-d smartExampleBaseClient \
+	smartsoft-src/components/smartExampleBaseClient
+
+_component-smartExampleJoystickNavigationClient \
+	-d smartExampleJoystickNavigationClient \
+	smartsoft-src/components/smartExampleJoystickNavigationClient
+
+_component-smartExampleLaserClient \
+	-d smartExampleLaserClient \
+	smartsoft-src/components/smartExampleLaserClient
+
+_component-smartExampleLaserTrackingClient \
+	-d smartExampleLaserTrackingClient \
+	smartsoft-src/components/smartExampleLaserTrackingClient
+
+_component-smartJoystickServer \
+	-d smartJoystickServer \
+	smartsoft-src/components/smartJoystickServer
+
+_component-smartLaserServer \
+	-d smartLaserServer \
+	smartsoft-src/components/smartLaserServer
+
+_component-smartLaserTrackingServer \
+	-d smartLaserTrackingServer \
+	smartsoft-src/components/smartLaserTrackingServer
+
+_component-smartLircServer \
+	-d smartLircServer \
+	smartsoft-src/components/smartLircServer
+
+_component-smartNomad200BaseServer \
+	-d smartNomad200BaseServer \
+	smartsoft-src/components/smartNomad200BaseServer
+
+_component-smartVideo4LinuxServer \
+	-d smartVideo4LinuxServer \
+	smartsoft-src/components/smartVideo4LinuxServer
+
+_component-smartVideoClient \
+	-d smartVideoClient \
+	smartsoft-src/components/smartVideoClient
+
+_component-smartVisualizationServer \
+	-d smartVisualizationServer \
+	smartsoft-src/components/smartVisualizationServer
+\endverbatim
+*/

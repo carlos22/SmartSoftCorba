@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<propertyset name="root">
+  <property name="value1">1</property>
+  <propertyset name="sub_1"/>
+  <propertyset name="sub_2">
+    <property name="value2">2</property>
+    <property name="value3">3</property>
+    <propertyset name="sub_sub_2">
+      <property name="value4">4</property>
+    </propertyset> 
+  </propertyset> 
+</propertyset>
