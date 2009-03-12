@@ -1,6 +1,8 @@
 /*!
 \mainpage SmartSoft
 
+
+
 \section what What is SmartSoft ?
 
 SmartSoft is a component approach for robotics software based on communication patterns as core of a robotics component
@@ -10,6 +12,8 @@ of where they are applied. Dynamic wiring of components at run-time is explicitl
 major difference to other approaches. This allows to implement loosely coupled and distributed systems based on standardized
 components whose interaction can be adjusted according to the current context and requirements.
 
+\section sourcefo SmartSoft repository on Sourceforge
+The SmartSoft repository is hosted on Sourceforge: <a href="http://sourceforge.net/projects/smart-robotics/">SmartSoft repository</a>
 
 \section desc Description
 
@@ -166,7 +170,8 @@ at all to robotics applications.
    - Tested on Linux (SuSE 10.3, gcc 4.2.1)
    - Doxygen to generate documentation
    - some commponents need qt3/qt3-devel and the boost library
- 
+
+   - take care that you have more than 5 GB free disk space available 
 
   <b> Recommended file structure</b>
 
@@ -225,21 +230,21 @@ at all to robotics applications.
 	\verbatim
         # cd $TAO_ROOT
 	# time make \endverbatim
-	--> can require more than 3 hours
+	--> can require more than 2 hours
 
    <b>SmartSoft installation</b><br> 
-Go to the software directory and checkout the current release of the CORBA based communication patterns.
-     - <tt># cd software</tt>
-     - <tt># export CVSROOT=:pserver:anonymous@cvs.sourceforge.net:/cvsroot/smart-robotics</tt>
-     - <tt># cvs login</tt>
-     - <tt># cvs checkout orocos-smartsoft</tt>
+Go to the software directory and checkout the current release of SmartSoft.
+     \verbatim
+     # export SMART_ROOT=/home/<username>/SOFTWARE/smartsoft
+     # cd $SMART_ROOT
+     # svn co https://smart-robotics.svn.sourceforge.net/svnroot/smart-robotics/trunk/smartsoft/ . \endverbatim
 
-   Now build the framework and the example components:
-     - <tt># cd orocos-smartsoft</tt>
-     - <tt># export SMART_ROOT=`pwd`</tt>
-     - <tt># cd src</tt>
-     - <tt># make</tt>
+   Probably you also want to set <tt>$SMART_ROOT</tt> somewhere inside your .bashrc so that they become permanent (recommended).
 
+   Now build the framework and the enclosed components:
+     \verbatim
+     # cd $SMART_ROOT/src
+     # make \endverbatim
 
 
 
@@ -270,7 +275,9 @@ Go to the software directory and checkout the current release of the CORBA based
    \ref page_core-examples  describes the examples for the core package.
 
    \ref page_basic-demo describes a real-world example (Pioneer P3DX, Laserscanner, CDL)
-
+ 
+   \ref page_advanced-demo describes more advanced examples (Pioneer P3DX, Laserscanner, CDL, Planner, Mapper, Speechoutput, Joystick controll)
+ 
    \ref page_server-components describes the server components which are shipped with SmartSoft.
 
    \ref page_client-components describes example clients using and demonstrating the above server components.

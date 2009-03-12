@@ -94,17 +94,17 @@ Robot::Robot()
   totalRotationRight = 0;
 
   // initialize covariance matrix
-  this->oldPos.set_cov(0,0, 20*20);
-  this->oldPos.set_cov(1,1, 20*20);
-  this->oldPos.set_cov(2,2, 2*2/180.0*M_PI);
+  this->oldPos.set_cov(0,0, 50*50);
+  this->oldPos.set_cov(1,1, 50*50);
+  this->oldPos.set_cov(2,2, 5*5/180.0*M_PI);
   this->robotPos.set_cov(0,0, oldPos.get_cov(0,0) );
   this->robotPos.set_cov(1,1, oldPos.get_cov(1,1) );
   this->robotPos.set_cov(2,2, oldPos.get_cov(2,2) );
 
   // uncertainity of robot
-  lamdaSigmaD = 20*20/1000.0; // TODO
-  lamdaSigmaDeltaAlpha = (2*2/360.0) /180.0 * M_PI; // TODO
-  lamdaSigmaDeltaBeta = (1*1/1000.0) /180.0 * M_PI; // TODO
+  lamdaSigmaD = 50*50/1000.0; // TODO
+  lamdaSigmaDeltaAlpha = (5*5/360.0) /180.0 * M_PI; // TODO
+  lamdaSigmaDeltaBeta = (2*2/1000.0) /180.0 * M_PI; // TODO
   
 }
 

@@ -1073,14 +1073,107 @@ CHS::StatusCode CHS::SmartStateServer::acquire(const std::string& substate) thro
 
 CHS::StatusCode CHS::SmartStateServer::tryAcquire(const std::string& substate) throw()
 {
+  //TODO: tryAcquire not really tested
   std::cout << "SmartStateServer::tryAcquire ERROR: NOT YET IMPLEMENTED !!!" << std::endl;
 
-  return SMART_ERROR;
+  std::list<SmartSubStateEntry>::iterator iterator;
+  std::list<SmartSubStateEntry>::iterator sIterator = stateList.end();
+
+  CHS::StatusCode result;
+
+  mutex.acquire();
+
+  if (running == false) {
+    //
+    // not yet activated
+    //
+    result = SMART_NOTACTIVATED;
+  } else {
+    //
+    // state service is running
+    //
+
+    //
+    // first check whether substate is valid
+    //
+    for (iterator=stateList.begin();iterator != stateList.end(); ++iterator) {
+      if (iterator->name == substate) {
+        sIterator = iterator;
+      }
+    }
+    if (sIterator != stateList.end()) {
+      //
+      // substate is valid ...
+      //
+      if (desiredState.action == SSA_CHANGE_STATE) {
+        //
+        // state change requested, therefore do not acquire substate until the
+        // requested state change has been processed
+        //
+        //mutex.release();
+
+        // IMPORTANT:
+        //
+        // if state change is requested but required substate is already active, one has
+        // to wait until the state change has been performed. Since the substate has been
+        // active before the mainstate changed, one would wait here until the next activation
+        // of this substate since normally only the newly activated substates are signalled.
+        // To avoid this problem, we signal all active substates after a main state change
+        // and can therefore safely wait here until the current main state change has been
+        // performed.
+
+        //sIterator->cond.wait();
+
+        //mutex.acquire();
+
+        //
+        // state change completed since we got signal
+        //
+        //(sIterator->cnt)++;
+
+        result = SMART_NOTACTIVATED;
+      } else {
+        //
+        // no state change in progress
+        //
+        if (sIterator->state == STATE_ACTIVATED) {
+          //
+          // requested substate is already active
+          //
+          (sIterator->cnt)++;
+
+          result = SMART_OK;
+        } else {
+          //
+          // requested substate not active => wait
+          //
+          //mutex.release();
+
+          //sIterator->cond.wait();
+
+          //mutex.acquire();
+
+          //(sIterator->cnt)++;
+
+          result = SMART_NOTACTIVATED;
+        }
+      }
+    } else {
+      //
+      // unknown substate
+      //
+      result = SMART_UNKNOWNSTATE;
+    }
+  }
+
+  mutex.release();
+
+  return result;
 }
     // Acquire specified substate if available, otherwise return immediately.
     // SMART_OK                  : everything is ok
-    // SMART_UNKNOWNSTATE        : returns immediately if the requested state is unknown
-    // SMART_NOTACTIVATED        : state object of component not yet activated
+    // SMART_UNKNOWNSTATE        : returns immediately if the requested state is unknown --OK
+    // SMART_NOTACTIVATED        : state object of component not yet activated --OK
     // SMART_ERROR_COMMUNICATION : communication problems
     // SMART_ERROR               : something went wrong
     //

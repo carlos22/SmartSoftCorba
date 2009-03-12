@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2008 Christian Schlegel, Andreas Steck
+//  Copyright (C) 2008 Christian Schlegel, Andreas Steck, Matthias Lutz
 //
 //        schlegel@hs-ulm.de
 //        steck@hs-ulm.de 
@@ -41,11 +41,11 @@
 #include "commNavigationVelocity.hh"
 #include "commMobileLaserScan.hh"
 #include "commCdlParameter.hh"
-
+#include "commPlannerGoal.hh"
+#include "commCdlGoalEvent.hh"
 #include "smartCdlLookup.hh"
 
 #define INI_PARAMETERS_FILE "smartCdlServer.ini"
-
 
 class PrintStateChangeHandler;
 
@@ -70,7 +70,7 @@ struct CdlStateStruct {
 //  double ignoreCircleY;            // inside that circle. If radius is less
 //  double ignoreCircleR;            // or equal to zero, no points are discarded.
 
-//  double approachDistance;         // distance to stop
+  double approachDistance;         // distance to stop
   double rotateError;              // angular error to stop rotation in place
 
   double transAcc;                 // translational acceleration
@@ -82,9 +82,9 @@ struct CdlStateStruct {
   double wmin;                     // current run: minimum allowed velocity
   double wmax;                     // current run: maximum allowed velocity
 
-//  double goalX;                    //
-//  double goalY;                    //
-//  double goalA;                    //
+  double goalX;                    // x coordinate of goal
+  double goalY;                    // y coordinate of goal
+  double goalA;                    // a coordinate of goal
 
 } globalState,localState;
 
@@ -99,12 +99,19 @@ CHS::SmartConditionMutex cdlTrigger(cdlTriggerLock);
 
 // TODO
 //CdlCircleClass cdlCircle;
-//CdlGoalEventStateClass goalEventState;
 //CdlCdlEventStateClass cdlEventState;
+
+Smart::CdlGoalEventState cdlGoalEventState;
+CHS::EventServer<Smart::CommCdlGoalEventParameter,Smart::CommCdlGoalEventResult,Smart::CdlGoalEventState>
+*cdlGoalEventServer;
+
+
 
 CHS::SmartComponent *component;
 CHS::PushNewestClient<Smart::CommMobileLaserScan> *laserClient;
+CHS::PushNewestClient<Smart::CommPlannerGoal> *plannerClient;
 CHS::SendClient<Smart::CommNavigationVelocity> *navigationVelocitySendClient;
+
 CHS::SendServer<Smart::CommCdlParameter> *parameterServer;
 CHS::SendServer<Smart::CommNavigationVelocity> *navigationVelocitySendServer; // for Joystick input
 
@@ -194,6 +201,14 @@ public:
         else if( (Smart::CdlTagType)p1 == Smart::CDL_TURN )
         {
           std::cout << "CDL_TURN selected\n";
+        }
+	else if( (Smart::CdlTagType)p1 == Smart::CDL_APPROACH_HALT )
+        {
+          std::cout << "CDL_APPROACH_HALT selected\n";
+        }
+        else if( (Smart::CdlTagType)p1 == Smart::CDL_ROTATE )
+        {
+          std::cout << "CDL_ROTATE selected\n";
         }
         else
         {
@@ -322,7 +337,92 @@ public:
         break;
       }
 
- 
+
+      /////////////////////////////////////////////////////////////////////
+      // CDL_SET_MODE_GOAL
+      case Smart::CDL_SET_MODE_GOAL:
+      {
+        cdlGlobalLock.acquire();
+        globalState.goalSpec = (Smart::CdlTagType)p1;
+        cdlGlobalLock.release();
+        std::cout << "CDL_SET_MODE_GOAL: ";
+        if( (Smart::CdlTagType)p1 == Smart::CDL_ABSOLUTE )
+        {
+          std::cout << "CDL_ABSOLUTE selected\n";
+        }
+        else if( (Smart::CdlTagType)p1 == Smart::CDL_PLANNER )
+        {
+          std::cout << "CDL_PLANNER selected\n";
+        }
+        else
+        {
+          std::cout << "unsupported parameter\n";
+        }
+
+        break;
+      }
+
+
+      /////////////////////////////////////////////////////////////////////
+      // CDL_SET_GOAL
+      case Smart::CDL_SET_GOAL:
+      {
+        cdlGlobalLock.acquire();
+
+	globalState.goalX =p1;
+        globalState.goalY =p2;
+        globalState.goalA =p3*M_PI/180.0;
+
+        //<lutz>
+        cdlGoalEventState.set(CDL_GOAL_NOT_REACHED);
+        cdlGoalEventServer->put(cdlGoalEventState);
+        std::cout<<"CDL EVENT CDL_GOAL_NOT_REACHED!"<<std::endl;
+        //<lutz>
+
+        cdlGlobalLock.release();
+        std::cout << "CDL_SET_GOAL: "
+                  << "Parameters: x:" << p1 << " y:" << p2 << " a:"<< p3 <<" \n";
+        break;
+      }
+
+	
+      /////////////////////////////////////////////////////////////////////
+      // CDL_SET_APPROACH_DIST
+      case Smart::CDL_SET_APPROACH_DIST:
+      {
+        cdlGlobalLock.acquire();
+
+        globalState.approachDistance =p1;
+        
+	cdlGlobalLock.release();
+
+        std::cout << "CDL_SET_APPROACH_DIST: "
+                  << "Parameters: " << p1 <<" \n";
+        break;
+      }
+
+
+
+      /////////////////////////////////////////////////////////////////////
+      // CDL_SET_ID
+      case Smart::CDL_SET_ID:
+      {
+        cdlGlobalLock.acquire();
+
+        globalState.id =p1;
+
+        cdlGlobalLock.release();
+        //<lutz>
+        //cdlGoalEventState.set(CDL_GOAL_NOT_REACHED);
+        //cdlGoalEventServer->put(cdlGoalEventState);
+        //std::cout<<"CDL EVENT CDL_GOAL_NOT_REACHED!"<<std::endl;
+        //<lutz>
+        std::cout << "CDL_SET_ID: "
+                  << "Parameters: " << p1 <<" \n";
+        break;
+      }
+
+
 
       ///////////////////////////////////////////////////////////////////// 
       // default
@@ -399,13 +499,14 @@ public:
 
 int CDLThread::svc(void)
 {
-  Smart::CommMobileLaserScan scan;
+  Smart::CommMobileLaserScan    scan;
   Smart::CommNavigationVelocity vel;
-  CHS::StatusCode status;
+  CHS::StatusCode               status;
+
+  Smart::CommPlannerGoal        plannerGoal;
 
 /* <asteck>
   SmartBasePositionClass spos;
-  PlannerGoalClass       plannerGoal;
   VisionVehUpdNewClass   visionGoal;
   TrackVehUpdNewClass    trackGoal;
   CylGoalClass           cylinderGoal;
@@ -420,13 +521,13 @@ int CDLThread::svc(void)
   double alpha1,alpha2,alpha3;
   double goalX,goalY,goalA;
   double wayPointX,wayPointY,wayPointA;
-  int    goalId;
+  long   goalId;
 
   double trackAngle,trackDistance,trackX,trackY,trackA;
   bool trackFlag;
   bool approachFlag;
   CdlEvalFunctionType evalFunction;
-  int  goalFlag;
+  long goalFlag;
 
   static int scannumber=0;
 
@@ -435,6 +536,7 @@ int CDLThread::svc(void)
   int            stalledFlag;       // 0 not stalled, 1 stalled
   double         timeDiff;
   int            turnDirection;
+
 
   stalledFlag = 0;
 
@@ -514,6 +616,77 @@ int CDLThread::svc(void)
         {
 
           /////////////////////////////////////////////////////////////////////////////////////////
+          // CDL_ROTATE
+          /////////////////////////////////////////////////////////////////////////////////////////
+          case Smart::CDL_ROTATE:
+          {
+            // ----------------------------------------------------
+            // head into the given direction and report this by
+            // the goal reached event
+            // ----------------------------------------------------
+
+            approachFlag = false;
+
+            cdlLookup->setLaserscan(scan);
+
+            cdlLookup->setParameterRobot(localState.tcalc,localState.transAcc,localState.rotAcc);
+
+            switch(localState.goalSpec) {
+              case Smart::CDL_ABSOLUTE:
+                // -------------------------------------------------
+                // heading is given by absolute position
+                // -------------------------------------------------
+                cdlLookup->setGoalPosition(localState.goalX,localState.goalY);
+                heading  = angle00(atan2(localState.goalY-y,localState.goalX-x)-a);
+                approachFlag=true;
+                break;
+              default:
+               approachFlag=false;
+                break;
+            }
+            if (approachFlag==false) {
+              vres = 0.0;
+              wres = 0.0;
+            } else {
+              if ((heading < localState.rotateError) && (heading >-localState.rotateError)) 
+              {
+                // heading ok, stop turning
+                vres = 0.0;
+                wres = 0.0;
+
+                cout << "Heading OK, stop\n";
+
+                // -------------------------------------------
+                // put event into object
+                // -------------------------------------------
+                //<lutz>
+                if(w == 0)
+                {
+                //<lutz>
+                cdlGoalEventState.set(CDL_GOAL_REACHED);
+                cdlGoalEventServer->put(cdlGoalEventState);
+                std::cout<<"CDL EVENT CDL_GOAL_REACHED FIRED!"<<std::endl;
+                }
+              } else {
+               // not inside goal region
+               cdlLookup->setMaxDistance(CDL_MAX_DISTANCE);
+               cdlLookup->calculateSpeedValues(v,w,x,y,a,0.0,0.0,
+                                            localState.wmin,localState.wmax,
+                                            CDL_STRATEGY_11,CDL_EVAL_STANDARD,
+                                            vres,wres,vaccres,waccres);
+               cout << "Heading NOT OK\n";
+              }
+            }
+
+            break;
+          } // case CDL_ROTATE
+
+
+
+
+
+
+          /////////////////////////////////////////////////////////////////////////////////////////
           // CDL_REACTIVE
           /////////////////////////////////////////////////////////////////////////////////////////
           case Smart::CDL_REACTIVE:
@@ -530,8 +703,7 @@ int CDLThread::svc(void)
             cdlLookup->setMaxDistance(CDL_MAX_DISTANCE);
             cdlLookup->setDesiredTranslationalSpeed(localState.vmax);
 
-            cdlLookup->calculateSpeedValues( v, w, x, y, a, localState.vmin, localState.vmax, localState.wmin, localState.wmax,
-                                             CDL_STRATEGY_2, CDL_EVAL_STANDARD, vres, wres, vaccres, waccres);
+            cdlLookup->calculateSpeedValues( v, w, x, y, a, localState.vmin, localState.vmax, localState.wmin, localState.wmax, CDL_STRATEGY_2, CDL_EVAL_STANDARD, vres, wres, vaccres, waccres);
 
 
             break;
@@ -578,6 +750,144 @@ int CDLThread::svc(void)
             break;
           }
 
+
+
+          /////////////////////////////////////////////////////////////////////////////////////////
+          // CDL_APPROACH_HALT
+          /////////////////////////////////////////////////////////////////////////////////////////
+
+          case Smart::CDL_APPROACH_HALT:
+          {
+          
+          approachFlag = false;
+
+          cdlLookup->setLaserscan(scan);
+          cdlLookup->setParameterRobot(localState.tcalc,localState.transAcc,localState.rotAcc);
+
+          switch(localState.goalSpec) {
+            
+           case Smart::CDL_ABSOLUTE:
+            // goal specified directly in this module
+
+            approachFlag = true;
+            evalFunction = CDL_EVAL_STOPPING;
+            goalX     = localState.goalX;
+            goalY     = localState.goalY;
+            cdlLookup->setGoalPosition(goalX,goalY);
+            cdlLookup->setEvalStopping(3000.0,2000.0,800.0,200.0,50.0,2000.0);
+            vmin = localState.vmin;
+            vmax = localState.vmax;
+            wmin = localState.wmin;
+            wmax = localState.wmax;
+            break;
+
+           case Smart::CDL_PLANNER:
+
+            // goal specification from planner
+            // don't use getWait because the cycle time of the cdl process
+            // is higher than the planner cycle time.
+            //
+            status =  plannerClient->getUpdate(plannerGoal);
+            plannerGoal.get_goal(wayPointX,wayPointY,wayPointA,goalX,goalY,goalA,goalId,goalFlag);
+
+            //std::cout<<"CDL localState.id: "<<localState.id<<" goalID: "<<goalId<<std::endl;
+            if (goalId != localState.id) {
+              // received not yet the actual data
+              approachFlag=false;
+            } else if (goalFlag != 0) {
+              // currently no valid goal available
+              approachFlag=false;
+            } else {
+              approachFlag=true;
+              cdlLookup->setGoalPosition(wayPointX,wayPointY);
+              distance = sqrt((wayPointX-goalX)*(wayPointX-goalX)
+                             +(wayPointY-goalY)*(wayPointY-goalY));
+              if (distance < 100.0) {
+                //std::cout<<"CDL_EVAL_STOPPING"<<endl;
+                // approach final destination
+                // the final goal point and the next way point are very close to
+                // each other
+                evalFunction = CDL_EVAL_STOPPING;
+                if (localState.lookupTable==Smart::CDL_SECOND_LOOKUP) {
+                  cdlLookup->setEvalStopping(2500.0,1000.0,
+                                              500.0, 200.0,200.0,
+                                             1500.0);
+                } else {
+                  cdlLookup->setEvalStopping(1000.0,500.0,
+                                              800.0, 400.0,100.0,
+                                             1500.0);
+                  //cdlLookup->setEvalStopping(2500.0,1000.0,
+                    //                          800.0, 300.0,100.0,
+                      //                       1500.0);
+
+                }
+              } else {
+                // approach intermediate way point
+                //std::cout<<"CDL_EVAL_PASSING"<<endl;
+                evalFunction = CDL_EVAL_PASSING;
+                if (localState.lookupTable==Smart::CDL_SECOND_LOOKUP) {
+                  cdlLookup->setEvalPassing(2500.0,1000.0,
+                                             500.0, 500.0,500.0,
+                                            1500.0);
+                } else {
+                  cdlLookup->setEvalPassing(2500.0,1000.0,
+                                             800.0, 600.0,600.0,
+                                            1500.0);
+                  //cdlLookup->setEvalPassing(2500.0,1000.0,
+                    //                         800.0, 400.0,200.0,
+                      //                      1500.0);
+                }
+              }
+            }
+            vmin = localState.vmin;
+            vmax = localState.vmax;
+            wmin = localState.wmin;
+            wmax = localState.wmax;
+            break;
+
+           default:
+            approachFlag = false;
+            vmin         = 0.0;
+            vmax         = 0.0;
+            wmin         = 0.0;
+            wmax         = 0.0;
+            break;
+          }//switch(localState.goalSpec)
+
+          if (approachFlag==false) {
+            vres = 0.0;
+            wres = 0.0;
+          } else {
+
+            distance = sqrt((goalX-x)*(goalX-x)+(goalY-y)*(goalY-y));
+            std::cout<<"Distance to Goal: "<<distance<<" approachDistance: "<<localState.approachDistance<<std::endl;
+            if (distance < localState.approachDistance) {
+		// goal reached, stop robot
+		vres = 0.0;
+            	wres = 0.0;
+
+                // this stop is intended, since the goal has been reached
+                stalledFlag = 0;
+
+                // -------------------------------------------
+                // put event into object
+                // -------------------------------------------
+                cdlGoalEventState.set(CDL_GOAL_REACHED);
+                cdlGoalEventServer->put(cdlGoalEventState); 
+                std::cout<<"CDL EVENT CDL_GOAL_REACHED FIRED!"<<std::endl;
+
+                std::cout << "GOAL REACHED !!!!!!!! actpos " << x << " " << y << " " << a*180.0/M_PI << "\n";
+                std::cout << "             goal   " << localState.goalX << " " << localState.goalY << "\n";
+
+            } else {
+                cdlLookup->calculateSpeedValues(v,w,x,y,a,localState.vmin,localState.vmax,localState.wmin,localState.wmax,CDL_STRATEGY_6,evalFunction,vres,wres,vaccres,waccres);
+                //std::cout << "CDL_PLANNER: vres = " << vres << "; wres = " << wres << std::endl;
+            }
+          }
+
+
+            break;
+          } //case Smart::CDL_APPROACH_HALT
 
 
 
@@ -747,6 +1057,35 @@ int CDLThread::svc(void)
 
 
 
+
+
+
+class CdlGoalTestHandler:
+  public CHS::EventTestHandler<Smart::CommCdlGoalEventParameter, Smart::CommCdlGoalEventResult, Smart::CdlGoalEventState>
+{
+public:
+  bool testEvent(Smart::CommCdlGoalEventParameter& p, Smart::CommCdlGoalEventResult& r,const Smart::CdlGoalEventState& s) throw()
+  {
+
+   int oldState,newState;
+
+   p.get(oldState);
+   s.get(newState);
+   if ((oldState!=newState) && (newState==CDL_GOAL_REACHED)) {
+     p.set(newState);
+     r.set(newState);
+     std::cout<<"Event Testhandel true!"<<std::endl;
+     return true;
+   } else {
+   //  p.set(newState);
+     return false;
+   }
+
+  }
+};
+
+
+
 /**
  * Main function.
  * \param argc arguments counter.
@@ -781,6 +1120,8 @@ int main (int argc, char *argv[])
     std::string param_accelSecondFile;
 
     int status;
+    //TODO Tmp variable:
+    CHS::StatusCode status_code;
 
 
     ///////////////////////////////////////////
@@ -861,6 +1202,18 @@ int main (int argc, char *argv[])
     std::cout << "globalState.wmax = " << globalState.wmax << " deg" << std::endl;
     globalState.wmax *= M_PI/180.0;
 
+//<lutz>
+    parameter.getDouble("cdl","goalX", globalState.goalX);
+    std::cout << "globalState.goalX = " << globalState.goalX << std::endl;
+    
+    parameter.getDouble("cdl","goalY", globalState.goalY);
+    std::cout << "globalState.goalY = " << globalState.goalY << std::endl;
+    
+    parameter.getDouble("cdl","goalA", globalState.goalA);
+    std::cout << "globalState.goalA = " << globalState.goalA << std::endl;
+    globalState.goalA *= M_PI/180.0;
+//<lutz>
+
 
     parameter.getDouble("cdlrotate","error", globalState.rotateError);
     std::cout << "globalState.rotateError = " << globalState.rotateError << " deg" << std::endl;
@@ -934,9 +1287,13 @@ int main (int argc, char *argv[])
 
     // laser PushNewestClient
     laserClient = new CHS::PushNewestClient<Smart::CommMobileLaserScan>(component);
-
     laserClient->connect("smartLaserServer","scan");
     laserClient->subscribe();
+
+    plannerClient = new CHS::PushNewestClient<Smart::CommPlannerGoal>(component);
+    status_code =  plannerClient->connect("smartPlanner","plannerGoal");
+    std::cout << "status code returned from connect to planner " << CHS::StatusCodeConversion(status_code);
+    plannerClient->subscribe();
 
     // state StateServer
     stateHandler = new PrintStateChangeHandler();
@@ -957,6 +1314,12 @@ int main (int argc, char *argv[])
       navigationVelocitySendServer = new CHS::SendServer<Smart::CommNavigationVelocity>(component, "navigationvelocity", 
                                                                                         threadNavigationVelocitySendHandler);
     }
+
+
+    // Cdl Goal Event Server
+    CdlGoalTestHandler cdlGoalTest;
+    cdlGoalEventServer = new CHS::EventServer<Smart::CommCdlGoalEventParameter,Smart::CommCdlGoalEventResult,Smart::CdlGoalEventState>(component, "cdlGoalEvent",cdlGoalTest);
+
 
     // timer triggers cdl processing
     // ACE_Time_Value(seconds, microseconds) values from ttrigger in s

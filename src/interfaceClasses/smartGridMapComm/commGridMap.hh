@@ -102,6 +102,14 @@ public:
                      unsigned int &xSizeCells, 
                      unsigned int &ySizeCells ) const;
 
+  /// extract a cell from the communication class of the map
+ inline unsigned char get_cells(unsigned int xcell, unsigned int ycell) const
+ {
+   return ( _gridmap.cell[xcell+ycell*_gridmap.xSizeCells]);
+ }
+
+    
+
   /// save the map in X11 XPM format
   void save_xpm( std::ostream &os ) const;
 

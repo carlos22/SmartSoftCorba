@@ -28,7 +28,7 @@ robot drives maximising his translation velocity while avoiding collisions.
 
 
     Run the demo:
-    - Be sure that the Corba Naming Service is running and the NameServiceIOR environment-variable is set corecctly!
+    - Be sure that the Corba Naming Service is running and the NameServiceIOR environment-variable is set correctly!
     (see \ref examples)
 
     - Be sure that the interface-devices of your robot and the Laserscanner are set correctly. Please check:

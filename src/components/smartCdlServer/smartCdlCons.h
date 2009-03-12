@@ -66,14 +66,14 @@ extern "C" {
 // -----------------------------------------------------------------
 // x/y-discretisation, local robot environment, cartesian space
 // -----------------------------------------------------------------
-#define CDL_C_X_MIN   -3000.0	         // mm
-#define CDL_C_X_MAX    3000.0	         // mm
-#define CDL_C_Y_MIN   -3000.0	         // mm
-#define CDL_C_Y_MAX    3000.0	         // mm
-#define CDL_C_RES       100.0            // mm
+#define CDL_C_X_MIN   -500.0	         // mm
+#define CDL_C_X_MAX    2500.0	         // mm
+#define CDL_C_Y_MIN   -2500.0	         // mm
+#define CDL_C_Y_MAX    2500.0	         // mm
+#define CDL_C_RES       50.0            // mm
 
 #define CDL_MAX_DISTANCE	5000.0   // mm
-#define CDL_CAPTURE_DISTANCE    100.0    // mm
+#define CDL_CAPTURE_DISTANCE    50.0     // mm
 
 #define CDL_C_X_CELLS ((CDL_C_X_MAX-CDL_C_X_MIN)/CDL_C_RES+1)
 #define CDL_C_Y_CELLS ((CDL_C_Y_MAX-CDL_C_Y_MIN)/CDL_C_RES+1)
@@ -92,7 +92,7 @@ extern "C" {
 #define CDL_MAX_TRA_CELLS	201
 #define CDL_MAX_ROT_CELLS	141
 #define CDL_MAX_X_CELLS		61
-#define CDL_MAX_Y_CELLS		61
+#define CDL_MAX_Y_CELLS		101
 #define CDL_MAX_CURVATURE	680
 
 

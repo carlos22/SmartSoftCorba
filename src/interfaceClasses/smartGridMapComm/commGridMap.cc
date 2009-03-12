@@ -114,7 +114,6 @@ int CommGridMap::get_parameter( unsigned int &id,
   return 0;
 }
 
-
 void CommGridMap::save_xpm( std::ostream &os ) const
 {
   int a;

@@ -53,11 +53,11 @@ extern "C" {
 #define CDL_V_ROT_MAX   70.0  	// deg/s
 #define CDL_V_ROT_MIN  -70.0	// deg/s
 
-#define CDL_V_TRA_STEP  25.0  	// mm/s
+#define CDL_V_TRA_STEP  10.0  	// mm/s
 #define CDL_V_ROT_STEP  1.0	// deg/s
 
 // some robot specific parameters
-#define CDL_A_ROT_MAX   100.0    // deg/s2 //(200)
+#define CDL_A_ROT_MAX   200.0    // deg/s2 //(200)
 #define CDL_A_TRA_MAX   500.0   // mm/s2 //(500)
 
 #define CDL_TRA_CELLS ((CDL_V_TRA_MAX-CDL_V_TRA_MIN)/CDL_V_TRA_STEP+1)
@@ -66,14 +66,14 @@ extern "C" {
 // -----------------------------------------------------------------
 // x/y-discretisation, local robot environment, cartesian space
 // -----------------------------------------------------------------
-#define CDL_C_X_MIN   -1000.0	         // mm
-#define CDL_C_X_MAX    1000.0	         // mm
-#define CDL_C_Y_MIN   -1000.0	         // mm
-#define CDL_C_Y_MAX    1000.0	         // mm
-#define CDL_C_RES       100.0            // mm
+#define CDL_C_X_MIN   -500.0	         // mm
+#define CDL_C_X_MAX    2500.0	         // mm
+#define CDL_C_Y_MIN   -2500.0	         // mm
+#define CDL_C_Y_MAX    2500.0	         // mm
+#define CDL_C_RES       50.0            // mm
 
 #define CDL_MAX_DISTANCE	5000.0   // mm
-#define CDL_CAPTURE_DISTANCE    100.0    // mm
+#define CDL_CAPTURE_DISTANCE    50.0    // mm
 
 #define CDL_C_X_CELLS ((CDL_C_X_MAX-CDL_C_X_MIN)/CDL_C_RES+1)
 #define CDL_C_Y_CELLS ((CDL_C_Y_MAX-CDL_C_Y_MIN)/CDL_C_RES+1)
@@ -92,7 +92,7 @@ extern "C" {
 #define CDL_MAX_TRA_CELLS	201
 #define CDL_MAX_ROT_CELLS	141
 #define CDL_MAX_X_CELLS		61
-#define CDL_MAX_Y_CELLS		61
+#define CDL_MAX_Y_CELLS		101
 #define CDL_MAX_CURVATURE	680
 
 

@@ -170,7 +170,6 @@ void readParameters(int argc, char **argv)
   parameter.getInt("pioneer", "maxRotVelDecel", param_maxRotVelDecel);
   std::cout << "maxRotVelDecel = " << param_maxRotVelDecel << std::endl;
 
-
   parameter.getInt("baseposition", "push_interval_msec", param_baseStatePushTimedInterval);
   std::cout << "param_baseStatePushTimedInterval = " << param_baseStatePushTimedInterval << std::endl;
 

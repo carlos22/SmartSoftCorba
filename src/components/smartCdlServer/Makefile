@@ -76,8 +76,8 @@ CPNT =	1
 # Defaults
 
 CPNT_CFLAGS = 	$(CFLAGS) 
-CPNT_LFLAGS = 	$(LFLAGS) -lsmartBasicComm -lsmartCdlParameter \
-		-lTAO_CosNaming -lTAO -lTAO_PortableServer \
+CPNT_LFLAGS = 	$(LFLAGS) -lsmartBasicComm -lsmartCdlParameter -lsmartPlannerGoal \
+		-lTAO_CosNaming -lTAO -lTAO_PortableServer -lsmartCdlGoalEvent \
 		-lsmartSoft -lACE -ldl -lpthread $(OS_LIBS) -lm -lrt
 
 

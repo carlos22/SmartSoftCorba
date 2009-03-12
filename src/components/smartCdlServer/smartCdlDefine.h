@@ -52,6 +52,7 @@ typedef enum {
   CDL_STRATEGY_3,            // cdl lookup strategy 3
   CDL_STRATEGY_4,            // cdl lookup strategy 4
   CDL_STRATEGY_5,            // cdl lookup strategy 5
+  CDL_STRATEGY_6,            // cdl lookup strategy 6
   CDL_STRATEGY_10,           // cdl lookup strategy 10
   CDL_STRATEGY_11            // cdl lookup strategy 11
 } CdlStrategyType;

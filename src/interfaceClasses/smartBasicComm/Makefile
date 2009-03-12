@@ -78,8 +78,7 @@ IDL_FILES    =  smartBasePosition \
 		smartSpeechOutputMessage \
 		smartStringMap \
 		smartTimeStamp \
-		smartTurretVelocity \
-		smartZAFHParameter
+		smartTurretVelocity
 
 EXPORT_FILES = 	commBasePosition.hh \
 		commBasePositionUpdate.hh \
@@ -102,8 +101,7 @@ EXPORT_FILES = 	commBasePosition.hh \
 		commTimeStamp.hh \
 		commTurretVelocity.hh \
 		commVideoImage.hh \
-		commVoid.hh \
-		commZAFHParameter.hh
+		commVoid.hh
 
 INI_FILES    =	
 
@@ -181,10 +179,7 @@ LIB_1_OBJ =	commBasePosition.o \
 		commTurretVelocity.o \
 		  smartTurretVelocityC.o \
 		  smartTurretVelocityS.o \
-		commVideoImage.o \
-		commZAFHParameter.o \
-		  smartZAFHParameterC.o \
-		  smartZAFHParameterS.o
+		commVideoImage.o
 
 LIB_1_LFLAGS =	$(LIB_LFLAGS)
 LIB_1_BIN =	smartBasicComm

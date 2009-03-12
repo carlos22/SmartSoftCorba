@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2008 Christian Schlegel, Andreas Steck
+//  Copyright (C) 2008 Christian Schlegel, Andreas Steck, Matthias Lutz
 //
 //        schlegel@hs-ulm.de
 //        steck@hs-ulm.de 
@@ -57,10 +57,10 @@ typedef enum
   CDL_SET_LOOKUP_TABLE,     // select the lookup table to be used
   CDL_SET_TRANS_VELOCITY,   // set min, max trans velocity [mm/s,mm/s]
   CDL_SET_ROT_VELOCITY,     // set min, max rot velocity [deg/s,deg/s]
-//  CDL_MODE_GOAL,            //
-//  CDL_SET_ID,               // set the id used for synchronisation
-//  CDL_SET_GOAL,             // set goal x,y,heading [mm,mm,deg]
-//  CDL_SET_APPROACH_DIST,    // set the minimum distance to stop at goal [mm]
+  CDL_SET_MODE_GOAL,        // set goal mode absolute position or planner
+  CDL_SET_ID,               // set the id used for synchronisation
+  CDL_SET_GOAL,             // set goal x,y,heading [mm,mm,deg]
+  CDL_SET_APPROACH_DIST,    // set the minimum distance to stop at goal [mm]
 //  CDL_SET_IGNORE_REGION,    // set circular region where scan points are ignored
   
   CDL_NEUTRAL,              // indicate that no selection has been made
@@ -68,6 +68,8 @@ typedef enum
   CDL_REACTIVE,             // Strategy
   CDL_JOYSTICK,             // Strategy
   CDL_TURN,                 // Strategy
+  CDL_APPROACH_HALT,        // Strategy
+  CDL_ROTATE,		    // Strategy
   
   CDL_ABSOLUTE,             // goal specification
   CDL_PLANNER,              // goal specification
@@ -132,13 +134,12 @@ inline int CommCdlParameter::set(std::string& inString)
   //   LOOKUPTABLE DEFAULT/SECOND
   //   TRANSVEL ?vmin ?vmax (mm/sec)
   //   ROTVEL ?wmin ?wmax (deg/sec)
-
+  //   GOALMODE ABSOLUTE/PLANNER
+  //   GOALREGION ?x ?y ?h mm/mm/degree
+  //   APPROACHDIST ?d
+  //   ID ?id
 // TODO
-//  //   ID ?id
-//  //   APPROACHDIST ?d
 //  //   IGNOREREGION ?x ?y ?r
-//  //   GOALREGION ?x ?y ?h     mm/mm/degree
-//  //   GOAL ABSOLUTE/PLANNER 
 //  // 
   // ----------------------------------------------------
 
@@ -185,6 +186,14 @@ inline int CommCdlParameter::set(std::string& inString)
       else if(strcasecmp("TURN",param)==0)
       {
         cmd.parameter1 = CDL_TURN;
+      }
+      else if(strcasecmp("APPROACH_HALT",param)==0)
+      {
+        cmd.parameter1 = CDL_APPROACH_HALT;
+      }
+      else if(strcasecmp("ROTATE",param)==0)
+      {
+        cmd.parameter1 = CDL_ROTATE;
       }
       else
       {
@@ -302,6 +311,120 @@ inline int CommCdlParameter::set(std::string& inString)
     }
     if (sscanf(parse,"%d %d",&cmd.parameter1,
                              &cmd.parameter2) == 2)
+    {
+      error = 0;
+    }
+    else
+    {
+      error = -1;
+    }
+    free(parse);
+  }
+  else if (strcasecmp(param,"GOALMODE")==0)
+  {
+    // ---------------------------------------
+    // set goal type -- ABSOLUTE/PLANNER
+    // ---------------------------------------
+    cmd.tag = CDL_SET_MODE_GOAL;
+    
+    //
+    // get the first parameter
+    //
+    if (error == 0)
+    {
+      do
+      {
+        param = strsep(&input,LISP_SEPARATOR);
+      } while ((param != NULL) && (strlen(param)==0));
+
+      if (strcasecmp("ABSOLUTE",param)==0)
+      {
+        cmd.parameter1 = CDL_ABSOLUTE;
+      }
+      else if(strcasecmp("PLANNER",param)==0)
+      {
+        cmd.parameter1 = CDL_PLANNER;
+      }
+      else
+      {
+        error = -1;
+      }
+    }
+  }
+  else if (strcasecmp(param,"ID")==0)
+  {
+    // ---------------------------------------
+    // set cdl goal id  -- id
+    // ---------------------------------------
+    cmd.tag = CDL_SET_ID;
+    parse = (char *)calloc(LISP_STRING,sizeof(char));
+
+    for (i=0; i<1; i++)
+    {
+      do
+      {
+        param = strsep(&input,LISP_SEPARATOR);
+      } while ((param != NULL) && (strlen(param)==0));
+      parse = strcat(parse,param);
+      parse = strcat(parse," ");
+    }
+    if (sscanf(parse,"%d",&cmd.parameter1) == 1)
+    {
+      error = 0;
+    }
+    else
+    {
+      error = -1;
+    }
+    free(parse);
+  }
+  else if (strcasecmp(param,"GOALREGION")==0)
+  {
+    // ---------------------------------------
+    // set goal  -- x/y/a
+    // ---------------------------------------
+    cmd.tag = CDL_SET_GOAL;
+    parse = (char *)calloc(LISP_STRING,sizeof(char));
+
+    for (i=0; i<3; i++)
+    {
+      do
+      {
+        param = strsep(&input,LISP_SEPARATOR);
+      } while ((param != NULL) && (strlen(param)==0));
+      parse = strcat(parse,param);
+      parse = strcat(parse," ");
+    }
+    if (sscanf(parse,"%d %d %d",&cmd.parameter1,
+                                &cmd.parameter2,
+                                &cmd.parameter3) == 3)
+    {
+      error = 0;
+    }
+    else
+    {
+      error = -1;
+    }
+    free(parse);
+  }
+  else if (strcasecmp(param,"APPROACHDIST")==0)
+  {
+    // ---------------------------------------
+    // set goal approach distance  -- dist
+    // ---------------------------------------
+    cmd.tag = CDL_SET_APPROACH_DIST;
+    parse = (char *)calloc(LISP_STRING,sizeof(char));
+
+    for (i=0; i<1; i++)
+    {
+      do
+      {
+        param = strsep(&input,LISP_SEPARATOR);
+      } while ((param != NULL) && (strlen(param)==0));
+      parse = strcat(parse,param);
+      parse = strcat(parse," ");
+    }
+    if (sscanf(parse,"%d",&cmd.parameter1) == 1)
     {
       error = 0;
     }

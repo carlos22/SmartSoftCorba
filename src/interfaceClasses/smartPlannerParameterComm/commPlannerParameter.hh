@@ -113,6 +113,7 @@ inline int CommPlannerParameter::set(std::string& inString)
   //
   // ----------------------------------------------------
 
+
   char *param = (char *)NULL;
   char *parse = (char *)NULL;
   char *input = (char *)NULL;
@@ -172,17 +173,14 @@ inline int CommPlannerParameter::set(std::string& inString)
     // --------------------
     // set destination circle in path planner
     // --------------------
-    std::cout << "start\n";
     parse = (char *)calloc(LISP_STRING,sizeof(char));
 
     for (i=0; i<3; i++) {
       do {
         param = strsep(&input,LISP_SEPARATOR);
       } while ((param != NULL) && (strlen(param)==0));
-      printf("nach while - parse = %s;  param = %s\n", parse, param);
       parse = strcat(parse,param);
       parse = strcat(parse," ");
-      printf("parse = %s\n",  parse);
     }
     if (sscanf(parse,"%d %d %d",&cmd.parameter1,
                                 &cmd.parameter2,

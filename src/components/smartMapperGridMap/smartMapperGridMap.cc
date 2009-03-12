@@ -140,7 +140,10 @@ public:
         // p2 threshold for longterm map obstacle
         mapperStateLock.acquire();
         globalState.curLtmState = p1;
-        globalState.curLtmThreshold = p2;
+        if(p1== 1) //set threshold only if preoccupation is enabled
+        {
+          globalState.curLtmThreshold = p2;
+        }
         mapperStateLock.release();
         std::cout << "MAPPER_CUR_LTM: curLtmState = " << p1 << " curLtmThreshold = " << p2 << "\n";
         break;
@@ -473,6 +476,9 @@ int CurrentMapperThread::svc(void)
           gm = (Smart::CommGridMap)(*currentGridMap);
           currentGridMapServer->put( gm );
           curLock.release();
+
+
+
 
           #if DEBUGPRINT
             cout << "MAPPER: autoupdate current map: sent to subscribed clients\n";
