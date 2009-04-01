@@ -12,8 +12,10 @@ of where they are applied. Dynamic wiring of components at run-time is explicitl
 major difference to other approaches. This allows to implement loosely coupled and distributed systems based on standardized
 components whose interaction can be adjusted according to the current context and requirements.
 
-\section sourcefo SmartSoft repository on Sourceforge
-The SmartSoft repository is hosted on Sourceforge: <a href="http://sourceforge.net/projects/smart-robotics/">SmartSoft repository</a>
+\section sourcefo SmartSoft on Sourceforge
+The SmartSoft repository is hosted on Sourceforge: <a href="http://sourceforge.net/projects/smart-robotics/">SmartSoft repository</a><br>
+A ready to run SmartSoft VMWare-image with integrated Player/Stage simulator is also available: <a href="http://sourceforge.net/projects/smart-robotics/download">SmartSoft VMWare-image</a><br> 
+\ref vmware-manual
 
 \section desc Description
 
@@ -277,6 +279,8 @@ Go to the software directory and checkout the current release of SmartSoft.
    \ref page_basic-demo describes a real-world example (Pioneer P3DX, Laserscanner, CDL)
  
    \ref page_advanced-demo describes more advanced examples (Pioneer P3DX, Laserscanner, CDL, Planner, Mapper, Speechoutput, Joystick controll)
+
+   \ref playerStage-demo describes how to run SmartSoft components with the simulator component.
  
    \ref page_server-components describes the server components which are shipped with SmartSoft.
 

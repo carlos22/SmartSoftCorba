@@ -26,6 +26,9 @@ robot drives maximising his translation velocity while avoiding collisions.
      - \e smartCdlServer 
      - \e smartRobotConsole 
 
+\image html p3dx_ulm.jpg "Our basic P3DX setup"
+
+
 
     Run the demo:
     - Be sure that the Corba Naming Service is running and the NameServiceIOR environment-variable is set correctly!

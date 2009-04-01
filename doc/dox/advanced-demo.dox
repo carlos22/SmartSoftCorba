@@ -7,12 +7,10 @@ Each demo runs separatly. It is not nessesary to restart the components to run t
    Our reference robot setup:
    - Pioneer P3DX (H8S Microcontroller) with AROS 1.13 <br>
      Further information see \ref page_basic-demo
-    
-\image html tutorial_overview_commobject.png "Figure 5:&nbsp; Defining a communication object."
-
-
  
    - Laserscanner SICK LMS 200
+
+   \image html robo_env.jpg "The environment we run the demos in."
 
     Components:
      - \e smartPioneerBaseServer
