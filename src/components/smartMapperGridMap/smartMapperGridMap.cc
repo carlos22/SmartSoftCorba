@@ -658,6 +658,7 @@ int CurrentMapRequestThread::svc(void)
     } else {
 
       // module is not active
+      // gridmap is set invalid by default in the constructor
       resultMap = new Smart::SmartCurrentGridMap();
       gm = (Smart::CommGridMap)(*resultMap);
 

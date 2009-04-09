@@ -2,8 +2,8 @@
 \page vmware-manual SmartSoft VMware-image manual
 
 While the SVN installation of SmartSoft requires an amount of time, the SmartSoft VMware-image is already set up correctly.
-The VMware-image provides an installed SmartSoft version with the necessary enviroment, set up on SuSe 10.3.<br>
-This provides an easy way to get familiar with SmartSoft, which normaly depends on a real robot. This is achieved by using the integrated simulator (based on player/stage).<br>
+The VMware-image provides an installed SmartSoft version with the necessary environment, set up on SuSe 10.3.<br>
+This provides an easy way to get familiar with SmartSoft, which normally depends on a real robot. This is achieved by using the integrated simulator (based on player/stage).<br>
 The \ref playerStage-demo describes how to run SmartSoft components within the simulator.
 
 \section Installation
@@ -15,16 +15,15 @@ To run the SmartSoft VMware-image you need a recent version of VMware, the <a hr
 The SmartSoft VMware-image needs about 9GB free harddisk space.
 
     - Install the VMware-player
-    - extract the SmartSoft VMware-image: 
-      \verbatim
-      # tar xzvf smartsoft-VM.tar.gz \endverbatim
-
+    - extract the SmartSoft VMware-image from the archive files in the same directory.
 
     - run VMware-player and start the SmartSoft VMware-image
 
 \section Hints
 
     - The <i>default user</i> in the virtual machine is <i> smartsoft </i> with the password <i> smartsoft </i>. The <i>root</i> acount also has the password <i>smartsoft</i>.
+
+    - To start the CORBA NamingService run the startCORBA script, which you can find in the home directory.
 
     - Within the virtual machine (vm) the resolution of the vm can be adapted using xrandr. 
       \verbatim
@@ -33,17 +32,17 @@ The SmartSoft VMware-image needs about 9GB free harddisk space.
       \verbatim
       # xrandr  \endverbatim
 
-    - This documentaion of SmartSoft is avilable in the vm for fast access using the bookmaks within firefox.
+    - This documentation of SmartSoft is available in the vm for fast access using the bookmaks within firefox.
 
-    - The SmartSoft framework is installed in /home/smartsoft/SOFTWARE/smartsoft/ , the installation is an SVN checkout form the sourceforge repository. To get the latest version of SmartSoft use svn update.
+    - The SmartSoft framework is installed in /home/smartsoft/SOFTWARE/smartsoft/ , the installation is an SVN checkout from the sourceforge repository. To get the latest version of SmartSoft use svn update.
       \verbatim
       # cd $SMART_ROOT 
       # svn update
       # cd src
       # make distclean; make \endverbatim
   
-    - Within the vm the MARY Text-to-Speech System is set up, used by the speech output component provding speech output.
-    - The vm include's an installation of player/stage, used by the SmartSoft simulator component.
+    - Within the vm the MARY Text-to-Speech System is set up, used by the speech output component providing speech output.
+    - The vm includes an installation of player/stage, used by the SmartSoft simulator component.
 
    \image html smartsoft-VM.png "The SmartSoft VM"
 

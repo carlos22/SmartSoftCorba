@@ -171,7 +171,7 @@ at all to robotics applications.
      <a href="http://download.dre.vanderbilt.edu/previous_versions/ACE+TAO+CIAO-5.6.tar.gz">link to the source archive</a>
    - Tested on Linux (SuSE 10.3, gcc 4.2.1)
    - Doxygen to generate documentation
-   - some commponents need qt3/qt3-devel and the boost library
+   - some commponents need qt3/qt3-devel and the boost library (check if the environment variable $QTDIR is set correctly)
 
    - take care that you have more than 5 GB free disk space available 
 
@@ -261,6 +261,8 @@ Go to the software directory and checkout the current release of SmartSoft.
    to be started before any components:
    \verbatim
    # $TAO_ROOT/orbsvcs/Naming_Service/Naming_Service -m 0 -ORBEndpoint iiop://localhost:9999 \endverbatim
+
+   We recommend to create an shell script (e.g. startCORBA) somewhere in your home directory, which contains the startup call of the above CORBA NamingService. The NamingService needs to be started each time you restart the system and you want to run a SmartSoft component.
 
    Every Component needs to find the NamingService, this can be
    done by setting the NameServiceIOR environment variable to

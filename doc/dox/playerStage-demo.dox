@@ -22,10 +22,11 @@ The demo below describes how to drive to a commanded position. It is also possib
 
     Run the demo:
      - Be sure that the Corba Naming Service is running and the NameServiceIOR environment-variable is set correctly!
-     (see \ref examples)
+     \verbatim
+     # $TAO_ROOT/orbsvcs/Naming_Service/Naming_Service -m 0 -ORBEndpoint iiop://localhost:9999 \endverbatim
 
 
-    - If you want to use the speech output component be sure that the MARY server is running and the voices configered in the
+    - If you want to use the speech output component be sure that the MARY server is running and the voices configured in the
       $SMART_ROOT/src/components/smartSpeechMaryOutputServer/smartSpeechMaryOutputServer.ini
       are installed correctly!
 
@@ -47,7 +48,7 @@ The demo below describes how to drive to a commanded position. It is also possib
     - choose “08 - Demos” to get the list of the demos: <br>
     - now choose “(2) Demo 2 Planner-CDL GOTO”
 
-    - choose wether you want to use the speech output component: "Activate speach output? (y/n): "
+    - choose whether you want to use the speech output component: "Activate speech output? (y/n): "
     - now enter the goal coordinates measured in millimeter from the initial position (x:0 y:0) of the robot: <br>
       <tt>(1000)(0)</tt> -> set the goal 1m ahead of the robot <br>
 
@@ -56,7 +57,7 @@ The demo below describes how to drive to a commanded position. It is also possib
 
     - to move the robot to another goal choose "Enter Goal? (y/n): " y and enter the coordinates
 
-    - the demo stops by entering "n" if you are asked wether you want to enter an goal.
+    - the demo stops by entering "n" if you are asked whether you want to enter an goal.
 
 \section Hints
    - To show the position of the robot select view --> position line; position text in stage

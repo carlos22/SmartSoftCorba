@@ -649,7 +649,7 @@ int ConsoleThread::svc(void)
 
           GoalEventThread goalEventThread;
 
-          std::cout<<"\nActivate speach output? (y/n): ";
+          std::cout<<"\nActivate speech output? (y/n): ";
           cin>>inString;
           if( strcasecmp("n", inString.c_str() ) != 0 )
           {
@@ -669,7 +669,7 @@ int ConsoleThread::svc(void)
           cmdMap.set(str);
           smartMapperParameterSendClient.send(cmdMap);
 
-          // set build current Map
+          // set build both Map
           itemNumber = 2;
           // first get list of main states
           mapperStateClient.getWaitMainStates(mainstates);

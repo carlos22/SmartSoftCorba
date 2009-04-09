@@ -80,7 +80,7 @@ Each demo runs separatly. It is not nessesary to restart the components to run t
     - choose “08 - Demos” to get the list of the demos: <br>
     - now choose “(2) Demo 2 Planner-CDL GOTO”
 
-    - choose wether you want to use the speech output component: "Activate speach output? (y/n): "
+    - choose wether you want to use the speech output component: "Activate speech output? (y/n): "
     - now enter the goal coordinates measured in millimeter from the initial position (x:0 y:0) of the robot: <br>
       <tt>(1000)(0)</tt> -> set the goal 1m ahead of the robot <br>
 
