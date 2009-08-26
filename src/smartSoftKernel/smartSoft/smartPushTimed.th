@@ -183,7 +183,12 @@ template<class T> inline CHS::PushTimedClient<T>::PushTimedClient(SmartComponent
   component->addCV(&cond);
 
   // Create the CORBA client object
-  corbaClient = new PushTimedClient_impl((void *)this,&PushTimedClient<T>::hndUpdate,&PushTimedClient<T>::hndServDisc);
+  // <asteck, alotz 26.08.2009>
+  // missing parameter
+  //corbaClient = new PushTimedClient_impl((void *)this,&PushTimedClient<T>::hndUpdate,&PushTimedClient<T>::hndServDisc);
+  corbaClient = new PushTimedClient_impl((void *)this,&PushTimedClient<T>::hndUpdate,&PushTimedClient<T>::hndServDisc,&PushTimedClient<T>::hndServerStateChange);
+  // </asteck, alotz>
+
 
   // activate object to obtain the object reference, need not be registered at name service
   // since object reference is sent to server with every subscribe
