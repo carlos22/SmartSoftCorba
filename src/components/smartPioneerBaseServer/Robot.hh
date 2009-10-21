@@ -99,6 +99,12 @@
 
 #include "packet.hh"
 
+// different pioneer robot types
+#define  ROBOT_TYPE_P3DX_SH 0
+#define  ROBOT_TYPE_P3DX 1
+#define  ROBOT_TYPE_P3AT_SH 2
+
+
 // defines taken from player (p2os.h) some additional commands added by Andreas Steck
 #define P2OS_CYCLETIME_USEC 200000 // 20 ms
 #define SYNC0 0
@@ -156,12 +162,6 @@
 
 #define PLAYER_SONAR_MAX_SAMPLES 64
 
-const double DiffConvFactor  = 0.0056;
-const double DistConvFactor  = 0.485;
-const double AngleConvFactor = 0.001534;
-const double VelConvFactor   = 1.0;
-const double RangeConvFactor = 1.0;
-
 /**
  * \class Robot
  * Encapsulates the Robot
@@ -174,7 +174,7 @@ public:
    * @brief Default constructor
    *
    */
-  Robot();
+  Robot(int robotType);
 
   /**
    * @brief Default destructor
@@ -302,6 +302,12 @@ public:
 
 /////////////////////////////// private
 private:
+  double DiffConvFactor;//  = 0.0056;
+  double DistConvFactor;//  = 0.485;
+  double AngleConvFactor;// = 0.001534;
+  double VelConvFactor;//   = 1.0;
+  double RangeConvFactor;// = 1.0;
+
   // thread
   int svc(void);
   

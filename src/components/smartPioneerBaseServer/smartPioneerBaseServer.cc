@@ -1,6 +1,7 @@
 //--------------------------------------------------------------------------
 //
-//  Copyright (C) 2003 Christian Schlegel, Andreas Steck
+//  Copyright (C) 2008 Christian Schlegel, Andreas Steck
+//                2009 Andreas Steck
 //
 //        schlegel@hs-ulm.de
 //        steck@hs-ulm.de
@@ -84,7 +85,7 @@
 #define INI_PARAMETERS_FILE "smartPioneerBaseServer.ini"
 
 
-Robot robot;
+Robot *robot;
 
 
 // -------------------------------------------------------------
@@ -94,6 +95,7 @@ Robot robot;
 // -------------------------------------------------------------
 
 /// Parameter for the verbosity.
+std::string param_robotType;
 bool param_verbose = false;
 bool param_enable_motors = true;
 bool param_enable_sonar = false;
@@ -127,19 +129,12 @@ void readParameters(int argc, char **argv)
     }
   }
 
-
-  ////////////////////
-  // set defaults
-  //
-  //param_verbose = false;
-  //param_enable_motors = true;
-  //param_baseStatePushTimedInterval = 100;
-  //param_serialport = "dev/ttyS42";
-  //param_enable_sonar = false;
-
   ////////////////////
   // read parameters
   //
+  parameter.getString("pioneer", "robotType", param_robotType);
+  std::cout << "robotType = " << param_robotType << std::endl;
+
   parameter.getTruthValue("pioneer", "enable_motors", param_enable_motors);
   std::cout << "param_enable_motors = " << param_enable_motors << std::endl;
 
@@ -189,7 +184,7 @@ public:
   void handleSend(const Smart::CommBasePositionUpdate &upd) throw()
   {
     // update robot pos
-    robot.updatePosition( upd );
+    robot->updatePosition( upd );
     std::cout << "update...\n";
   }
 };
@@ -216,8 +211,8 @@ public:
 
     // set the robot's velocity
     //std::cout << "SetSpeed(" << v << ", " << omega << " )" << std::endl;
-    robot.setV( (int)v );
-    robot.setOmegaDeg( (int)omega );
+    robot->setV( (int)v );
+    robot->setOmegaDeg( (int)omega );
   }
 };
 
@@ -251,14 +246,14 @@ public:
     time_stamp.set_now();  // Set the timestamp to the current time
 
     //base_velocity.set_v((xSpeed + ySpeed) / 2);
-    base_velocity.set_v( robot.getV() );
+    base_velocity.set_v( robot->getV() );
     //base_velocity.set_omega_base(yawSpeed);
-    base_velocity.set_omega_base( robot.getOmegaRad() );
+    base_velocity.set_omega_base( robot->getOmegaRad() );
 
     // push the objects CommBasePosition and CommBaseVelocity into the SmartSoft CommBaseState object
     base_state.set_time_stamp(time_stamp);
 //    base_state.set_base_position(base_position);
-    base_state.set_base_position( robot.getBasePosition() );
+    base_state.set_base_position( robot->getBasePosition() );
     base_state.set_base_velocity(base_velocity);
 
     // send the CommBaseState object to the client
@@ -301,9 +296,26 @@ int main (int argc, char **argv)
 
     readParameters(argc,argv);
 
-    robot.openSerial( param_serialport, param_enable_motors, param_enable_sonar );
-    robot.setParameters( param_maxVel, param_maxRotVel, param_maxVelAcc, param_maxVelDecel, param_maxRotVelAcc, param_maxRotVelDecel );
-    robot.open();
+    // select the pioneer robot specified in the .ini-file
+    // add your robots here
+    int robotType;
+    if( strcmp("p3dx", param_robotType.c_str() ) == 0 )
+    {
+      robotType = ROBOT_TYPE_P3DX;
+    }
+    else if( strcmp("p3dxsh", param_robotType.c_str() ) == 0 )
+    {
+      robotType = ROBOT_TYPE_P3DX_SH;
+    }
+    else if( strcmp("p3atsh", param_robotType.c_str() ) == 0 )
+    {
+      robotType = ROBOT_TYPE_P3AT_SH;
+    }
+    robot = new Robot(robotType);
+
+    robot->openSerial( param_serialport, param_enable_motors, param_enable_sonar );
+    robot->setParameters( param_maxVel, param_maxRotVel, param_maxVelAcc, param_maxVelDecel, param_maxRotVelAcc, param_maxRotVelDecel );
+    robot->open();
 
     // BasePositionUpdate SendServer:
     BasePositionUpdateSendHandler basePositionUpdateSendHandler;

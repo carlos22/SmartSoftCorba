@@ -73,7 +73,7 @@
 #include "Robot.hh"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Robot::Robot()
+Robot::Robot(int robotType)
 {
   serial_fd = -1;
   
@@ -105,7 +105,44 @@ Robot::Robot()
   lamdaSigmaD = 50*50/1000.0; // TODO
   lamdaSigmaDeltaAlpha = (5*5/360.0) /180.0 * M_PI; // TODO
   lamdaSigmaDeltaBeta = (2*2/1000.0) /180.0 * M_PI; // TODO
-  
+
+
+  // select the parameters according to the specified pioneer robot type
+  switch(robotType)
+  {
+    // P3DX SH 
+    case ROBOT_TYPE_P3DX_SH:
+    {
+       AngleConvFactor = 0.001534;
+       DiffConvFactor  = 0.0056;
+       DistConvFactor  = 1.0;
+       VelConvFactor   = 1.0;
+       RangeConvFactor = 1.0;
+       break;
+    }
+
+    // P3DX
+    case ROBOT_TYPE_P3DX:
+    {
+       AngleConvFactor = 0.001534;
+       DiffConvFactor  = 0.0056;
+       DistConvFactor  = 0.485;
+       VelConvFactor   = 1.0;
+       RangeConvFactor = 1.0;
+       break;
+    }
+
+    // P3AT SH
+    case ROBOT_TYPE_P3AT_SH:
+    {
+       AngleConvFactor = 0.001534;
+       DiffConvFactor  = 0.0034;
+       DistConvFactor  = 1.0;
+       VelConvFactor   = 1.0;
+       RangeConvFactor = 1.0;
+       break;
+    }
+  } 
 }
 
 
