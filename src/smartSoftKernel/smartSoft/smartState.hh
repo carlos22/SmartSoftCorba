@@ -1,14 +1,16 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2002/2004/2008/2009 Christian Schlegel, Alex Lotz
 //
 //        schlegel@hs-ulm.de
+//        lotz@hs-ulm.de
 //
 //        Prof. Dr. Christian Schlegel
 //        University of Applied Sciences
 //        Prittwitzstr. 10
 //        D-89075 Ulm
 //        Germany
+//
 //
 //  This file is part of the "SmartSoft Communication Library".
 //  It provides standardized patterns for communication between
@@ -29,7 +31,7 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
 //
-//  (partly based on joint work with Robert Wörz)
+//  (partly based on joint work with Robert WÃ¶rz)
 //
 // --------------------------------------------------------------------------
 
@@ -37,7 +39,7 @@
 #define _SMARTSTATE_HH
 
 #include <cstdio>
-#include <unistd.h>
+
 #include <cstdlib>
 #include <cstring>
 #include <cmath>
@@ -46,9 +48,10 @@
 #include <list>
 
 #include "smartComponent.hh"
+#include "smartCommState.hh"
+#include "smartWiring.hh"
+#include "smartQuery.hh"
 #include "smartTask.hh"
-#include "smartStateServerPattern.hh"
-#include "smartStateClientPattern.hh"
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -63,11 +66,6 @@
 namespace CHS {
 
   /** Client part of state pattern (master).
-   *
-   * @warning Provides not yet the standard interface for dynamic wiring
-   *          consisting of the add / remove / connect / disconnect member
-   *          functions and does not yet provide the blocking member function
-   *          to abort blocking calls.
    *
    *  The configuration class provides priorized mutexes for protecting
    *  configurations. Normally, a complex robotic system requires a lot of
@@ -95,40 +93,211 @@ namespace CHS {
    */
   class SmartStateClient {
   private:
-    SmartMutex        mutex;
-    SmartCntCondClass cond;   // signal when answer to setWaitState is received
-    StatusCode result;        // result returned from server
+    /// mutexConnection protects critical sections from being executed in
+    ///                 parallel. These are all related to changing connections
+    ///                 while client/server interactions are active. The mutex
+    ///                 avoids racing conditions when for example a subscribe
+    ///                 and a disconnect are called in parallel.
+    SmartRecursiveMutex mutexConnection;
 
     // management class of the component
     SmartComponent *component;
 
-    // the CORBA client object
-    StateClient_impl *corbaClient;
+    //<alexej date="2009-10-27">
+    /// Main Query port - handles all communication of state pattern
+    QueryClient<SmartCommStateRequest, SmartCommStateResponse> state_proxy;
+    //</alexej>
 
-    // the CORBA client reference transferred to server
-    SmartStateClientPattern_ptr h;
+    /// 0/1 to indicate whether client is not connected / is connected to server
+    int statusConnected;
 
-    // the CORBA server connection
-    SmartStateServerPattern_var corbaServant;
+    /// 0/1 to indicate whether port is not contained / is contained in the set
+    /// of externally accessible client wiring
+    int statusManagedPort;
 
-    // private functions
-    static void hndAnswSetMainState(void*,int);
+    /// denotes the name of the port if client can be wired from other components
+    std::string portname;
 
+    /// used for the case connect is done out of the constructor
+    bool constructor_connect;
+
+    /// stores pointer to wiring slave when managed port
+    WiringSlave *wiringslave;
+
+    /// Default constructor
+    ///
+    /// throws exception if someone tries to use this constructor
+    ///   SMART_ERROR : this constructor is forbidden
     SmartStateClient() throw(CHS::SmartError);
+
     // Default constructor
+    /** (Interface used by wiring service. Requires ordinary pointer since
+     *   client patterns have different types and even have different template
+     *   parameters. Therefore member function pointers in wiring service would
+     *   require type information. For further details on return status see connect()
+     *   and disconnect() methods.)
+     *
+     *   internalConnect @return status code
+     *     - SMART_OK                  : everything is OK
+     *     - SMART_SERVICEUNAVAILABLE  : the requested server/service is not available and therefore
+     *                                   no connection can be established.
+     *     - SMART_INCOMPATIBLESERVICE : the denoted service is incompatible (wrong communication
+     *                                   pattern or wrong communication objects) and can therefore
+     *                                   not be connected. Client is now not connected to any server.
+     *     - SMART_ERROR               : something went wrong
+     *
+     *   internalDisconnect @return status code
+     *     - SMART_OK                  : everything is OK
+     *     - SMART_ERROR_COMMUNICATION : something went wrong
+     */
+    static StatusCode internalConnect(void* ptr, const std::string& server, const std::string& service);
+    static StatusCode internalDisconnect(void* ptr);
 
   public:
     // Initialization
-
-    /** constructor.
+    /** Constructor (exposed as port and wireable from outside by other components).
+     *  add()/remove() and connect()/disconnect() can always be used to change the
+     *  status of the instance. Instance is not connected to a service provider.
      *
-     *  @param component management class of the component
-     *  @param service   name of the service
+     *  Throws exception if port name is already in use.
+     *    - SMART_PORTALREADYUSED : port name already in use, instance not created
+     *    - SMART_ERROR           : something went wrong, instance not created
+     *
+     * @param component  management class of the component
+     * @param port       name of the wireable port
+     * @param slave      wiring slave of this component
      */
-    SmartStateClient(SmartComponent * component, const std::string & service) throw(CHS::SmartError);
+    SmartStateClient(SmartComponent* component, const std::string& port, WiringSlave* slave) throw(CHS::SmartError);
+
+    /** Constructor (not wired with service provider and not exposed as port).
+     *  add()/remove() and connect()/disconnect() can always be used to change
+     *  the status of the instance. Instance is not connected to a service provider
+     *  and is not exposed as port wireable from outside the component.
+     *
+     *  (Currently exception not thrown)
+     *
+     * @param component  management class of the component
+     */
+    SmartStateClient(SmartComponent* component) throw(CHS::SmartError);
+
+    /** Constructor (wired with specified service provider).
+     *  Connects to the denoted service and blocks until the connection
+     *  has been established. Blocks infinitely if denoted service becomes
+     *  not available since constructor performs retries. Blocking is useful to
+     *  simplify startup of components which have mutual dependencies.
+     *  add()/remove() and connect()/disconnect() can always be used to change
+     *  the status of the instance.
+     *
+     *  Throws exception if denoted service is incompatible (wrong communication
+     *  pattern or wrong communication objects).
+     *    - SMART_INCOMPATIBLESERVICE : the denoted service is incompatible (wrong communication
+     *                                  pattern or wrong communication objects) and can therefore
+     *                                  not be connected. Instance is not created.
+     *    - SMART_ERROR               : something went wrong, instance not created
+     *
+     * @param component  management class of the component
+     * @param server     name of the server
+     * @param service    name of the service
+     */
+    SmartStateClient(SmartComponent* component, const std::string& server, const std::string& service="state") throw(CHS::SmartError);
 
     /// Destructor
     virtual ~SmartStateClient() throw();
+
+   /** Add this instance to the set of ports wireable via the
+     *  wiring pattern from outside the component. Already
+     *  established connections keep valid. If this service
+     *  requestor is already exposed as port, it is first
+     *  removed and then added with the new port name.
+     *  add()/remove() and connect()/disconnect() can always
+     *  be used to change the status of this instance.
+     *
+     *  @param slave  wiring slave of this component
+     *  @param port   name of port used for wiring
+     *
+     *  @return status code
+     *   - SMART_OK                  : everything is OK and this instance
+     *                                 added to the set of ports wireable
+     *                                 from outside the component
+     *   - SMART_PORTALREADYUSED     : port name already in use and this
+     *                                 instance now not available as port
+     *   - SMART_ERROR               : something went wrong
+     */
+    StatusCode add(WiringSlave* slave, const std::string& port) throw();
+
+    /** Remove this service requestor from the set of ports wireable
+     *  via the wiring pattern from outside the component. Already
+     *  established connections keep valid but can now be changed
+     *  only from inside and not from outside this component anymore.
+     *
+     *  @return status code
+     *   - SMART_OK                  : everything is OK and instance not
+     *                                 exposed as port anymore (or was not
+     *                                 registered as port).
+     *   - SMART_ERROR               : something went wrong but this instance
+     *                                 is removed from the set of ports in
+     *                                 any case.
+     */
+    StatusCode remove() throw();
+
+    /** Connect this service requestor to the denoted service provider. An
+     *  already established connection is first disconnected. See disconnect()
+     *  for implications on pending data reception in that case.
+     *
+     *  It is no problem to change the connection to a service provider at any
+     *  point of time irrespective of any calls to getUpdate() / getUpdateWait().
+     *
+     *  @param server   name of the server
+     *  @param service  name of the service
+     *
+     *  @return status code
+     *   - SMART_OK                  : everything is OK and connected to the specified service.
+     *   - SMART_SERVICEUNAVAILABLE  : the specified service is currently not available and the
+     *                                 requested connection can not be established. Service
+     *                                 requestor is now not connected to any service provider.
+     *   - SMART_INCOMPATIBLESERVICE : the specified service provider is not compatible (wrong communication
+     *                                 pattern or wrong communication objects) to this service requestor and
+     *                                 can therefore not be connected. Service requestor is now not connected
+     *                                 to any service provider.
+     *   - SMART_ERROR_COMMUNICATION : communication problems, service requestor is now not connected to any
+     *                                 service provider.
+     *   - SMART_ERROR               : something went wrong, service requestor is now not connected to any
+     *                                 service provider.
+     */
+    StatusCode connect(const std::string& server, const std::string& service="state") throw();
+
+    /** Disconnect the service requestor from the service provider.
+     *
+     *  A disconnect always first performs an unsubscribe. See unsubsribe() for
+     *  implications on getUpdate() and getUpdateWait().
+     *
+     *  It is no problem to change the connection to a service provider at any
+     *  point of time irrespective of any calls to getUpdate() / getUpdateWait().
+     *
+     *  @return status code
+     *   - SMART_OK                  : everything is OK and service requestor is disconnected from
+     *                                 the service provider.
+     *   - SMART_ERROR_COMMUNICATION : something went wrong at the level of the intercomponent
+     *                                 communication. At least the service requestor is in the
+     *                                 disconnected state irrespective of the service provider
+     *                                 side clean up procedures.
+     *   - SMART_ERROR               : something went wrong. Again at least the service requestor
+     *                                 is in the disconnected state.
+     */
+    StatusCode disconnect() throw();
+
+    /** Allow or abort and reject blocking calls.
+     *
+     *  If blocking is set to false all blocking calls return with SMART_CANCELLED. This can be
+     *  used to abort blocking calls.
+     *
+     *  @param blocking  true/false
+     *
+     *  @return status code
+     *   - SMART_OK                  : new mode set
+     *   - SMART_ERROR               : something went wrong
+     */
+    StatusCode blocking(const bool b) throw();
 
     /** Blocking call to change the main state.
      *
@@ -265,6 +434,8 @@ namespace CHS {
   class StateChangeHandler
   {
   public:
+    virtual ~StateChangeHandler() {  };
+
     // Handler methods
     /** Called when a substate is entered
      *
@@ -279,24 +450,61 @@ namespace CHS {
     virtual void handleQuitState(const std::string& state) throw() = 0;
   };
 
+  /// forward declaration
+  class SmartStateServer;
+
+
+  /** @internal
+   *  Handler for slave part of wiring pattern.
+   *
+   *  The wiring handler is called by the internally used query pattern
+   *  and connects / disconnects a port with a server.
+   */
+  class StateServerHandler : public QueryServerHandler<SmartCommStateRequest, SmartCommStateResponse>
+  {
+  private:
+    /// used to access the SmartStateServer from the handler
+    SmartStateServer * stateServer;
+
+    /// default constructor
+    StateServerHandler() throw(SmartError);
+
+  public:
+    /** Constructor.
+     *
+     * @param slave  <I>SmartStateServer</I> needed to access it from the handler
+     */
+    StateServerHandler(SmartStateServer* state) throw();
+
+    /// Destructor
+    virtual ~StateServerHandler() throw();
+
+      virtual void handleQuery(QueryServer<SmartCommStateRequest,SmartCommStateResponse>& server, 
+         const QueryId id, const SmartCommStateRequest& request) throw();
+  };
+
   /** Server part of state pattern (slave)
    *
    *  Demonstrated in @ref example3
    */
   class SmartStateServer {
+     friend class StateServerHandler;
 
   private:
 
     typedef enum SmartStateServerAction {
       SSA_UNDEFINED,
       SSA_CHANGE_STATE
-    };
+    }SSSA;
 
     typedef struct SmartStateEntry {
       SmartStateServerAction      action;
       std::string                 state;
-      SmartStateClientPattern_ptr client;
-    };
+      //<alexej date="2009-10-27">
+      QueryServer<SmartCommStateRequest,SmartCommStateResponse> *server_proxy;
+      QueryId                     qid;
+      //</alexej>
+    }SSE;
 
     //
     // indicates the next action to be performed on a substate
@@ -305,7 +513,7 @@ namespace CHS {
       STATE_ACTION_ACTIVATE,
       STATE_ACTION_DEACTIVATE,
       STATE_ACTION_NONE
-    };
+    }SSA;
 
     //
     // indicates the current mode of a substate
@@ -313,7 +521,7 @@ namespace CHS {
     typedef enum SmartStateMode {
       STATE_ACTIVATED,
       STATE_DEACTIVATED
-    };
+    }SSM;
 
     //
     // used to manage the states of a component
@@ -325,7 +533,7 @@ namespace CHS {
       int                     cnt;
       SmartStateAction        action;
       SmartStateMode          state;
-    };
+    }SSSE;
 
 
     StateUpdateThread                    stateUpdateThread;
@@ -337,30 +545,34 @@ namespace CHS {
 
     SmartMutex  mutex;
 
-    //
+    ///
     std::list<SmartSubStateEntry> stateList;
 
-    // if flag is true => no more states can be defined
+    /// if flag is true => no more states can be defined
     bool running;
 
     // management class of the service
     SmartComponent *component;
 
-    //
+    /// service name
     std::string service;
 
-    // handler for state changes
+    /// handler for state changes
     StateChangeHandler & changeHandler;
 
-    // the CORBA server object
-    StateServer_impl *corbaServant;
+    /// QueryHandler handles incomming state-requests from StateClient
+    StateServerHandler query_handler;
 
-    // private functions
-    static void hndSetMainState(void*, const SmartStateClientPattern_ptr, std::string);
-    static int hndGetMainStates(void*, StateList_out);
-    static int hndGetSubStates(void*, std::string, StateList_out);
+    /// QueryServer as main port of StateServer
+    QueryServer<SmartCommStateRequest, SmartCommStateResponse> query_server;
 
-    // Default constructor
+
+    /// private handler functions
+    static void hndSetMainState(void*, QueryServer<SmartCommStateRequest,SmartCommStateResponse> *server, const QueryId &qid, const std::string&);
+    static StatusCode hndGetMainStates(void*, std::list<std::string>&);
+    static StatusCode hndGetSubStates(void*, const std::string&, std::list<std::string>&);
+
+    /// Default constructor
     SmartStateServer() throw(SmartError);
 
   public:
@@ -374,7 +586,14 @@ namespace CHS {
      *  @param component management class of the component
      *  @param hnd       notify this handle object when state changes occur
      */
-    SmartStateServer(SmartComponent* component,StateChangeHandler & hnd) throw(SmartError);
+    SmartStateServer(SmartComponent* component, StateChangeHandler & hnd) throw(SmartError);
+
+    /** Constructor.
+     *  @param component management class of the component
+     *  @param service   service name
+     *  @param hnd       notify this handle object when state changes occur
+     */
+    SmartStateServer(SmartComponent* component, const std::string& service, StateChangeHandler & hnd) throw(SmartError);
 
     /// Destructor
     virtual ~SmartStateServer() throw();
@@ -404,7 +623,7 @@ namespace CHS {
      *   - SMART_ERROR_COMMUNICATION : communication problems
      *   - SMART_ERROR               : something went wrong
      */
-    StatusCode defineStates(const std::string& main,const std::string& sub) throw();
+    StatusCode defineStates(const std::string& mainstate, const std::string& substate) throw();
 
     /** Activation is necessary since otherwise no states can be set
      *  or acquired. No more state definitions are possible after

@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2009 Alex Lotz, Andreas Steck
 //
 //        schlegel@hs-ulm.de
 //
@@ -28,30 +28,17 @@
 //  License along with this library; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-//
-//  (partly based on joint work with Robert Wörz)
-//
 // --------------------------------------------------------------------------
 
-typedef sequence<string> StateList;
-
-interface SmartStateClientPattern
+struct SmartStateRequest
 {
-  void answer(in long status);
-  // result of setting the main state
+  long command;
+  string state_name;
 };
 
-interface SmartStateServerPattern
+struct SmartStateResponse
 {
-  void setState(in string mainstate,in SmartStateClientPattern client);
-  // mainstate  : main state to be set
-  // client     : reference to the client object
-
-  long getMainStates(out StateList mainstates);
-  // mainstates : returned list of main states
-
-  long getSubStates(in string mainstate,out StateList substates);
-  // mainstate : main state of which the substates are requested
-  // substates : returned list of substates
+  long status;
+  sequence<string> state_list;
 };
 

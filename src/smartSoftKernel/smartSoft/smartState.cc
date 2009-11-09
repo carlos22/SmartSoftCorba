@@ -1,14 +1,16 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2002/2004/2008/2009 Christian Schlegel, Alex Lotz
 //
 //        schlegel@hs-ulm.de
+//        lotz@hs-ulm.de
 //
 //        Prof. Dr. Christian Schlegel
 //        University of Applied Sciences
 //        Prittwitzstr. 10
 //        D-89075 Ulm
 //        Germany
+//
 //
 //  This file is part of the "SmartSoft Communication Library".
 //  It provides standardized patterns for communication between
@@ -29,7 +31,7 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
 //
-//  (partly based on joint work with Robert Wörz)
+//  (partly based on joint work with Robert WÃ¶rz)
 //
 // --------------------------------------------------------------------------
 
@@ -42,72 +44,132 @@
 //
 /////////////////////////////////////////////////////////////////////////
 
+
 //
-// static handle method called by CORBA object
+// static internal interface methods used by wiring service
 //
-void CHS::SmartStateClient::hndAnswSetMainState(void* ptr,int status)
+CHS::StatusCode CHS::SmartStateClient::internalConnect(void *ptr,const std::string & server, const std::string & service)
+{
+  SmartStateClient* lthis = (SmartStateClient *)ptr;
+
+  return lthis->connect(server,service);
+}
+
+CHS::StatusCode CHS::SmartStateClient::internalDisconnect(void *ptr)
 {
   SmartStateClient *lthis = (SmartStateClient *)ptr;
 
-  lthis->mutex.acquire();
-  lthis->result = static_cast<CHS::StatusCode> (status);
-  lthis->mutex.release();
-
-  lthis->cond.signal();
+  return lthis->disconnect();
 }
-
 
 //
 // default constructor
 //
 CHS::SmartStateClient::SmartStateClient(void) throw(CHS::SmartError)
+:  state_proxy(NULL)
 {
   std::cerr << "CommPattern (state): ERROR: Entered default constructor SmartStateClient" << std::endl;
+
+  throw(CHS::SmartError(CHS::SMART_ERROR,"CommPattern (stateClient): ERROR: Entered default constructor SmartStateClient"));
+}
+
+//
+// standard constructor port
+//
+CHS::SmartStateClient::SmartStateClient(SmartComponent* m,const std::string& port, CHS::WiringSlave* slave) throw(CHS::SmartError)
+:  state_proxy(m)
+{
+  CHS::StatusCode status = CHS::SMART_ERROR;
+
+  // set the configuration flags approriately
+  statusConnected    = 0;
+  statusManagedPort  = 0;
+  portname           = port;
+  component          = m;
+  wiringslave        = slave;
+
+  constructor_connect = false;
+
+  status = this->add(slave, port);
+
+  if (status == CHS::SMART_PORTALREADYUSED) {
+    //
+    // port name already in use therefore throw exception
+    //
+    throw(CHS::SmartError(CHS::SMART_PORTALREADYUSED,"CommPattern (stateClient): ERROR: port name already in use"));
+  } else if (status != CHS::SMART_OK) {
+    //
+    // throw exception since something went wrong
+    //
+    throw(CHS::SmartError(CHS::SMART_ERROR,"CommPattern (stateClient): ERROR: something went wrong"));
+  }
 }
 
 
 //
 // standard constructor
 //
-CHS::SmartStateClient::SmartStateClient(SmartComponent* m,const std::string& srv) throw(CHS::SmartError)
+CHS::SmartStateClient::SmartStateClient(SmartComponent* m) throw(CHS::SmartError)
+:  state_proxy(m)
 {
+  // set the configuration flags approriately
+  statusConnected    = 0;
+  statusManagedPort  = 0;
+  portname           = "";
+  component          = m;
+  wiringslave        = 0;
+
+  constructor_connect = false;
+}
+
+
+//
+// standard constructor
+//
+CHS::SmartStateClient::SmartStateClient(SmartComponent* m, const std::string& server, const std::string& service) throw(CHS::SmartError)
+:  state_proxy(m, server, service)
+{
+  CHS::StatusCode status = CHS::SMART_ERROR;
   int flag;
 
-  component = m;
+  // set the configuration flags appropriately
+  statusConnected    = 1;
+  statusManagedPort  = 0;
+  portname           = "";
+  component          = m;
+  wiringslave        = 0;
 
-  // Create the CORBA client object
-  corbaClient = new StateClient_impl((void *)this,&SmartStateClient::hndAnswSetMainState);
+  constructor_connect = true;
 
-  // activate object to obtain the object reference, need not be registered since object reference
-  // is sent to server when state is set
-  h = corbaClient->_this();
 
-  // Now connect to the server side of the state pattern
-  std::cout << "Try to connect to (" << srv << ":state) ..." << std::endl;
-  try {
+  // Now connect to the server side of the push Timed pattern
+  std::cout << "Try to connect to (" << server << ":state:" << service << ") ..." << std::endl;
 
-    CosNaming::Name name;
-    name.length(3);
-    name[0].id = CORBA::string_dup("orocos");
-    name[1].id = CORBA::string_dup(srv.c_str());
-    name[2].id = CORBA::string_dup("state");
+  do {
+    //<alexej date="2009-10-27">
+    // not working under ACE under all conditions because reactom may not
+    // run at constructor time, but under CORBA it is not a problem
+     //status = this->connect(server, service);
+     status = CHS::SMART_OK;
+    //</alexej>
 
-    do {
-      try {
-        corbaServant = resolve_name<SmartStateServerPattern>(component->namingService.in(), name);
-        flag = 1;
-      } catch (const CosNaming::NamingContext::NotFound &) {
-        std::cout << "CommPattern (state): INFO: not yet found in naming service ..." << std::endl;
-        sleep(1);
-        flag = 0;
-      }
-    } while (flag==0);
-  } catch (const CORBA::Exception & e) {
-    std::cerr << "CommPattern (state): ERROR: Uncaught CORBA exception: ";
-    CHS::operator<<(std::cerr, e) << std::endl;
-    throw 0;
-  }
-  std::cout << "... connected to (" << srv << ":state)" << std::endl;
+    if (status == CHS::SMART_OK) {
+      flag = 1;
+      std::cout << "... connected to (" << server << ":state:" << service << ")" << std::endl;
+    } else if (status == CHS::SMART_SERVICEUNAVAILABLE) {
+      std::cout << "CommPattern (SmartStateClient): INFO: not yet found in naming service ..." << std::endl;
+      ACE_OS::sleep(1);
+      flag = 0;
+    } else if (status == CHS::SMART_INCOMPATIBLESERVICE) {
+      std::cout << "CommPattern (SmartStateClient): ERROR: incompatible service ..." << std::endl;
+      flag = 1;
+      throw(CHS::SmartError(status,"CommPattern (SmartStateClient): ERROR: incompatible service"));
+    } else {
+      std::cout << "CommPattern (SmartStateClient): ERROR: something went wrong ..." << std::endl;
+      flag = 1;
+      throw(CHS::SmartError(status,"CommPattern (SmartStateClient): ERROR: something went wrong"));
+    };
+  } while (flag == 0);
 }
 
 
@@ -116,91 +178,239 @@ CHS::SmartStateClient::SmartStateClient(SmartComponent* m,const std::string& srv
 //
 CHS::SmartStateClient::~SmartStateClient(void) throw()
 {
-  // client does not bind object at naming service,
-  // therefore no unbind of objects needed here
+  //
+  // remove port from managed set of ports and disconnect from server even if not
+  // exposed as port or connected to a server since this is handled correctly inside
+  // remove() and disconnect(). Disconnect automatically unsubscribes from server.
+  //
+  this->remove();
+  this->disconnect();
 }
 
+
+//
+//
+//
+CHS::StatusCode CHS::SmartStateClient::add(CHS::WiringSlave* slave, const std::string& port) throw()
+{
+  CHS::StatusCode status = CHS::SMART_ERROR;
+
+  mutexConnection.acquire();
+
+     // first remove eventually valid registration
+     this->remove();
+
+     // now add client
+     portname          = port;
+     statusManagedPort = 1;
+
+     wiringslave = slave;
+     status      = this->wiringslave->add(port, (void*)this, &SmartStateClient::internalConnect, &SmartStateClient::internalDisconnect);
+
+  mutexConnection.release();
+
+  return status;
+}
+
+//
+//
+//
+CHS::StatusCode CHS::SmartStateClient::remove() throw()
+{
+  CHS::StatusCode status = CHS::SMART_ERROR;
+
+  mutexConnection.acquire();
+
+     if (statusManagedPort == 1) {
+       status = this->wiringslave->remove(portname);
+
+       portname          = "";
+       statusManagedPort = 0;
+
+     } else {
+       status = CHS::SMART_OK;
+     }
+
+  mutexConnection.release();
+
+  return status;
+}
+
+//
+//
+//
+CHS::StatusCode CHS::SmartStateClient::connect(const std::string& server, const std::string& service) throw()
+{
+   CHS::StatusCode status = CHS::SMART_ERROR;
+
+   mutexConnection.acquire();
+
+      // first disconnect eventually valid connection
+      this->disconnect();
+
+      //
+      // perform connect
+      //
+      status = state_proxy.connect(server, service);
+
+      if (status == CHS::SMART_OK) {
+         // successfully connected to the server
+         statusConnected = 1;
+      }
+
+   mutexConnection.release();
+
+   return status;
+}
+
+//
+//
+//
+CHS::StatusCode CHS::SmartStateClient::disconnect() throw()
+{
+   CHS::StatusCode status = CHS::SMART_ERROR;
+
+   mutexConnection.acquire();
+
+      if (statusConnected == 0)
+      {
+         status = CHS::SMART_OK;
+      } else {
+
+         statusConnected = 0;
+
+         //
+         // perform disconnect
+         //
+         status = state_proxy.disconnect();
+      }
+
+   mutexConnection.release();
+
+   return status;
+}
+
+//
+//
+//
+CHS::StatusCode CHS::SmartStateClient::blocking(const bool b) throw()
+{
+  CHS::StatusCode result = CHS::SMART_OK;
+
+  state_proxy.blocking(b);
+
+  return result;
+}
 
 //
 //
 //
 CHS::StatusCode CHS::SmartStateClient::setWaitState(const std::string& mainstate) throw()
 {
-  CHS::StatusCode status;
+   CHS::StatusCode status = CHS::SMART_ERROR;
 
-  try {
-    corbaServant->setState(mainstate.c_str(),h);
-  } catch (CORBA::SystemException &e) {
-    std::cerr << "SmartStateClient::setWaitState(): Corba::SystemException : ";
-    CHS::operator<<(std::cerr, e) << std::endl;
-    return CHS::SMART_ERROR_COMMUNICATION;
-  }
+   CHS::SmartCommStateRequest request;
+   CHS::SmartCommStateResponse response;
 
+   mutexConnection.acquire();
 
-  status = component->waitForCond(cond);
-  if (status != SMART_OK) return status;
+      // set request comm-obj
+      request.setCommand(CHS::STATE_CMD_SET_STATE);
+      request.setStateName(mainstate);
 
-  // now get the status returned from the server
-  mutex.acquire();
-  status = result;
-  mutex.release();
+      // perform the query
+      status = state_proxy.query(request, response);
 
-  return status;
+      // get the reply state
+      if(status == CHS::SMART_OK)
+      {
+         status = static_cast<CHS::StatusCode>(response.getStatus());
+      }
+
+   mutexConnection.release();
+
+   return status;
 }
 
 
 CHS::StatusCode CHS::SmartStateClient::getWaitCurrentState(std::string& mainstate) throw()
 {
-  std::cerr << "############# getWaitCurrentState NOT YET IMPLEMENTED !!!" << std::endl;
+   std::cerr << "############# getWaitCurrentState NOT YET IMPLEMENTED !!!" << std::endl;
 
-  return SMART_ERROR;
+   return SMART_ERROR;
 }
 
 
 CHS::StatusCode CHS::SmartStateClient::getWaitMainStates(std::list<std::string>& mainstates) throw()
 {
-  StateList_var l;
-  CHS::StatusCode status;
+   CHS::StatusCode status = CHS::SMART_ERROR;
 
-  try {
-    status = static_cast<CHS::StatusCode>( corbaServant->getMainStates(l) );
-  } catch (CORBA::SystemException &e) {
-    std::cerr << "SmartStateClient::getWaitMainStates(): Corba::SystemException : ";
-    CHS::operator<<(std::cerr, e) << std::endl;
-    // could not get the list of main states because of comm. problems
-    return CHS::SMART_ERROR_COMMUNICATION;
-  }
+   CHS::SmartCommStateRequest request;
+   CHS::SmartCommStateResponse response;
 
-  mainstates.clear();
-  for (unsigned int i=0;i<l->length();i++) {
-    std::string help(l[i]);
-    mainstates.push_back(help);
-  }
+   mutexConnection.acquire();
 
-  return status;
+      // set request comm-obj
+      request.setCommand(CHS::STATE_CMD_GET_MAIN_STATES);
+
+      // perform the query
+      status = state_proxy.query(request, response);
+
+      // get the reply state
+      if(status == CHS::SMART_OK)
+      {
+         // get remote status
+         status = static_cast<CHS::StatusCode>(response.getStatus());
+
+         // copy received list back into mainstates-list
+         if(status == CHS::SMART_OK)
+         {
+            mainstates = response.getStateList();
+         }else{
+            mainstates.clear();
+         }
+      }
+
+   mutexConnection.release();
+
+   return status;
 }
 
 
 CHS::StatusCode CHS::SmartStateClient::getWaitSubStates(const std::string& mainstate,std::list<std::string>& substates) throw()
 {
-  StateList_var l;
-  CHS::StatusCode status;
+   CHS::StatusCode status = CHS::SMART_ERROR;
 
-  try {
-    status = static_cast<CHS::StatusCode>( corbaServant->getSubStates(mainstate.c_str(),l) );
-  } catch (CORBA::SystemException &e) {
-    std::cerr << "SmartStateClient::getWaitSubStates(): Corba::SystemException : ";
-    CHS::operator<<(std::cerr, e) << std::endl;
-    return CHS::SMART_ERROR_COMMUNICATION;
-  }
+   CHS::SmartCommStateRequest request;
+   CHS::SmartCommStateResponse response;
 
-  substates.clear();
-  for (unsigned int i=0;i<l->length();i++) {
-    std::string help(l[i]);
-    substates.push_back(help);
-  }
+   mutexConnection.acquire();
 
-  return status;
+      // set request comm-obj
+      request.setCommand(CHS::STATE_CMD_GET_SUB_STATES);
+      request.setStateName(mainstate);
+
+      // perform the query
+      status = state_proxy.query(request, response);
+
+      // get the reply state
+      if(status == CHS::SMART_OK)
+      {
+         // get remote status
+         status = static_cast<CHS::StatusCode>(response.getStatus());
+
+         // copy received list back into substates-list
+         if(status == CHS::SMART_OK)
+         {
+            substates = response.getStateList();
+         }else{
+            substates.clear();
+         }
+      }
+
+   mutexConnection.release();
+
+   return status;
 }
 
 
@@ -240,15 +450,85 @@ CHS::StatusCode CHS::SmartStateClient::getWaitSubStates(const std::string& mains
 //
 // static handle method called by CORBA object
 //
+CHS::StateServerHandler::StateServerHandler() throw(CHS::SmartError)
+{
+  std::cerr << "CommPattern (StateServerHandler): ERROR: Entered default constructor StateServerHandler" << std::endl;
 
-void CHS::SmartStateServer::hndSetMainState(void *ptr, const SmartStateClientPattern_ptr client,std::string mainstate)
+  throw(CHS::SmartError(CHS::SMART_ERROR,"CommPattern (StateServerHandler): ERROR: Entered default constructor StateServerHandler"));
+}
+
+CHS::StateServerHandler::StateServerHandler(CHS::SmartStateServer *state) throw()
+:  stateServer(state)
+{  }
+
+CHS::StateServerHandler::~StateServerHandler() throw()
+{  }
+
+void CHS::StateServerHandler::handleQuery(QueryServer<SmartCommStateRequest,SmartCommStateResponse>& server,
+         const QueryId id, const SmartCommStateRequest& request) throw()
+{
+   SmartCommStateResponse reply;
+   std::list<std::string> state_list;
+   std::string mainstate;
+   CHS::StatusCode ret_val;
+
+   // call appropriate command depending on command-id
+   switch(request.getCommand())
+   {
+   case STATE_CMD_SET_STATE:
+      // get main-state
+      mainstate = request.getStateName();
+
+      // call handler for setMainState
+      SmartStateServer::hndSetMainState((void*)stateServer, &server, id, mainstate);
+      break;
+
+   case STATE_CMD_GET_MAIN_STATES:
+      //get state-list
+      ret_val = SmartStateServer::hndGetMainStates((void*)stateServer, state_list);
+
+      // safe state list in reply comm-obj
+      reply.setStateList(state_list);
+      reply.setStatus(static_cast<int>(ret_val));
+
+      // reply to client
+      server.answer(id, reply);
+      break;
+
+
+   case STATE_CMD_GET_SUB_STATES:
+      // get main state
+      mainstate = request.getStateName();
+      //get state-list
+      ret_val = SmartStateServer::hndGetSubStates((void*)stateServer, mainstate, state_list);
+
+      // safe state list in reply comm-obj
+      reply.setStateList(state_list);
+      reply.setStatus(static_cast<int>(ret_val));
+
+      // reply to client
+      server.answer(id, reply);
+      break;
+
+   default:
+      ACE_DEBUG((LM_DEBUG, ACE_TEXT("StateServerHandler: unknown command\n")));
+   };
+
+}
+
+
+
+
+void CHS::SmartStateServer::hndSetMainState(void *ptr, QueryServer<SmartCommStateRequest,SmartCommStateResponse> *server, const QueryId &qid, const std::string &mainstate)
 {
   SmartStateServer* lthis = (SmartStateServer *)ptr;
   SmartStateEntry entry;
+  SmartCommStateResponse reply;
 
   entry.state  = mainstate;
   entry.action = SSA_CHANGE_STATE;
-  entry.client = SmartStateClientPattern::_duplicate(client);
+  entry.server_proxy = server;
+  entry.qid = qid;
 
   lthis->mutex.acquire();
 
@@ -256,9 +536,10 @@ void CHS::SmartStateServer::hndSetMainState(void *ptr, const SmartStateClientPat
     //
     // state management not yet activated, send immediately status
     //
-    entry.client->answer(SMART_NOTACTIVATED);
+    reply.setStatus(static_cast<int>(SMART_NOTACTIVATED));
 
-    CORBA::release(entry.client);
+    entry.server_proxy->answer(qid, reply);
+    entry.server_proxy = 0;
   } else {
     //
     // enqueue the state change request
@@ -270,8 +551,7 @@ void CHS::SmartStateServer::hndSetMainState(void *ptr, const SmartStateClientPat
   lthis->mutex.release();
 }
 
-
-int CHS::SmartStateServer::hndGetMainStates(void *ptr, StateList_out mainstates)
+CHS::StatusCode CHS::SmartStateServer::hndGetMainStates(void *ptr, std::list<std::string> &mainstates)
 {
   SmartStateServer* lthis = (SmartStateServer *)ptr;
   std::list<SmartSubStateEntry>::iterator iterator;
@@ -279,8 +559,6 @@ int CHS::SmartStateServer::hndGetMainStates(void *ptr, StateList_out mainstates)
   std::list<std::string>::iterator mIterator;
   std::list<std::string>::iterator rIterator;
 
-  StateList_var l = new StateList;
-  CORBA::ULong count;
   int flag;
   CHS::StatusCode result;
 
@@ -299,11 +577,8 @@ int CHS::SmartStateServer::hndGetMainStates(void *ptr, StateList_out mainstates)
     //
     std::string neutral("neutral");
 
-    count = 0;
-
-    count++;
-    l->length(count);
-    l[count-1] = CORBA::string_dup(neutral.c_str());
+    mainstates.clear();
+    mainstates.push_back(neutral.c_str());
 
     stateResults.push_back(neutral);
 
@@ -325,33 +600,29 @@ int CHS::SmartStateServer::hndGetMainStates(void *ptr, StateList_out mainstates)
           // found new mainstate, add it to the list ...
           stateResults.push_back(*mIterator);
 
-          count++;
-          l->length(count);
-          l[count-1] = CORBA::string_dup(mIterator->c_str());
+          mainstates.push_back(mIterator->c_str());
         }
       }
     }
     result = SMART_OK;
   }
 
-  // now take away dynamically allocated state list from StateList_var before it goes out of scope
-  mainstates = l._retn();
-
   lthis->mutex.release();
 
   return result;
 }
 
-int CHS::SmartStateServer::hndGetSubStates(void *ptr, std::string mainstate, StateList_out substates)
+CHS::StatusCode CHS::SmartStateServer::hndGetSubStates(void *ptr, const std::string &mainstate, std::list<std::string> &substates)
 {
   SmartStateServer* lthis = (SmartStateServer *)ptr;
-  StateList_var l = new StateList;
   std::list<SmartSubStateEntry>::iterator iterator;
   std::list<std::string>::iterator mIterator;
-  CORBA::ULong count;
+  unsigned int count = 0;
   CHS::StatusCode result;
 
   lthis->mutex.acquire();
+
+  substates.clear();
 
   if (lthis->running == false) {
     //
@@ -363,8 +634,6 @@ int CHS::SmartStateServer::hndGetSubStates(void *ptr, std::string mainstate, Sta
     //
     // "neutral" has no substates
     //
-    l->length(0);
-    substates = l._retn();
 
     result = CHS::SMART_OK;
   } else {
@@ -374,17 +643,13 @@ int CHS::SmartStateServer::hndGetSubStates(void *ptr, std::string mainstate, Sta
         if (*mIterator == mainstate) {
           // found mainstate in this substate, therefore add substate to result list
           count++;
-          l->length(count);
-          l[count-1] = CORBA::string_dup(iterator->name.c_str());
+          substates.push_back(iterator->name.c_str());
 
           // now end for loop since we have already added this substate ...
           break;
         }
       }
     }
-
-    // now take away dynamically allocated state list from StateList_var before it goes out of scope
-    substates = l._retn();
 
     if (count==0) {
       // couldn't find the mainstate
@@ -399,58 +664,30 @@ int CHS::SmartStateServer::hndGetSubStates(void *ptr, std::string mainstate, Sta
   return result;
 }
 
-//
 // default constructor
 //
-// CHS::SmartStateServer::SmartStateServer(void) throw(CHS::SmartError) 
-// {
+//CHS::SmartStateServer::SmartStateServer(void) throw(CHS::SmartError)
+//:  query_handler(this)
+//,  query_server(NULL, "", query_handler)
+//{
 //   std::cerr << "CommPattern (state): ERROR: Entered default constructor SmartStateServer" << std::endl;
-// 
+//
 //   throw(CHS::SmartError(CHS::SMART_ERROR,"CommPattern (stateServer): ERROR: Entered default constructor SmartStateServer"));
-// }
+//}
 
 //
 // standard constructor
 //
-CHS::SmartStateServer::SmartStateServer(SmartComponent* m, CHS::StateChangeHandler & hnd) throw(CHS::SmartError)
-  : component(m), changeHandler(hnd)
+CHS::SmartStateServer::SmartStateServer(SmartComponent* comp, CHS::StateChangeHandler & hnd) throw(CHS::SmartError)
+  : component(comp)
+  , changeHandler(hnd)
+  , query_handler(this)
+  , query_server(comp, "state", query_handler)
 {
-  // Create the CORBA server object
-  corbaServant = new StateServer_impl((void *)this,
-                                      &SmartStateServer::hndSetMainState,
-                                      &SmartStateServer::hndGetMainStates,
-                                      &SmartStateServer::hndGetSubStates);
+   CHS::StatusCode result = CHS::SMART_OK;
 
-  // activate object to obtain the object reference
-  SmartStateServerPattern_var tm = corbaServant->_this();
-
-  CosNaming::Name name;
-
-  name.length(1);
-  name[0].id = CORBA::string_dup("orocos");
-  try {
-    CosNaming::NamingContext_var orocos = component->namingService->bind_new_context(name);
-  } catch (const CosNaming::NamingContext::AlreadyBound &) {
-    // Fine, context already exists
-  }
-
-  std::string server = component->getComponentName();
-  name.length(2);
-  name[1].id = CORBA::string_dup(server.c_str());
-  try {
-    CosNaming::NamingContext_var compname = component->namingService->bind_new_context(name);
-  } catch (const CosNaming::NamingContext::AlreadyBound &) {
-    // Fine, context already exists
-  }
-
-  name.length(3);
-  name[2].id = CORBA::string_dup("state");
-  try {
-    component->namingService->bind(name,tm.in());
-  } catch (const CosNaming::NamingContext::AlreadyBound &) {
-    std::cerr << "CommPattern (state): WARNING: service " << name[2].id << " in " << name[1].id << " rebound !" << std::endl;
-    component->namingService->rebind(name,tm.in());
-  }
+   mutex.acquire();
+   if(result != CHS::SMART_OK) throw(CHS::SmartError(CHS::SMART_ERROR,"CommPattern (stateServer): ERROR: Something went wrong during Acceptor initialization!\n"));
 
   //
   //
@@ -459,7 +696,10 @@ CHS::SmartStateServer::SmartStateServer(SmartComponent* m, CHS::StateChangeHandl
 
   desiredState.action = SSA_UNDEFINED;
   desiredState.state  = "neutral";
-  desiredState.client = 0;
+  //<alexej date="2009-10-27">
+  desiredState.server_proxy = 0;
+  desiredState.qid = 0;
+  //</alexej>
 
   currentState = std::string("neutral");
 
@@ -480,6 +720,59 @@ CHS::SmartStateServer::SmartStateServer(SmartComponent* m, CHS::StateChangeHandl
   stateList.push_back(nonneutral);
 
   running = false;
+
+  mutex.release();
+}
+
+
+//
+// standard constructor
+//
+CHS::SmartStateServer::SmartStateServer(SmartComponent* comp, const std::string& service, CHS::StateChangeHandler & hnd) throw(CHS::SmartError)
+  : component(comp)
+  , changeHandler(hnd)
+  , query_handler(this)
+  , query_server(comp, service, query_handler)
+{
+   CHS::StatusCode result = CHS::SMART_OK;
+
+   mutex.acquire();
+
+   if(result != CHS::SMART_OK) throw(CHS::SmartError(CHS::SMART_ERROR,"CommPattern (stateServer): ERROR: Something went wrong during Acceptor initialization!\n"));
+
+  //
+  //
+  //
+  stateQueueSemaphore = new SmartSemaphore(0);
+
+  desiredState.action = SSA_UNDEFINED;
+  desiredState.state  = "neutral";
+  //<alexej date="2009-10-13">
+  desiredState.server_proxy = 0;
+  desiredState.qid = 0;
+  //</alexej>
+
+  currentState = std::string("neutral");
+
+  stateUpdateThread.init(this,stateQueueSemaphore);
+  stateUpdateThread.open();
+
+  //
+  //
+  //
+  SmartSubStateEntry nonneutral;
+
+  nonneutral.name   = "nonneutral";
+  nonneutral.cnt    = 0;
+  nonneutral.action = STATE_ACTION_NONE;
+  nonneutral.state  = STATE_DEACTIVATED;
+  nonneutral.mainstates.clear();
+
+  stateList.push_back(nonneutral);
+
+  running = false;
+
+  mutex.release();
 }
 
 //
@@ -487,29 +780,12 @@ CHS::SmartStateServer::SmartStateServer(SmartComponent* m, CHS::StateChangeHandl
 //
 CHS::SmartStateServer::~SmartStateServer(void) throw()
 {
+  //delete acceptor;
   delete stateQueueSemaphore;
-
-  // unbind from naming service
-  try {
-    CosNaming::Name name;
-    name.length(3);
-    name[0].id = CORBA::string_dup("orocos");
-    name[1].id = CORBA::string_dup(component->getComponentName().c_str());
-    name[2].id = CORBA::string_dup("state");
-
-    component->namingService->unbind(name);
-  } catch (const CosNaming::NamingContext::NotFound &) {
-    std::cerr << "could not unbind SmartStateServer "
-	 << component->getComponentName() << "/"
-	 << service << " from naming service" << std::endl;
-  } catch (const CORBA::Exception & e) {
-    std::cerr << "CORBA Error while unbinding from Naming Service: ";
-    CHS::operator<<(std::cerr, e) << std::endl;
-    // do not rethrow, continue destruction of object
-  }
 
   std::cout << "TO BE DONE: shut down state thread ...." << std::endl;
   // ##### shutdown state thread
+  //</alexej>
 }
 
 
@@ -519,11 +795,14 @@ CHS::SmartStateServer::~SmartStateServer(void) throw()
 void CHS::SmartStateServer::updateState(void)
 {
   std::list<SmartSubStateEntry>::iterator sIterator;
-  std::list<std::string>::iterator             mIterator;
+  std::list<std::string>::iterator        mIterator;
 
+  //<alexej date="2009-10-13">
   int currentFlag;
   int desiredFlag;
   int lockedFlag;
+
+  SmartCommStateResponse reply;
 
   int callQuitHandler;
   int callEnterHandler;
@@ -553,15 +832,21 @@ void CHS::SmartStateServer::updateState(void)
       //
       desiredState.action = SSA_UNDEFINED;
 
-      if (desiredState.client != 0) {
+      if (desiredState.server_proxy != 0) {
         //
         // if no action is pending, one should not have a client ptr here ....
         //
 
-        desiredState.client->answer(SMART_OK);
+        //<alexej date="2009-10-13">
+        //desiredState.client->answer(SMART_OK);
+         reply.setStatus(static_cast<int>(SMART_OK));
+         desiredState.server_proxy->answer(desiredState.qid, reply);
 
-        CORBA::release(desiredState.client);
-        desiredState.client = 0;
+        // do nothing, because release would destroy the whole object
+        //CORBA::release(desiredState.client);
+        //</alexej>
+
+        desiredState.server_proxy = 0;
       }
 
     } else {
@@ -624,7 +909,7 @@ void CHS::SmartStateServer::updateState(void)
             // check whether to reach the neutral state has been
             // enforced. If so, again allow acquiring states which
             // does not cause any problems since states can only be
-            // acquired again after we leave this completely mutex 
+            // acquired again after we leave this completely mutex
             // protected block.
             //
 
@@ -699,21 +984,26 @@ std::cout << "Performing state change: " << currentState << " -> " << desiredSta
 
           desiredState.action = SSA_UNDEFINED;
 
-          if (desiredState.client != 0) {
+          if (desiredState.server_proxy != 0) {
             //
             // there is a state change pending, therefore send answer
             //
-            // (Since this method is left without any action if there are still 
-            //  locks on required substates, we have to remember for the next call 
+            // (Since this method is left without any action if there are still
+            //  locks on required substates, we have to remember for the next call
             //  to notify the master as soon as we have finished the state change.
             //  If we arrive here, we successfully finished the state change and
-            //  as long as we have a client ptr here, we know that there is a 
+            //  as long as we have a client ptr here, we know that there is a
             //  master waiting for that notification).
 
-            desiredState.client->answer(SMART_OK);
+            //<alexej date="2009-10-27">
+            reply.setStatus(static_cast<int>(SMART_OK));
+            desiredState.server_proxy->answer(desiredState.qid, reply);
 
-            CORBA::release(desiredState.client);
-            desiredState.client = 0;
+            // do nothing, because releasae would destroy the whole object
+            //CORBA::release(desiredState.client);
+            //</alexej>
+
+            desiredState.server_proxy = 0;
           } else {
             //
             //
@@ -727,14 +1017,19 @@ std::cout << "Performing state change: " << currentState << " -> " << desiredSta
         //
         desiredState.action = SSA_UNDEFINED;
 
-        if (desiredState.client != 0) {
+        if (desiredState.server_proxy != 0) {
           //
           // there is a state change pending, therefore send answer
           //
-          desiredState.client->answer(SMART_UNKNOWNSTATE);
+          //<alexej date="2009-10-27">
+          reply.setStatus(static_cast<int>(SMART_UNKNOWNSTATE));
+          desiredState.server_proxy->answer(desiredState.qid, reply);
 
-          CORBA::release(desiredState.client);
-          desiredState.client = 0;
+          // do nothing, because releasae would destroy the whole object
+          //CORBA::release(desiredState.client);
+          //</alexej>
+
+          desiredState.server_proxy = 0;
         }
       }
     }
@@ -745,17 +1040,22 @@ std::cout << "Performing state change: " << currentState << " -> " << desiredSta
     //
     desiredState.action = SSA_UNDEFINED;
 
-    if (desiredState.client != 0) {
+    if (desiredState.server_proxy != 0) {
       //
       // if no action is pending, one should not have a client ptr here ....
       //
 
 std::cerr << "### strange: no action pending, but have client ptr" << std::endl;
 
-      desiredState.client->answer(SMART_ERROR);
+      //<alexej date="2009-10-13">
+         reply.setStatus(static_cast<int>(SMART_ERROR));
+         desiredState.server_proxy->answer(desiredState.qid, reply);
 
-      CORBA::release(desiredState.client);
-      desiredState.client = 0;
+      // do nothing, because releasae would destroy the whole object
+      //CORBA::release(desiredState.client);
+      //</alexej>
+
+      desiredState.server_proxy = 0;
     }
   } else {
     //
@@ -763,21 +1063,28 @@ std::cerr << "### strange: no action pending, but have client ptr" << std::endl;
     //
     desiredState.action = SSA_UNDEFINED;
 
-    if (desiredState.client != 0) {
+    if (desiredState.server_proxy != 0) {
       //
       // there is a client ptr available, therefore client wants to get informed
       //
 
 std::cerr << "### strange: unknown action pending" << std::endl;
 
-      desiredState.client->answer(SMART_ERROR);
+      //<alexej date="2009-10-13">
+         reply.setStatus(static_cast<int>(SMART_ERROR));
+         desiredState.server_proxy->answer(desiredState.qid, reply);
 
-      CORBA::release(desiredState.client);
-      desiredState.client = 0;
+      // do nothing, because releasae would destroy the whole object
+      //CORBA::release(desiredState.client);
+      //</alexej>
+
+      desiredState.server_proxy = 0;
     }
   }
 
   mutex.release();
+
+  //</alexej>
 }
 
 //
@@ -787,10 +1094,12 @@ void CHS::SmartStateServer::updateStateFromThread(void)
 {
   mutex.acquire();
 
-  if (desiredState.client != 0) {
+  //<alexej date="2009-10-13">
+  if (desiredState.server_proxy != 0) {
     std::cerr << "WARNING: state change in progress (now killed)" << std::endl;
-    // #### hier muß man dem alten master eine entsprechenden status als Antwort schicken !!!!
+    // #### hier muÃŸ man dem alten master eine entsprechenden status als Antwort schicken !!!!
   }
+  //</alexej>
 
   stateQueue.dequeue_head(desiredState);
 
@@ -812,7 +1121,8 @@ void CHS::SmartStateServer::updateStateFromThread(void)
 //
 //
 //
-CHS::StatusCode CHS::SmartStateServer::defineStates(const std::string& mainstate,const std::string& substate) throw()
+
+CHS::StatusCode CHS::SmartStateServer::defineStates(const std::string& mainstate, const std::string& substate) throw()
 {
   std::list<SmartSubStateEntry>::iterator iterator;
   std::list<SmartSubStateEntry>::iterator substatePtr;
@@ -821,7 +1131,7 @@ CHS::StatusCode CHS::SmartStateServer::defineStates(const std::string& mainstate
   std::list<std::string>::iterator mIterator;
   int countM;
 
-  CHS::StatusCode result;
+  CHS::StatusCode result = CHS::SMART_ERROR;
 
   mutex.acquire();
   if (running == true) {
@@ -952,10 +1262,10 @@ CHS::StatusCode CHS::SmartStateServer::defineStates(const std::string& mainstate
           //
           result = SMART_ERROR;
         }
-      }
+      } // end if(countS == ...)
 
-    }
-  }
+    } // end if((mainstate == "neutral") || (substate == "nonneutral"))
+  } // end if(running)
 
   mutex.release();
 
@@ -1074,7 +1384,7 @@ CHS::StatusCode CHS::SmartStateServer::acquire(const std::string& substate) thro
 CHS::StatusCode CHS::SmartStateServer::tryAcquire(const std::string& substate) throw()
 {
   //TODO: tryAcquire not really tested
-  std::cout << "SmartStateServer::tryAcquire ERROR: NOT YET IMPLEMENTED !!!" << std::endl;
+  //std::cout << "SmartStateServer::tryAcquire ERROR: NOT YET IMPLEMENTED !!!" << std::endl;
 
   std::list<SmartSubStateEntry>::iterator iterator;
   std::list<SmartSubStateEntry>::iterator sIterator = stateList.end();
@@ -1275,7 +1585,8 @@ void CHS::StateUpdateThread::init(SmartStateServer *ptr,SmartSemaphore *sem)
 
 int CHS::StateUpdateThread::svc(void)
 {
-  while(1) {
+  while(1)
+  {
     stateQueueSemaphore->acquire();
     stateServer->updateStateFromThread();
   }

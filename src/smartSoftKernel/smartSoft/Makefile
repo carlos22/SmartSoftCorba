@@ -69,7 +69,7 @@ IDL_FILES    = smartQueryPattern \
                smartPushNewestPattern \
                smartPushTimedPattern \
                smartEventPattern \
-               smartStatePattern \
+               smartCommState \
                smartCommWiring
 EXPORT_FILES = smartQueryClientPattern.hh \
                smartQueryServerPattern.hh \
@@ -92,8 +92,7 @@ EXPORT_FILES = smartQueryClientPattern.hh \
                smartEventServerPattern.hh \
                smartEvent.hh \
                smartEvent.th \
-               smartStateClientPattern.hh \
-               smartStateServerPattern.hh \
+               smartCommState.hh \
                smartState.hh \
                smartErrno.hh \
                smartSoft.hh \
@@ -122,8 +121,7 @@ OBJ_FILES    = smartTask.o \
                smartPushTimedClientPattern.o \
                smartEventServerPattern.o \
                smartEventClientPattern.o \
-               smartStateServerPattern.o \
-               smartStateClientPattern.o \
+               smartCommState.o \
                smartState.o \
                smartSys.o \
                smartTimerThread.o \
@@ -195,10 +193,9 @@ SERVER_OBJS = $(OBJ_DIR)/smartTask.o \
               $(OBJ_DIR)/smartEventPatternC.o \
               $(OBJ_DIR)/smartEventServerPattern.o \
               $(OBJ_DIR)/smartEventClientPattern.o \
-              $(OBJ_DIR)/smartStatePatternS.o \
-              $(OBJ_DIR)/smartStatePatternC.o \
-              $(OBJ_DIR)/smartStateServerPattern.o \
-              $(OBJ_DIR)/smartStateClientPattern.o \
+              $(OBJ_DIR)/smartCommStateS.o \
+              $(OBJ_DIR)/smartCommStateC.o \
+              $(OBJ_DIR)/smartCommState.o \
               $(OBJ_DIR)/smartState.o \
               $(OBJ_DIR)/smartSys.o \
               $(OBJ_DIR)/smartTimerThread.o \

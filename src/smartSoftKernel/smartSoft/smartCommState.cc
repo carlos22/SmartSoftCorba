@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2009 Alex Lotz, Andreas Steck
 //
 //        schlegel@hs-ulm.de
 //
@@ -28,35 +28,47 @@
 //  License along with this library; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-//
-//  (partly based on joint work with Robert Wörz)
-//
 // --------------------------------------------------------------------------
 
-#include <list>
-#include <string>
+#include "smartCommState.hh"
 
-#include "smartStatePatternS.hh"
+/////////////////////////////////////////////////////////////////////////
+//
+// Request
+//
+/////////////////////////////////////////////////////////////////////////
+void CHS::SmartCommStateRequest::get(CORBA::Any &a) const
+{
+  a <<= smartStateRequest;
+}
 
-namespace CHS {
+void CHS::SmartCommStateRequest::set(const CORBA::Any &a)
+{
+  SmartStateRequest *s;
 
-  class StateServer_impl : public virtual POA_SmartStateServerPattern
-  {
-  private:
-    void (*hndSetStatePtr)(void *, SmartStateClientPattern_ptr, std::string);
-    int (*hndGetMainStatesPtr)(void *, StateList_out);
-    int (*hndGetSubStatesPtr)(void *, std::string, StateList_out);
-    void *lthis;
+  a >>= s;
 
-  public:
-    StateServer_impl(void *,
-                     void (*)(void *, SmartStateClientPattern_ptr, std::string),
-                     int  (*)(void *, StateList_out),
-                     int  (*)(void *, std::string, StateList_out));
+  smartStateRequest = *s;
+}
 
-    virtual void setState(const char *, SmartStateClientPattern_ptr) throw (CORBA::SystemException);
-    virtual int  getMainStates(StateList_out) throw (CORBA::SystemException);
-    virtual int  getSubStates(const char *, StateList_out) throw (CORBA::SystemException);
-  };
+
+
+/////////////////////////////////////////////////////////////////////////
+//
+// Response (Answer)
+//
+/////////////////////////////////////////////////////////////////////////
+void CHS::SmartCommStateResponse::get(CORBA::Any &a) const
+{
+  a <<= smartStateResponse;
+}
+
+void CHS::SmartCommStateResponse::set(const CORBA::Any &a)
+{
+  SmartStateResponse *s;
+
+  a >>= s;
+
+  smartStateResponse = *s;
 }
 
