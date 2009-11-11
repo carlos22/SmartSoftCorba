@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_X_MF4JPLEd6VjOT4CXhd3g/67" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_X_MF4JPLEd6VjOT4CXhd3g/67 ../../../org.smartsoft.profile.smartmars/profile/SmartMARS.profile.uml#_YA7yUJPLEd6VjOT4CXhd3g">
+  <uml:Model xmi:id="_8Cs-IMSkEd6zj7-Uh20wVQ" name="MobileManipulationObjects_pim">
+    <ownedComment xmi:id="_OTOWoMU-Ed67xsDK7Leaiw" annotatedElement="_I-REIMU-Ed67xsDK7Leaiw">
+      <body>0 = pose values valide
+1 = motor values valide</body>
+    </ownedComment>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Lt_yUMSlEd6zj7-Uh20wVQ" name="MoMaObjectList">
+      <ownedAttribute xmi:id="_zgf3EMSlEd6zj7-Uh20wVQ" name="objs" type="_RHHzIMSlEd6zj7-Uh20wVQ" isUnique="false">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_1vsSgMSlEd6zj7-Uh20wVQ" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_1vgsUMSlEd6zj7-Uh20wVQ"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_RHHzIMSlEd6zj7-Uh20wVQ" name="MoMaObject">
+      <ownedAttribute xmi:id="_rM-hsMSlEd6zj7-Uh20wVQ" name="id" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="../../../org.smartsoft.profile.smartmars/profile/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_th_RQMSlEd6zj7-Uh20wVQ" name="objectClass" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="../../../org.smartsoft.profile.smartmars/profile/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_v48hkMSlEd6zj7-Uh20wVQ" name="pose" type="_Yn_jkMSlEd6zj7-Uh20wVQ" isUnique="false"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_S-Zd0MSlEd6zj7-Uh20wVQ" name="MoMaScanEnvironment">
+      <ownedAttribute xmi:id="_V6CTEMSmEd6zj7-Uh20wVQ" name="startAngle" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="../../../org.smartsoft.profile.smartmars/profile/SmartMARS.profile.uml#_LgUa4IgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_ZEWS8MSmEd6zj7-Uh20wVQ" name="scanAngle" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="../../../org.smartsoft.profile.smartmars/profile/SmartMARS.profile.uml#_LgUa4IgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_VLK3YMSlEd6zj7-Uh20wVQ" name="MoMaManipulateState">
+      <ownedAttribute xmi:id="_ayaMsMSlEd6zj7-Uh20wVQ" name="objectId" visibility="public" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="../../../org.smartsoft.profile.smartmars/profile/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lYhPwMSlEd6zj7-Uh20wVQ" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lYVCgMSlEd6zj7-Uh20wVQ"/>
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_bf16cMSlEd6zj7-Uh20wVQ">
+          <value xsi:nil="true"/>
+        </defaultValue>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_lY8GgMSlEd6zj7-Uh20wVQ" name="state" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="../../../org.smartsoft.profile.smartmars/profile/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_oCj0IMSlEd6zj7-Uh20wVQ" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_oCYN8MSlEd6zj7-Uh20wVQ"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Yn_jkMSlEd6zj7-Uh20wVQ" name="MoMaPose">
+      <ownedAttribute xmi:id="_3yOK8MSlEd6zj7-Uh20wVQ" name="x" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="../../../org.smartsoft.profile.smartmars/profile/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_51mX8MSlEd6zj7-Uh20wVQ" name="y" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="../../../org.smartsoft.profile.smartmars/profile/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_7okxcMSlEd6zj7-Uh20wVQ" name="z" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="../../../org.smartsoft.profile.smartmars/profile/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_9pA_MMSlEd6zj7-Uh20wVQ" name="pitch" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="../../../org.smartsoft.profile.smartmars/profile/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="__n2qcMSlEd6zj7-Uh20wVQ" name="yaw" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="../../../org.smartsoft.profile.smartmars/profile/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_B23fsMSmEd6zj7-Uh20wVQ" name="roll" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="../../../org.smartsoft.profile.smartmars/profile/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_EN958MSmEd6zj7-Uh20wVQ" name="motor01" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="../../../org.smartsoft.profile.smartmars/profile/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Gtw9MMSmEd6zj7-Uh20wVQ" name="motor02" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="../../../org.smartsoft.profile.smartmars/profile/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_JLm4oMSmEd6zj7-Uh20wVQ" name="motor03" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="../../../org.smartsoft.profile.smartmars/profile/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_LIbxsMSmEd6zj7-Uh20wVQ" name="motor04" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="../../../org.smartsoft.profile.smartmars/profile/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Nnd_8MSmEd6zj7-Uh20wVQ" name="motor05" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="../../../org.smartsoft.profile.smartmars/profile/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Rm6RAMSmEd6zj7-Uh20wVQ" name="command" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="../../../org.smartsoft.profile.smartmars/profile/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
+        <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_U2X2oMSmEd6zj7-Uh20wVQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_I-REIMU-Ed67xsDK7Leaiw" name="flags" visibility="public" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="../../../org.smartsoft.profile.smartmars/profile/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Jss3cMU-Ed67xsDK7Leaiw" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Jsh4UMU-Ed67xsDK7Leaiw" value="1"/>
+        <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_ZUgSwMU-Ed67xsDK7Leaiw"/>
+      </ownedAttribute>
+    </packagedElement>
+    <profileApplication xmi:id="_8Cs-IcSkEd6zj7-Uh20wVQ">
+      <eAnnotations xmi:id="_8Cs-IsSkEd6zj7-Uh20wVQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_8Cs-I8SkEd6zj7-Uh20wVQ">
+      <eAnnotations xmi:id="_8Cs-JMSkEd6zj7-Uh20wVQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../../../org.smartsoft.profile.smartmars/profile/SmartMARS.profile.uml#_YA7yUJPLEd6VjOT4CXhd3g"/>
+      </eAnnotations>
+      <appliedProfile href="../../../org.smartsoft.profile.smartmars/profile/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartCommObject xmi:id="_L3N_wMSlEd6zj7-Uh20wVQ" base_Class="_Lt_yUMSlEd6zj7-Uh20wVQ"/>
+  <SmartMARS:SmartCommObject xmi:id="_RHUncMSlEd6zj7-Uh20wVQ" base_Class="_RHHzIMSlEd6zj7-Uh20wVQ"/>
+  <SmartMARS:SmartCommObject xmi:id="_S-j14MSlEd6zj7-Uh20wVQ" base_Class="_S-Zd0MSlEd6zj7-Uh20wVQ"/>
+  <SmartMARS:SmartCommObject xmi:id="_VLTaQMSlEd6zj7-Uh20wVQ" base_Class="_VLK3YMSlEd6zj7-Uh20wVQ"/>
+  <SmartMARS:SmartCommObject xmi:id="_YoG4UMSlEd6zj7-Uh20wVQ" base_Class="_Yn_jkMSlEd6zj7-Uh20wVQ"/>
+</xmi:XMI>

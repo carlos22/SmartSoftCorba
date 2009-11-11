@@ -1,0 +1,73 @@
+
+Installation manual for installing the needed libraries for the "MobileManipulationServer" commponent
+
+################################################
+#
+#      installation of the MRPT-library
+#
+################################################
+
+Installing mrpt Library version 0.7.0
+
+- checkout libdc1394 from http://damien.douxchamps.net/ieee1394/libdc1394/download/ using svn
+- after that execute this in your console:
+ 
+	autoreconf -i -s
+	./configure
+	make
+	make install
+
+- download mrpt version 0.7.0 from http://babel.isa.uma.es/mrpt/index.php/Main_Page
+- follow the compiling instructions on the mrpt-Page. They should look like this:
+
+	mkdir mrpt-release
+	cd mrpt-release
+	ccmake ../mrpt-0.7.0
+	make
+	make install
+
+- after that execute:
+	updatedb
+	ldconfig
+
+
+----------------------------------------------------------------------------
+If there appears an error that the "hwdrivers" include files couldn't be found proceed as follow: 
+
+switch to /usr/local/include/mrpt/ and execute:
+	cp -r [Verzeichnis wo mrpt entpackt wurde]/include/mrpt/hwdrivers ./
+----------------------------------------------------------------------------
+
+################################################
+#
+#         installation of OpenRAVE
+#
+################################################
+
+- checkout OpenRAVE from the repository http://openrave.svn.sourceforge.net/svnroot/openrave/trunk into a local folder.
+- use the svn version 914 (svn export -r 914 http://openrave.svn.sourceforge.net/svnroot/openrave/trunk)
+- the follow packages should be installed 
+		octave, octave-devel (optional)
+		SoQt, SoQt-devel, glew, glew-devel, bullet-devel, cmake, libxml2-devel
+- switch to the OpenRAVE folder and execute:
+	# vi CMakeList.txt
+		-> there change the follow entries to: 
+				option(ENABLE_VIDEORECORDING "Enable video recording" OFF)
+				option(PLUGINS "Build the pluings" ON)
+				option(DOUBLE_PRECISION "Use double precision" ON)
+
+----------------------------------------------------------------------------
+- Optional - only have to be done when no GUI is used (necessary when using suse 10.3)
+
+	# cd plugins
+	# vi CMakeList.txt
+		-> there out comment the follow line 
+				add_subdirectory(qtcoinrave)
+        # cd ..
+-----------------------------------------------------------------------------
+
+	# make prefix=/usr/local/
+	# sudo make install
+	
+
+
