@@ -1,16 +1,16 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2003 Boris Kluge
+//  Copyright (C) 2009 Matthias Lutz, Andreas Steck
 //
-//        schlegel@hs-ulm.de
+//        lutz@hs-ulm.de
+//        steck@hs-ulm.de 
 //
-//        Prof. Dr. Christian Schlegel
 //        University of Applied Sciences
 //        Prittwitzstr. 10
 //        D-89075 Ulm
 //        Germany
 //
-//  This file is part of the "SmartSoft Basic Communication Classes".
+//  This file is part of the "SmartSoft Communication Classes".
 //  It provides basic standardized data types for communication between
 //  different components in the mobile robotics context. These classes
 //  are designed to be used in conjunction with the SmartSoft Communication
@@ -30,27 +30,55 @@
 //  License along with this library; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-//  (partly based on work by Christian Schlegel and Pablo d'Angelo)
-//
 // --------------------------------------------------------------------------
 
-#ifndef _SMART_IDL_BASESTATE
-#define _SMART_IDL_BASESTATE
+#include "commTrackingGoal.hh"
 
-#include "smartTimeStamp.idl"
-#include "smartBasePosition.idl"
-#include "smartBaseVelocity.idl"
+using namespace Smart;
 
-module SmartIDL 
+CommTrackingGoal::CommTrackingGoal()
 {
-  struct BaseState
-  {
-    TimeStamp time;
-    BasePosition base_position;
-    BasePosition base_raw_position;
-    BaseVelocity base_velocity;
-  };
-};
+  trackingGoal.angle = 0;
+  trackingGoal.distance = 0;
+  trackingGoal.x = 0;
+  trackingGoal.y = 0;
+  trackingGoal.valid = false;
+}
 
-#endif
+CommTrackingGoal::~CommTrackingGoal()
+{
+}
+
+void CommTrackingGoal::get(CORBA::Any &a) const
+{
+  a <<= trackingGoal;
+}
+
+void CommTrackingGoal::set(const CORBA::Any &a)
+{
+  SmartIDL::TrackingGoal *tmp;
+  if(a >>= tmp)
+  {
+    trackingGoal = *tmp;
+  }
+}
+
+void CommTrackingGoal::get(double &_angle, double &_distance, double &_x, double &_y, bool &_valid) const
+{
+  _angle = trackingGoal.angle;
+  _distance = trackingGoal.distance;
+  _x = trackingGoal.x;
+  _y = trackingGoal.y;
+  _valid = trackingGoal.valid;
+}
+
+   
+void CommTrackingGoal::set( double _angle, double _distance, double _x, double _y, bool _valid )
+{
+  trackingGoal.angle = _angle;
+  trackingGoal.distance = _distance;
+  trackingGoal.x = _x;
+  trackingGoal.y = _y;
+  trackingGoal.valid = _valid;
+}
 

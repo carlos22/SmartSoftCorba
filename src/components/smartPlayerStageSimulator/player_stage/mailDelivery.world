@@ -12,7 +12,7 @@ include "map.inc"
 include "sick.inc"
 
 # size of the world in meters
-size [45.25 18.45]
+size [12.00 7.50]
 
 # set the resolution of the underlying raytrace model in meters
 resolution 0.02
@@ -25,17 +25,17 @@ gui_interval 20
 # configure the GUI window
 window
 ( 
-  size [ 591.000 638.000 ] 
-  center [-0.010 -0.040] 
-  scale 0.028 
+  size [ 600.000 420.000 ] 
+  center [0 0] 
+  scale 0.02 #0.028
 )
 
 # load an environment bitmap
 map
 ( 
-  bitmap "bitmaps/hospital_section.png"
-  size [45.25 18.45]
-  name "hospital_small"
+  bitmap "bitmaps/mailDeliveryWorld.png"
+  size [12.00 7.50]
+  name "mailDelivery"
 )
 
 # create a robot
@@ -48,6 +48,8 @@ pioneer2dx
   watchdog_timeout -1.0
   # position properties
   drive "diff"
+
+  #########################
   # odom or gps
   localization "odom"
   localization_origin [0 0 0]
@@ -57,6 +59,6 @@ pioneer2dx
   # only used if localization is set to "odom"
   # odom_error [x xstd y ystd theta thetastd] mean and standard deviation
   #odom_error [0.01 0.05 0.01 0.02 0.01 0.02]
-  odom_error [0.00 0.02 0.00 0.02 0.00 0.02]
+  odom_error [0.00 0.05 0.00 0.02 0.00 0.02]
 
 )

@@ -62,6 +62,7 @@ namespace Smart {
         <li>the turret direction,
       </ul>
     <li>the covariance matrix for the (x,y) position and the base orientation, and
+    <li>indicates if the covariance is invalid
     <li>an update counter which is increased whenever the base server changes its
         coordinate system (due to self localization).
   </ul>
@@ -148,6 +149,11 @@ public:
     The base server increases the update count whenever it changes its coordinate system.
    */
   inline unsigned long get_update_count() const { return _pos.update_count; }
+
+  /**
+    Return the condition of the covariance matrix.
+   */
+  inline bool get_cov_invalid() const { return _pos.cov_invalid; }
 
   /**
     Return an element of the position covariance matrix.
@@ -264,6 +270,12 @@ public:
     Index counting starts at zero.
    */
   inline void set_cov(unsigned int i, unsigned int j, double d);
+
+  /**
+    Set the condition of the covariance matrix.
+   */
+  inline void set_cov_invalid(bool b) { _pos.cov_invalid = b; }
+
 
   /**
     Print this base position to the \a os output stream.

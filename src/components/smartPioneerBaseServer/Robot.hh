@@ -206,6 +206,13 @@ public:
   Smart::CommBasePosition getBasePosition();
 
   /**
+   * @brief Returns the uncorrected CommBasePosition object
+   *
+   * @return Uncorrected position of the Robot
+   */
+  Smart::CommBasePosition getBaseRawPosition();
+ 
+  /**
    * @brief Updates the current position of the robot
    *
    * @return ??
@@ -332,7 +339,7 @@ private:
 
   int maxVel, maxRotVel;
 
-  Smart::CommBasePosition robotPos, oldPos;
+  Smart::CommBasePosition robotPos, oldPos, rawPos;
   CHS::SmartMutex mutexRobotPos;
 
 

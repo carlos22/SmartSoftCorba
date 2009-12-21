@@ -81,6 +81,10 @@ Robot::Robot(int robotType)
   this->robotPos.set_y(0.0);
   this->robotPos.set_base_alpha(0.0);
   
+  this->rawPos.set_x(0.0);
+  this->rawPos.set_y(0.0);
+  this->rawPos.set_base_alpha(0.0);
+
   updateV = false;
   updateOmega = false;
 
@@ -89,6 +93,8 @@ Robot::Robot(int robotType)
   this->oldPos.set_base_alpha(0.0);
 
   oldth = 0;
+  oldxpos = 0;
+  oldypos = 0;
   totalDistance = 0;
   totalRotationLeft = 0;
   totalRotationRight = 0;
@@ -475,6 +481,7 @@ void Robot::parse( unsigned char *buffer )
   {
     this->oldPos.set_x( this->robotPos.get_x() );
     this->robotPos.set_x( this->oldPos.get_x() + deltaX );
+    this->rawPos.set_x( this->rawPos.get_x() + deltaX );
   }
 
   oldxpos = newxpos;
@@ -492,6 +499,7 @@ void Robot::parse( unsigned char *buffer )
   {
     this->oldPos.set_y( this->robotPos.get_y() );
     this->robotPos.set_y( this->oldPos.get_y() + deltaY );
+    this->rawPos.set_y( this->rawPos.get_y() + deltaY );
   }
 
   oldypos = newypos;
@@ -503,20 +511,20 @@ void Robot::parse( unsigned char *buffer )
 
   // <asteck> 
   unsigned short th = ((buffer[cnt] | (buffer[cnt+1] << 8)) & 0xEFFF) % 4096;
-  double degDiff = (double)positionChange( oldth, th ) * AngleConvFactor;
+  double radDiff = (double)positionChange( oldth, th ) * AngleConvFactor;
   oldth = th;
 
-  if( degDiff >= 0 ) 
+  if( radDiff >= 0 ) 
   {
-    totalRotationLeft += fabs( degDiff );
+    totalRotationLeft += fabs( radDiff );
   }
   else
   {
-    totalRotationRight += fabs( degDiff );
+    totalRotationRight += fabs( radDiff );
   }
 
-  this->oldPos.set_base_alpha( oldth * AngleConvFactor );
-  this->robotPos.set_base_alpha( this->oldPos.get_base_alpha() + degDiff );
+  this->robotPos.set_base_alpha(piToPiRad(this->oldPos.get_base_alpha() + radDiff ));
+  this->rawPos.set_base_alpha( piToPiRad(this->rawPos.get_base_alpha() + radDiff ));
 
   // update the covMatrix in robotPos
   // robotPos is transmitted by reference
@@ -790,6 +798,8 @@ int Robot::updatePosition( Smart::CommBasePositionUpdate update )
   newCorrectedPos.set_y( correctedPos.get_y() + deltaY );
   newCorrectedPos.set_base_alpha( piToPiRad( piToPiRad(correctedPos.get_base_alpha()) + deltaA) );
 //  newCorrectedPos.set_base_alpha( correctedPos.get_base_alpha() + deltaA );
+  
+  newCorrectedPos.set_cov_invalid(correctedPos.get_cov_invalid());
 
   // update of the robot Position
   mutexRobotPos.acquire();
@@ -804,7 +814,7 @@ int Robot::updatePosition( Smart::CommBasePositionUpdate update )
 
   printf("this covM       (0,0)(1,1)(2,2): %8.1f; %8.1f; %8.1f \n",  this->getBasePosition().get_cov(0,0), 
            this->getBasePosition().get_cov(1,1), this->getBasePosition().get_cov(2,2) );
-
+  std::cout<<"Set Cov invalid: "<<this->getBasePosition().get_cov_invalid()<<std::endl;
   mutexRobotPos.release();
 
   return 0;
@@ -829,6 +839,11 @@ Smart::CommBasePosition Robot::getBasePosition()
   return robotPos;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Smart::CommBasePosition Robot::getBaseRawPosition()
+{
+  return rawPos;
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 double Robot::getBatteryVoltage()

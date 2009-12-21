@@ -254,6 +254,7 @@ public:
     base_state.set_time_stamp(time_stamp);
 //    base_state.set_base_position(base_position);
     base_state.set_base_position( robot->getBasePosition() );
+    base_state.set_base_raw_position( robot->getBaseRawPosition() );
     base_state.set_base_velocity(base_velocity);
 
     // send the CommBaseState object to the client

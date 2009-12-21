@@ -1,6 +1,7 @@
 #--------------------------------------------------------------------------
 #
 #  Copyright (C) 2003 Boris Kluge
+#                2009 Andreas Steck, Dennis Stampfer
 #
 #        schlegel@hs-ulm.de
 #
@@ -24,29 +25,25 @@
 #  License along with this library; if not, write to the Free Software
 #  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
-#----------------------------------------------------------------------------
+#--------------------------------------------------------------------------
 
 #----------------------------------------------------------------------------
 #
 #----------------------------------------------------------------------------
-CONF  = ../../Makefile.smart.conf
-RULES = ../../Makefile.smart.rules
+CONF  = ../../../Makefile.smart.conf
+RULES = ../../../Makefile.smart.rules
 
 include $(CONF)
-
-# directory for test binaries
-TST_DIR = $(PWD)/tests
 
 #----------------------------------------------------------------------------
 #       Doxygen documentation
 #----------------------------------------------------------------------------
-#DOXYGEN		= doxygen
+#DOXYGEN	= doxygen
 #DOXY_FILE	= Doxyfile
 
 #----------------------------------------------------------------------------
 #       Include macros and targets
 #----------------------------------------------------------------------------
-
 DEPENDENCIES += *.cc
 INCLUDES     += -I$(TAO_ROOT)/orbsvcs
 
@@ -65,28 +62,54 @@ INCLUDES     += -I$(TAO_ROOT)/orbsvcs
 #       CLIENT_LIBS       libraries needed by the client library
 #
 #---------------------------------------------------------------------------- 
-INI_FILES    =	smartCdlServer.ini
+INI_FILES    =	smartUnicapImageServer.ini
 
 ##----------------------------------------------------------------------------
 ## Components to build
 ##----------------------------------------------------------------------------
 
+##----------------------------------------------------------------------------
+## user libs  -- add your own libs here
+USER_CPP_CFLAGS = 
+USER_CPP_LFLAGS = -lunicap
+INCLUDES += -I/usr/include/unicap
+##----------------------------------------------------------------------------
+
 CPNT =	1
 
-# Defaults
+# <asteck, dstampfer> --------------------------------------------------------
+# Include all libs
+ALL_LIBS=  $(patsubst $(SMART_ROOT)/lib/lib%.a,-l%,$(wildcard $(SMART_ROOT)/lib/lib*))
 
-CPNT_CFLAGS = 	$(CFLAGS) 
-CPNT_LFLAGS = 	$(LFLAGS) -lsmartBasicComm -lsmartCdlParameter -lsmartPlannerGoal \
-		-lTAO_CosNaming -lTAO -lTAO_PortableServer -lsmartCdlGoalEvent \
-		-lsmartTrackingGoal \
-		-lsmartSoft -lACE -ldl -lpthread $(OS_LIBS) -lm -lrt
+CPNT_CFLAGS = 	$(USER_CPP_CFLAGS) 
+CPNT_LFLAGS = 	$(LFLAGS) $(USER_CPP_LFLAGS) $(ALL_LIBS) \
+		-lTAO_CosNaming -lTAO -lTAO_PortableServer \
+		-lACE -ldl -lpthread $(OS_LIBS) -lm -lrt
+##----------------------------------------------------------------------------		
 
 
 CPNT_1_CFLAGS =	$(CPNT_CFLAGS)
-CPNT_1_OBJ =	smartCdlServer.o \
-                smartCdlLookup.o
+
+# <asteck, dstampfer> --------------------------------------------------------
+# take all *.cc / *.c and build objects
+CPNT_1_OBJ =	$(patsubst %.cc,%.o,$(wildcard *.cc gen/*.cc)) $(patsubst %.c,%.o,$(wildcard *.c))
+##----------------------------------------------------------------------------
+
 CPNT_1_LFLAGS =	$(CPNT_LFLAGS)
-CPNT_1_BIN =	smartCdlServer
+CPNT_1_BIN =	smartUnicapImageServer
+
+#############################################################################
+
+
+# <asteck> ------------------------------------------------------------------
+GEN_DIR = $(OBJ_DIR)/gen
+BIN_DIR = ../../../../bin
+LIB_DIR = ../../../../lib
+SRC_DIR = ../../../../src
+INC_DIR = ../../../../include
+ETC_DIR = ../../../../etc
+CFLAGS += $(CPNT_$(CPNT)_CFLAGS)
+#----------------------------------------------------------------------------
 
 
 #---------------------------------------------------------------------------- 
@@ -170,6 +193,7 @@ export: $(IDL_EXPORT)
 	$(ECHO) "   ---- Installing header files etc."
 	$(SILENT) $(MKDIR) $(ETC_DIR)
 	$(SILENT) $(MKDIR) $(INC_DIR)
+	$(SILENT) $(MKDIR) $(GEN_DIR)
 	$(foreach exp,$(IDL_EXPORT),$(INSTALL_H) `pwd`/$(exp) $(INC_DIR);)
 	$(foreach exp,$(EXPORT_FILES),$(INSTALL_H) `pwd`/$(exp) $(INC_DIR);)
 	$(foreach exp,$(INI_FILES),$(INSTALL_H) `pwd`/$(exp) $(ETC_DIR);)

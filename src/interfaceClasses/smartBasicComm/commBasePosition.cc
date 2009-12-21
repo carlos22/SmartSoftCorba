@@ -53,6 +53,7 @@ CommBasePosition::CommBasePosition()
   {
     _pos.m[i*3+j] = (i==j)?1:0;
   }
+  _pos.cov_invalid = 0;
   _pos.update_count = 0;
 }
 
@@ -87,7 +88,7 @@ void CommBasePosition::print(std::ostream &os) const
      << "m=((" << _pos.m[0] << "," << _pos.m[1] << "," << _pos.m[2] << "),"
      <<    "(" << _pos.m[3] << "," << _pos.m[4] << "," << _pos.m[5] << "),"
      <<    "(" << _pos.m[6] << "," << _pos.m[7] << "," << _pos.m[8] << ")),"
-     << "upd_cnt=" << _pos.update_count << ")";
+     << "_pos.cov_invalid= "<< _pos.cov_invalid << "," << "upd_cnt=" << _pos.update_count << ")";
 }
 
 void CommBasePosition::save_xml(std::ostream &os, const std::string &indent) const
@@ -99,6 +100,7 @@ void CommBasePosition::save_xml(std::ostream &os, const std::string &indent) con
   os << indent << "  <alpha_base>" << _pos.a_base << "</alpha_base>" << std::endl;
   os << indent << "  <alpha_steer>" << _pos.a_steer << "</alpha_steer>" << std::endl;
   os << indent << "  <alpha_turret>" << _pos.a_turret << "</alpha_turret>" << std::endl;
+  os << indent << "  <cov_invalid>" << _pos.cov_invalid << "</cov_invalid>" << std::endl;
   os << indent << "  <update_count>" << _pos.update_count << "</update_count>" << std::endl;
   for(unsigned int i=0; i<9; ++i)
   {
@@ -117,6 +119,7 @@ void CommBasePosition::load_xml(std::istream &is)
   static const KnuthMorrisPratt kmp_alpha_base("<alpha_base>");
   static const KnuthMorrisPratt kmp_alpha_steer("<alpha_steer>");
   static const KnuthMorrisPratt kmp_alpha_turret("<alpha_turret>");
+  static const KnuthMorrisPratt kmp_cov_invalid("<cov_invalid>");
   static const KnuthMorrisPratt kmp_update_count("<update_count>");
   static const KnuthMorrisPratt kmp_cov("\">");
   static const KnuthMorrisPratt kmp_end("</base_position>");
@@ -134,6 +137,8 @@ void CommBasePosition::load_xml(std::istream &is)
   is >> _pos.a_steer;
   kmp_alpha_turret.search(is);
   is >> _pos.a_turret;
+  kmp_cov_invalid.search(is);
+  is >> _pos.cov_invalid;
   kmp_update_count.search(is);
   is >> _pos.update_count;
   for(unsigned int i=0; i<9; ++i)

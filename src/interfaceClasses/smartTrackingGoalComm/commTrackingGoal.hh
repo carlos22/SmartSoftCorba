@@ -1,16 +1,16 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2003 Boris Kluge
+//  Copyright (C) 2009 Matthias Lutz, Andreas Steck
 //
-//        schlegel@hs-ulm.de
+//        lutz@hs-ulm.de
+//        steck@hs-ulm.de 
 //
-//        Prof. Dr. Christian Schlegel
 //        University of Applied Sciences
 //        Prittwitzstr. 10
 //        D-89075 Ulm
 //        Germany
 //
-//  This file is part of the "SmartSoft Basic Communication Classes".
+//  This file is part of the "SmartSoft Communication Classes".
 //  It provides basic standardized data types for communication between
 //  different components in the mobile robotics context. These classes
 //  are designed to be used in conjunction with the SmartSoft Communication
@@ -30,27 +30,36 @@
 //  License along with this library; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-//  (partly based on work by Christian Schlegel and Pablo d'Angelo)
-//
 // --------------------------------------------------------------------------
 
-#ifndef _SMART_IDL_BASESTATE
-#define _SMART_IDL_BASESTATE
+#ifndef SMART_COMM_TRACKINGGOAL_HH
+#define SMART_COMM_TRACKINGGOAL_HH
 
-#include "smartTimeStamp.idl"
-#include "smartBasePosition.idl"
-#include "smartBaseVelocity.idl"
+#include <string>
+#include <iostream>
 
-module SmartIDL 
+#include "smartTrackingGoalC.hh"
+
+namespace Smart {
+
+class CommTrackingGoal
 {
-  struct BaseState
-  {
-    TimeStamp time;
-    BasePosition base_position;
-    BasePosition base_raw_position;
-    BaseVelocity base_velocity;
-  };
+protected:
+  SmartIDL::TrackingGoal trackingGoal;
+
+public:
+
+  CommTrackingGoal();
+  virtual ~CommTrackingGoal();
+
+  void get(CORBA::Any &a) const;
+  void set(const CORBA::Any &a);
+  static inline std::string identifier() { return "Smart::CommTrackingGoal"; };
+
+  void get( double &_angle, double &_distance, double &_x, double &_y, bool &_valid) const; 
+  void set( double _angle, double _distance, double _x, double _y, bool _valid );
 };
 
-#endif
+} // namespace Smart
 
+#endif

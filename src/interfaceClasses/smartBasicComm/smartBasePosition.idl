@@ -72,7 +72,7 @@ module SmartIDL
     double a_turret; // [rad] current orientation of turret/enclosure
 
     double m[3*3]; // covariance matrix for (x,y,a_base)
-
+    boolean cov_invalid; // indicates if the covariance is invalid
     unsigned long update_count;
   };
 

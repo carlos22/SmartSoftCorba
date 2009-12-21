@@ -22,10 +22,10 @@
 #
 #  You should have received a copy of the GNU Lesser General Public
 #  License along with this library; if not, write to the Free Software
-#  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
-#----------------------------------------------------------------------------
-
+#--------------------------------------------------------------------------
+ 
 #----------------------------------------------------------------------------
 #
 #----------------------------------------------------------------------------
@@ -33,15 +33,6 @@ CONF  = ../../Makefile.smart.conf
 RULES = ../../Makefile.smart.rules
 
 include $(CONF)
-
-# directory for test binaries
-TST_DIR = $(PWD)/tests
-
-#----------------------------------------------------------------------------
-#       Doxygen documentation
-#----------------------------------------------------------------------------
-#DOXYGEN		= doxygen
-#DOXY_FILE	= Doxyfile
 
 #----------------------------------------------------------------------------
 #       Include macros and targets
@@ -65,7 +56,32 @@ INCLUDES     += -I$(TAO_ROOT)/orbsvcs
 #       CLIENT_LIBS       libraries needed by the client library
 #
 #---------------------------------------------------------------------------- 
-INI_FILES    =	smartCdlServer.ini
+IDL_FILES    =  smartTrackingGoal
+
+EXPORT_FILES = 	commTrackingGoal.hh
+
+INI_FILES    =	
+
+##----------------------------------------------------------------------------
+## Libraries to build
+##----------------------------------------------------------------------------
+
+LIBS =	1
+
+# Defaults
+
+LIB_CFLAGS = $(CFLAGS)
+LIB_LFLAGS = $(LFLAGS)
+
+# Library 1
+
+LIB_1_CFLAGS =	$(LIB_CFLAGS)
+LIB_1_OBJ =	commTrackingGoal.o \
+		  smartTrackingGoalC.o \
+		  smartTrackingGoalS.o \
+
+LIB_1_LFLAGS =	$(LIB_LFLAGS)
+LIB_1_BIN =	smartTrackingGoal
 
 ##----------------------------------------------------------------------------
 ## Components to build
@@ -75,18 +91,18 @@ CPNT =	1
 
 # Defaults
 
-CPNT_CFLAGS = 	$(CFLAGS) 
-CPNT_LFLAGS = 	$(LFLAGS) -lsmartBasicComm -lsmartCdlParameter -lsmartPlannerGoal \
-		-lTAO_CosNaming -lTAO -lTAO_PortableServer -lsmartCdlGoalEvent \
-		-lsmartTrackingGoal \
+CPNT_CFLAGS = 	$(CFLAGS)
+CPNT_LFLAGS = 	$(LFLAGS) -lsmartBasicComm \
+		-lTAO_CosNaming -lTAO -lTAO_PortableServer \
 		-lsmartSoft -lACE -ldl -lpthread $(OS_LIBS) -lm -lrt
 
 
-CPNT_1_CFLAGS =	$(CPNT_CFLAGS)
-CPNT_1_OBJ =	smartCdlServer.o \
-                smartCdlLookup.o
-CPNT_1_LFLAGS =	$(CPNT_LFLAGS)
-CPNT_1_BIN =	smartCdlServer
+##----------------------------------------------------------------------------
+## Tests to build
+##----------------------------------------------------------------------------
+
+#TEST = 1 2 3 4 5 6 7 8
+# Defaults
 
 
 #---------------------------------------------------------------------------- 
@@ -108,17 +124,11 @@ MOCOBJECTS = $(patsubst %.hh, $(OBJ_DIR)/%.moc.o,  $(MOCHEADERS))
 IDL_EXPORT   = $(addsuffix C.i,    $(IDL_FILES)) \
                $(addsuffix C.hh,   $(IDL_FILES)) \
                $(addsuffix S.i,    $(IDL_FILES)) \
-               $(addsuffix S.hh,   $(IDL_FILES)) \
-               $(addsuffix S_T.i,  $(IDL_FILES)) \
-               $(addsuffix S_T.hh, $(IDL_FILES)) \
-               $(addsuffix S_T.cc, $(IDL_FILES))
+               $(addsuffix S.hh,   $(IDL_FILES))
  
 IDL_DEPEND   = $(addsuffix S.cc,   $(IDL_FILES)) \
                $(addsuffix S.hh,   $(IDL_FILES)) \
                $(addsuffix S.i,    $(IDL_FILES)) \
-               $(addsuffix S_T.cc, $(IDL_FILES)) \
-               $(addsuffix S_T.hh, $(IDL_FILES)) \
-               $(addsuffix S_T.i,  $(IDL_FILES)) \
                $(addsuffix C.cc,   $(IDL_FILES)) \
                $(addsuffix C.hh,   $(IDL_FILES)) \
                $(addsuffix C.i,    $(IDL_FILES))
@@ -139,7 +149,7 @@ CLEAN_FILES = $(IDL_CLEAN) \
               $(OBJ_DIR) \
               $(MOCSOURCES)
  
-TAO_IDLFLAGS += -cs C.cc -hc C.hh -ss S.cc -hs S.hh -sT S_T.cc -hT S_T.hh -ci C.i -si S.i -st S_T.i
+TAO_IDLFLAGS += -cs C.cc -hc C.hh -ss S.cc -hs S.hh -sT S_T.cc -hT S_T.hh -ci C.i -si S.i
 
 DISTCLEAN_FILES = $(OBJ_DIR) *~ \
 		$(addprefix $(LIB_DIR)/, $(LIBS_BIN)) \
@@ -155,15 +165,14 @@ all: $(IDL_DEPEND)
 	$(MAKE) build
 
 build: build-libs build-components
-# build-tests
 
-build-libs: $(OBJ_DIR) $(LIB_DIR) \
+build-libs: $(OBJ_DIR) $(LIB_DIR) $(BIN_DIR) $(TST_DIR) \
 	$(addprefix $(LIB_DIR)/, $(LIBS_BIN))
 
-build-components: $(OBJ_DIR) $(BIN_DIR) \
+build-components: $(OBJ_DIR) $(LIB_DIR) $(BIN_DIR) $(TST_DIR) \
 	$(addprefix $(BIN_DIR)/, $(CPNT_BIN))
 
-build-tests: $(OBJ_DIR) $(TST_DIR) \
+build-tests: $(OBJ_DIR) $(LIB_DIR) $(BIN_DIR) $(TST_DIR) \
 	$(addprefix $(TST_DIR)/, $(TEST_BIN))
 
 export: $(IDL_EXPORT)
@@ -174,17 +183,10 @@ export: $(IDL_EXPORT)
 	$(foreach exp,$(EXPORT_FILES),$(INSTALL_H) `pwd`/$(exp) $(INC_DIR);)
 	$(foreach exp,$(INI_FILES),$(INSTALL_H) `pwd`/$(exp) $(ETC_DIR);)
 
-doc: $(DOXY_FILE)
-	$(DOXYGEN) $(DOXY_FILE)
-
-cleandoc:
-	rm -rf doc
-	
-
 clean:
 	$(RM) $(CLEAN_FILES)
 
-distclean: clean cleandoc
+distclean: clean
 	$(RM) $(DEPEND) Makefile.depend* $(DISTCLEAN_FILES)
 
 ##

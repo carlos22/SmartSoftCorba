@@ -88,6 +88,11 @@ public:
   inline void set_base_position(const CommBasePosition &bp) { _state.base_position = bp.get_idl(); }
 
   /**
+    Set the base raw position.
+   */
+  inline void set_base_raw_position(const CommBasePosition &bp) { _state.base_raw_position = bp.get_idl(); }
+
+  /**
     Set the base velocity.
    */
   inline void set_base_velocity(const CommBaseVelocity &bv) { _state.base_velocity = bv.get_idl(); }
@@ -101,6 +106,11 @@ public:
     Get the base position.
    */
   inline CommBasePosition get_base_position() const { return CommBasePosition(_state.base_position); }
+
+  /**
+    Get the base raw position.
+   */
+  inline CommBasePosition get_base_raw_position() const { return CommBasePosition(_state.base_raw_position); }
 
   /**
     Get the base velocity.

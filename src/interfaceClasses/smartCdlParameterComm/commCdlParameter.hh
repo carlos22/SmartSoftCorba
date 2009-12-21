@@ -70,9 +70,11 @@ typedef enum
   CDL_TURN,                 // Strategy
   CDL_APPROACH_HALT,        // Strategy
   CDL_ROTATE,		    // Strategy
+  CDL_FOLLOW,               // Strategy
   
   CDL_ABSOLUTE,             // goal specification
   CDL_PLANNER,              // goal specification
+  CDL_PERSON,               // goal specification
   
   CDL_DEFAULT_LOOKUP,       // lookup table
   CDL_SECOND_LOOKUP,        // lookup table
@@ -194,6 +196,10 @@ inline int CommCdlParameter::set(std::string& inString)
       else if(strcasecmp("ROTATE",param)==0)
       {
         cmd.parameter1 = CDL_ROTATE;
+      }
+      else if(strcasecmp("FOLLOW",param)==0)
+      {
+        cmd.parameter1 = CDL_FOLLOW;
       }
       else
       {
@@ -344,6 +350,10 @@ inline int CommCdlParameter::set(std::string& inString)
       else if(strcasecmp("PLANNER",param)==0)
       {
         cmd.parameter1 = CDL_PLANNER;
+      }
+      else if(strcasecmp("PERSON",param)==0)
+      {
+        cmd.parameter1 = CDL_PERSON;
       }
       else
       {

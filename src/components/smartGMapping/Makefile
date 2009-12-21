@@ -24,7 +24,7 @@
 #  License along with this library; if not, write to the Free Software
 #  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
-#----------------------------------------------------------------------------
+#--------------------------------------------------------------------------
 
 #----------------------------------------------------------------------------
 #
@@ -48,7 +48,7 @@ TST_DIR = $(PWD)/tests
 #----------------------------------------------------------------------------
 
 DEPENDENCIES += *.cc
-INCLUDES     += -I$(TAO_ROOT)/orbsvcs
+INCLUDES     += -I$(TAO_ROOT)/orbsvcs -I$(SMART_ROOT)/src/utility/gmapping
 
 #----------------------------------------------------------------------------
 # Variables
@@ -65,7 +65,7 @@ INCLUDES     += -I$(TAO_ROOT)/orbsvcs
 #       CLIENT_LIBS       libraries needed by the client library
 #
 #---------------------------------------------------------------------------- 
-INI_FILES    =	smartCdlServer.ini
+INI_FILES    =	smartGmapping.ini
 
 ##----------------------------------------------------------------------------
 ## Components to build
@@ -74,19 +74,16 @@ INI_FILES    =	smartCdlServer.ini
 CPNT =	1
 
 # Defaults
-
-CPNT_CFLAGS = 	$(CFLAGS) 
-CPNT_LFLAGS = 	$(LFLAGS) -lsmartBasicComm -lsmartCdlParameter -lsmartPlannerGoal \
-		-lTAO_CosNaming -lTAO -lTAO_PortableServer -lsmartCdlGoalEvent \
-		-lsmartTrackingGoal \
+CPNT_CFLAGS = 	$(CFLAGS)
+CPNT_LFLAGS = 	$(LFLAGS) -L$(SMART_ROOT)/src/utility/gmapping/lib -lsensor_base -lsensor_range -lgridfastslam -lsmartBasicComm \
+		-lTAO_CosNaming -lTAO -lTAO_PortableServer \
 		-lsmartSoft -lACE -ldl -lpthread $(OS_LIBS) -lm -lrt
 
 
 CPNT_1_CFLAGS =	$(CPNT_CFLAGS)
-CPNT_1_OBJ =	smartCdlServer.o \
-                smartCdlLookup.o
+CPNT_1_OBJ =	smartGmapping.o
 CPNT_1_LFLAGS =	$(CPNT_LFLAGS)
-CPNT_1_BIN =	smartCdlServer
+CPNT_1_BIN =	smartGmapping
 
 
 #---------------------------------------------------------------------------- 
@@ -151,7 +148,7 @@ DISTCLEAN_FILES = $(OBJ_DIR) *~ \
 ##
 
 all: $(IDL_DEPEND)
-	$(MAKE) export $(DEPEND)
+	$(MAKE) export $(DEPEND)   
 	$(MAKE) build
 
 build: build-libs build-components

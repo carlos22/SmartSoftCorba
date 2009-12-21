@@ -43,6 +43,7 @@
 #include "commCdlParameter.hh"
 #include "commPlannerGoal.hh"
 #include "commCdlGoalEvent.hh"
+#include "commTrackingGoal.hh"
 #include "smartCdlLookup.hh"
 
 #define INI_PARAMETERS_FILE "smartCdlServer.ini"
@@ -114,6 +115,8 @@ CHS::SendClient<Smart::CommNavigationVelocity> *navigationVelocitySendClient;
 
 CHS::SendServer<Smart::CommCdlParameter> *parameterServer;
 CHS::SendServer<Smart::CommNavigationVelocity> *navigationVelocitySendServer; // for Joystick input
+
+CHS::PushNewestClient<Smart::CommTrackingGoal> *trackingClient;
 
 PrintStateChangeHandler *stateHandler;
 CHS::SmartStateServer *state;
@@ -209,6 +212,10 @@ public:
         else if( (Smart::CdlTagType)p1 == Smart::CDL_ROTATE )
         {
           std::cout << "CDL_ROTATE selected\n";
+        }
+        else if( (Smart::CdlTagType)p1 == Smart::CDL_FOLLOW )
+        {
+          std::cout << "CDL_FOLLOW selected\n";
         }
         else
         {
@@ -353,6 +360,10 @@ public:
         else if( (Smart::CdlTagType)p1 == Smart::CDL_PLANNER )
         {
           std::cout << "CDL_PLANNER selected\n";
+        }
+        else if( (Smart::CdlTagType)p1 == Smart::CDL_PERSON )
+        {
+          std::cout << "CDL_PERSON selected\n";
         }
         else
         {
@@ -537,6 +548,7 @@ int CDLThread::svc(void)
   double         timeDiff;
   int            turnDirection;
 
+  Smart::CommTrackingGoal trackingGoal;
 
   stalledFlag = 0;
 
@@ -880,8 +892,17 @@ int CDLThread::svc(void)
                 std::cout << "             goal   " << localState.goalX << " " << localState.goalY << "\n";
 
             } else {
-                cdlLookup->calculateSpeedValues(v,w,x,y,a,localState.vmin,localState.vmax,localState.wmin,localState.wmax,CDL_STRATEGY_6,evalFunction,vres,wres,vaccres,waccres);
-                //std::cout << "CDL_PLANNER: vres = " << vres << "; wres = " << wres << std::endl;
+                //cdlLookup->calculateSpeedValues(v, w, x, y, a, localState.vmin, localState.vmax, localState.wmin, localState.wmax, CDL_STRATEGY_6, evalFunction, vres, wres, vaccres, waccres);
+                cdlLookup->setDesiredTranslationalSpeed(localState.vmax); 
+                cdlLookup->calculateSpeedValues(v, w, x, y, a, localState.vmin, localState.vmax, localState.wmin, localState.wmax, CDL_STRATEGY_12, evalFunction, vres, wres, vaccres, waccres);
+                std::cout << "vres = " << vres << "; wres = " << wres/M_PI*180.0 << std::endl;
+                double gainDist = distance / 750.0;
+                if(gainDist>1.0) gainDist=1.0;
+
+                vres *= gainDist;
+                if(vres > 20 && vres < 150) vres = 150;
+                std::cout << "vres = " << vres << "; wres = " << wres/M_PI*180.0 << std::endl;
+                std::cout << "---------------------------------------------------------------------------\n\n\n";
             }
           }
 
@@ -891,12 +912,75 @@ int CDLThread::svc(void)
 
 
 
+
+          /////////////////////////////////////////////////////////////////////////////////////////
+          // CDL_FOLLOW
+          /////////////////////////////////////////////////////////////////////////////////////////
+
+
+          case Smart::CDL_FOLLOW:
+          // ----------------------------------------------------
+          // try to drive into the given direction with the
+          // given translational velocity
+          // ----------------------------------------------------
+          cdlLookup->setLaserscan(scan);
+
+          switch(localState.goalSpec) 
+          {
+            case Smart::CDL_PERSON:
+
+              trackingClient->getUpdate(trackingGoal);
+              trackingGoal.get( trackAngle, trackDistance, trackX, trackY, trackFlag);
+
+              std::cout << "Track x: " << trackX << "; y: " << trackY << "; Angle: " << ((trackAngle*180.0)/M_PI) << "; dist: " << trackDistance << "; flag: " << trackFlag << "\n";
+
+             if (trackFlag == false) 
+             {
+                // no valid goal information from track server
+                std::cout << "no valid goal information\n";
+                vres=0.0;
+                wres=0.0;
+             } 
+             else 
+             {
+                cdlLookup->setParameterRobot(localState.tcalc,localState.transAcc,localState.rotAcc);
+                cdlLookup->setHeading(trackAngle);
+                cdlLookup->setMaxDistance(CDL_MAX_DISTANCE);
+                cdlLookup->setDesiredTranslationalSpeed(localState.vmax);
+                //cdlLookup->calculateSpeedValues(v,w,0.0,0.0,0.0,localState.vmin,localState.vmax,localState.wmin,localState.wmax,CDL_STRATEGY_2,CDL_EVAL_STANDARD,vres,wres,vaccres,waccres);
+                cdlLookup->calculateSpeedValues(v,w,0.0,0.0,0.0,localState.vmin,localState.vmax,localState.wmin,localState.wmax,CDL_STRATEGY_7,CDL_EVAL_STANDARD,vres,wres,vaccres,waccres);
+
+                //if( trackDistance < localState.approachDistance) 
+                if( trackDistance < localState.approachDistance && fabs(trackAngle-w) < (10.0/180.0*M_PI)   ) 
+                {
+                  // goal reached, stop robot
+                  vres = 0.0;
+                  wres = 0.0;
+
+                  // this stop is intended, since the goal has been reached
+                  stalledFlag = 0;
+                }
+             }
+
+            break;
+            default:
+              // set everything to harmless values
+              cdlLookup->setHeading(0.0);
+              cdlLookup->setMaxDistance(0.0);
+              cdlLookup->setDesiredTranslationalSpeed(0.0);
+              cdlLookup->calculateSpeedValues(v,w,0.0,0.0,0.0,localState.vmin,localState.vmax,localState.wmin,localState.wmax,CDL_STRATEGY_1,CDL_EVAL_STANDARD,vres,wres,vaccres,waccres);
+            break;
+          }
+          //smartBase.setAccelerations(localState.rotAcc,localState.transAcc);
+
+          break; //case follow
+
+
           /////////////////////////////////////////////////////////////////////////////////////////
           // default -> no strategy selected
           /////////////////////////////////////////////////////////////////////////////////////////
           default:
           {
-
             break;
           } // case default
 
@@ -1294,6 +1378,12 @@ int main (int argc, char *argv[])
     status_code =  plannerClient->connect("smartPlanner","plannerGoal");
     std::cout << "status code returned from connect to planner " << CHS::StatusCodeConversion(status_code);
     plannerClient->subscribe();
+
+    // trackingClient
+    trackingClient = new CHS::PushNewestClient<Smart::CommTrackingGoal>(component);
+    status_code =  trackingClient->connect("smartLaserTrackingServer","trackingGoal");
+    std::cout << "status code returned from connect to planner " << CHS::StatusCodeConversion(status_code);
+    trackingClient->subscribe();
 
     // state StateServer
     stateHandler = new PrintStateChangeHandler();

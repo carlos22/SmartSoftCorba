@@ -97,6 +97,7 @@ CHS::SendServer<Smart::CommBasePositionUpdate> *basePositionUpdateSendServer;
 CHS::PushNewestServer<Smart::CommMobileLaserScan> *laserServer;
 
 Smart::CommBasePosition robotPos;
+Smart::CommBasePosition rawPos;
 Smart::CommBasePosition oldPos;
 CHS::SmartMutex mutexRobotPos;
 CHS::SmartMutex playerClientMutex;
@@ -348,6 +349,10 @@ public:
     robotPos.set_y(0.0);
     robotPos.set_base_alpha(0.0);
 
+    rawPos.set_x(0.0);
+    rawPos.set_y(0.0);
+    rawPos.set_base_alpha(0.0);
+
     oldth = 0;
     totalDistance = 0;
 
@@ -402,13 +407,18 @@ public:
 
     robotPos.set_x( oldPos.get_x() + dx );
     robotPos.set_y( oldPos.get_y() + dy );
-    robotPos.set_base_alpha( oldPos.get_base_alpha() + da );
+    robotPos.set_base_alpha( piToPiRad(oldPos.get_base_alpha() + da ));
+
+    rawPos.set_x( rawPos.get_x() + dx );
+    rawPos.set_y( rawPos.get_y() + dy );
+    rawPos.set_base_alpha( piToPiRad(rawPos.get_base_alpha() + da ));
 
     updateCovMatrix( oldPos, robotPos );
     mutexRobotPos.release();
 
     oldPos = robotPos;
     base_state.set_base_position(oldPos);
+    base_state.set_base_raw_position(rawPos);
     base_state.set_base_velocity(base_velocity);
 
     ///////////////////////////////////////////////////////////////////
@@ -555,7 +565,7 @@ int updatePosition( Smart::CommBasePositionUpdate update )
   oldPos = robotPos;
 
   // set odometry of robot
-  position_2d_proxy.SetOdometry( robotPos.get_x()/1000.0, robotPos.get_y()/1000.0, robotPos.get_base_alpha() );
+  //position_2d_proxy.SetOdometry( robotPos.get_x()/1000.0, robotPos.get_y()/1000.0, robotPos.get_base_alpha() );
 
 
   printf("Pos        (cnt=%lu) ( %9.4f %9.4f %6.2f deg)\n", correctedPos.get_update_count(),

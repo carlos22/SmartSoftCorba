@@ -35,7 +35,9 @@
 
 
 // <asteck: date="21.07.2008">
+#define EVAL_FUNC_1 1
 //#define EVAL_FUNC_3 1
+//#define EVAL_FUNC_4 1
 // </asteck>
 
 CdlLookupClass::CdlLookupClass()
@@ -589,9 +591,12 @@ int CdlLookupClass::calculateSpeedValues(
 
 // factors
 #define BRAKE_SECURITY_FACTOR  1.0
-              // ----------------------------------------------------
+
+
+              //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+              //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
               // now switch depending on the selected strategy
-              // ----------------------------------------------------
+              //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
               switch (strategy)
                 {
                 case CDL_STRATEGY_10:
@@ -1310,8 +1315,59 @@ int CdlLookupClass::calculateSpeedValues(
                 }
                 break;
 
+//<startegy added by asteck, mlutz; 2009-10-23>
+                case CDL_STRATEGY_12:
+                {
+                  double free = 1000.0;
+                  double angle = (60.0*M_PI/180.0);
+
+                  double deltaX = goalX - posX;
+                  double deltaY = goalY - posY;
+                  double hitDistance = sqrt( deltaX*deltaX + deltaY*deltaY );
+                  double hitAngle = angle00( atan2( deltaY, deltaX) - posA );
 
 
+                  if (hitAngle < -angle) hitAngle=-angle;
+                  if (hitAngle >  angle) hitAngle= angle;
+                  costHeading=1.0-abs00(angle00(hitAngle-vrot))/(2*angle);
+
+                  costSpeed=1.0-abs00(desiredTranslationalSpeed-vtrans)/vmaxIni;
+                  costDist=dist/CDL_MAX_DISTANCE; // CDL_MAX_DISTANCE = 5000.0
+
+                  if (costDist>1.0) costDist=1.0;
+
+                  double gainHitDist = hitDistance / 1500.0; //hitDistance / 1000.0;
+                  if(gainHitDist >1.0) gainHitDist = 1.0;
+
+                  if(evalFunc == CDL_EVAL_PASSING) gainHitDist = 1.0; 
+
+                  alpha1 = 20.0 - (1-gainHitDist) *  19.0; // 20.0 - 19.0
+                  alpha2 =  2.0 - (1-gainHitDist) *   1.0; // 2.0  - 1.0
+                  alpha3 =  1.0 + (1-gainHitDist) * 100.0; // 1.0  + 100.0
+                  costValue = alpha1*costSpeed + alpha2*costDist + alpha3*costHeading;
+
+                  //std::cout << "vtrans = " << vtrans << "; vrot = " << vrot/M_PI*180.0 <<  "; costSpeed = " << costSpeed << " ; costDist = " << costDist << " ; costHeading = " << costHeading << " ; costValue = " << costValue << std::endl;
+
+/*
+                  //if ((dist > free) && (vtrans>100.0))
+                  if ((hitDistance > free) && (vtrans>100.0))
+                  {
+                    alpha1=5.0;
+                    alpha2=15.0;
+                    alpha3=2.0;
+                    costValue=5+alpha1*costSpeed+alpha2*costDist+alpha3*costHeading;
+                  }
+                  else
+                  {
+                    alpha1=2.0;
+                    alpha2=1.0;
+                    alpha3=8.0;
+                    costValue=alpha1*costSpeed+alpha2*costDist+alpha3*costHeading;
+                  }
+*/
+                  break;
+                }
+//</strategy 12>
 
                 case CDL_STRATEGY_1:
                   // ------------------------------------------------
@@ -1889,6 +1945,33 @@ int CdlLookupClass::calculateSpeedValues(
                       break;
                     }
 
+		case CDL_STRATEGY_7:
+                {
+                  // ------------------------------------------------------------------------
+                  // follow
+                  // ------------------------------------------------------------------------
+                  double free   = 1000.0;
+                  double angle  = (60.0*M_PI/180.0);
+
+                  if (goalHeadingRelative < -angle) goalHeadingRelative=-angle;
+                  if (goalHeadingRelative >  angle) goalHeadingRelative= angle;
+
+                  costHeading = 1.0 - abs00( angle00(goalHeadingRelative-vrot)) / (2*angle);
+                  costSpeed   = 1.0 - abs00( desiredTranslationalSpeed-vtrans) / vmaxIni;
+
+                  costDist    = 1; //dist/maxDistance;
+
+                  alpha1 = 1.0;
+                  alpha2 = 2.0;
+                  alpha3 = 8.0;
+
+                  //costValue =  alpha1*costSpeed + alpha3*costHeading;
+                  costValue = alpha1*costSpeed + alpha3*costHeading;
+
+                  break;
+                } // CDL_STRATEGY_7
+
+
                  
                   break;
                  }
@@ -1922,6 +2005,10 @@ int CdlLookupClass::calculateSpeedValues(
             }
         }
     } // end for (vi=ivmin;vi<=ivmax;vi++)
+
+    std::cout << "cost = " << costResult << "; alpha1 = " << alpha1 << " ; alpha2 = " << alpha2 << " ; alpha3 = " << alpha3 << std::endl;
+
+
 #if DEBUG_VW_WINDOW
   if (file!=NULL)
     {
