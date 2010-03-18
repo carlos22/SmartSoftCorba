@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_2KPH4MrkEd688Ztvebp4-A/101" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_2KPH4MrkEd688Ztvebp4-A/101 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_2LsgcMrkEd688Ztvebp4-A">
+  <uml:Model xmi:id="_du4kANQ_Ed6nTeGEf54M4w" name="CommManipulatorObjects_pim">
+    <packagedElement xmi:type="uml:Class" xmi:id="_rMVAkNQ_Ed6nTeGEf54M4w" name="CommManipulatorState">
+      <ownedAttribute xmi:id="_wqfSYNQ_Ed6nTeGEf54M4w" name="id" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_0Uk-gNQ_Ed6nTeGEf54M4w" name="gripper_angle" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_6pQBkNQ_Ed6nTeGEf54M4w" name="joint_angles" visibility="public" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_FhEbcNULEd6I2533l4SMIw" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Fg3AENULEd6I2533l4SMIw"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_wZJ1UNRAEd6nTeGEf54M4w" name="pose_tcp" type="_ENpvANRLEd6zv9zsUcRbiQ" isUnique="false"/>
+      <ownedAttribute xmi:id="_elVPUNT5Ed6cerV4vDaVGg" name="isValid" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
+        <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_kMUtANT5Ed6cerV4vDaVGg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="__cgVMNQ_Ed6nTeGEf54M4w" name="JointValues">
+      <ownedAttribute xmi:id="_HMoCkNRAEd6nTeGEf54M4w" name="values" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_WsgQ8NRAEd6nTeGEf54M4w" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_WsVR0NRAEd6nTeGEf54M4w"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_a_vAsNRAEd6nTeGEf54M4w" name="CommMobileManipulatorState">
+      <ownedAttribute xmi:id="_fTjmUNRAEd6nTeGEf54M4w" name="manipulator_state" type="_rMVAkNQ_Ed6nTeGEf54M4w" isUnique="false"/>
+      <ownedAttribute xmi:id="_b4bRUNRCEd6nTeGEf54M4w" name="base_state" type="_qKM-wNRLEd6zv9zsUcRbiQ" isUnique="false"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_mPzmwNRAEd6nTeGEf54M4w" name="CommManipulatorTrajectory">
+      <ownedAttribute xmi:id="_o3bwUNRAEd6nTeGEf54M4w" name="joint_angles" type="__cgVMNQ_Ed6nTeGEf54M4w" isUnique="false">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Pp9XANULEd6I2533l4SMIw" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Ppxw0NULEd6I2533l4SMIw"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_uA8n0NRAEd6nTeGEf54M4w" name="pose_tcp" type="_ENpvANRLEd6zv9zsUcRbiQ" isUnique="false">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_0UhesNRAEd6nTeGEf54M4w" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_0UWfkNRAEd6nTeGEf54M4w"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_zRIvENRAEd6nTeGEf54M4w" name="sequence_size" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
+        <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_5mRFINRAEd6nTeGEf54M4w"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_99wp0NRAEd6nTeGEf54M4w" name="gripper_angles" visibility="public" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_D_h_ANRBEd6nTeGEf54M4w" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_D_gJ0NRBEd6nTeGEf54M4w"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_HVZHkNRBEd6nTeGEf54M4w" name="gripper" isUnique="false"/>
+      <ownedAttribute xmi:id="_LX8-ENRBEd6nTeGEf54M4w" name="wait_until_each_pose_reached" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_QcKe0NRBEd6nTeGEf54M4w" name="flag" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_fhLWINRBEd6nTeGEf54M4w" name="CommManipulatorParameter">
+      <ownedAttribute xmi:id="_jyIN8NRBEd6nTeGEf54M4w" name="mode" isUnique="false"/>
+      <ownedAttribute xmi:id="_1t_dQN8bEd63moR2ZQvbqQ" name="parameter01" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_ENpvANRLEd6zv9zsUcRbiQ" name="CommPose3d"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_qKM-wNRLEd6zv9zsUcRbiQ" name="CommBaseState"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_izW_MN_fEd6mtOmaBIShAA" name="CommManipulatorEventState">
+      <ownedAttribute xmi:id="_tER_8N_gEd6JssC1ymuMlA" name="event" isUnique="false"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_w4c_sN_hEd6JssC1ymuMlA" name="CommManipulatorEventParameter">
+      <ownedAttribute xmi:id="_4P5uYN_hEd6JssC1ymuMlA" name="event" isUnique="false"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_0DexQN_hEd6JssC1ymuMlA" name="CommManipulatorEventResult">
+      <ownedAttribute xmi:id="_24R0IN_hEd6JssC1ymuMlA" name="event" visibility="public" isUnique="false">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3e_14N_hEd6JssC1ymuMlA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3e0PsN_hEd6JssC1ymuMlA" value="1"/>
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_3fLcEN_hEd6JssC1ymuMlA">
+          <value xsi:nil="true"/>
+        </defaultValue>
+      </ownedAttribute>
+    </packagedElement>
+    <profileApplication xmi:id="_du5LENQ_Ed6nTeGEf54M4w">
+      <eAnnotations xmi:id="_du5LEdQ_Ed6nTeGEf54M4w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_du5LEtQ_Ed6nTeGEf54M4w">
+      <eAnnotations xmi:id="_du5LE9Q_Ed6nTeGEf54M4w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_2LsgcMrkEd688Ztvebp4-A"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartCommObject xmi:id="_rX5-cNQ_Ed6nTeGEf54M4w" base_Class="_rMVAkNQ_Ed6nTeGEf54M4w"/>
+  <SmartMARS:SmartCommObject xmi:id="_bAEX4NRAEd6nTeGEf54M4w" base_Class="_a_vAsNRAEd6nTeGEf54M4w"/>
+  <SmartMARS:SmartCommObject xmi:id="_mQLaMNRAEd6nTeGEf54M4w" base_Class="_mPzmwNRAEd6nTeGEf54M4w"/>
+  <SmartMARS:SmartCommObject xmi:id="_fhhUYNRBEd6nTeGEf54M4w" base_Class="_fhLWINRBEd6nTeGEf54M4w"/>
+  <SmartMARS:SmartExternalCommObject xmi:id="_6qDVANROEd6zv9zsUcRbiQ" base_Class="_ENpvANRLEd6zv9zsUcRbiQ"/>
+  <SmartMARS:SmartExternalCommObject xmi:id="_8BiFUNROEd6zv9zsUcRbiQ" base_Class="_qKM-wNRLEd6zv9zsUcRbiQ"/>
+  <SmartMARS:SmartEventState xmi:id="_TRHZUN_fEd6mtOmaBIShAA"/>
+  <SmartMARS:SmartEventState xmi:id="_f4TjUN_fEd6mtOmaBIShAA"/>
+  <SmartMARS:SmartEventState xmi:id="_iz2HYN_fEd6mtOmaBIShAA" base_Class="_izW_MN_fEd6mtOmaBIShAA"/>
+  <SmartMARS:SmartCommObject xmi:id="_w44dgN_hEd6JssC1ymuMlA" base_Class="_w4c_sN_hEd6JssC1ymuMlA"/>
+  <SmartMARS:SmartCommObject xmi:id="_0D7dMN_hEd6JssC1ymuMlA" base_Class="_0DexQN_hEd6JssC1ymuMlA"/>
+</xmi:XMI>

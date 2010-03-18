@@ -1,0 +1,17 @@
+1. copy the "include" and "src" folder from the "KNI_4.2.0" folder into "SmartKatana/src/kni"
+
+2. copy the file "KNI_4.2.0/lib/linuxlibKinematics.a" to "SmartKatana/src/kni/lib/linux"
+
+3. delete the folder "include/boost"
+   delete also the files:
+     "src/Base/Base.vcproj"
+     "src/InvKin/InvKin.vcproj"
+     "src/kni_wrapper.vcproj"
+     "src/LM/LM.vcproj"
+
+4. open a console and goto "SmartKatana/src/kni"
+
+5. execute patch "patch -Np1 -i ./KNI_4.2.0.patch"
+
+6. compile SmartKatana component with make
+   (before you must compile CommManipulatorObjects)

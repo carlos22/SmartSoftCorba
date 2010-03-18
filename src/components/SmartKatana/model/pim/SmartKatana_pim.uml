@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_2KPH4MrkEd688Ztvebp4-A/101" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_2KPH4MrkEd688Ztvebp4-A/101 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_2LsgcMrkEd688Ztvebp4-A">
+  <uml:Model xmi:id="_bUOF4NTjEd6cerV4vDaVGg" name="SmartKatana_pim">
+    <ownedComment xmi:id="_uvft0NUaEd6I2533l4SMIw" annotatedElement="_h4-uYNUaEd6I2533l4SMIw">
+      <body>KatanaDevice = &quot;Serial&quot; or &quot;Lan&quot;</body>
+    </ownedComment>
+    <elementImport xmi:id="_XqrdwN_jEd6JssC1ymuMlA">
+      <importedElement xmi:type="uml:Class" href="file://home/wopfner/SOFTWARE/smartsoft-ACE-5.6+TAO-1.6/src/workspace_mdsd/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_rMVAkNQ_Ed6nTeGEf54M4w"/>
+    </elementImport>
+    <elementImport xmi:id="_Xq4SEN_jEd6JssC1ymuMlA">
+      <importedElement xmi:type="uml:Class" href="file://home/wopfner/SOFTWARE/smartsoft-ACE-5.6+TAO-1.6/src/workspace_mdsd/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#__cgVMNQ_Ed6nTeGEf54M4w"/>
+    </elementImport>
+    <elementImport xmi:id="_XrD4QN_jEd6JssC1ymuMlA">
+      <importedElement xmi:type="uml:Class" href="file://home/wopfner/SOFTWARE/smartsoft-ACE-5.6+TAO-1.6/src/workspace_mdsd/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_a_vAsNRAEd6nTeGEf54M4w"/>
+    </elementImport>
+    <elementImport xmi:id="_XrTI0N_jEd6JssC1ymuMlA">
+      <importedElement xmi:type="uml:Class" href="file://home/wopfner/SOFTWARE/smartsoft-ACE-5.6+TAO-1.6/src/workspace_mdsd/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_mPzmwNRAEd6nTeGEf54M4w"/>
+    </elementImport>
+    <elementImport xmi:id="_Xrk1oN_jEd6JssC1ymuMlA">
+      <importedElement xmi:type="uml:Class" href="file://home/wopfner/SOFTWARE/smartsoft-ACE-5.6+TAO-1.6/src/workspace_mdsd/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_fhLWINRBEd6nTeGEf54M4w"/>
+    </elementImport>
+    <elementImport xmi:id="_Xr8CAN_jEd6JssC1ymuMlA">
+      <importedElement xmi:type="uml:Class" href="file://home/wopfner/SOFTWARE/smartsoft-ACE-5.6+TAO-1.6/src/workspace_mdsd/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_ENpvANRLEd6zv9zsUcRbiQ"/>
+    </elementImport>
+    <elementImport xmi:id="_XsQLEN_jEd6JssC1ymuMlA">
+      <importedElement xmi:type="uml:Class" href="file://home/wopfner/SOFTWARE/smartsoft-ACE-5.6+TAO-1.6/src/workspace_mdsd/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_qKM-wNRLEd6zv9zsUcRbiQ"/>
+    </elementImport>
+    <elementImport xmi:id="_XsmJUN_jEd6JssC1ymuMlA">
+      <importedElement xmi:type="uml:Class" href="file://home/wopfner/SOFTWARE/smartsoft-ACE-5.6+TAO-1.6/src/workspace_mdsd/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_izW_MN_fEd6mtOmaBIShAA"/>
+    </elementImport>
+    <elementImport xmi:id="_Xs8uoN_jEd6JssC1ymuMlA">
+      <importedElement xmi:type="uml:Class" href="file://home/wopfner/SOFTWARE/smartsoft-ACE-5.6+TAO-1.6/src/workspace_mdsd/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_w4c_sN_hEd6JssC1ymuMlA"/>
+    </elementImport>
+    <elementImport xmi:id="_XtVJIN_jEd6JssC1ymuMlA">
+      <importedElement xmi:type="uml:Class" href="file://home/wopfner/SOFTWARE/smartsoft-ACE-5.6+TAO-1.6/src/workspace_mdsd/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_0DexQN_hEd6JssC1ymuMlA"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:Component" xmi:id="_bUOs8NTjEd6cerV4vDaVGg" name="SmartKatana">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_iXTRoNTkEd6cerV4vDaVGg" name="trajectorySendServer" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_AQfH4NTlEd6cerV4vDaVGg" name="posePushTimedServer" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_kpRe0NTlEd6cerV4vDaVGg" name="paramServer" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_5HRZIN8OEd63moR2ZQvbqQ" name="basePushTimedClient" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_bFR3cN9WEd6ez-ul3It3lg" name="stateServer" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_DK2zwN9YEd6ez-ul3It3lg" name="eventServer" aggregation="composite"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_l72WcNTkEd6cerV4vDaVGg" name="TrajectorySendHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_MJIw4NTlEd6cerV4vDaVGg" name="PosePushTimedHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_oAtUsNTlEd6cerV4vDaVGg" name="ParamHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_5TcRsNTuEd6cerV4vDaVGg" name="Katana">
+        <ownedAttribute xmi:id="_HxrOUNUaEd6I2533l4SMIw" name="KatanaConfigFile" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_RS9XUNUaEd6I2533l4SMIw" value="src/config/katana6M180.cfg"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_h4-uYNUaEd6I2533l4SMIw" name="KatanaDevice" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_pGSCkNUaEd6I2533l4SMIw" value="Serial"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_-zPnAN8aEd63moR2ZQvbqQ" name="BaseInit" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_bmJKoN8bEd63moR2ZQvbqQ" value="true"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_vWyEMAXWEd-l7Kj4tbR4-w" name="GoalPositionApproach" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JpaDcAXXEd-l7Kj4tbR4-w" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JpXAIAXXEd-l7Kj4tbR4-w" value="1"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_Ic50EAXXEd-l7Kj4tbR4-w" value="3"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_J_mV4AXXEd-l7Kj4tbR4-w" name="GoalAngleApproach" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_UXD48AXXEd-l7Kj4tbR4-w" value="0.1"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="__68xMNTuEd6cerV4vDaVGg" name="KatanaMutex"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_awBSMNUbEd6I2533l4SMIw" name="Network">
+        <ownedAttribute xmi:id="_EDjhUNUbEd6I2533l4SMIw" name="IpAdress" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_IGsmoNUbEd6I2533l4SMIw" value="127.0.0.1"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_LVbzgNUbEd6I2533l4SMIw" name="Port" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_Uin70NUbEd6I2533l4SMIw" value="5566"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_jLcmYNUbEd6I2533l4SMIw" name="SerialPort">
+        <ownedAttribute xmi:id="__S4AkNUaEd6I2533l4SMIw" name="Device" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_CiW0UNUbEd6I2533l4SMIw" value="/dev/ttyS0"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_lyeZ8N9WEd6ez-ul3It3lg" name="StateChangeHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_UXZ_UN9YEd6ez-ul3It3lg" name="EventTestHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_GxVOYN9cEd6ez-ul3It3lg" name="demonstration"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_LVpHEN9cEd6ez-ul3It3lg" name="demonstration"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_yjxrUN_cEd6mtOmaBIShAA" name="trajectory"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_00fJsN_cEd6mtOmaBIShAA" name="trajectory"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_UuLKwOozEd6QY6y_9WRSQw" name="ParameterMutex"/>
+    </packagedElement>
+    <profileApplication xmi:id="_bUOs8dTjEd6cerV4vDaVGg">
+      <eAnnotations xmi:id="_bUOs8tTjEd6cerV4vDaVGg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_bUOs89TjEd6cerV4vDaVGg">
+      <eAnnotations xmi:id="_bUOs9NTjEd6cerV4vDaVGg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_2LsgcMrkEd688Ztvebp4-A"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartComponent xmi:id="_ba9nENTjEd6cerV4vDaVGg" base_Component="_bUOs8NTjEd6cerV4vDaVGg"/>
+  <SmartMARS:SmartQueryServer xmi:id="_50fKQNTjEd6cerV4vDaVGg" serviceName="performTrajectory" smartQueryHandler="_-1SKoNTjEd6cerV4vDaVGg">
+    <commRequestObject href="file://home/wopfner/SOFTWARE/smartsoft-ACE-5.6+TAO-1.6/src/workspace_mdsd/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_mPzmwNRAEd6nTeGEf54M4w"/>
+  </SmartMARS:SmartQueryServer>
+  <SmartMARS:SmartQueryHandler xmi:id="_-1SKoNTjEd6cerV4vDaVGg" isActive="true"/>
+  <SmartMARS:SmartSendServer xmi:id="_iYWagNTkEd6cerV4vDaVGg" serviceName="performTrajectory" base_Port="_iXTRoNTkEd6cerV4vDaVGg" smartSendHandler="_l8EY4NTkEd6cerV4vDaVGg">
+    <commObject href="file://home/wopfner/SOFTWARE/smartsoft-ACE-5.6+TAO-1.6/src/workspace_mdsd/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_mPzmwNRAEd6nTeGEf54M4w"/>
+  </SmartMARS:SmartSendServer>
+  <SmartMARS:SmartSendHandler xmi:id="_l8EY4NTkEd6cerV4vDaVGg" base_Class="_l72WcNTkEd6cerV4vDaVGg" isActive="true"/>
+  <SmartMARS:SmartPushTimedServer xmi:id="_AROHsNTlEd6cerV4vDaVGg" serviceName="currentPose" base_Port="_AQfH4NTlEd6cerV4vDaVGg" smartPushTimedHandler="_MJXaYNTlEd6cerV4vDaVGg" cycle="0.1">
+    <commObject href="file://home/wopfner/SOFTWARE/smartsoft-ACE-5.6+TAO-1.6/src/workspace_mdsd/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_a_vAsNRAEd6nTeGEf54M4w"/>
+  </SmartMARS:SmartPushTimedServer>
+  <SmartMARS:SmartPushTimedHandler xmi:id="_MJXaYNTlEd6cerV4vDaVGg" base_Class="_MJIw4NTlEd6cerV4vDaVGg"/>
+  <SmartMARS:SmartParameterServer xmi:id="_kqEwENTlEd6cerV4vDaVGg" serviceName="param" base_Port="_kpRe0NTlEd6cerV4vDaVGg" smartParameterHandler="_oA9MUNTlEd6cerV4vDaVGg">
+    <commObject href="file://home/wopfner/SOFTWARE/smartsoft-ACE-5.6+TAO-1.6/src/workspace_mdsd/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_fhLWINRBEd6nTeGEf54M4w"/>
+  </SmartMARS:SmartParameterServer>
+  <SmartMARS:SmartParameterHandler xmi:id="_oA9MUNTlEd6cerV4vDaVGg" base_Class="_oAtUsNTlEd6cerV4vDaVGg"/>
+  <SmartMARS:SmartPushNewestClient xmi:id="_1Q9CwNTlEd6cerV4vDaVGg" serviceName="unknown" serverName="unknown">
+    <commObject href="file://home/wopfner/SOFTWARE/smartsoft-ACE-5.6+TAO-1.6/src/workspace_mdsd/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_qKM-wNRLEd6zv9zsUcRbiQ"/>
+  </SmartMARS:SmartPushNewestClient>
+  <SmartMARS:SmartQueryServer xmi:id="_KraZMNTmEd6cerV4vDaVGg" smartQueryHandler="_SrGMkNTmEd6cerV4vDaVGg"/>
+  <SmartMARS:SmartQueryServer xmi:id="_PZFpQNTmEd6cerV4vDaVGg"/>
+  <SmartMARS:SmartQueryHandler xmi:id="_SrGMkNTmEd6cerV4vDaVGg"/>
+  <SmartMARS:SmartQueryHandler xmi:id="_VIOWUNTmEd6cerV4vDaVGg"/>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_5Xx_INTuEd6cerV4vDaVGg" base_Class="_5TcRsNTuEd6cerV4vDaVGg"/>
+  <SmartMARS:SmartMutex xmi:id="__7I-cNTuEd6cerV4vDaVGg" base_Class="__68xMNTuEd6cerV4vDaVGg"/>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_a1wt0NUbEd6I2533l4SMIw" base_Class="_awBSMNUbEd6I2533l4SMIw"/>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_jLtFENUbEd6I2533l4SMIw" base_Class="_jLcmYNUbEd6I2533l4SMIw"/>
+  <SmartMARS:SmartPushTimedClient xmi:id="_5JjREN8OEd63moR2ZQvbqQ" serviceName="unknown" base_Port="_5HRZIN8OEd63moR2ZQvbqQ" serverName="unknown">
+    <commObject href="file://home/wopfner/SOFTWARE/smartsoft-ACE-5.6+TAO-1.6/src/workspace_mdsd/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_qKM-wNRLEd6zv9zsUcRbiQ"/>
+  </SmartMARS:SmartPushTimedClient>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_75ADcN8aEd63moR2ZQvbqQ"/>
+  <SmartMARS:SmartMainState xmi:id="_WsCmUN9WEd6ez-ul3It3lg"/>
+  <SmartMARS:SmartStateServer xmi:id="_bHuugN9WEd6ez-ul3It3lg" serviceName="stateServer" base_Port="_bFR3cN9WEd6ez-ul3It3lg" smartStateChangeHandler="_lywGwN9WEd6ez-ul3It3lg"/>
+  <SmartMARS:SmartStateChangeHandler xmi:id="_lywGwN9WEd6ez-ul3It3lg" base_Class="_lyeZ8N9WEd6ez-ul3It3lg"/>
+  <SmartMARS:SmartMainState xmi:id="_4kfugN9WEd6ez-ul3It3lg"/>
+  <SmartMARS:SmartMainState xmi:id="_VDQOIN9XEd6ez-ul3It3lg"/>
+  <SmartMARS:SmartEventServer xmi:id="_DL7KwN9YEd6ez-ul3It3lg" serviceName="eventServer" base_Port="_DK2zwN9YEd6ez-ul3It3lg" smartEventTestHandler="_UXuvcN9YEd6ez-ul3It3lg">
+    <eventParameter href="file://home/wopfner/SOFTWARE/smartsoft-ACE-5.6+TAO-1.6/src/workspace_mdsd/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_w4c_sN_hEd6JssC1ymuMlA"/>
+    <eventResult href="file://home/wopfner/SOFTWARE/smartsoft-ACE-5.6+TAO-1.6/src/workspace_mdsd/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_0DexQN_hEd6JssC1ymuMlA"/>
+    <eventState href="file://home/wopfner/SOFTWARE/smartsoft-ACE-5.6+TAO-1.6/src/workspace_mdsd/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_izW_MN_fEd6mtOmaBIShAA"/>
+  </SmartMARS:SmartEventServer>
+  <SmartMARS:SmartEventHandler xmi:id="_J0XeYN9YEd6ez-ul3It3lg"/>
+  <SmartMARS:SmartEventTestHandler xmi:id="_UXuvcN9YEd6ez-ul3It3lg" base_Class="_UXZ_UN9YEd6ez-ul3It3lg"/>
+  <SmartMARS:SmartMainState xmi:id="_GxrMoN9cEd6ez-ul3It3lg" base_Class="_GxVOYN9cEd6ez-ul3It3lg" subState="_LWATcN9cEd6ez-ul3It3lg"/>
+  <SmartMARS:SmartSubState xmi:id="_LWATcN9cEd6ez-ul3It3lg" base_Class="_LVpHEN9cEd6ez-ul3It3lg"/>
+  <SmartMARS:SmartMainState xmi:id="_yr0NAN_cEd6mtOmaBIShAA" base_Class="_yjxrUN_cEd6mtOmaBIShAA" subState="_01NicN_cEd6mtOmaBIShAA"/>
+  <SmartMARS:SmartSubState xmi:id="_01NicN_cEd6mtOmaBIShAA" base_Class="_00fJsN_cEd6mtOmaBIShAA"/>
+  <SmartMARS:SmartMutex xmi:id="_U2ojMOozEd6QY6y_9WRSQw" base_Class="_UuLKwOozEd6QY6y_9WRSQw"/>
+</xmi:XMI>
