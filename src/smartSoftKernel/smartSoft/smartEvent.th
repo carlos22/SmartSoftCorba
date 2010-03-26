@@ -1112,6 +1112,7 @@ template<class P, class E> CHS::StatusCode CHS::EventClient<P,E>::getNextEvent(c
         } else {
           result = CHS::SMART_NOTACTIVATED;
         }
+        mutexConnection.release();
       } else {
         //
         // since id still valid, it is a standard "cancel" of a blocking method
