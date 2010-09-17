@@ -21,13 +21,6 @@
 //
 //        wopfner@hs-ulm.de
 //
-//        Christian Schlegel (schlegel@hs-ulm.de)
-//        University of Applied Sciences
-//        Prittwitzstr. 10
-//        89075 Ulm (Germany)
-//
-//  This file is part of the "Katana Mobile Manipulation communication objects".
-//
 //  This library is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU Lesser General Public
 //  License as published by the Free Software Foundation; either

@@ -1,10 +1,11 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2008 Matthias Lutz, Andreas Steck
+//  Copyright (C) 2008 Christian Schlegel, Andreas Steck
 //
-//        lutz@hs-ulm.de
+//        schlegel@hs-ulm.de
 //        steck@hs-ulm.de 
 //
+//        ZAFH Servicerobotik Ulm
 //        University of Applied Sciences
 //        Prittwitzstr. 10
 //        D-89075 Ulm
@@ -32,21 +33,31 @@
 //
 // --------------------------------------------------------------------------
 
-#ifndef _SMART_IDL_TRACKINGGOAL
-#define _SMART_IDL_TRACKINGGOAL
+#include "commSpeechInputParameter.hh"
 
-module SmartIDL {
+using namespace Smart;
 
-  struct TrackingGoal
+CommSpeechInputParameter::CommSpeechInputParameter()
+{
+  cmd.tag = 0;
+  cmd.parameter1 = "";
+}
+
+CommSpeechInputParameter::~CommSpeechInputParameter()
+{
+}
+
+void CommSpeechInputParameter::get(CORBA::Any &a) const
+{
+  a <<= cmd;
+}
+
+void CommSpeechInputParameter::set(const CORBA::Any &a)
+{
+  SmartIDL::SpeechInputParameter *tmp_cmd;
+  if(a >>= tmp_cmd)
   {
-    double angle;
-    double distance;
-    double x;
-    double y;
-    boolean valid;
-  };
-
-};
-
-#endif
+    cmd = *tmp_cmd;
+  }
+}
 

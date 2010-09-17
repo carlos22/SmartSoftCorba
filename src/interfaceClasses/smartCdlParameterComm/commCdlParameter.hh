@@ -61,20 +61,27 @@ typedef enum
   CDL_SET_ID,               // set the id used for synchronisation
   CDL_SET_GOAL,             // set goal x,y,heading [mm,mm,deg]
   CDL_SET_APPROACH_DIST,    // set the minimum distance to stop at goal [mm]
+  CDL_SAVE_CURRENT_POS,     // save current robot pose for backward driving
+  CDL_SET_SAFETY_CLEARANCE, // set the global safety clearance
 //  CDL_SET_IGNORE_REGION,    // set circular region where scan points are ignored
   
   CDL_NEUTRAL,              // indicate that no selection has been made
   
-  CDL_REACTIVE,             // Strategy
-  CDL_JOYSTICK,             // Strategy
-  CDL_TURN,                 // Strategy
-  CDL_APPROACH_HALT,        // Strategy
-  CDL_ROTATE,		    // Strategy
-  CDL_FOLLOW,               // Strategy
+  CDL_REACTIVE,               // Strategy
+  CDL_JOYSTICK,               // Strategy
+  CDL_TURN,                   // Strategy
+  CDL_APPROACH_HALT,          // Strategy
+  CDL_APPROACH,               // Strategy
+  CDL_ROTATE,	     	      // Strategy
+  CDL_FOLLOW,                 // Strategy
+  CDL_BACKWARD,               // Strategy
   
   CDL_ABSOLUTE,             // goal specification
   CDL_PLANNER,              // goal specification
   CDL_PERSON,               // goal specification
+  CDL_SAVED,                // goal specification
+  CDL_ANGLE_ABSOLUTE,        // goal specification
+  CDL_ANGLE_RELATIVE,       // goal specification
   
   CDL_DEFAULT_LOOKUP,       // lookup table
   CDL_SECOND_LOOKUP,        // lookup table
@@ -193,6 +200,10 @@ inline int CommCdlParameter::set(std::string& inString)
       {
         cmd.parameter1 = CDL_APPROACH_HALT;
       }
+      else if(strcasecmp("APPROACH",param)==0)
+      {
+        cmd.parameter1 = CDL_APPROACH;
+      }
       else if(strcasecmp("ROTATE",param)==0)
       {
         cmd.parameter1 = CDL_ROTATE;
@@ -200,6 +211,10 @@ inline int CommCdlParameter::set(std::string& inString)
       else if(strcasecmp("FOLLOW",param)==0)
       {
         cmd.parameter1 = CDL_FOLLOW;
+      }
+      else if(strcasecmp("BACKWARD",param)==0)
+      {
+        cmd.parameter1 = CDL_BACKWARD;
       }
       else
       {
@@ -355,6 +370,19 @@ inline int CommCdlParameter::set(std::string& inString)
       {
         cmd.parameter1 = CDL_PERSON;
       }
+      else if(strcasecmp("SAVED",param)==0)
+      {
+        cmd.parameter1 = CDL_SAVED;
+      }
+      else if(strcasecmp("ANGLEABSOLUT",param)==0 || strcasecmp("ANGLEABSOLUTE",param)==0)
+      {
+        cmd.parameter1 = CDL_ANGLE_ABSOLUTE;
+      }
+      else if(strcasecmp("ANGLERELATIVE",param)==0)
+      {
+        cmd.parameter1 = CDL_ANGLE_RELATIVE;
+      }
+
       else
       {
         error = -1;
@@ -396,7 +424,7 @@ inline int CommCdlParameter::set(std::string& inString)
     cmd.tag = CDL_SET_GOAL;
     parse = (char *)calloc(LISP_STRING,sizeof(char));
 
-    for (i=0; i<3; i++)
+    for (i=0; i<4; i++)
     {
       do
       {
@@ -405,9 +433,10 @@ inline int CommCdlParameter::set(std::string& inString)
       parse = strcat(parse,param);
       parse = strcat(parse," ");
     }
-    if (sscanf(parse,"%d %d %d",&cmd.parameter1,
+    if (sscanf(parse,"%d %d %d %d",&cmd.parameter1,
                                 &cmd.parameter2,
-                                &cmd.parameter3) == 3)
+                                &cmd.parameter3,
+				&cmd.parameter4) == 4)
     {
       error = 0;
     }
@@ -423,6 +452,61 @@ inline int CommCdlParameter::set(std::string& inString)
     // set goal approach distance  -- dist
     // ---------------------------------------
     cmd.tag = CDL_SET_APPROACH_DIST;
+    parse = (char *)calloc(LISP_STRING,sizeof(char));
+
+    for (i=0; i<1; i++)
+    {
+      do
+      {
+        param = strsep(&input,LISP_SEPARATOR);
+      } while ((param != NULL) && (strlen(param)==0));
+      parse = strcat(parse,param);
+      parse = strcat(parse," ");
+    }
+    if (sscanf(parse,"%d",&cmd.parameter1) == 1)
+    {
+      error = 0;
+    }
+    else
+    {
+      error = -1;
+    }
+    free(parse);
+  }
+  else if (strcasecmp(param,"SAVECURPOS")==0)
+  {
+    // ---------------------------------------
+    // set goal approach distance  -- dist
+    // ---------------------------------------
+    cmd.tag = CDL_SAVE_CURRENT_POS;
+
+    parse = (char *)calloc(LISP_STRING,sizeof(char));
+
+    for (i=0; i<1; i++)
+    {
+      do
+      {
+        param = strsep(&input,LISP_SEPARATOR);
+      } while ((param != NULL) && (strlen(param)==0));
+      parse = strcat(parse,param);
+      parse = strcat(parse," ");
+    }
+    if (sscanf(parse,"%d",&cmd.parameter1) == 1)
+    {
+      error = 0;
+    }
+    else
+    {
+      error = -1;
+    }
+    free(parse);
+  }
+  else if (strcasecmp(param,"SAFETYCL")==0)
+  {
+    // ---------------------------------------
+    // set global cdl safety clearance -- dist
+    // ---------------------------------------
+    cmd.tag = CDL_SET_SAFETY_CLEARANCE;
     parse = (char *)calloc(LISP_STRING,sizeof(char));
 
     for (i=0; i<1; i++)

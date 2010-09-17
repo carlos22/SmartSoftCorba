@@ -35,6 +35,7 @@
 // --------------------------------------------------------------------------
 
 #include "commVideoImage.hh"
+#include "smartKnuthMorrisPratt.hh"
 
 using namespace Smart;
 
@@ -618,6 +619,26 @@ void CommVideoImage::adjust_size(unsigned int &width, unsigned int &height, Form
   }
 }
 
+
+void CommVideoImage::save_xml(std::ostream &os, const std::string &indent) const {
+	os << indent << "<video_image>" << std::endl;
+	os << indent << "  <width>" << get_width() << "</width>" << std::endl;
+	os << indent << "  <height>" << get_height() << "</height>" << std::endl;
+	os << indent << "  <format>" << format2string(get_format()) << "</format>" << std::endl;
+	os << indent << "  <depth>" << depth(get_format()) << "</depth>" << std::endl;
+	os << indent << "  <size>" << get_size() << "</size>" << std::endl;
+
+	os << indent << "  <valid>" << (int) is_data_valid() << "</valid>" << std::endl;
+	os << indent << "  <sequence_count>" << get_sequence_counter() << "</sequence_count>" << std::endl;
+
+	os << indent << "  <image>";
+	os.write(reinterpret_cast<const char *> (get_data()), get_size());
+	os << "</image>" << std::endl;
+
+	os << indent << "</video_image>" << std::endl;
+}
+
+
 void CommMutableVideoImage::set_data_invalid()
 {
   if(shm)
@@ -666,5 +687,70 @@ void CommResizableVideoImage::set_parameters(unsigned int width, unsigned int he
     p->data_valid = false;
     p->seq_count = 0;
   }
+}
+
+void CommResizableVideoImage::load_xml(std::istream &is) {
+	static const KnuthMorrisPratt kmp_begin("<video_image>");
+
+	static const KnuthMorrisPratt kmp_width("<width>");
+	static const KnuthMorrisPratt kmp_height("<height>");
+	static const KnuthMorrisPratt kmp_format("<format>");
+
+	static const KnuthMorrisPratt kmp_valid("<valid>");
+	static const KnuthMorrisPratt kmp_sequence_count("<sequence_count>");
+
+	static const KnuthMorrisPratt kmp_image("<image>");
+
+	static const KnuthMorrisPratt kmp_end("</video_image>");
+
+	std::string format;
+	uint32_t width, height;
+
+	kmp_begin.search(is);
+
+	kmp_width.search(is);
+	is >> width;
+	kmp_height.search(is);
+	is >> height;
+	kmp_format.search(is);
+	
+	char c = 0;
+	while (c != '<') {
+		is.read(&c, 1);
+		
+		if (c != '<') {
+			format += c;
+		}
+	}	
+	
+	Format form;
+	string2format(format, form);
+	set_parameters(width, height, form);
+
+	// size and depth must not be set because this is
+	// done in set_parameters
+
+	int b;
+	kmp_valid.search(is);
+	is >> b;
+
+	ulong l;
+	kmp_sequence_count.search(is);
+	is >> l;
+	set_sequence_counter(l);
+
+	kmp_image.search(is);
+	unsigned char* data = new unsigned char[get_size()];
+	is.read(reinterpret_cast<char *> (data), get_size());
+	set_data(data);
+	delete data;
+
+	// set the valid flag
+  	if(shm)
+  	{
+    	reinterpret_cast<ImageParameters*>(shm)->data_valid = b;
+  	}
+
+	kmp_end.search(is);
 }
 

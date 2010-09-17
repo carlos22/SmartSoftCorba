@@ -36,6 +36,7 @@
 
 #include "smartKnuthMorrisPratt.hh"
 #include "commLaserScan.hh"
+#include <limits.h>
 
 using namespace Smart;
 
@@ -48,6 +49,8 @@ CommLaserScan::CommLaserScan()
   _scan.time.usec = 0;
   _scan.start_angle = 27000; // -90 deg
   _scan.resolution = 50;     // 0.5 deg
+  _scan.distance_min = 0;
+  _scan.distance_max = USHRT_MAX;
 }
 
 CommLaserScan::CommLaserScan(const SmartIDL::LaserScan &scan)
@@ -98,6 +101,8 @@ void CommLaserScan::save_xml(std::ostream &os, const std::string &indent) const
   os << indent << "  <start_angle>" << _scan.start_angle << "</start_angle>" << std::endl;
   os << indent << "  <resolution>" << _scan.resolution << "</resolution>" << std::endl;
   os << indent << "  <length_unit>" << _scan.length_unit << "</length_unit>" << std::endl;
+  os << indent << "  <distance_min>" << _scan.distance_min << "</distance_min>" << std::endl;
+  os << indent << "  <distance_max>" << _scan.distance_max << "</distance_max>" << std::endl;
   os << indent << "  <points n=\"" << n << "\">" << std::endl;
   for(unsigned int i=0; i<n; ++i)
   {
@@ -115,6 +120,8 @@ void CommLaserScan::load_xml(std::istream &is)
   static const KnuthMorrisPratt kmp_start_angle("<start_angle>");
   static const KnuthMorrisPratt kmp_resolution("<resolution>");
   static const KnuthMorrisPratt kmp_length_unit("<length_unit>");
+  static const KnuthMorrisPratt kmp_distance_min("<distance_min>");
+  static const KnuthMorrisPratt kmp_distance_max("<distance_max>");
   static const KnuthMorrisPratt kmp_points("<points n=\"");
   static const KnuthMorrisPratt kmp_index("<point index=\"");
   static const KnuthMorrisPratt kmp_distance("distance=\"");
@@ -139,6 +146,10 @@ void CommLaserScan::load_xml(std::istream &is)
   is >> _scan.resolution;
   kmp_length_unit.search(is);
   is >> _scan.length_unit;
+  kmp_distance_min.search(is);
+  is >> _scan.distance_min;
+  kmp_distance_max.search(is);
+  is >> _scan.distance_max;
 
   unsigned int n;
   kmp_points.search(is);

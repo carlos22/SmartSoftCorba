@@ -42,17 +42,19 @@ using namespace Smart;
 
 CommMobileLaserScan::CommMobileLaserScan()
 {
-  _scan.laser_scan.is_valid = false;
-  _scan.laser_scan.length_unit = 1;
-  _scan.laser_scan.update_count = 0;
-  _scan.laser_scan.time.sec = 0;
-  _scan.laser_scan.time.usec = 0;
-  _scan.laser_scan.start_angle = 27000; // -90 deg
-  _scan.laser_scan.resolution = 50;     // 0.5 deg
-  _scan.scanner_x = 0;
-  _scan.scanner_y = 0;
-  _scan.scanner_z = 0;
-  _scan.scanner_a = 0;
+  _scan.laser_scan_pose.laser_scan.is_valid = false;
+  _scan.laser_scan_pose.laser_scan.length_unit = 1;
+  _scan.laser_scan_pose.laser_scan.update_count = 0;
+  _scan.laser_scan_pose.laser_scan.time.sec = 0;
+  _scan.laser_scan_pose.laser_scan.time.usec = 0;
+  _scan.laser_scan_pose.laser_scan.start_angle = 27000; // -90 deg
+  _scan.laser_scan_pose.laser_scan.resolution = 50;     // 0.5 deg
+  _scan.laser_world_pose.position.x = 0;
+  _scan.laser_world_pose.position.y = 0;
+  _scan.laser_world_pose.position.z = 0;
+  _scan.laser_world_pose.orientation.azimuth = 0;
+  _scan.laser_world_pose.orientation.elevation = 0;
+  _scan.laser_world_pose.orientation.roll = 0;
 }
 
 CommMobileLaserScan::CommMobileLaserScan(const SmartIDL::MobileLaserScan &scan)
@@ -80,7 +82,7 @@ void CommMobileLaserScan::set(const CORBA::Any &a)
 
 void CommMobileLaserScan::limit_scan_distance_integer(unsigned int max_dist)
 {
-  SmartIDL::LaserScan tmp_scan = _scan.laser_scan;
+  SmartIDL::LaserScan tmp_scan = _scan.laser_scan_pose.laser_scan;
   const unsigned int size = tmp_scan.scan_points.length();
   
   unsigned int num_points_to_remove = 0;
@@ -89,7 +91,7 @@ void CommMobileLaserScan::limit_scan_distance_integer(unsigned int max_dist)
     if(tmp_scan.scan_points[i].distance > max_dist) ++num_points_to_remove;
   }
 
-  _scan.laser_scan.scan_points.length(size - num_points_to_remove);
+  _scan.laser_scan_pose.laser_scan.scan_points.length(size - num_points_to_remove);
   unsigned int num_points_removed = 0;
   for(unsigned int i=0; i<size; ++i)
   {
@@ -99,7 +101,7 @@ void CommMobileLaserScan::limit_scan_distance_integer(unsigned int max_dist)
     }
     else
     {
-      _scan.laser_scan.scan_points[i - num_points_removed] = tmp_scan.scan_points[i];
+      _scan.laser_scan_pose.laser_scan.scan_points[i - num_points_removed] = tmp_scan.scan_points[i];
     }
   }
 }
@@ -124,22 +126,17 @@ void CommMobileLaserScan::print(std::ostream &os) const
 void CommMobileLaserScan::save_xml(std::ostream &os, const std::string &indent) const
 {
   os << indent << "<mobile_laser_scan>" << std::endl;
-  get_base_state().save_xml(os, indent + "  ");
-  os << indent << "  <scanner_x>" << _scan.scanner_x << "</scanner_x>" << std::endl;
-  os << indent << "  <scanner_y>" << _scan.scanner_y << "</scanner_y>" << std::endl;
-  os << indent << "  <scanner_z>" << _scan.scanner_z << "</scanner_z>" << std::endl;
-  os << indent << "  <scanner_azimuth>" << _scan.scanner_a << "</scanner_azimuth>" << std::endl;
-  CommLaserScan(_scan.laser_scan).save_xml(os, indent + "  ");
+  get_base_state().save_xml(os, indent + "  "); 
+  CommPose3d(_scan.laser_world_pose).save_xml(os, indent + "  ");
+  CommPose3d(_scan.laser_scan_pose.sensor_pose).save_xml(os, indent + "  ");
+  CommLaserScan(_scan.laser_scan_pose.laser_scan).save_xml(os, indent + "  ");
   os << indent << "</mobile_laser_scan>" << std::endl;
 }
 
 void CommMobileLaserScan::load_xml(std::istream &is)
 {
   static const KnuthMorrisPratt kmp_begin("<mobile_laser_scan>");
-  static const KnuthMorrisPratt kmp_scanner_x("<scanner_x>");
-  static const KnuthMorrisPratt kmp_scanner_y("<scanner_y>");
-  static const KnuthMorrisPratt kmp_scanner_z("<scanner_z>");
-  static const KnuthMorrisPratt kmp_scanner_azimuth("<scanner_azimuth>");
+
   static const KnuthMorrisPratt kmp_end("</mobile_laser_scan>");
 
   kmp_begin.search(is);
@@ -148,18 +145,17 @@ void CommMobileLaserScan::load_xml(std::istream &is)
   bs.load_xml(is);
   set_base_state(bs);
   
-  kmp_scanner_x.search(is);
-  is >> _scan.scanner_x;
-  kmp_scanner_y.search(is);
-  is >> _scan.scanner_y;
-  kmp_scanner_z.search(is);
-  is >> _scan.scanner_z;
-  kmp_scanner_azimuth.search(is);
-  is >> _scan.scanner_a;
+  CommPose3d world_pose;
+  world_pose.load_xml(is);
+  _scan.laser_world_pose = world_pose.get_idl();
+
+  CommPose3d sensor_pose;
+  sensor_pose.load_xml(is);
+  _scan.laser_scan_pose.sensor_pose = sensor_pose.get_idl();
 
   CommLaserScan scan;
   scan.load_xml(is);
-  _scan.laser_scan = scan.get_idl();
+  _scan.laser_scan_pose.laser_scan = scan.get_idl();
 
   kmp_end.search(is);
 }

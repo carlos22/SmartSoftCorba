@@ -67,6 +67,9 @@ module SmartIDL
     unsigned short start_angle; // [0.01 degrees]
     unsigned short resolution;  // [0.01 degrees]
 
+    unsigned short distance_min;  // min distance that the scanner can meassure [distance in units as defined]
+    unsigned short distance_max;  // max distance that the scanner can meassure [distance in units as defined]
+
     // distance unit in [mm],
     // possible values are 1, 10, and 100.
     // distance of scan point i in [mm] is scan_points[i].distance * length_unit

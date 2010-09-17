@@ -33,6 +33,28 @@
 //  (partly based on work by Christian Schlegel and Pablo d'Angelo)
 //
 // --------------------------------------------------------------------------
+//
+// 	1394-Based Digital Camera Control Library
+//
+// 	Color conversion functions, including Bayer pattern decoding
+//
+//	 Written by Damien Douxchamps and Frederic Devernay
+//
+//	 This library is free software; you can redistribute it and/or
+// 	modify it under the terms of the GNU Lesser General Public
+// 	License as published by the Free Software Foundation; either
+// 	version 2.1 of the License, or (at your option) any later version.
+//
+//	 This library is distributed in the hope that it will be useful,
+// 	but WITHOUT ANY WARRANTY; without even the implied warranty of
+// 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// 	Lesser General Public License for more details.
+//
+// 	You should have received a copy of the GNU Lesser General Public
+// 	License along with this library; if not, write to the Free Software
+// 	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+// --------------------------------------------------------------------------
 
 #ifndef SMART_COMM_VIDEO_IMAGE_HH
 #define SMART_COMM_VIDEO_IMAGE_HH
@@ -65,7 +87,7 @@ public:
       The width of the image in pixels.
      */
     unsigned int width;
-    
+
     /**
       The height of the image in pixels.
      */
@@ -94,7 +116,7 @@ public:
       Boolean flag if image data is valid.
      */
     bool data_valid;
-    
+
     /**
       Sequence counter
      */
@@ -106,16 +128,16 @@ public:
    */
   enum Format
   {
-    GREY, 
-    RGB565, 
-    RGB555, 
-    RGB24, 
-    RGB32, 
+    GREY,
+    RGB565,
+    RGB555,
+    RGB24,
+    RGB32,
     YUV422,
-    YUYV, 
-    UYVY, 
+    YUYV,
+    UYVY,
     YUV420P,
-    YUV422P, 
+    YUV422P,
     YUV411P
   };
 
@@ -124,14 +146,14 @@ public:
   inline CommVideoImage()
   {
   }
-  
+
   /**
    */
   inline CommVideoImage(const CommVideoImage &source)
   : CommSharedMemoryBase(source)
   {
   }
-  
+
   /**
    */
   inline CommVideoImage &operator=(const CommVideoImage &source)
@@ -153,7 +175,7 @@ public:
   /**
     Required by SmartSoft.
    */
-  static inline std::string identifier() 
+  static inline std::string identifier()
   {
     return std::string("CommVideoImage");
   }
@@ -161,38 +183,38 @@ public:
   /**
     Get the width of the image in pixels.
    */
-  inline unsigned int get_width() const 
-  { 
-    return reinterpret_cast<const ImageParameters*>(shm)->width; 
+  inline unsigned int get_width() const
+  {
+    return reinterpret_cast<const ImageParameters*>(shm)->width;
   }
 
   /**
     Get the height of the image in pixels.
    */
-  inline unsigned int get_height() const 
-  { 
-    return reinterpret_cast<const ImageParameters*>(shm)->height; 
+  inline unsigned int get_height() const
+  {
+    return reinterpret_cast<const ImageParameters*>(shm)->height;
   }
 
   /**
     Get the data format of the image.
-    The <a href="http://www.thedirks.org/v4l2/">Video4Linux Two documentation</a> 
-    contains 
+    The <a href="http://www.thedirks.org/v4l2/">Video4Linux Two documentation</a>
+    contains
     <a href="http://www.thedirks.org/v4l2/v4l2fmt.htm">a nice description of these formats</a>.
     Note that the integer values of the enum members of this class do not necessarily
     correspond to the macro values of video4linux for the same format.
    */
-  inline Format get_format() const 
+  inline Format get_format() const
   {
-    return (Format)(reinterpret_cast<const ImageParameters*>(shm)->format); 
+    return (Format)(reinterpret_cast<const ImageParameters*>(shm)->format);
   }
 
   /**
     Return the size of the image in memory in bytes.
    */
-  inline unsigned int get_size() const 
-  { 
-    return reinterpret_cast<const ImageParameters*>(shm)->size; 
+  inline unsigned int get_size() const
+  {
+    return reinterpret_cast<const ImageParameters*>(shm)->size;
   }
 
   /**
@@ -201,26 +223,26 @@ public:
     server isn't able to create.
     At the moment, the server is configured by its ini file to one static format and size.
    */
-  inline bool is_data_valid() const 
+  inline bool is_data_valid() const
   {
-    return (shm) && reinterpret_cast<const ImageParameters*>(shm)->data_valid; 
+    return (shm) && reinterpret_cast<const ImageParameters*>(shm)->data_valid;
   }
 
   /**
     Returns the server sided sequence counter of this image.
     Use it to see if your client drops frames.
    */
-  inline unsigned long get_sequence_counter() const 
+  inline unsigned long get_sequence_counter() const
   {
-    return reinterpret_cast<const ImageParameters*>(shm)->seq_count; 
+    return reinterpret_cast<const ImageParameters*>(shm)->seq_count;
   }
 
   /**
     Return a pointer to the image data.
    */
-  inline const unsigned char *get_data() const 
-  { 
-    return (const unsigned char*)shm + sizeof(ImageParameters); 
+  inline const unsigned char *get_data() const
+  {
+    return (const unsigned char*)shm + sizeof(ImageParameters);
   }
 
   unsigned int get_size_as_rgb24() const;
@@ -250,7 +272,7 @@ public:
     Returns \c false on failure.
    */
   static bool string2format(const std::string &name, Format &format);
-  
+
   /**
     Return a string describing the image format.
     This string can be converted back to an enum member using string2format.
@@ -270,6 +292,11 @@ public:
 
   static inline void yuv2rgb(const unsigned char y, const unsigned char u, const unsigned char v, unsigned char &r, unsigned char &g, unsigned char &b);
   static inline void yuv2bgr(const unsigned char y, const unsigned char u, const unsigned char v, unsigned char &b, unsigned char &g, unsigned char &r) { yuv2rgb(y,u,v,r,g,b); }
+  
+  /**
+    Save an XML like representation of this image to the given output stream.
+   */
+   void save_xml(std::ostream &os, const std::string &indent = "") const;
 
 private:
   void _get_as_rgb(unsigned char *target, int mode) const;
@@ -296,7 +323,7 @@ public:
   /**
     Try to lock the shared memory segment and get the reference counter.
     This method can be used to find out if some other process or thread is accessing
-    this image, which is the case if you fail to get the reference counter or if the 
+    this image, which is the case if you fail to get the reference counter or if the
     counter is greater than one.
 
     We won't allow locking of images for an extended period of time,
@@ -305,7 +332,7 @@ public:
     SmartSoft communication to synchronize access to an image instance.
    */
   inline bool try_get_ref_count(unsigned int &n)
-  { 
+  {
     if(CommSharedMemoryBase::trylock()==0)
     {
       n = CommSharedMemoryBase::get_ref_count();
@@ -321,7 +348,7 @@ public:
     Thus the server either writes data to the image or sets the valid flag to false.
    */
   void set_data_invalid();
-  
+
   /**
     Set the sequence counter of the image.
    */
@@ -367,24 +394,58 @@ public:
     to be allocated.
    */
   void set_parameters(unsigned int width, unsigned int height, Format format);
+  
+  	/**
+	 Load from XML represenation on an istream.
+	 Be warned, no error checking is done.
+	 For details, see \ref smart_basic_com-xml.
+	 */
+	void load_xml(std::istream &is);
 };
 
 inline void CommVideoImage::yuv2rgb(const unsigned char y, const unsigned char u, const unsigned char v, unsigned char &r, unsigned char &g, unsigned char &b)
 {
+/* Old Version which has not been tested
   const float fy = 1.1643836 * (y -  16);
   const float fu = 1.1339286 * (u - 128);
   const float fv = 1.1339286 * (v - 128);
   const float fr = fy + 1.402 * fv;
   const float fg = fy - 0.344 * fu - 0.714 * fv;
   const float fb = fy + 1.772 * fu;
-/*
+*/
+
+/* Old Version which function properly and has been used before the libdc1394 version
   const float fr = y + 1.402 * (v - 128);
   const float fg = y - 0.344 * (u - 128) - 0.714 * (v - 128);
   const float fb = y + 1.772 * (u - 128);
 */
-  r = (fr<0)?0:(fr>255)?255:((unsigned char)::rint(fr));
-  g = (fg<0)?0:(fg>255)?255:((unsigned char)::rint(fg));
-  b = (fb<0)?0:(fb>255)?255:((unsigned char)::rint(fb));
+
+/* This block is needed to convert the float back to unsigned char
+	r = (fr<0)?0:(fr>255)?255:((unsigned char)::rint(fr));
+	g = (fg<0)?0:(fg>255)?255:((unsigned char)::rint(fg));
+	b = (fb<0)?0:(fb>255)?255:((unsigned char)::rint(fb));
+*/
+
+	/**
+	 * This block is taken from the libdc1394 library.
+	 *
+	 * The only modification is the subtraction of 128 from u and v because we use unsigned and have to shift it.
+	 *
+	 * The speed up of this version against the old version is about 3 to 6 times.
+	 * Old Version conversion has been done in 60 to 70 ms on a 1024x768pixel (YUV422-UYVY) image.
+	 * This image has then been converted into RGB32 with the same size.
+	 * This Version converts in 10 to 20 ms on the same image.
+	 */
+	int fr = y + (((v-128)*1436) >> 10);
+	int fg = y - (((u-128)*352 + (v-128)*731) >> 10);
+	int fb = y + (((u-128)*1814) >> 10);
+	fr = fr < 0 ? 0 : fr;
+	fg = fg < 0 ? 0 : fg;
+	fb = fb < 0 ? 0 : fb;
+	r = fr > 255 ? 255 : fr;
+	g = fg > 255 ? 255 : fg;
+	b = fb > 255 ? 255 : fb;
+
 }
 
 

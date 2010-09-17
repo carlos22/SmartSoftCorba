@@ -1,20 +1,18 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2008 Matthias Lutz, Andreas Steck
+//  Copyright (C) 2009 Andreas Steck, Matthias Lutz
 //
-//        lutz@hs-ulm.de
-//        steck@hs-ulm.de 
+//        schlegel@hs-ulm.de
 //
+//        Prof. Dr. Christian Schlegel
 //        University of Applied Sciences
 //        Prittwitzstr. 10
 //        D-89075 Ulm
 //        Germany
 //
-//  This file is part of the "SmartSoft Communication Classes".
-//  It provides basic standardized data types for communication between
-//  different components in the mobile robotics context. These classes
-//  are designed to be used in conjunction with the SmartSoft Communication
-//  Library.
+//  This file is part of the "SmartSoft Communication Library".
+//  It provides standardized patterns for communication between
+//  different components.
 //
 //  This library is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU Lesser General Public
@@ -32,21 +30,18 @@
 //
 // --------------------------------------------------------------------------
 
-#ifndef _SMART_IDL_TRACKINGGOAL
-#define _SMART_IDL_TRACKINGGOAL
-
-module SmartIDL {
-
-  struct TrackingGoal
+module SmartIDL
+{
+  struct SpeechInputEventParameter
   {
-    double angle;
-    double distance;
-    double x;
-    double y;
-    boolean valid;
+    double confidence;
+    string topic;
   };
 
+  struct SpeechInputEventResult
+  {
+    string text;
+    double confidence;
+    string semantic;
+  };
 };
-
-#endif
-

@@ -1,10 +1,11 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2008 Matthias Lutz, Andreas Steck
+//  Copyright (C) 2008 Christian Schlegel, Andreas Steck
 //
-//        lutz@hs-ulm.de
+//        schlegel@hs-ulm.de
 //        steck@hs-ulm.de 
 //
+//        ZAFH Servicerobotik Ulm
 //        University of Applied Sciences
 //        Prittwitzstr. 10
 //        D-89075 Ulm
@@ -32,18 +33,15 @@
 //
 // --------------------------------------------------------------------------
 
-#ifndef _SMART_IDL_TRACKINGGOAL
-#define _SMART_IDL_TRACKINGGOAL
+#ifndef _SMART_IDL_SPEECHINPUTPARAMETER
+#define _SMART_IDL_SPEECHINPUTPARAMETER
 
 module SmartIDL {
 
-  struct TrackingGoal
+  struct SpeechInputParameter
   {
-    double angle;
-    double distance;
-    double x;
-    double y;
-    boolean valid;
+    long tag;
+    string parameter1;
   };
 
 };

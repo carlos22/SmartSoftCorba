@@ -142,6 +142,9 @@ void CommPlannerEventResult::get(char* r)const
     case PLANNER_WRONG_MAPID:
       strcpy(r,"(wrong map id)");
       break;
+    case PLANNER_UNKNOWN:
+      strcpy(r,"(unknown)");
+      break;
     default:
       strcpy(r,"(error)");
       break;

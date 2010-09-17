@@ -59,50 +59,9 @@ INCLUDES     += -I$(TAO_ROOT)/orbsvcs
 #       CLIENT_LIBS       libraries needed by the client library
 #
 #---------------------------------------------------------------------------- 
-IDL_FILES    =  smartBasePosition \
-		smartBasePositionUpdate \
-		smartBaseState \
-		smartBaseVelocity \
-		smartDirection3d \
-		smartJoystick \
-		smartLaserScan \
-		smartLaserScan6DPose\
-		smartLaserTrackingData \
-		smartMobileLaserScan \
-		smartNavigationVelocity \
-		smartOrientation3d \
-		smartPose3d \
-		smartPosition3d \
-		smartPropertySet \
-		smartSharedMemory \
-		smartSonar \
-		smartSpeechOutputMessage \
-		smartStringMap \
-		smartTimeStamp \
-		smartTurretVelocity
+IDL_FILES    =  smartBaseParameter
 
-EXPORT_FILES = 	commBasePosition.hh \
-		commBasePositionUpdate.hh \
-		commBaseState.hh \
-		commBaseVelocity.hh \
-		commDirection3d.hh \
-		commJoystick.hh \
-		commLaserScan.hh \
-		commLaserTrackingData.hh \
-		commMobileLaserScan.hh \
-		commNavigationVelocity.hh \
-		commOrientation3d.hh \
-		commPose3d.hh \
-		commPosition3d.hh \
-		commPropertySet.hh \
-		commSharedMemory.hh \
-		commSonar.hh \
-		commSpeechOutputMessage.hh \
-		commStringMap.hh \
-		commTimeStamp.hh \
-		commTurretVelocity.hh \
-		commVideoImage.hh \
-		commVoid.hh
+EXPORT_FILES = 	commBaseParameter.hh
 
 INI_FILES    =	
 
@@ -120,78 +79,18 @@ LIB_LFLAGS = $(LFLAGS)
 # Library 1
 
 LIB_1_CFLAGS =	$(LIB_CFLAGS)
-LIB_1_OBJ =	commBasePosition.o \
-		  smartBasePositionC.o \
-		  smartBasePositionS.o \
-		commBasePositionUpdate.o \
-		  smartBasePositionUpdateC.o \
-		  smartBasePositionUpdateS.o \
-		commBaseState.o \
-		  smartBaseStateC.o \
-		  smartBaseStateS.o \
-		commBaseVelocity.o \
-		  smartBaseVelocityC.o \
-		  smartBaseVelocityS.o \
-		commDirection3d.o \
-		  smartDirection3dC.o \
-		  smartDirection3dS.o \
-		commJoystick.o \
-		  smartJoystickC.o \
-		  smartJoystickS.o \
-		commLaserScan.o \
-		  smartLaserScanC.o \
-		  smartLaserScanS.o \
-		  smartLaserScan6DPoseC.o \
-		  smartLaserScan6DPoseS.o \
-		commLaserTrackingData.o \
-		  smartLaserTrackingDataC.o \
-		  smartLaserTrackingDataS.o \
-		commMobileLaserScan.o \
-		  smartMobileLaserScanC.o \
-		  smartMobileLaserScanS.o \
-		commNavigationVelocity.o \
-		  smartNavigationVelocityC.o \
-		  smartNavigationVelocityS.o \
-		commOrientation3d.o \
-		  smartOrientation3dC.o \
-		  smartOrientation3dS.o \
-		commPose3d.o \
-		  smartPose3dC.o \
-		  smartPose3dS.o \
-		commPosition3d.o \
-		  smartPosition3dC.o \
-		  smartPosition3dS.o \
-		commPropertySet.o \
-		  smartPropertySetC.o \
-		  smartPropertySetS.o \
-		commSharedMemory.o \
-		  smartSharedMemoryC.o \
-		  smartSharedMemoryS.o \
-		commSonar.o \
-		  smartSonarC.o \
-		  smartSonarS.o \
-		commSpeechOutputMessage.o \
-		  smartSpeechOutputMessageC.o \
-		  smartSpeechOutputMessageS.o \
-		commStringMap.o \
-		  smartStringMapC.o \
-		  smartStringMapS.o \
-		commTimeStamp.o \
-		  smartTimeStampC.o \
-		  smartTimeStampS.o \
-		commTurretVelocity.o \
-		  smartTurretVelocityC.o \
-		  smartTurretVelocityS.o \
-		commVideoImage.o
+LIB_1_OBJ =	commBaseParameter.o \
+		  smartBaseParameterC.o \
+		  smartBaseParameterS.o \
 
 LIB_1_LFLAGS =	$(LIB_LFLAGS)
-LIB_1_BIN =	smartBasicComm
+LIB_1_BIN =	smartBaseParameter
 
 ##----------------------------------------------------------------------------
 ## Components to build
 ##----------------------------------------------------------------------------
 
-CPNT =	1 2
+CPNT =	1
 
 # Defaults
 
@@ -202,86 +101,25 @@ CPNT_LFLAGS = 	$(LFLAGS) -lsmartBasicComm \
 
 # Component 1
 
-CPNT_1_CFLAGS =	$(CPNT_CFLAGS)
-CPNT_1_OBJ =	testSharedMemoryServer.o
-CPNT_1_LFLAGS =	$(CPNT_LFLAGS)
-CPNT_1_BIN =	testSharedMemoryServer
+#CPNT_1_CFLAGS =	$(CPNT_CFLAGS)
+#CPNT_1_OBJ =	testSharedMemoryServer.o
+#CPNT_1_LFLAGS =	$(CPNT_LFLAGS)
+#CPNT_1_BIN =	testSharedMemoryServer
 
 # Component 2
 
-CPNT_2_CFLAGS =	$(CPNT_CFLAGS)
-CPNT_2_OBJ =	testSharedMemoryClient.o
-CPNT_2_LFLAGS =	$(CPNT_LFLAGS)
-CPNT_2_BIN =	testSharedMemoryClient
+#CPNT_2_CFLAGS =	$(CPNT_CFLAGS)
+#CPNT_2_OBJ =	testSharedMemoryClient.o
+#CPNT_2_LFLAGS =	$(CPNT_LFLAGS)
+#CPNT_2_BIN =	testSharedMemoryClient
 
 ##----------------------------------------------------------------------------
 ## Tests to build
 ##----------------------------------------------------------------------------
 
-TEST = 1 2 3 4 5 6 7 8
-
+#TEST = 1 2 3 4 5 6 7 8
 # Defaults
 
-TEST_CFLAGS =	$(CFLAGS)
-TEST_LFLAGS =	$(LFLAGS) -lsmartBasicComm \
-		-lTAO_CosNaming -lTAO -lTAO_PortableServer \
-		-lsmartSoft -lACE -ldl -lpthread $(OS_LIBS) -lm -lrt
-
-# Test 1
-
-TEST_1_CFLAGS =	$(TEST_CFLAGS)
-TEST_1_OBJ =	testTimeStamp.o
-TEST_1_LFLAGS =	$(TEST_LFLAGS)
-TEST_1_BIN =	testTimeStamp
-
-# Test 2
-
-TEST_2_CFLAGS =	$(TEST_CFLAGS)
-TEST_2_OBJ =	testBasePosition.o
-TEST_2_LFLAGS =	$(TEST_LFLAGS)
-TEST_2_BIN =	testBasePosition
-
-# Test 3
-
-TEST_3_CFLAGS =	$(TEST_CFLAGS)
-TEST_3_OBJ =	testBaseVelocity.o
-TEST_3_LFLAGS =	$(TEST_LFLAGS)
-TEST_3_BIN =	testBaseVelocity
-
-# Test 4
-
-TEST_4_CFLAGS =	$(TEST_CFLAGS)
-TEST_4_OBJ =	testBaseState.o
-TEST_4_LFLAGS =	$(TEST_LFLAGS)
-TEST_4_BIN =	testBaseState
-
-# Test 5
-
-TEST_5_CFLAGS =	$(TEST_CFLAGS)
-TEST_5_OBJ =	testMobileLaserScan.o
-TEST_5_LFLAGS =	$(TEST_LFLAGS)
-TEST_5_BIN =	testMobileLaserScan
-
-# Test 6
-
-TEST_6_CFLAGS =	$(TEST_CFLAGS)
-TEST_6_OBJ =	testJoystick.o
-TEST_6_LFLAGS =	$(TEST_LFLAGS)
-TEST_6_BIN =	testJoystick
-
-# Test 7: string map
-
-TEST_7_CFLAGS =	$(TEST_CFLAGS)
-TEST_7_OBJ =	testStringMap.o
-TEST_7_LFLAGS =	$(TEST_LFLAGS)
-TEST_7_BIN =	testStringMap
-
-# Test 7: xml storage
-
-TEST_7_CFLAGS =	$(TEST_CFLAGS)
-TEST_7_OBJ =	testXml.o
-TEST_7_LFLAGS =	$(TEST_LFLAGS)
-TEST_7_BIN =	testXml
 
 #---------------------------------------------------------------------------- 
 #

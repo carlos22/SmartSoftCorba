@@ -183,6 +183,22 @@ public:
   inline double get_scan_resolution() const { return _hd2r(_scan.resolution); }
 
   /**
+    Return the min distance that the sensor can meassure in units of \a unit meters.
+   */
+  inline double get_min_distance(const double unit = 0.001) const 
+  { 
+    return _scan.distance_min * 0.001 * _scan.length_unit / unit; 
+  }  
+
+  /**
+    Return the max distance that the sensor can meassure in units of \a unit meters.
+   */
+  inline double get_max_distance(const double unit = 0.001) const 
+  { 
+    return _scan.distance_max * 0.001 * _scan.length_unit / unit; 
+  }  
+
+  /**
     Return the angle of scan point number \a i in radians relative to the scanning device.
     The returned value is non-negative and smaller than 2*pi.
     Scan point counting starts with zero.
@@ -302,6 +318,23 @@ public:
   }
 
   /**
+    Set the min distance that the sensor can meassure to \a dist * \a unit meters
+   */
+  inline void set_min_distance(double dist, const double unit)
+  {
+    _scan.distance_min = int(::rint(dist * unit * 1000) / _scan.length_unit);
+  }
+
+  /**
+    Set the max distance that the sensor can meassure to \a dist * \a unit meters
+   */
+  inline void set_max_distance(double dist, const double unit)
+  {
+    _scan.distance_max = int(::rint(dist * unit * 1000) / _scan.length_unit);
+  }
+
+
+  /**
     Set the distance of scan point \a index to \a dist * \a unit meters
     and set its valid flag to true.
    */
@@ -367,7 +400,7 @@ inline CommLaserScan::polar_point_type::polar_point_type(const CommLaserScan *sc
   intensity = scan->get_scan_intensity(index);
 }
 
-inline std::ostream &operator<<(std::ostream &os, const CommLaserScan::polar_point_type::polar_point_type &pnt)
+inline std::ostream &operator<<(std::ostream &os, const struct CommLaserScan::polar_point_type::polar_point_type &pnt)
 {
   return os << "polar_point(a=" << pnt.angle << ",d=" << pnt.distance << ",i=" << int(pnt.intensity) << ")";
 }

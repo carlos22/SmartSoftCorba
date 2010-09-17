@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2008 Matthias Lutz, Andreas Steck
+//  Copyright (C) 2010 Andreas Steck, Matthias Lutz
 //
 //        lutz@hs-ulm.de
 //        steck@hs-ulm.de 
@@ -32,18 +32,19 @@
 //
 // --------------------------------------------------------------------------
 
-#ifndef _SMART_IDL_TRACKINGGOAL
-#define _SMART_IDL_TRACKINGGOAL
+#ifndef _SMART_IDL_BASEPARAMETER
+#define _SMART_IDL_BASEPARAMETER
 
 module SmartIDL {
 
-  struct TrackingGoal
+  struct BaseParameter
   {
-    double angle;
-    double distance;
-    double x;
-    double y;
-    boolean valid;
+    long tag;
+    long parameter1;
+    long parameter2;
+    long parameter3;
+    long parameter4;
+    long parameter5;
   };
 
 };

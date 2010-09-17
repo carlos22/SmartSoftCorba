@@ -1,10 +1,11 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2008 Matthias Lutz, Andreas Steck
+//  Copyright (C) 2008 Christian Schlegel, Andreas Steck
 //
-//        lutz@hs-ulm.de
+//        schlegel@hs-ulm.de
 //        steck@hs-ulm.de 
 //
+//        ZAFH Servicerobotik Ulm
 //        University of Applied Sciences
 //        Prittwitzstr. 10
 //        D-89075 Ulm
@@ -32,21 +33,35 @@
 //
 // --------------------------------------------------------------------------
 
-#ifndef _SMART_IDL_TRACKINGGOAL
-#define _SMART_IDL_TRACKINGGOAL
+#include "commBaseParameter.hh"
 
-module SmartIDL {
+using namespace Smart;
 
-  struct TrackingGoal
+CommBaseParameter::CommBaseParameter()
+{
+  cmd.tag = 0;
+  cmd.parameter1 = 0;
+  cmd.parameter2 = 0;
+  cmd.parameter3 = 0;
+  cmd.parameter4 = 0;
+  cmd.parameter5 = 0;
+}
+
+CommBaseParameter::~CommBaseParameter()
+{
+}
+
+void CommBaseParameter::get(CORBA::Any &a) const
+{
+  a <<= cmd;
+}
+
+void CommBaseParameter::set(const CORBA::Any &a)
+{
+  SmartIDL::BaseParameter *tmp_cmd;
+  if(a >>= tmp_cmd)
   {
-    double angle;
-    double distance;
-    double x;
-    double y;
-    boolean valid;
-  };
-
-};
-
-#endif
+    cmd = *tmp_cmd;
+  }
+}
 

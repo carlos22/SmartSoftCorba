@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2009 Matthias Lutz, Andreas Steck
+//  Copyright (C) 2008 Matthias Lutz, Andreas Steck
 //
 //        lutz@hs-ulm.de
 //        steck@hs-ulm.de 

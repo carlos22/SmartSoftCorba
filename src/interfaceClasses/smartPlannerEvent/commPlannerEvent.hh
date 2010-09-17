@@ -53,7 +53,7 @@
 #define PLANNER_NO_PATH                 7   // no path found
 #define PLANNER_PATH_FOUND              8   // valid path found
 #define PLANNER_WRONG_MAPID             9   // map id does not match
-
+#define PLANNER_UNKNOWN                10   // unknown
 
 
 namespace Smart {

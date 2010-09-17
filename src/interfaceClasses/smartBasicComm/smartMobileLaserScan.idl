@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2003 Boris Kluge
+//  Copyright (C) 2010 Boris Kluge, Manuel Wopfner
 //
 //        schlegel@hs-ulm.de
 //
@@ -37,8 +37,9 @@
 #ifndef _SMART_IDL_MOBILELASERSCAN
 #define _SMART_IDL_MOBILELASERSCAN
 
+#include "smartPose3d.idl"
 #include "smartBaseState.idl"
-#include "smartLaserScan.idl"
+#include "smartLaserScan6DPose.idl"
 
 module SmartIDL 
 {
@@ -46,8 +47,8 @@ module SmartIDL
   // for self localisation, obstacle avoidance, object tracking etc.
   struct MobileLaserScan
   {
-    BaseState   base_state; // the most recent basestate
-    LaserScan   laser_scan; // the laserscan
+    BaseState         base_state;      // the most recent basestate
+    LaserScan6DPose   laser_scan_pose; // the laserscan with pose on robot
 
     // position of the scanner in world coordinates.
     // the scanner's coordinate frame is:
@@ -55,10 +56,7 @@ module SmartIDL
     //   y - in the scanning plane, direction of scan ray no. 360
     //   (assuming 361 scan points for a 180 degree range and first ray having index 0)
     //   z - the axis of the scanner, upwards
-    double scanner_x; // [mm]
-    double scanner_y; // [mm]
-    double scanner_z; // [mm]
-    double scanner_a; // [rad]
+    Pose3d laser_world_pose; 
   };
 };
 
