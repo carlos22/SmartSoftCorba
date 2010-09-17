@@ -34,6 +34,9 @@
 // changelog:
 // Andreas Steck 04.08.2008:
 // changes in usage of streambuf
+// -------------------------------
+// Steck; Lutz 26.07.2010:
+// update to GCC 4.5
 //--------------------------------------------------------------------------
  
 #ifndef FAW_DEFLATING_OUTPUT_STREAM_BUF_HH
@@ -46,10 +49,7 @@
 #include <zlib.h>
 
 #include <bits/char_traits.h>
-// <asteck date="04.08.2008">
-//#include <streambuf>
-#include <streambuf.h>
-// </asteck>
+#include <streambuf>
 #include <iostream>
 
 namespace Faw {
@@ -167,12 +167,8 @@ protected:
       _flush_input_buffer();
       if(c!=traits_type::eof())
       {
-        // <asteck date="04.08.2008">
-        //*(pptr()) = c; 
-        //pbump(1);
-        *(streambuf::pptr()) = c; 
-        streambuf::pbump(1);
-        // </asteck>
+        *(std::streambuf::pptr()) = c; 
+        std::streambuf::pbump(1);
       }
       else
       {
@@ -186,12 +182,8 @@ private:
 
   inline int _flush_input_buffer()
   {
-    // <asteck date="04.08.2008">
-    //_zlib_stream.next_in = (Bytef*)pbase();
-    //_zlib_stream.avail_in = (pptr() - pbase()) * sizeof(Ch);
-    _zlib_stream.next_in = (Bytef*)streambuf::pbase();
-    _zlib_stream.avail_in = (streambuf::pptr() - streambuf::pbase()) * sizeof(Ch);
-    // </asteck>
+    _zlib_stream.next_in = (Bytef*)std::streambuf::pbase();
+    _zlib_stream.avail_in = (std::streambuf::pptr() - std::streambuf::pbase()) * sizeof(Ch);
     while(_zlib_stream.avail_in>0)
     {
       if(_zlib_stream.avail_out==0)

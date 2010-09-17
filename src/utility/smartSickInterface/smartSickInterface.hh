@@ -1,6 +1,6 @@
 //--------------------------------------------------------------------------
 //
-//  Copyright (C) 2003 Boris Kluge
+//  Copyright (C) 2003 Boris Kluge, Andreas Steck
 //
 //        schlegel@hs-ulm.de
 //
@@ -171,6 +171,8 @@ public:
   }
 
 private:
+  // for setting the baud rate to 500kbaud
+  int serial_high_speed_mode;
 
   static const unsigned char STX = 0x02;
   static const unsigned char ACK = 0x06;

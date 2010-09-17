@@ -1,6 +1,6 @@
 //--------------------------------------------------------------------------
 //
-//  Copyright (C) 2003 Boris Kluge
+//  Copyright (C) 2003 Boris Kluge, Andreas Steck
 //
 //        schlegel@hs-ulm.de
 //
@@ -30,6 +30,7 @@
 //--------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------
+// Supported: Sick LMS 200, PLS
 //
 // CREDITS:
 //
@@ -49,9 +50,16 @@
 #include <termios.h>
 #include <unistd.h>
 #include <sys/time.h>
-
+#include <stdio.h>
 #include <iostream>
 #include <iomanip>
+#include <string.h>
+
+// asteck
+#include <linux/serial.h>
+#include <sys/ioctl.h>
+
+#define HAVE_HI_SPEED_SERIAL
 
 #include "smartSickInterface.hh"
 
@@ -66,7 +74,9 @@ SickInterface::SickInterface()
   bitrate(38400),
   term_bitrate(38400),
   _fd(0)
-{  
+{ 
+  // setting to 0 workd fine to set the baud rate to 500kbaud
+  serial_high_speed_mode = 0; 
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -154,14 +164,14 @@ int SickInterface::close_device()
 //
 int SickInterface::probe_sick_speed(unsigned int &sick_speed, std::string &sick_name)
 {
-  static int rates[] = { 1200, 1800, 2400, 4800, 9600, 19200, 38400, 0 };
+  //static int rates[] = { 1200, 1800, 2400, 4800, 9600, 19200, 38400, 0 };
+  static int rates[] = { 9600, 38400, 500000 };
   sick_speed = 0;
   sick_name = "";
   int *r = rates;
-  std::cerr << "Probing serial speed: appearing errors may be ignored." << std::endl;
   while((*r)>0)
   {
-    std::cerr << *r << "bps..." << std::endl;
+    std::cout << "probing " << *r << "bps..." << std::endl;
     if(set_term_speed(*r)==0)
     {
       int result;
@@ -170,7 +180,7 @@ int SickInterface::probe_sick_speed(unsigned int &sick_speed, std::string &sick_
       if(result==0) 
       {
         sick_speed = *r;
-        std::cerr << "Probing serial speed: success" << std::endl;
+        std::cerr << "Probing serial speed: success (" << *r << ")" << std::endl;
         
         if(sick_type==LMS)
         {
@@ -186,81 +196,143 @@ int SickInterface::probe_sick_speed(unsigned int &sick_speed, std::string &sick_
     }
     ++r;
   }
-  std::cerr << "Probing serial speed: failure" << std::endl;
+  //std::cerr << "Probing serial speed: failure" << std::endl;
   return -1;
 }
 
+/******************
+this is taken from Player and adapted to the smartSickInterface
 
-////////////////////////////////////////////////////////////////////////////////
-// Set the terminal speed
-// Valid values are:
-//   9600, 19200, 38400
-// SICK supports:
-//   9600, 19200, 38400, 500000
-// Returns 0 on success
-//
-int SickInterface::set_term_speed(int req_speed)
+*/
+int SickInterface::set_term_speed(int speed)
 {
   struct termios term;
-    
-  int known_speeds[] = { 1200, 1800, 2400, 4800, 9600, 19200, 38400, 0 }; 
-  speed_t term_speeds[] = { B1200, B1800, B2400, B4800, B9600, B19200, B38400, B0 };
 
-  int *known_speed = known_speeds;
-  speed_t *term_speed = term_speeds;
-  while(*known_speed)
+#ifdef HAVE_HI_SPEED_SERIAL
+  struct serial_struct serial;
+  if(this->serial_high_speed_mode == 0)
   {
-    if(*known_speed == req_speed) break;
-    ++known_speed;
-    ++term_speed;
+
+          // we should check and reset the AYSNC_SPD_CUST flag
+          // since if it's set and we request 38400, we're likely
+          // to get another baud rate instead (based on custom_divisor)
+          // this way even if the previous player doesn't reset the
+          // port correctly, we'll end up with the right speed we want
+          if (ioctl(this->_fd, TIOCGSERIAL, &serial) < 0)
+          {
+            //RETURN_ERROR(1, "error on TIOCGSERIAL in beginning");
+            printf("ioctl() failed while trying to get serial port info");
+          }
+          else
+          {
+            serial.flags &= ~ASYNC_SPD_CUST;
+            serial.custom_divisor = 0;
+            if (ioctl(this->_fd, TIOCSSERIAL, &serial) < 0)
+            {
+              //RETURN_ERROR(1, "error on TIOCSSERIAL in beginning");
+              printf("ioctl() failed while trying to set serial port info");
+            }
+          }
   }
-
-  if (*known_speed)
+#endif
+  switch(speed)
   {
-    if(verbose) std::cerr << "setting terminal speed to " << *known_speed << std::endl;
-    if( tcgetattr(_fd, &term) < 0 )
-    {
-      std::cerr << "ERROR: unable to get device attributes" << std::endl;
-      return -1;
-    }
-        
-    if(sick_type==LMS)
-    {
-      term.c_iflag &= ~(IGNBRK|BRKINT|PARMRK|ISTRIP|INLCR|IGNCR|ICRNL|IXON);
-      term.c_oflag &= ~OPOST;
-      term.c_lflag &= ~(ECHO|ECHONL|ICANON|ISIG|IEXTEN);
-      term.c_cflag &= ~(CSIZE|PARENB);
-      term.c_cflag |= CS8;
-    }
-    else if(sick_type==PLS)
-    {
-      term.c_iflag &= ~(IGNBRK|BRKINT|PARMRK|ISTRIP|INLCR|IGNCR|ICRNL|IXON);
-      term.c_oflag &= ~OPOST;
-      term.c_lflag &= ~(ECHO|ECHONL|ICANON|ISIG|IEXTEN);
-      term.c_cflag &= ~(CSIZE);
-      term.c_cflag |= (CS8|PARENB);
-    }
-    else
-    {
-      std::cerr << "WARNING: unknown SICK type." << std::endl;
-    }
+    case 9600:
+      //PLAYER_MSG0(2, "terminal speed to 9600");
+      if( tcgetattr( this->_fd, &term ) < 0 )
+        if(verbose) printf("unable to get device attributes");
 
-    cfsetispeed( &term, *term_speed );
-    cfsetospeed( &term, *term_speed );
+      cfmakeraw( &term );
+      cfsetispeed( &term, B9600 );
+      cfsetospeed( &term, B9600 );
 
-    if( tcsetattr(_fd, TCSAFLUSH, &term ) < 0 )
-    {
-      std::cerr << "ERROR: unable to set device attributes" << std::endl;
-      return -1;
-    }
-  }
-  else
-  {
-    std::cerr << "ERROR: unknown terminal speed (" << req_speed << "bps)" << std::endl;
-    return -1;
+      if( tcsetattr( this->_fd, TCSAFLUSH, &term ) < 0 )
+        if(verbose) printf("unable to set device attributes");
+      break;
+
+    case 38400:
+      //PLAYER_MSG0(2, "terminal speed to 38400");
+      if( tcgetattr( this->_fd, &term ) < 0 )
+        if(verbose) printf("unable to get device attributes");
+
+      cfmakeraw( &term );
+      cfsetispeed( &term, B38400 );
+      cfsetospeed( &term, B38400 );
+
+      if( tcsetattr( this->_fd, TCSAFLUSH, &term ) < 0 )
+        if(verbose) printf("unable to set device attributes");
+      break;
+
+    case 500000:
+     if(this->serial_high_speed_mode == 0)
+     {
+        #ifdef HAVE_HI_SPEED_SERIAL
+              //if (ioctl(this->_fd, TIOCGSERIAL, &this->old_serial) < 0) {
+              if (ioctl(this->_fd, TIOCGSERIAL, &serial) < 0) {
+                if(verbose) printf("error on TIOCGSERIAL ioctl");
+              }
+
+              //serial = this->old_serial;
+
+              serial.flags |= ASYNC_SPD_CUST;
+              serial.custom_divisor = 240/5; // for FTDI USB/serial converter divisor is 240/5
+
+              if (ioctl(this->_fd, TIOCSSERIAL, &serial) < 0) {
+                if(verbose) printf("error on TIOCSSERIAL ioctl");
+              }
+
+        #else
+              printf("sicklms200: Trying to change to 500kbps in serial_high_speed_mode = 0, but no support compiled in, defaulting to 38.4kbps.\n");
+        #endif
+
+              // even if we are doing 500kbps, we have to set the speed to 38400...
+              // the FTDI will know we want 500000 instead.
+
+              if( tcgetattr( this->_fd, &term ) < 0 )
+                if(verbose) printf("unable to get device attributes");
+
+              cfmakeraw( &term );
+              cfsetispeed( &term, B38400 );
+              cfsetospeed( &term, B38400 );
+
+              if( tcsetattr( this->_fd, TCSAFLUSH, &term ) < 0 )
+                printf("unable to set device attributes");
+        }
+        else if(this->serial_high_speed_mode == 1)
+        {
+/* TODO we don't need this !!!
+
+                printf("ChangeTermSpeed() -- serial_high_speed_mode == 1\n");
+                tcflush(this->_fd, TCIFLUSH);
+                close(this->_fd);
+                usleep(1000000);
+                this->_fd = ::open(this->device_name, O_RDWR | O_NOCTTY | O_SYNC);
+                if(this->_fd < 0)
+                        printf("error opening");
+
+                if( tcgetattr( this->_fd, &term ) < 0 )
+                         printf("unable to get device attributes");
+
+                term.c_cflag = this->serial_high_speed_baudremap | CS8 | CLOCAL | CREAD;
+                      cfmakeraw( &term );
+                      cfsetispeed( &term, this->serial_high_speed_baudremap );
+                      cfsetospeed( &term, this->serial_high_speed_baudremap );
+                tcflush(this->_fd, TCIFLUSH);
+                tcsetattr(this->_fd, TCSANOW, &term);
+                tcflush(this->_fd, TCIFLUSH);
+*/
+        }
+        break;
+
+        default:
+              printf("unknown speed %d", speed);
   }
   return 0;
 }
+
+
+
+
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -284,23 +356,23 @@ int SickInterface::get_sick_type(std::string &sick_type)
   if(verbose) std::cerr << "waiting for reply" << std::endl;
   if(_receive_ack())
   {
-    std::cerr << "ERROR: ACK expected, but not received" << std::endl;
+    //std::cerr << "ERROR: ACK expected, but not received" << std::endl;
     return -1;
   }
   int len = _receive(false, 3000);
   if (len < 1) 
   {
-    std::cerr << "ERROR: no reply from laser" << std::endl;
+    if(verbose) std::cerr << "ERROR: no reply from laser" << std::endl;
     return -1;
   }
   else if (buffer[PACKET_CMD] == NACK)
   {
-    std::cerr << "ERROR: request denied by laser" << std::endl;
+    if(verbose) std::cerr << "ERROR: request denied by laser" << std::endl;
     return -1;
   }
   else if (buffer[PACKET_CMD] != 0xBA)
   {
-    std::cerr << "ERROR: unexpected packet type" << std::endl;
+    if(verbose) std::cerr << "ERROR: unexpected packet type" << std::endl;
     return -1;
   }
 
@@ -335,23 +407,23 @@ int SickInterface::get_sensor_status(SensorStatus &status)
   if(verbose) std::cerr << "waiting for reply" << std::endl;
   if(_receive_ack())
   {
-    std::cerr << "ERROR: ACK expected, but not received" << std::endl;
+    if(verbose) std::cerr << "ERROR: ACK expected, but not received" << std::endl;
     return -1;
   }
   int len = _receive(false, 3000);
   if (len < 1) 
   {
-    std::cerr << "ERROR: no reply from laser" << std::endl;
+    if(verbose) std::cerr << "ERROR: no reply from laser" << std::endl;
     return -1;
   }
   else if (buffer[PACKET_CMD] == NACK)
   {
-    std::cerr << "ERROR: request denied by laser" << std::endl;
+    if(verbose) std::cerr << "ERROR: request denied by laser" << std::endl;
     return -1;
   }
   else if (buffer[PACKET_CMD] != 0xB1)
   {
-    std::cerr << "ERROR: unexpected packet type" << std::endl;
+    if(verbose) std::cerr << "ERROR: unexpected packet type" << std::endl;
     return -1;
   }
 
@@ -475,10 +547,10 @@ int SickInterface::set_laser_config_mode()
   if(verbose) std::cerr << "waiting for acknowledge" << std::endl;
   if(_receive_ack())
   {
-    std::cerr << "ERROR: ACK expected, but not received" << std::endl;
+    if(verbose) std::cerr << "ERROR: ACK expected, but not received" << std::endl;
     return -1;
   }
-  if(verbose) std::cerr << "configuration mode request ok" << std::endl;
+  if(verbose) if(verbose) std::cerr << "configuration mode request ok" << std::endl;
   return 0;
 }
 
@@ -506,23 +578,23 @@ int SickInterface::set_laser_length_unit_and_intensity()
   if(verbose) std::cerr << "waiting for reply" << std::endl;
   if(_receive_ack())
   {
-    std::cerr << "ERROR: ACK expected, but not received" << std::endl;
+    if(verbose) std::cerr << "ERROR: ACK expected, but not received" << std::endl;
     return -1;
   }
   int len = _receive(false, 3000);
   if (len < 1)
   {
-    std::cerr << "ERROR: no reply from laser" << std::endl;
+    if(verbose) std::cerr << "ERROR: no reply from laser" << std::endl;
     return -1;
   }
   else if (buffer[PACKET_CMD] == NACK)
   {
-    std::cerr << "ERROR: request denied by laser" << std::endl;
+    if(verbose) std::cerr << "ERROR: request denied by laser" << std::endl;
     return -1;
   }
   else if (buffer[PACKET_CMD] != 0xF4)
   {
-    std::cerr << "ERROR: unexpected packet type" << std::endl;
+    if(verbose) std::cerr << "ERROR: unexpected packet type" << std::endl;
     return -1;
   }
 
@@ -556,24 +628,24 @@ int SickInterface::set_laser_length_unit_and_intensity()
   if(verbose) std::cerr << "waiting for acknowledge" << std::endl;
   if(_receive_ack())
   {
-    std::cerr << "ERROR: ACK expected, but not received" << std::endl;
+    if(verbose) std::cerr << "ERROR: ACK expected, but not received" << std::endl;
     return -1;
   }
   if(verbose) std::cerr << "waiting for reply (may take up to 12sec)" << std::endl;
   len = _receive(false, 15000);
   if (len < 1)
   {
-    std::cerr << "ERROR: no reply from laser" << std::endl;
+    if(verbose) std::cerr << "ERROR: no reply from laser" << std::endl;
     return -1;
   }
   else if (buffer[PACKET_CMD] == NACK)
   {
-    std::cerr << "ERROR: request denied by laser" << std::endl;
+    if(verbose) std::cerr << "ERROR: request denied by laser" << std::endl;
     return -1;
   }
   else if (buffer[PACKET_CMD] != 0xF7)
   {
-    std::cerr << "ERROR: unexpected packet type" << std::endl;
+    if(verbose) std::cerr << "ERROR: unexpected packet type" << std::endl;
     return -1;
   }
 
@@ -635,23 +707,23 @@ int SickInterface::set_laser_resolution()
   if(verbose) std::cerr << "waiting for reply" << std::endl;
   if(_receive_ack())
   {
-    std::cerr << "ERROR: ACK expected, but not received" << std::endl;
+    if(verbose) std::cerr << "ERROR: ACK expected, but not received" << std::endl;
     return -1;
   }
   int len = _receive(false, 3000);
   if (len < 1)
   {
-    std::cerr << "ERROR: no reply from laser" << std::endl;
+    if(verbose) std::cerr << "ERROR: no reply from laser" << std::endl;
     return -1;
   }
   else if (buffer[PACKET_CMD] == NACK)
   {
-    std::cerr << "ERROR: request denied by laser" << std::endl;
+    if(verbose) std::cerr << "ERROR: request denied by laser" << std::endl;
     return -1;
   }
   else if (buffer[PACKET_CMD] != 0xBB)
   {
-    std::cerr << "ERROR: unexpected packet type" << std::endl;
+    if(verbose) std::cerr << "ERROR: unexpected packet type" << std::endl;
     return -1;
   }
 
@@ -659,7 +731,7 @@ int SickInterface::set_laser_resolution()
   //
   if (buffer[PACKET_DATA_START] == 0)
   {
-    std::cerr << "WARNING: variant request ignored" << std::endl;
+    if(verbose) std::cerr << "WARNING: variant request ignored" << std::endl;
   }
 
 
@@ -701,28 +773,28 @@ int SickInterface::set_laser_speed()
     if(verbose) std::cerr << "waiting for acknowledge" << std::endl;
     if(_receive_ack())
     {
-      std::cerr << "ERROR: ACK expected, but not received" << std::endl;
+      if(verbose) std::cerr << "ERROR: ACK expected, but not received" << std::endl;
       return -1;
     }
     const int len = _receive(false, 3000);
     if (len < 1)
     {
-      std::cerr << "ERROR: no reply from laser" << std::endl;
+      if(verbose) std::cerr << "ERROR: no reply from laser" << std::endl;
       return -1;
     }
     else if (buffer[PACKET_CMD] == NACK)
     {
-      std::cerr << "ERROR: request denied by laser" << std::endl;
+      if(verbose) std::cerr << "ERROR: request denied by laser" << std::endl;
       return -1;
     }
     else if (buffer[PACKET_CMD] != 0xA0)
     {
-      std::cerr << "ERROR: unexpected packet type" << std::endl;
+      if(verbose) std::cerr << "ERROR: unexpected packet type" << std::endl;
       return -1;
     }
     else if(buffer[PACKET_DATA_START] != 0x00)
     {
-      std::cerr << "ERROR: scanner reports problem (" << int(buffer[PACKET_DATA_START]) << ") with changing baud rate " << std::endl;
+      if(verbose) std::cerr << "ERROR: scanner reports problem (" << int(buffer[PACKET_DATA_START]) << ") with changing baud rate " << std::endl;
       return -1;
     }
     if(verbose) std::cerr << "baud rate request ok" << std::endl;
@@ -754,28 +826,28 @@ int SickInterface::request_laser_data()
   if(verbose) std::cerr << "waiting for acknowledge" << std::endl;
   if(_receive_ack())
   {
-    std::cerr << "ERROR: ACK expected, but not received" << std::endl;
+    if(verbose) std::cerr << "ERROR: ACK expected, but not received" << std::endl;
     return -1;
   }
   int len = _receive(false, 3000);
   if (len < 1)
   {
-    std::cerr << "ERROR: no reply from laser" << std::endl;
+    if(verbose) std::cerr << "ERROR: no reply from laser" << std::endl;
     return -1;
   }
   else if (buffer[PACKET_CMD] == NACK)
   {
-    std::cerr << "ERROR: request denied by laser" << std::endl;
+    if(verbose) std::cerr << "ERROR: request denied by laser" << std::endl;
     return -1;
   }
   else if (buffer[PACKET_CMD] != 0xA0)
   {
-    std::cerr << "ERROR: unexpected packet type" << std::endl;
+    if(verbose) std::cerr << "ERROR: unexpected packet type" << std::endl;
     return -1;
   }
   else if (buffer[PACKET_DATA_START] != 0x00)
   {
-    std::cerr << "ERROR: scanner reports problem (" << int(buffer[PACKET_DATA_START]) << ") with changing mode" << std::endl;
+    if(verbose) std::cerr << "ERROR: scanner reports problem (" << int(buffer[PACKET_DATA_START]) << ") with changing mode" << std::endl;
     return -1;
   }
   if(verbose) std::cerr << "scan data request ok" << std::endl;
@@ -955,7 +1027,7 @@ if(verbose) std::cerr << std::dec << std::endl;
     else // nothing to read, timed out
     {
 if(verbose) std::cerr << std::dec << std::endl;
-      std::cerr << "ERROR: timeout" << std::endl;
+      //std::cerr << "ERROR: timeout" << std::endl;
       return -1;
     }
   }

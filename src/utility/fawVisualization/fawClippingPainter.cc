@@ -311,7 +311,7 @@ void ClippingPainter::_end()
 
 Painter::Point ClippingPainter::_enter_point(const Painter::Point &p1, const Painter::Point &p2) const
 {
-  double ix1,iy1,ix2,iy2;
+  double ix1=0,iy1=0,ix2=0,iy2=0;
   _clipping_rect.intersection(p1[0],p1[1],p2[0],p2[1], ix1,iy1,ix2,iy2); // result is two.
   if(p2[0]<p1[0])
   {
@@ -361,7 +361,7 @@ Painter::Point ClippingPainter::_enter_point(const Painter::Point &p1, const Pai
 
 Painter::Point ClippingPainter::_exit_point(const Painter::Point &p1, const Painter::Point &p2) const
 {
-  double ix1,iy1,ix2,iy2;
+  double ix1=0,iy1=0,ix2=0,iy2=0;
   _clipping_rect.intersection(p1[0],p1[1],p2[0],p2[1], ix1,iy1,ix2,iy2); // result is two.
   if(p1[0]<p2[0])
   {

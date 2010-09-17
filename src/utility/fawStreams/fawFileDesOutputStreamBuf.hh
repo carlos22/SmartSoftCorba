@@ -34,6 +34,9 @@
 // changelog:
 // Andreas Steck 04.08.2008:
 // changes in usage of streambuf
+// -------------------------------
+// Steck; Lutz 26.07.2010:
+// update to GCC 4.5
 //--------------------------------------------------------------------------
  
 #ifndef FAW_FILE_DES_OUTPUT_STREAM_BUF_HH
@@ -46,10 +49,7 @@
 #include <unistd.h>
 #include <ios>
 
-// <asteck date="04.08.2008">
-//#include <streambuf>
-#include <streambuf.h>
-// </asteck>
+#include <streambuf>
 
 namespace Faw {
 
@@ -74,10 +74,7 @@ protected:
   
   virtual int_type sync()
   {
-    // <asteck date="04.08.2008">
-    //write(_fd, pbase(), pptr() - pbase());
-    write(_fd, streambuf::pbase(), streambuf::pptr() - streambuf::pbase());
-    // </asteck>
+    write(_fd, std::streambuf::pbase(), std::streambuf::pptr() - std::streambuf::pbase());
     setp(_buffer, _buffer + BUFFER_SIZE);
     return 0;
   }
@@ -89,10 +86,7 @@ protected:
       sync();
       setp(_buffer, _buffer + BUFFER_SIZE);
       _buffer[0] = traits_type::to_char_type(c);
-      // <asteck date="04.08.2008">
-      //pbump(1);
-      streambuf::pbump(1);
-      // </asteck>
+      std::streambuf::pbump(1);
     }
     return c;
   }

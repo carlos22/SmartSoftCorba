@@ -1,6 +1,6 @@
 //--------------------------------------------------------------------------
 //
-//  Copyright (C) 2003 Boris Kluge
+//  Copyright (C) 2003 Boris Kluge, Andreas Steck
 //
 //        schlegel@hs-ulm.de
 //
@@ -45,6 +45,8 @@
 
 #include <iostream>
 #include <string>
+#include <stdio.h>
+#include <stdlib.h>
 
 #include "smartSickInterface.hh"
 
@@ -57,26 +59,33 @@ int main(int argc, char **argv)
   {
     cerr << "usage:" << endl
          << argv[0] << endl
+         << "\tdevice: {z.B. /dev/ttyUSB0}" << endl
          << "\tlength unit [mm]: {1|10|100}" << endl
          << "\tresolution [0.01deg]: {25|50|100}" << endl
          << "\twidth [deg]: {100|180}" << endl
-         << "\tbitrate [bps]: {9600|19200|38400}" << endl
+         << "\tbitrate [bps]: {9600|38400|500000}" << endl
          << "\tnum scans [int]" << endl;
     return 1;
   }
 
   Smart::SickInterface sick;
 
-  sick.verbose = true;
-  sick.length_unit = atoi(argv[1]);
-  sick.resolution = atoi(argv[2]);
-  sick.width = atoi(argv[3]);
-  sick.bitrate = atoi(argv[4]);
+  sick.verbose = false;
+  std::string device = argv[1];
+  sick.length_unit = atoi(argv[2]);
+  sick.resolution = atoi(argv[3]);
+  sick.width = atoi(argv[4]);
+  sick.bitrate = atoi(argv[5]);
   sick.term_bitrate = sick.bitrate;
-  unsigned int num_scans = atoi(argv[5]);
+  unsigned int num_scans = atoi(argv[6]);
+
+  std::cout << "device: " << device << std::endl;
+
+  unsigned long long start = 0, stop = 0;
   
   //if(sick.open_device("/dev/ttyS0"))
-  if(sick.open_device("/dev/ttyUSB0"))
+  //if(sick.open_device("/dev/ttyUSB0"))
+  if(sick.open_device(device.c_str()))
   {
     cerr << "open_device failed." << endl;
     return 1;
@@ -88,7 +97,7 @@ int main(int argc, char **argv)
     string sick_type;
     if(sick.probe_sick_speed(sick_speed, sick_type))
     {
-      cerr << "probe_sick_speed failed." << endl;
+      //cerr << "probe_sick_speed failed." << endl;
       continue;
     }
 
@@ -111,14 +120,11 @@ int main(int argc, char **argv)
     if (sick.read_laser_data()==0)
     {
       timeval ts = sick.get_receive_timestamp();
-      cout << "time = " << (ts.tv_sec%1000) << "sec, " << (ts.tv_usec/1000) << "msec" << endl;
-      cout << "length unit = " << sick.extract_length_unit() << endl;
+      if(count == 0) start = ts.tv_sec * 1000000 + ts.tv_usec;
+      if(count == num_scans-1) stop = ts.tv_sec * 1000000 + ts.tv_usec;
+
       const unsigned int n = sick.extract_num_points();
-      cout << "num points = " << n << endl;
-      for(unsigned int i=0; i<3; ++i)
-      {
-        cout << i << "\t" << sick.extract_distance(i) << "\t" << sick.extract_intensity(i) << endl;
-      }
+      cout << "id = " << count << "  ; num points = " << n << endl;
       ++count;
     }
     else
@@ -126,6 +132,8 @@ int main(int argc, char **argv)
       cerr << "received unexpected packet type" << endl;
     }
   }
+
+  std::cout << "Frequency is " << (double)num_scans / (double)(stop-start) * 1000000.0 << " Hz.\n";
 
   sick.close_device();
 

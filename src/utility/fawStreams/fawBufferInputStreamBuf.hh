@@ -34,6 +34,9 @@
 // changelog:
 // Andreas Steck 04.08.2008:
 // changes in usage of streambuf
+// -------------------------------
+// Steck; Lutz 26.07.2010:
+// update to GCC 4.5
 //--------------------------------------------------------------------------
 
 #ifndef FAW_BUFFER_INPUT_STREAM_BUF_HH
@@ -44,10 +47,7 @@
 #else
 
 #include <ios>
-// <asteck date="04.08.2008">
-//#include <streambuf>
-#include <streambuf.h>
-// </asteck>
+#include <streambuf>
 #include <iterator>
 
 namespace Faw {
@@ -100,10 +100,7 @@ protected:
   virtual int_type uflow()
   {
     const int_type c = underflow();
-    // <asteck date="04.08.2008">
-    //if(c!=traits_type::eof()) sbumpc();
-    if(c!=traits_type::eof()) streambuf::sbumpc();
-    // </asteck>
+    if(c!=traits_type::eof()) std::streambuf::sbumpc();
     return c;
   }
 

@@ -32,7 +32,7 @@
  
 #include <sstream>
 #include <iosfwd>
-
+#include <string.h>
 #include "fawStreamPainter.hh"
 
 using namespace Faw;

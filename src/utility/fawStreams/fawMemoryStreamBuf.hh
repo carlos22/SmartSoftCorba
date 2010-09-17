@@ -34,6 +34,9 @@
 // changelog:
 // Andreas Steck 04.08.2008:
 // changes in usage of streambuf
+// -------------------------------
+// Steck; Lutz 26.07.2010:
+// update to GCC 4.5
 //--------------------------------------------------------------------------
  
 #ifndef FAW_MEMORY_STREAM_BUF_HH
@@ -44,10 +47,7 @@
 #else
 
 #include <ios>
-// <asteck date="04.08.2008">
-//#include <streambuf>
-#include <streambuf.h>
-// </asteck>
+#include <streambuf>
 #include <iterator>
 
 #include "fawDynamicBuffer.hh"
@@ -68,12 +68,8 @@ public:
   BasicMemoryStreamBuf(BasicDynamicBuffer<Ch,Tr> &buffer) 
     : _buffer(buffer), _gbuf_avail(0)
   {
-    // <asteck date="04.08.2008">
-    //setp(_pbuf, _pbuf + BUFFER_SIZE);
-    //setg(0,0,0);
-    streambuf::setp(_pbuf, _pbuf + BUFFER_SIZE);
-    streambuf::setg(0,0,0);
-    // </asteck>
+    std::streambuf::setp(_pbuf, _pbuf + BUFFER_SIZE);
+    std::streambuf::setg(0,0,0);
     _giter = _buffer.begin();
   }
 
@@ -86,12 +82,8 @@ public:
   void clear()
   {
     _buffer.clear();
-    // <asteck date="04.08.2008">
-    //setp(_pbuf, _pbuf + BUFFER_SIZE);
-    //setg(0,0,0);
-    streambuf::setp(_pbuf, _pbuf + BUFFER_SIZE);
-    streambuf::setg(0,0,0);
-    // </asteck>
+    std::streambuf::setp(_pbuf, _pbuf + BUFFER_SIZE);
+    std::streambuf::setg(0,0,0);
     _giter = _buffer.begin();
   }
 
@@ -101,10 +93,7 @@ public:
   void reset()
   {
     _giter = _buffer.begin();
-    // <asteck date="04.08.2008">
-    //setg(0,0,0);
-    streambuf::setg(0,0,0);
-    // </asteck>
+    std::streambuf::setg(0,0,0);
   }
 
   virtual void print(std::ostream &os = std::cout) const
@@ -116,12 +105,8 @@ protected:
   
   virtual int sync()
   {
-    // <asteck date="04.08.2008">
-    //_buffer.append(pbase(), pptr() - pbase());
-    //setp(_pbuf, _pbuf + BUFFER_SIZE);
-    _buffer.append(streambuf::pbase(), streambuf::pptr() - streambuf::pbase());
-    streambuf::setp(_pbuf, _pbuf + BUFFER_SIZE);
-    // </asteck>
+    _buffer.append(std::streambuf::pbase(), std::streambuf::pptr() - std::streambuf::pbase());
+    std::streambuf::setp(_pbuf, _pbuf + BUFFER_SIZE);
     return 0;
   }
 
@@ -130,12 +115,8 @@ protected:
     sync();
     if(c!=traits_type::eof())
     {
-      // <asteck date="04.08.2008">
-      //*(pptr()) = c;
-      //pbump(1);
-      *(streambuf::pptr()) = c;
-      streambuf::pbump(1);
-      // </asteck>
+      *(std::streambuf::pptr()) = c;
+      std::streambuf::pbump(1);
     }
     return c;
   }
@@ -153,12 +134,8 @@ protected:
 
   virtual int_type uflow()
   {
-    // <asteck date="04.08.2008">
-    //const int_type c = underflow();
-    //if(c!=traits_type::eof()) sbumpc();
-    const int_type c = streambuf::underflow();
-    if(c!=traits_type::eof()) streambuf::sbumpc();
-    // </asteck>
+    const int_type c = std::streambuf::underflow();
+    if(c!=traits_type::eof()) std::streambuf::sbumpc();
     return c;
   }
 

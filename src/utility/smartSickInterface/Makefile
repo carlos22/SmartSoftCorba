@@ -105,7 +105,7 @@ LIB_1_BIN =	smartSickInterface
 ## Components to build
 ##----------------------------------------------------------------------------
 
-CPNT =	
+CPNT = 1	
 
 # Defaults
 
@@ -117,9 +117,10 @@ CPNT_LFLAGS = 	$(LFLAGS) \
 # Component 1:
 
 CPNT_1_CFLAGS =	$(CPNT_CFLAGS)
-CPNT_1_OBJ =	
+CPNT_1_OBJ =	smartSickInterface.o \
+		testSickInterface.o
 CPNT_1_LFLAGS =	$(CPNT_LFLAGS)
-CPNT_1_BIN =	
+CPNT_1_BIN =	testSickInterface
 
 ##----------------------------------------------------------------------------
 ## Tests to build

@@ -27,8 +27,8 @@
 //
 // --------------------------------------------------------------------------
 
-#ifndef SMART_QT_PUSH_NEWEST_CLIENT_HH
-#define SMART_QT_PUSH_NEWEST_CLIENT_HH
+#ifndef SMART_QT_PUSH_TIMED_CLIENT_HH
+#define SMART_QT_PUSH_TIMED_CLIENT_HH
 
 #include "smartSoft.hh"
 #include "smartQtSignallingInterface.hh"
