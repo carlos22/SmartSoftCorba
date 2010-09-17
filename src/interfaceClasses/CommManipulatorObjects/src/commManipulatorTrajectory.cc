@@ -14,7 +14,6 @@
 // This file is generated once. Modify this file to your needs.
 // If you want the workflow to re-generate this file, please
 // delete it before running the workflow.
-//
 //------------------------------------------------------------------------
 //
 //  Copyright (C) 2010 Manuel Wopfner
@@ -26,7 +25,7 @@
 //        Prittwitzstr. 10
 //        89075 Ulm (Germany)
 //
-//  This file is part of CommManipulatorObjects.
+//  This file is part of the "CommManipulatorObjects".
 //
 //  This library is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU Lesser General Public
@@ -43,28 +42,23 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //--------------------------------------------------------------------------
 
-
 #include "commManipulatorTrajectory.hh"
 
 using namespace Smart;
 
-void CommManipulatorTrajectory::get(CORBA::Any &a) const
-{
+void CommManipulatorTrajectory::get(CORBA::Any &a) const {
 	a <<= idl_CommManipulatorTrajectory;
 }
 
-void CommManipulatorTrajectory::set(const CORBA::Any &a)
-{
+void CommManipulatorTrajectory::set(const CORBA::Any &a) {
 	SmartIDL::CommManipulatorTrajectory *tmp_cmd;
-	if (a >>= tmp_cmd)
-	{
+	if (a >>= tmp_cmd) {
 		idl_CommManipulatorTrajectory = *tmp_cmd;
 	}
 
 }
 
-void CommManipulatorTrajectory::print(std::ostream &os) const
-{
+void CommManipulatorTrajectory::print(std::ostream &os) const {
 	os << "CommManipulatorTrajectory(";
 
 	os << "size=" << get_trajectory_size() << "\n";

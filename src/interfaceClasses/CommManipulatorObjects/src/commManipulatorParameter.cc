@@ -14,7 +14,6 @@
 // This file is generated once. Modify this file to your needs.
 // If you want the workflow to re-generate this file, please
 // delete it before running the workflow.
-//
 //------------------------------------------------------------------------
 //
 //  Copyright (C) 2010 Manuel Wopfner
@@ -26,7 +25,7 @@
 //        Prittwitzstr. 10
 //        89075 Ulm (Germany)
 //
-//  This file is part of CommManipulatorObjects.
+//  This file is part of the "CommManipulatorObjects".
 //
 //  This library is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU Lesser General Public
@@ -43,27 +42,22 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //--------------------------------------------------------------------------
 
-
 #include "commManipulatorParameter.hh"
 
 using namespace Smart;
 
-void CommManipulatorParameter::get(CORBA::Any &a) const
-{
+void CommManipulatorParameter::get(CORBA::Any &a) const {
 	a <<= idl_CommManipulatorParameter;
 }
 
-void CommManipulatorParameter::set(const CORBA::Any &a)
-{
+void CommManipulatorParameter::set(const CORBA::Any &a) {
 	SmartIDL::CommManipulatorParameter *tmp_cmd;
-	if (a >>= tmp_cmd)
-	{
+	if (a >>= tmp_cmd) {
 		idl_CommManipulatorParameter = *tmp_cmd;
 	}
 }
 
-void CommManipulatorParameter::print(std::ostream &os) const
-{
+void CommManipulatorParameter::print(std::ostream &os) const {
 	os << "CommManipulatorParameter(";
 
 	os << "tag=" << idl_CommManipulatorParameter.mode << "\n";

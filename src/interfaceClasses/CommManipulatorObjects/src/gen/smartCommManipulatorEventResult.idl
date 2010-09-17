@@ -12,27 +12,21 @@
 // smart-robotics.sourceforge.net
 // 
 // Please do not modify this file. It will be re-generated
-// running the workflow.
+// running the code generator.
 //--------------------------------------------------------------------------
 
 #ifndef _SMART_IDL_COMMMANIPULATOREVENTRESULT
 #define _SMART_IDL_COMMMANIPULATOREVENTRESULT
 
+// include IDL's
+#include <gen/enumManipulatorEvent.idl>
 
 module SmartIDL
 {
-	enum enum_result_event
-	{
-		RESULT_COLLISION,
-		RESULT_NO_SOLUTION_FOUND,
-		RESULT_VALUE_OUT_OF_RANGE,
-		RESULT_GOAL_REACHED,
-		RESULT_GOAL_NOT_REACHED
-	};
-	
+
 	struct CommManipulatorEventResult
 	{
-		enum_result_event event;
+		ENUM_ManipulatorEvent event;
 	};
 };
 #endif

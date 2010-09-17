@@ -14,7 +14,6 @@
 // This file is generated once. Modify this file to your needs.
 // If you want the workflow to re-generate this file, please
 // delete it before running the workflow.
-//
 //------------------------------------------------------------------------
 //
 //  Copyright (C) 2010 Manuel Wopfner
@@ -26,7 +25,7 @@
 //        Prittwitzstr. 10
 //        89075 Ulm (Germany)
 //
-//  This file is part of CommManipulatorObjects.
+//  This file is part of the "CommManipulatorObjects".
 //
 //  This library is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU Lesser General Public
@@ -43,52 +42,48 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //--------------------------------------------------------------------------
 
-
 #include "commManipulatorState.hh"
 
 using namespace Smart;
 
-void CommManipulatorState::get(CORBA::Any &a) const
-{
+void CommManipulatorState::get(CORBA::Any &a) const {
 	a <<= idl_CommManipulatorState;
 }
 
-void CommManipulatorState::set(const CORBA::Any &a)
-{
+void CommManipulatorState::set(const CORBA::Any &a) {
 	SmartIDL::CommManipulatorState *tmp_cmd;
-	if (a >>= tmp_cmd)
-	{
+	if (a >>= tmp_cmd) {
 		idl_CommManipulatorState = *tmp_cmd;
 	}
 }
 
-void CommManipulatorState::print(std::ostream &os) const
-{
+void CommManipulatorState::print(std::ostream &os) const {
 	os << "CommManipulatorState(";
 	os << "id=" << get_id() << "\n";
-	if (is_valid())
-	{
-		os << "pose tcp=" << idl_CommManipulatorState.pose_tcp.position.x
-				<< ", " << idl_CommManipulatorState.pose_tcp.position.y << ", "
-				<< idl_CommManipulatorState.pose_tcp.position.z << ", "
-				<< idl_CommManipulatorState.pose_tcp.orientation.azimuth
-				<< ", "
-				<< idl_CommManipulatorState.pose_tcp.orientation.elevation
-				<< ", " << idl_CommManipulatorState.pose_tcp.orientation.roll
-				<< "\n";
+	if (is_valid()) {
+		double x, y, z, azimuth, elevation, roll;
+
+		get_pose_TCP_manipulator(x, y, z, azimuth, elevation, roll);
+		os << "pose tcp manipulator=" << x << ", " << y << ", " << z << ", " << azimuth << ", " << elevation << ", "
+				<< roll << "\n";
+
+		get_pose_TCP_robot(x, y, z, azimuth, elevation, roll);
+		os << "pose tcp robot=" << x << ", " << y << ", " << z << ", " << azimuth << ", " << elevation << ", "
+						<< roll << "\n";
+
+		get_pose_manipulator(x, y, z, azimuth, elevation, roll);
+		os << "pose manipulator=" << x << ", " << y << ", " << z << ", " << azimuth << ", " << elevation << ", "
+						<< roll << "\n";
 
 		os << "joint angles=";
-		for (uint32_t i = 0; i < get_joint_count(); ++i)
-		{
+		for (uint32_t i = 0; i < get_joint_count(); ++i) {
 			os << get_joint_angle(i) << ", ";
 		}
 		os << "\n";
 
 		os << "gripper angle=" << idl_CommManipulatorState.gripper_angle;
 
-	}
-	else
-	{
+	} else {
 		os << "invalid";
 	}
 	os << ")\n";

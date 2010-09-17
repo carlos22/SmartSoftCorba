@@ -12,15 +12,15 @@
 // smart-robotics.sourceforge.net
 // 
 // Please do not modify this file. It will be re-generated
-// running the workflow.
+// running the code generator.
 //--------------------------------------------------------------------------
 
 #ifndef _SMART_IDL_COMMMOBILEMANIPULATORSTATE
 #define _SMART_IDL_COMMMOBILEMANIPULATORSTATE
 
 // include IDL's
-#include "../../../interfaceClasses/smartBasicComm/smartBaseState.idl"
-#include "gen/smartCommManipulatorState.idl"
+#include <smartBaseState.idl>
+#include <gen/smartCommManipulatorState.idl>
 
 module SmartIDL
 {

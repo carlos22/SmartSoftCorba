@@ -14,7 +14,6 @@
 // This file is generated once. Modify this file to your needs.
 // If you want the workflow to re-generate this file, please
 // delete it before running the workflow.
-//
 //------------------------------------------------------------------------
 //
 //  Copyright (C) 2010 Manuel Wopfner
@@ -26,7 +25,7 @@
 //        Prittwitzstr. 10
 //        89075 Ulm (Germany)
 //
-//  This file is part of CommManipulatorObjects.
+//  This file is part of the "CommManipulatorObjects".
 //
 //  This library is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU Lesser General Public
@@ -43,21 +42,17 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //--------------------------------------------------------------------------
 
-
 #include "commManipulatorEventParameter.hh"
 
 using namespace Smart;
 
-void CommManipulatorEventParameter::get(CORBA::Any &a) const
-{
+void CommManipulatorEventParameter::get(CORBA::Any &a) const {
 	a <<= idl_CommManipulatorEventParameter;
 }
 
-void CommManipulatorEventParameter::set(const CORBA::Any &a)
-{
+void CommManipulatorEventParameter::set(const CORBA::Any &a) {
 	SmartIDL::CommManipulatorEventParameter *tmp_cmd;
-	if (a >>= tmp_cmd)
-	{
+	if (a >>= tmp_cmd) {
 		idl_CommManipulatorEventParameter = *tmp_cmd;
 	}
 }

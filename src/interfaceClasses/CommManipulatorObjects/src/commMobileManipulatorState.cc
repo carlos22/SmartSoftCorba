@@ -14,7 +14,6 @@
 // This file is generated once. Modify this file to your needs.
 // If you want the workflow to re-generate this file, please
 // delete it before running the workflow.
-//
 //------------------------------------------------------------------------
 //
 //  Copyright (C) 2010 Manuel Wopfner
@@ -26,7 +25,7 @@
 //        Prittwitzstr. 10
 //        89075 Ulm (Germany)
 //
-//  This file is part of CommManipulatorObjects.
+//  This file is part of the "CommManipulatorObjects".
 //
 //  This library is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU Lesser General Public
@@ -43,29 +42,22 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //--------------------------------------------------------------------------
 
-
 #include "commMobileManipulatorState.hh"
 
 using namespace Smart;
 
-void CommMobileManipulatorState::get(CORBA::Any &a) const
-{
+void CommMobileManipulatorState::get(CORBA::Any &a) const {
 	a <<= idl_CommMobileManipulatorState;
 }
 
-void CommMobileManipulatorState::set(const CORBA::Any &a)
-{
+void CommMobileManipulatorState::set(const CORBA::Any &a) {
 	SmartIDL::CommMobileManipulatorState *tmp_cmd;
-	if (a >>= tmp_cmd)
-	{
+	if (a >>= tmp_cmd) {
 		idl_CommMobileManipulatorState = *tmp_cmd;
 	}
 }
 
-
-void CommMobileManipulatorState::print(std::ostream &os) const
-{
-  os << "CommMobileManipulatorState("
-     << ",baseState=" << get_base_state()
-     << ",manipulatorState=" << get_manipulator_state() << ")";
+void CommMobileManipulatorState::print(std::ostream &os) const {
+	os << "CommMobileManipulatorState(" << ",baseState=" << get_base_state()
+			<< ",manipulatorState=" << get_manipulator_state() << ")";
 }
