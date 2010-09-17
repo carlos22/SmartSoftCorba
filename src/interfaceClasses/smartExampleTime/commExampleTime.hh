@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002 Christian Schlegel
+//  Copyright (C) 2002/2010 Christian Schlegel
 //
 //        schlegel@hs-ulm.de
 //
@@ -50,7 +50,7 @@
 #include <string>
 #include "exampleTimeC.hh"
 
-namespace CHS {
+namespace Smart {
 
 class CommExampleTime
 {

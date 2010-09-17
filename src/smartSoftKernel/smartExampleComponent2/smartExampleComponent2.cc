@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2002/2004/2010 Christian Schlegel
 //
 //        schlegel@hs-ulm.de
 //
@@ -46,8 +46,8 @@
 // -------------------------------------------------------------
 CHS::SmartComponent *component;
 
-CHS::QueryClient<CHS::CommExampleTime,CHS::CommExampleTime>     *timeClient;
-CHS::QueryClient<CHS::CommExampleValues,CHS::CommExampleResult> *calcClient;
+CHS::QueryClient<Smart::CommExampleTime,Smart::CommExampleTime>     *timeClient;
+CHS::QueryClient<Smart::CommExampleValues,Smart::CommExampleResult> *calcClient;
 
 
 // -------------------------------------------------------------
@@ -64,8 +64,8 @@ public:
 int UserThreadA::svc(void)
 {
   CHS::QueryId    id1, id2;
-  CHS::CommExampleTime q1,q2;
-  CHS::CommExampleTime a1,a2;
+  Smart::CommExampleTime q1,q2;
+  Smart::CommExampleTime a1,a2;
 
   CHS::StatusCode status1, status2;
 
@@ -121,8 +121,8 @@ int UserThreadB::svc(void)
   int i=0;
   std::list<int> l;
 
-  CHS::CommExampleValues q;
-  CHS::CommExampleResult r;
+  Smart::CommExampleValues q;
+  Smart::CommExampleResult r;
  
   CHS::QueryId    id;
   CHS::StatusCode status;
@@ -187,8 +187,8 @@ int main (int argc, char *argv[])
 
     component = new CHS::SmartComponent("exampleComponent2",argc,argv);
 
-    timeClient = new CHS::QueryClient<CHS::CommExampleTime,CHS::CommExampleTime>(component,"exampleComponent1","time");
-    calcClient = new CHS::QueryClient<CHS::CommExampleValues,CHS::CommExampleResult>(component,"exampleComponent1","calc");
+    timeClient = new CHS::QueryClient<Smart::CommExampleTime,Smart::CommExampleTime>(component,"exampleComponent1","time");
+    calcClient = new CHS::QueryClient<Smart::CommExampleValues,Smart::CommExampleResult>(component,"exampleComponent1","calc");
 
     //
     //

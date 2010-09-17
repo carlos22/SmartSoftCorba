@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2002/2004/2010 Christian Schlegel
 //
 //        schlegel@hs-ulm.de
 //
@@ -59,10 +59,10 @@ public:
 
 int UserThreadA::svc(void)
 {
-  CHS::SendClient<CHS::CommExamplePrint> *printClient;
-  printClient = new CHS::SendClient<CHS::CommExamplePrint>(component,"exampleComponent50","print");
+  CHS::SendClient<Smart::CommExamplePrint> *printClient;
+  printClient = new CHS::SendClient<Smart::CommExamplePrint>(component,"exampleComponent50","print");
 
-  CHS::CommExamplePrint m;
+  Smart::CommExamplePrint m;
 
   time_t time_now;
   struct tm *time_p;
@@ -94,10 +94,10 @@ public:
 
 int UserThreadB::svc(void)
 {
-  CHS::SendClient<CHS::CommExamplePrint> *printClient;
-  printClient = new CHS::SendClient<CHS::CommExamplePrint>(component,"exampleComponent50","print");
+  CHS::SendClient<Smart::CommExamplePrint> *printClient;
+  printClient = new CHS::SendClient<Smart::CommExamplePrint>(component,"exampleComponent50","print");
 
-  CHS::CommExamplePrint m;
+  Smart::CommExamplePrint m;
 
   time_t time_now;
   struct tm *time_p;

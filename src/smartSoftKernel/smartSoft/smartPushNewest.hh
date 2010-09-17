@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2002/2004/2010 Christian Schlegel
 //
 //        schlegel@hs-ulm.de
 //
@@ -397,7 +397,7 @@ namespace CHS {
       SmartPushNewestClientPattern_ptr client;
       PushNewestClientList             *next;
       int                              subscribed;
-    };
+    }PushNewestClientList;
 
     SmartRecursiveMutex mutexClientList;
 

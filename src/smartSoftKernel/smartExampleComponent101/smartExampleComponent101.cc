@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2002/2004/2010 Christian Schlegel
 //
 //        schlegel@hs-ulm.de
 //
@@ -51,14 +51,14 @@ CHS::SmartComponent *component;
 // handler class for the first query service of this component
 //
 //
-class TimeQueryHandler : public CHS::QueryServerHandler<CHS::CommExampleTime,CHS::CommExampleTime>
+class TimeQueryHandler : public CHS::QueryServerHandler<Smart::CommExampleTime,Smart::CommExampleTime>
 {
 public:
-  void handleQuery(CHS::QueryServer<CHS::CommExampleTime, CHS::CommExampleTime> & server,
+  void handleQuery(CHS::QueryServer<Smart::CommExampleTime, Smart::CommExampleTime> & server,
 		     const CHS::QueryId id,
-		     const CHS::CommExampleTime& r) throw()
+		     const Smart::CommExampleTime& r) throw()
     {
-      CHS::CommExampleTime a;
+      Smart::CommExampleTime a;
 
       std::cout << "time service " << id << " received time: ";
       r.print();
@@ -82,15 +82,15 @@ public:
 // result is returned to the caller
 //
 
-class SumQueryHandler :  public CHS::QueryServerHandler<CHS::CommExampleValues,CHS::CommExampleResult>
+class SumQueryHandler :  public CHS::QueryServerHandler<Smart::CommExampleValues,Smart::CommExampleResult>
 {
 public:
-  void handleQuery(CHS::QueryServer<CHS::CommExampleValues,CHS::CommExampleResult> & server,
+  void handleQuery(CHS::QueryServer<Smart::CommExampleValues,Smart::CommExampleResult> & server,
 		     const CHS::QueryId id,
-		     const CHS::CommExampleValues& r) throw()
+		     const Smart::CommExampleValues& r) throw()
 
     {
-      CHS::CommExampleResult a;
+      Smart::CommExampleResult a;
       std::list<int>    l;
       int               result;
 
@@ -123,12 +123,12 @@ int main (int argc, char *argv[])
 
     // Create time query and its handler
     TimeQueryHandler timeHandler;
-    CHS::QueryServer<CHS::CommExampleTime,CHS::CommExampleTime> timeServant(component,"time",timeHandler);
+    CHS::QueryServer<Smart::CommExampleTime,Smart::CommExampleTime> timeServant(component,"time",timeHandler);
 
     // Create sum servant and its handler
     SumQueryHandler calcHandler;
     // register the threaded calc handler
-    CHS::QueryServer<CHS::CommExampleValues,CHS::CommExampleResult> calcServant(component,"calc",calcHandler);
+    CHS::QueryServer<Smart::CommExampleValues,Smart::CommExampleResult> calcServant(component,"calc",calcHandler);
 
     component->run();
   } catch (const CORBA::Exception &) {

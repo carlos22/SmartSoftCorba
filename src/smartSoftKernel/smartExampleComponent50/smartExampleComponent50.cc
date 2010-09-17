@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2002/2004/2010 Christian Schlegel
 //
 //        schlegel@hs-ulm.de
 //
@@ -49,12 +49,12 @@ CHS::SmartComponent *component;
 // handler of the send service of this component
 //
 //
-class PrintHandler : public CHS::SendServerHandler<CHS::CommExamplePrint>
+class PrintHandler : public CHS::SendServerHandler<Smart::CommExamplePrint>
 {
 public:
-  void handleSend(const CHS::CommExamplePrint& r) throw()
+  void handleSend(const Smart::CommExamplePrint& r) throw()
     {
-      CHS::CommExamplePrint a;
+      Smart::CommExamplePrint a;
       std::cout << "print service received time and message: ";
       r.print();
     }
@@ -74,7 +74,7 @@ int main (int argc, char *argv[])
   try {
     // Create an object
     PrintHandler sendHandler;
-    CHS::SendServer<CHS::CommExamplePrint> printServant(component,"print",sendHandler);
+    CHS::SendServer<Smart::CommExamplePrint> printServant(component,"print",sendHandler);
 
     component->run();
   } catch (const CORBA::Exception &) {

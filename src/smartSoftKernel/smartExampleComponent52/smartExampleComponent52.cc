@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2002/2004/2010 Christian Schlegel
 //
 //        schlegel@hs-ulm.de
 //
@@ -59,14 +59,14 @@ CHS::SmartComponent *component;
 class TimedSender : public CHS::TimerHandler
 {
 private:
-  CHS::SendClient<CHS::CommExamplePrint> sendClient;
+  CHS::SendClient<Smart::CommExamplePrint> sendClient;
 
 public:
   TimedSender() : sendClient(component,"exampleComponent50","print") {};
 
   virtual void timerExpired(const ACE_Time_Value & absolute_time, const void * arg) {
     std::cout << "timerExpired:" << absolute_time << std::endl;
-    CHS::CommExamplePrint m;
+    Smart::CommExamplePrint m;
     std::ostringstream oss;
     oss << "Timer message: " << absolute_time;
     m.set(0, 0, 0, oss.str());

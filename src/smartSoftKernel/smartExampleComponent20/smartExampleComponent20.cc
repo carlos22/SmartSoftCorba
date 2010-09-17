@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2002/2004/2010 Christian Schlegel
 //
 //        schlegel@hs-ulm.de
 //
@@ -63,7 +63,7 @@ public:
 //
 // -------------------------------------------------------------------
 CHS::SmartComponent *component;
-CHS::QueryClient<CHS::CommExampleTime,CHS::CommExampleTime> *timeClient;
+CHS::QueryClient<Smart::CommExampleTime,Smart::CommExampleTime> *timeClient;
 
 PrintStateChangeHandler *stateHandler;
 CHS::SmartStateServer *state;
@@ -153,7 +153,7 @@ public:
 
 int UserThreadC::svc(void)
 {
-  CHS::CommExampleTime r,a;
+  Smart::CommExampleTime r,a;
   CHS::StatusCode status;
 
   r.set(0,0,0);
@@ -216,7 +216,7 @@ int main (int argc, char *argv[])
     component = new CHS::SmartComponent("exampleComponent20",argc,argv);
     
     // Create an object
-    timeClient = new CHS::QueryClient<CHS::CommExampleTime,CHS::CommExampleTime>(component,"exampleComponent22","time");
+    timeClient = new CHS::QueryClient<Smart::CommExampleTime,Smart::CommExampleTime>(component,"exampleComponent22","time");
 
     stateHandler = new PrintStateChangeHandler();
     state = new CHS::SmartStateServer(component,*stateHandler);

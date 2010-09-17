@@ -102,7 +102,7 @@ namespace CHS {
       QueryStatus        querystatus;
       int                disconnect;
       QueryClientList   *next;
-    };
+    }QueryClientList;
 
     /// mutexQueryList   protects the list of pending queries while being
     ///                  accessed since this list is being manipulated from
@@ -527,7 +527,7 @@ namespace CHS {
       SmartQueryClientPattern_ptr client;
       QueryStatus     querystatus;
       QueryServerList *next;
-    };
+    }QueryServerList;
 
     //
     // element of list of connected clients
@@ -535,7 +535,7 @@ namespace CHS {
     typedef struct QueryClientList {
       SmartQueryClientPattern_ptr client;
       QueryClientList *next;
-    };
+    }QueryClientList;
 
     /// see comment at client part 
     QueryServerList     *queries;

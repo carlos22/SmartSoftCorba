@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2002/2004/2010 Christian Schlegel
 //
 //        schlegel@hs-ulm.de
 //
@@ -47,20 +47,20 @@
 // -------------------------------------------------------------------
 CHS::SmartComponent *component;
 
-CHS::QueryClient<CHS::CommExampleValues,CHS::CommExampleResult> *calcClient;
+CHS::QueryClient<Smart::CommExampleValues,Smart::CommExampleResult> *calcClient;
 
 
 //
 // handler class for the time query service
 //
-class TimeQueryHandler : public CHS::QueryServerHandler<CHS::CommExampleTime,CHS::CommExampleTime>
+class TimeQueryHandler : public CHS::QueryServerHandler<Smart::CommExampleTime,Smart::CommExampleTime>
 {
 public:
-  void handleQuery(CHS::QueryServer<CHS::CommExampleTime, CHS::CommExampleTime> & server,
+  void handleQuery(CHS::QueryServer<Smart::CommExampleTime, Smart::CommExampleTime> & server,
 		   const CHS::QueryId id,
-		   const CHS::CommExampleTime& r) throw()
+		   const Smart::CommExampleTime& r) throw()
     {
-      CHS::CommExampleTime a;
+      Smart::CommExampleTime a;
 
       std::cout << "time service " << id << " received time: ";
       r.print();
@@ -93,8 +93,8 @@ int UserThread::svc(void)
   int i=0;
   std::list<int> l;
 
-  CHS::CommExampleValues q;
-  CHS::CommExampleResult r;
+  Smart::CommExampleValues q;
+  Smart::CommExampleResult r;
 
   CHS::StatusCode status;
 
@@ -137,9 +137,9 @@ int main (int argc, char *argv[])
     //            to access the servers. This would result in nonfinite waits.
     //
     TimeQueryHandler timeHandler;
-    CHS::QueryServer<CHS::CommExampleTime,CHS::CommExampleTime> timeServant(component,"time",timeHandler);
+    CHS::QueryServer<Smart::CommExampleTime,Smart::CommExampleTime> timeServant(component,"time",timeHandler);
 
-    calcClient = new CHS::QueryClient<CHS::CommExampleValues,CHS::CommExampleResult>(component,"exampleComponent31","calc");
+    calcClient = new CHS::QueryClient<Smart::CommExampleValues,Smart::CommExampleResult>(component,"exampleComponent31","calc");
 
     //
     //

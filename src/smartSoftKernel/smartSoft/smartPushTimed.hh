@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2002/2004/2010 Christian Schlegel
 //
 //        schlegel@hs-ulm.de
 //
@@ -482,7 +482,7 @@ namespace CHS {
       int                              ctrCurrent;
       int                              subscribed;
       PushTimedClientList              *next;
-    };
+    }PushTimedClientList;
 
     SmartRecursiveMutex mutexClientList;
 

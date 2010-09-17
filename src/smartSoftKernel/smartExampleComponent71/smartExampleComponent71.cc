@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2002/2004/2010 Christian Schlegel
 //
 //        schlegel@hs-ulm.de
 //
@@ -45,7 +45,7 @@
 // -------------------------------------------------------------
 CHS::SmartComponent *component;
 
-CHS::PushTimedClient<CHS::CommExampleTime> *timeClient;
+CHS::PushTimedClient<Smart::CommExampleTime> *timeClient;
 
 
 // -------------------------------------------------------------
@@ -61,7 +61,7 @@ public:
 
 int UserThreadA::svc(void)
 {
-  CHS::CommExampleTime a;
+  Smart::CommExampleTime a;
   CHS::StatusCode status;
   double cycle;
   bool   running;
@@ -116,7 +116,7 @@ int main (int argc, char *argv[])
 
     component = new CHS::SmartComponent("exampleComponent71",argc,argv);
 
-    timeClient = new CHS::PushTimedClient<CHS::CommExampleTime>(component,"exampleComponent70","time");
+    timeClient = new CHS::PushTimedClient<Smart::CommExampleTime>(component,"exampleComponent70","time");
 
     //
     //

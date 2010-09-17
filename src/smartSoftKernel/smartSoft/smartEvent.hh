@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2002/2004/2010 Christian Schlegel
 //
 //        schlegel@hs-ulm.de
 //
@@ -131,7 +131,7 @@ namespace CHS {
       int                  eventFired;
       int                  eventAvailable;
       EventClientList      *next;
-    };
+    }EventClientList;
 
     EventHandler<E>   *hndObject;
 
@@ -712,7 +712,7 @@ namespace CHS {
       P                           p;
       int                         eventCnt;
       EventServerList             *next;
-    };
+    }EventServerList;
 
     //
     // element of list of connected clients
@@ -720,7 +720,7 @@ namespace CHS {
     typedef struct EventClientList {
       SmartEventClientPattern_ptr client;
       EventClientList *next;
-    };
+    }EventClientList;
 
     EventServerList     *events;
     EventClientList     *clients;

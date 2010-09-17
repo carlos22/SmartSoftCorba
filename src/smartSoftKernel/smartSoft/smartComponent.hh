@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2002/2004/2010 Christian Schlegel
 //
 //        schlegel@hs-ulm.de
 //
@@ -316,20 +316,20 @@ namespace CHS {
     typedef struct CondListStruct {                  // old ...
       SmartCondClass        *cond;
       struct CondListStruct *next;
-    };
+    }CondListStruct;
     typedef struct CntCondListStruct {               // old ...
       SmartCntCondClass        *cond;
       struct CntCondListStruct *next;
-    };
+    }CntCondListStruct;
 
     typedef struct SmartCVwithMemoryStruct {
       SmartCVwithMemory              *cond;
       struct SmartCVwithMemoryStruct *next;
-    };
+    }SmartCVwithMemoryStruct;
     typedef struct SmartCVwithoutMemoryStruct {
       SmartCVwithoutMemory              *cond;
       struct SmartCVwithoutMemoryStruct *next;
-    };
+    }SmartCVwithoutMemoryStruct;
 
     /// indicates whether blocking is not allowed in whole component
     bool statusComponentBlocking;

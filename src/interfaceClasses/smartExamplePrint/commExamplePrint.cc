@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002 Christian Schlegel
+//  Copyright (C) 2002/2010 Christian Schlegel
 //
 //        schlegel@hs-ulm.de
 //
@@ -35,7 +35,7 @@
 
 #include "commExamplePrint.hh"
 
-using namespace CHS;
+using namespace Smart;
 
 CommExamplePrint::CommExamplePrint()
 {

@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2002/2004/2010 Christian Schlegel
 //
 //        schlegel@hs-ulm.de
 //
@@ -53,8 +53,8 @@ CHS::SmartComponent *component;
 class UserThreadA : public CHS::SmartTask
 {
 private:
-  CHS::QueryClient<CHS::CommExampleTime,CHS::CommExampleTime>     *timeClient;
-  CHS::QueryClient<CHS::CommExampleValues,CHS::CommExampleResult> *calcClient;
+  CHS::QueryClient<Smart::CommExampleTime,Smart::CommExampleTime>     *timeClient;
+  CHS::QueryClient<Smart::CommExampleValues,Smart::CommExampleResult> *calcClient;
 public:
   UserThreadA() {};
   ~UserThreadA() {};
@@ -64,8 +64,8 @@ public:
 int UserThreadA::svc(void)
 {
   CHS::QueryId    id1, id2;
-  CHS::CommExampleTime q1,q2;
-  CHS::CommExampleTime a1,a2;
+  Smart::CommExampleTime q1,q2;
+  Smart::CommExampleTime a1,a2;
 
   CHS::StatusCode status1, status2;
 
@@ -75,12 +75,12 @@ int UserThreadA::svc(void)
   //
   //
   try {
-    timeClient = new CHS::QueryClient<CHS::CommExampleTime,CHS::CommExampleTime>(component);
+    timeClient = new CHS::QueryClient<Smart::CommExampleTime,Smart::CommExampleTime>(component);
   } catch (...) {
     std::cout << "thread A : error in constructor <timeClient>" << std::endl;   
   }
   try {
-    calcClient = new CHS::QueryClient<CHS::CommExampleValues,CHS::CommExampleResult>(component);
+    calcClient = new CHS::QueryClient<Smart::CommExampleValues,Smart::CommExampleResult>(component);
   } catch (...) {
     std::cout << "thread A : error in constructor <calcClient>" << std::endl;   
   }
@@ -145,8 +145,8 @@ int UserThreadA::svc(void)
 class UserThreadB : public CHS::SmartTask
 {
 private:
-  CHS::QueryClient<CHS::CommExampleTime,CHS::CommExampleTime>     *timeClient;
-  CHS::QueryClient<CHS::CommExampleValues,CHS::CommExampleResult> *calcClient;
+  CHS::QueryClient<Smart::CommExampleTime,Smart::CommExampleTime>     *timeClient;
+  CHS::QueryClient<Smart::CommExampleValues,Smart::CommExampleResult> *calcClient;
 public:
   UserThreadB() {};
   ~UserThreadB() {};
@@ -158,8 +158,8 @@ int UserThreadB::svc(void)
   int i=0;
   std::list<int> l;
 
-  CHS::CommExampleValues q;
-  CHS::CommExampleResult r;
+  Smart::CommExampleValues q;
+  Smart::CommExampleResult r;
  
   CHS::QueryId    id;
   CHS::StatusCode status;
@@ -167,8 +167,8 @@ int UserThreadB::svc(void)
   //
   // this thread is always connected to the exampleComponent80
   //
-  timeClient = new CHS::QueryClient<CHS::CommExampleTime,CHS::CommExampleTime>(component,"exampleComponent80","time");
-  calcClient = new CHS::QueryClient<CHS::CommExampleValues,CHS::CommExampleResult>(component,"exampleComponent80","calc");
+  timeClient = new CHS::QueryClient<Smart::CommExampleTime,Smart::CommExampleTime>(component,"exampleComponent80","time");
+  calcClient = new CHS::QueryClient<Smart::CommExampleValues,Smart::CommExampleResult>(component,"exampleComponent80","calc");
 
   while(1) {
     //

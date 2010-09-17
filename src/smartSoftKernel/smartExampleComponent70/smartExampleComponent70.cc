@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2002/2004/2010 Christian Schlegel
 //
 //        schlegel@hs-ulm.de
 //
@@ -43,7 +43,7 @@
 //
 // -------------------------------------------------------------------
 CHS::SmartComponent *component;
-CHS::PushTimedServer<CHS::CommExampleTime> *timeUpdate;
+CHS::PushTimedServer<Smart::CommExampleTime> *timeUpdate;
 
 
 // -------------------------------------------------------------------
@@ -51,16 +51,16 @@ CHS::PushTimedServer<CHS::CommExampleTime> *timeUpdate;
 // callback method of pushTimed service
 //
 // -------------------------------------------------------------------
-class TimePushHandler : public CHS::PushTimedHandler<CHS::CommExampleTime>
+class TimePushHandler : public CHS::PushTimedHandler<Smart::CommExampleTime>
 {
-  void handlePushTimer(CHS::PushTimedServer<CHS::CommExampleTime> & server) throw()
+  void handlePushTimer(CHS::PushTimedServer<Smart::CommExampleTime> & server) throw()
     {
       time_t time_now;
       struct tm *time_p;
       CHS::StatusCode status;
       int i=0;
 
-      CHS::CommExampleTime a;
+      Smart::CommExampleTime a;
 
       time_now = time(0);
       time_p   = gmtime(&time_now);
@@ -83,7 +83,7 @@ int main (int argc, char *argv[])
     component = new CHS::SmartComponent("exampleComponent70",argc,argv);
 
     TimePushHandler timeHandler;
-    timeUpdate = new CHS::PushTimedServer<CHS::CommExampleTime>(component,"time",timeHandler, 2.0);
+    timeUpdate = new CHS::PushTimedServer<Smart::CommExampleTime>(component,"time",timeHandler, 2.0);
 
     timeUpdate->start();
 

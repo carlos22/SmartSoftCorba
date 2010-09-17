@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2002/2004/2010 Christian Schlegel
 //
 //        schlegel@hs-ulm.de
 //
@@ -48,14 +48,14 @@ CHS::SmartComponent *component;
 //
 // handler class for time queries.
 //
-class TimeQueryHandler : public CHS::QueryServerHandler<CHS::CommExampleTime,CHS::CommExampleTime>
+class TimeQueryHandler : public CHS::QueryServerHandler<Smart::CommExampleTime,Smart::CommExampleTime>
 {
 public:
-  void handleQuery(CHS::QueryServer<CHS::CommExampleTime,CHS::CommExampleTime> & server,
+  void handleQuery(CHS::QueryServer<Smart::CommExampleTime,Smart::CommExampleTime> & server,
 		     const CHS::QueryId id,
-		     const CHS::CommExampleTime& r) throw()
+		     const Smart::CommExampleTime& r) throw()
     {
-      CHS::CommExampleTime a;
+      Smart::CommExampleTime a;
 
       std::cout << "time service " << id << " received time: ";
       r.print();
@@ -93,7 +93,7 @@ int main (int argc, char *argv[])
     component = new CHS::SmartComponent("exampleComponent22",argc,argv);
     // Create an object
     TimeQueryHandler timeHandler;
-    CHS::QueryServer<CHS::CommExampleTime,CHS::CommExampleTime> timeServant(component,"time", timeHandler);
+    CHS::QueryServer<Smart::CommExampleTime,Smart::CommExampleTime> timeServant(component,"time", timeHandler);
 
     component->run();
   } catch (const CORBA::Exception &) {

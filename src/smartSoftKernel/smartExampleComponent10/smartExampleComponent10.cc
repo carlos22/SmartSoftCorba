@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2002/2004/2010 Christian Schlegel
 //
 //        schlegel@hs-ulm.de
 //
@@ -43,7 +43,7 @@
 //
 // -------------------------------------------------------------------
 CHS::SmartComponent *component;
-CHS::PushNewestServer<CHS::CommExampleTime> *timeUpdate;
+CHS::PushNewestServer<Smart::CommExampleTime> *timeUpdate;
 
 
 class UserThreadA : public CHS::SmartTask
@@ -61,7 +61,7 @@ int UserThreadA::svc(void)
   CHS::StatusCode status;
   int i=0;
 
-  CHS::CommExampleTime a;
+  Smart::CommExampleTime a;
 
   while(1) {
     time_now = time(0);
@@ -88,7 +88,7 @@ int main (int argc, char *argv[])
 
   try {
     // Create an object
-    timeUpdate = new CHS::PushNewestServer<CHS::CommExampleTime>(component,"time");
+    timeUpdate = new CHS::PushNewestServer<Smart::CommExampleTime>(component,"time");
 
     //
     //

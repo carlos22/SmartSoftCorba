@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2002/2004/2010 Christian Schlegel
 //
 //        schlegel@hs-ulm.de
 //
@@ -47,8 +47,8 @@
 // -------------------------------------------------------------
 CHS::SmartComponent *component;
 
-CHS::EventClient<CHS::CommExampleEvent1Parameter,CHS::CommExampleEvent1Result> *eventClient1;
-CHS::EventClient<CHS::CommExampleEvent2Parameter,CHS::CommExampleEvent2Result> *eventClient2;
+CHS::EventClient<Smart::CommExampleEvent1Parameter,Smart::CommExampleEvent1Result> *eventClient1;
+CHS::EventClient<Smart::CommExampleEvent2Parameter,Smart::CommExampleEvent2Result> *eventClient2;
 
 
 // -------------------------------------------------------------
@@ -66,8 +66,8 @@ public:
 
 int UserThreadA::svc(void)
 {
-  CHS::CommExampleEvent1Parameter parameter;
-  CHS::CommExampleEvent1Result    result;
+  Smart::CommExampleEvent1Parameter parameter;
+  Smart::CommExampleEvent1Result    result;
   CHS::EventId               id;
 
   CHS::StatusCode status;
@@ -110,8 +110,8 @@ class UserThreadB : public CHS::SmartTask
 
 int UserThreadB::svc(void)
 {
-  CHS::CommExampleEvent1Parameter parameter;
-  CHS::CommExampleEvent1Result    result;
+  Smart::CommExampleEvent1Parameter parameter;
+  Smart::CommExampleEvent1Result    result;
   CHS::EventId               id;
 
   CHS::StatusCode status;
@@ -159,8 +159,8 @@ class UserThreadC : public CHS::SmartTask
 
 int UserThreadC::svc(void)
 {
-  CHS::CommExampleEvent2Parameter parameter;
-  CHS::CommExampleEvent2Result    result;
+  Smart::CommExampleEvent2Parameter parameter;
+  Smart::CommExampleEvent2Result    result;
   CHS::EventId               id;
 
   int status;
@@ -201,10 +201,10 @@ int UserThreadC::svc(void)
 // -------------------------------------------------------------
 
 class MoreThanEventHandler:
-  public CHS::EventHandler<CHS::CommExampleEvent1Result>
+  public CHS::EventHandler<Smart::CommExampleEvent1Result>
 {
 public:
-  void handleEvent(const CHS::EventId id, const CHS::CommExampleEvent1Result& e) throw()
+  void handleEvent(const CHS::EventId id, const Smart::CommExampleEvent1Result& e) throw()
     {
       int a;
 
@@ -229,8 +229,8 @@ int main (int argc, char *argv[])
 
     component = new CHS::SmartComponent("exampleComponent41",argc,argv);
 
-    eventClient1 = new CHS::EventClient<CHS::CommExampleEvent1Parameter,CHS::CommExampleEvent1Result>(component,"exampleComponent40","eventMoreThan");
-    eventClient2 = new CHS::EventClient<CHS::CommExampleEvent2Parameter,CHS::CommExampleEvent2Result>(component,"exampleComponent40","eventInterval");
+    eventClient1 = new CHS::EventClient<Smart::CommExampleEvent1Parameter,Smart::CommExampleEvent1Result>(component,"exampleComponent40","eventMoreThan");
+    eventClient2 = new CHS::EventClient<Smart::CommExampleEvent2Parameter,Smart::CommExampleEvent2Result>(component,"exampleComponent40","eventInterval");
 
     //
     //
@@ -252,16 +252,16 @@ int main (int argc, char *argv[])
     // activate continuous "more than" event with threshold 40 with event handler
     // event handler is used only for eventClient3 (and not for eventClient1 which is the same event on the server side !)
     //
-    CHS::CommExampleEvent1Parameter parameter;
+    Smart::CommExampleEvent1Parameter parameter;
     CHS::EventId               id;
 
-    CHS::EventClient<CHS::CommExampleEvent1Parameter,CHS::CommExampleEvent1Result> *eventClient3;
+    CHS::EventClient<Smart::CommExampleEvent1Parameter,Smart::CommExampleEvent1Result> *eventClient3;
     MoreThanEventHandler eventHandler;
 
     CHS::StatusCode status;
     int v = 40;
 
-    eventClient3 = new CHS::EventClient<CHS::CommExampleEvent1Parameter,CHS::CommExampleEvent1Result>(component,"exampleComponent40","eventMoreThan",eventHandler);
+    eventClient3 = new CHS::EventClient<Smart::CommExampleEvent1Parameter,Smart::CommExampleEvent1Result>(component,"exampleComponent40","eventMoreThan",eventHandler);
     parameter.set(v);
     status = eventClient3->activate(CHS::continuous, parameter, id);
 

@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004/2008/2009 Christian Schlegel, Alex Lotz
+//  Copyright (C) 2002/2004/2008/2009/2010 Christian Schlegel, Alex Lotz
 //
 //        schlegel@hs-ulm.de
 //        lotz@hs-ulm.de
@@ -117,9 +117,6 @@ namespace CHS {
 
     /// denotes the name of the port if client can be wired from other components
     std::string portname;
-
-    /// used for the case connect is done out of the constructor
-    bool constructor_connect;
 
     /// stores pointer to wiring slave when managed port
     WiringSlave *wiringslave;
@@ -495,7 +492,7 @@ namespace CHS {
     typedef enum SmartStateServerAction {
       SSA_UNDEFINED,
       SSA_CHANGE_STATE
-    }SSSA;
+    }SmartStateServerAction;
 
     typedef struct SmartStateEntry {
       SmartStateServerAction      action;
@@ -504,7 +501,7 @@ namespace CHS {
       QueryServer<SmartCommStateRequest,SmartCommStateResponse> *server_proxy;
       QueryId                     qid;
       //</alexej>
-    }SSE;
+    }SmartStateEntry;
 
     //
     // indicates the next action to be performed on a substate
@@ -513,7 +510,7 @@ namespace CHS {
       STATE_ACTION_ACTIVATE,
       STATE_ACTION_DEACTIVATE,
       STATE_ACTION_NONE
-    }SSA;
+    }SmartStateAction;
 
     //
     // indicates the current mode of a substate
@@ -521,7 +518,7 @@ namespace CHS {
     typedef enum SmartStateMode {
       STATE_ACTIVATED,
       STATE_DEACTIVATED
-    }SSM;
+    }SmartStateMode;
 
     //
     // used to manage the states of a component
@@ -529,11 +526,14 @@ namespace CHS {
     typedef struct SmartSubStateEntry {
       std::list<std::string>  mainstates;
       std::string             name;
-      SmartCondClass          cond;
+      //<alexej date="2010-09-08">
+      //SmartCondClass        cond;
+      SmartConditionMutex     *cond;
+      //</alexej>
       int                     cnt;
       SmartStateAction        action;
       SmartStateMode          state;
-    }SSSE;
+    }SmartSubStateEntry;
 
 
     StateUpdateThread                    stateUpdateThread;

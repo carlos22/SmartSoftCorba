@@ -88,8 +88,6 @@ CHS::SmartStateClient::SmartStateClient(SmartComponent* m,const std::string& por
   component          = m;
   wiringslave        = slave;
 
-  constructor_connect = false;
-
   status = this->add(slave, port);
 
   if (status == CHS::SMART_PORTALREADYUSED) {
@@ -118,8 +116,6 @@ CHS::SmartStateClient::SmartStateClient(SmartComponent* m) throw(CHS::SmartError
   portname           = "";
   component          = m;
   wiringslave        = 0;
-
-  constructor_connect = false;
 }
 
 
@@ -127,7 +123,7 @@ CHS::SmartStateClient::SmartStateClient(SmartComponent* m) throw(CHS::SmartError
 // standard constructor
 //
 CHS::SmartStateClient::SmartStateClient(SmartComponent* m, const std::string& server, const std::string& service) throw(CHS::SmartError)
-:  state_proxy(m, server, service)
+:  state_proxy(m)
 {
   CHS::StatusCode status = CHS::SMART_ERROR;
   int flag;
@@ -139,19 +135,11 @@ CHS::SmartStateClient::SmartStateClient(SmartComponent* m, const std::string& se
   component          = m;
   wiringslave        = 0;
 
-  constructor_connect = true;
-
-
   // Now connect to the server side of the push Timed pattern
   std::cout << "Try to connect to (" << server << ":state:" << service << ") ..." << std::endl;
 
   do {
-    //<alexej date="2009-10-27">
-    // not working under ACE under all conditions because reactom may not
-    // run at constructor time, but under CORBA it is not a problem
-     //status = this->connect(server, service);
-     status = CHS::SMART_OK;
-    //</alexej>
+    status = this->connect(server, service);
 
     if (status == CHS::SMART_OK) {
       flag = 1;
@@ -712,6 +700,9 @@ CHS::SmartStateServer::SmartStateServer(SmartComponent* comp, CHS::StateChangeHa
   SmartSubStateEntry nonneutral;
 
   nonneutral.name   = "nonneutral";
+  //<alexej date="2010-09-08">
+  nonneutral.cond   = new SmartConditionMutex(mutex);
+  //</alexej>
   nonneutral.cnt    = 0;
   nonneutral.action = STATE_ACTION_NONE;
   nonneutral.state  = STATE_DEACTIVATED;
@@ -763,6 +754,9 @@ CHS::SmartStateServer::SmartStateServer(SmartComponent* comp, const std::string&
   SmartSubStateEntry nonneutral;
 
   nonneutral.name   = "nonneutral";
+  //<alexej date="2010-09-08">
+  nonneutral.cond   = new SmartConditionMutex(mutex);
+  //</alexej>
   nonneutral.cnt    = 0;
   nonneutral.action = STATE_ACTION_NONE;
   nonneutral.state  = STATE_DEACTIVATED;
@@ -972,8 +966,10 @@ std::cout << "Performing state change: " << currentState << " -> " << desiredSta
               //
 
               // see comment in acquire()-method why we signal every activated substate
-
-              sIterator->cond.signalAll();
+              //<alexej date="2010-09-08">
+              //sIterator->cond.signalAll();
+              (sIterator->cond)->broadcast();
+              //</alexej>
             }
           }
 
@@ -1220,6 +1216,9 @@ CHS::StatusCode CHS::SmartStateServer::defineStates(const std::string& mainstate
           // substate does not yet exist, generate new entry
           //
           newEntry.name   = substate;
+          //<alexej date="2010-09-08">
+          newEntry.cond   = new SmartConditionMutex(mutex);
+          //</alexej>
           newEntry.cnt    = 0;
           newEntry.action = STATE_ACTION_NONE;
           newEntry.state  = STATE_DEACTIVATED;
@@ -1319,7 +1318,8 @@ CHS::StatusCode CHS::SmartStateServer::acquire(const std::string& substate) thro
         // state change requested, therefore do not acquire substate until the
         // requested state change has been processed
         //
-        mutex.release();
+        //<alexej date="2010-09-08">
+        //mutex.release(); // not needed any more
 
         // IMPORTANT:
         //
@@ -1331,9 +1331,11 @@ CHS::StatusCode CHS::SmartStateServer::acquire(const std::string& substate) thro
         // and can therefore safely wait here until the current main state change has been
         // performed.
 
-        sIterator->cond.wait();
-
-        mutex.acquire();
+        //sIterator->cond.wait(); // changed usage
+        (sIterator->cond)->wait();
+        
+        //mutex.acquire(); // not needed eny more
+        //</alexej>
 
         //
         // state change completed since we got signal
@@ -1356,14 +1358,17 @@ CHS::StatusCode CHS::SmartStateServer::acquire(const std::string& substate) thro
           //
           // requested substate not active => wait
           //
-          mutex.release();
+          //<alexej date="2010-09-08">
+          //mutex.release(); // not needed to release any more
 
-          sIterator->cond.wait();
+          (sIterator->cnt)++; // changed order (must be incremented before cond->wait!!!)
+        
+          (sIterator->cond)->wait(); // changed usage
 
-          mutex.acquire();
+          //mutex.acquire(); // not needed to acquire any more
 
-          (sIterator->cnt)++;
-
+          //(sIterator->cnt)++; // changed order (see above)
+          //</alexej>
           result = SMART_OK;
         }
       }

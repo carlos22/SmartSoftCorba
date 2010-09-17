@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002 Christian Schlegel
+//  Copyright (C) 2002/2010 Christian Schlegel
 //
 //        schlegel@hs-ulm.de
 //
@@ -41,7 +41,7 @@
 
 #include "exampleEvent2C.hh"
 
-namespace CHS {
+namespace Smart {
 
 // --------------------------------------------------------------------------
 //

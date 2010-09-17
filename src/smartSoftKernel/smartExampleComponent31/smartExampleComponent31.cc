@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2002/2004/2010 Christian Schlegel
 //
 //        schlegel@hs-ulm.de
 //
@@ -47,7 +47,7 @@
 // -------------------------------------------------------------
 CHS::SmartComponent *component;
 
-CHS::QueryClient<CHS::CommExampleTime,CHS::CommExampleTime> *timeClient;
+CHS::QueryClient<Smart::CommExampleTime,Smart::CommExampleTime> *timeClient;
 
 
 //
@@ -57,13 +57,13 @@ CHS::QueryClient<CHS::CommExampleTime,CHS::CommExampleTime> *timeClient;
 // the caller
 //
 
-class SumQueryHandler : public CHS::QueryServerHandler<CHS::CommExampleValues,CHS::CommExampleResult>
+class SumQueryHandler : public CHS::QueryServerHandler<Smart::CommExampleValues,Smart::CommExampleResult>
 {
-  void handleQuery(CHS::QueryServer<CHS::CommExampleValues,CHS::CommExampleResult> & server, 
+  void handleQuery(CHS::QueryServer<Smart::CommExampleValues,Smart::CommExampleResult> & server, 
 		   const CHS::QueryId id, 
-		   const CHS::CommExampleValues& r) throw()
+		   const Smart::CommExampleValues& r) throw()
     {
-      CHS::CommExampleResult a;
+      Smart::CommExampleResult a;
       std::list<int>         l;
       int                    result;
 
@@ -96,8 +96,8 @@ public:
 int UserThread::svc(void)
 {
   CHS::QueryId         id1, id2;
-  CHS::CommExampleTime q1,q2;
-  CHS::CommExampleTime a1,a2;
+  Smart::CommExampleTime q1,q2;
+  Smart::CommExampleTime a1,a2;
 
   CHS::StatusCode status1, status2;
 
@@ -158,9 +158,9 @@ int main (int argc, char *argv[])
     //            to access the servers. This would result in nonfinite waits.
     //
     SumQueryHandler calcHandler;
-    CHS::QueryServer<CHS::CommExampleValues,CHS::CommExampleResult> calcServant(component,"calc",calcHandler);
+    CHS::QueryServer<Smart::CommExampleValues,Smart::CommExampleResult> calcServant(component,"calc",calcHandler);
 
-    timeClient = new CHS::QueryClient<CHS::CommExampleTime,CHS::CommExampleTime>(component,"exampleComponent30","time");
+    timeClient = new CHS::QueryClient<Smart::CommExampleTime,Smart::CommExampleTime>(component,"exampleComponent30","time");
 
 
     //

@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2002/2004/2010 Christian Schlegel
 //
 //        schlegel@hs-ulm.de
 //
@@ -32,6 +32,8 @@
 //  (partly based on joint work with Robert Wörz)
 //
 // --------------------------------------------------------------------------
+
+#include <cassert>
 
 template<class T> typename T::_ptr_type CHS::resolve_init(CORBA::ORB_ptr orb, const char * id)
 {

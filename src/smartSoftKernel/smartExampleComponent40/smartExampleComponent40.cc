@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
 //
-//  Copyright (C) 2002/2004 Christian Schlegel
+//  Copyright (C) 2002/2004/2010 Christian Schlegel
 //
 //        schlegel@hs-ulm.de
 //
@@ -45,18 +45,18 @@
 // -------------------------------------------------------------------
 CHS::SmartComponent *component;
 
-CHS::EventServer<CHS::CommExampleEvent1Parameter,CHS::CommExampleEvent1Result,CHS::ExampleEventState> *exampleEvent1;
-CHS::EventServer<CHS::CommExampleEvent2Parameter,CHS::CommExampleEvent2Result,CHS::ExampleEventState> *exampleEvent2;
+CHS::EventServer<Smart::CommExampleEvent1Parameter,Smart::CommExampleEvent1Result,Smart::ExampleEventState> *exampleEvent1;
+CHS::EventServer<Smart::CommExampleEvent2Parameter,Smart::CommExampleEvent2Result,Smart::ExampleEventState> *exampleEvent2;
 
 
 //
 // defining test event function
 //
 class MoreThanTestHandler :
-  public CHS::EventTestHandler<CHS::CommExampleEvent1Parameter, CHS::CommExampleEvent1Result, CHS::ExampleEventState>
+  public CHS::EventTestHandler<Smart::CommExampleEvent1Parameter, Smart::CommExampleEvent1Result, Smart::ExampleEventState>
 {
 public:
-  bool testEvent(CHS::CommExampleEvent1Parameter& p, CHS::CommExampleEvent1Result& e, const CHS::ExampleEventState& s) throw()
+  bool testEvent(Smart::CommExampleEvent1Parameter& p, Smart::CommExampleEvent1Result& e, const Smart::ExampleEventState& s) throw()
   {
     //
     // fire if current counter value is greater or equal to the event parameter
@@ -76,9 +76,9 @@ public:
 };
 
 class IntervalTestHandler :
-  public CHS::EventTestHandler<CHS::CommExampleEvent2Parameter, CHS::CommExampleEvent2Result, CHS::ExampleEventState>
+  public CHS::EventTestHandler<Smart::CommExampleEvent2Parameter, Smart::CommExampleEvent2Result, Smart::ExampleEventState>
 {
-  bool testEvent(CHS::CommExampleEvent2Parameter& p, CHS::CommExampleEvent2Result& e, const CHS::ExampleEventState& s) throw()
+  bool testEvent(Smart::CommExampleEvent2Parameter& p, Smart::CommExampleEvent2Result& e, const Smart::ExampleEventState& s) throw()
     {
       //
       // report when current counter enters / leaves specified interval
@@ -157,7 +157,7 @@ public:
 
 int EventThread::svc(void)
 {
-  CHS::ExampleEventState st;
+  Smart::ExampleEventState st;
   int cnt = 0;
 
   while(1) {
@@ -195,10 +195,10 @@ int main (int argc, char *argv[])
     // Create an object
 
     MoreThanTestHandler moreThanTester;
-    exampleEvent1 = new CHS::EventServer<CHS::CommExampleEvent1Parameter,CHS::CommExampleEvent1Result,CHS::ExampleEventState>(component,"eventMoreThan",moreThanTester);
+    exampleEvent1 = new CHS::EventServer<Smart::CommExampleEvent1Parameter,Smart::CommExampleEvent1Result,Smart::ExampleEventState>(component,"eventMoreThan",moreThanTester);
 
     IntervalTestHandler intervallTester;
-    exampleEvent2 = new CHS::EventServer<CHS::CommExampleEvent2Parameter,CHS::CommExampleEvent2Result,CHS::ExampleEventState>(component,"eventInterval",intervallTester);
+    exampleEvent2 = new CHS::EventServer<Smart::CommExampleEvent2Parameter,Smart::CommExampleEvent2Result,Smart::ExampleEventState>(component,"eventInterval",intervallTester);
 
     userThread.open();
 

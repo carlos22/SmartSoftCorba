@@ -243,7 +243,7 @@ namespace CHS {
       StatusCode  (*cPtr)(void*,const std::string&,const std::string&); // ptr to internalConnect method
       StatusCode  (*dPtr)(void*);                                       // ptr to internalDisconnect method
       PortList    *next;
-    };
+    }PortList;
 
     PortList   *ports;
 
