@@ -75,9 +75,9 @@ CPNT =	1
 
 # Defaults
 CPNT_CFLAGS = 	$(CFLAGS) 
-CPNT_LFLAGS = 	$(LFLAGS) -lsmartBasicComm -lsmartForkLiftCommand \
+CPNT_LFLAGS = 	$(LFLAGS) -lsmartBasicComm -lsmartSpeechInputParameter -lsmartForkLiftCommand \
 		-lsmartGridMap -lsmartMapperParameter -lsmartPlannerParameter \
-		-lsmartCdlGoalEvent -lsmartPlannerEvent -lsmartCdlParameter \
+		-lsmartCdlGoalEvent -lsmartPlannerEvent -lsmartCdlParameter -lsmartBaseParameter \
 		-lTAO_CosNaming -lTAO -lTAO_PortableServer \
 		-lsmartSoft -lACE -ldl -lpthread $(OS_LIBS) -lm -lrt
 

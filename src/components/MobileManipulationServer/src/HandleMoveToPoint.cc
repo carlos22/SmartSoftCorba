@@ -54,7 +54,12 @@
 void HandleMoveToPoint::handleSend(const Smart::CommMoMaPose &r) throw()
 {
 	std::cout << "Moving to Point" << std::endl;
-
-	KatanaAPI::MotorAngles motors(r.getMotor1(), r.getMotor2(), r.getMotor3(), r.getMotor4(), r.getMotor5());
-	mmp::MainController::getInstance().moveToPoint(motors, r.getCommand());
+	
+	try {
+		KatanaAPI::MotorAngles motors(r.getMotor1(), r.getMotor2(), r.getMotor3(), r.getMotor4(), r.getMotor5());
+		mmp::MainController::getInstance().moveToPoint(motors, r.getCommand());
+	}
+	catch (...) {
+		cout << ">> Exception occured in MoveToPointHandler\n";
+	}
 }

@@ -1,6 +1,6 @@
 //--------------------------------------------------------------------------
 //
-//  Copyright (C) 2003 Boris Kluge
+//  Copyright (C) 2003 Boris Kluge, Andreas Steck
 //
 //        schlegel@hs-ulm.de
 //

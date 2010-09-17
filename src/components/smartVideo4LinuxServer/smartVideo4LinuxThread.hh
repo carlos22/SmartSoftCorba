@@ -2,12 +2,12 @@
 //
 //  Copyright (C) 2003 Boris Kluge
 //
-//        schlegel@hs-ulm.de
+//        kluge@faw.uni-ulm.de
 //
-//        Prof. Dr. Christian Schlegel
-//        University of Applied Sciences
-//        Prittwitzstr. 10
-//        D-89075 Ulm
+//        FAW Ulm
+//        Research Institute for Applied Knowledge Processing
+//        Helmholtzstr. 16
+//        D-89081 Ulm
 //        Germany
 //
 //  This program is free software; you can redistribute it and/or
@@ -21,9 +21,8 @@
 //  Lesser General Public License for more details.
 //
 //  You should have received a copy of the GNU Lesser General Public
-//  License along with this program; if not, write to the Free Software
+//  License along with this library; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-//
 //
 // --------------------------------------------------------------------------
 
@@ -39,7 +38,7 @@
 
 namespace Smart {
 
-class Video4LinuxThread:
+class Video4LinuxThread: 
   public CHS::SmartTask,
   public CHS::QueryServerHandler<Smart::CommMutableVideoImage,Smart::CommVoid>
 {
@@ -82,7 +81,7 @@ private:
   std::string _push_name;
   unsigned int _push_num_buffers;
   unsigned int _push_stride;
-
+  
   bool _query_verbose;
   std::vector<std::list<QueryQueueEntry> > _query_queue_vector;
   unsigned int _query_queue_index;
@@ -94,7 +93,7 @@ private:
   std::string _device;
   std::string _channel;
   unsigned int _capture_flags;
-
+  
   double _brightness;
   double _hue;
   double _colour;

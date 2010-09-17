@@ -16,7 +16,7 @@
 // delete it before running the workflow.
 //--------------------------------------------------------------------------
 //
-//  Copyright (C) 2009 Jonas Brich
+//  Copyright (C) 2010 Jonas Brich
 //
 //        brich@mail.hs-ulm.de
 //
@@ -25,7 +25,7 @@
 //        Prittwitzstr. 10
 //        89075 Ulm (Germany)
 //
-//  This file is part of the "Unicap Image Server component".
+//  This file is part of the "Unicap Video Server component".
 //
 //  This library is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU Lesser General Public
@@ -46,10 +46,7 @@
 #define _IMAGEQUERYHANDLER_HH
 
 #include "smartSoft.hh"
-
-// include communication objects
 #include "externalCommObjectHeaders.hh"
-
 #include "gen/ImageQueryHandlerCore.hh"
 
 class ImageQueryHandler: public ImageQueryHandlerCore

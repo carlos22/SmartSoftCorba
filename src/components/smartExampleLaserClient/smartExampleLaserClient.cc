@@ -43,8 +43,9 @@
 
 #include "smartQtPushNewestClient.hh"
 
-using namespace Faw;
+#define INI_PARAMETERS_FILE "smartExampleLaserClient.ini"
 
+using namespace Faw;
 // -------------------------------------------------------------
 // WARNING:
 // THIS IS NOT A GOOD EXAMPLE ON HOW TO VISUALIZE COMPONENTS,
@@ -113,13 +114,47 @@ void GuiThread::redraw(Faw::Painter &painter)
 // -------------------------------------------------------------
 int main (int argc, char *argv[])
 {
+
+
+
   try 
   {
+
+    CHS::SmartParameter parameter;
+    std::string laser_server_name;
+    std::string laser_service_name;
+
+    // read parameters
+    try
+    {
+      parameter.addFile(argc, argv, "ini");
+    }
+    catch(CHS::ParameterError e)
+    {
+      try
+      {
+        parameter.addFile(INI_PARAMETERS_FILE);
+      }
+      catch(CHS::ParameterError e)
+      {
+        std::cerr << "No parameter file found." << std::endl;
+        return 1;
+      }
+    }
+    laser_server_name = parameter.getString("","laser_server");
+    laser_service_name = parameter.getString("","laser_service");
+
+
     CHS::SmartThreadManager *threadManager = CHS::SmartThreadManager::instance();
 
+    //component 
     CHS::SmartComponent component("smartExampleLaserClient",argc,argv);
 
-    Smart::QtPushNewestClient<Smart::CommMobileLaserScan> scan_push_newest(&component,"smartLaserServer","scan");
+    //std::string service_name = "smartLaserServer";
+    std::string service_name = "smartHokuyoGalgenLaserServer";
+    if(argc >= 2) service_name = argv[1];
+
+    Smart::QtPushNewestClient<Smart::CommMobileLaserScan> scan_push_newest(&component, service_name, "scan");
 
     GuiThread gui_thread(argc, argv, scan_push_newest);
 

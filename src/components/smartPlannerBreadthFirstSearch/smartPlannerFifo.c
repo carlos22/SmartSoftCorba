@@ -58,12 +58,19 @@ int fifoInit(void)
 
 int fifoWrite(int x,int y)
 {
+//printf("in smartPlannerFifo.c fifoWrite -- line %d\n", __LINE__);
   if (fifoNrOfEntries >= PLANNER_FIFO_SIZE) return 1;
+//printf("in smartPlannerFifo.c fifoWrite -- line %d\n", __LINE__);
   fifoNrOfEntries++;
+//printf("in smartPlannerFifo.c fifoWrite -- line %d\n", __LINE__);
   fifoArray[fifoWriteIndex].x = x;
+//printf("in smartPlannerFifo.c fifoWrite -- line %d\n", __LINE__);
   fifoArray[fifoWriteIndex].y = y;
+//printf("in smartPlannerFifo.c fifoWrite -- line %d\n", __LINE__);
   fifoWriteIndex++;
+//printf("in smartPlannerFifo.c fifoWrite -- line %d\n", __LINE__);
   if (fifoWriteIndex >= PLANNER_FIFO_SIZE) fifoWriteIndex=0;
+//printf("in smartPlannerFifo.c fifoWrite -- line %d\n", __LINE__);
 
   return 0;
 }

@@ -220,6 +220,14 @@ public:
   int updatePosition( Smart::CommBasePositionUpdate update );
 
   /**
+   * @brief Resets the current position of the robot (including the raw position!)
+   *
+   * @return ??
+   */
+  int resetPosition();
+
+
+  /**
    * @brief Returns the voltage of the battery
    *
    * @return Battery charge in volt
@@ -406,6 +414,9 @@ private:
   double lamdaSigmaDeltaAlpha;
   double lamdaSigmaDeltaBeta;
   
+  std::string param_serialport;
+  bool param_enable_motors;
+  bool param_enable_sonar;
   
 
 };

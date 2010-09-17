@@ -42,6 +42,8 @@
 #include "commSpeechOutputMessage.hh"
 #include "commCdlGoalEvent.hh"
 #include "commPlannerEvent.hh"
+#include "commSpeechInputParameter.hh"
+#include "commBaseParameter.hh"
 
 #include <sstream>
 
@@ -194,7 +196,11 @@ int ConsoleThread::svc(void)
     std::cout << " 05 - ForkLift command\n";
     std::cout << " 06 - CDL state\n";
     std::cout << " 07 - CDL parameter\n";
-    std::cout << " 08 - Demos\n";
+    std::cout << " 08 - Base parameter\n";
+    std::cout << " 09 - Speech-input state\n";
+    std::cout << " 10 - Speech-input parameter\n";
+    std::cout << " 11 - Gmapping state\n";
+    std::cout << " 99 - Demos\n";
     std::cout << " <ctrl> + <c> for exit\n";
     std::cout << "------------------------------------------------------------------------\n";
 
@@ -476,16 +482,21 @@ int ConsoleThread::svc(void)
         std::string inString;
         CHS::SendClient<Smart::CommCdlParameter> smartCdlParameterSendClient(component,"smartCdlServer","cdlParameter");
         std::cout << std::endl;
-        std::cout << "STRATEGY REACTIVE/JOYSTICK/APPROACH_HALT\n";
-        std::cout << "         TURN/ROTATE                        : set the cdl strategy\n";
-        std::cout << "FREEBEHAVIOR ACTIVATE/DEACTIVATE            : freebehavior in stall situation\n";
-        std::cout << "LOOKUPTABLE DEFAULT/SECOND                  : set cdl lookup table\n";
+        std::cout << "STRATEGY REACTIVE / JOYSTICK / BACKWARD\n";
+        std::cout << "         APPROACH_HALT / APPROACH\n";
+        std::cout << "         TURN / ROTATE / FOLLOW             : set the cdl strategy\n";
+        std::cout << "FREEBEHAVIOR ACTIVATE / DEACTIVATE          : freebehavior in stall situation\n";
+        std::cout << "LOOKUPTABLE DEFAULT / SECOND                : set cdl lookup table\n";
         std::cout << "TRANSVEL ?vmin ?vmax                        : set translation velocity min,max in mm/s\n";
         std::cout << "ROTVEL ?wmin ?wmax (deg/sec)                : set rotational velocity min,max in deg/s\n";
-        std::cout << "GOALMODE ABSOLUTE/PLANNER                   : set the cdl goal mode\n";
-        std::cout << "GOALREGION ?x ?y ?h (mm,mm,deg)             : set cdl goal x,y,heading\n";
+        std::cout << "GOALMODE ABSOLUTE / PLANNER / PERSON /\n"; 
+        std::cout << "         SAVED / ANGLEABSOLUTE /\n";
+        std::cout << "         ANGLERELATIVE                      : set the cdl goal mode\n";
+        std::cout << "GOALREGION ?x ?y ?a ?id (mm,mm,deg,id)      : set cdl goal x,y,heading,goalId\n";
         std::cout << "APPROACHDIST ?dist (mm)                     : set cdl goal approach distance in mm\n";
+        std::cout << "SAFETYCL ?dist (mm)                         : set cdl global safety clearance distance in mm\n";
         std::cout << "ID ?id                                      : set CDL_ID\n";
+        std::cout << "SAVECURPOS ?id                              : save current robot pose (for relative movements)\n";
         std::cout << "m to return to main menu" << std::endl;
 
         std::cout << std::endl;
@@ -508,8 +519,178 @@ int ConsoleThread::svc(void)
       } // case 7
 
 
-      // 8 - Demo
+
+      // 8 - Base parameter
       case 8:
+      {
+        Smart::CommBaseParameter cmd;
+        std::string inString;
+
+        CHS::SendClient<Smart::CommBaseParameter> smartBaseParameterSendClient(component,"smartPioneerBaseServer","baseParameter");
+
+        std::cout << std::endl;
+        std::cout << "RESET   : reset the Base Postion \n";
+        std::cout << "        !!ALL POSITIONS ARE RESET!! \n";
+        std::cout << "        !!INCLUDING THE RAW POS!! \n";
+        std::cout << "m to return to main menu" << std::endl;
+
+        std::cout << std::endl;
+        std::cout << "usage: command(param1)(param2)(param3)\n";
+        std::cout << "       setdestinationcircle(8000)(8000)(150)\n";
+
+        std::cout << "\nplease enter command:  ";
+
+        cin >> inString;
+        std::cout << "your input: " << inString << std::endl;
+
+        if( strcasecmp("m", inString.c_str() ) != 0 )
+        {
+
+          cmd.set(inString);
+          smartBaseParameterSendClient.send(cmd);
+          std::cout << "send.\n\n";
+        }
+        break;
+
+      } // case 8
+
+
+      // 9 - Speech-input state
+      case 9:
+      {
+        std::string stateServerName = "smartSpeechInputServer";
+        std::list<std::string> mainstates;
+        CHS::SmartStateClient stateClient(component, stateServerName);
+
+        // first get list of main states 
+        status = stateClient.getWaitMainStates(mainstates);
+        if(status != CHS::SMART_OK)
+        {
+          std::cout << "could not connect to " << stateServerName << "\n\n";
+        }
+        else
+        {
+          // print list of main states 
+          unsigned int itemNumber = 1;
+
+          std::cout << "\nlist of possible main states: " << std::endl;
+          for (std::list<std::string>::iterator iterator1=mainstates.begin();iterator1 != mainstates.end(); ++iterator1)
+          {
+            std::cout << setw(2) << itemNumber << " -- mainstate :  " << *iterator1 << std::endl;
+            itemNumber++;
+          }
+          std::cout << setw(2) << itemNumber << " -- return to main menu" << std::endl;
+
+          // ask which state should be sent
+          std::cout << "\nplease choose number:  ";
+          cin >> itemNumber;
+
+          // check input
+          if( itemNumber <= mainstates.size() )
+          {
+            // iterate to selected state
+            std::list<std::string>::iterator iterator1 = mainstates.begin();
+            for(unsigned int i=1; i < itemNumber; i++)
+            {
+              ++iterator1;
+            }
+            // send selected state
+            stateClient.setWaitState( *iterator1 );
+            std::cout << "state <" << *iterator1 << "> sent\n";
+          }
+
+        } // else
+
+
+        break;
+      } // case 9
+
+
+
+      // 10 - Speech-Input parameter
+      case 10:
+      {
+        Smart::CommSpeechInputParameter cmd;
+        std::string inString;
+        CHS::SendClient<Smart::CommSpeechInputParameter> smartSpeechInputParameterSendClient(component,"smartSpeechInputServer","speechInputParameter");
+        std::cout << std::endl;
+        std::cout << "SETGRAMMER ?file_name                       : set the speech input grammer\n";
+        std::cout << "m to return to main menu" << std::endl;
+
+        std::cout << std::endl;
+        std::cout << "usage: command(param1)(param2)(param3)\n";
+        std::cout << "       setgrammer(/home/user/grammer.gxml)\n";
+
+        std::cout << "\nplease enter command:  ";
+
+        cin >> inString;
+        std::cout << "your input: " << inString << std::endl;
+
+        if( strcasecmp("m", inString.c_str() ) != 0 )
+        {
+
+          cmd.set(inString);
+          smartSpeechInputParameterSendClient.send(cmd);
+          std::cout << "send.\n\n";
+        }
+        break;
+      } // case 10
+
+
+
+      // 11 - Gmapping state
+      case 11:
+      {
+        std::string stateServerName = "smartGmapping";
+        std::list<std::string> mainstates;
+        CHS::SmartStateClient stateClient(component, stateServerName);
+
+        // first get list of main states
+        status = stateClient.getWaitMainStates(mainstates);
+        if(status != CHS::SMART_OK)
+        {
+          std::cout << "could not connect to " << stateServerName << "\n\n";
+        }
+        else
+        {
+          // print list of main states
+          unsigned int itemNumber = 1;
+
+          std::cout << "\nlist of possible main states: " << std::endl;
+          for (std::list<std::string>::iterator iterator1=mainstates.begin();iterator1 != mainstates.end(); ++iterator1)
+          {
+            std::cout << setw(2) << itemNumber << " -- mainstate :  " << *iterator1 << std::endl;
+            itemNumber++;
+          }
+          std::cout << setw(2) << itemNumber << " -- return to main menu" << std::endl;
+
+          // ask which state should be sent
+          std::cout << "\nplease choose number:  ";
+          cin >> itemNumber;
+
+          // check input
+          if( itemNumber <= mainstates.size() )
+          {
+            // iterate to selected state
+            std::list<std::string>::iterator iterator1 = mainstates.begin();
+            for(unsigned int i=1; i < itemNumber; i++)
+            {
+              ++iterator1;
+            }
+            // send selected state
+            stateClient.setWaitState( *iterator1 );
+            std::cout << "state <" << *iterator1 << "> sent\n";
+          }
+
+        } // else
+
+
+        break;
+      } //case 11
+
+
+      // 99 - Demo
+      case 99:
       {
         
 	unsigned int itemNumber;
@@ -527,6 +708,7 @@ int ConsoleThread::svc(void)
         std::cout << "(2) Demo 2 Planner-CDL GOTO \n";
         std::cout << "(3) Demo 3 CDL Reactive Mode \n";
         std::cout << "(4) Demo 4 Cdl Joystick Mode \n";
+        std::cout << "(5) Demo 5 Follow Me \n";
         std::cout << "(0) to return to main menu" << std::endl;
 
         std::cout << std::endl;
@@ -558,7 +740,7 @@ int ConsoleThread::svc(void)
             cmd.set(str);
             smartCdlParameterSendClient.send(cmd);
 
-            str = "GOALREGION(-1000)(0)(0)";
+            str = "GOALREGION(-1000)(0)(0)(0)";
             cmd.set(str);
             smartCdlParameterSendClient.send(cmd);
             itemNumber = 2;
@@ -704,6 +886,9 @@ int ConsoleThread::svc(void)
           cmd.set(str);
           smartCdlParameterSendClient.send(cmd);
           str = "APPROACHDIST(100)";
+          cmd.set(str);
+          smartCdlParameterSendClient.send(cmd);
+          str = "ID(0)";
           cmd.set(str);
           smartCdlParameterSendClient.send(cmd);
 
@@ -890,8 +1075,39 @@ int ConsoleThread::svc(void)
             std::cout << "state <" << *iterator1 << "> sent\n";
           }
 
-          break;
-          }
+            break;
+          } // case 4
+
+	  case 5:
+          {
+            CHS::SendClient<Smart::CommCdlParameter> smartCdlParameterSendClient(component,"smartCdlServer","cdlParameter");
+            // CDL SETUP
+            str = "STRATEGY(FOLLOW)";
+            cmd.set(str);
+            smartCdlParameterSendClient.send(cmd);
+            str = "GOALMODE(PERSON)";
+            cmd.set(str);
+            smartCdlParameterSendClient.send(cmd);
+            str = "LOOKUPTABLE(DEFAULT)";
+            cmd.set(str);
+            smartCdlParameterSendClient.send(cmd);
+            str = "APPROACHDIST(600)";
+            cmd.set(str);
+            smartCdlParameterSendClient.send(cmd);
+            //str = "TRANSVEL(0)(200)";
+            str = "TRANSVEL(0)(200)";
+            cmd.set(str);
+            smartCdlParameterSendClient.send(cmd);
+            str = "ROTVEL(-40)(40)";
+            cmd.set(str);
+            smartCdlParameterSendClient.send(cmd);
+
+            std::cout<<"To start the demo set CDL in moverobot state!\n";
+
+            break;
+          } // case 5
+
+
           default:
           {
             break;
@@ -899,7 +1115,9 @@ int ConsoleThread::svc(void)
 
 	}
         break;
-      } // case 8
+      } // case 99
+
+
 
 
       // default

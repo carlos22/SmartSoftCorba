@@ -1,6 +1,6 @@
 //--------------------------------------------------------------------------
 //
-//  Copyright (C) 2003 Boris Kluge
+//  Copyright (C) 2003 Boris Kluge, Andreas Steck
 //
 //        schlegel@hs-ulm.de
 //
@@ -65,7 +65,6 @@ private:
   std::string  _laser_type;
   std::string  _laser_device;
   unsigned int _laser_bitrate;
-  unsigned int _term_bitrate;
   unsigned int _laser_resolution;
   unsigned int _laser_length_unit;
   bool _laser_verbose;

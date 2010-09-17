@@ -568,14 +568,23 @@ int PlannerMapClass::circle(double xw,double yw,double r,int write)
   //
 
   status = 0;
+//  std::cout << "in PlannerMapClass::circle -- before bresenham -- line " << __LINE__ << std::endl;
   status += bresenham(xw+r,yw,xw+dx,yw+dy,write);  // A B
+//  std::cout << "in PlannerMapClass::circle -- before bresenham -- line " << __LINE__ << std::endl;
   status += bresenham(xw+dx,yw+dy,xw,yw+r,write);  // B C
+//  std::cout << "in PlannerMapClass::circle -- before bresenham -- line " << __LINE__ << std::endl;
   status += bresenham(xw,yw+r,xw-dx,yw+dy,write);  // C D
+//  std::cout << "in PlannerMapClass::circle -- before bresenham -- line " << __LINE__ << std::endl;
   status += bresenham(xw-dx,yw+dy,xw-r,yw,write);  // D E
+//  std::cout << "in PlannerMapClass::circle -- before bresenham -- line " << __LINE__ << std::endl;
   status += bresenham(xw-r,yw,xw-dx,yw-dy,write);  // E F
+//  std::cout << "in PlannerMapClass::circle -- before bresenham -- line " << __LINE__ << std::endl;
   status += bresenham(xw-dx,yw-dy,xw,yw-r,write);  // F G
+//  std::cout << "in PlannerMapClass::circle -- before bresenham -- line " << __LINE__ << std::endl;
   status += bresenham(xw,yw-r,xw+dx,yw-dy,write);  // G H
+//  std::cout << "in PlannerMapClass::circle -- before bresenham -- line " << __LINE__ << std::endl;
   status += bresenham(xw+dx,yw-dy,xw+r,yw,write);  // H A
+//  std::cout << "after last bresenham -- status = " << status << std::endl;
 
   switch(write) {
     case MODE_OBSTACLE:
@@ -634,6 +643,7 @@ int PlannerMapClass::bresenham(double x1w,double y1w,double x2w,double y2w,int w
   y1 = index(y1w,_gridmap.yOffsetMM);
   x2 = index(x2w,_gridmap.xOffsetMM);
   y2 = index(y2w,_gridmap.yOffsetMM);
+//std::cout << "in PlannerMapClass::bresenham -- line " << __LINE__ << std::endl;
 
   flag=1;
   dx=abs(x1-x2);
@@ -656,7 +666,9 @@ int PlannerMapClass::bresenham(double x1w,double y1w,double x2w,double y2w,int w
       break;
     case MODE_GOAL:
       if (_gridmap.cell[mapindex] == PLANNER_FREE) {
+//std::cout << "in PlannerMapClass::bresenham -- line " << __LINE__ << std::endl;
         fifoWrite(x,y);
+//std::cout << "in PlannerMapClass::bresenham -- line " << __LINE__ << std::endl;
         _gridmap.cell[mapindex]=PLANNER_GOAL;
         flag=0;
       }
@@ -685,7 +697,9 @@ int PlannerMapClass::bresenham(double x1w,double y1w,double x2w,double y2w,int w
         break;
       case MODE_GOAL:
         if (_gridmap.cell[mapindex] == PLANNER_FREE) {
+//std::cout << "in PlannerMapClass::bresenham -- line " << __LINE__ << std::endl;
           fifoWrite(x,y);
+//std::cout << "in PlannerMapClass::bresenham -- line " << __LINE__ << std::endl;
           _gridmap.cell[mapindex]=PLANNER_GOAL;
           flag=0;
         }

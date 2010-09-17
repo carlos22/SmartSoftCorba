@@ -60,26 +60,33 @@ void ObjectRecognition::handleQuery(CHS::QueryServer<
 		Smart::CommMoMaScanEnvironment, Smart::CommMoMaObjectList> & server,
 		const CHS::QueryId id, const Smart::CommMoMaScanEnvironment & request) throw ()
 {
-	// scan environment
-	cout << "StartAngle: " << request.getStartAngle() << endl;
-	cout << "ScanAngle: " << request.getScanAngle() << endl;
-
-	mmp::MainController::getInstance().scanEnvironment(request.getStartAngle(), request.getScanAngle());
-
-	// get objects in environment
-	std::vector<mmp::ConcreteObject> objects;
-	mmp::MainController::getInstance().getObjectList(objects);
-
 	Smart::CommMoMaObjectList answer;
-	answer.setObjectListSize(objects.size());
 
-	for (uint32_t i=0; i < objects.size(); i++)
-	{
-		answer.setId(i, objects[i].getId());
-		answer.setObjectClass(i, objects[i].getObjectClass());
-		answer.setPose(i, objects[i].getPose().x(), objects[i].getPose().y(), objects[i].getPose().z(),
-				objects[i].getPose().yaw(), objects[i].getPose().pitch(), objects[i].getPose().roll());
+	try {
+		// scan environment
+		cout << "StartAngle: " << request.getStartAngle() << endl;
+		cout << "ScanAngle: " << request.getScanAngle() << endl;
 
+		mmp::MainController::getInstance().scanEnvironment(request.getStartAngle(), request.getScanAngle());
+
+		// get objects in environment
+		std::vector<mmp::ConcreteObject> objects;
+		mmp::MainController::getInstance().getObjectList(objects);
+
+	
+		answer.setObjectListSize(objects.size());
+
+		for (uint32_t i=0; i < objects.size(); i++)
+		{
+			answer.setId(i, objects[i].getId());
+			answer.setObjectClass(i, objects[i].getObjectClass());
+			answer.setPose(i, objects[i].getPose().x(), objects[i].getPose().y(), objects[i].getPose().z(),
+					objects[i].getPose().yaw(), objects[i].getPose().pitch(), objects[i].getPose().roll());
+
+		}
+	}
+	catch (...) {
+		cout << ">> Exception occured in ObjectRecognitionHandler\n";
 	}
 
 	server.answer(id, answer);

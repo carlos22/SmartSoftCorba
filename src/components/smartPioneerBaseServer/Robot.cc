@@ -169,6 +169,11 @@ int Robot::openSerial( std::string serialPort, bool enableMotors, bool enableSon
   P2OSPacket packet;
   P2OSPacket receivedpacket;
 
+  //save base parameters
+  param_serialport = serialPort;
+  param_enable_motors = enableMotors;
+  param_enable_sonar = enableSonar;
+
   // this is the order in which we'll try the possible baud rates 
   //int bauds[] = {B9600, B38400, B19200, B115200, B57600};
   int bauds[] = {B115200, B57600, B38400, B9600};
@@ -469,62 +474,76 @@ void Robot::parse( unsigned char *buffer )
   // take mutex
   mutexRobotPos.acquire();
 
+  /////////////////////////////////////////////////////////
+  // Get ricks from base and calculate delta
+  /////////////////////////////////////////////////////////
+  // X
   newxpos = ((buffer[cnt] | (buffer[cnt+1] << 8))
              & 0xEFFF) % 4096; /* 15 ls-bits */
-
-  deltaX = (int) rint(positionChange( oldxpos, newxpos ) * DistConvFactor);
-  if (abs(deltaX)>100)
-  {
-    printf("invalid odometry change [%d]; odometry values are tainted", deltaX);
-  }
-  else
-  {
-    this->oldPos.set_x( this->robotPos.get_x() );
-    this->robotPos.set_x( this->oldPos.get_x() + deltaX );
-    this->rawPos.set_x( this->rawPos.get_x() + deltaX );
-  }
-
+  deltaX = (int) rint(positionChange( oldxpos, newxpos ) * DistConvFactor); 
   oldxpos = newxpos;
-  cnt += sizeof(short);
 
+  // Y
+  cnt += sizeof(short);
   newypos = ((buffer[cnt] | (buffer[cnt+1] << 8))
              & 0xEFFF) % 4096; /* 15 ls-bits */
-
   deltaY = (int) rint(positionChange( oldypos, newypos ) * DistConvFactor);
-  if (abs(deltaY)>100)
-  {
-    printf("invalid odometry change [%d]; odometry values are tainted", deltaY);
+  oldypos = newypos;
+
+  // Alpha
+  cnt += sizeof(short);
+  unsigned short th = ((buffer[cnt] | (buffer[cnt+1] << 8)) & 0xEFFF) % 4096;
+  double deltaA = (double)positionChange( oldth, th ) * AngleConvFactor;
+  deltaA = piToPiRad( deltaA );
+  oldth = th;
+
+  if(abs(deltaX)>100 || abs(deltaY)>100)
+  { 
+    printf("invalid odometry change [%d,%d]; odometry values are tainted", deltaX,deltaY);
   }
   else
   {
-    this->oldPos.set_y( this->robotPos.get_y() );
-    this->robotPos.set_y( this->oldPos.get_y() + deltaY );
-    this->rawPos.set_y( this->rawPos.get_y() + deltaY );
+
+    double dAlpha = piToPiRad( this->robotPos.get_base_alpha() - rawPos.get_base_alpha());
+    double a1 = cos(dAlpha);
+    double a2 = (-1.0)*sin(dAlpha);
+    double a3 = 0;
+
+    double a4 = sin(dAlpha);
+    double a5 = cos(dAlpha);
+    double a6 = 0;
+
+    double a7 = 0;
+    double a8 = 0;
+    double a9 = 1;
+
+    this->robotPos.set_x( this->robotPos.get_x() + (a1*deltaX + a2*deltaY + a3*deltaA) );
+    this->robotPos.set_y( this->robotPos.get_y() + (a4*deltaX + a5*deltaY + a6*deltaA) );
+    this->robotPos.set_base_alpha( piToPiRad(this->robotPos.get_base_alpha() +  (a7*deltaX + a8*deltaY + a9*deltaA)) );
+
+    //////////////////////////////////////////////////////////////////
+    // calculation of new rawPos
+
+    this->rawPos.set_x( this->rawPos.get_x() + deltaX);
+    this->rawPos.set_y( this->rawPos.get_y() + deltaY);
+    this->rawPos.set_base_alpha( piToPiRad(this->rawPos.get_base_alpha() +  deltaA) );
+
+    
   }
 
-  oldypos = newypos;
-  cnt += sizeof(short);
 
   deltaDistance = sqrt( (deltaX*deltaX) + (deltaY*deltaY) );
   totalDistance += deltaDistance;
-  
 
-  // <asteck> 
-  unsigned short th = ((buffer[cnt] | (buffer[cnt+1] << 8)) & 0xEFFF) % 4096;
-  double radDiff = (double)positionChange( oldth, th ) * AngleConvFactor;
-  oldth = th;
-
-  if( radDiff >= 0 ) 
+  if( deltaA >= 0 ) 
   {
-    totalRotationLeft += fabs( radDiff );
+    totalRotationLeft += fabs( deltaA );
   }
   else
   {
-    totalRotationRight += fabs( radDiff );
+    totalRotationRight += fabs( deltaA );
   }
 
-  this->robotPos.set_base_alpha(piToPiRad(this->oldPos.get_base_alpha() + radDiff ));
-  this->rawPos.set_base_alpha( piToPiRad(this->rawPos.get_base_alpha() + radDiff ));
 
   // update the covMatrix in robotPos
   // robotPos is transmitted by reference
@@ -770,49 +789,65 @@ int Robot::updatePosition( Smart::CommBasePositionUpdate update )
 {
   bool isCovUpdated = false;
 
-  Smart::CommBasePosition oldPos          = update.get_old_position();
-  Smart::CommBasePosition correctedPos    = update.get_corrected_position();
+  Smart::CommBasePosition upd_oldPos          = update.get_old_position();
+  Smart::CommBasePosition upd_correctedPos    = update.get_corrected_position();
   Smart::CommBasePosition newCorrectedPos;
-    
-  // robot motion between current position and the position the laserscan (selfloc-scan) was taken 
-  double deltaX = this->getBasePosition().get_x() - oldPos.get_x();
-  double deltaY = this->getBasePosition().get_y() - oldPos.get_y();
-  double deltaA = piToPiRad( this->getBasePosition().get_base_alpha() )  - piToPiRad( oldPos.get_base_alpha() );
+
+  // robot motion between current position and the position the laserscan (selfloc-scan) was taken
+  double deltaX = this->getBasePosition().get_x() - upd_oldPos.get_x();
+  double deltaY = this->getBasePosition().get_y() - upd_oldPos.get_y();
+  double deltaA = piToPiRad( this->getBasePosition().get_base_alpha() )  - piToPiRad( upd_oldPos.get_base_alpha() );
   deltaA = piToPiRad( deltaA );
 
-  newCorrectedPos.set_x( correctedPos.get_x() + deltaX );
-  newCorrectedPos.set_y( correctedPos.get_y() + deltaY );
-  newCorrectedPos.set_base_alpha( piToPiRad(correctedPos.get_base_alpha() + deltaA) );
+  double dAlpha = piToPiRad(upd_correctedPos.get_base_alpha()) -  piToPiRad( upd_oldPos.get_base_alpha() );
+
+  double a1 = cos(dAlpha);
+  double a2 = (-1.0)*sin(dAlpha);
+  double a3 = 0;
+
+  double a4 = sin(dAlpha);
+  double a5 = cos(dAlpha);
+  double a6 = 0;
+
+  double a7 = 0;
+  double a8 = 0;
+  double a9 = 1;
+
+  newCorrectedPos.set_x( upd_correctedPos.get_x() + (a1*deltaX + a2*deltaY + a3*deltaA) );
+  newCorrectedPos.set_y( upd_correctedPos.get_y() + (a4*deltaX + a5*deltaY + a6*deltaA) );
+  newCorrectedPos.set_base_alpha( piToPiRad(upd_correctedPos.get_base_alpha() +  (a7*deltaX + a8*deltaY + a9*deltaA)) );
 
   // calculate covMatrix
-  isCovUpdated = updateCovMatrix( correctedPos, newCorrectedPos );
+  isCovUpdated = updateCovMatrix( upd_correctedPos, newCorrectedPos );
   // now in newCorrectedPos exists the new covMatrix
 
-  // robot motion once more. this is because of the motion while calculating covM 
-  deltaX = this->getBasePosition().get_x() - oldPos.get_x();
-  deltaY = this->getBasePosition().get_y() - oldPos.get_y();
-  deltaA = piToPiRad( this->getBasePosition().get_base_alpha() ) - piToPiRad( oldPos.get_base_alpha() );
+  // robot motion once more. this is because of the motion while calculating covM
+//<hochdorfer,lutz>
+  deltaX = this->getBasePosition().get_x() - upd_oldPos.get_x();
+  deltaY = this->getBasePosition().get_y() - upd_oldPos.get_y();
+  deltaA = piToPiRad( this->getBasePosition().get_base_alpha() ) - piToPiRad( upd_oldPos.get_base_alpha() );
   deltaA = piToPiRad( deltaA );
 
-  newCorrectedPos.set_x( correctedPos.get_x() + deltaX );
-  newCorrectedPos.set_y( correctedPos.get_y() + deltaY );
-  newCorrectedPos.set_base_alpha( piToPiRad( piToPiRad(correctedPos.get_base_alpha()) + deltaA) );
+  cout<<"new: "<<newCorrectedPos.get_x()      <<" "<<newCorrectedPos.get_y()      <<" "<<newCorrectedPos.get_base_alpha()<<endl;
+  cout<<"old: "<<upd_correctedPos.get_x() + deltaX<<" "<<upd_correctedPos.get_y() + deltaY<<" "<< piToPiRad( piToPiRad(upd_correctedPos.get_base_alpha()) + deltaA)<<endl;
 //  newCorrectedPos.set_base_alpha( correctedPos.get_base_alpha() + deltaA );
-  
-  newCorrectedPos.set_cov_invalid(correctedPos.get_cov_invalid());
+
+
+//</hochdorfer,lutz>
+  newCorrectedPos.set_cov_invalid(upd_correctedPos.get_cov_invalid());
 
   // update of the robot Position
   mutexRobotPos.acquire();
   this->robotPos = newCorrectedPos;
   this->oldPos = this->robotPos;
 
-  printf("this Pos        (cnt=%lu) ( %9.4f %9.4f %6.2f deg)\n", correctedPos.get_update_count(), 
+  printf("this Pos        (cnt=%lu) ( %9.4f %9.4f %6.2f deg)\n", upd_correctedPos.get_update_count(),
            this->getBasePosition().get_x(), this->getBasePosition().get_y(), this->getBasePosition().get_base_alpha() /M_PI*180.0 );
 
-  printf("corrected covM  (0,0)(1,1)(2,2): %8.1f; %8.1f; %8.1f \n", correctedPos.get_cov(0,0), 
-           correctedPos.get_cov(1,1), correctedPos.get_cov(2,2) );
+  printf("corrected covM  (0,0)(1,1)(2,2): %8.1f; %8.1f; %8.1f \n", upd_correctedPos.get_cov(0,0),
+           upd_correctedPos.get_cov(1,1), upd_correctedPos.get_cov(2,2) );
 
-  printf("this covM       (0,0)(1,1)(2,2): %8.1f; %8.1f; %8.1f \n",  this->getBasePosition().get_cov(0,0), 
+  printf("this covM       (0,0)(1,1)(2,2): %8.1f; %8.1f; %8.1f \n",  this->getBasePosition().get_cov(0,0),
            this->getBasePosition().get_cov(1,1), this->getBasePosition().get_cov(2,2) );
   std::cout<<"Set Cov invalid: "<<this->getBasePosition().get_cov_invalid()<<std::endl;
   mutexRobotPos.release();
@@ -821,13 +856,67 @@ int Robot::updatePosition( Smart::CommBasePositionUpdate update )
 }
 
 
+int Robot::resetPosition()
+{
+ 
+  // reset of the robot Position
+  mutexRobotPos.acquire();
+
+  this->closeSerial();
+
+  this->robotPos.set_x(0.0);
+  this->robotPos.set_y(0.0);
+  this->robotPos.set_base_alpha(0.0);
+
+  this->rawPos.set_x(0.0);
+  this->rawPos.set_y(0.0);
+  this->rawPos.set_base_alpha(0.0);
+
+  updateV = false;
+  updateOmega = false;
+
+  this->oldPos.set_x(0.0);
+  this->oldPos.set_y(0.0);
+  this->oldPos.set_base_alpha(0.0);
+
+  oldth = 0;
+  oldxpos = 0;
+  oldypos = 0;
+  totalDistance = 0;
+  totalRotationLeft = 0;
+  totalRotationRight = 0;
+
+  // initialize covariance matrix
+  this->oldPos.set_cov(0,0, 50*50);
+  this->oldPos.set_cov(1,1, 50*50);
+  this->oldPos.set_cov(2,2, 5*5/180.0*M_PI);
+  this->robotPos.set_cov(0,0, oldPos.get_cov(0,0) );
+  this->robotPos.set_cov(1,1, oldPos.get_cov(1,1) );
+  this->robotPos.set_cov(2,2, oldPos.get_cov(2,2) );
+
+  // uncertainity of robot
+  lamdaSigmaD = 50*50/1000.0; // TODO
+  lamdaSigmaDeltaAlpha = (5*5/360.0) /180.0 * M_PI; // TODO
+  lamdaSigmaDeltaBeta = (2*2/1000.0) /180.0 * M_PI; // TODO
+
+  this->openSerial(param_serialport , param_enable_motors, param_enable_sonar );
+  mutexRobotPos.release();
+ 
+  return 0;
+
+}
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // -PI <= a <= PI
 double Robot::piToPiRad( double a )
 {
-  fmod(a, 2*M_PI );
-  if( a >  M_PI ) a -= 2*M_PI;
-  if( a < -M_PI ) a += 2*M_PI; 
+  a+=M_PI;
+  bool was_neg = a<0;
+  a = fmod(a, 2*M_PI );
+  if (was_neg) a+=2*M_PI;
+  a-=M_PI;
   return a;
 }
 

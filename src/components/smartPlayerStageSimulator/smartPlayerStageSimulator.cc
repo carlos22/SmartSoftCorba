@@ -74,12 +74,14 @@
 
 #include "smartSoft.hh"
 
+#include "commVoid.hh"
 #include "commBasePosition.hh"
 #include "commBaseVelocity.hh"
 #include "commBaseState.hh"
 #include "commNavigationVelocity.hh"
 #include "commMobileLaserScan.hh"
 #include "commBasePositionUpdate.hh"
+#include "commTimeStamp.hh"
 
 // boost-Library for Matrix
 #include <boost/numeric/ublas/matrix.hpp>
@@ -95,6 +97,8 @@ CHS::PushTimedServer<Smart::CommBaseState> *basePositionPushTimedServer;
 CHS::SendServer<Smart::CommBasePositionUpdate> *basePositionUpdateSendServer;
 
 CHS::PushNewestServer<Smart::CommMobileLaserScan> *laserServer;
+
+CHS::QueryServer<Smart::CommVoid,Smart::CommBaseState> *baseQueryServer;
 
 Smart::CommBasePosition robotPos;
 Smart::CommBasePosition rawPos;
@@ -436,6 +440,11 @@ public:
     // laser
     scan.set_scan_update_count(scan_count);
 
+    // set timestamp
+    timeval _receive_time;
+    gettimeofday(&_receive_time, 0);
+    scan.set_scan_time_stamp(Smart::CommTimeStamp(_receive_time));
+
     //////////////////////////
     // set scanner position
     //
@@ -650,6 +659,53 @@ public:
 
 
 
+class BaseStateQueryHandler :  public CHS::QueryServerHandler<Smart::CommVoid,Smart::CommBaseState>
+{ 
+public:
+
+  void handleQuery(CHS::QueryServer<Smart::CommVoid,Smart::CommBaseState> & server,
+                     const CHS::QueryId id,
+                     const Smart::CommVoid& r) throw()
+  
+  {
+    std::cout << "Query for basestate \n";
+
+    playerClientMutex.acquire();
+
+    robot.ReadIfWaiting();
+
+    base_position.set_x(position_2d_proxy.GetXPos(), 1.0);
+    base_position.set_y(position_2d_proxy.GetYPos(), 1.0);
+    base_position.set_z(0);
+    base_position.set_base_alpha(position_2d_proxy.GetYaw());
+
+    double xSpeed;
+    double ySpeed;
+    xSpeed = position_2d_proxy.GetXSpeed();
+    ySpeed = position_2d_proxy.GetYSpeed();
+    base_velocity.set_v(((xSpeed + ySpeed) / 2.0) * 1000.0);
+
+    double yawSpeed;
+    yawSpeed = position_2d_proxy.GetYawSpeed();
+    base_velocity.set_omega_base(yawSpeed);
+
+    playerClientMutex.release();
+
+    base_state.set_base_position(base_position);
+    base_state.set_base_velocity(base_velocity);
+
+    server.answer(id, base_state);
+} 
+
+private:
+  Smart::CommTimeStamp time_stamp; 
+  Smart::CommBasePosition base_position;
+  Smart::CommBaseVelocity base_velocity;
+  Smart::CommBaseState base_state;
+    
+};
+
+
 // -------------------------------------------------------------
 //
 // Main
@@ -691,6 +747,12 @@ int main (int argc, char *argv[])
     // BasePositionUpdate SendServer
     BasePositionUpdateSendHandler basePositionUpdateSendHandler;
     basePositionUpdateSendServer = new CHS::SendServer<Smart::CommBasePositionUpdate>(componentBase, "positionUpdate", basePositionUpdateSendHandler);
+
+
+    // BaseStateQuery Server
+    BaseStateQueryHandler baseStateQueryHandler;
+    baseQueryServer = new CHS::QueryServer<Smart::CommVoid,Smart::CommBaseState>(componentBase, "basestatequery", baseStateQueryHandler);
+
 
 
     // laser

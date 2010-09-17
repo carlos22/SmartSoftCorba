@@ -44,7 +44,9 @@
 #include <string>
 #include <iostream>
 
-
+//<alexej date="2010-02-06">
+#include <string.h>
+//</alexej>
 
 /**
  * A C++ implementation of a simple client to the MARY TTS system.

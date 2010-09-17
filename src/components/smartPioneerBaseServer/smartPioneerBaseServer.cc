@@ -76,11 +76,13 @@
 
 #include "smartSoft.hh"
 
+#include "commVoid.hh"
 #include "commBasePosition.hh"
 #include "commBasePositionUpdate.hh"
 #include "commBaseVelocity.hh"
 #include "commBaseState.hh"
 #include "commNavigationVelocity.hh"
+#include "commBaseParameter.hh"
 
 #define INI_PARAMETERS_FILE "smartPioneerBaseServer.ini"
 
@@ -101,11 +103,11 @@ bool param_enable_motors = true;
 bool param_enable_sonar = false;
 
 int param_maxVel = 1000;
-int param_maxRotVel = 300;
-int param_maxVelAcc = 300;
-int param_maxVelDecel = 300;
-int param_maxRotVelAcc = 100;
-int param_maxRotVelDecel = 100;
+int param_maxRotVel = 50;
+int param_maxVelAcc = 800;
+int param_maxVelDecel = -500;
+int param_maxRotVelAcc = 500;
+int param_maxRotVelDecel = -500;
 
 double param_baseStatePushTimedInterval = 100;
 std::string param_serialport;
@@ -274,6 +276,71 @@ private:
 
 
 
+//
+// handler of the send service of this component
+//
+class ParameterHandler : public CHS::SendServerHandler<Smart::CommBaseParameter>
+{
+public:
+  void handleSend(const Smart::CommBaseParameter& cmd) throw()
+  {
+    Smart::BaseTagType tag;
+    int                  p1,p2,p3,p4,p5;
+
+    cmd.get(tag,p1,p2,p3,p4,p5);
+
+    switch (tag)
+    {
+      case Smart::BASE_RESET:
+      {
+	robot->resetPosition();
+        std::cout << "RESET BASE !!!!!!!!!!!!!!\n\n";
+
+      } // case BASE_RESET
+
+    } // switch
+  }
+};
+
+
+class BaseStateQueryHandler :  public CHS::QueryServerHandler<Smart::CommVoid,Smart::CommBaseState>
+{
+public:
+
+  void handleQuery(CHS::QueryServer<Smart::CommVoid,Smart::CommBaseState> & server,
+                     const CHS::QueryId id,
+                     const Smart::CommVoid& r) throw()
+
+  {
+    std::cout << "Query for basestate \n";
+    
+    time_stamp.set_now();  // Set the timestamp to the current time
+
+    //base_velocity.set_v((xSpeed + ySpeed) / 2);
+    base_velocity.set_v( robot->getV() );
+    //base_velocity.set_omega_base(yawSpeed);
+    base_velocity.set_omega_base( robot->getOmegaRad() );
+
+    // push the objects CommBasePosition and CommBaseVelocity into the SmartSoft CommBaseState object
+    base_state.set_time_stamp(time_stamp);
+//    base_state.set_base_position(base_position);
+    base_state.set_base_position( robot->getBasePosition() );
+    base_state.set_base_raw_position( robot->getBaseRawPosition() );
+    base_state.set_base_velocity(base_velocity);
+
+    server.answer(id, base_state);
+  }
+
+private:
+  Smart::CommTimeStamp time_stamp;
+  Smart::CommBasePosition base_position;
+  Smart::CommBaseVelocity base_velocity;
+  Smart::CommBaseState base_state;
+
+};
+
+
+
 
 
 // -------------------------------------------------------------
@@ -332,6 +399,15 @@ int main (int argc, char **argv)
     BaseStatePushTimedHandler baseStatePushTimedHandler;
     CHS::ThreadQueuePushTimedHandler<Smart::CommBaseState> threadBaseStatePushTimedHandler(baseStatePushTimedHandler);
     CHS::PushTimedServer<Smart::CommBaseState> basePositionPushTimedServer(&component, "basestate", threadBaseStatePushTimedHandler, param_baseStatePushTimedInterval / 1000.0);
+
+
+    //BaseParamServer
+    ParameterHandler sendParameterHandler;
+    CHS::SendServer<Smart::CommBaseParameter> parameterServer(&component, "baseParameter", sendParameterHandler);
+
+    // BaseStateQuery Server
+    BaseStateQueryHandler baseStateQueryHandler;
+    CHS::QueryServer<Smart::CommVoid,Smart::CommBaseState> baseQueryServer(&component, "basestatequery", baseStateQueryHandler);
 
     // Start push services
     basePositionPushTimedServer.start();

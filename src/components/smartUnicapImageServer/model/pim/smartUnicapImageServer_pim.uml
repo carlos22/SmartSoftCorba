@@ -1,14 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_2KPH4MrkEd688Ztvebp4-A/101" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_2KPH4MrkEd688Ztvebp4-A/101 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_2LsgcMrkEd688Ztvebp4-A">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:SmartMARS_1="http:///schemas/SmartMARS/_2KPH4MrkEd688Ztvebp4-A/101" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ http:///schemas/SmartMARS/_2KPH4MrkEd688Ztvebp4-A/101 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_2LsgcMrkEd688Ztvebp4-A">
   <uml:Model xmi:id="_tiyPAN8eEd6n4Z-_EEYSRg" name="smartUnicapImageServer_pim">
-    <elementImport xmi:id="_o8fcgN8iEd6n4Z-_EEYSRg">
-      <importedElement xmi:type="uml:Class" href="file://home/brich/Software/smartsoft-ACE-5.6+TAO-1.6/src/workspace_mdsd/CommVideoServerObjects/model/pim/CommVideoServerObjects_pim.uml#_C-QnMN8hEd6n4Z-_EEYSRg"/>
+    <elementImport xmi:id="_GPb8wFOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_PU-psJf7Ed6diMgK3usWsg"/>
     </elementImport>
-    <elementImport xmi:id="_o8mxQN8iEd6n4Z-_EEYSRg">
-      <importedElement xmi:type="uml:Class" href="file://home/brich/Software/smartsoft-ACE-5.6+TAO-1.6/src/workspace_mdsd/CommVideoServerObjects/model/pim/CommVideoServerObjects_pim.uml#_EaYm8N8hEd6n4Z-_EEYSRg"/>
+    <elementImport xmi:id="_GPoKAFOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_KPWXMJf8Ed6diMgK3usWsg"/>
+    </elementImport>
+    <elementImport xmi:id="_GPws4FOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_PgL-sJf8Ed6diMgK3usWsg"/>
+    </elementImport>
+    <elementImport xmi:id="_GP6d4FOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_nume8JgGEd6s7_SKW4BMcg"/>
+    </elementImport>
+    <elementImport xmi:id="_GQGEEFOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_aAbuEJhvEd6s7_SKW4BMcg"/>
+    </elementImport>
+    <elementImport xmi:id="_GQUGgFOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_LyqD4MeaEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_GQjXEFOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_ak6-UMeaEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_GQynoFOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_LwqDUMebEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_GRDGUFOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_PhIrUMebEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_GRWBQFOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_U4r-0MebEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_GRqxYFOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_Y9db0MebEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_GR-TYFOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_qK6mUMebEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_GSVfwFOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_tE_x0MebEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_GS1PAFOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_v21nUMebEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_GTOQkFOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_xOHjUMebEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_GTpHUFOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_7kHt0MebEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_GUGaUFOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#__6hGUMebEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_GUjtUFOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_Ck5B4MecEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_GVBnYFOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_Ghy8UMecEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_GVikwFOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_MHnVUMecEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_GWHzkFOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_Qn7e0MecEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_GWp_EFOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_W1MSUMecEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_GXVUgFOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_y7hD0MecEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_GX8YgFOQEd-YNe_XoerspQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_fwNf8MrmEd6fDquU7V04LQ"/>
+    </elementImport>
+    <elementImport xmi:id="_XNS1gFj1Ed-xTrOoN5fcRQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalVideoImage/model/pim/CommExternalVideoImage_pim.uml#_ISEMUFj1Ed-xTrOoN5fcRQ"/>
     </elementImport>
     <packagedElement xmi:type="uml:Component" xmi:id="_tiyPAd8eEd6n4Z-_EEYSRg" name="SmartUnicapImageServer">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_mE-5UN8hEd6n4Z-_EEYSRg" name="imageQueryServer" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_PBj6QOsEEd61rfwQGDbLcA" name="imagePushNewestServer" aggregation="composite">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_iT2pYPtiEd6dJIlZLxrlxg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_iTzmEPtiEd6dJIlZLxrlxg" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_ltFjIFg1Ed-l8dBXKlWiqA" name="imagePushTimedServer" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_hCOEkFg3Ed-l8dBXKlWiqA" name="stateServer" aggregation="composite"/>
       <packagedElement xmi:type="uml:Class" xmi:id="__v1G4N8hEd6n4Z-_EEYSRg" name="ImageQueryHandler"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_XOLuEN8qEd6n4Z-_EEYSRg" name="component">
         <ownedAttribute xmi:id="_Z9yu8N8qEd6n4Z-_EEYSRg" name="name" isUnique="false">
@@ -132,23 +207,17 @@
           <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
           <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_hWF8oOWVEd6VdpO0jAS4YA"/>
         </ownedAttribute>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_S67m0N9DEd6n4Z-_EEYSRg" name="image">
-        <ownedAttribute xmi:id="_U2UVcN9DEd6n4Z-_EEYSRg" name="format" isUnique="false">
+        <ownedAttribute xmi:id="_tW7dAFONEd-YNe_XoerspQ" name="format" isUnique="false">
           <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
-          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dQz1gN9DEd6n4Z-_EEYSRg" value="Y(Mono)"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_yOMt8FONEd-YNe_XoerspQ" value="Y(Mono)"/>
         </ownedAttribute>
-        <ownedAttribute xmi:id="_oW4yEN9DEd6n4Z-_EEYSRg" name="height" isUnique="false">
+        <ownedAttribute xmi:id="_t6MiIFONEd-YNe_XoerspQ" name="width" isUnique="false">
           <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
-          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_rHHeAN9DEd6n4Z-_EEYSRg" value="768"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_71VAQFONEd-YNe_XoerspQ" value="1024"/>
         </ownedAttribute>
-        <ownedAttribute xmi:id="_t1ZpMN9DEd6n4Z-_EEYSRg" name="width" isUnique="false">
+        <ownedAttribute xmi:id="_uPomoFONEd-YNe_XoerspQ" name="height" isUnique="false">
           <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
-          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_yBz_QN9DEd6n4Z-_EEYSRg" value="1024"/>
-        </ownedAttribute>
-        <ownedAttribute xmi:id="_J2W2cOS-Ed6oE7eNu0krew" name="debug_info" isUnique="false">
-          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
-          <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_L6NkkOS-Ed6oE7eNu0krew"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_5hJXIFONEd-YNe_XoerspQ" value="768"/>
         </ownedAttribute>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_9n45sOr4Ed61rfwQGDbLcA" name="hardware">
@@ -169,6 +238,46 @@
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_5OnW4Or5Ed61rfwQGDbLcA" value="FireWire"/>
         </ownedAttribute>
       </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_eYwtwOsEEd61rfwQGDbLcA" name="ImageTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_0u2mAOsEEd61rfwQGDbLcA" name="push_newest">
+        <ownedAttribute xmi:id="_33vCgOsEEd61rfwQGDbLcA" name="debug_info" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_90DP8OsEEd61rfwQGDbLcA"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_KlBEMOsJEd61rfwQGDbLcA" name="active" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_O0bq8OsJEd61rfwQGDbLcA"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_S67m0N9DEd6n4Z-_EEYSRg" name="image">
+        <ownedAttribute xmi:id="_J2W2cOS-Ed6oE7eNu0krew" name="debug_info" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_L6NkkOS-Ed6oE7eNu0krew"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_BYCa4FOOEd-YNe_XoerspQ" name="smart_format" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_Dzd7gFOOEd-YNe_XoerspQ" value="grey"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_PHB7QFhAEd-l8dBXKlWiqA" name="valid_time_in_sec" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_R8w54IgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_YIWKwFhAEd-l8dBXKlWiqA" value="1.0"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_VhBkMFg1Ed-l8dBXKlWiqA" name="active"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_WFeVEFg1Ed-l8dBXKlWiqA" name="active"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_nChsEFg1Ed-l8dBXKlWiqA" name="ImagePushTimedHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_iEcWkFg3Ed-l8dBXKlWiqA" name="StateChangeHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_A_XWoFg4Ed-l8dBXKlWiqA" name="push_timed">
+        <ownedAttribute xmi:id="_DFCpsFg4Ed-l8dBXKlWiqA" name="debug_info" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_HlEfUFg4Ed-l8dBXKlWiqA"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_KOR9QFg4Ed-l8dBXKlWiqA" name="active" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_NqTYMFg4Ed-l8dBXKlWiqA"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_IrlMsFg-Ed-l8dBXKlWiqA" name="NewestImageMutex"/>
     </packagedElement>
     <profileApplication xmi:id="_tiyPAt8eEd6n4Z-_EEYSRg">
       <eAnnotations xmi:id="_tiyPA98eEd6n4Z-_EEYSRg" source="http://www.eclipse.org/uml2/2.0.0/UML">
@@ -178,20 +287,36 @@
     </profileApplication>
     <profileApplication xmi:id="_tiyPBN8eEd6n4Z-_EEYSRg">
       <eAnnotations xmi:id="_tiyPBd8eEd6n4Z-_EEYSRg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_2LsgcMrkEd688Ztvebp4-A"/>
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
       </eAnnotations>
       <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
     </profileApplication>
   </uml:Model>
   <SmartMARS:SmartComponent xmi:id="_tvcyAN8eEd6n4Z-_EEYSRg" base_Component="_tiyPAd8eEd6n4Z-_EEYSRg"/>
   <SmartMARS:SmartQueryServer xmi:id="_mKfEYN8hEd6n4Z-_EEYSRg" serviceName="imageQuery" base_Port="_mE-5UN8hEd6n4Z-_EEYSRg" smartQueryHandler="__wBUIN8hEd6n4Z-_EEYSRg">
-    <commRequestObject href="file://home/brich/Software/smartsoft-ACE-5.6+TAO-1.6/src/workspace_mdsd/CommVideoServerObjects/model/pim/CommVideoServerObjects_pim.uml#_EaYm8N8hEd6n4Z-_EEYSRg"/>
-    <commAnswerObject href="file://home/brich/Software/smartsoft-ACE-5.6+TAO-1.6/src/workspace_mdsd/CommVideoServerObjects/model/pim/CommVideoServerObjects_pim.uml#_C-QnMN8hEd6n4Z-_EEYSRg"/>
+    <commRequestObject href="../../../CommExternalVideoImage/model/pim/CommExternalVideoImage_pim.uml#_ISEMUFj1Ed-xTrOoN5fcRQ"/>
+    <commAnswerObject href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_aAbuEJhvEd6s7_SKW4BMcg"/>
   </SmartMARS:SmartQueryServer>
   <SmartMARS:SmartQueryHandler xmi:id="__wBUIN8hEd6n4Z-_EEYSRg" base_Class="__v1G4N8hEd6n4Z-_EEYSRg"/>
   <SmartMARS:SmartIniParameterGroup xmi:id="_XOfQEN8qEd6n4Z-_EEYSRg" base_Class="_XOLuEN8qEd6n4Z-_EEYSRg"/>
-  <SmartMARS:SmartIniParameterGroup xmi:id="_uTEmAN8qEd6n4Z-_EEYSRg"/>
+  <SmartMARS_1:SmartIniParameterGroup xmi:id="_uTEmAN8qEd6n4Z-_EEYSRg"/>
   <SmartMARS:SmartIniParameterGroup xmi:id="_55TlIN8xEd6n4Z-_EEYSRg" base_Class="_545VcN8xEd6n4Z-_EEYSRg"/>
   <SmartMARS:SmartIniParameterGroup xmi:id="_TFGPcN9DEd6n4Z-_EEYSRg" base_Class="_S67m0N9DEd6n4Z-_EEYSRg"/>
   <SmartMARS:SmartIniParameterGroup xmi:id="_9soPwOr4Ed61rfwQGDbLcA" base_Class="_9n45sOr4Ed61rfwQGDbLcA"/>
+  <SmartMARS:SmartPushNewestServer xmi:id="_PHzFIOsEEd61rfwQGDbLcA" serviceName="imageNewest" base_Port="_PBj6QOsEEd61rfwQGDbLcA">
+    <commObject href="../../../CommExternalVideoImage/model/pim/CommExternalVideoImage_pim.uml#_ISEMUFj1Ed-xTrOoN5fcRQ"/>
+  </SmartMARS:SmartPushNewestServer>
+  <SmartMARS:SmartTask xmi:id="_eY_XQOsEEd61rfwQGDbLcA" base_Class="_eYwtwOsEEd61rfwQGDbLcA"/>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_0vF2kOsEEd61rfwQGDbLcA" base_Class="_0u2mAOsEEd61rfwQGDbLcA"/>
+  <SmartMARS_1:SmartTask xmi:id="_zkMM4OsIEd61rfwQGDbLcA"/>
+  <SmartMARS:SmartMainState xmi:id="_VheQIFg1Ed-l8dBXKlWiqA" base_Class="_VhBkMFg1Ed-l8dBXKlWiqA" subState="_WFotIFg1Ed-l8dBXKlWiqA"/>
+  <SmartMARS:SmartSubState xmi:id="_WFotIFg1Ed-l8dBXKlWiqA" base_Class="_WFeVEFg1Ed-l8dBXKlWiqA"/>
+  <SmartMARS:SmartPushTimedServer xmi:id="_ltqK4Fg1Ed-l8dBXKlWiqA" serviceName="imageTimed" base_Port="_ltFjIFg1Ed-l8dBXKlWiqA" smartPushTimedHandler="_nCsrMFg1Ed-l8dBXKlWiqA" cycle="60" timeUnit="ms">
+    <commObject href="../../../CommExternalVideoImage/model/pim/CommExternalVideoImage_pim.uml#_ISEMUFj1Ed-xTrOoN5fcRQ"/>
+  </SmartMARS:SmartPushTimedServer>
+  <SmartMARS:SmartPushTimedHandler xmi:id="_nCsrMFg1Ed-l8dBXKlWiqA" base_Class="_nChsEFg1Ed-l8dBXKlWiqA"/>
+  <SmartMARS:SmartStateServer xmi:id="_hCw3IFg3Ed-l8dBXKlWiqA" serviceName="stateServer" base_Port="_hCOEkFg3Ed-l8dBXKlWiqA" smartStateChangeHandler="_iEmuoFg3Ed-l8dBXKlWiqA"/>
+  <SmartMARS:SmartStateChangeHandler xmi:id="_iEmuoFg3Ed-l8dBXKlWiqA" base_Class="_iEcWkFg3Ed-l8dBXKlWiqA"/>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_A_ggkFg4Ed-l8dBXKlWiqA" base_Class="_A_XWoFg4Ed-l8dBXKlWiqA"/>
+  <SmartMARS:SmartMutex xmi:id="_ItTrAFg-Ed-l8dBXKlWiqA" base_Class="_IrlMsFg-Ed-l8dBXKlWiqA"/>
 </xmi:XMI>

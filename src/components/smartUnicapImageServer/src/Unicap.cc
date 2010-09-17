@@ -1,5 +1,5 @@
 //--------------------------------------------------------------------------
-//  Copyright (C) 2009 Jonas Brich
+//  Copyright (C) 2010 Jonas Brich
 //
 //        brich@mail.hs-ulm.de
 //
@@ -8,7 +8,7 @@
 //        Prittwitzstr. 10
 //        89075 Ulm (Germany)
 //
-//  This file is part of the "Unicap Image Server component".
+//  This file is part of the "Unicap Video Server component".
 //
 //  This library is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU Lesser General Public
@@ -28,14 +28,18 @@
 #include <sstream>
 
 #include "Unicap.hh"
-
 #include "gen/SmartUnicapImageServer.hh"
 
 Unicap* Unicap::_instance = NULL;
+CHS::SmartSemaphore Unicap::_instance_sem;
 
 Unicap* Unicap::instance() {
 	if (_instance == NULL) {
-		_instance = new Unicap();
+		_instance_sem.acquire();
+		if (_instance == NULL) {
+			_instance = new Unicap();
+			_instance_sem.release();
+		}
 	}
 	return _instance;
 }
@@ -112,7 +116,8 @@ int Unicap::init() {
 	std::stringstream formatIni;
 	if (strcmp(COMP->ini.hardware.camera_type.c_str(), "FireWire") == 0) {
 		// Build the format out of the ini-File, e.g. Y(Mono) 1024x786
-		formatIni << COMP->ini.image.format << " " << COMP->ini.image.width << "x" << COMP->ini.image.height;
+		formatIni << COMP->ini.hardware_properties.format << " " << COMP->ini.hardware_properties.width << "x"
+				<< COMP->ini.hardware_properties.height;
 
 		// Iterate over all formats given by the camera
 		for (; SUCCESS(status) && (format_count < MAX_FORMATS); format_count++) {
@@ -128,7 +133,7 @@ int Unicap::init() {
 			}
 		}
 	} else if (strcmp(COMP->ini.hardware.camera_type.c_str(), "USB") == 0) {
-		formatIni << COMP->ini.image.format;
+		formatIni << COMP->ini.hardware_properties.format;
 
 		// Iterate over all formats given by the camera
 		for (; SUCCESS(status) && (format_count < MAX_FORMATS); format_count++) {
@@ -136,8 +141,8 @@ int Unicap::init() {
 			if (SUCCESS(status)) {
 				// Compare the current format of the camera with the format specified in the ini-File
 				if (strcmp(formats[format_count].identifier, formatIni.str().c_str()) == 0) {
-					formats[format_count].size.height = COMP->ini.image.height;
-					formats[format_count].size.width = COMP->ini.image.width;
+					formats[format_count].size.height = COMP->ini.hardware_properties.height;
+					formats[format_count].size.width = COMP->ini.hardware_properties.width;
 					format = format_count;
 					break;
 				}
@@ -158,8 +163,8 @@ int Unicap::init() {
 				if (format_count == 0) {
 					std::cout << "Available Range:\n";
 					for (int i = 0; i < formats[format_count].size_count; ++i) {
-						std::cout << formats[format_count].sizes[i].width << "x"
-								<< formats[format_count].sizes[i].height << std::endl;
+						std::cout << formats[format_count].sizes[i].width << "x" << formats[format_count].sizes[i].height
+								<< std::endl;
 					}
 					std::cout << "Available Formats:\n";
 				}
@@ -234,91 +239,97 @@ int Unicap::init() {
 		if (SUCCESS(status)) {
 			if (properties[range_ppty_count].type == UNICAP_PROPERTY_TYPE_RANGE || properties[range_ppty_count].type
 					== UNICAP_PROPERTY_TYPE_FLAGS || properties[range_ppty_count].type == UNICAP_PROPERTY_TYPE_MENU
-					|| properties[range_ppty_count].type == UNICAP_PROPERTY_TYPE_VALUE_LIST
-					|| properties[range_ppty_count].type == UNICAP_PROPERTY_TYPE_DATA
-					|| properties[range_ppty_count].type == UNICAP_PROPERTY_TYPE_UNKNOWN) {
+					|| properties[range_ppty_count].type == UNICAP_PROPERTY_TYPE_VALUE_LIST || properties[range_ppty_count].type
+					== UNICAP_PROPERTY_TYPE_DATA || properties[range_ppty_count].type == UNICAP_PROPERTY_TYPE_UNKNOWN) {
 				if (strcmp(properties[range_ppty_count].identifier, "auto_exposure") == 0) {
 					if (COMP->ini.hardware.debug_info)
 						std::cout << "Prop: auto_exposure\n";
-					if (!handleProperty(COMP->ini.hardware_properties.auto_exposure, properties[range_ppty_count])) {
+					if (!_handleProperty(COMP->ini.hardware_properties.auto_exposure, properties[range_ppty_count])) {
 						return -5;
 					}
 				} else if (strcmp(properties[range_ppty_count].identifier, "white_balance_mode") == 0) {
 					if (COMP->ini.hardware.debug_info)
 						std::cout << "Prop: white_balance_mode\n";
-					if (!handleProperty(COMP->ini.hardware_properties.white_balance_mode, properties[range_ppty_count])) {
+					if (!_handleProperty(COMP->ini.hardware_properties.white_balance_mode, properties[range_ppty_count])) {
 						return -5;
 					}
 				} else if (strcmp(properties[range_ppty_count].identifier, "brightness") == 0) {
 					if (COMP->ini.hardware.debug_info)
 						std::cout << "Prop: brightness\n";
-					if (!handleProperty(COMP->ini.hardware_properties.brightness, properties[range_ppty_count])) {
+					if (!_handleProperty(COMP->ini.hardware_properties.brightness, properties[range_ppty_count])) {
 						return -5;
 					}
 				} else if (strcmp(properties[range_ppty_count].identifier, "gain") == 0) {
 					if (COMP->ini.hardware.debug_info)
 						std::cout << "Prop: gain\n";
-					if (!handleProperty(COMP->ini.hardware_properties.gain, properties[range_ppty_count])) {
+					if (!_handleProperty(COMP->ini.hardware_properties.gain, properties[range_ppty_count])) {
 						return -5;
 					}
 				} else if (strcmp(properties[range_ppty_count].identifier, "gamma") == 0) {
 					if (COMP->ini.hardware.debug_info)
 						std::cout << "Prop: gamma\n";
-					if (!handleProperty(COMP->ini.hardware_properties.gamma, properties[range_ppty_count])) {
+					if (!_handleProperty(COMP->ini.hardware_properties.gamma, properties[range_ppty_count])) {
 						return -5;
 					}
 				} else if (strcmp(properties[range_ppty_count].identifier, "hue") == 0) {
 					if (COMP->ini.hardware.debug_info)
 						std::cout << "Prop: hue\n";
-					if (!handleProperty(COMP->ini.hardware_properties.hue, properties[range_ppty_count])) {
+					if (!_handleProperty(COMP->ini.hardware_properties.hue, properties[range_ppty_count])) {
 						return -5;
 					}
 				} else if (strcmp(properties[range_ppty_count].identifier, "saturation") == 0) {
 					if (COMP->ini.hardware.debug_info)
 						std::cout << "Prop: saturation\n";
-					if (!handleProperty(COMP->ini.hardware_properties.saturation, properties[range_ppty_count])) {
+					if (!_handleProperty(COMP->ini.hardware_properties.saturation, properties[range_ppty_count])) {
 						return -5;
 					}
 				} else if (strcmp(properties[range_ppty_count].identifier, "sharpness") == 0) {
 					if (COMP->ini.hardware.debug_info)
 						std::cout << "Prop: sharpness\n";
-					if (!handleProperty(COMP->ini.hardware_properties.sharpness, properties[range_ppty_count])) {
+					if (!_handleProperty(COMP->ini.hardware_properties.sharpness, properties[range_ppty_count])) {
 						return -5;
 					}
 				} else if (strcmp(properties[range_ppty_count].identifier, "shutter") == 0) {
 					if (COMP->ini.hardware.debug_info)
 						std::cout << "Prop: shutter\n";
-					if (!handleProperty(COMP->ini.hardware_properties.shutter, properties[range_ppty_count])) {
+					if (!_handleProperty(COMP->ini.hardware_properties.shutter, properties[range_ppty_count])) {
 						return -5;
 					}
-				} else if (strcmp(properties[range_ppty_count].identifier, "white_balance_u") == 0) {
+				}
+				// Set only if Auto_white_balance is false
+				else if ((strcmp(properties[range_ppty_count].identifier, "white_balance_u") == 0)
+						&& COMP->ini.hardware_properties.autoflag_white_balance_mode == false) {
 					if (COMP->ini.hardware.debug_info)
 						std::cout << "Prop: white_balance_u\n";
-					if (!handleProperty(COMP->ini.hardware_properties.white_balance_u, properties[range_ppty_count])) {
+					if (!_handleProperty(COMP->ini.hardware_properties.white_balance_u, properties[range_ppty_count])) {
 						return -5;
 					}
-				} else if (strcmp(properties[range_ppty_count].identifier, "white_balance_v") == 0) {
+				}
+				// Set only if Auto_white_balance is false
+				else if ((strcmp(properties[range_ppty_count].identifier, "white_balance_v") == 0)
+						&& COMP->ini.hardware_properties.autoflag_white_balance_mode == false) {
 					if (COMP->ini.hardware.debug_info)
 						std::cout << "Prop: white_balance_v\n";
-					if (!handleProperty(COMP->ini.hardware_properties.white_balance_v, properties[range_ppty_count])) {
+					if (!_handleProperty(COMP->ini.hardware_properties.white_balance_v, properties[range_ppty_count])) {
 						return -5;
 					}
+
 				} else if (strcmp(properties[range_ppty_count].identifier, "trigger_mode") == 0) {
 					if (COMP->ini.hardware.debug_info)
 						std::cout << "Prop: trigger_mode\n";
-					if (!handleMenuProperty(COMP->ini.hardware_properties.trigger_mode, properties[range_ppty_count])) {
+					if (!_handleMenuProperty(COMP->ini.hardware_properties.trigger_mode, properties[range_ppty_count])) {
 						return -5;
 					}
 				} else if (strcmp(properties[range_ppty_count].identifier, "trigger_polarity") == 0) {
 					if (COMP->ini.hardware.debug_info)
 						std::cout << "Prop: trigger_polarity\n";
-					if (!handleMenuProperty(COMP->ini.hardware_properties.trigger_polarity, properties[range_ppty_count])) {
+					if (!_handleMenuProperty(COMP->ini.hardware_properties.trigger_polarity, properties[range_ppty_count])) {
 						return -5;
 					}
 				} else if (strcmp(properties[range_ppty_count].identifier, "frame rate") == 0) {
 					if (COMP->ini.hardware.debug_info)
 						std::cout << "Prop: frame rate\n";
-					if (!handleProperty(COMP->ini.hardware_properties.framerate, properties[range_ppty_count])) {
+					if (!_handleProperty(COMP->ini.hardware_properties.framerate, properties[range_ppty_count])) {
 						return -5;
 					}
 				} else {
@@ -370,12 +381,19 @@ int Unicap::init() {
 	_buffer.data = (unsigned char*) malloc(uniFormat.buffer_size);
 	_buffer.buffer_size = uniFormat.buffer_size;
 
-	// Start capture mode
-	if (!SUCCESS(unicap_start_capture(_handle))) {
-		return -8;
-	}
-
 	return 0;
+}
+
+bool Unicap::startCaptureMode() {
+	// Start capture mode
+	return SUCCESS(unicap_start_capture(_handle));
+}
+bool Unicap::stopCaptureMode() {
+	// Stop capture if _handle is set
+	if (_handle != NULL) {
+		return SUCCESS(unicap_stop_capture(_handle));
+	}
+	return true;
 }
 
 int Unicap::getImage(Smart::CommMutableVideoImage& image) {
@@ -390,13 +408,11 @@ int Unicap::getImage(Smart::CommMutableVideoImage& image) {
 	if (!SUCCESS(unicap_wait_buffer(_handle, &returned_buffer))) {
 		return -2;
 	}
+	_seq_counter++;
 
-	// Test if the width, height and memsize is correct
-	// if true, set the data into the requested image
-	// otherwise set data invalid.
-	if (image.get_width() == COMP->ini.image.width && image.get_height() == COMP->ini.image.height && image.get_size()
-			== returned_buffer->buffer_size) {
-		image.set_data(returned_buffer->data);
+	if (image.get_width() == COMP->ini.hardware_properties.width && image.get_height() == COMP->ini.hardware_properties.height
+			&& image.get_size() == returned_buffer->buffer_size) {
+		image.set_data(_buffer.data);
 		image.set_sequence_counter(_seq_counter);
 		if (COMP->ini.image.debug_info)
 			std::cout << "Image: DATA VALID" << std::endl;
@@ -405,7 +421,6 @@ int Unicap::getImage(Smart::CommMutableVideoImage& image) {
 		if (COMP->ini.image.debug_info)
 			std::cout << "Image: DATA INVALID" << std::endl;
 	}
-	_seq_counter++;
 
 	if (COMP->ini.hardware.debug_info) {
 		showAllProperties();
@@ -414,7 +429,7 @@ int Unicap::getImage(Smart::CommMutableVideoImage& image) {
 	return 0;
 }
 
-bool Unicap::handleProperty(double value, unicap_property_t& property) {
+bool Unicap::_handleProperty(double value, unicap_property_t& property) {
 	if (SUCCESS(unicap_get_property(_handle, &property))) {
 		property.value = value;
 		if (SUCCESS(unicap_set_property(_handle, &property))) {
@@ -424,7 +439,7 @@ bool Unicap::handleProperty(double value, unicap_property_t& property) {
 	return false;
 }
 
-bool Unicap::handleMenuProperty(int value, unicap_property_t& property) {
+bool Unicap::_handleMenuProperty(int value, unicap_property_t& property) {
 	if (SUCCESS(unicap_get_property(_handle, &property))) {
 		if ((value >= 0) && (value < property.menu.menu_item_count)) {
 			strcpy(property.menu_item, property.menu.menu_items[value]);
@@ -468,9 +483,8 @@ void Unicap::showAllProperties() const {
 		if (SUCCESS(status)) {
 			if (properties[range_ppty_count].type == UNICAP_PROPERTY_TYPE_RANGE || properties[range_ppty_count].type
 					== UNICAP_PROPERTY_TYPE_FLAGS || properties[range_ppty_count].type == UNICAP_PROPERTY_TYPE_MENU
-					|| properties[range_ppty_count].type == UNICAP_PROPERTY_TYPE_VALUE_LIST
-					|| properties[range_ppty_count].type == UNICAP_PROPERTY_TYPE_DATA
-					|| properties[range_ppty_count].type == UNICAP_PROPERTY_TYPE_UNKNOWN) {
+					|| properties[range_ppty_count].type == UNICAP_PROPERTY_TYPE_VALUE_LIST || properties[range_ppty_count].type
+					== UNICAP_PROPERTY_TYPE_DATA || properties[range_ppty_count].type == UNICAP_PROPERTY_TYPE_UNKNOWN) {
 				if (strcmp(properties[range_ppty_count].identifier, "auto_exposure") == 0) {
 					std::cout << "Prop: auto_exposure\n";
 					showProperty(properties[range_ppty_count]);
@@ -524,6 +538,8 @@ void Unicap::showAllProperties() const {
 
 int Unicap::handle_signal(int signum, siginfo_t *, ucontext_t *) {
 	if (signum == SIGINT) {
+		// Has to be set because otherwise the ImageTask will call getImage-Method over and over again
+		COMP->componentActive = false;
 		if (_handle != NULL) {
 			unicap_stop_capture(_handle);
 		}
@@ -539,6 +555,8 @@ int Unicap::handle_signal(int signum, siginfo_t *, ucontext_t *) {
 }
 
 Unicap::~Unicap() {
+	// Has to be set because otherwise the ImageTask will call getImage-Method over and over again
+	COMP->componentActive = false;
 	if (_handle != NULL) {
 		unicap_stop_capture(_handle);
 	}

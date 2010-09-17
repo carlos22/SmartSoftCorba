@@ -143,6 +143,9 @@ protected:
   double goalX, goalY;
   // Parameter: the goal point which should be reached
 
+  double safetyClearance;
+  // Parameter: the global safety clearance
+
   int intersectionsCircleLine(double,double,double,
                               double,double,double,double,
                               double&,double&,double&,double&,int&);
@@ -189,6 +192,9 @@ public:
 
   double getHeading();
   // Get the goal heading relative to the robot frame.
+
+  void setSafetyClearance(double sc);
+  // Set the global safety clearance.
 
   int setMaxDistance(double distance);
   // Set the maximum considered free path length for the distance

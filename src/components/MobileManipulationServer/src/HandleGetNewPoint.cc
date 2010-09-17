@@ -58,14 +58,19 @@ void HandleGetNewPoint::handleQuery(CHS::QueryServer<Smart::CommMoMaPose,
 	// change this code to your needs !!!
 	Smart::CommMoMaPose answer;
 
-	KatanaAPI::MotorAngles startAngles(request.getMotor1(), request.getMotor2(), request.getMotor3(), request.getMotor4(), request.getMotor5());
-	KatanaAPI::MotorAngles newAngles = mmp::MainController::getInstance().getNewPoint(startAngles);
+	try {
+		KatanaAPI::MotorAngles startAngles(request.getMotor1(), request.getMotor2(), request.getMotor3(), request.getMotor4(), request.getMotor5());
+		KatanaAPI::MotorAngles newAngles = mmp::MainController::getInstance().getNewPoint(startAngles);
 
-	answer.setMotor1(newAngles.motor1);
-	answer.setMotor2(newAngles.motor2);
-	answer.setMotor3(newAngles.motor3);
-	answer.setMotor4(newAngles.motor4);
-	answer.setMotor5(newAngles.motor5);
+		answer.setMotor1(newAngles.motor1);
+		answer.setMotor2(newAngles.motor2);
+		answer.setMotor3(newAngles.motor3);
+		answer.setMotor4(newAngles.motor4);
+		answer.setMotor5(newAngles.motor5);
+	}
+	catch (...) {
+		cout << ">> Exception occured in GetNewPointHandler\n";
+	}
 
 	server.answer(id, answer);
 }

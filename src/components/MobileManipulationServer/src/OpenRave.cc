@@ -60,69 +60,75 @@ void OpenRave::handleQuery(CHS::QueryServer<Smart::CommMoMaObjectList,
 {
 	Smart::CommMoMaManipulateState answer;
 
-	std::vector<uint32_t> ids;
-	std::string state;
-	double motor01;
-	double motor02;
-	double motor03;
-	double motor04;
-	double motor05;
-	uint32_t command;
+	try {
+		std::vector<uint32_t> ids;
+		std::string state;
+		double motor01;
+		double motor02;
+		double motor03;
+		double motor04;
+		double motor05;
+		uint32_t command;
 
-	answer.setSize(request.getObjectListSize());
+		answer.setSize(request.getObjectListSize());
 
-	for (unsigned int i=0; i < request.getObjectListSize(); i++)
-	{
-		ids.push_back(request.getId(i));
-	}
-
-
-	mmp::MainController::getInstance().beginManipulation(ids);
-	for (unsigned int i=0; i < request.getObjectListSize(); i++)
-	{
-		// get motor angles directly or calculate first
-		if (request.getFlags(i) == 0)
+		for (unsigned int i=0; i < request.getObjectListSize(); i++)
 		{
-			std::vector<double> angles;
-			double x;
-			double y;
-			double z;
-			double yaw;
-			double pitch;
-			double roll;
+			ids.push_back(request.getId(i));
+		}
 
-			request.getPose(i, x, y, z, yaw, pitch, roll);
-			mmp::MainController::getInstance().calculateIK(x, y, z, yaw, pitch, roll, angles);
 
-			if (angles.size() < 5)
+		mmp::MainController::getInstance().beginManipulation(ids);
+		for (unsigned int i=0; i < request.getObjectListSize(); i++)
+		{
+			// get motor angles directly or calculate first
+			if (request.getFlags(i) == 0)
 			{
-				break;
+				std::vector<double> angles;
+				double x;
+				double y;
+				double z;
+				double yaw;
+				double pitch;
+				double roll;
+
+				request.getPose(i, x, y, z, yaw, pitch, roll);
+				mmp::MainController::getInstance().calculateIK(x, y, z, yaw, pitch, roll, angles);
+
+				if (angles.size() < 5)
+				{
+					std:cout << "Manipulation stopped because motor angles couldn't be calculated\n";
+					break;
+				}
+
+				motor01 = angles[0];
+				motor02 = angles[1];
+				motor03 = angles[2];
+				motor04 = angles[3];
+				motor05 = angles[4];
+			}
+			else if (request.getFlags(i) == 1)
+			{
+				request.getMotors(i, motor01, motor02, motor03, motor04, motor05);
 			}
 
-			motor01 = angles[0];
-			motor02 = angles[1];
-			motor03 = angles[2];
-			motor04 = angles[3];
-			motor05 = angles[4];
+			// get command
+			command = request.getCommand(i);
+
+			std::string objClass;
+			request.getObjectClass(i, objClass);
+
+			cout << "Id, Class: " << request.getId(i) << ", " << objClass << endl;
+			state = mmp::MainController::getInstance().manipulateObject(request.getId(i), motor01, motor02, motor03, motor04, motor05, command);
+
+			answer.setObjectId(i, request.getId(i));
+			answer.setState(i, state);
 		}
-		else if (request.getFlags(i) == 1)
-		{
-			request.getMotors(i, motor01, motor02, motor03, motor04, motor05);
-		}
-
-		// get command
-		command = request.getCommand(i);
-
-		std::string objClass;
-		request.getObjectClass(i, objClass);
-
-		cout << "Id, Class: " << request.getId(i) << ", " << objClass << endl;
-		state = mmp::MainController::getInstance().manipulateObject(request.getId(i), motor01, motor02, motor03, motor04, motor05, command);
-
-		answer.setObjectId(i, request.getId(i));
-		answer.setState(i, state);
+		mmp::MainController::getInstance().endManipulation();
 	}
-	mmp::MainController::getInstance().endManipulation();
+	catch (...) {
+		cout << ">> Exception occured in OpenRaveHandler\n";
+	}
 
 	server.answer(id, answer);
 }

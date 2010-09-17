@@ -8,7 +8,7 @@ verbose		true
 [scanner]
 
 # type of SICK scanner
-# possible values are "LMS" and "PLS"
+# possible values are "LMS" (for LMS 200) and "PLS"
 sick_type	LMS
 
 # does the scanner rotate with the turret,

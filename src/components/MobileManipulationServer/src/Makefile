@@ -71,7 +71,7 @@ INI_FILES    =	MobileManipulationServer.ini
 ##----------------------------------------------------------------------------
 ## user libs  -- add your own libs here
 USER_CPP_CFLAGS = -pthread
-USER_CPP_LFLAGS = `pkg-config --libs libmrpt` -lGL -lGLU -lglut -L../libs \
+USER_CPP_LFLAGS = -pthread -L/usr/local/lib `pkg-config --libs libmrpt` -lGL -lGLU -lglut -L../libs \
 					-lKNIBase -lKNI_LM -lKNI_InvKin -L/usr/local/lib \
 					-lopenrave -lopenrave-core 
 INCLUDES += -I/usr/local/include -I/usr/local/include/mrpt/mrpt-config/ -I../kni_api

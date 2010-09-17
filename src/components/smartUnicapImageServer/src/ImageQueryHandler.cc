@@ -16,7 +16,7 @@
 // delete it before running the workflow.
 //--------------------------------------------------------------------------
 //
-//  Copyright (C) 2009 Jonas Brich
+//  Copyright (C) 2010 Jonas Brich
 //
 //        brich@mail.hs-ulm.de
 //
@@ -25,7 +25,7 @@
 //        Prittwitzstr. 10
 //        89075 Ulm (Germany)
 //
-//  This file is part of the "Unicap Image Server component".
+//  This file is part of the "Unicap Video Server component".
 //
 //  This library is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU Lesser General Public
@@ -51,22 +51,44 @@
 void ImageQueryHandler::handleQuery(CHS::QueryServer<Smart::CommMutableVideoImage, Smart::CommVoid> & server,
 		const CHS::QueryId id, const Smart::CommMutableVideoImage & request) throw () {
 
+	// Hold own reference and set it to invalid. If no new data is available the request is sent back as invalid.
 	Smart::CommMutableVideoImage image = request;
+	image.set_data_invalid();
+	int status = 0;
 
-	int status = UNICAPINZ->getImage(image);
+	// Component Active then get new image
+	if (COMP->componentActive) {
+		// If Newest and Timed active get image from global Reference otherwise get it directly from Unicap
+		if (!COMP->ini.push_newest.active && !COMP->ini.push_timed.active) {
+			status = UNICAPINZ->getImage(image);
+		} else {
+			COMP->NewestImageMutex.acquire();
+			Smart::CommMutableVideoImage* newestImage = COMP->newestImage;
+			COMP->NewestImageMutex.release();
+
+			if (newestImage != NULL) {
+				image.set_data(newestImage->get_data());
+				image.set_sequence_counter((unsigned long int) newestImage->get_sequence_counter());
+				status = 0;
+			}
+		}
+	}
 
 	if (status == 0) {
 		server.answer(id, Smart::CommVoid());
+		if (COMP->ini.component.debug_info) {
+			std::cout << "Query: Answer sent with ID: " << id << std::endl;
+		}
 	} else {
 		switch (status) {
 		case -1:
-			std::cerr << "Error: Failed to queue image buffer.\n";
+			std::cerr << "Error: (QueryHandler) Failed to queue image buffer.\n";
 			break;
 		case -2:
-			std::cerr << "Error: Failed to wait for queued buffer.\n";
+			std::cerr << "Error: (QueryHandler) Failed to wait for queued buffer.\n";
 			break;
 		default:
-			std::cerr << "Undefined Error.\n";
+			std::cerr << "Error: (QueryHandler) Undefined Error.\n";
 			break;
 		}
 	}

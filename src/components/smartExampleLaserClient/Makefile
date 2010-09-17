@@ -63,7 +63,7 @@ IDL_FILES    =
 
 EXPORT_FILES = 	
 
-INI_FILES    =	
+INI_FILES    = smartExampleLaserClient.ini
 
 ##----------------------------------------------------------------------------
 ## Libraries to build

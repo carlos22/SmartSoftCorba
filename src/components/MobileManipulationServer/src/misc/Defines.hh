@@ -41,4 +41,7 @@
 // if defined, Pathplaning will be timed
 //#define ORTIME
 
+// deactivate assert
+#define NDEBUG
+
 #endif /* DEFINES_H_ */

@@ -12,7 +12,7 @@
 // smart-robotics.sourceforge.net
 // 
 // Please do not modify this file. It will be re-generated
-// running the workflow.
+// running the code generator.
 //--------------------------------------------------------------------------
 
 #ifndef _SMARTUNICAPIMAGESERVER_HH
@@ -24,9 +24,13 @@
 // include communication objects
 #include "externalCommObjectHeaders.hh"
 // include tasks	
+
+#include "../ImageTask.hh"
 // include handler
 #include "../CompHandler.hh"
+#include "../ImagePushTimedHandler.hh"
 #include "../ImageQueryHandler.hh"
+#include "../StateChangeHandler.hh"
 
 #define COMP SmartUnicapImageServer::instance()
 
@@ -52,7 +56,9 @@ private:
 
 	// instantiate handler
 	CompHandler compHandler;
+	ImagePushTimedHandler imagePushTimedHandler;
 	ImageQueryHandler imageQueryHandler;
+	StateChangeHandler stateChangeHandler;
 
 	// ThreadQueueHandler 
 
@@ -62,16 +68,21 @@ public:
 	CHS::SmartComponent *component;
 
 	// create mutex
-
+	CHS::SmartMutex NewestImageMutex;
 
 	// create condition mutex
 
 
 	// instantiate tasks
 
+	ImageTask imageTask;
+
 	// ports
+	CHS::PushNewestServer<Smart::CommMutableVideoImage> *imagePushNewestServer;
+	CHS::PushTimedServer<Smart::CommMutableVideoImage> *imagePushTimedServer;
 	CHS::QueryServer<Smart::CommMutableVideoImage, Smart::CommVoid>
 			*imageQueryServer;
+	CHS::SmartStateServer *stateServer;
 
 	void init(int argc, char *argv[]);
 	void run();
@@ -83,35 +94,53 @@ public:
 	}
 
 	// ini parameter
-	struct
+	struct ini_ini
 	{
 
-		struct
+		struct ini_imagePushNewestServer
+		{
+			std::string serviceName;
+		} imagePushNewestServer;
+
+		struct ini_imagePushTimedServer
+		{
+			std::string serviceName;
+			double cycle;
+		} imagePushTimedServer;
+
+		struct ini_imageQueryServer
 		{
 			std::string serviceName;
 		} imageQueryServer;
 
-		struct
+		struct ini_stateServer
+		{
+			std::string serviceName;
+		} stateServer;
+
+		struct ini_component
 		{
 			bool debug_info;
 			std::string name;
 		} component;
-		struct
+		struct ini_hardware
 		{
 			std::string camera_type;
 			bool debug_info;
 			std::string device;
 			std::string identifier;
 		} hardware;
-		struct
+		struct ini_hardware_properties
 		{
 			double auto_exposure;
 			bool autoflag_shutter;
 			bool autoflag_white_balance_mode;
 			double brightness;
+			std::string format;
 			double framerate;
 			double gain;
 			double gamma;
+			unsigned long height;
 			double hue;
 			double saturation;
 			double sharpness;
@@ -121,14 +150,24 @@ public:
 			double white_balance_mode;
 			double white_balance_u;
 			double white_balance_v;
+			unsigned long width;
 		} hardware_properties;
-		struct
+		struct ini_image
 		{
 			bool debug_info;
-			std::string format;
-			unsigned long height;
-			unsigned long width;
+			std::string smart_format;
+			float valid_time_in_sec;
 		} image;
+		struct ini_push_newest
+		{
+			bool active;
+			bool debug_info;
+		} push_newest;
+		struct ini_push_timed
+		{
+			bool active;
+			bool debug_info;
+		} push_timed;
 	} ini;
 
 };

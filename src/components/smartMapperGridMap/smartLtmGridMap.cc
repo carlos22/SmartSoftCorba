@@ -211,7 +211,7 @@ int SmartLtmGridMap::update( Smart::CommMobileLaserScan const &scan, double n )
 }
 
 
-int SmartLtmGridMap::clearMap(int)
+int SmartLtmGridMap::clearMap(int value)
 {
   unsigned int x,y;
 
@@ -219,7 +219,7 @@ int SmartLtmGridMap::clearMap(int)
   {
     for (y=0; y < _gridmap.ySizeCells; y++)
     {
-      _gridmap.cell[x+y * _gridmap.xSizeCells] = MAPPER_FREE;
+      _gridmap.cell[x+y * _gridmap.xSizeCells] = value;
     }
   }
 

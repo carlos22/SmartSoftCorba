@@ -1,6 +1,6 @@
 //--------------------------------------------------------------------------
 //
-//  Copyright (C) 2003 Boris Kluge
+//  Copyright (C) 2003 Boris Kluge, Andreas Steck
 //
 //        schlegel@hs-ulm.de
 //
@@ -52,7 +52,6 @@ LaserThread::LaserThread
   _laser_type("LMS"),
   _laser_device("/dev/ttyS0"),
   _laser_bitrate(38400),
-  _term_bitrate(38400),
   _laser_resolution(50),
   _laser_length_unit(1),
   _laser_verbose(false),
@@ -71,7 +70,6 @@ LaserThread::LaserThread
   parameters.getString("scanner","sick_type",_laser_type);
   parameters.getString("scanner","device",_laser_device);
   parameters.getInt("scanner","speed",_laser_bitrate);
-  parameters.getInt("scanner","term_speed",_term_bitrate);
   parameters.getInt("scanner","resolution",_laser_resolution);
   parameters.getInt("scanner","length_unit",_laser_length_unit);
   parameters.getTruthValue("scanner","verbose",_laser_verbose);
@@ -111,6 +109,8 @@ int LaserThread::svc()
   CommMobileLaserScan scan;
   CommBaseState base_state;
   unsigned long update_count = 0;
+  unsigned long long start = 0, stop = 0;
+  timeval ts;
 
   CommBaseVelocity zero_velocity;
   zero_velocity.set_v(0);
@@ -126,7 +126,7 @@ int LaserThread::svc()
 
   while(!init_laser(laser))
   {
-    std::cerr << "WARNING: failed to init laser, retry in one second" << std::endl;
+    //std::cerr << "WARNING: failed to init laser, retry in one second" << std::endl;
     sleep(1);
   }
 
@@ -258,15 +258,30 @@ int LaserThread::svc()
       CHS::StatusCode push_status = push_server.put(scan);
       if(push_status!=CHS::SMART_OK)
       {
-        std::cerr << "WARNING: error on push (" << CHS::StatusCodeConversion(push_status) << ")" << std::endl;
+        //std::cerr << "WARNING: error on push (" << CHS::StatusCodeConversion(push_status) << ")" << std::endl;
       }
       
       _global_scan_mutex.acquire();
       _global_scan = scan;
       _global_scan_mutex.release();
 
+/*
       const unsigned int index = 180;
-      if(_verbose) std::cout << "Scan " << update_count << " sent." << " Scan Position " << index << " = " << scan.get_scan_distance(index) << " mm" << std::endl;
+      if(_verbose) std::cout << "Scan " << update_count << " sent." << " Scan Position " << index << " = " << scan.get_scan_distance(index) << " mm"<< std::endl;
+*/
+      const unsigned int num_scans_freq = 200;
+      if(update_count== 0)
+      {
+        ts = laser.get_receive_timestamp();
+        start = ts.tv_sec * 1000000 + ts.tv_usec;
+        std::cout << "\n\nlaser is ready. measure frequency (first "<< num_scans_freq << " scans)...\n";
+      }
+      else if(update_count == num_scans_freq)
+      {
+        ts = laser.get_receive_timestamp();
+        stop = ts.tv_sec * 1000000 + ts.tv_usec;
+        std::cout << "...frequency is " << (double)num_scans_freq / (double)(stop-start) * 1000000.0 << " Hz.\n";
+      }
       ++update_count;
     }
     else
@@ -307,7 +322,7 @@ bool LaserThread::init_laser(Smart::SickInterface &laser) const
   }
 
   laser.bitrate = _laser_bitrate;
-  laser.term_bitrate = _term_bitrate;
+  laser.term_bitrate = _laser_bitrate;
   
   if(_laser_type=="LMS")
   {
@@ -332,7 +347,7 @@ bool LaserThread::init_laser(Smart::SickInterface &laser) const
   std::string laser_type;
   if(laser.probe_sick_speed(current_laser_speed, laser_type))
   {
-    std::cerr << "ERROR: probe_laser_speed() failed." << std::endl;
+    //std::cerr << "ERROR: probe_laser_speed() failed." << std::endl;
     return false;
   }
   if(_verbose)

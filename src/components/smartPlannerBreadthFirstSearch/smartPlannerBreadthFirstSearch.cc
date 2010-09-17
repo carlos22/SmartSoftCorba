@@ -49,7 +49,7 @@ class PrintStateChangeHandler;
 // Necessary dummy that libsmartBasicComm will be linked.
 // Problem is that the linkt to smartTimeStamp.idl in smartGridMapComm leads to smartBasicComm
 // removing this will cause strange problems
-Smart::CommTimeStamp dummy;
+//Smart::CommTimeStamp dummy;
 
 // -----------------------------------------------------------------
 // global data
@@ -208,7 +208,7 @@ int PlannerBreadthFirstSearchThread::svc(void)
     // ("pathplanning")
     // ------------------------------------------------
     status = state->acquire("pathplanning");
-    std::cout<<"State active in processing-loop: "<<status<<endl;
+    std::cout<<"State active in processing-loop: "<< status <<endl;
 
     // wait for the next timed trigger
     plannerTriggerLock.acquire();
@@ -231,9 +231,13 @@ int PlannerBreadthFirstSearchThread::svc(void)
     // ------------------------------------------------------------------
     // get next current map and put it into the planner map class
     // ------------------------------------------------------------------
+
+//std::cout << "before acquiring curMapClient - line " << __LINE__ << std::endl;
     status = curMapClient->getUpdate(currentGridMap);
- 
+//std::cout << "after acquiring curMapClient - line " << __LINE__ << std::endl;
+
     currentGridMap.get_parameter(aMapId,aStatus,aTime,aXOffsetMM,aYOffsetMM,aXOffsetCells,aYOffsetCells,aCellSizeMM,aXSizeMM,aYSizeMM,aXSizeCells,aYSizeCells);
+//std::cout << "after getParameter - line " << __LINE__ << std::endl;
 
     if(localState.id != aMapId){
       // map id not vaild
@@ -252,13 +256,16 @@ int PlannerBreadthFirstSearchThread::svc(void)
       // convert from mapper to planner cell values
       // ---------------------------------------------------------------- 
       status2 = plannerMap->convert();
+//std::cout << "after map convert() - line " << __LINE__ << std::endl;
+     
       // ----------------------------------------------------------------
       // mark goal region in the map
       // ----------------------------------------------------------------
-      goalFifoPtr = goalFifoHead;
       plannerGoalLock.acquire();
+      goalFifoPtr = goalFifoHead;
       status2 = goalFifoNext(goalFifoHead,goalFifoTail,&goalFifoPtr,&type,&x1g,&y1g,&x2g,&y2g);
       plannerGoalLock.release();
+//std::cout << "after goal next fifo - line " << __LINE__ << std::endl;
 
       if (status2 != 0) {
         // --------------------------------------------------------------
@@ -270,10 +277,15 @@ int PlannerBreadthFirstSearchThread::svc(void)
         while (status2==0) {
           switch (type) {
             case PLANNER_LINE:
+//std::cout << "before bresenham - line " << __LINE__ << std::endl;
               status2 = plannerMap->bresenham(x1g,y1g,x2g,y2g,MODE_GOAL);
+//std::cout << "after bresenham - line " << __LINE__ << std::endl;
               break;
             case PLANNER_CIRCLE:
+//std::cout << "before circle - line " << __LINE__ << std::endl;
+//std::cout << "line: " << __LINE__ << "  plannerMap->circle("<<x1g<<", "<<y1g<<", "<<x2g<<", "<<MODE_GOAL<<")\n";
               status2 = plannerMap->circle(x1g,y1g,x2g,MODE_GOAL);
+//std::cout << "after circle - line " << __LINE__ << std::endl;
               break;
             default:
               status2 = 1;
@@ -283,7 +295,13 @@ int PlannerBreadthFirstSearchThread::svc(void)
           if (status2 == 0) {
             generalstatus = PLANNER_GOAL_OK;
           }
+//std::cout << "before plannerGoalLock.acquire() - line " << __LINE__ << std::endl;
+          plannerGoalLock.acquire();
+//std::cout << "before goalFifoNext - line " << __LINE__ << std::endl;
           status2 = goalFifoNext(goalFifoHead,goalFifoTail,&goalFifoPtr,&type,&x1g,&y1g,&x2g,&y2g);
+          plannerGoalLock.release();
+//std::cout << "after goal next fifo - line " << __LINE__ << std::endl;
+
         }//while(status==0)
         if (generalstatus != PLANNER_GOAL_OK) {
           // ------------------------------------------------------------
@@ -330,7 +348,9 @@ int PlannerBreadthFirstSearchThread::svc(void)
             // ------------------------------------------------------------
             // no error occured during making the current position
             // ------------------------------------------------------------
+//std::cout << "before wavefrontflood - line " << __LINE__ << std::endl;
             status2 = plannerMap->waveFrontFlood();
+//std::cout << "after wavefrontflood - line " << __LINE__ << std::endl;
             if (status2 != 0) {
               // ------------------------------------------------------------
               // was not able to find a path, no valid goal point
@@ -346,9 +366,11 @@ int PlannerBreadthFirstSearchThread::svc(void)
               // found path, calculate next way point
               // ------------------------------------------------------------
               generalstatus = PLANNER_PATH_FOUND;
+              //std::cout << "PLANNER befor waveFrontOptimizeFirstSegment - line " << __LINE__ << std::endl;
               status2 = plannerMap->waveFrontOptimizeFirstSegment(robotX,robotY,xNextGoal,yNextGoal);
+              //std::cout << "PLANNER before waveFrontFindGoal - line " << __LINE__ << std::endl;
               status2 = plannerMap->waveFrontFindGoal(robotX,robotY,xGoal,yGoal);
-              std::cout << "PLANNER Robot position pos ("<<robotX << ","<<robotY<<")"<<std::endl;
+              //std::cout << "PLANNER Robot position pos ("<<robotX << ","<<robotY<<")"<<std::endl;
               std::cout << "PLANNER  next goal (" << xNextGoal << "," << yNextGoal << ") goal (" << xGoal << "," << yGoal << ")" << std::endl;
            
               plannerGoal.set_goal(xNextGoal,yNextGoal,0.0,xGoal,yGoal,0.0,localState.id,0);
@@ -536,9 +558,12 @@ public:
 
    p.get(oldState);
    s.get(newState);
-   if (oldState==newState) {
+   if (oldState==newState) 
+   {
      return false;
-   } else {
+   } 
+   else 
+   {
      p.set(newState);
      r.set(newState);
      return true;
@@ -583,7 +608,7 @@ int main (int argc, char *argv[])
     // PushTimedClient receiving base state fom smartPioneerBaseServer
     base = new CHS::PushTimedClient<Smart::CommBaseState>(component, "smartPioneerBaseServer", "basestate");
      CHS::StatusCode status1 = base->subscribe(1);
-    if(status!=CHS::SMART_OK)
+    if(status1!=CHS::SMART_OK)
     {
       std::cerr << "ERROR: failed to connect to base state service "<< std::endl;
       std::cerr << "ERROR: (" << CHS::StatusCodeConversion(status1) << ")" << std::endl;

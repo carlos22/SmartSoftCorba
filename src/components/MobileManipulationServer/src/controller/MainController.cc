@@ -166,6 +166,7 @@ namespace mmp
 				}
 			}
 
+			std::cout << cObj.getObjectClass() << " Mahalanobis: " << lastMahalanobisDistance << std::endl;
 			concreteObjects.push_back(cObj);
 		}
 
@@ -262,6 +263,7 @@ namespace mmp
 			{
 				state = "NoPlanFound to Object";
 				std::cout << state<< std::endl;
+				return state;
 			}
 
 			this->openRave->moveRobotToPosition(traj);
@@ -286,6 +288,7 @@ namespace mmp
 			{
 				state = "NoPlanFound Up";
 				std::cout << state << std::endl;
+				return state;
 			}
 
 			std::cout << "close gripper" << std::endl;
@@ -318,6 +321,7 @@ namespace mmp
 			{
 				state = "NoPlanFound to EndPosition";
 				std::cout << state << std::endl;
+				return state;
 			}
 			this->openRave->moveRobotToPosition(traj);
 
@@ -417,7 +421,10 @@ namespace mmp
 
 		pose.setFromValues(x, y, z, phi, theta, psi);
 		this->openRave->calculateIKSolution(pose, raveAngles);
-		this->openRave->convertAnglesOpenRaveToKatana(raveAngles, angles);
+		if (raveAngles.size() > 0)
+		{
+			this->openRave->convertAnglesOpenRaveToKatana(raveAngles, angles);
+		}
 	}
 
 
@@ -427,7 +434,7 @@ namespace mmp
 		mrpt::math::TPoint3D maxPos;
 
 		double obstacleGrowing = 0.02;
-		double obstacleShrinking = 0.02;
+		double obstacleShrinking = 0.012;
 
 		std::ofstream coordFile;
 		std::string coordFileName = COMP->ini.general.tempData + "coords.txt";
@@ -450,7 +457,7 @@ namespace mmp
 
 				// Write XML File
 				this->xmlWriter.writeKinBodyBox(stream.str(), i, maxPos.x - minPos.x - obstacleShrinking,
-						maxPos.y - minPos.y - obstacleShrinking, maxPos.z - minPos.z);
+						maxPos.y - minPos.y - obstacleShrinking, maxPos.z - minPos.z + 0.01);
 				this ->openRave->readKinBody(stream.str(), temp.str(), concreteObjects[i].getPose().getHomogeneousMatrixVal().m_Val, false, true);
 			} else
 			{

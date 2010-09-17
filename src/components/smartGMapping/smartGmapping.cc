@@ -37,13 +37,20 @@
 #include <utils/commandline.h>
 #include <sstream>
 #include <string>
+#include <fstream>	// for ofstream
 #include "commMobileLaserScan.hh"
 #include "commBasePositionUpdate.hh"
 
 
 #define INI_PARAMETERS_FILE "smartGmapping.ini"
 
+
+class PrintStateChangeHandler;
+
 CHS::SmartComponent *component;
+
+PrintStateChangeHandler *stateHandler;
+CHS::SmartStateServer *state;
 
 // -------------------------------------------------------------
 //
@@ -229,6 +236,24 @@ double pi_to_pi(double angle){
 }
 
 
+
+// -------------------------------------------------------------
+// derive the state class and provide handler functions
+// -------------------------------------------------------------
+class PrintStateChangeHandler : public CHS::StateChangeHandler
+{
+public:
+  void handleEnterState(const std::string & s) throw()
+    {
+      std::cout << "    enterHandler  activate   " << s << std::endl;
+    };
+  void handleQuitState(const std::string & s) throw()
+    {
+      std::cout << "    quitHandler   deactivate " << s << std::endl;
+    };
+};
+
+
 using namespace GMapping;
 
 class GmappingThread : public CHS::SmartTask
@@ -252,8 +277,6 @@ int GmappingThread::svc(void)
   laserClient = new CHS::PushNewestClient<Smart::CommMobileLaserScan>(component);
 
   CHS::SendClient<Smart::CommBasePositionUpdate> smartBasePositionUpdateSendClient(component,"smartPioneerBaseServer","positionUpdate");
-
-
 
 
   Smart::CommMobileLaserScan laserscan;
@@ -314,7 +337,8 @@ int GmappingThread::svc(void)
   processor->setUpdateDistances(linearUpdate, angularUpdate, resampleThreshold);
   processor->setgenerateMap(generateMap);
   //OrientedPoint initialPose(xmin+xmax/2, ymin+ymax/2, 0);
-  OrientedPoint initialPose(0, 0, 0);
+  OrientedPoint initialPose(0,0,0);
+
 
   //INITIALIZATION
   processor->init(particles, xmin, ymin, xmax, ymax, delta, initialPose);
@@ -330,8 +354,16 @@ int GmappingThread::svc(void)
   RangeReading rr(0,0);
   double intpart,fractpart;
 
+
 	while (running){
-	   while (CHS::SMART_OK == laserClient->getUpdateWait(laserscan)){
+	   // ----------------------------------------------------------
+   	   // wait for activation
+   	   // ("active")
+  	   // ----------------------------------------------------------
+	   status = state->acquire("active");
+   	   if (status == CHS::SMART_OK) {
+	      while (CHS::SMART_OK == laserClient->getUpdateWait(laserscan)){
+
 		const RangeSensor * rs= m_frontLaser;
         	RangeReading reading(rs, 0);
 	        reading.resize(numScanBeams);
@@ -371,6 +403,7 @@ int GmappingThread::svc(void)
 
 			//this returns true when the algorithm effectively processes (the traveled path since the last processing is over a given threshold)
 			if (processed){
+		cout<<"SLAM odom pose: "<<laserscan.get_base_state().get_base_raw_position().get_x(1)<<" "<<laserscan.get_base_state().get_base_raw_position().get_y(1)<<" "<<pi_to_pi(laserscan.get_base_state().get_base_raw_position().get_base_alpha())<<endl;
 				cerr << "PROCESSED" << endl;
 				//for searching for the BEST PARTICLE INDEX
 				unsigned int best_idx=processor->getBestParticleIndex();
@@ -404,6 +437,7 @@ int GmappingThread::svc(void)
 			        upd_pos.set_cov(1, 1, laserscan.get_base_state().get_base_position().get_cov(1,1));
           			upd_pos.set_cov(2, 2, laserscan.get_base_state().get_base_position().get_cov(2,2));
 				
+				cout<<"SLAM: pos update: old pos: "<<laserscan.get_base_state().get_base_position().get_x(1)<<" "<<laserscan.get_base_state().get_base_position().get_y(1)<<" "<<laserscan.get_base_state().get_base_position().get_base_alpha()<<endl;
 				old_pos.set_x (laserscan.get_base_state().get_base_position().get_x(1), 1);
 			        old_pos.set_y (laserscan.get_base_state().get_base_position().get_y(1), 1);
 			        old_pos.set_z (laserscan.get_base_state().get_base_position().get_z(1), 1);
@@ -419,7 +453,30 @@ int GmappingThread::svc(void)
 			        upd.set_old_position (old_pos);
 			        smartBasePositionUpdateSendClient.send(upd);
  				std::cout<<"Postion update send!"<<std::endl;
-				
+
+
+/* 				{
+				cout<<"m_count: "<<processor->m_count<<endl;
+				std::string sFileExtension = ".mat";
+				std::stringstream sFileName;
+				sFileName << "/home/zafh/SOFTWARE/smartsoft/src/components/smartGMapping/experimentData/" << "estimatedVehiclePos";
+				sFileName << setfill('0') << setw(4) << processor->m_count << sFileExtension;
+
+				ofstream fileStream((sFileName.str()).c_str(), ios::trunc);	// open file for output
+				if(fileStream) // file could be opened
+				{
+					cout<<"File stream opendend!"<<endl;
+					fileStream<<std::scientific<<std::setprecision(7);
+					fileStream <<setw(16)<< pose.x<<endl;
+					fileStream <<setw(16)<< pose.y<<endl;
+					fileStream <<setw(16)<< pose.theta<<endl;
+				}
+				else{
+				cout<<"WARNING: could not open Debug filestream!"<<endl;
+				}
+				fileStream.close();	// close the File
+				}
+*/				
 				cerr << __PRETTY_FUNCTION__  << "CLONING... " << endl;
 				GridSlamProcessor* newProcessor=processor->clone();
 				cerr << "DONE" << endl;
@@ -427,9 +484,14 @@ int GmappingThread::svc(void)
 				delete processor;
 				cerr << "DONE" << endl;
 				processor=newProcessor;
-			}
-		}
-	}
+			} //if processed
+		} //while getUpdateWait(laserscan)
+	   }//if
+	   // -----------------------------------------------------
+	   // unlock state at end of while loop
+	   // -----------------------------------------------------
+	   status = state->release("active");
+	} //while running
 
   return 0;
 }
@@ -444,6 +506,15 @@ int main (int argc, char *argv[])
     component = new CHS::SmartComponent("smartGmapping",argc,argv);
 
     readParameters(argc,argv);
+
+
+    // state StateServer
+    stateHandler = new PrintStateChangeHandler();
+    state = new CHS::SmartStateServer(component,*stateHandler);
+
+    if (state->defineStates("active" ,"active") != CHS::SMART_OK) std::cerr << "ERROR: define state" << std::endl;
+    if (state->activate() != CHS::SMART_OK) std::cerr << "ERROR: activate state" << std::endl;
+
 
     GmappingThread gmappingThread;
     gmappingThread.open();

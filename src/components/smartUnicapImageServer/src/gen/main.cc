@@ -12,7 +12,7 @@
 // smart-robotics.sourceforge.net
 // 
 // Please do not modify this file. It will be re-generated
-// running the workflow.
+// running the code generator.
 //--------------------------------------------------------------------------
 
 #include <iostream>

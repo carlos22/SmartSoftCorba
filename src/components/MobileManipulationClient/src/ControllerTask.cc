@@ -93,8 +93,13 @@ int ControllerTask::svc()
 
 			for (uint32_t i=0; i < scanResult.getObjectListSize(); i++)
 			{
+				double x, y, z, yaw, pitch, roll;
+
 				scanResult.getObjectClass(i, objClass);
-				std::cout << "Id, ObjectClass: " << scanResult.getId(i) << ", " << objClass  << endl;
+				scanResult.getPose(i, x, y, z, yaw, pitch, roll);
+				
+				std::cout << "Id, ObjectClass: " << scanResult.getId(i) << ", " << objClass 
+					  << "  (" << x << ", " << y << ", " << z << ", " << yaw << ", " << pitch << ", " << roll << ")" << endl;
 
 				if (objClass == manipulateObject)
 				{
@@ -102,41 +107,76 @@ int ControllerTask::svc()
 				}
 			}
 
+			manipulateRequest.setObjectListSize(objects.size());
+
+			if (objects.size() > 0)
+			{
+				size_t j = 0;
+				for (; j < objects.size()-1; ++j)
+				{
+					double x, y, z, yaw, pitch, roll;
+
+					// stack objects in each other
+					manipulateRequest.setId(j, scanResult.getId(objects[j]));
+					manipulateRequest.setObjectClass(j, objClass);
+					scanResult.getPose(objects[j+1], x, y, z, yaw, pitch, roll);
+					manipulateRequest.setPose(j, x, y, z + 0.12, atan(y/x), M_PI/2, 0);
+					manipulateRequest.setCommand(j, 1);
+				}
+
+				// manipulate last object
+				manipulateRequest.setId(j, scanResult.getId(objects[j]));
+				manipulateRequest.setObjectClass(j, objClass);
+				manipulateRequest.setMotors(j, 3.13322, 2.13827, 2.87904, 4.98754, 3.1406);
+				manipulateRequest.setCommand(j, 0);
+
+				// send object list
+				status = COMP->manipulateObject->query(manipulateRequest, manipulateResult);
+				std::cout << "query (status): " << CHS::StatusCodeConversion(status) << " result " << endl;
+
+				std::string state;
+
+				for (uint32_t i = 0; i < manipulateResult.getSize(); i++)
+				{
+					manipulateResult.getState(i, state);
+					std::cout << "ObjectId, State: " << manipulateResult.getObjectId(i) << ", " << state << endl;
+				}
+			}
+
+
+/*
 			if (objects.size() >= 2)
 			{
-				double x;
-				double y;
-				double z;
-				double yaw;
-				double pitch;
-				double roll;
+				std::cout << "Two objects found -> stack them\n";
+				double x, y, z, yaw, pitch, roll;
 
 				manipulateRequest.setObjectListSize(2);
 
 				// stack object 1 into object 2
 				manipulateRequest.setId(0, scanResult.getId(objects[0]));
 				manipulateRequest.setObjectClass(0, objClass);
-				scanResult.getPose(scanResult.getId(objects[1]), x, y, z, yaw, pitch, roll);
-				manipulateRequest.setPose(0, x, y, z + 0.09, atan(y/x), M_PI/2, 0);
+				scanResult.getPose(objects[1], x, y, z, yaw, pitch, roll);
+				manipulateRequest.setPose(0, x, y, z + 0.11, atan(y/x), M_PI/2, 0);
 				manipulateRequest.setCommand(0, 1);
 
 				// manipulate object 2
 				manipulateRequest.setId(1, scanResult.getId(objects[1]));
 				manipulateRequest.setObjectClass(1, objClass);
 				manipulateRequest.setMotors(1, 3.13322, 2.13827, 2.87904, 4.98754, 3.1406);
+
+				// send object list
+				status = COMP->manipulateObject->query(manipulateRequest, manipulateResult);
+				std::cout << "query (status): " << CHS::StatusCodeConversion(status) << " result " << endl;
+
+				std::string state;
+
+				for (uint32_t i = 0; i < manipulateResult.getSize(); i++)
+				{
+					manipulateResult.getState(i, state);
+					std::cout << "ObjectId, State: " << manipulateResult.getObjectId(i) << ", " << state << endl;
+				}
 			}
-
-			// send object list
-			status = COMP->manipulateObject->query(manipulateRequest, manipulateResult);
-			std::cout << "query (status): " << CHS::StatusCodeConversion(status) << " result " << endl;
-
-			std::string state;
-
-			for (uint32_t i = 0; i < manipulateResult.getSize(); i++)
-			{
-				manipulateResult.getState(i, state);
-				std::cout << "ObjectId, State: " << manipulateResult.getObjectId(i) << ", " << state << endl;
-			}
+*/
 
 		}
 		else if (command == "getPoint")

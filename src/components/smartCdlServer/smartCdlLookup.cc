@@ -473,6 +473,7 @@ int CdlLookupClass::calculateSpeedValues(
     }
 #endif
 
+
   // ------------------------------------------------------
   // now we have to calculate the evaluation function
   // ------------------------------------------------------
@@ -531,6 +532,8 @@ int CdlLookupClass::calculateSpeedValues(
 //
 //
 
+//  std::cout << "new ----------------------------------------------------\n\n\n";
+
 
   for (vi=ivmin;vi<=ivmax;vi++)
     {
@@ -541,7 +544,6 @@ int CdlLookupClass::calculateSpeedValues(
           ci      = indexVW[vi][wi];
           dist    = (double)(distanceList[ci]);
           angle   = (double)alphaList[ci]/1000.0;
-
           vAccMax = transAccLookup[ci];
           wAccMax = rotAccLookup[ci];
 
@@ -560,7 +562,10 @@ int CdlLookupClass::calculateSpeedValues(
           angle  = angle-abs00(w)*deltat;
           if (angle < 0.0) angle=0.0;
 
-          dist  -= 200.0;
+          // Sicherheitsabstand !!!! ??????
+          //dist  -= 200.0;
+          dist  -= safetyClearance;
+
           angle -= rad00(5.0);
           if (dist  < 0.0) dist  = 0.0;
           if (angle < 0.0) angle = 0.0;
@@ -591,6 +596,7 @@ int CdlLookupClass::calculateSpeedValues(
 
 // factors
 #define BRAKE_SECURITY_FACTOR  1.0
+
 
 
               //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1409,16 +1415,16 @@ int CdlLookupClass::calculateSpeedValues(
                   if (costDist>1.0) costDist=1.0;
                   if ((dist > free) && (vtrans>100.0))
                     {
-                      alpha1=1.0;
-                      alpha2=1.0;
-                      alpha3=2.0;
+                      alpha1=1.0; //1
+                      alpha2=1.0; //1
+                      alpha3=2.0; //2
                       costValue=5+alpha1*costSpeed+alpha2*costDist+alpha3*costHeading;
                     }
                   else
                     {
-                      alpha1=1.0;
-                      alpha2=1.0;
-                      alpha3=1.0;
+                      alpha1=6.0; // 6
+                      alpha2=3.0; // 3
+                      alpha3=1.0; // 1
                       costValue=alpha1*costSpeed+alpha2*costDist+alpha3*costHeading;
                     }
 
@@ -1513,6 +1519,7 @@ int CdlLookupClass::calculateSpeedValues(
                   // used for v-w commands from "outside" (for example from joystick)
                   // commands should be set with setDesiredTranslationSpeed and setHeading
                   // ------------------------------------------------------------------------
+
                   double free   = 1000.0;
                   double angle  = (60.0*M_PI/180.0);
 
@@ -1530,6 +1537,9 @@ int CdlLookupClass::calculateSpeedValues(
 
                   //costValue =  alpha1*costSpeed + alpha3*costHeading;
                   costValue = alpha1*costSpeed + alpha3*costHeading;
+
+                  //if( vtrans == 350 )
+                  //  printf("STRAT v ; w ; costValue ; dist -- %5.2f ; %5.2f ; %10.2f ; %6.2f\n", vtrans , vrot, costValue, dist);
 
                   break;
                 } // CDL_STRATEGY_5
@@ -2006,7 +2016,7 @@ int CdlLookupClass::calculateSpeedValues(
         }
     } // end for (vi=ivmin;vi<=ivmax;vi++)
 
-    std::cout << "cost = " << costResult << "; alpha1 = " << alpha1 << " ; alpha2 = " << alpha2 << " ; alpha3 = " << alpha3 << std::endl;
+    //std::cout << "cost = " << costResult << "; alpha1 = " << alpha1 << " ; alpha2 = " << alpha2 << " ; alpha3 = " << alpha3 << std::endl;
 
 
 #if DEBUG_VW_WINDOW
@@ -2168,6 +2178,12 @@ double CdlLookupClass::getHeading()
 {
   return goalHeadingRelative;
 };
+
+void CdlLookupClass::setSafetyClearance(double sc)
+{
+  safetyClearance = sc;
+}
+
 
 int CdlLookupClass::setMaxDistance(double distance)
 {

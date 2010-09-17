@@ -1,5 +1,5 @@
 //--------------------------------------------------------------------------
-//  Copyright (C) 2009 Jonas Brich
+//  Copyright (C) 2010 Jonas Brich
 //
 //        brich@mail.hs-ulm.de
 //
@@ -8,7 +8,7 @@
 //        Prittwitzstr. 10
 //        89075 Ulm (Germany)
 //
-//  This file is part of the "Unicap Image Server component".
+//  This file is part of the "Unicap Video Server component".
 //
 //  This library is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 #ifndef UNICAP_HH_
 #define UNICAP_HH_
 
+#include "smartSoft.hh"
 #include "externalCommObjectHeaders.hh"
 
 #include <unicap.h>
@@ -42,9 +43,8 @@
  *
  * - The init()-method should be called on startup. It init the Camera with all specified properties in
  * the init-File and opens the capture mode.
- * - The getImage()-method should be called in the handleQuery-method. This method will get the
- * current image from the camera and copies it into the given memoryblock of the Client. The Client
- * is then able to work with this image when the query returns.
+ * - The getImage()-method gets the image from the camera and copies it into the given CommMutableVideoImage.
+ * It is a real copy, the image is a duplicate.
  */
 class Unicap : public ACE_Event_Handler {
 public:
@@ -54,11 +54,15 @@ public:
 
 	int getImage(Smart::CommMutableVideoImage& image);
 
+	bool startCaptureMode();
+	bool stopCaptureMode();
+
 	virtual ~Unicap();
 private:
 	Unicap();
 
 	static Unicap* _instance;
+	static CHS::SmartSemaphore _instance_sem;
 
 	const int MAX_DEVICES;
 	const int MAX_FORMATS;
@@ -69,8 +73,8 @@ private:
 
 	unsigned long int _seq_counter;
 
-	bool handleProperty(double value, unicap_property_t& property);
-	bool handleMenuProperty(int value, unicap_property_t& property);
+	bool _handleProperty(double value, unicap_property_t& property);
+	bool _handleMenuProperty(int value, unicap_property_t& property);
 
 	// This method handles the SIGINT-signal and closes the handle to the camera
 	virtual int handle_signal (int signum, siginfo_t * = 0, ucontext_t * = 0);

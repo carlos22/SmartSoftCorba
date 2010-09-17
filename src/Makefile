@@ -68,6 +68,13 @@ PACKAGES = \
 		$(foreach P, $(wildcard $(C)/*), \
 			$(subst /SMARTSOFT_PACKAGE,,$(wildcard $(P)/SMARTSOFT_PACKAGE)) \
 		) \
+))
+
+PACKAGES += \
+	$(strip $(foreach C, $(CATEGORIES), \
+		$(foreach P, $(wildcard $(C)/*), \
+			$(subst /SMARTSOFT_PACKAGE_MDSD,/src,$(wildcard $(P)/SMARTSOFT_PACKAGE_MDSD)) \
+		) \
 	))
 
 DOC_FILE_LIST = \

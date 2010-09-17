@@ -35,6 +35,8 @@
 
 #include "smartCurrentGridMap.hh"
 
+#include <assert.h>
+
 using namespace Smart;
 
 
@@ -195,7 +197,8 @@ int SmartCurrentGridMap::setLtmOccupation( int threshold, Smart::SmartLtmGridMap
                              _gridmap.ySizeMM,
                              threshold,
                              _gridmap.cell);
-  return status;
+  //return status;
+  return drawBorder();
 }
 
 
@@ -452,8 +455,9 @@ int SmartCurrentGridMap::obstacleGrowing(int x,int y)
     x1 = x + growing_x[i];
     y1 = y + growing_y[i];
 
-    if ((0<=x1) && (x1 < (int)_gridmap.xSizeCells) && (0<=y) && (y1 < (int)_gridmap.ySizeCells)) 
+    if ((0<=x1) && (x1 < (int)_gridmap.xSizeCells) && (0<=y1) && (y1 < (int)_gridmap.ySizeCells)) 
     {
+      assert(_gridmap.cell.length() > x1+y1*_gridmap.xSizeCells);
       if (_gridmap.cell[x1+y1*_gridmap.xSizeCells] != MAPPER_UNDELETABLE) 
       {
         _gridmap.cell[x1+y1*_gridmap.xSizeCells] = MAPPER_GROWING;

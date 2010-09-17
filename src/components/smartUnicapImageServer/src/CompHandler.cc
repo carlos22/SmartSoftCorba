@@ -16,7 +16,7 @@
 // delete it before running the workflow.
 //--------------------------------------------------------------------------
 //
-//  Copyright (C) 2009 Jonas Brich
+//  Copyright (C) 2010 Jonas Brich
 //
 //        brich@mail.hs-ulm.de
 //
@@ -25,7 +25,7 @@
 //        Prittwitzstr. 10
 //        89075 Ulm (Germany)
 //
-//  This file is part of the "Unicap Image Server component".
+//  This file is part of the "Unicap Video Server component".
 //
 //  This library is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU Lesser General Public
@@ -54,40 +54,52 @@
 
 void CompHandler::onStartup() {
 
+	// Init Unicap ...
 	int status = UNICAPINZ->init();
 
 	if (status == 0) {
-		std::cout << "Init successful!\n";
+		std::cout << "Unicap successful init!\n";
 	} else {
-		std::cout << "Init failed!" << std::endl;
+		std::cout << "Unicap init failed!" << std::endl;
 		switch (status) {
 		case -1:
-			std::cerr << "Error: Specified device not found. Cannot find Camera.\n";
+			std::cerr << "Error: (CompHandler) Specified device not found. Cannot find Camera.\n";
 			break;
 		case -2:
-			std::cerr << "Error: Cannot open Camera.\n";
+			std::cerr << "Error: (CompHandler) Cannot open Camera.\n";
 			break;
 		case -3:
-			std::cerr << "Error: Specified format not found.\n";
+			std::cerr << "Error: (CompHandler) Specified format not found.\n";
 			break;
 		case -4:
-			std::cerr << "Error: Format cannot be set.\n";
+			std::cerr << "Error: (CompHandler) Format cannot be set.\n";
 			break;
 		case -5:
-			std::cerr << "Error: Property cannot be set.\n";
+			std::cerr << "Error: (CompHandler) Property cannot be set.\n";
 			break;
 		case -6:
-			std::cerr << "Error: Format for video capturing cannot be get.\n";
+			std::cerr << "Error: (CompHandler) Format for video capturing cannot be get.\n";
 			break;
 		case -7:
-			std::cerr << "Error: Format for video capturing cannot be set.\n";
-			break;
-		case -8:
-			std::cerr << "Error: Capturing mode cannot be started.\n";
+			std::cerr << "Error: (CompHandler) Format for video capturing cannot be set.\n";
 			break;
 		default:
-			std::cerr << "Undefined Error.\n";
+			std::cerr << "Error: (CompHandler) Undefined Error.\n";
 			break;
 		}
 	}
+
+	if (COMP->stateServer->activate() != CHS::SMART_OK) {
+		std::cerr << "Error: (CompHandler) activate state.\n";
+	}
+
+	if (COMP->ini.push_newest.active || COMP->ini.push_timed.active) {
+		COMP->imageTask.open();
+	}
+
+	if (COMP->ini.push_newest.active) {
+		std::cout << "Push Newest initialized.\n";
+	}
+
+
 }

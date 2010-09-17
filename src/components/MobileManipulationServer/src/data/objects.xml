@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CSimpleDatabase-MRPT-Object>
 	<table name="Features">
 		<fields>
@@ -11,541 +11,1801 @@
 			<objectId>1</objectId>
 			<instanceId>0</instanceId>
 			<dimension>0</dimension>
-			<value>0.102621</value>
+			<value>0.094161</value>
 		</record>
 		<record>
 			<objectId>1</objectId>
 			<instanceId>0</instanceId>
 			<dimension>1</dimension>
-			<value>0.074853</value>
+			<value>0.073921</value>
 		</record>
 		<record>
 			<objectId>1</objectId>
 			<instanceId>0</instanceId>
 			<dimension>2</dimension>
-			<value>0.0735146</value>
+			<value>0.0711421</value>
 		</record>
 		<record>
 			<objectId>1</objectId>
 			<instanceId>1</instanceId>
 			<dimension>0</dimension>
-			<value>0.100094</value>
+			<value>0.0987885</value>
 		</record>
 		<record>
 			<objectId>1</objectId>
 			<instanceId>1</instanceId>
 			<dimension>1</dimension>
-			<value>0.0754983</value>
+			<value>0.0725545</value>
 		</record>
 		<record>
 			<objectId>1</objectId>
 			<instanceId>1</instanceId>
 			<dimension>2</dimension>
-			<value>0.0762078</value>
+			<value>0.0758613</value>
 		</record>
 		<record>
 			<objectId>1</objectId>
 			<instanceId>2</instanceId>
 			<dimension>0</dimension>
-			<value>0.0936792</value>
+			<value>0.0858813</value>
 		</record>
 		<record>
 			<objectId>1</objectId>
 			<instanceId>2</instanceId>
 			<dimension>1</dimension>
-			<value>0.0760802</value>
+			<value>0.0754719</value>
 		</record>
 		<record>
 			<objectId>1</objectId>
 			<instanceId>2</instanceId>
 			<dimension>2</dimension>
-			<value>0.0739976</value>
+			<value>0.0772025</value>
 		</record>
 		<record>
 			<objectId>1</objectId>
 			<instanceId>3</instanceId>
 			<dimension>0</dimension>
-			<value>0.104823</value>
+			<value>0.0947521</value>
 		</record>
 		<record>
 			<objectId>1</objectId>
 			<instanceId>3</instanceId>
 			<dimension>1</dimension>
-			<value>0.0730569</value>
+			<value>0.0654229</value>
 		</record>
 		<record>
 			<objectId>1</objectId>
 			<instanceId>3</instanceId>
 			<dimension>2</dimension>
-			<value>0.0743705</value>
+			<value>0.0749606</value>
 		</record>
 		<record>
 			<objectId>1</objectId>
 			<instanceId>4</instanceId>
 			<dimension>0</dimension>
-			<value>0.102755</value>
+			<value>0.0900844</value>
 		</record>
 		<record>
 			<objectId>1</objectId>
 			<instanceId>4</instanceId>
 			<dimension>1</dimension>
-			<value>0.0770203</value>
+			<value>0.0744614</value>
 		</record>
 		<record>
 			<objectId>1</objectId>
 			<instanceId>4</instanceId>
 			<dimension>2</dimension>
-			<value>0.0757119</value>
+			<value>0.0754775</value>
 		</record>
 		<record>
-			<objectId>2</objectId>
-			<instanceId>0</instanceId>
+			<objectId>1</objectId>
+			<instanceId>5</instanceId>
 			<dimension>0</dimension>
-			<value>0.0487169</value>
+			<value>0.0832171</value>
 		</record>
 		<record>
-			<objectId>2</objectId>
-			<instanceId>0</instanceId>
+			<objectId>1</objectId>
+			<instanceId>5</instanceId>
 			<dimension>1</dimension>
-			<value>0.0648302</value>
+			<value>0.0691433</value>
 		</record>
 		<record>
-			<objectId>2</objectId>
-			<instanceId>0</instanceId>
+			<objectId>1</objectId>
+			<instanceId>5</instanceId>
 			<dimension>2</dimension>
-			<value>0.203989</value>
+			<value>0.0732316</value>
 		</record>
 		<record>
-			<objectId>2</objectId>
-			<instanceId>1</instanceId>
+			<objectId>1</objectId>
+			<instanceId>6</instanceId>
 			<dimension>0</dimension>
-			<value>0.0479657</value>
+			<value>0.0890225</value>
 		</record>
 		<record>
-			<objectId>2</objectId>
-			<instanceId>1</instanceId>
+			<objectId>1</objectId>
+			<instanceId>6</instanceId>
 			<dimension>1</dimension>
-			<value>0.0698454</value>
+			<value>0.0697701</value>
 		</record>
 		<record>
-			<objectId>2</objectId>
-			<instanceId>1</instanceId>
+			<objectId>1</objectId>
+			<instanceId>6</instanceId>
 			<dimension>2</dimension>
-			<value>0.202826</value>
+			<value>0.0716243</value>
 		</record>
 		<record>
-			<objectId>2</objectId>
-			<instanceId>2</instanceId>
+			<objectId>1</objectId>
+			<instanceId>7</instanceId>
 			<dimension>0</dimension>
-			<value>0.0668528</value>
+			<value>0.0957098</value>
 		</record>
 		<record>
-			<objectId>2</objectId>
-			<instanceId>2</instanceId>
+			<objectId>1</objectId>
+			<instanceId>7</instanceId>
 			<dimension>1</dimension>
-			<value>0.0655284</value>
+			<value>0.0770805</value>
 		</record>
 		<record>
-			<objectId>2</objectId>
-			<instanceId>2</instanceId>
+			<objectId>1</objectId>
+			<instanceId>7</instanceId>
 			<dimension>2</dimension>
-			<value>0.209707</value>
+			<value>0.0776026</value>
 		</record>
 		<record>
-			<objectId>2</objectId>
-			<instanceId>3</instanceId>
+			<objectId>1</objectId>
+			<instanceId>8</instanceId>
 			<dimension>0</dimension>
-			<value>0.0427253</value>
+			<value>0.0906247</value>
 		</record>
 		<record>
-			<objectId>2</objectId>
-			<instanceId>3</instanceId>
+			<objectId>1</objectId>
+			<instanceId>8</instanceId>
 			<dimension>1</dimension>
-			<value>0.0705975</value>
+			<value>0.073735</value>
 		</record>
 		<record>
-			<objectId>2</objectId>
-			<instanceId>3</instanceId>
+			<objectId>1</objectId>
+			<instanceId>8</instanceId>
 			<dimension>2</dimension>
-			<value>0.21269</value>
+			<value>0.0808827</value>
 		</record>
 		<record>
-			<objectId>2</objectId>
-			<instanceId>4</instanceId>
+			<objectId>1</objectId>
+			<instanceId>9</instanceId>
 			<dimension>0</dimension>
-			<value>0.0642905</value>
+			<value>0.0886822</value>
 		</record>
 		<record>
-			<objectId>2</objectId>
-			<instanceId>4</instanceId>
+			<objectId>1</objectId>
+			<instanceId>9</instanceId>
 			<dimension>1</dimension>
-			<value>0.0651702</value>
+			<value>0.0694378</value>
 		</record>
 		<record>
-			<objectId>2</objectId>
-			<instanceId>4</instanceId>
+			<objectId>1</objectId>
+			<instanceId>9</instanceId>
 			<dimension>2</dimension>
-			<value>0.206131</value>
+			<value>0.0698744</value>
 		</record>
 		<record>
-			<objectId>3</objectId>
-			<instanceId>0</instanceId>
+			<objectId>1</objectId>
+			<instanceId>10</instanceId>
 			<dimension>0</dimension>
-			<value>0.0379041</value>
+			<value>0.093595</value>
 		</record>
 		<record>
-			<objectId>3</objectId>
-			<instanceId>0</instanceId>
+			<objectId>1</objectId>
+			<instanceId>10</instanceId>
 			<dimension>1</dimension>
-			<value>0.0288783</value>
+			<value>0.0732969</value>
 		</record>
 		<record>
-			<objectId>3</objectId>
-			<instanceId>0</instanceId>
+			<objectId>1</objectId>
+			<instanceId>10</instanceId>
 			<dimension>2</dimension>
-			<value>0.187852</value>
+			<value>0.0808335</value>
 		</record>
 		<record>
-			<objectId>3</objectId>
-			<instanceId>1</instanceId>
+			<objectId>1</objectId>
+			<instanceId>11</instanceId>
 			<dimension>0</dimension>
-			<value>0.0340901</value>
+			<value>0.0990141</value>
 		</record>
 		<record>
-			<objectId>3</objectId>
-			<instanceId>1</instanceId>
+			<objectId>1</objectId>
+			<instanceId>11</instanceId>
 			<dimension>1</dimension>
-			<value>0.0301457</value>
+			<value>0.0727983</value>
 		</record>
 		<record>
-			<objectId>3</objectId>
-			<instanceId>1</instanceId>
+			<objectId>1</objectId>
+			<instanceId>11</instanceId>
 			<dimension>2</dimension>
-			<value>0.176645</value>
+			<value>0.076398</value>
 		</record>
 		<record>
-			<objectId>3</objectId>
-			<instanceId>2</instanceId>
+			<objectId>1</objectId>
+			<instanceId>12</instanceId>
 			<dimension>0</dimension>
-			<value>0.0235943</value>
+			<value>0.0901894</value>
 		</record>
 		<record>
-			<objectId>3</objectId>
-			<instanceId>2</instanceId>
+			<objectId>1</objectId>
+			<instanceId>12</instanceId>
 			<dimension>1</dimension>
-			<value>0.0332252</value>
+			<value>0.0694137</value>
 		</record>
 		<record>
-			<objectId>3</objectId>
-			<instanceId>2</instanceId>
+			<objectId>1</objectId>
+			<instanceId>12</instanceId>
 			<dimension>2</dimension>
-			<value>0.180574</value>
+			<value>0.0711131</value>
 		</record>
 		<record>
-			<objectId>3</objectId>
-			<instanceId>3</instanceId>
+			<objectId>1</objectId>
+			<instanceId>13</instanceId>
 			<dimension>0</dimension>
-			<value>0.0643075</value>
+			<value>0.0855337</value>
 		</record>
 		<record>
-			<objectId>3</objectId>
-			<instanceId>3</instanceId>
+			<objectId>1</objectId>
+			<instanceId>13</instanceId>
 			<dimension>1</dimension>
-			<value>0.0388217</value>
+			<value>0.0692794</value>
 		</record>
 		<record>
-			<objectId>3</objectId>
-			<instanceId>3</instanceId>
+			<objectId>1</objectId>
+			<instanceId>13</instanceId>
 			<dimension>2</dimension>
-			<value>0.185274</value>
+			<value>0.0741507</value>
 		</record>
 		<record>
-			<objectId>3</objectId>
-			<instanceId>4</instanceId>
+			<objectId>1</objectId>
+			<instanceId>14</instanceId>
 			<dimension>0</dimension>
-			<value>0.0204686</value>
+			<value>0.090789</value>
 		</record>
 		<record>
-			<objectId>3</objectId>
-			<instanceId>4</instanceId>
+			<objectId>1</objectId>
+			<instanceId>14</instanceId>
 			<dimension>1</dimension>
-			<value>0.0295352</value>
+			<value>0.068128</value>
 		</record>
 		<record>
-			<objectId>3</objectId>
-			<instanceId>4</instanceId>
+			<objectId>1</objectId>
+			<instanceId>14</instanceId>
 			<dimension>2</dimension>
-			<value>0.186829</value>
+			<value>0.0767472</value>
 		</record>
 		<record>
-			<objectId>4</objectId>
-			<instanceId>0</instanceId>
+			<objectId>1</objectId>
+			<instanceId>15</instanceId>
 			<dimension>0</dimension>
-			<value>0.0925407</value>
+			<value>0.0958939</value>
 		</record>
 		<record>
-			<objectId>4</objectId>
-			<instanceId>0</instanceId>
+			<objectId>1</objectId>
+			<instanceId>15</instanceId>
 			<dimension>1</dimension>
-			<value>0.0510547</value>
+			<value>0.0673563</value>
 		</record>
 		<record>
-			<objectId>4</objectId>
-			<instanceId>0</instanceId>
+			<objectId>1</objectId>
+			<instanceId>15</instanceId>
 			<dimension>2</dimension>
-			<value>0.140727</value>
+			<value>0.0696495</value>
 		</record>
 		<record>
-			<objectId>4</objectId>
-			<instanceId>1</instanceId>
+			<objectId>1</objectId>
+			<instanceId>16</instanceId>
 			<dimension>0</dimension>
-			<value>0.0871881</value>
+			<value>0.088311</value>
 		</record>
 		<record>
-			<objectId>4</objectId>
-			<instanceId>1</instanceId>
+			<objectId>1</objectId>
+			<instanceId>16</instanceId>
 			<dimension>1</dimension>
-			<value>0.0527727</value>
+			<value>0.0707845</value>
 		</record>
 		<record>
-			<objectId>4</objectId>
-			<instanceId>1</instanceId>
+			<objectId>1</objectId>
+			<instanceId>16</instanceId>
 			<dimension>2</dimension>
-			<value>0.137556</value>
+			<value>0.0786816</value>
 		</record>
 		<record>
-			<objectId>4</objectId>
-			<instanceId>2</instanceId>
+			<objectId>1</objectId>
+			<instanceId>17</instanceId>
 			<dimension>0</dimension>
-			<value>0.0555657</value>
+			<value>0.0946432</value>
 		</record>
 		<record>
-			<objectId>4</objectId>
-			<instanceId>2</instanceId>
+			<objectId>1</objectId>
+			<instanceId>17</instanceId>
 			<dimension>1</dimension>
-			<value>0.0470983</value>
+			<value>0.0718435</value>
 		</record>
 		<record>
-			<objectId>4</objectId>
-			<instanceId>2</instanceId>
+			<objectId>1</objectId>
+			<instanceId>17</instanceId>
 			<dimension>2</dimension>
-			<value>0.128673</value>
+			<value>0.0805991</value>
 		</record>
 		<record>
-			<objectId>4</objectId>
-			<instanceId>3</instanceId>
+			<objectId>1</objectId>
+			<instanceId>18</instanceId>
 			<dimension>0</dimension>
-			<value>0.0902017</value>
+			<value>0.094347</value>
 		</record>
 		<record>
-			<objectId>4</objectId>
-			<instanceId>3</instanceId>
+			<objectId>1</objectId>
+			<instanceId>18</instanceId>
 			<dimension>1</dimension>
-			<value>0.0579029</value>
+			<value>0.0722346</value>
 		</record>
 		<record>
-			<objectId>4</objectId>
-			<instanceId>3</instanceId>
+			<objectId>1</objectId>
+			<instanceId>18</instanceId>
 			<dimension>2</dimension>
-			<value>0.14241</value>
+			<value>0.0688228</value>
 		</record>
 		<record>
-			<objectId>4</objectId>
-			<instanceId>4</instanceId>
+			<objectId>1</objectId>
+			<instanceId>19</instanceId>
 			<dimension>0</dimension>
-			<value>0.0869864</value>
+			<value>0.0925978</value>
 		</record>
 		<record>
-			<objectId>4</objectId>
-			<instanceId>4</instanceId>
+			<objectId>1</objectId>
+			<instanceId>19</instanceId>
 			<dimension>1</dimension>
-			<value>0.0464553</value>
+			<value>0.0715453</value>
 		</record>
 		<record>
-			<objectId>4</objectId>
-			<instanceId>4</instanceId>
+			<objectId>1</objectId>
+			<instanceId>19</instanceId>
 			<dimension>2</dimension>
-			<value>0.134035</value>
+			<value>0.0728049</value>
 		</record>
 		<record>
-			<objectId>5</objectId>
-			<instanceId>0</instanceId>
+			<objectId>1</objectId>
+			<instanceId>20</instanceId>
 			<dimension>0</dimension>
-			<value>0.0907662</value>
+			<value>0.102376</value>
 		</record>
 		<record>
-			<objectId>5</objectId>
-			<instanceId>0</instanceId>
+			<objectId>1</objectId>
+			<instanceId>20</instanceId>
 			<dimension>1</dimension>
-			<value>0.0377311</value>
+			<value>0.0724419</value>
 		</record>
 		<record>
-			<objectId>5</objectId>
-			<instanceId>0</instanceId>
+			<objectId>1</objectId>
+			<instanceId>20</instanceId>
 			<dimension>2</dimension>
-			<value>0.0641885</value>
+			<value>0.0789835</value>
 		</record>
 		<record>
-			<objectId>5</objectId>
-			<instanceId>1</instanceId>
+			<objectId>1</objectId>
+			<instanceId>21</instanceId>
 			<dimension>0</dimension>
-			<value>0.0910667</value>
+			<value>0.0905981</value>
 		</record>
 		<record>
-			<objectId>5</objectId>
-			<instanceId>1</instanceId>
+			<objectId>1</objectId>
+			<instanceId>21</instanceId>
 			<dimension>1</dimension>
-			<value>0.0243545</value>
+			<value>0.0687416</value>
 		</record>
 		<record>
-			<objectId>5</objectId>
-			<instanceId>1</instanceId>
+			<objectId>1</objectId>
+			<instanceId>21</instanceId>
 			<dimension>2</dimension>
-			<value>0.0690148</value>
+			<value>0.0752456</value>
 		</record>
 		<record>
-			<objectId>5</objectId>
-			<instanceId>2</instanceId>
+			<objectId>1</objectId>
+			<instanceId>22</instanceId>
 			<dimension>0</dimension>
-			<value>0.0911459</value>
+			<value>0.0907605</value>
 		</record>
 		<record>
-			<objectId>5</objectId>
-			<instanceId>2</instanceId>
+			<objectId>1</objectId>
+			<instanceId>22</instanceId>
 			<dimension>1</dimension>
-			<value>0.0431925</value>
+			<value>0.0739903</value>
 		</record>
 		<record>
-			<objectId>5</objectId>
-			<instanceId>2</instanceId>
+			<objectId>1</objectId>
+			<instanceId>22</instanceId>
 			<dimension>2</dimension>
-			<value>0.0644778</value>
+			<value>0.0789382</value>
 		</record>
 		<record>
-			<objectId>5</objectId>
-			<instanceId>3</instanceId>
+			<objectId>1</objectId>
+			<instanceId>23</instanceId>
 			<dimension>0</dimension>
-			<value>0.0824963</value>
+			<value>0.0982725</value>
 		</record>
 		<record>
-			<objectId>5</objectId>
-			<instanceId>3</instanceId>
+			<objectId>1</objectId>
+			<instanceId>23</instanceId>
 			<dimension>1</dimension>
-			<value>0.0250899</value>
+			<value>0.0711659</value>
 		</record>
 		<record>
-			<objectId>5</objectId>
-			<instanceId>3</instanceId>
+			<objectId>1</objectId>
+			<instanceId>23</instanceId>
 			<dimension>2</dimension>
-			<value>0.0650155</value>
+			<value>0.0740756</value>
 		</record>
 		<record>
-			<objectId>5</objectId>
-			<instanceId>4</instanceId>
+			<objectId>1</objectId>
+			<instanceId>24</instanceId>
 			<dimension>0</dimension>
-			<value>0.0880331</value>
+			<value>0.100803</value>
 		</record>
 		<record>
-			<objectId>5</objectId>
-			<instanceId>4</instanceId>
+			<objectId>1</objectId>
+			<instanceId>24</instanceId>
 			<dimension>1</dimension>
-			<value>0.0452115</value>
+			<value>0.0716217</value>
 		</record>
 		<record>
-			<objectId>5</objectId>
-			<instanceId>4</instanceId>
+			<objectId>1</objectId>
+			<instanceId>24</instanceId>
 			<dimension>2</dimension>
-			<value>0.063462</value>
+			<value>0.0760296</value>
 		</record>
 		<record>
-			<objectId>6</objectId>
-			<instanceId>0</instanceId>
+			<objectId>1</objectId>
+			<instanceId>25</instanceId>
 			<dimension>0</dimension>
-			<value>0.150961</value>
+			<value>0.0975997</value>
 		</record>
 		<record>
-			<objectId>6</objectId>
-			<instanceId>0</instanceId>
+			<objectId>1</objectId>
+			<instanceId>25</instanceId>
 			<dimension>1</dimension>
-			<value>0.142396</value>
+			<value>0.0727591</value>
 		</record>
 		<record>
-			<objectId>6</objectId>
-			<instanceId>0</instanceId>
+			<objectId>1</objectId>
+			<instanceId>25</instanceId>
 			<dimension>2</dimension>
-			<value>0.0445866</value>
+			<value>0.080109</value>
 		</record>
 		<record>
-			<objectId>6</objectId>
-			<instanceId>1</instanceId>
+			<objectId>1</objectId>
+			<instanceId>26</instanceId>
 			<dimension>0</dimension>
-			<value>0.15548</value>
+			<value>0.0905466</value>
 		</record>
 		<record>
-			<objectId>6</objectId>
-			<instanceId>1</instanceId>
+			<objectId>1</objectId>
+			<instanceId>26</instanceId>
 			<dimension>1</dimension>
-			<value>0.14221</value>
+			<value>0.0687154</value>
 		</record>
 		<record>
-			<objectId>6</objectId>
-			<instanceId>1</instanceId>
+			<objectId>1</objectId>
+			<instanceId>26</instanceId>
 			<dimension>2</dimension>
-			<value>0.0452927</value>
+			<value>0.0731936</value>
 		</record>
 		<record>
-			<objectId>6</objectId>
-			<instanceId>2</instanceId>
+			<objectId>1</objectId>
+			<instanceId>27</instanceId>
 			<dimension>0</dimension>
-			<value>0.148683</value>
+			<value>0.0896951</value>
 		</record>
 		<record>
-			<objectId>6</objectId>
-			<instanceId>2</instanceId>
+			<objectId>1</objectId>
+			<instanceId>27</instanceId>
 			<dimension>1</dimension>
-			<value>0.137879</value>
+			<value>0.0739208</value>
 		</record>
 		<record>
-			<objectId>6</objectId>
-			<instanceId>2</instanceId>
+			<objectId>1</objectId>
+			<instanceId>27</instanceId>
 			<dimension>2</dimension>
-			<value>0.0419299</value>
+			<value>0.0746596</value>
 		</record>
 		<record>
-			<objectId>6</objectId>
-			<instanceId>3</instanceId>
+			<objectId>1</objectId>
+			<instanceId>28</instanceId>
 			<dimension>0</dimension>
-			<value>0.150739</value>
+			<value>0.0941775</value>
 		</record>
 		<record>
-			<objectId>6</objectId>
-			<instanceId>3</instanceId>
+			<objectId>1</objectId>
+			<instanceId>28</instanceId>
 			<dimension>1</dimension>
-			<value>0.139699</value>
+			<value>0.0716378</value>
 		</record>
 		<record>
-			<objectId>6</objectId>
-			<instanceId>3</instanceId>
+			<objectId>1</objectId>
+			<instanceId>28</instanceId>
 			<dimension>2</dimension>
-			<value>0.0466045</value>
+			<value>0.0771436</value>
 		</record>
 		<record>
-			<objectId>6</objectId>
-			<instanceId>4</instanceId>
+			<objectId>1</objectId>
+			<instanceId>29</instanceId>
 			<dimension>0</dimension>
-			<value>0.145752</value>
+			<value>0.0912384</value>
 		</record>
 		<record>
-			<objectId>6</objectId>
-			<instanceId>4</instanceId>
+			<objectId>1</objectId>
+			<instanceId>29</instanceId>
 			<dimension>1</dimension>
-			<value>0.142042</value>
+			<value>0.0763382</value>
 		</record>
 		<record>
-			<objectId>6</objectId>
-			<instanceId>4</instanceId>
+			<objectId>1</objectId>
+			<instanceId>29</instanceId>
 			<dimension>2</dimension>
-			<value>0.0544389</value>
+			<value>0.0637461</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>30</instanceId>
+			<dimension>0</dimension>
+			<value>0.0912721</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>30</instanceId>
+			<dimension>1</dimension>
+			<value>0.070367</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>30</instanceId>
+			<dimension>2</dimension>
+			<value>0.0920372</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>31</instanceId>
+			<dimension>0</dimension>
+			<value>0.0886081</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>31</instanceId>
+			<dimension>1</dimension>
+			<value>0.0732948</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>31</instanceId>
+			<dimension>2</dimension>
+			<value>0.0747571</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>32</instanceId>
+			<dimension>0</dimension>
+			<value>0.0871134</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>32</instanceId>
+			<dimension>1</dimension>
+			<value>0.0731918</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>32</instanceId>
+			<dimension>2</dimension>
+			<value>0.0727643</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>33</instanceId>
+			<dimension>0</dimension>
+			<value>0.0954732</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>33</instanceId>
+			<dimension>1</dimension>
+			<value>0.0725093</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>33</instanceId>
+			<dimension>2</dimension>
+			<value>0.0726056</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>34</instanceId>
+			<dimension>0</dimension>
+			<value>0.0901136</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>34</instanceId>
+			<dimension>1</dimension>
+			<value>0.0749912</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>34</instanceId>
+			<dimension>2</dimension>
+			<value>0.0802559</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>35</instanceId>
+			<dimension>0</dimension>
+			<value>0.0911789</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>35</instanceId>
+			<dimension>1</dimension>
+			<value>0.0696872</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>35</instanceId>
+			<dimension>2</dimension>
+			<value>0.0832345</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>36</instanceId>
+			<dimension>0</dimension>
+			<value>0.0833706</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>36</instanceId>
+			<dimension>1</dimension>
+			<value>0.0727846</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>36</instanceId>
+			<dimension>2</dimension>
+			<value>0.0727537</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>37</instanceId>
+			<dimension>0</dimension>
+			<value>0.0881096</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>37</instanceId>
+			<dimension>1</dimension>
+			<value>0.070397</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>37</instanceId>
+			<dimension>2</dimension>
+			<value>0.0664545</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>38</instanceId>
+			<dimension>0</dimension>
+			<value>0.087051</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>38</instanceId>
+			<dimension>1</dimension>
+			<value>0.0752825</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>38</instanceId>
+			<dimension>2</dimension>
+			<value>0.0773253</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>39</instanceId>
+			<dimension>0</dimension>
+			<value>0.0890047</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>39</instanceId>
+			<dimension>1</dimension>
+			<value>0.0735436</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>39</instanceId>
+			<dimension>2</dimension>
+			<value>0.0761709</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>40</instanceId>
+			<dimension>0</dimension>
+			<value>0.0991475</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>40</instanceId>
+			<dimension>1</dimension>
+			<value>0.0707876</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>40</instanceId>
+			<dimension>2</dimension>
+			<value>0.0774045</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>41</instanceId>
+			<dimension>0</dimension>
+			<value>0.0934745</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>41</instanceId>
+			<dimension>1</dimension>
+			<value>0.0736043</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>41</instanceId>
+			<dimension>2</dimension>
+			<value>0.0804858</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>42</instanceId>
+			<dimension>0</dimension>
+			<value>0.0869279</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>42</instanceId>
+			<dimension>1</dimension>
+			<value>0.0696216</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>42</instanceId>
+			<dimension>2</dimension>
+			<value>0.0680719</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>43</instanceId>
+			<dimension>0</dimension>
+			<value>0.0903501</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>43</instanceId>
+			<dimension>1</dimension>
+			<value>0.0716592</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>43</instanceId>
+			<dimension>2</dimension>
+			<value>0.0710315</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>44</instanceId>
+			<dimension>0</dimension>
+			<value>0.0833861</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>44</instanceId>
+			<dimension>1</dimension>
+			<value>0.0674663</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>44</instanceId>
+			<dimension>2</dimension>
+			<value>0.0719937</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>45</instanceId>
+			<dimension>0</dimension>
+			<value>0.0854833</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>45</instanceId>
+			<dimension>1</dimension>
+			<value>0.0695224</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>45</instanceId>
+			<dimension>2</dimension>
+			<value>0.0774184</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>46</instanceId>
+			<dimension>0</dimension>
+			<value>0.0923827</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>46</instanceId>
+			<dimension>1</dimension>
+			<value>0.0715035</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>46</instanceId>
+			<dimension>2</dimension>
+			<value>0.0726294</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>47</instanceId>
+			<dimension>0</dimension>
+			<value>0.0919704</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>47</instanceId>
+			<dimension>1</dimension>
+			<value>0.0736591</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>47</instanceId>
+			<dimension>2</dimension>
+			<value>0.073517</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>48</instanceId>
+			<dimension>0</dimension>
+			<value>0.0890287</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>48</instanceId>
+			<dimension>1</dimension>
+			<value>0.0706363</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>48</instanceId>
+			<dimension>2</dimension>
+			<value>0.0785489</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>49</instanceId>
+			<dimension>0</dimension>
+			<value>0.0924388</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>49</instanceId>
+			<dimension>1</dimension>
+			<value>0.0756038</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>49</instanceId>
+			<dimension>2</dimension>
+			<value>0.074989</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>50</instanceId>
+			<dimension>0</dimension>
+			<value>0.0895654</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>50</instanceId>
+			<dimension>1</dimension>
+			<value>0.0700761</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>50</instanceId>
+			<dimension>2</dimension>
+			<value>0.0744529</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>51</instanceId>
+			<dimension>0</dimension>
+			<value>0.0839517</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>51</instanceId>
+			<dimension>1</dimension>
+			<value>0.0703186</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>51</instanceId>
+			<dimension>2</dimension>
+			<value>0.0709549</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>52</instanceId>
+			<dimension>0</dimension>
+			<value>0.0964233</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>52</instanceId>
+			<dimension>1</dimension>
+			<value>0.0700002</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>52</instanceId>
+			<dimension>2</dimension>
+			<value>0.0688461</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>53</instanceId>
+			<dimension>0</dimension>
+			<value>0.0910947</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>53</instanceId>
+			<dimension>1</dimension>
+			<value>0.0783055</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>53</instanceId>
+			<dimension>2</dimension>
+			<value>0.0806913</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>54</instanceId>
+			<dimension>0</dimension>
+			<value>0.0871804</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>54</instanceId>
+			<dimension>1</dimension>
+			<value>0.0704186</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>54</instanceId>
+			<dimension>2</dimension>
+			<value>0.0604523</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>55</instanceId>
+			<dimension>0</dimension>
+			<value>0.0898818</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>55</instanceId>
+			<dimension>1</dimension>
+			<value>0.0710256</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>55</instanceId>
+			<dimension>2</dimension>
+			<value>0.0713238</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>56</instanceId>
+			<dimension>0</dimension>
+			<value>0.0993448</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>56</instanceId>
+			<dimension>1</dimension>
+			<value>0.0688988</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>56</instanceId>
+			<dimension>2</dimension>
+			<value>0.0685048</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>57</instanceId>
+			<dimension>0</dimension>
+			<value>0.0972956</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>57</instanceId>
+			<dimension>1</dimension>
+			<value>0.0735012</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>57</instanceId>
+			<dimension>2</dimension>
+			<value>0.0719717</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>58</instanceId>
+			<dimension>0</dimension>
+			<value>0.083628</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>58</instanceId>
+			<dimension>1</dimension>
+			<value>0.0665861</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>58</instanceId>
+			<dimension>2</dimension>
+			<value>0.0763041</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>59</instanceId>
+			<dimension>0</dimension>
+			<value>0.0873031</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>59</instanceId>
+			<dimension>1</dimension>
+			<value>0.0761218</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>59</instanceId>
+			<dimension>2</dimension>
+			<value>0.0816657</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>60</instanceId>
+			<dimension>0</dimension>
+			<value>0.0907574</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>60</instanceId>
+			<dimension>1</dimension>
+			<value>0.0738209</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>60</instanceId>
+			<dimension>2</dimension>
+			<value>0.0688717</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>61</instanceId>
+			<dimension>0</dimension>
+			<value>0.093289</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>61</instanceId>
+			<dimension>1</dimension>
+			<value>0.0721265</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>61</instanceId>
+			<dimension>2</dimension>
+			<value>0.0746534</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>62</instanceId>
+			<dimension>0</dimension>
+			<value>0.0901737</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>62</instanceId>
+			<dimension>1</dimension>
+			<value>0.0704401</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>62</instanceId>
+			<dimension>2</dimension>
+			<value>0.0709815</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>63</instanceId>
+			<dimension>0</dimension>
+			<value>0.0946773</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>63</instanceId>
+			<dimension>1</dimension>
+			<value>0.0700027</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>63</instanceId>
+			<dimension>2</dimension>
+			<value>0.0730276</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>64</instanceId>
+			<dimension>0</dimension>
+			<value>0.0967995</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>64</instanceId>
+			<dimension>1</dimension>
+			<value>0.0755546</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>64</instanceId>
+			<dimension>2</dimension>
+			<value>0.0720273</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>65</instanceId>
+			<dimension>0</dimension>
+			<value>0.0893757</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>65</instanceId>
+			<dimension>1</dimension>
+			<value>0.0726364</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>65</instanceId>
+			<dimension>2</dimension>
+			<value>0.0770751</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>66</instanceId>
+			<dimension>0</dimension>
+			<value>0.0784034</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>66</instanceId>
+			<dimension>1</dimension>
+			<value>0.0793077</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>66</instanceId>
+			<dimension>2</dimension>
+			<value>0.0747274</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>67</instanceId>
+			<dimension>0</dimension>
+			<value>0.0911634</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>67</instanceId>
+			<dimension>1</dimension>
+			<value>0.073681</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>67</instanceId>
+			<dimension>2</dimension>
+			<value>0.0721596</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>68</instanceId>
+			<dimension>0</dimension>
+			<value>0.091668</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>68</instanceId>
+			<dimension>1</dimension>
+			<value>0.0735786</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>68</instanceId>
+			<dimension>2</dimension>
+			<value>0.0686612</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>69</instanceId>
+			<dimension>0</dimension>
+			<value>0.0916467</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>69</instanceId>
+			<dimension>1</dimension>
+			<value>0.0717027</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>69</instanceId>
+			<dimension>2</dimension>
+			<value>0.0747718</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>70</instanceId>
+			<dimension>0</dimension>
+			<value>0.0902934</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>70</instanceId>
+			<dimension>1</dimension>
+			<value>0.0739018</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>70</instanceId>
+			<dimension>2</dimension>
+			<value>0.0737439</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>71</instanceId>
+			<dimension>0</dimension>
+			<value>0.0833396</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>71</instanceId>
+			<dimension>1</dimension>
+			<value>0.0710026</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>71</instanceId>
+			<dimension>2</dimension>
+			<value>0.0749437</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>72</instanceId>
+			<dimension>0</dimension>
+			<value>0.0847789</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>72</instanceId>
+			<dimension>1</dimension>
+			<value>0.0735688</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>72</instanceId>
+			<dimension>2</dimension>
+			<value>0.0692218</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>73</instanceId>
+			<dimension>0</dimension>
+			<value>0.0843056</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>73</instanceId>
+			<dimension>1</dimension>
+			<value>0.0721225</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>73</instanceId>
+			<dimension>2</dimension>
+			<value>0.0799445</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>74</instanceId>
+			<dimension>0</dimension>
+			<value>0.094574</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>74</instanceId>
+			<dimension>1</dimension>
+			<value>0.0768783</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>74</instanceId>
+			<dimension>2</dimension>
+			<value>0.0744044</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>75</instanceId>
+			<dimension>0</dimension>
+			<value>0.0926475</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>75</instanceId>
+			<dimension>1</dimension>
+			<value>0.0735078</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>75</instanceId>
+			<dimension>2</dimension>
+			<value>0.0704992</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>76</instanceId>
+			<dimension>0</dimension>
+			<value>0.0854176</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>76</instanceId>
+			<dimension>1</dimension>
+			<value>0.0702643</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>76</instanceId>
+			<dimension>2</dimension>
+			<value>0.0760117</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>77</instanceId>
+			<dimension>0</dimension>
+			<value>0.0890876</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>77</instanceId>
+			<dimension>1</dimension>
+			<value>0.0719385</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>77</instanceId>
+			<dimension>2</dimension>
+			<value>0.0679152</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>78</instanceId>
+			<dimension>0</dimension>
+			<value>0.0887533</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>78</instanceId>
+			<dimension>1</dimension>
+			<value>0.0707074</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>78</instanceId>
+			<dimension>2</dimension>
+			<value>0.0715278</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>79</instanceId>
+			<dimension>0</dimension>
+			<value>0.0863273</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>79</instanceId>
+			<dimension>1</dimension>
+			<value>0.0725781</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>79</instanceId>
+			<dimension>2</dimension>
+			<value>0.0686387</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>80</instanceId>
+			<dimension>0</dimension>
+			<value>0.091111</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>80</instanceId>
+			<dimension>1</dimension>
+			<value>0.0674514</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>80</instanceId>
+			<dimension>2</dimension>
+			<value>0.076827</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>81</instanceId>
+			<dimension>0</dimension>
+			<value>0.0792948</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>81</instanceId>
+			<dimension>1</dimension>
+			<value>0.0736338</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>81</instanceId>
+			<dimension>2</dimension>
+			<value>0.0719983</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>82</instanceId>
+			<dimension>0</dimension>
+			<value>0.0794986</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>82</instanceId>
+			<dimension>1</dimension>
+			<value>0.0689189</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>82</instanceId>
+			<dimension>2</dimension>
+			<value>0.0768515</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>83</instanceId>
+			<dimension>0</dimension>
+			<value>0.0797125</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>83</instanceId>
+			<dimension>1</dimension>
+			<value>0.072452</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>83</instanceId>
+			<dimension>2</dimension>
+			<value>0.0751264</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>84</instanceId>
+			<dimension>0</dimension>
+			<value>0.0922348</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>84</instanceId>
+			<dimension>1</dimension>
+			<value>0.0715945</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>84</instanceId>
+			<dimension>2</dimension>
+			<value>0.0737069</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>85</instanceId>
+			<dimension>0</dimension>
+			<value>0.0942111</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>85</instanceId>
+			<dimension>1</dimension>
+			<value>0.071232</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>85</instanceId>
+			<dimension>2</dimension>
+			<value>0.0791876</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>86</instanceId>
+			<dimension>0</dimension>
+			<value>0.0892248</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>86</instanceId>
+			<dimension>1</dimension>
+			<value>0.0718273</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>86</instanceId>
+			<dimension>2</dimension>
+			<value>0.0701815</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>87</instanceId>
+			<dimension>0</dimension>
+			<value>0.0874659</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>87</instanceId>
+			<dimension>1</dimension>
+			<value>0.0714073</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>87</instanceId>
+			<dimension>2</dimension>
+			<value>0.072672</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>88</instanceId>
+			<dimension>0</dimension>
+			<value>0.087567</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>88</instanceId>
+			<dimension>1</dimension>
+			<value>0.0671045</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>88</instanceId>
+			<dimension>2</dimension>
+			<value>0.0703279</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>89</instanceId>
+			<dimension>0</dimension>
+			<value>0.0893531</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>89</instanceId>
+			<dimension>1</dimension>
+			<value>0.0704517</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>89</instanceId>
+			<dimension>2</dimension>
+			<value>0.0681575</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>90</instanceId>
+			<dimension>0</dimension>
+			<value>0.0839748</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>90</instanceId>
+			<dimension>1</dimension>
+			<value>0.074808</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>90</instanceId>
+			<dimension>2</dimension>
+			<value>0.0685667</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>91</instanceId>
+			<dimension>0</dimension>
+			<value>0.0938325</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>91</instanceId>
+			<dimension>1</dimension>
+			<value>0.0711863</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>91</instanceId>
+			<dimension>2</dimension>
+			<value>0.0653617</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>92</instanceId>
+			<dimension>0</dimension>
+			<value>0.088124</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>92</instanceId>
+			<dimension>1</dimension>
+			<value>0.0722342</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>92</instanceId>
+			<dimension>2</dimension>
+			<value>0.0765266</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>93</instanceId>
+			<dimension>0</dimension>
+			<value>0.096001</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>93</instanceId>
+			<dimension>1</dimension>
+			<value>0.0698016</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>93</instanceId>
+			<dimension>2</dimension>
+			<value>0.0726955</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>94</instanceId>
+			<dimension>0</dimension>
+			<value>0.094919</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>94</instanceId>
+			<dimension>1</dimension>
+			<value>0.0703541</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>94</instanceId>
+			<dimension>2</dimension>
+			<value>0.0701214</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>95</instanceId>
+			<dimension>0</dimension>
+			<value>0.0828155</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>95</instanceId>
+			<dimension>1</dimension>
+			<value>0.070318</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>95</instanceId>
+			<dimension>2</dimension>
+			<value>0.0672979</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>96</instanceId>
+			<dimension>0</dimension>
+			<value>0.0880067</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>96</instanceId>
+			<dimension>1</dimension>
+			<value>0.0721444</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>96</instanceId>
+			<dimension>2</dimension>
+			<value>0.0700652</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>97</instanceId>
+			<dimension>0</dimension>
+			<value>0.086229</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>97</instanceId>
+			<dimension>1</dimension>
+			<value>0.0695123</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>97</instanceId>
+			<dimension>2</dimension>
+			<value>0.0758042</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>98</instanceId>
+			<dimension>0</dimension>
+			<value>0.0885991</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>98</instanceId>
+			<dimension>1</dimension>
+			<value>0.0748642</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>98</instanceId>
+			<dimension>2</dimension>
+			<value>0.075304</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>99</instanceId>
+			<dimension>0</dimension>
+			<value>0.0921125</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>99</instanceId>
+			<dimension>1</dimension>
+			<value>0.0780163</value>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>99</instanceId>
+			<dimension>2</dimension>
+			<value>0.0793575</value>
 		</record>
 	</table>
 	<table name="Instances">
@@ -574,104 +1834,384 @@
 			<instanceId>4</instanceId>
 		</record>
 		<record>
-			<objectId>2</objectId>
-			<instanceId>0</instanceId>
+			<objectId>1</objectId>
+			<instanceId>5</instanceId>
 		</record>
 		<record>
-			<objectId>2</objectId>
-			<instanceId>1</instanceId>
+			<objectId>1</objectId>
+			<instanceId>6</instanceId>
 		</record>
 		<record>
-			<objectId>2</objectId>
-			<instanceId>2</instanceId>
+			<objectId>1</objectId>
+			<instanceId>7</instanceId>
 		</record>
 		<record>
-			<objectId>2</objectId>
-			<instanceId>3</instanceId>
+			<objectId>1</objectId>
+			<instanceId>8</instanceId>
 		</record>
 		<record>
-			<objectId>2</objectId>
-			<instanceId>4</instanceId>
+			<objectId>1</objectId>
+			<instanceId>9</instanceId>
 		</record>
 		<record>
-			<objectId>3</objectId>
-			<instanceId>0</instanceId>
+			<objectId>1</objectId>
+			<instanceId>10</instanceId>
 		</record>
 		<record>
-			<objectId>3</objectId>
-			<instanceId>1</instanceId>
+			<objectId>1</objectId>
+			<instanceId>11</instanceId>
 		</record>
 		<record>
-			<objectId>3</objectId>
-			<instanceId>2</instanceId>
+			<objectId>1</objectId>
+			<instanceId>12</instanceId>
 		</record>
 		<record>
-			<objectId>3</objectId>
-			<instanceId>3</instanceId>
+			<objectId>1</objectId>
+			<instanceId>13</instanceId>
 		</record>
 		<record>
-			<objectId>3</objectId>
-			<instanceId>4</instanceId>
+			<objectId>1</objectId>
+			<instanceId>14</instanceId>
 		</record>
 		<record>
-			<objectId>4</objectId>
-			<instanceId>0</instanceId>
+			<objectId>1</objectId>
+			<instanceId>15</instanceId>
 		</record>
 		<record>
-			<objectId>4</objectId>
-			<instanceId>1</instanceId>
+			<objectId>1</objectId>
+			<instanceId>16</instanceId>
 		</record>
 		<record>
-			<objectId>4</objectId>
-			<instanceId>2</instanceId>
+			<objectId>1</objectId>
+			<instanceId>17</instanceId>
 		</record>
 		<record>
-			<objectId>4</objectId>
-			<instanceId>3</instanceId>
+			<objectId>1</objectId>
+			<instanceId>18</instanceId>
 		</record>
 		<record>
-			<objectId>4</objectId>
-			<instanceId>4</instanceId>
+			<objectId>1</objectId>
+			<instanceId>19</instanceId>
 		</record>
 		<record>
-			<objectId>5</objectId>
-			<instanceId>0</instanceId>
+			<objectId>1</objectId>
+			<instanceId>20</instanceId>
 		</record>
 		<record>
-			<objectId>5</objectId>
-			<instanceId>1</instanceId>
+			<objectId>1</objectId>
+			<instanceId>21</instanceId>
 		</record>
 		<record>
-			<objectId>5</objectId>
-			<instanceId>2</instanceId>
+			<objectId>1</objectId>
+			<instanceId>22</instanceId>
 		</record>
 		<record>
-			<objectId>5</objectId>
-			<instanceId>3</instanceId>
+			<objectId>1</objectId>
+			<instanceId>23</instanceId>
 		</record>
 		<record>
-			<objectId>5</objectId>
-			<instanceId>4</instanceId>
+			<objectId>1</objectId>
+			<instanceId>24</instanceId>
 		</record>
 		<record>
-			<objectId>6</objectId>
-			<instanceId>0</instanceId>
+			<objectId>1</objectId>
+			<instanceId>25</instanceId>
 		</record>
 		<record>
-			<objectId>6</objectId>
-			<instanceId>1</instanceId>
+			<objectId>1</objectId>
+			<instanceId>26</instanceId>
 		</record>
 		<record>
-			<objectId>6</objectId>
-			<instanceId>2</instanceId>
+			<objectId>1</objectId>
+			<instanceId>27</instanceId>
 		</record>
 		<record>
-			<objectId>6</objectId>
-			<instanceId>3</instanceId>
+			<objectId>1</objectId>
+			<instanceId>28</instanceId>
 		</record>
 		<record>
-			<objectId>6</objectId>
-			<instanceId>4</instanceId>
+			<objectId>1</objectId>
+			<instanceId>29</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>30</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>31</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>32</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>33</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>34</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>35</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>36</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>37</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>38</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>39</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>40</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>41</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>42</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>43</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>44</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>45</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>46</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>47</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>48</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>49</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>50</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>51</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>52</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>53</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>54</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>55</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>56</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>57</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>58</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>59</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>60</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>61</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>62</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>63</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>64</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>65</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>66</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>67</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>68</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>69</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>70</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>71</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>72</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>73</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>74</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>75</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>76</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>77</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>78</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>79</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>80</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>81</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>82</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>83</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>84</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>85</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>86</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>87</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>88</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>89</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>90</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>91</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>92</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>93</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>94</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>95</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>96</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>97</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>98</instanceId>
+		</record>
+		<record>
+			<objectId>1</objectId>
+			<instanceId>99</instanceId>
 		</record>
 	</table>
 	<table name="Objects">
@@ -682,22 +2222,6 @@
 		<record>
 			<id>1</id>
 			<name>Becher</name>
-		</record>
-		<record>
-			<id>2</id>
-			<name>Flasche</name>
-		</record>
-		<record>
-			<id>3</id>
-			<name>Kerze</name>
-		</record>
-		<record>
-			<id>4</id>
-			<name>RedBull</name>
-		</record>
-		<record>
-			<id>6</id>
-			<name>Schuessel</name>
 		</record>
 	</table>
 </CSimpleDatabase-MRPT-Object>

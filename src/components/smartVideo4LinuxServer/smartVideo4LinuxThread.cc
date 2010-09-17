@@ -2,12 +2,12 @@
 //
 //  Copyright (C) 2003 Boris Kluge
 //
-//        schlegel@hs-ulm.de
+//        kluge@faw.uni-ulm.de
 //
-//        Prof. Dr. Christian Schlegel
-//        University of Applied Sciences
-//        Prittwitzstr. 10
-//        D-89075 Ulm
+//        FAW Ulm
+//        Research Institute for Applied Knowledge Processing
+//        Helmholtzstr. 16
+//        D-89081 Ulm
 //        Germany
 //
 //  This program is free software; you can redistribute it and/or
@@ -21,9 +21,8 @@
 //  Lesser General Public License for more details.
 //
 //  You should have received a copy of the GNU Lesser General Public
-//  License along with this program; if not, write to the Free Software
+//  License along with this library; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-//
 //
 // --------------------------------------------------------------------------
 
@@ -40,7 +39,7 @@ using namespace Smart;
 
 Video4LinuxThread::Video4LinuxThread
 (
-    CHS::SmartComponent &component,
+    CHS::SmartComponent &component, 
     CHS::SmartParameter &parameters
 )
 : _component(component),
@@ -109,7 +108,7 @@ int Video4LinuxThread::svc()
   video_mbuf vid_mbuf;
   video_mmap vid_mmap;
   unsigned char *vid_mem = 0;
-  if(_use_hardware)
+  if(_use_hardware) 
   {
     fd = ::open(_device.c_str(), O_RDWR);
     if(fd<0)
@@ -129,9 +128,9 @@ int Video4LinuxThread::svc()
 
     if(_hardware_verbose)
     {
-      std::cout << "Connected to \"" << vid_cap.name << " Channels: "<< vid_cap.channels << "\" video device." << std::endl;
+      std::cout << "Connected to \"" << vid_cap.name << "\" video device." << std::endl;
     }
-
+    
     if((vid_cap.type & VID_TYPE_CAPTURE)==0)
     {
       std::cerr << "ERROR: device does not support capturing." << std::endl;
@@ -156,8 +155,8 @@ int Video4LinuxThread::svc()
         close(fd);
         return -1;
       }
-
-      if(_hardware_verbose)
+      
+      if(_hardware_verbose) 
       {
         std::cout << "Channel " << vid_chan.channel << " is \"" << vid_chan.name << "\" (";
         if(vid_chan.type==VIDEO_TYPE_TV)
@@ -180,7 +179,7 @@ int Video4LinuxThread::svc()
         channel = vid_chan.channel;
       }
     }
-
+    
     if(channel<0)
     {
       std::cerr << "WARNING: channel \"" << _channel << "\" not found, using channel 0" << std::endl;
@@ -302,7 +301,7 @@ int Video4LinuxThread::svc()
     {
       push_ring_buffer[i] = new CommResizableVideoImage(_width,_height,_format);
     }
-
+    
     if(_push_verbose) std::cout << "Creating ring buffer cleanup thread." << std::endl;
     push_buffer_cleanup_thread = new PushBufferCleanupThread;
     push_buffer_cleanup_thread->open();
@@ -335,7 +334,7 @@ int Video4LinuxThread::svc()
     vid_win.flags  = _capture_flags;
     if(_hardware_verbose)
     {
-      std::cout << "Setting capture window size to " << _width << "x" << _height << ", flags=0x"
+      std::cout << "Setting capture window size to " << _width << "x" << _height << ", flags=0x" 
                 << std::hex << std::setw(8) << std::setfill('0') << _capture_flags << std::dec << std::endl;
     }
     if(ioctl(fd, VIDIOCSWIN, &vid_win)<0)
@@ -369,7 +368,7 @@ int Video4LinuxThread::svc()
       std::cout << "Actual size is " << _width << "x" << _height << std::endl;
       std::cout << "Actual flags=0x" << std::hex << std::setw(8) << std::setfill('0') << vid_win.flags << std::dec << std::endl;
     }
-
+    
     vid_mmap.height = _height;
     vid_mmap.width = _width;
     vid_mmap.format = _convert_smart_to_v4l_format(_format);
@@ -411,7 +410,7 @@ int Video4LinuxThread::svc()
     }
 
     if(_verbose) _statistics(0);
-
+        
     // access buffer...
     image_data = vid_mem + vid_mbuf.offsets[buffer];
 
@@ -420,10 +419,8 @@ int Video4LinuxThread::svc()
       if(push_stride_countdown==0)
       {
         push_stride_countdown = _push_stride;
-
-        std::cout << "Debug: --0--" << std::endl;
+        
         CommMutableVideoImage *image = push_ring_buffer[push_ring_buffer_index];
-        std::cout << "Debug: --1--" << std::endl;
         unsigned int ref_count = 1;
         if((!image->try_get_ref_count(ref_count)) || (ref_count>1))
         {
@@ -431,14 +428,12 @@ int Video4LinuxThread::svc()
           push_buffer_cleanup_thread->remove_reference_to(image); // directly removing could block!
           image = new CommResizableVideoImage(_width,_height,_format);
           push_ring_buffer[push_ring_buffer_index] = image;
-        std::cout << "Debug: --2--" << std::endl;
         }
-
+        
         // copy image data...
         image->set_data(image_data);
         image->set_sequence_counter(seq_count);
-        std::cout << "Debug: --3--" << std::endl;
-
+        
         // ...and push
         push_server->put(*image);
         if(_push_verbose) std::cout << "Pushed data" << std::endl;
@@ -491,7 +486,7 @@ int Video4LinuxThread::svc()
 
     ++buffer;
     if(buffer==vid_mbuf.frames) buffer = 0;
-
+    
     ++seq_count;
   }
 
@@ -503,7 +498,7 @@ int Video4LinuxThread::svc()
     {
       delete push_ring_buffer[i];
     }
-
+    
     if(_push_verbose) std::cout << "Stopping ring buffer cleanup thread." << std::endl;
     push_buffer_cleanup_thread->stop();
     delete push_buffer_cleanup_thread;
@@ -544,7 +539,7 @@ void Video4LinuxThread::_statistics(int where)
   static timeval frame_start_time;
   static bool started = false;
   static unsigned int integrated_time_ms = 0;
-
+  
   if(where==0)
   {
     gettimeofday(&frame_start_time,0);
@@ -618,7 +613,7 @@ CommVideoImage::Format Video4LinuxThread::_convert_v4l_to_smart_format(int forma
     case VIDEO_PALETTE_YUV420P: return CommVideoImage::YUV420P;
     case VIDEO_PALETTE_YUV422P: return CommVideoImage::YUV422P;
     case VIDEO_PALETTE_YUV411P: return CommVideoImage::YUV411P;
-    default:
+    default: 
     {
       std::cerr << "WARNING: unknown V4L format \"" << format << "\"" << std::endl;
       return CommVideoImage::RGB24;

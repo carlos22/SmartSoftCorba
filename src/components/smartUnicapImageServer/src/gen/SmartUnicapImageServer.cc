@@ -12,7 +12,7 @@
 // smart-robotics.sourceforge.net
 // 
 // Please do not modify this file. It will be re-generated
-// running the workflow.
+// running the code generator.
 //--------------------------------------------------------------------------
 
 #include "SmartUnicapImageServer.hh"
@@ -22,33 +22,43 @@ SmartUnicapImageServer::SmartUnicapImageServer()
 {
 	std::cout << "constructor SmartUnicapImageServer\n";
 
+	ini.imagePushNewestServer.serviceName = "imageNewest";
+	ini.imagePushTimedServer.serviceName = "imageTimed";
+	ini.imagePushTimedServer.cycle = 0.06;
 	ini.imageQueryServer.serviceName = "imageQuery";
-	ini.component.name = "smartUnicapImageServer";
-	ini.component.debug_info = false;
-	ini.image.height = 768;
+	ini.stateServer.serviceName = "stateServer";
 	ini.image.debug_info = false;
-	ini.image.format = "Y(Mono)";
-	ini.image.width = 1024;
-	ini.hardware_properties.shutter = 0.014300;
-	ini.hardware_properties.saturation = 128;
-	ini.hardware_properties.trigger_mode = 0;
-	ini.hardware_properties.autoflag_white_balance_mode = false;
-	ini.hardware_properties.framerate = 15;
-	ini.hardware_properties.white_balance_v = 2000;
-	ini.hardware_properties.autoflag_shutter = false;
-	ini.hardware_properties.auto_exposure = 100;
-	ini.hardware_properties.gamma = 128;
-	ini.hardware_properties.trigger_polarity = 0;
-	ini.hardware_properties.sharpness = 3;
-	ini.hardware_properties.white_balance_mode = 3;
-	ini.hardware_properties.white_balance_u = 2000;
-	ini.hardware_properties.gain = 100;
-	ini.hardware_properties.brightness = 16;
-	ini.hardware_properties.hue = 128;
+	ini.image.valid_time_in_sec = 1.0;
+	ini.image.smart_format = "grey";
+	ini.push_newest.active = false;
+	ini.push_newest.debug_info = false;
 	ini.hardware.camera_type = "FireWire";
-	ini.hardware.debug_info = false;
-	ini.hardware.identifier = "SONY DFW-X710 v1.03A 2917744";
 	ini.hardware.device = "/dev/raw1394";
+	ini.hardware.identifier = "SONY DFW-X710 v1.03A 2917744";
+	ini.hardware.debug_info = false;
+	ini.push_timed.active = false;
+	ini.push_timed.debug_info = false;
+	ini.component.debug_info = false;
+	ini.component.name = "smartUnicapImageServer";
+	ini.hardware_properties.autoflag_shutter = false;
+	ini.hardware_properties.hue = 128;
+	ini.hardware_properties.white_balance_u = 2000;
+	ini.hardware_properties.sharpness = 3;
+	ini.hardware_properties.gain = 100;
+	ini.hardware_properties.white_balance_mode = 3;
+	ini.hardware_properties.shutter = 0.014300;
+	ini.hardware_properties.auto_exposure = 100;
+	ini.hardware_properties.saturation = 128;
+	ini.hardware_properties.trigger_polarity = 0;
+	ini.hardware_properties.white_balance_v = 2000;
+	ini.hardware_properties.autoflag_white_balance_mode = false;
+	ini.hardware_properties.trigger_mode = 0;
+	ini.hardware_properties.brightness = 16;
+	ini.hardware_properties.gamma = 128;
+	ini.hardware_properties.height = 768;
+	ini.hardware_properties.width = 1024;
+	ini.hardware_properties.framerate = 15;
+	ini.hardware_properties.format = "Y(Mono)";
 }
 
 void SmartUnicapImageServer::init(int argc, char *argv[])
@@ -60,9 +70,23 @@ void SmartUnicapImageServer::init(int argc, char *argv[])
 		loadParameter(argc, argv);
 
 		// create ports
+		imagePushNewestServer = new CHS::PushNewestServer<
+				Smart::CommMutableVideoImage>(component,
+				ini.imagePushNewestServer.serviceName);
+		imagePushTimedServer = new CHS::PushTimedServer<
+				Smart::CommMutableVideoImage>(component,
+				ini.imagePushTimedServer.serviceName, imagePushTimedHandler,
+				ini.imagePushTimedServer.cycle);
+
 		imageQueryServer = new CHS::QueryServer<Smart::CommMutableVideoImage,
 				Smart::CommVoid>(component, ini.imageQueryServer.serviceName,
 				imageQueryHandler);
+
+		stateServer = new CHS::SmartStateServer(component,
+				ini.stateServer.serviceName, stateChangeHandler);
+		// define states for stateServer (CHS::SmartStateServer) 
+		if (stateServer->defineStates("active", "active") != CHS::SMART_OK)
+			std::cerr << "ERROR: define state" << std::endl;
 
 	} catch (const CORBA::Exception &)
 	{
@@ -83,6 +107,19 @@ void SmartUnicapImageServer::run()
 
 void SmartUnicapImageServer::loadParameter(int argc, char *argv[])
 {
+	/* 
+	 Parameters can be specified via command line -filename=<filename>
+	 
+	 With this parameter present:
+	 - The component will look for the file in the current working directory, 
+	 a path relative to the current directory or any absolute path
+	 - The component will use the default values if the file cannot be found
+	 
+	 With this parameter absent:
+	 - <Name of Component>.ini will be read from current working directory, if found there
+	 - $SMART_ROOT/etc/<Name of Component>.ini will be read otherwise
+	 - Default values will be used if neither found in working directory or /etc   
+	 */
 	CHS::SmartParameter parameter;
 
 	// load parameters
@@ -120,53 +157,73 @@ void SmartUnicapImageServer::loadParameter(int argc, char *argv[])
 
 
 		// load parameter
+		parameter.getString("imagePushNewestServer", "serviceName",
+				ini.imagePushNewestServer.serviceName);
+		parameter.getString("imagePushTimedServer", "serviceName",
+				ini.imagePushTimedServer.serviceName);
+		parameter.getDouble("imagePushTimedServer", "cycle",
+				ini.imagePushTimedServer.cycle);
 		parameter.getString("imageQueryServer", "serviceName",
 				ini.imageQueryServer.serviceName);
-		parameter.getString("component", "name", ini.component.name);
+		parameter.getString("stateServer", "serviceName",
+				ini.stateServer.serviceName);
+		parameter.getTruthValue("image", "debug_info", ini.image.debug_info);
+		parameter.getDouble("image", "valid_time_in_sec",
+				ini.image.valid_time_in_sec);
+		parameter.getString("image", "smart_format", ini.image.smart_format);
+		parameter.getTruthValue("push_newest", "active", ini.push_newest.active);
+		parameter.getTruthValue("push_newest", "debug_info",
+				ini.push_newest.debug_info);
+		parameter.getString("hardware", "camera_type", ini.hardware.camera_type);
+		parameter.getString("hardware", "device", ini.hardware.device);
+		parameter.getString("hardware", "identifier", ini.hardware.identifier);
+		parameter.getTruthValue("hardware", "debug_info",
+				ini.hardware.debug_info);
+		parameter.getTruthValue("push_timed", "active", ini.push_timed.active);
+		parameter.getTruthValue("push_timed", "debug_info",
+				ini.push_timed.debug_info);
 		parameter.getTruthValue("component", "debug_info",
 				ini.component.debug_info);
-		parameter.getInt("image", "height", ini.image.height);
-		parameter.getTruthValue("image", "debug_info", ini.image.debug_info);
-		parameter.getString("image", "format", ini.image.format);
-		parameter.getInt("image", "width", ini.image.width);
+		parameter.getString("component", "name", ini.component.name);
+		parameter.getTruthValue("hardware_properties", "autoflag_shutter",
+				ini.hardware_properties.autoflag_shutter);
+		parameter.getDouble("hardware_properties", "hue",
+				ini.hardware_properties.hue);
+		parameter.getDouble("hardware_properties", "white_balance_u",
+				ini.hardware_properties.white_balance_u);
+		parameter.getDouble("hardware_properties", "sharpness",
+				ini.hardware_properties.sharpness);
+		parameter.getDouble("hardware_properties", "gain",
+				ini.hardware_properties.gain);
+		parameter.getDouble("hardware_properties", "white_balance_mode",
+				ini.hardware_properties.white_balance_mode);
 		parameter.getDouble("hardware_properties", "shutter",
 				ini.hardware_properties.shutter);
+		parameter.getDouble("hardware_properties", "auto_exposure",
+				ini.hardware_properties.auto_exposure);
 		parameter.getDouble("hardware_properties", "saturation",
 				ini.hardware_properties.saturation);
-		parameter.getInt("hardware_properties", "trigger_mode",
-				ini.hardware_properties.trigger_mode);
+		parameter.getInt("hardware_properties", "trigger_polarity",
+				ini.hardware_properties.trigger_polarity);
+		parameter.getDouble("hardware_properties", "white_balance_v",
+				ini.hardware_properties.white_balance_v);
 		parameter.getTruthValue("hardware_properties",
 				"autoflag_white_balance_mode",
 				ini.hardware_properties.autoflag_white_balance_mode);
-		parameter.getDouble("hardware_properties", "framerate",
-				ini.hardware_properties.framerate);
-		parameter.getDouble("hardware_properties", "white_balance_v",
-				ini.hardware_properties.white_balance_v);
-		parameter.getTruthValue("hardware_properties", "autoflag_shutter",
-				ini.hardware_properties.autoflag_shutter);
-		parameter.getDouble("hardware_properties", "auto_exposure",
-				ini.hardware_properties.auto_exposure);
-		parameter.getDouble("hardware_properties", "gamma",
-				ini.hardware_properties.gamma);
-		parameter.getInt("hardware_properties", "trigger_polarity",
-				ini.hardware_properties.trigger_polarity);
-		parameter.getDouble("hardware_properties", "sharpness",
-				ini.hardware_properties.sharpness);
-		parameter.getDouble("hardware_properties", "white_balance_mode",
-				ini.hardware_properties.white_balance_mode);
-		parameter.getDouble("hardware_properties", "white_balance_u",
-				ini.hardware_properties.white_balance_u);
-		parameter.getDouble("hardware_properties", "gain",
-				ini.hardware_properties.gain);
+		parameter.getInt("hardware_properties", "trigger_mode",
+				ini.hardware_properties.trigger_mode);
 		parameter.getDouble("hardware_properties", "brightness",
 				ini.hardware_properties.brightness);
-		parameter.getDouble("hardware_properties", "hue",
-				ini.hardware_properties.hue);
-		parameter.getString("hardware", "camera_type", ini.hardware.camera_type);
-		parameter.getTruthValue("hardware", "debug_info",
-				ini.hardware.debug_info);
-		parameter.getString("hardware", "identifier", ini.hardware.identifier);
-		parameter.getString("hardware", "device", ini.hardware.device);
+		parameter.getDouble("hardware_properties", "gamma",
+				ini.hardware_properties.gamma);
+		parameter.getInt("hardware_properties", "height",
+				ini.hardware_properties.height);
+		parameter.getInt("hardware_properties", "width",
+				ini.hardware_properties.width);
+		parameter.getDouble("hardware_properties", "framerate",
+				ini.hardware_properties.framerate);
+		parameter.getString("hardware_properties", "format",
+				ini.hardware_properties.format);
 
 	} catch (const CORBA::Exception &)
 	{

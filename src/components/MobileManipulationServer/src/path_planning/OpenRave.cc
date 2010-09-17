@@ -579,6 +579,8 @@ namespace mmp
 		TransformMatrix transform = this->robot->GetActiveManipulator()->GetEndEffectorTransform();
 		transform.trans.z += getExtents(object).x;
 		RaveVector<dReal> rotation(0, 1, 0);
+		transform.trans.z -= (getExtents(object).z + 0.025);
+		//transform.trans.z -= (getExtents(object).z + 0.03);
 		object->SetTransform(transform);
 		this->robot->Grab(object, NULL);
 		//		string result;
