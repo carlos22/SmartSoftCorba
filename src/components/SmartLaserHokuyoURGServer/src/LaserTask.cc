@@ -43,7 +43,7 @@
 //--------------------------------------------------------------------------
 
 #include "LaserTask.hh"
-#include "CommManipulatorObjects/commMobileManipulatorState.hh"
+#include "commMobileManipulatorState.hh"
 
 #include "gen/SmartLaserHokuyoURGServer.hh"
 #include <EulerTransformationMatrices.hh>
@@ -134,8 +134,8 @@ bool LaserTask::accquireNewScan(Smart::CommMobileLaserScan& scan) {
 int LaserTask::svc() {
 	Smart::CommMobileLaserScan scan;
 	Smart::CommBaseState base_state;
-	CommManipulatorObjects::CommManipulatorState manipulator_state;
-	CommManipulatorObjects::CommMobileManipulatorState mobile_manipulator_state;
+	Smart::CommManipulatorState manipulator_state;
+	Smart::CommMobileManipulatorState mobile_manipulator_state;
 
 	Smart::CommBaseVelocity zero_velocity;
 	zero_velocity.set_v(0);

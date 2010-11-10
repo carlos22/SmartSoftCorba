@@ -43,8 +43,6 @@
 //--------------------------------------------------------------------------
 
 // put the headerfiles of the used external communication objects here!
-#define CommExternalObjects Smart
-
 #include "commVoid.hh"
 #include "commMobileLaserScan.hh"
 #include "commTimeStamp.hh"

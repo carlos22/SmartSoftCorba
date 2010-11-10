@@ -49,7 +49,7 @@
 
 // include communication objects
 #include "externalCommObjectHeaders.hh"
-#include <CommManipulatorObjects/commMobileManipulatorState.hh>
+#include <commMobileManipulatorState.hh>
 
 void CompHandler::onStartup() {
 	std::cout << "startup - put your startupCode in CompHandler::onStartup()!!!\n";

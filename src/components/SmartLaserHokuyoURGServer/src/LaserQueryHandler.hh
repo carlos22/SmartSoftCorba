@@ -49,7 +49,7 @@
 
 // include communication objects
 #include "externalCommObjectHeaders.hh"
-#include <CommManipulatorObjects/commMobileManipulatorState.hh>
+#include <commMobileManipulatorState.hh>
 
 #include "gen/LaserQueryHandlerCore.hh"
 
