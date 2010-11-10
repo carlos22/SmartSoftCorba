@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_2KPH4MrkEd688Ztvebp4-A/101" xmlns:SmartMARS_1="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_2KPH4MrkEd688Ztvebp4-A/101 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_2LsgcMrkEd688Ztvebp4-A http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+  <uml:Model xmi:id="_tLy84DHUEd-W7cKfHymkbw" name="SmartLaserHokuyoURGServer_pim">
+    <elementImport xmi:id="_56z9MDKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_PU-psJf7Ed6diMgK3usWsg"/>
+    </elementImport>
+    <elementImport xmi:id="_5675ADKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_KPWXMJf8Ed6diMgK3usWsg"/>
+    </elementImport>
+    <elementImport xmi:id="_57B_oDKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_PgL-sJf8Ed6diMgK3usWsg"/>
+    </elementImport>
+    <elementImport xmi:id="_57ItUDKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_nume8JgGEd6s7_SKW4BMcg"/>
+    </elementImport>
+    <elementImport xmi:id="_57QCEDKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_aAbuEJhvEd6s7_SKW4BMcg"/>
+    </elementImport>
+    <elementImport xmi:id="_57Yk8DKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_LyqD4MeaEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_57iV8DKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_ak6-UMeaEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_57t8IDKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_LwqDUMebEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_575iUDKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_PhIrUMebEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_58FvkDKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_U4r-0MebEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_58TyADKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_Y9db0MebEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_58kQsDKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_qK6mUMebEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_581WcDKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_tE_x0MebEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_59I4cDKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_v21nUMebEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_59bzYDKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_xOHjUMebEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_59vVYDKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_7kHt0MebEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_5-DecDKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#__6hGUMebEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_5-XngDKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_Ck5B4MecEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_5-rwkDKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_Ghy8UMecEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_5_BHwDKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_MHnVUMecEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_5_Y7MDKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_Qn7e0MecEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_5_vggDKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_W1MSUMecEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_6AKXQDKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_y7hD0MecEd6vIvH_b0MLkA"/>
+    </elementImport>
+    <elementImport xmi:id="_6AnDMDKEEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_fwNf8MrmEd6fDquU7V04LQ"/>
+    </elementImport>
+    <elementImport xmi:id="_almewDKNEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_rMVAkNQ_Ed6nTeGEf54M4w"/>
+    </elementImport>
+    <elementImport xmi:id="_anqUQDKNEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#__cgVMNQ_Ed6nTeGEf54M4w"/>
+    </elementImport>
+    <elementImport xmi:id="_aoL4sDKNEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_a_vAsNRAEd6nTeGEf54M4w"/>
+    </elementImport>
+    <elementImport xmi:id="_aopywDKNEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_mPzmwNRAEd6nTeGEf54M4w"/>
+    </elementImport>
+    <elementImport xmi:id="_apb14DKNEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_fhLWINRBEd6nTeGEf54M4w"/>
+    </elementImport>
+    <elementImport xmi:id="_ap_PgDKNEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_ENpvANRLEd6zv9zsUcRbiQ"/>
+    </elementImport>
+    <elementImport xmi:id="_aqiCEDKNEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_qKM-wNRLEd6zv9zsUcRbiQ"/>
+    </elementImport>
+    <elementImport xmi:id="_arENkDKNEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_izW_MN_fEd6mtOmaBIShAA"/>
+    </elementImport>
+    <elementImport xmi:id="_a3SEoDKNEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_w4c_sN_hEd6JssC1ymuMlA"/>
+    </elementImport>
+    <elementImport xmi:id="_a4ciQDKNEd-6z8hIrFdGMQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_0DexQN_hEd6JssC1ymuMlA"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:Component" xmi:id="_tLy84THUEd-W7cKfHymkbw" name="SmartLaserHokuyoURGServer">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_p_5_sDKEEd-6z8hIrFdGMQ" name="baseTimedClient" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_MS35oDKFEd-6z8hIrFdGMQ" name="laserQueryServer" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_rRxhIDKNEd-6z8hIrFdGMQ" name="manipulatorTimedClient" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_95TLADKPEd-6z8hIrFdGMQ" name="laserPushNewestServer" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_jHX6UELaEd-ct70wlBtMaQ" name="stateServer" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_Cype8FKiEd-AxPEv4WCKsg" name="laserPushTimedServer" aggregation="composite"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_SbWVwDJvEd-SvN0H3YB-5w" name="scanner">
+        <ownedAttribute xmi:id="_Qc0-IDJwEd-SvN0H3YB-5w" name="device" isUnique="false">
+          <ownedComment xmi:id="_GRjyEDJyEd-SvN0H3YB-5w" annotatedElement="_Qc0-IDJwEd-SvN0H3YB-5w">
+            <body>The device for the laser ranger.</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_Wq_JgDJwEd-SvN0H3YB-5w" value="/dev/ttyACM0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_Y4zE4DJwEd-SvN0H3YB-5w" name="speed" isUnique="false">
+          <ownedComment xmi:id="_IvnI4DJyEd-SvN0H3YB-5w" annotatedElement="_Y4zE4DJwEd-SvN0H3YB-5w">
+            <body>Speed for communication (bps). Default = 115200</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_do0eUDJwEd-SvN0H3YB-5w" value="115200"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_vFWmoDJwEd-SvN0H3YB-5w" name="verbose" isUnique="false">
+          <ownedComment xmi:id="_nm60QDJyEd-SvN0H3YB-5w" annotatedElement="_vFWmoDJwEd-SvN0H3YB-5w">
+            <body>Set the component to verbose. Default = false</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_0eoYcDJwEd-SvN0H3YB-5w"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_gmEdIDJxEd-SvN0H3YB-5w" name="x" isUnique="false">
+          <ownedComment xmi:id="_DHC94DJyEd-SvN0H3YB-5w" annotatedElement="_gmEdIDJxEd-SvN0H3YB-5w">
+            <body>The x position [mm] of the scanner on the robot, etc. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_pgXeoDJxEd-SvN0H3YB-5w"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_hIqz4DJxEd-SvN0H3YB-5w" name="y" isUnique="false">
+          <ownedComment xmi:id="_simLsOZ6Ed-L_LayEWa7Ow" annotatedElement="_hIqz4DJxEd-SvN0H3YB-5w">
+            <body>The y position [mm] of the scanner on the robot, etc. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_sB1V0DJxEd-SvN0H3YB-5w"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_h-iE4DJxEd-SvN0H3YB-5w" name="z" isUnique="false">
+          <ownedComment xmi:id="_t9T2MOZ6Ed-L_LayEWa7Ow" annotatedElement="_h-iE4DJxEd-SvN0H3YB-5w">
+            <body>The z position [mm] of the scanner on the robot, etc. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_uBXkoDJxEd-SvN0H3YB-5w"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_jxi6oDJxEd-SvN0H3YB-5w" name="azimuth" isUnique="false">
+          <ownedComment xmi:id="_Nm3XsFj-Ed-mR6TLo8gKxQ" annotatedElement="_jxi6oDJxEd-SvN0H3YB-5w">
+            <body>The azimuth angle [rad] of the scanner on the robot, etc. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_MCez0Fj-Ed-mR6TLo8gKxQ" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_6eIjsDyrEd-k451kr4T2rw" name="elevation" isUnique="false">
+          <ownedComment xmi:id="_QwD9QFj-Ed-mR6TLo8gKxQ" annotatedElement="_6eIjsDyrEd-k451kr4T2rw">
+            <body>The elevation angle [rad] of the scanner on the robot, etc. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_LN2R4Fj-Ed-mR6TLo8gKxQ" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="__hqH8DyrEd-k451kr4T2rw" name="roll" isUnique="false">
+          <ownedComment xmi:id="_WisDMFj-Ed-mR6TLo8gKxQ" annotatedElement="__hqH8DyrEd-k451kr4T2rw">
+            <body>The roll angle [rad] of the scanner on the robot, etc. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_BydF4DysEd-k451kr4T2rw"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_OPJbIOZVEd-L_LayEWa7Ow" name="min_range" isUnique="false">
+          <ownedComment xmi:id="_7FwTIOZ6Ed-L_LayEWa7Ow" annotatedElement="_OPJbIOZVEd-L_LayEWa7Ow">
+            <body>The min distance [mm] of allowed measurements. Default = 20</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_2AAhIOZVEd-L_LayEWa7Ow" value="20"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_3VTgIOZVEd-L_LayEWa7Ow" name="max_range" isUnique="false">
+          <ownedComment xmi:id="_J9_SsOZ7Ed-L_LayEWa7Ow" annotatedElement="_3VTgIOZVEd-L_LayEWa7Ow">
+            <body>The max distance [mm] of allowed measurements. Default = 5600</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_5KpRIOZVEd-L_LayEWa7Ow" value="5600"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="__sXRsOZVEd-L_LayEWa7Ow" name="opening_angle" isUnique="false">
+          <ownedComment xmi:id="_Lu52sOZ7Ed-L_LayEWa7Ow" annotatedElement="__sXRsOZVEd-L_LayEWa7Ow">
+            <body>The opening angle [1/100 deg] which should be used. It is possible to give a smaller value than the laser ranger has. Default = 24000</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_CNVZoOZWEd-L_LayEWa7Ow" value="24000"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_aj1FkOZlEd-L_LayEWa7Ow" name="type" isUnique="false">
+          <ownedComment xmi:id="_TplyIOZ3Ed-L_LayEWa7Ow" annotatedElement="_aj1FkOZlEd-L_LayEWa7Ow">
+            <body>The type of the connected laser ranger. Supported types are URG-04LX, URG-04LX-UG01,  UBG-05LX-F01, UHG-08LX, UTM-30LX .Default = URG-04LX.</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_eMQk0OZlEd-L_LayEWa7Ow" value="URG-04LX"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_3v_bgDJwEd-SvN0H3YB-5w" name="base_manipulator">
+        <ownedAttribute xmi:id="_6AvWIDJwEd-SvN0H3YB-5w" name="on_base" isUnique="false">
+          <ownedComment xmi:id="_pUOqoDJyEd-SvN0H3YB-5w" annotatedElement="_6AvWIDJwEd-SvN0H3YB-5w">
+            <body>If the laser ranger is mounted on a robot set it to true. Default = true</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_9ew8MDJwEd-SvN0H3YB-5w" value="true"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_K2i1oDJxEd-SvN0H3YB-5w" name="x" isUnique="false">
+          <ownedComment xmi:id="_r7tDMDJyEd-SvN0H3YB-5w" annotatedElement="_K2i1oDJxEd-SvN0H3YB-5w">
+            <body>The default base x position [mm] if on_base = false. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_Ni2D0DJxEd-SvN0H3YB-5w"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_N86JoDJxEd-SvN0H3YB-5w" name="y" isUnique="false">
+          <ownedComment xmi:id="_0DREoOZ2Ed-L_LayEWa7Ow" annotatedElement="_N86JoDJxEd-SvN0H3YB-5w">
+            <body>The default base y position [mm] if on_base = false. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_P5nt8DJxEd-SvN0H3YB-5w"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_QPBWMDJxEd-SvN0H3YB-5w" name="z" isUnique="false">
+          <ownedComment xmi:id="_1178IOZ2Ed-L_LayEWa7Ow" annotatedElement="_QPBWMDJxEd-SvN0H3YB-5w">
+            <body>The default base z position [mm] if on_base = false. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_UCXsADJxEd-SvN0H3YB-5w"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_VqfgYDJxEd-SvN0H3YB-5w" name="base_a" isUnique="false">
+          <ownedComment xmi:id="_EI7goOZ3Ed-L_LayEWa7Ow" annotatedElement="_VqfgYDJxEd-SvN0H3YB-5w">
+            <body>The default base azimuth angle [rad] if on_base = false. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_X2sSMDJxEd-SvN0H3YB-5w"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_YGoysDJxEd-SvN0H3YB-5w" name="steer_a" isUnique="false">
+          <ownedComment xmi:id="_KNV6IOZ3Ed-L_LayEWa7Ow" annotatedElement="_YGoysDJxEd-SvN0H3YB-5w">
+            <body>The default base steer angle [rad] if on_base = false. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_aoMwgDJxEd-SvN0H3YB-5w"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_a4PXoDJxEd-SvN0H3YB-5w" name="turret_a" isUnique="false">
+          <ownedComment xmi:id="_Lw5-oOZ3Ed-L_LayEWa7Ow" annotatedElement="_a4PXoDJxEd-SvN0H3YB-5w">
+            <body>The default turret angle [rad] if on_base = false. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_dhOMEDJxEd-SvN0H3YB-5w"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_XFyyMDKcEd-gm7RAOr25aA" name="on_manipulator" isUnique="false">
+          <ownedComment xmi:id="_fFfDIOZ2Ed-L_LayEWa7Ow" annotatedElement="_XFyyMDKcEd-gm7RAOr25aA">
+            <body>If the laser ranger is mounted on a manipulator set it to true. Default = false</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_bKWz0DKcEd-gm7RAOr25aA"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_UXnAcOZQEd-L_LayEWa7Ow" name="on_turret" isUnique="false">
+          <ownedComment xmi:id="_q3Oy4OZ2Ed-L_LayEWa7Ow" annotatedElement="_UXnAcOZQEd-L_LayEWa7Ow">
+            <body>If the laser ranger is mounted on a robot turret set it to true. Default = false</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_WwKWwOZREd-L_LayEWa7Ow"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_SMta0DKFEd-6z8hIrFdGMQ" name="LaserQueryHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_G2ou4DKPEd-6z8hIrFdGMQ" name="ScanLock"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_W51R0Dy4Ed-aTfXMddeT8A" name="services">
+        <ownedAttribute xmi:id="_Yz_RYDy4Ed-aTfXMddeT8A" name="activate_push_newest" isUnique="false">
+          <ownedComment xmi:id="_Nwi7IOZ3Ed-L_LayEWa7Ow" annotatedElement="_Yz_RYDy4Ed-aTfXMddeT8A">
+            <body>If true, the push newest service is activated. Default = true</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_pNE_sDy4Ed-aTfXMddeT8A" value="true"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_p6uv4Dy4Ed-aTfXMddeT8A" name="activate_push_timed" isUnique="false">
+          <ownedComment xmi:id="_SbY5oOZ3Ed-L_LayEWa7Ow" annotatedElement="_p6uv4Dy4Ed-aTfXMddeT8A">
+            <body>If true, the push timed service is activated. Default = true</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_tWUF8Dy4Ed-aTfXMddeT8A" value="true"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_kTP3kELaEd-ct70wlBtMaQ" name="StateChangeHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_MxTkUELnEd-ct70wlBtMaQ" name="active"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_PykV4ELnEd-ct70wlBtMaQ" name="active"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_ywRLAFKiEd-KJcnyqitu7Q" name="PushTimedHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_wydroGPnEd-g_fTB2mw-UA" name="query_only"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_xVe5IGPnEd-g_fTB2mw-UA" name="query_only"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_4tMXAJogEd-lwMTz1BA9qQ" name="LaserTask"/>
+    </packagedElement>
+    <profileApplication xmi:id="_tLy84jHUEd-W7cKfHymkbw">
+      <eAnnotations xmi:id="_tLy84zHUEd-W7cKfHymkbw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_tLy85DHUEd-W7cKfHymkbw">
+      <eAnnotations xmi:id="_tLy85THUEd-W7cKfHymkbw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartComponent xmi:id="_tauJsDHUEd-W7cKfHymkbw" base_Component="_tLy84THUEd-W7cKfHymkbw"/>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_Sl1ugDJvEd-SvN0H3YB-5w" base_Class="_SbWVwDJvEd-SvN0H3YB-5w"/>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_3wRIUDJwEd-SvN0H3YB-5w" base_Class="_3v_bgDJwEd-SvN0H3YB-5w"/>
+  <SmartMARS:SmartPushTimedClient xmi:id="_qGehwDKEEd-6z8hIrFdGMQ" serviceName="basestate" base_Port="_p_5_sDKEEd-6z8hIrFdGMQ" serverName="SmartPioneerBaseServer">
+    <commObject href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_KPWXMJf8Ed6diMgK3usWsg"/>
+  </SmartMARS:SmartPushTimedClient>
+  <SmartMARS:SmartQueryHandler xmi:id="_SM5oEDKFEd-6z8hIrFdGMQ" base_Class="_SMta0DKFEd-6z8hIrFdGMQ"/>
+  <SmartMARS:SmartPushTimedClient xmi:id="_rTLPUDKNEd-6z8hIrFdGMQ" serviceName="currentPose" base_Port="_rRxhIDKNEd-6z8hIrFdGMQ" serverName="SmartKatanaServer">
+    <commObject href="../../../CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_a_vAsNRAEd6nTeGEf54M4w"/>
+  </SmartMARS:SmartPushTimedClient>
+  <SmartMARS:SmartMutex xmi:id="_G3GB4DKPEd-6z8hIrFdGMQ" base_Class="_G2ou4DKPEd-6z8hIrFdGMQ"/>
+  <SmartMARS:SmartTask xmi:id="_NoUeEDKPEd-6z8hIrFdGMQ"/>
+  <SmartMARS:SmartMutex xmi:id="_YHrY4DKPEd-6z8hIrFdGMQ"/>
+  <SmartMARS:SmartQueryServer xmi:id="_xCX74DKPEd-6z8hIrFdGMQ" serviceName="scan" base_Port="_MS35oDKFEd-6z8hIrFdGMQ" smartQueryHandler="_SM5oEDKFEd-6z8hIrFdGMQ">
+    <commRequestObject href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_aAbuEJhvEd6s7_SKW4BMcg"/>
+    <commAnswerObject href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_PU-psJf7Ed6diMgK3usWsg"/>
+  </SmartMARS:SmartQueryServer>
+  <SmartMARS:SmartPushNewestServer xmi:id="_96rrEDKPEd-6z8hIrFdGMQ" serviceName="scan" base_Port="_95TLADKPEd-6z8hIrFdGMQ">
+    <commObject href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_PU-psJf7Ed6diMgK3usWsg"/>
+  </SmartMARS:SmartPushNewestServer>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_SmvM8DKcEd-gm7RAOr25aA"/>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_P3yzcDytEd-k451kr4T2rw"/>
+  <SmartMARS:SmartPushTimedServer xmi:id="_6U54wDy3Ed-aTfXMddeT8A" serviceName="scan" smartPushTimedHandler="_EVtPUDy4Ed-aTfXMddeT8A" cycle="10">
+    <commObject href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_PU-psJf7Ed6diMgK3usWsg"/>
+  </SmartMARS:SmartPushTimedServer>
+  <SmartMARS:SmartPushTimedHandler xmi:id="_EVtPUDy4Ed-aTfXMddeT8A"/>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_W6R9wDy4Ed-aTfXMddeT8A" base_Class="_W51R0Dy4Ed-aTfXMddeT8A"/>
+  <SmartMARS:SmartStateServer xmi:id="_jQ30kELaEd-ct70wlBtMaQ" serviceName="stateServer" base_Port="_jHX6UELaEd-ct70wlBtMaQ" smartStateChangeHandler="_kTg9UELaEd-ct70wlBtMaQ"/>
+  <SmartMARS:SmartStateChangeHandler xmi:id="_kTg9UELaEd-ct70wlBtMaQ" base_Class="_kTP3kELaEd-ct70wlBtMaQ"/>
+  <SmartMARS:SmartMainState xmi:id="_M3V64ELnEd-ct70wlBtMaQ" base_Class="_MxTkUELnEd-ct70wlBtMaQ" subState="_Pyut8ELnEd-ct70wlBtMaQ"/>
+  <SmartMARS:SmartSubState xmi:id="_Pyut8ELnEd-ct70wlBtMaQ" base_Class="_PykV4ELnEd-ct70wlBtMaQ"/>
+  <SmartMARS_1:SmartTask xmi:id="_SyHBwFKhEd-AxPEv4WCKsg"/>
+  <SmartMARS_1:SmartPushTimedServer xmi:id="_CzRxEFKiEd-AxPEv4WCKsg" serviceName="scan" base_Port="_Cype8FKiEd-AxPEv4WCKsg" smartPushTimedHandler="_y0BpoFKiEd-KJcnyqitu7Q" cycle="100" timeUnit="ms">
+    <commObject href="../../../CommExternalObjects/model/pim/CommExternalObjects_pim.uml#_PU-psJf7Ed6diMgK3usWsg"/>
+  </SmartMARS_1:SmartPushTimedServer>
+  <SmartMARS_1:SmartPushTimedHandler xmi:id="_TxgMwFKiEd-AxPEv4WCKsg"/>
+  <SmartMARS_1:SmartPushTimedHandler xmi:id="_y0BpoFKiEd-KJcnyqitu7Q" base_Class="_ywRLAFKiEd-KJcnyqitu7Q"/>
+  <SmartMARS_1:SmartMutex xmi:id="_hqv8UGM8Ed-JQMHJ2GmZcQ"/>
+  <SmartMARS_1:SmartConditionMutex xmi:id="_HKny8GNEEd-JQMHJ2GmZcQ" mutex="_KVOtwGNEEd-JQMHJ2GmZcQ"/>
+  <SmartMARS_1:SmartMutex xmi:id="_KVOtwGNEEd-JQMHJ2GmZcQ"/>
+  <SmartMARS_1:SmartMainState xmi:id="_w0azcGPnEd-g_fTB2mw-UA" base_Class="_wydroGPnEd-g_fTB2mw-UA" subState="_xVmN4GPnEd-g_fTB2mw-UA"/>
+  <SmartMARS_1:SmartSubState xmi:id="_xVmN4GPnEd-g_fTB2mw-UA" base_Class="_xVe5IGPnEd-g_fTB2mw-UA"/>
+  <SmartMARS_1:SmartTask xmi:id="_4tWIAJogEd-lwMTz1BA9qQ" base_Class="_4tMXAJogEd-lwMTz1BA9qQ"/>
+</xmi:XMI>
