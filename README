@@ -1,0 +1,133 @@
+# --------------------------------------------------------------------------
+#
+#  Copyright (C) 2002/2004/2006/2008/2011 Christian Schlegel
+#
+#        schlegel@hs-ulm.de
+#
+#        Prof. Dr. Christian Schlegel
+#        University of Applied Sciences
+#        Prittwitzstr. 10
+#        D-89075 Ulm
+#        Germany
+#
+#        Previous affiliation:
+#
+#        FAW Ulm
+#        Research Institute for Applied Knowledge Processing
+#        Helmholtzstr. 16
+#        D-89081 Ulm
+#        Germany
+#
+#  This file is part of the "SmartSoft Communication Library".
+#  It provides standardized patterns for communication between
+#  different components.
+#
+#  This library is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU Lesser General Public
+#  License as published by the Free Software Foundation; either
+#  version 2.1 of the License, or (at your option) any later version.
+#
+#  This library is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with this library; if not, write to the Free Software
+#  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+#
+#  (partly based on joint work with Robert Wörz)
+#
+# --------------------------------------------------------------------------
+
+============================================================================
+DESCRIPTION
+============================================================================
+
+    This software package contains a CORBA based implementation of the
+    SmartSoft communication patterns.
+
+
+============================================================================
+OVERALL DIRECTORY STRUCTURE
+============================================================================
+
+    The communication patterns can be found in "src/smartSoftKernel/smartSoft", 
+    examples are in "src/smartSoftKernel/smartExampleComponent*".
+
+    smartsoft/src
+                    /src/smartSoftKernel
+                         "directory of the SmartSoft kernel"
+                        /smartSoftKernel/smartSoft
+                                         "the SmartSoft kernel"
+                        /smartSoftKernel/smartExampleComponent*
+                                         "several example components to 
+                                          demonstrate the usage of SmartSoft"
+
+                    /src/components
+                         "directory of the provided components. Every component
+                          is located in its own directory."
+
+                    /src/interfaceClasses
+                         "directory of the communication objects. Every
+                          communication object is located in its own
+                          directory."
+
+                    /src/utility
+                         "directory of additional components which do not
+                          depend on SmartSoft"
+
+    smartsoft/include
+                     "contains links into the src-directory for all 
+                      globally needed include files"
+
+    smartsoft/lib
+                     "contains all the libraries"
+
+    smartsoft/bin
+                     "contains the binaries"
+  
+    smartsoft/etc
+                     "contains parameter files etc."
+
+    smartsoft/doc 
+                     "contains all the documentation"
+
+
+
+
+============================================================================
+DOCUMENTATION
+============================================================================
+
+If you have doxygen (http://www.doxygen.org) installed on your
+machine, the installation will create a nice html documentation that
+describes the user API and the example components. Its location is
+$SMART_ROOT/doc/html/index.html
+
+Currently, documentation can be found in the header files of the
+communication patterns. Further documentation can be found in the
+example directories. The example components contain user defined
+communication objects, examples of proposed file structure and
+Makefiles. The examples are ideal points to start when to learn
+how to use the communication patterns.
+
+Various manuals are provided with the next release.
+
+The following files contain the documentation of the various
+user methods of the communication patterns:
+
+smartSend.hh            send pattern
+smartQuery.hh           query pattern
+smartPushNewest.hh      push newest pattern
+smartPushTimed.hh       push timed pattern
+smartEvent.hh           event pattern
+smartWiring.hh          wiring pattern
+smartState.hh           state management of components
+smartErrno.hh           error code definitios
+smartTask.hh            thread class for active objects
+smartSys.hh             several helper definitions
+...
+
+
