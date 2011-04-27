@@ -1,0 +1,6 @@
+configfile.cc:159 error   : unable to open world file smart_laboratory.cfg : No such file or directory
+server.cc:146 error   : failed to load config file smart_laboratory.cfg
+configfile.cc:159 error   : unable to open world file smart_wallfollower.cfg : No such file or directory
+server.cc:146 error   : failed to load config file smart_wallfollower.cfg
+configfile.cc:159 error   : unable to open world file smart_wallfollower.cfg : No such file or directory
+server.cc:146 error   : failed to load config file smart_wallfollower.cfg

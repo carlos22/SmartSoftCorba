@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_SKsYsG_TEeCg6dWWHvp29w" name="DeployLaserBaseEmptyRobot">
+    <elementImport xmi:id="_W-jwUG_TEeCg6dWWHvp29w" alias="SmartLaserBaseEmpty">
+      <importedElement xmi:type="uml:Component" href="platform:/resource/SmartLaserBaseEmpty/model/pim/SmartLaserBaseEmpty_pim.uml#_-IxyYQLNEeCeZs-4B278rA"/>
+    </elementImport>
+    <elementImport xmi:id="_W-rFEG_TEeCg6dWWHvp29w" alias="SmartLaserLMS200Server">
+      <importedElement xmi:type="uml:Component" href="platform:/resource/SmartLaserLMS200Server/model/pim/SmartLaserLMS200Server_pim.uml#_a7RbIZhuEd6s7_SKW4BMcg"/>
+    </elementImport>
+    <elementImport xmi:id="_W_chIG_TEeCg6dWWHvp29w" alias="SmartPioneerBaseServer">
+      <importedElement xmi:type="uml:Component" href="platform:/resource/SmartPioneerBaseServer/model/pim/SmartPioneerBaseServer_pim.uml#_tNxB4Zf8Ed6diMgK3usWsg"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:Package" xmi:id="_SKsYsW_TEeCg6dWWHvp29w" name="DeployLaserBaseEmptyRobot">
+      <packagedElement xmi:type="uml:Class" xmi:id="_ivRlUG_TEeCg6dWWHvp29w" name="Class_0"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_uEOrYG_TEeCg6dWWHvp29w" name="FromlaserClienttolaserServer">
+        <supplier xmi:type="uml:Port" href="platform:/resource/SmartLaserLMS200Server/model/pim/SmartLaserLMS200Server_pim.uml#_5ChikJhuEd6s7_SKW4BMcg"/>
+        <client xmi:type="uml:Port" href="platform:/resource/SmartLaserBaseEmpty/model/pim/SmartLaserBaseEmpty_pim.uml#_ChuvoALOEeCeZs-4B278rA"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_ujlg4G_TEeCg6dWWHvp29w" name="FrombaseClienttobasePositionServer">
+        <supplier xmi:type="uml:Port" href="platform:/resource/SmartPioneerBaseServer/model/pim/SmartPioneerBaseServer_pim.uml#_Ty03kJgHEd6s7_SKW4BMcg"/>
+        <client xmi:type="uml:Port" href="platform:/resource/SmartLaserLMS200Server/model/pim/SmartLaserLMS200Server_pim.uml#_9xB5EJhuEd6s7_SKW4BMcg"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_vQS14G_TEeCg6dWWHvp29w" name="FromnavVelSendClienttonavigationVelocityServer">
+        <supplier xmi:type="uml:Port" href="platform:/resource/SmartPioneerBaseServer/model/pim/SmartPioneerBaseServer_pim.uml#_CyaqkJgHEd6s7_SKW4BMcg"/>
+        <client xmi:type="uml:Port" href="platform:/resource/SmartLaserBaseEmpty/model/pim/SmartLaserBaseEmpty_pim.uml#_HH8FwALOEeCeZs-4B278rA"/>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:id="_SKsYsm_TEeCg6dWWHvp29w">
+      <eAnnotations xmi:id="_SKsYs2_TEeCg6dWWHvp29w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_SKsYtG_TEeCg6dWWHvp29w">
+      <eAnnotations xmi:id="_SKsYtW_TEeCg6dWWHvp29w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+    <profileApplication xmi:id="_SKsYtm_TEeCg6dWWHvp29w">
+      <eAnnotations xmi:id="_SKsYt2_TEeCg6dWWHvp29w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:CorbaSmartSoftDevice xmi:id="_SNa8kG_TEeCg6dWWHvp29w" base_Package="_SKsYsW_TEeCg6dWWHvp29w"/>
+  <CorbaSmartSoft:CorbaNamingService xmi:id="_iydcMG_TEeCg6dWWHvp29w" base_Class="_ivRlUG_TEeCg6dWWHvp29w" ip="0.0.0.0" port="12345"/>
+</xmi:XMI>

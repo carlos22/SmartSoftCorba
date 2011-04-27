@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_BKYDwAIhEeCQC_reOkxlVA" name="DeployLaserObstacleAvoid">
+    <elementImport xmi:id="_GG8rcAIhEeCQC_reOkxlVA" alias="SmartLaserObstacleAvoid">
+      <importedElement xmi:type="uml:Component" href="../../SmartLaserObstacleAvoid/model/pim/SmartLaserObstacleAvoid_pim.uml#_rWr_sZilEd6ybMLNVUr2iw"/>
+    </elementImport>
+    <elementImport xmi:id="_GHdo0AIhEeCQC_reOkxlVA" alias="SmartPlayerStageSimulator">
+      <importedElement xmi:type="uml:Component" href="../../SmartPlayerStageSimulator/model/pim/SmartPlayerStageSimulator_pim.uml#_G3mg4Z6iEd6WIPcnwRdG_Q"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:Package" xmi:id="_BKYq0AIhEeCQC_reOkxlVA" name="DeployLaserObstacleAvoid">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_kxlz0AIhEeCQC_reOkxlVA" name="FromlaserClienttolaserServer">
+        <supplier xmi:type="uml:Port" href="../../SmartPlayerStageSimulator/model/pim/SmartPlayerStageSimulator_pim.uml#_eTTWUJ6iEd6WIPcnwRdG_Q"/>
+        <client xmi:type="uml:Port" href="../../SmartLaserObstacleAvoid/model/pim/SmartLaserObstacleAvoid_pim.uml#_7x6cAJilEd6ybMLNVUr2iw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_lzdggAIhEeCQC_reOkxlVA" name="FromnavigationVelocitySendClienttonavigationVelocitySendServer">
+        <supplier xmi:type="uml:Port" href="../../SmartPlayerStageSimulator/model/pim/SmartPlayerStageSimulator_pim.uml#_WxWAwJ6iEd6WIPcnwRdG_Q"/>
+        <client xmi:type="uml:Port" href="../../SmartLaserObstacleAvoid/model/pim/SmartLaserObstacleAvoid_pim.uml#_FCt5AJimEd6ybMLNVUr2iw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_c5u00AIjEeCQC_reOkxlVA" name="NamingService"/>
+    </packagedElement>
+    <profileApplication xmi:id="_BKYq0QIhEeCQC_reOkxlVA">
+      <eAnnotations xmi:id="_BKYq0gIhEeCQC_reOkxlVA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_BKYq0wIhEeCQC_reOkxlVA">
+      <eAnnotations xmi:id="_BKYq1AIhEeCQC_reOkxlVA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+    <profileApplication xmi:id="_BKYq1QIhEeCQC_reOkxlVA">
+      <eAnnotations xmi:id="_BKYq1gIhEeCQC_reOkxlVA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:CorbaSmartSoftDevice xmi:id="_BM4lMAIhEeCQC_reOkxlVA" base_Package="_BKYq0AIhEeCQC_reOkxlVA"/>
+  <CorbaSmartSoft:CorbaNamingService xmi:id="_c8vskAIjEeCQC_reOkxlVA" base_Class="_c5u00AIjEeCQC_reOkxlVA" ip="0.0.0.0" port="9999"/>
+</xmi:XMI>

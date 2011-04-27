@@ -1,0 +1,4 @@
+configfile.cc:159 error   : unable to open world file smart_hospital_small.cfg : No such file or directory
+server.cc:146 error   : failed to load config file smart_hospital_small.cfg
+configfile.cc:159 error   : unable to open world file smart_hospital_small.cfg : No such file or directory
+server.cc:146 error   : failed to load config file smart_hospital_small.cfg

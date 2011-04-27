@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_5zNAYMrpEd6fDquU7V04LQ" name="DeployCdlReactive">
+    <elementImport xmi:id="_CAFiQMrqEd6fDquU7V04LQ" alias="SmartPioneerBaseServer">
+      <importedElement xmi:type="uml:Component" href="../../SmartPioneerBaseServer/model/pim/SmartPioneerBaseServer_pim.uml#_tNxB4Zf8Ed6diMgK3usWsg"/>
+    </elementImport>
+    <elementImport xmi:id="_HOJikMrqEd6fDquU7V04LQ" alias="SmartCdlServer">
+      <importedElement xmi:type="uml:Component" href="../../SmartCdlServer/model/pim/SmartCdlServer_pim.uml#_BcOtkZhxEd6s7_SKW4BMcg"/>
+    </elementImport>
+    <elementImport xmi:id="_65gSQGafEeCNHpfA0JO6Pg" alias="SmartLaserLMS200Server">
+      <importedElement xmi:type="uml:Component" href="../../SmartLaserLMS200Server/model/pim/SmartLaserLMS200Server_pim.uml#_a7RbIZhuEd6s7_SKW4BMcg"/>
+    </elementImport>
+    <elementImport xmi:id="_67B8QGafEeCNHpfA0JO6Pg" alias="SmartRobotConsole">
+      <importedElement xmi:type="uml:Component" href="../../SmartRobotConsole/model/pim/SmartRobotConsole_pim.uml#_bqLkUEmnEeCtB8o47pLkjg"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:Package" xmi:id="_5zNAYcrpEd6fDquU7V04LQ" name="DeployCdlReactive">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_g-QOIMrrEd6fDquU7V04LQ" name="FromnavVelSendClienttonavigationVelocityServer">
+        <supplier xmi:type="uml:Port" href="../../SmartPioneerBaseServer/model/pim/SmartPioneerBaseServer_pim.uml#_CyaqkJgHEd6s7_SKW4BMcg"/>
+        <client xmi:type="uml:Port" href="../../SmartCdlServer/model/pim/SmartCdlServer_pim.uml#_RvAYgJhxEd6s7_SKW4BMcg"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_m4-gIMrrEd6fDquU7V04LQ" name="NamingService"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_FUN9oGagEeCNHpfA0JO6Pg" name="FromlaserClienttolaserServer">
+        <supplier xmi:type="uml:Port" href="../../SmartLaserLMS200Server/model/pim/SmartLaserLMS200Server_pim.uml#_5ChikJhuEd6s7_SKW4BMcg"/>
+        <client xmi:type="uml:Port" href="../../SmartCdlServer/model/pim/SmartCdlServer_pim.uml#_LZqAAJhxEd6s7_SKW4BMcg"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_I8rSEGagEeCNHpfA0JO6Pg" name="FrombaseClienttobasePositionServer">
+        <supplier xmi:type="uml:Port" href="../../SmartPioneerBaseServer/model/pim/SmartPioneerBaseServer_pim.uml#_Ty03kJgHEd6s7_SKW4BMcg"/>
+        <client xmi:type="uml:Port" href="../../SmartLaserLMS200Server/model/pim/SmartLaserLMS200Server_pim.uml#_9xB5EJhuEd6s7_SKW4BMcg"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_NiHMIGagEeCNHpfA0JO6Pg" name="FromcdlParameterClienttoparamServer">
+        <supplier xmi:type="uml:Port" href="../../SmartCdlServer/model/pim/SmartCdlServer_pim.uml#__2vWYMeXEd6RRa13nKyHNw"/>
+        <client xmi:type="uml:Port" href="../../SmartRobotConsole/model/pim/SmartRobotConsole_pim.uml#_QVUWIEmtEeCtB8o47pLkjg"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_N0CpoGagEeCNHpfA0JO6Pg" name="FromcdlStateClienttostateServer">
+        <supplier xmi:type="uml:Port" href="../../SmartCdlServer/model/pim/SmartCdlServer_pim.uml#_NDiu4MeYEd6RRa13nKyHNw"/>
+        <client xmi:type="uml:Port" href="../../SmartRobotConsole/model/pim/SmartRobotConsole_pim.uml#_p4YWIEmsEeCtB8o47pLkjg"/>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:id="_5zNAYsrpEd6fDquU7V04LQ">
+      <eAnnotations xmi:id="_5zNAY8rpEd6fDquU7V04LQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_5zNAZMrpEd6fDquU7V04LQ">
+      <eAnnotations xmi:id="_5zNAZcrpEd6fDquU7V04LQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+    <profileApplication xmi:id="_5zNAZsrpEd6fDquU7V04LQ">
+      <eAnnotations xmi:id="_5zNAZ8rpEd6fDquU7V04LQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:CorbaSmartSoftDevice xmi:id="_52aFYMrpEd6fDquU7V04LQ" base_Package="_5zNAYcrpEd6fDquU7V04LQ" ip="c26-13-robotc" deployed="remote" username="zafh" directory="deployTest/"/>
+  <CorbaSmartSoft:CorbaNamingService xmi:id="_m5Gb8MrrEd6fDquU7V04LQ" base_Class="_m4-gIMrrEd6fDquU7V04LQ" ip="c26-13-robotc" port="12345"/>
+</xmi:XMI>

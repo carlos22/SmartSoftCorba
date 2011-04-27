@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_-GdzUALPEeCeZs-4B278rA" name="DeployLaserBaseEmpty">
+    <elementImport xmi:id="_FcMDsALQEeCeZs-4B278rA" alias="SmartLaserBaseEmpty">
+      <importedElement xmi:type="uml:Component" href="platform:/resource/SmartLaserBaseEmpty/model/pim/SmartLaserBaseEmpty_pim.uml#_-IxyYQLNEeCeZs-4B278rA"/>
+    </elementImport>
+    <elementImport xmi:id="_FcRjQALQEeCeZs-4B278rA" alias="SmartPlayerStageSimulator">
+      <importedElement xmi:type="uml:Component" href="platform:/resource/SmartPlayerStageSimulator/model/pim/SmartPlayerStageSimulator_pim.uml#_G3mg4Z6iEd6WIPcnwRdG_Q"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:Package" xmi:id="_-GdzUQLPEeCeZs-4B278rA" name="DeployLaserBaseEmpty">
+      <packagedElement xmi:type="uml:Class" xmi:id="__dYi8ALPEeCeZs-4B278rA" name="NamingService"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_QhXBUALQEeCeZs-4B278rA" name="FromnavVelSendClienttonavigationVelocitySendServer">
+        <supplier xmi:type="uml:Port" href="platform:/resource/SmartPlayerStageSimulator/model/pim/SmartPlayerStageSimulator_pim.uml#_WxWAwJ6iEd6WIPcnwRdG_Q"/>
+        <client xmi:type="uml:Port" href="platform:/resource/SmartLaserBaseEmpty/model/pim/SmartLaserBaseEmpty_pim.uml#_HH8FwALOEeCeZs-4B278rA"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_RInOkALQEeCeZs-4B278rA" name="FromlaserClienttolaserServer">
+        <supplier xmi:type="uml:Port" href="platform:/resource/SmartPlayerStageSimulator/model/pim/SmartPlayerStageSimulator_pim.uml#_eTTWUJ6iEd6WIPcnwRdG_Q"/>
+        <client xmi:type="uml:Port" href="platform:/resource/SmartLaserBaseEmpty/model/pim/SmartLaserBaseEmpty_pim.uml#_ChuvoALOEeCeZs-4B278rA"/>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:id="_-GdzUgLPEeCeZs-4B278rA">
+      <eAnnotations xmi:id="_-GdzUwLPEeCeZs-4B278rA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_-GdzVALPEeCeZs-4B278rA">
+      <eAnnotations xmi:id="_-GdzVQLPEeCeZs-4B278rA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+    <profileApplication xmi:id="_-GdzVgLPEeCeZs-4B278rA">
+      <eAnnotations xmi:id="_-GdzVwLPEeCeZs-4B278rA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:CorbaSmartSoftDevice xmi:id="_-JnN8ALPEeCeZs-4B278rA" base_Package="_-GdzUQLPEeCeZs-4B278rA"/>
+  <CorbaSmartSoft:CorbaNamingService xmi:id="__fuFQALPEeCeZs-4B278rA" base_Class="__dYi8ALPEeCeZs-4B278rA" ip="0.0.0.0" port="9999"/>
+</xmi:XMI>
