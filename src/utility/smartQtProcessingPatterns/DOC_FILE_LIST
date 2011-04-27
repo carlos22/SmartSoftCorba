@@ -1,7 +1,0 @@
-smartQtSignallingInterface.hh 
-smartQtPushNewestClient.hh 
-smartQtPushTimedClient.hh 
-smartQtSignallingQueue.hh 
-smartQtPushTimedServerHandler.hh 
-smartQtQueryServerHandler.hh 
-smartQtSendServerHandler.hh 

@@ -1,4 +1,0 @@
-
-Use testJoystickDevice to quickly test low-level joystick access.
-Build it with "make build-tests", and run it with 
-"./tests/testJoystickDevice /dev/input/js0" etc.

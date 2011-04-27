@@ -1,5 +1,0 @@
-Rename this to SMARTSOFT_PACKAGE to include the component into the central makefile!
-
-The presence of this file indicates that this directory contains a SmartSoft 
-source code package which will be included in the build process by the central
-makefile. The contents of this file is ignored, change it as you wish.

@@ -1,2 +1,0 @@
-// dummy
-#include "smartDefaultPaintMethods.hh"
