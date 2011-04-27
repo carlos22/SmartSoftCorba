@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_v9PikGarEeCO2uZHSTM3Pg" name="SmartOpenRave_psm">
+    <packagedElement xmi:type="uml:Component" xmi:id="_v9PikWarEeCO2uZHSTM3Pg" name="SmartOpenRave">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_v9PikmarEeCO2uZHSTM3Pg" name="pathPlanningSendServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_v9Pik2arEeCO2uZHSTM3Pg" name="stateServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_v9PilGarEeCO2uZHSTM3Pg" name="manipulatorEventClient"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_v9PilWarEeCO2uZHSTM3Pg" name="environmentQueryClient"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_v9PilmarEeCO2uZHSTM3Pg" name="manipulatorStatePushTimedClient"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_v9Pil2arEeCO2uZHSTM3Pg" name="eventServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_v9PimGarEeCO2uZHSTM3Pg" name="trajectorySendClient"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_v9PimWarEeCO2uZHSTM3Pg" name="parameterServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_v9PimmarEeCO2uZHSTM3Pg" name="objectQueryClient"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_v9Pim2arEeCO2uZHSTM3Pg" name="taskPlanningSendServer"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_v9PinGarEeCO2uZHSTM3Pg" name="GUITask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_v9PinWarEeCO2uZHSTM3Pg" name="DemonstrationTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_v9PinmarEeCO2uZHSTM3Pg" name="PathPlanningSendHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_v9Pin2arEeCO2uZHSTM3Pg" name="StateChangeHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_v9PioGarEeCO2uZHSTM3Pg" name="ManipulatorEventClientHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_v9PioWarEeCO2uZHSTM3Pg" name="EventServerHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_v9PiomarEeCO2uZHSTM3Pg" name="ParameterServerHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_v9Pio2arEeCO2uZHSTM3Pg" name="TaskPlanningSendHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_v9PipGarEeCO2uZHSTM3Pg" name="ManipulatorFactoryMutex"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_v9PipWarEeCO2uZHSTM3Pg" name="ManipulatorModeMutex"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_v9PipmarEeCO2uZHSTM3Pg" name="OpenRaveMutex"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_v9Pip2arEeCO2uZHSTM3Pg" name="OpenRave">
+        <ownedAttribute xmi:id="_v9PiqGarEeCO2uZHSTM3Pg" name="defaultEnvironmentPath">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_v9PiqWarEeCO2uZHSTM3Pg" value="defaultOpenRave.env.xml"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_v9PiqmarEeCO2uZHSTM3Pg" name="saveTrajectoryToFile">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_v9Piq2arEeCO2uZHSTM3Pg" value="false"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_v9PirGarEeCO2uZHSTM3Pg" name="robotName">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_v9PirWarEeCO2uZHSTM3Pg" value="Katana"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_v9PirmarEeCO2uZHSTM3Pg" name="gui_active">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_v9Pir2arEeCO2uZHSTM3Pg" value="true"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_v9PisGarEeCO2uZHSTM3Pg" name="storedEnvironmentName">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_v9PisWarEeCO2uZHSTM3Pg" value="storedEnvironment"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_v9PismarEeCO2uZHSTM3Pg" name="debugSend">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_v9Pis2arEeCO2uZHSTM3Pg" value="false"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_v9PitGarEeCO2uZHSTM3Pg" name="storedEnvironmentPath">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_v9PitWarEeCO2uZHSTM3Pg" value="data/"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_v9PitmarEeCO2uZHSTM3Pg" name="debugOpenRave">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_v9Pit2arEeCO2uZHSTM3Pg" value="false"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_v9PiuGarEeCO2uZHSTM3Pg" name="robotPath">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_v9PiuWarEeCO2uZHSTM3Pg" value="robots/katana.robot.xml"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_v9PiumarEeCO2uZHSTM3Pg" name="showCompleteTrajectory">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_v9Piu2arEeCO2uZHSTM3Pg" value="false"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_v9PivGarEeCO2uZHSTM3Pg" name="saveObjectsToFile">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_v9PivWarEeCO2uZHSTM3Pg" value="false"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_v9PivmarEeCO2uZHSTM3Pg" name="PortParameter">
+        <ownedAttribute xmi:id="_v9Piv2arEeCO2uZHSTM3Pg" name="withObjectRecognition">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_v9PiwGarEeCO2uZHSTM3Pg" value="true"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_v9PiwWarEeCO2uZHSTM3Pg" name="withManipulator">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_v9PiwmarEeCO2uZHSTM3Pg" value="true"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_v9Piw2arEeCO2uZHSTM3Pg" name="demonstration"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_v9PixGarEeCO2uZHSTM3Pg" name="demonstration"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_v9PixWarEeCO2uZHSTM3Pg" name="simulation"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_v9PixmarEeCO2uZHSTM3Pg" name="simulation"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_v9Pix2arEeCO2uZHSTM3Pg" name="trajectory"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_v9PiyGarEeCO2uZHSTM3Pg" name="trajectory"/>
+    </packagedElement>
+    <profileApplication xmi:id="_v9PiyWarEeCO2uZHSTM3Pg">
+      <eAnnotations xmi:id="_v9PiymarEeCO2uZHSTM3Pg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:SmartCorbaComponent xmi:id="_v9Piy2arEeCO2uZHSTM3Pg" base_Component="_v9PikWarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="_v9PizGarEeCO2uZHSTM3Pg" serviceName="pathPlanning" base_Port="_v9PikmarEeCO2uZHSTM3Pg" smartSendHandler="_v9PinmarEeCO2uZHSTM3Pg">
+    <commObject href="platform:/resource/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_mPzmwNRAEd6nTeGEf54M4w"/>
+  </CorbaSmartSoft:SmartCorbaSendServer>
+  <CorbaSmartSoft:SmartCorbaStateServer xmi:id="_v9PizWarEeCO2uZHSTM3Pg" serviceName="state" base_Port="_v9Pik2arEeCO2uZHSTM3Pg" smartCorbaStateChangeHandler="_v9Pin2arEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaEventClient xmi:id="_v9PizmarEeCO2uZHSTM3Pg" serviceName="eventServer" base_Port="_v9PilGarEeCO2uZHSTM3Pg" serverName="SmartKatanaServer" smartEventHandler="_v9PioGarEeCO2uZHSTM3Pg">
+    <eventParameter href="platform:/resource/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_w4c_sN_hEd6JssC1ymuMlA"/>
+    <eventResult href="platform:/resource/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_0DexQN_hEd6JssC1ymuMlA"/>
+  </CorbaSmartSoft:SmartCorbaEventClient>
+  <CorbaSmartSoft:SmartCorbaQueryClient xmi:id="_v9Piz2arEeCO2uZHSTM3Pg" serviceName="environment" base_Port="_v9PilWarEeCO2uZHSTM3Pg" serverName="Smart3dPointCloudObjectRecognition">
+    <commRequestObject href="platform:/resource/CommObjectRecognitionObjects/model/pim/CommObjectRecognitionObjects_pim.uml#_JZjcsGQVEd-X2o5mGpZM5Q"/>
+    <commAnswerObject href="platform:/resource/CommObjectRecognitionObjects/model/pim/CommObjectRecognitionObjects_pim.uml#_0YCZUI8XEd-9KcaXAG_8tw"/>
+  </CorbaSmartSoft:SmartCorbaQueryClient>
+  <CorbaSmartSoft:SmartCorbaPushTimedClient xmi:id="_v9Pi0GarEeCO2uZHSTM3Pg" serviceName="currentPose" base_Port="_v9PilmarEeCO2uZHSTM3Pg" serverName="SmartKatanaServer" interval="1">
+    <commObject href="platform:/resource/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_a_vAsNRAEd6nTeGEf54M4w"/>
+  </CorbaSmartSoft:SmartCorbaPushTimedClient>
+  <CorbaSmartSoft:SmartCorbaEventServer xmi:id="_v9Pi0WarEeCO2uZHSTM3Pg" serviceName="eventServer" base_Port="_v9Pil2arEeCO2uZHSTM3Pg" smartEventTestHandler="_v9PioWarEeCO2uZHSTM3Pg">
+    <eventParameter href="platform:/resource/CommManipulationPlannerObjects/model/pim/CommManipulationPlannerObjects_pim.uml#_E7ddsF2nEd-7Gft3vKY-LQ"/>
+    <eventResult href="platform:/resource/CommManipulationPlannerObjects/model/pim/CommManipulationPlannerObjects_pim.uml#_IEiugF2nEd-7Gft3vKY-LQ"/>
+    <eventState href="platform:/resource/CommManipulationPlannerObjects/model/pim/CommManipulationPlannerObjects_pim.uml#_J74DkF2nEd-7Gft3vKY-LQ"/>
+  </CorbaSmartSoft:SmartCorbaEventServer>
+  <CorbaSmartSoft:SmartCorbaSendClient xmi:id="_v9Pi0marEeCO2uZHSTM3Pg" serviceName="performTrajectory" base_Port="_v9PimGarEeCO2uZHSTM3Pg" serverName="SmartKatanaServer">
+    <commObject href="platform:/resource/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_mPzmwNRAEd6nTeGEf54M4w"/>
+  </CorbaSmartSoft:SmartCorbaSendClient>
+  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="_v9Pi02arEeCO2uZHSTM3Pg" serviceName="param" base_Port="_v9PimWarEeCO2uZHSTM3Pg" smartSendHandler="_v9PiomarEeCO2uZHSTM3Pg">
+    <commObject href="platform:/resource/CommManipulationPlannerObjects/model/pim/CommManipulationPlannerObjects_pim.uml#_QRwnkF2nEd-7Gft3vKY-LQ"/>
+  </CorbaSmartSoft:SmartCorbaSendServer>
+  <CorbaSmartSoft:SmartCorbaQueryClient xmi:id="_v9Pi1GarEeCO2uZHSTM3Pg" serviceName="objectFeatures" base_Port="_v9PimmarEeCO2uZHSTM3Pg" serverName="Smart3dPointCloudObjectRecognition">
+    <commRequestObject href="platform:/resource/CommObjectRecognitionObjects/model/pim/CommObjectRecognitionObjects_pim.uml#_JZjcsGQVEd-X2o5mGpZM5Q"/>
+    <commAnswerObject href="platform:/resource/CommObjectRecognitionObjects/model/pim/CommObjectRecognitionObjects_pim.uml#_V9T4MGQVEd-X2o5mGpZM5Q"/>
+  </CorbaSmartSoft:SmartCorbaQueryClient>
+  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="_v9Pi1WarEeCO2uZHSTM3Pg" serviceName="taskPlanning" base_Port="_v9Pim2arEeCO2uZHSTM3Pg" smartSendHandler="_v9Pio2arEeCO2uZHSTM3Pg">
+    <commObject href="platform:/resource/CommManipulationPlannerObjects/model/pim/CommManipulationPlannerObjects_pim.uml#_9h93oLscEd-YTK8Jejw7Mw"/>
+  </CorbaSmartSoft:SmartCorbaSendServer>
+  <CorbaSmartSoft:SmartCorbaTask xmi:id="_v9Pi1marEeCO2uZHSTM3Pg" period="0" base_Class="_v9PinGarEeCO2uZHSTM3Pg" wcet="0"/>
+  <CorbaSmartSoft:SmartCorbaTask xmi:id="_v9Pi12arEeCO2uZHSTM3Pg" period="0" base_Class="_v9PinWarEeCO2uZHSTM3Pg" wcet="0"/>
+  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="_v9Pi2GarEeCO2uZHSTM3Pg" base_Class="_v9PinmarEeCO2uZHSTM3Pg" isActive="true"/>
+  <CorbaSmartSoft:SmartCorbaStateChangeHandler xmi:id="_v9Pi2WarEeCO2uZHSTM3Pg" base_Class="_v9Pin2arEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaEventHandler xmi:id="_v9Pi2marEeCO2uZHSTM3Pg" base_Class="_v9PioGarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaEventTestHandler xmi:id="_v9Pi22arEeCO2uZHSTM3Pg" base_Class="_v9PioWarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="_v9Pi3GarEeCO2uZHSTM3Pg" base_Class="_v9PiomarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="_v9Pi3WarEeCO2uZHSTM3Pg" base_Class="_v9Pio2arEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaMutex xmi:id="_v9QJoGarEeCO2uZHSTM3Pg" base_Class="_v9PipGarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaMutex xmi:id="_v9QJoWarEeCO2uZHSTM3Pg" base_Class="_v9PipWarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaMutex xmi:id="_v9QJomarEeCO2uZHSTM3Pg" base_Class="_v9PipmarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_v9QJo2arEeCO2uZHSTM3Pg" base_Class="_v9Pip2arEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_v9QJpGarEeCO2uZHSTM3Pg" base_Class="_v9PivmarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaMainState xmi:id="_v9QJpWarEeCO2uZHSTM3Pg" base_Class="_v9Piw2arEeCO2uZHSTM3Pg" smartCorbaSubState="_v9PixGarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaSubState xmi:id="_v9QJpmarEeCO2uZHSTM3Pg" base_Class="_v9PixGarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaMainState xmi:id="_v9QJp2arEeCO2uZHSTM3Pg" base_Class="_v9PixWarEeCO2uZHSTM3Pg" smartCorbaSubState="_v9PixmarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaSubState xmi:id="_v9QJqGarEeCO2uZHSTM3Pg" base_Class="_v9PixmarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaMainState xmi:id="_v9QJqWarEeCO2uZHSTM3Pg" base_Class="_v9Pix2arEeCO2uZHSTM3Pg" smartCorbaSubState="_v9PiyGarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaSubState xmi:id="_v9QJqmarEeCO2uZHSTM3Pg" base_Class="_v9PiyGarEeCO2uZHSTM3Pg"/>
+</xmi:XMI>

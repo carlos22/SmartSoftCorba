@@ -1,0 +1,8 @@
+
+
+
+requirements:
+
+- libfreenect v ?
+- libusb-1.0 >= 1.0.3
+- Cmake >= 2.6

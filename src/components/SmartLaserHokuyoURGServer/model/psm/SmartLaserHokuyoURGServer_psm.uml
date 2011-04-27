@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_kEvDgGarEeCO2uZHSTM3Pg" name="SmartLaserHokuyoURGServer_psm">
+    <packagedElement xmi:type="uml:Component" xmi:id="_kEvDgWarEeCO2uZHSTM3Pg" name="SmartLaserHokuyoURGServer">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_kEvDgmarEeCO2uZHSTM3Pg" name="laserPushTimedServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_kEvDg2arEeCO2uZHSTM3Pg" name="baseTimedClient"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_kEvDhGarEeCO2uZHSTM3Pg" name="laserQueryServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_kEvDhWarEeCO2uZHSTM3Pg" name="manipulatorTimedClient"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_kEvDhmarEeCO2uZHSTM3Pg" name="stateServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_kEvDh2arEeCO2uZHSTM3Pg" name="laserPushNewestServer"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_kEvDiGarEeCO2uZHSTM3Pg" name="LaserTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_kEvDiWarEeCO2uZHSTM3Pg" name="PushTimedHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_kEvDimarEeCO2uZHSTM3Pg" name="LaserQueryHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_kEvDi2arEeCO2uZHSTM3Pg" name="StateChangeHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_kEvDjGarEeCO2uZHSTM3Pg" name="ScanLock"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_kEvDjWarEeCO2uZHSTM3Pg" name="base_manipulator">
+        <ownedAttribute xmi:id="_kEvDjmarEeCO2uZHSTM3Pg" name="z">
+          <ownedComment xmi:id="_1178IOZ2Ed-L_LayEWa7Ow">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#_QPBWMDJxEd-SvN0H3YB-5w"/>
+            <body>The default base z position [mm] if on_base = false. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDj2arEeCO2uZHSTM3Pg" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_kEvDkGarEeCO2uZHSTM3Pg" name="y">
+          <ownedComment xmi:id="_0DREoOZ2Ed-L_LayEWa7Ow">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#_N86JoDJxEd-SvN0H3YB-5w"/>
+            <body>The default base y position [mm] if on_base = false. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDkWarEeCO2uZHSTM3Pg" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_kEvDkmarEeCO2uZHSTM3Pg" name="turret_a">
+          <ownedComment xmi:id="_Lw5-oOZ3Ed-L_LayEWa7Ow">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#_a4PXoDJxEd-SvN0H3YB-5w"/>
+            <body>The default turret angle [rad] if on_base = false. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDk2arEeCO2uZHSTM3Pg" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_kEvDlGarEeCO2uZHSTM3Pg" name="on_turret">
+          <ownedComment xmi:id="_q3Oy4OZ2Ed-L_LayEWa7Ow">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#_UXnAcOZQEd-L_LayEWa7Ow"/>
+            <body>If the laser ranger is mounted on a robot turret set it to true. Default = false</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDlWarEeCO2uZHSTM3Pg" value="false"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_kEvDlmarEeCO2uZHSTM3Pg" name="on_base">
+          <ownedComment xmi:id="_pUOqoDJyEd-SvN0H3YB-5w">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#_6AvWIDJwEd-SvN0H3YB-5w"/>
+            <body>If the laser ranger is mounted on a robot set it to true. Default = true</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDl2arEeCO2uZHSTM3Pg" value="true"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_kEvDmGarEeCO2uZHSTM3Pg" name="steer_a">
+          <ownedComment xmi:id="_KNV6IOZ3Ed-L_LayEWa7Ow">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#_YGoysDJxEd-SvN0H3YB-5w"/>
+            <body>The default base steer angle [rad] if on_base = false. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDmWarEeCO2uZHSTM3Pg" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_kEvDmmarEeCO2uZHSTM3Pg" name="on_manipulator">
+          <ownedComment xmi:id="_fFfDIOZ2Ed-L_LayEWa7Ow">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#_XFyyMDKcEd-gm7RAOr25aA"/>
+            <body>If the laser ranger is mounted on a manipulator set it to true. Default = false</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDm2arEeCO2uZHSTM3Pg" value="false"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_kEvDnGarEeCO2uZHSTM3Pg" name="base_a">
+          <ownedComment xmi:id="_EI7goOZ3Ed-L_LayEWa7Ow">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#_VqfgYDJxEd-SvN0H3YB-5w"/>
+            <body>The default base azimuth angle [rad] if on_base = false. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDnWarEeCO2uZHSTM3Pg" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_kEvDnmarEeCO2uZHSTM3Pg" name="x">
+          <ownedComment xmi:id="_r7tDMDJyEd-SvN0H3YB-5w">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#_K2i1oDJxEd-SvN0H3YB-5w"/>
+            <body>The default base x position [mm] if on_base = false. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDn2arEeCO2uZHSTM3Pg" value="0"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_kEvDoGarEeCO2uZHSTM3Pg" name="services">
+        <ownedAttribute xmi:id="_kEvDoWarEeCO2uZHSTM3Pg" name="activate_push_timed">
+          <ownedComment xmi:id="_SbY5oOZ3Ed-L_LayEWa7Ow">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#_p6uv4Dy4Ed-aTfXMddeT8A"/>
+            <body>If true, the push timed service is activated. Default = true</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDomarEeCO2uZHSTM3Pg" value="true"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_kEvDo2arEeCO2uZHSTM3Pg" name="activate_push_newest">
+          <ownedComment xmi:id="_Nwi7IOZ3Ed-L_LayEWa7Ow">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#_Yz_RYDy4Ed-aTfXMddeT8A"/>
+            <body>If true, the push newest service is activated. Default = true</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDpGarEeCO2uZHSTM3Pg" value="true"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_kEvDpWarEeCO2uZHSTM3Pg" name="scanner">
+        <ownedAttribute xmi:id="_kEvDpmarEeCO2uZHSTM3Pg" name="y">
+          <ownedComment xmi:id="_simLsOZ6Ed-L_LayEWa7Ow">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#_hIqz4DJxEd-SvN0H3YB-5w"/>
+            <body>The y position [mm] of the scanner on the robot, etc. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDp2arEeCO2uZHSTM3Pg" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_kEvDqGarEeCO2uZHSTM3Pg" name="device">
+          <ownedComment xmi:id="_GRjyEDJyEd-SvN0H3YB-5w">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#_Qc0-IDJwEd-SvN0H3YB-5w"/>
+            <body>The device for the laser ranger.</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDqWarEeCO2uZHSTM3Pg" value="/dev/ttyACM0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_kEvDqmarEeCO2uZHSTM3Pg" name="roll">
+          <ownedComment xmi:id="_WisDMFj-Ed-mR6TLo8gKxQ">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#__hqH8DyrEd-k451kr4T2rw"/>
+            <body>The roll angle [rad] of the scanner on the robot, etc. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDq2arEeCO2uZHSTM3Pg" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_kEvDrGarEeCO2uZHSTM3Pg" name="verbose">
+          <ownedComment xmi:id="_nm60QDJyEd-SvN0H3YB-5w">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#_vFWmoDJwEd-SvN0H3YB-5w"/>
+            <body>Set the component to verbose. Default = false</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDrWarEeCO2uZHSTM3Pg" value="false"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_kEvDrmarEeCO2uZHSTM3Pg" name="min_range">
+          <ownedComment xmi:id="_7FwTIOZ6Ed-L_LayEWa7Ow">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#_OPJbIOZVEd-L_LayEWa7Ow"/>
+            <body>The min distance [mm] of allowed measurements. Default = 20</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_7kThsIQIEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDr2arEeCO2uZHSTM3Pg" value="20"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_kEvDsGarEeCO2uZHSTM3Pg" name="speed">
+          <ownedComment xmi:id="_IvnI4DJyEd-SvN0H3YB-5w">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#_Y4zE4DJwEd-SvN0H3YB-5w"/>
+            <body>Speed for communication (bps). Default = 115200</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_7kThsIQIEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDsWarEeCO2uZHSTM3Pg" value="115200"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_kEvDsmarEeCO2uZHSTM3Pg" name="max_range">
+          <ownedComment xmi:id="_J9_SsOZ7Ed-L_LayEWa7Ow">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#_3VTgIOZVEd-L_LayEWa7Ow"/>
+            <body>The max distance [mm] of allowed measurements. Default = 5600</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_7kThsIQIEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDs2arEeCO2uZHSTM3Pg" value="5600"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_kEvDtGarEeCO2uZHSTM3Pg" name="x">
+          <ownedComment xmi:id="_DHC94DJyEd-SvN0H3YB-5w">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#_gmEdIDJxEd-SvN0H3YB-5w"/>
+            <body>The x position [mm] of the scanner on the robot, etc. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDtWarEeCO2uZHSTM3Pg" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_kEvDtmarEeCO2uZHSTM3Pg" name="azimuth">
+          <ownedComment xmi:id="_Nm3XsFj-Ed-mR6TLo8gKxQ">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#_jxi6oDJxEd-SvN0H3YB-5w"/>
+            <body>The azimuth angle [rad] of the scanner on the robot, etc. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDt2arEeCO2uZHSTM3Pg" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_kEvDuGarEeCO2uZHSTM3Pg" name="opening_angle">
+          <ownedComment xmi:id="_Lu52sOZ7Ed-L_LayEWa7Ow">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#__sXRsOZVEd-L_LayEWa7Ow"/>
+            <body>The opening angle [1/100 deg] which should be used. It is possible to give a smaller value than the laser ranger has. Default = 24000</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_7kThsIQIEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDuWarEeCO2uZHSTM3Pg" value="24000"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_kEvDumarEeCO2uZHSTM3Pg" name="type">
+          <ownedComment xmi:id="_TplyIOZ3Ed-L_LayEWa7Ow">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#_aj1FkOZlEd-L_LayEWa7Ow"/>
+            <body>The type of the connected laser ranger. Supported types are URG-04LX, URG-04LX-UG01,  UBG-05LX-F01, UHG-08LX, UTM-30LX .Default = URG-04LX.</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDu2arEeCO2uZHSTM3Pg" value="URG-04LX"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_kEvDvGarEeCO2uZHSTM3Pg" name="z">
+          <ownedComment xmi:id="_t9T2MOZ6Ed-L_LayEWa7Ow">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#_h-iE4DJxEd-SvN0H3YB-5w"/>
+            <body>The z position [mm] of the scanner on the robot, etc. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDvWarEeCO2uZHSTM3Pg" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_kEvDvmarEeCO2uZHSTM3Pg" name="elevation">
+          <ownedComment xmi:id="_QwD9QFj-Ed-mR6TLo8gKxQ">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartLaserHokuyoURGServer/model/pim/SmartLaserHokuyoURGServer_pim.uml.out.uml#_6eIjsDyrEd-k451kr4T2rw"/>
+            <body>The elevation angle [rad] of the scanner on the robot, etc. Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kEvDv2arEeCO2uZHSTM3Pg" value="0"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_kEvDwGarEeCO2uZHSTM3Pg" name="query_only"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_kEvDwWarEeCO2uZHSTM3Pg" name="query_only"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_kEvDwmarEeCO2uZHSTM3Pg" name="active"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_kEvDw2arEeCO2uZHSTM3Pg" name="active"/>
+    </packagedElement>
+    <profileApplication xmi:id="_kEvDxGarEeCO2uZHSTM3Pg">
+      <eAnnotations xmi:id="_kEvDxWarEeCO2uZHSTM3Pg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:SmartCorbaComponent xmi:id="_kEvDxmarEeCO2uZHSTM3Pg" base_Component="_kEvDgWarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaPushTimedServer xmi:id="_kEvDx2arEeCO2uZHSTM3Pg" serviceName="scan" base_Port="_kEvDgmarEeCO2uZHSTM3Pg" smartPushTimedHandler="_kEvDiWarEeCO2uZHSTM3Pg" cycle="0.1">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
+  </CorbaSmartSoft:SmartCorbaPushTimedServer>
+  <CorbaSmartSoft:SmartCorbaPushTimedClient xmi:id="_kEvDyGarEeCO2uZHSTM3Pg" serviceName="basestate" base_Port="_kEvDg2arEeCO2uZHSTM3Pg" serverName="SmartPioneerBaseServer" interval="1">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
+  </CorbaSmartSoft:SmartCorbaPushTimedClient>
+  <CorbaSmartSoft:SmartCorbaQueryServer xmi:id="_kEvDyWarEeCO2uZHSTM3Pg" serviceName="scan" base_Port="_kEvDhGarEeCO2uZHSTM3Pg" smartQueryHandler="_kEvDimarEeCO2uZHSTM3Pg">
+    <commRequestObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
+    <commAnswerObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
+  </CorbaSmartSoft:SmartCorbaQueryServer>
+  <CorbaSmartSoft:SmartCorbaPushTimedClient xmi:id="_kEvDymarEeCO2uZHSTM3Pg" serviceName="currentPose" base_Port="_kEvDhWarEeCO2uZHSTM3Pg" serverName="SmartKatanaServer" interval="1">
+    <commObject href="platform:/resource/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_a_vAsNRAEd6nTeGEf54M4w"/>
+  </CorbaSmartSoft:SmartCorbaPushTimedClient>
+  <CorbaSmartSoft:SmartCorbaStateServer xmi:id="_kEvDy2arEeCO2uZHSTM3Pg" serviceName="stateServer" base_Port="_kEvDhmarEeCO2uZHSTM3Pg" smartCorbaStateChangeHandler="_kEvDi2arEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaPushNewestServer xmi:id="_kEvDzGarEeCO2uZHSTM3Pg" serviceName="scan" base_Port="_kEvDh2arEeCO2uZHSTM3Pg">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
+  </CorbaSmartSoft:SmartCorbaPushNewestServer>
+  <CorbaSmartSoft:SmartCorbaTask xmi:id="_kEvDzWarEeCO2uZHSTM3Pg" period="0" base_Class="_kEvDiGarEeCO2uZHSTM3Pg" wcet="0"/>
+  <CorbaSmartSoft:SmartCorbaPushTimedHandler xmi:id="_kEvDzmarEeCO2uZHSTM3Pg" base_Class="_kEvDiWarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaQueryHandler xmi:id="_kEvDz2arEeCO2uZHSTM3Pg" base_Class="_kEvDimarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaStateChangeHandler xmi:id="_kEvD0GarEeCO2uZHSTM3Pg" base_Class="_kEvDi2arEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaMutex xmi:id="_kEvD0WarEeCO2uZHSTM3Pg" base_Class="_kEvDjGarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_kEvD0marEeCO2uZHSTM3Pg" base_Class="_kEvDjWarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_kEvqkGarEeCO2uZHSTM3Pg" base_Class="_kEvDoGarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_kEvqkWarEeCO2uZHSTM3Pg" base_Class="_kEvDpWarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaMainState xmi:id="_kEvqkmarEeCO2uZHSTM3Pg" base_Class="_kEvDwGarEeCO2uZHSTM3Pg" smartCorbaSubState="_kEvDwWarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaSubState xmi:id="_kEvqk2arEeCO2uZHSTM3Pg" base_Class="_kEvDwWarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaMainState xmi:id="_kEvqlGarEeCO2uZHSTM3Pg" base_Class="_kEvDwmarEeCO2uZHSTM3Pg" smartCorbaSubState="_kEvDw2arEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaSubState xmi:id="_kEvqlWarEeCO2uZHSTM3Pg" base_Class="_kEvDw2arEeCO2uZHSTM3Pg"/>
+</xmi:XMI>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_vE9PsGarEeCO2uZHSTM3Pg" name="SmartMapperGridMap_psm">
+    <packagedElement xmi:type="uml:Component" xmi:id="_vE9PsWarEeCO2uZHSTM3Pg" name="SmartMapperGridMap">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_vE9PsmarEeCO2uZHSTM3Pg" name="ltmQueryServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_vE9Ps2arEeCO2uZHSTM3Pg" name="curQueryServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_vE92wGarEeCO2uZHSTM3Pg" name="laserClient"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_vE92wWarEeCO2uZHSTM3Pg" name="stateServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_vE92wmarEeCO2uZHSTM3Pg" name="curPushServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_vE92w2arEeCO2uZHSTM3Pg" name="paramServer"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_vE92xGarEeCO2uZHSTM3Pg" name="LtmMapTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_vE92xWarEeCO2uZHSTM3Pg" name="CurMapTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_vE92xmarEeCO2uZHSTM3Pg" name="LtmQueryHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_vE92x2arEeCO2uZHSTM3Pg" name="CurQueryHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_vE92yGarEeCO2uZHSTM3Pg" name="StateChangeHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_vE92yWarEeCO2uZHSTM3Pg" name="ParameterHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_vE92ymarEeCO2uZHSTM3Pg" name="MapperStateLock"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_vE92y2arEeCO2uZHSTM3Pg" name="LtmLock"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_vE92zGarEeCO2uZHSTM3Pg" name="CurLock"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_vE92zWarEeCO2uZHSTM3Pg" name="LtmTriggerLock"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_vE92zmarEeCO2uZHSTM3Pg" name="MapperLtmTrigger"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_vE92z2arEeCO2uZHSTM3Pg" name="currentMap">
+        <ownedAttribute xmi:id="_vE920GarEeCO2uZHSTM3Pg" name="interval">
+          <ownedComment xmi:id="_S2wzMEoxEeCeNt_YLTHJKA">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartMapperGridMap/model/pim/SmartMapperGridMap_pim.uml.out.uml#_4acIkM1YEd6P6fA2h1d4oQ"/>
+            <body>take every nth laserscan</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_7kThsIQIEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_vE920WarEeCO2uZHSTM3Pg" value="10"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_vE920marEeCO2uZHSTM3Pg" name="offset_x">
+          <ownedComment xmi:id="_111lMEoxEeCeNt_YLTHJKA">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartMapperGridMap/model/pim/SmartMapperGridMap_pim.uml.out.uml#_6rm58M1YEd6P6fA2h1d4oQ"/>
+            <body>offset relative to world in mm</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_vE9202arEeCO2uZHSTM3Pg" value="-10000"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_vE921GarEeCO2uZHSTM3Pg" name="offset_y">
+          <ownedComment xmi:id="_3QPtsEoxEeCeNt_YLTHJKA">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartMapperGridMap/model/pim/SmartMapperGridMap_pim.uml.out.uml#_IsDV4M1ZEd6P6fA2h1d4oQ"/>
+            <body>offset relative to world in mm</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_vE921WarEeCO2uZHSTM3Pg" value="-10000"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_vE921marEeCO2uZHSTM3Pg" name="size_y">
+          <ownedComment xmi:id="_077hsEoxEeCeNt_YLTHJKA">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartMapperGridMap/model/pim/SmartMapperGridMap_pim.uml.out.uml#_6oyPcM1YEd6P6fA2h1d4oQ"/>
+            <body>size of y current in mm</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_7kThsIQIEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_vE9212arEeCO2uZHSTM3Pg" value="20000"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_vE922GarEeCO2uZHSTM3Pg" name="empty">
+          <ownedComment xmi:id="_vsEKkEoxEeCeNt_YLTHJKA">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartMapperGridMap/model/pim/SmartMapperGridMap_pim.uml.out.uml#_6dHK8M1YEd6P6fA2h1d4oQ"/>
+            <body>[0,1]   accumulate/clear map each cycle</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_vE922WarEeCO2uZHSTM3Pg" value="false"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_vE922marEeCO2uZHSTM3Pg" name="size_x">
+          <ownedComment xmi:id="_zxnDoEoxEeCeNt_YLTHJKA">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartMapperGridMap/model/pim/SmartMapperGridMap_pim.uml.out.uml#_6ma38M1YEd6P6fA2h1d4oQ"/>
+            <body>size of x current in mm</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_7kThsIQIEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_vE9222arEeCO2uZHSTM3Pg" value="20000"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_vE923GarEeCO2uZHSTM3Pg" name="ltm_threshold">
+          <ownedComment xmi:id="_shz1EEoxEeCeNt_YLTHJKA">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartMapperGridMap/model/pim/SmartMapperGridMap_pim.uml.out.uml#_6Zmj8M1YEd6P6fA2h1d4oQ"/>
+            <body>[0-255] ltm obstacle threshold // asteck: [0-128]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_7kThsIQIEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_vE923WarEeCO2uZHSTM3Pg" value="20"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_vE923marEeCO2uZHSTM3Pg" name="map_id">
+          <ownedComment xmi:id="_ya8LoEoxEeCeNt_YLTHJKA">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartMapperGridMap/model/pim/SmartMapperGridMap_pim.uml.out.uml#_6j028M1YEd6P6fA2h1d4oQ"/>
+            <body>default map id</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_7kThsIQIEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_vE9232arEeCO2uZHSTM3Pg" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_vE924GarEeCO2uZHSTM3Pg" name="ltm_state">
+          <ownedComment xmi:id="_WPvhMEoxEeCeNt_YLTHJKA">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartMapperGridMap/model/pim/SmartMapperGridMap_pim.uml.out.uml#_6VVH8M1YEd6P6fA2h1d4oQ"/>
+            <body>disable/enable ltm preoccupation</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_vE924WarEeCO2uZHSTM3Pg" value="false"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_vE924marEeCO2uZHSTM3Pg" name="growing">
+          <ownedComment xmi:id="_xEf9IEoxEeCeNt_YLTHJKA">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartMapperGridMap/model/pim/SmartMapperGridMap_pim.uml.out.uml#_6g2bcM1YEd6P6fA2h1d4oQ"/>
+            <body>type of growing {star16,star12,circle16,circle8,no}</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_vE9242arEeCO2uZHSTM3Pg" value="star16"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_vE925GarEeCO2uZHSTM3Pg" name="ltmMap">
+        <ownedAttribute xmi:id="_vE925WarEeCO2uZHSTM3Pg" name="offset_y">
+          <ownedComment xmi:id="_gDMi0EoyEeCeNt_YLTHJKA">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartMapperGridMap/model/pim/SmartMapperGridMap_pim.uml.out.uml#_9K9b0M1ZEd6P6fA2h1d4oQ"/>
+            <body>offset relative to world in mm</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_vE925marEeCO2uZHSTM3Pg" value="-15000"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_vE9252arEeCO2uZHSTM3Pg" name="size_y">
+          <ownedComment xmi:id="_cN5sQEoyEeCeNt_YLTHJKA">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartMapperGridMap/model/pim/SmartMapperGridMap_pim.uml.out.uml#_9Ex7UM1ZEd6P6fA2h1d4oQ"/>
+            <body>size of y ltm in mm</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_7kThsIQIEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_vE926GarEeCO2uZHSTM3Pg" value="60000"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_vE926WarEeCO2uZHSTM3Pg" name="size_x">
+          <ownedComment xmi:id="_auJJsEoyEeCeNt_YLTHJKA">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartMapperGridMap/model/pim/SmartMapperGridMap_pim.uml.out.uml#_9B4YUM1ZEd6P6fA2h1d4oQ"/>
+            <body>size of x ltm in mm</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_7kThsIQIEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_vE926marEeCO2uZHSTM3Pg" value="60000"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_vE9262arEeCO2uZHSTM3Pg" name="kalman">
+          <ownedComment xmi:id="_XiXKMEoyEeCeNt_YLTHJKA">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartMapperGridMap/model/pim/SmartMapperGridMap_pim.uml.out.uml#_88F5YM1ZEd6P6fA2h1d4oQ"/>
+            <body>[0,255] adaptation rate //100</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_vE927GarEeCO2uZHSTM3Pg" value="100"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_vE927WarEeCO2uZHSTM3Pg" name="map_id">
+          <ownedComment xmi:id="_ZDe-sEoyEeCeNt_YLTHJKA">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartMapperGridMap/model/pim/SmartMapperGridMap_pim.uml.out.uml#_8_AqgM1ZEd6P6fA2h1d4oQ"/>
+            <body>default map id</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_7kThsIQIEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_vE927marEeCO2uZHSTM3Pg" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_vE9272arEeCO2uZHSTM3Pg" name="offset_x">
+          <ownedComment xmi:id="_ek1HYEoyEeCeNt_YLTHJKA">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartMapperGridMap/model/pim/SmartMapperGridMap_pim.uml.out.uml#_9H_AUM1ZEd6P6fA2h1d4oQ"/>
+            <body>offset relative to world in mm</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_vE928GarEeCO2uZHSTM3Pg" value="-15000"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_vE928WarEeCO2uZHSTM3Pg" name="general">
+        <ownedAttribute xmi:id="_vE928marEeCO2uZHSTM3Pg" name="cellsize">
+          <ownedComment xmi:id="_5iAKYEowEeCeNt_YLTHJKA">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartMapperGridMap/model/pim/SmartMapperGridMap_pim.uml.out.uml#_YBK7MM1YEd6P6fA2h1d4oQ"/>
+            <body>cellsize in mm</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_7kThsIQIEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_vE9282arEeCO2uZHSTM3Pg" value="50"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_vE929GarEeCO2uZHSTM3Pg" name="verbose">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_vE929WarEeCO2uZHSTM3Pg" value="false"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_vE929marEeCO2uZHSTM3Pg" name="buildbothmaps"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_vE9292arEeCO2uZHSTM3Pg" name="buildcurrentmap"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_vE92-GarEeCO2uZHSTM3Pg" name="buildltmmap"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_vE92-WarEeCO2uZHSTM3Pg" name="buildltmmap"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_vE92-marEeCO2uZHSTM3Pg" name="buildcurrentmap"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_vE92-2arEeCO2uZHSTM3Pg" name="LtmTriggerTimer"/>
+    </packagedElement>
+    <profileApplication xmi:id="_vE92_GarEeCO2uZHSTM3Pg">
+      <eAnnotations xmi:id="_vE92_WarEeCO2uZHSTM3Pg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:SmartCorbaComponent xmi:id="_vE92_marEeCO2uZHSTM3Pg" base_Component="_vE9PsWarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaQueryServer xmi:id="_vE92_2arEeCO2uZHSTM3Pg" serviceName="ltmGridMapQuery" base_Port="_vE9PsmarEeCO2uZHSTM3Pg" smartQueryHandler="_vE92xmarEeCO2uZHSTM3Pg">
+    <commRequestObject href="platform:/resource/CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_Svv6kEmUEeC-KYWPZCFBzA"/>
+    <commAnswerObject href="platform:/resource/CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_-s4UEEmREeC-KYWPZCFBzA"/>
+  </CorbaSmartSoft:SmartCorbaQueryServer>
+  <CorbaSmartSoft:SmartCorbaQueryServer xmi:id="_vE93AGarEeCO2uZHSTM3Pg" serviceName="curGridMapQuery" base_Port="_vE9Ps2arEeCO2uZHSTM3Pg" smartQueryHandler="_vE92x2arEeCO2uZHSTM3Pg">
+    <commRequestObject href="platform:/resource/CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_Svv6kEmUEeC-KYWPZCFBzA"/>
+    <commAnswerObject href="platform:/resource/CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_-s4UEEmREeC-KYWPZCFBzA"/>
+  </CorbaSmartSoft:SmartCorbaQueryServer>
+  <CorbaSmartSoft:SmartCorbaPushNewestClient xmi:id="_vE93AWarEeCO2uZHSTM3Pg" serviceName="scan" base_Port="_vE92wGarEeCO2uZHSTM3Pg" serverName="SmartLaserLMS200Server">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
+  </CorbaSmartSoft:SmartCorbaPushNewestClient>
+  <CorbaSmartSoft:SmartCorbaStateServer xmi:id="_vE93AmarEeCO2uZHSTM3Pg" serviceName="state" base_Port="_vE92wWarEeCO2uZHSTM3Pg" smartCorbaStateChangeHandler="_vE92yGarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaPushNewestServer xmi:id="_vE93A2arEeCO2uZHSTM3Pg" serviceName="currentGridMap" base_Port="_vE92wmarEeCO2uZHSTM3Pg">
+    <commObject href="platform:/resource/CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_-s4UEEmREeC-KYWPZCFBzA"/>
+  </CorbaSmartSoft:SmartCorbaPushNewestServer>
+  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="_vE93BGarEeCO2uZHSTM3Pg" serviceName="param" base_Port="_vE92w2arEeCO2uZHSTM3Pg" smartSendHandler="_vE92yWarEeCO2uZHSTM3Pg">
+    <commObject href="platform:/resource/CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_U2Y-UEmREeC-KYWPZCFBzA"/>
+  </CorbaSmartSoft:SmartCorbaSendServer>
+  <CorbaSmartSoft:SmartCorbaTask xmi:id="_vE93BWarEeCO2uZHSTM3Pg" period="0" base_Class="_vE92xGarEeCO2uZHSTM3Pg" wcet="0"/>
+  <CorbaSmartSoft:SmartCorbaTask xmi:id="_vE93BmarEeCO2uZHSTM3Pg" period="0" base_Class="_vE92xWarEeCO2uZHSTM3Pg" wcet="0"/>
+  <CorbaSmartSoft:SmartCorbaQueryHandler xmi:id="_vE93B2arEeCO2uZHSTM3Pg" base_Class="_vE92xmarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaQueryHandler xmi:id="_vE93CGarEeCO2uZHSTM3Pg" base_Class="_vE92x2arEeCO2uZHSTM3Pg" isActive="true"/>
+  <CorbaSmartSoft:SmartCorbaStateChangeHandler xmi:id="_vE93CWarEeCO2uZHSTM3Pg" base_Class="_vE92yGarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="_vE93CmarEeCO2uZHSTM3Pg" base_Class="_vE92yWarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaMutex xmi:id="_vE93C2arEeCO2uZHSTM3Pg" base_Class="_vE92ymarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaMutex xmi:id="_vE93DGarEeCO2uZHSTM3Pg" base_Class="_vE92y2arEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaMutex xmi:id="_vE93DWarEeCO2uZHSTM3Pg" base_Class="_vE92zGarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaMutex xmi:id="_vE93DmarEeCO2uZHSTM3Pg" base_Class="_vE92zWarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaConditionMutex xmi:id="_vE93D2arEeCO2uZHSTM3Pg" base_Class="_vE92zmarEeCO2uZHSTM3Pg" mutex="_vE92zWarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_vE93EGarEeCO2uZHSTM3Pg" base_Class="_vE92z2arEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_vE93EWarEeCO2uZHSTM3Pg" base_Class="_vE925GarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_vE93EmarEeCO2uZHSTM3Pg" base_Class="_vE928WarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaMainState xmi:id="_vE93E2arEeCO2uZHSTM3Pg" base_Class="_vE929marEeCO2uZHSTM3Pg" smartCorbaSubState="_vE9292arEeCO2uZHSTM3Pg _vE92-GarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaSubState xmi:id="_vE-d0GarEeCO2uZHSTM3Pg" base_Class="_vE9292arEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaSubState xmi:id="_vE-d0WarEeCO2uZHSTM3Pg" base_Class="_vE92-GarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaMainState xmi:id="_vE-d0marEeCO2uZHSTM3Pg" base_Class="_vE92-WarEeCO2uZHSTM3Pg" smartCorbaSubState="_vE92-GarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaMainState xmi:id="_vE-d02arEeCO2uZHSTM3Pg" base_Class="_vE92-marEeCO2uZHSTM3Pg" smartCorbaSubState="_vE9292arEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaTimer xmi:id="_vE-d1GarEeCO2uZHSTM3Pg" base_Class="_vE92-2arEeCO2uZHSTM3Pg" cycle="0.5"/>
+</xmi:XMI>

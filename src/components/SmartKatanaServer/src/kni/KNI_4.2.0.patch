@@ -1,0 +1,348 @@
+diff -Naur kni_orginal//include/KNI/cdlCOM.h kni_patched//include/KNI/cdlCOM.h
+--- kni_orginal//include/KNI/cdlCOM.h	2007-04-12 15:52:07.000000000 +0200
++++ kni_patched//include/KNI/cdlCOM.h	2010-06-23 12:08:25.103518847 +0200
+@@ -107,7 +107,7 @@
+ 	 *	describes the desired serial port. An attempt to open a connection
+ 	 *	to the desired device will be tried.
+ 	 */
+-	CCdlCOM(TCdlCOMDesc ccd);
++	CCdlCOM(TCdlCOMDesc ccd, const std::string& deviceName = "");
+ 
+ 	/*! \brief	Destructs the class
+ 	 */	virtual ~CCdlCOM();
+diff -Naur kni_orginal//src/Base/cdlCOM.cpp kni_patched//src/Base/cdlCOM.cpp
+--- kni_orginal//src/Base/cdlCOM.cpp	2007-04-12 15:52:07.000000000 +0200
++++ kni_patched//src/Base/cdlCOM.cpp	2010-06-23 12:08:25.110513803 +0200
+@@ -22,6 +22,7 @@
+ #include "KNI/cdlCOM.h"
+ 
+ #include "common/Timer.h"
++#include <string.h>
+ 
+ 
+ #ifdef WIN32
+@@ -159,21 +160,18 @@
+ 
+ #else //LINUX
+ 
+-CCdlCOM::CCdlCOM(TCdlCOMDesc ccd) : _deviceName(""), _ccd(), _prtHdl(-1), _oto() {
++CCdlCOM::CCdlCOM(TCdlCOMDesc ccd, const std::string& deviceName) : _deviceName(deviceName), _ccd(), _prtHdl(-1), _oto() {
+ 
+ 	int prtHdl	= -1;
+ 
+-	std::string deviceName;
++	if (_deviceName.length() == 0)
++	{
++		_deviceName = "/dev/ttyS" + digit(ccd.port);
++	}
+ 	struct termios	nto, oto;
+-	char		name[11];
+-
+ 	errno = 0;
+ 
+-	strncpy(name, "/dev/ttyS ", 11);
+-	name[9] = digit(ccd.port);
+-	prtHdl = ::open(name, O_RDWR | O_NOCTTY | O_NDELAY| O_NONBLOCK);
+-
+-	_deviceName = name;
++	prtHdl = ::open(_deviceName.c_str(), O_RDWR | O_NOCTTY | O_NDELAY| O_NONBLOCK);
+ 
+ 	if (prtHdl < 0) {
+ 		throw CannotOpenPortException(_deviceName, strerror(errno));
+@@ -289,7 +287,6 @@
+ 	}
+ 
+ 	_prtHdl = prtHdl;
+-	_deviceName = deviceName;
+ 	_ccd = ccd;
+ 	_oto = oto;
+ }
+diff -Naur kni_orginal//src/Base/cdlSocket.cpp kni_patched//src/Base/cdlSocket.cpp
+--- kni_orginal//src/Base/cdlSocket.cpp	2007-11-06 14:45:09.000000000 +0100
++++ kni_patched//src/Base/cdlSocket.cpp	2010-06-23 12:08:25.109514444 +0200
+@@ -21,6 +21,9 @@
+ /****************************************************************************/
+ #include "KNI/cdlSocket.h"
+ #include <iostream>
++#include <stdio.h>
++#include <string.h>
++#include <stdlib.h>
+ /****************************************************************************/
+ //test write:
+ int writesz;
+@@ -94,7 +97,7 @@
+ 		std::cout << "socket could not be created"<<_ipAddr<<" port: "<< _port<<" \n";
+ 		exit(1);
+ 	}
+-	memset(&_socketAddr, 0, sizeof(_socketAddr));  
++	memset(&_socketAddr, 0, sizeof(_socketAddr));
+ 	_socketAddr.sin_family = AF_INET;
+ 	_socketAddr.sin_addr.s_addr = inet_addr(_ipAddr);
+ 	_socketAddr.sin_port = htons(_port);
+@@ -114,7 +117,7 @@
+ 	else{
+ //		std::cout << "client connected to ip "<<_ipAddr<<", port: "<< _port<<" \n";
+ 	}
+- 	
++
+ }
+ 
+ CCdlSocket::~CCdlSocket() {
+diff -Naur kni_orginal//src/Base/cplSerial.cpp kni_patched//src/Base/cplSerial.cpp
+--- kni_orginal//src/Base/cplSerial.cpp	2008-10-01 11:56:27.000000000 +0200
++++ kni_patched//src/Base/cplSerial.cpp	2010-06-23 12:08:25.108514316 +0200
+@@ -22,6 +22,8 @@
+ #include "KNI/CRC.h"
+ #include <assert.h>
+ #include <iostream>
++#include <stdio.h>
++#include <string.h>
+ 
+ 
+ bool CCplSerialCRC::load_tbl() {
+diff -Naur kni_orginal//src/Base/kmlBase.cpp kni_patched//src/Base/kmlBase.cpp
+--- kni_orginal//src/Base/kmlBase.cpp	2008-11-17 08:05:22.000000000 +0100
++++ kni_patched//src/Base/kmlBase.cpp	2010-06-23 12:08:25.109514444 +0200
+@@ -21,6 +21,9 @@
+ #include "KNI/kmlBase.h"
+ 
+ #include "common/Timer.h"
++#include <stdio.h>
++#include <string.h>
++#include <stdlib.h>
+ 
+ #include <vector>
+ ////////////////////////////////////////////////////////////////
+@@ -144,7 +147,7 @@
+ 		if (reachedall)
+ 			return;
+ 		KNI::sleep(1000);
+-	}	
++	}
+ }
+ ////////////////////////////////////////////////////////////////
+ void CKatBase::recvECH() {
+@@ -273,9 +276,9 @@
+ }
+ ////////////////////////////////////////////////////////////////
+ int CKatBase::readDigitalIO(){
+-	byte	p[32];		
+-	byte	buf[256];	
+-	byte	sz =0;		
++	byte	p[32];
++	byte	buf[256];
++	byte	sz =0;
+ 	p[0] = 'T';
+ 	p[1] = 'r';
+ 	p[2] = 0;
+@@ -286,9 +289,9 @@
+ }
+ ////////////////////////////////////////////////////////////////
+ int CKatBase::flushMoveBuffers(){
+-	byte	p[32];		
+-	byte	buf[256];	
+-	byte	sz =0;		
++	byte	p[32];
++	byte	buf[256];
++	byte	sz =0;
+ 	p[0] = 'C';
+ 	p[1] = 0;
+ 	p[2] = 32;
+diff -Naur kni_orginal//src/Base/kmlExt.cpp kni_patched//src/Base/kmlExt.cpp
+--- kni_orginal//src/Base/kmlExt.cpp	2009-01-28 11:50:19.000000000 +0100
++++ kni_patched//src/Base/kmlExt.cpp	2010-06-23 12:08:25.109514444 +0200
+@@ -103,7 +103,7 @@
+ 	int gripperOpenEncoders, gripperCloseEncoders;
+ 	infos->getGripperParameters(gripperIsPresent, gripperOpenEncoders, gripperCloseEncoders);
+ 	setGripperParameters(gripperIsPresent, gripperOpenEncoders, gripperCloseEncoders);
+-	
++
+ }
+ 
+ void CKatana::create(TKatGNL& gnl, TKatMOT& mot, TKatSCT& sct, TKatEFF& eff, CCplBase* protocol) {
+@@ -146,7 +146,7 @@
+ 		}
+ 		while(buf[2] == 4);
+ 		std::cout << "...done with calibration.\n";
+-		
++
+ 	}
+ 	else if(mKatanaType == 300){
+ 		std::cout << "Katana300 calibration started\n";
+@@ -316,14 +316,14 @@
+ 			setForceLimit(i, limit);
+ 		}
+ 	}
+-	
++
+ 	// check axis number
+ 	if (axis < 1) return;
+ 	if (axis > getNumberOfMotors()) return;
+-	
++
+ 	// can not set current limit on drive controller
+ 	if (base->GetMOT()->arr[axis-1].GetSFW()->type == 0) return;
+-	
++
+ 	int force = abs(limit);
+ 	if (force > 100)
+ 		force = 100;
+@@ -493,10 +493,14 @@
+ 		poll_t.Start();
+ 		base->recvMPS(); // get position for all motors
+ 		base->recvGMS(); // get status flags for all motors
+-		for (int idx=0; idx<getNumberOfMotors(); idx++) {
++
++//		for (int idx=0; idx<getNumberOfMotors(); idx++) {  // original code
++
++		// only check for those encoders which were set
++		for (int idx=0; idx<i; idx++) {
+ 			if (mot->arr[idx].GetPVP()->msf == 40)
+ 				throw MotorCrashException();
+-			pos_reached &= std::abs(mot->arr[idx].GetTPS()->tarpos - mot->arr[idx].GetPVP()->pos) < 100;
++			pos_reached &= std::abs(mot->arr[idx].GetTPS()->tarpos - mot->arr[idx].GetPVP()->pos) < encTolerance;
+ 		}
+ 		if (pos_reached)
+ 			break;
+@@ -550,14 +554,14 @@
+ CKatana::openGripper(bool waitUntilReached, int waitTimeout) {
+ 	if(!_gripperIsPresent)
+ 		return;
+-	moveMotorToEnc( getNumberOfMotors()-1, _gripperOpenEncoders, waitUntilReached, waitTimeout );
++	moveMotorToEnc( getNumberOfMotors()-1, _gripperOpenEncoders, waitUntilReached, 100, waitTimeout );
+ }
+ 
+ void
+ CKatana::closeGripper(bool waitUntilReached, int waitTimeout) {
+ 	if(!_gripperIsPresent)
+ 		return;
+-	moveMotorToEnc( getNumberOfMotors()-1, _gripperCloseEncoders, waitUntilReached, waitTimeout );
++	moveMotorToEnc( getNumberOfMotors()-1, _gripperCloseEncoders, waitUntilReached, 100, waitTimeout );
+ }
+ 
+ 
+diff -Naur kni_orginal//src/Base/kmlFactories.cpp kni_patched//src/Base/kmlFactories.cpp
+--- kni_orginal//src/Base/kmlFactories.cpp	2008-07-30 10:18:13.000000000 +0200
++++ kni_patched//src/Base/kmlFactories.cpp	2010-06-23 12:08:25.111514071 +0200
+@@ -1,6 +1,10 @@
+ 
+ #include "KNI/kmlFactories.h"
+ 
++#include <stdio.h>
++#include <string.h>
++#include <stdlib.h>
++
+ namespace KNI {
+ 
+ kmlFactory::kmlFactory() : _configfile() {}
+diff -Naur kni_orginal//src/Base/kmlMotBase.cpp kni_patched//src/Base/kmlMotBase.cpp
+--- kni_orginal//src/Base/kmlMotBase.cpp	2009-01-26 09:17:47.000000000 +0100
++++ kni_patched//src/Base/kmlMotBase.cpp	2010-06-23 12:08:25.109514444 +0200
+@@ -15,6 +15,7 @@
+ #include "common/MathHelperFunctions.h"
+ #include "common/Timer.h"
+ #include <iostream>
++#include <cstdlib>
+ 
+ 
+ bool CMotBase::init(CKatBase* _own, const TMotDesc _motDesc, CCplBase* _protocol) {
+@@ -164,7 +165,7 @@
+ void CMotBase::setPwmLimits(byte maxppwm, byte maxnpwm) {
+ 
+ 	if (sfw.type == 1) return; // can not set pwm limit on current controller
+-	
++
+ 	byte p[32];		//packet
+ 	byte buf[256];	//readbuf
+ 	byte sz = 0;	//readbuf size
+@@ -240,12 +241,12 @@
+ ///////////////////////////////////////////////////////////////
+ //for Katana400s:
+ void CMotBase::setSpeedCollisionLimit(int limit){
+-	byte p[32];		
+-	byte buf[256];	
+-	byte sz = 0;	
++	byte p[32];
++	byte buf[256];
++	byte sz = 0;
+ 	p[0] = 'S';
+ 	p[1] = gnl.SID;
+-	p[2] = 7;		
++	p[2] = 7;
+ 	p[3] = (byte) limit; //for both the linear and non-linear the same:
+ 	p[4] = (byte) limit;
+ 	p[5] = 0;
+@@ -256,12 +257,12 @@
+ ///////////////////////////////////////////////////////////////
+ //for Katana400s:
+ void CMotBase::setPositionCollisionLimit(int limit){
+-	byte p[32];		
+-	byte buf[256];	
+-	byte sz = 0;	
++	byte p[32];
++	byte buf[256];
++	byte sz = 0;
+ 	p[0] = 'S';
+ 	p[1] = gnl.SID;
+-	p[2] = 5;		
++	p[2] = 5;
+ 	p[3] = (byte) (limit >> 8);
+ 	p[4] = (byte) limit;
+ 	p[5] = 0;
+@@ -420,7 +421,7 @@
+ 				break;
+ 		}
+ 		poll_t.WaitUntilElapsed();
+-	}	
++	}
+ }
+ 
+ void CMotBase::incDegrees(double dif, bool wait, int tolerance, long timeout) {
+diff -Naur kni_orginal//src/Base/Makefile kni_patched//src/Base/Makefile
+--- kni_orginal//src/Base/Makefile	2008-11-18 07:01:36.000000000 +0100
++++ kni_patched//src/Base/Makefile	2010-06-23 12:08:25.110513803 +0200
+@@ -7,7 +7,7 @@
+ CXX		=	g++
+ CXXFLAGS	+=	-fPIC -g -O2 -Wall
+ 
+-TARGETS		=	alib solib
++TARGETS		=	alib #solib
+ 
+ LIBNAME = libKNIBase
+ SOURCES = cdlCOM.cpp cplSerial.cpp cdlSocket.cpp CRC.cpp kmlBase.cpp kmlExt.cpp kmlMotBase.cpp kmlSctBase.cpp kmlFactories.cpp
+diff -Naur kni_orginal//src/InvKin/Makefile kni_patched//src/InvKin/Makefile
+--- kni_orginal//src/InvKin/Makefile	2008-11-18 07:01:36.000000000 +0100
++++ kni_patched//src/InvKin/Makefile	2010-06-23 12:08:25.106514341 +0200
+@@ -7,7 +7,7 @@
+ CXX		=	g++
+ CXXFLAGS	+=	-fPIC -g -O2 -Wall
+ 
+-TARGETS		=	alib solib
++TARGETS		=	alib #solib
+ 
+ LIBNAME = libKNI_InvKin
+ SOURCES = ikBase.cpp KatanaKinematics6M90G.cpp KatanaKinematics6M90T.cpp KatanaKinematics6M180.cpp KatanaKinematics5M180.cpp KatanaKinematicsDecisionAlgorithms.cpp
+diff -Naur kni_orginal//src/kni_wrapper/Makefile kni_patched//src/kni_wrapper/Makefile
+--- kni_orginal//src/kni_wrapper/Makefile	2008-11-18 07:01:36.000000000 +0100
++++ kni_patched//src/kni_wrapper/Makefile	2010-06-23 12:08:25.112514338 +0200
+@@ -7,7 +7,7 @@
+ CXX		=	g++
+ CXXFLAGS	+=	-fPIC -g -O2 -Wall
+ 
+-TARGETS		=	alib solib
++TARGETS		=	alib #solib
+ 
+ LIBNAME = kni
+ SOURCES = kni_wrapper.cpp
+diff -Naur kni_orginal//src/LM/Makefile kni_patched//src/LM/Makefile
+--- kni_orginal//src/LM/Makefile	2008-11-18 07:01:36.000000000 +0100
++++ kni_patched//src/LM/Makefile	2010-06-23 12:08:25.108514316 +0200
+@@ -7,7 +7,7 @@
+ CXX		=	g++
+ CXXFLAGS	+=	-fPIC -g -O2 -Wall
+ 
+-TARGETS		=	alib solib
++TARGETS		=	alib #solib
+ 
+ LIBNAME = libKNI_LM
+ SOURCES = lmBase.cpp

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_lXrukGaqEeCwRIvId514VA" name="SmartKinectTestClient_psm">
+    <packagedElement xmi:type="uml:Component" xmi:id="_lXsVoGaqEeCwRIvId514VA" name="SmartKinectTestClient">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_lXsVoWaqEeCwRIvId514VA" name="imagePushNewestClient"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_lXsVomaqEeCwRIvId514VA" name="stateClient"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_lXsVo2aqEeCwRIvId514VA" name="ViewerTask"/>
+    </packagedElement>
+    <profileApplication xmi:id="_lXsVpGaqEeCwRIvId514VA">
+      <eAnnotations xmi:id="_lXsVpWaqEeCwRIvId514VA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:SmartCorbaComponent xmi:id="_lXsVpmaqEeCwRIvId514VA" base_Component="_lXsVoGaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaPushNewestClient xmi:id="_lXsVp2aqEeCwRIvId514VA" serviceName="imageNewest" base_Port="_lXsVoWaqEeCwRIvId514VA" serverName="SmartKinectServer">
+    <commObject href="platform:/resource/CommVisionObjects/model/pim/CommVisionObjects_pim.uml#_kqIvsFn_EeCMadxcQY1MDw"/>
+  </CorbaSmartSoft:SmartCorbaPushNewestClient>
+  <CorbaSmartSoft:SmartCorbaStateClient xmi:id="_lXsVqGaqEeCwRIvId514VA" serviceName="state" base_Port="_lXsVomaqEeCwRIvId514VA" serverName="SmartKinectServer"/>
+  <CorbaSmartSoft:SmartCorbaTask xmi:id="_lXsVqWaqEeCwRIvId514VA" period="0" base_Class="_lXsVo2aqEeCwRIvId514VA" wcet="0"/>
+</xmi:XMI>

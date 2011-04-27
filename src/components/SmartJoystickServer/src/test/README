@@ -1,0 +1,3 @@
+
+Use testJoystickDevice to quickly test low-level joystick access.
+run "./testJoystickDevice /dev/input/js0" etc.

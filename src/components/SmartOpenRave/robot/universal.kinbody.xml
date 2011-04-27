@@ -1,0 +1,166 @@
+<KinBody name="Universal">
+  <Body name="Base" type="dynamic">
+    <Geom type="trimesh">
+      <Data>BasePlate.wrl 0.001</Data>
+      <Render>BasePlate.wrl 0.001</Render>
+    </Geom>
+  </Body>
+  <Body name="L1" type="dynamic">
+    <offsetfrom>Base</offsetfrom>
+    <Translation>-0.02 0.0 0.0</Translation>
+    <Geom type="trimesh">
+      <Data>Joint1.wrl 0.001</Data>
+      <Render>Joint1.wrl 0.001</Render>
+    </Geom>
+  </Body>
+  <Body name="L2" type="dynamic">
+    <offsetfrom>L1</offsetfrom>
+    <Translation>-0.065 0.07 0.0</Translation>
+    <Geom type="trimesh">
+      <Data>Joint2.wrl 0.001</Data>
+      <Render>Joint2.wrl 0.001</Render>
+    </Geom>
+  </Body>
+  <Body name="L3" type="dynamic">
+    <offsetfrom>L2</offsetfrom>
+    <Translation>-0.425 0.0 0.0</Translation>
+    <Geom type="trimesh">
+      <Data>Joint3.wrl 0.001</Data>
+      <Render>Joint3.wrl 0.001</Render>
+    </Geom>
+  </Body>
+  <Body name="L4" type="dynamic">
+    <offsetfrom>L3</offsetfrom>
+    <Translation>-0.3925 -0.0075 0.0</Translation>
+    <Geom type="trimesh">
+      <Data>Joint4.wrl 0.001</Data>
+      <Render>Joint4.wrl 0.001</Render>
+    </Geom>
+  </Body>
+  <Body name="L5" type="dynamic">
+    <offsetfrom>L4</offsetfrom>
+    <Translation>-0.0475 0.0455 0.0</Translation>
+    <Geom type="trimesh">
+      <Data>Joint5.wrl 0.001</Data>
+      <Render>Joint5.wrl 0.001</Render>
+    </Geom>
+  </Body>
+  <Body name="L6" type="dynamic">
+    <offsetfrom>L5</offsetfrom>
+    <Translation>-0.045 0.0475 0.0</Translation>
+    <Geom type="trimesh">
+      <Data>Joint6.wrl 0.001</Data>
+      <Render>Joint6.wrl 0.001</Render>
+    </Geom>
+  </Body>
+  <!-- Gripper -->
+  <Body name="Gripper_Base" type="dynamic">
+    <offsetfrom>L6</offsetfrom>
+    <Translation>0.0 0.035 0.0</Translation>
+    <RotationAxis>1 0 0 270</RotationAxis>
+    <Geom type="trimesh">
+      <Data>Gripper_Base.wrl 0.001</Data>
+      <Render>Gripper_Base.wrl 0.001</Render>
+    </Geom>
+  </Body>
+  <Body name="Gripper_Right" type="dynamic">
+    <offsetfrom>Gripper_Base</offsetfrom>
+    <Translation>0.0 0.0 0.0</Translation>
+    <Geom type="trimesh">
+      <Data>Gripper_Right.wrl 0.001</Data>
+      <Render>Gripper_Right.wrl 0.001</Render>
+    </Geom>
+  </Body>
+  <Body name="Gripper_Left" type="dynamic">
+    <offsetfrom>Gripper_Base</offsetfrom>
+    <Translation>0.0 0.0 0.0</Translation>
+    <Geom type="trimesh">
+      <Data>Gripper_Left.wrl 0.001</Data>
+      <Render>Gripper_Left.wrl 0.001</Render>
+    </Geom>
+  </Body>
+  
+  <!-- Katana Body Joints -->
+  <Joint name="j1" type="hinge">
+    <Body>Base</Body>
+    <Body>L1</Body>
+    <offsetfrom>L1</offsetfrom>
+    <weight>1</weight>
+    <limitsdeg>-360.0 360.0</limitsdeg>
+    <axis>1 0 0</axis>
+    <maxvel>1</maxvel>
+    <resolution>1</resolution>
+  </Joint>
+  <Joint name="j2" type="hinge">
+    <Body>L1</Body>
+    <Body>L2</Body>
+    <offsetfrom>L2</offsetfrom>
+    <limitsdeg>-360.0 360.0</limitsdeg>
+    <axis>0 1 0</axis>
+    <maxvel>1</maxvel>
+    <resolution>1</resolution>
+  </Joint>
+  <Joint name="j3" type="hinge">
+    <Body>L2</Body>
+    <Body>L3</Body>
+    <offsetfrom>L3</offsetfrom>
+    <limitsdeg>-360.0 360.0</limitsdeg>
+    <axis>0 1 0</axis>
+    <maxvel>1</maxvel>
+    <resolution>1</resolution>
+  </Joint>
+  <Joint name="j4" type="hinge">
+    <Body>L3</Body>
+    <Body>L4</Body>
+    <offsetfrom>L4</offsetfrom>
+    <limitsdeg>-360.0 360.0</limitsdeg>
+    <axis>0 1 0</axis>
+    <maxvel>1</maxvel>
+    <resolution>1</resolution>
+  </Joint>
+  <Joint name="j5" type="hinge">
+    <Body>L4</Body>
+    <Body>L5</Body>
+    <offsetfrom>L5</offsetfrom>
+    <limitsdeg>-360.0 360.0</limitsdeg>
+    <axis>1 0 0</axis>
+    <maxvel>1</maxvel>
+    <resolution>1</resolution>
+  </Joint>
+  <Joint name="j6" type="hinge">
+    <Body>L5</Body>
+    <Body>L6</Body>
+    <offsetfrom>L6</offsetfrom>
+    <limitsdeg>-360.0 360.0</limitsdeg>
+    <axis>0 1 0</axis>
+    <maxvel>1</maxvel>
+    <resolution>1</resolution>
+  </Joint>
+  <Joint name="j7" type="hinge">
+    <Body>L6</Body>
+    <Body>Gripper_Base</Body>
+    <offsetfrom>Gripper_Base</offsetfrom>
+    <limitsdeg>0 0</limitsdeg>
+    <axis>0 1 0</axis>
+    <maxvel>1</maxvel>
+    <resolution>1</resolution>
+  </Joint>
+  <!-- Gripper Joints -->
+  <Joint name="gj1" type="hinge">
+    <Body>Gripper_Base</Body>
+    <Body>Gripper_Right</Body>
+    <offsetfrom>Gripper_Right</offsetfrom>
+    <limitsdeg>-25 20</limitsdeg>
+    <axis>0 1 0</axis>
+    <maxvel>1</maxvel>
+    <resolution>1</resolution>
+  </Joint>
+  <Joint name="gj2" type="hinge" enable="false" mimic="gj1 1 0">
+    <Body>Gripper_Base</Body>
+    <Body>Gripper_Left</Body>
+    <offsetfrom>Gripper_Left</offsetfrom>
+    <axis>0 0 1</axis>
+    <maxvel>1</maxvel>
+    <resolution>1</resolution>
+  </Joint>-->
+</KinBody>

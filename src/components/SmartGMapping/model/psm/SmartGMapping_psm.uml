@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_ub7hcHAaEeCGMIM8YZNB5w" name="SmartGMapping_psm">
+    <packagedElement xmi:type="uml:Component" xmi:id="_ub8IgHAaEeCGMIM8YZNB5w" name="SmartGMapping">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_ub8IgXAaEeCGMIM8YZNB5w" name="basePositionUpdateClient"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_ub8IgnAaEeCGMIM8YZNB5w" name="laserClient"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_ub8Ig3AaEeCGMIM8YZNB5w" name="stateServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_ub8IhHAaEeCGMIM8YZNB5w" name="paramServer"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_ub8IhXAaEeCGMIM8YZNB5w" name="GMappingTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_ub8IhnAaEeCGMIM8YZNB5w" name="StateChangeHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_ub8Ih3AaEeCGMIM8YZNB5w" name="ParamHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_ub8IiHAaEeCGMIM8YZNB5w" name="gfs">
+        <ownedComment xmi:id="_dkQhcCJBEeCTtNLkwClVHg">
+          <annotatedElement xmi:type="uml:Class" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_6JKzwCI-EeCTtNLkwClVHg"/>
+          <body>#autosize         off     # determine te map size by pre readoing the log</body>
+        </ownedComment>
+        <ownedComment xmi:id="_Du_XICJCEeCTtNLkwClVHg">
+          <annotatedElement xmi:type="uml:Class" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_6JKzwCI-EeCTtNLkwClVHg"/>
+          <body>#skipMatching     off      # do not perform scan matching before computing the statistics</body>
+        </ownedComment>
+        <ownedComment xmi:id="_anicMCJCEeCTtNLkwClVHg">
+          <annotatedElement xmi:type="uml:Class" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_6JKzwCI-EeCTtNLkwClVHg"/>
+          <body>#randseed            0    # this is for the repeated experiments</body>
+        </ownedComment>
+        <ownedComment xmi:id="_0-HuYCJCEeCTtNLkwClVHg">
+          <annotatedElement xmi:type="uml:Class" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_6JKzwCI-EeCTtNLkwClVHg"/>
+          <body># likelihood sampling
+#llsamplerange              0.05        # linear range</body>
+        </ownedComment>
+        <ownedComment xmi:id="_3Gr9YCJCEeCTtNLkwClVHg">
+          <annotatedElement xmi:type="uml:Class" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_6JKzwCI-EeCTtNLkwClVHg"/>
+          <body>#llsamplestep               0.05  # linear step</body>
+        </ownedComment>
+        <ownedComment xmi:id="_4gQYYCJCEeCTtNLkwClVHg">
+          <annotatedElement xmi:type="uml:Class" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_6JKzwCI-EeCTtNLkwClVHg"/>
+          <body>#lasamplerange              0.05 # angular range</body>
+        </ownedComment>
+        <ownedComment xmi:id="_5l_RYCJCEeCTtNLkwClVHg">
+          <annotatedElement xmi:type="uml:Class" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_6JKzwCI-EeCTtNLkwClVHg"/>
+          <body>#lasamplestep               0.05 # angular step</body>
+        </ownedComment>
+        <ownedComment xmi:id="_7EvuYCJCEeCTtNLkwClVHg">
+          <annotatedElement xmi:type="uml:Class" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_6JKzwCI-EeCTtNLkwClVHg"/>
+          <body>## odometry integration in proposal
+#linearOdometryReliability  0.0</body>
+        </ownedComment>
+        <ownedComment xmi:id="_8f_kYCJCEeCTtNLkwClVHg">
+          <annotatedElement xmi:type="uml:Class" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_6JKzwCI-EeCTtNLkwClVHg"/>
+          <body>#angularOdometryReliability 0.0</body>
+        </ownedComment>
+        <ownedComment xmi:id="_9-5yYCJCEeCTtNLkwClVHg">
+          <annotatedElement xmi:type="uml:Class" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_6JKzwCI-EeCTtNLkwClVHg"/>
+          <body>#considerOdometryCovariance   off</body>
+        </ownedComment>
+        <ownedComment xmi:id="_f-YIkCJDEeCTtNLkwClVHg">
+          <annotatedElement xmi:type="uml:Class" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_6JKzwCI-EeCTtNLkwClVHg"/>
+          <body>## file parameters
+#readFromStdin       off</body>
+        </ownedComment>
+        <ownedComment xmi:id="_helXECJDEeCTtNLkwClVHg">
+          <annotatedElement xmi:type="uml:Class" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_6JKzwCI-EeCTtNLkwClVHg"/>
+          <body>#onLine              off</body>
+        </ownedComment>
+        <ownedComment xmi:id="_izRSECJDEeCTtNLkwClVHg">
+          <annotatedElement xmi:type="uml:Class" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_6JKzwCI-EeCTtNLkwClVHg"/>
+          <body>#generateMap         off</body>
+        </ownedComment>
+        <ownedAttribute xmi:id="_ub8IiXAaEeCGMIM8YZNB5w" name="resampleThreshold">
+          <ownedComment xmi:id="_ZlyEQCJCEeCTtNLkwClVHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_Ur2g4CJCEeCTtNLkwClVHg"/>
+            <body>when neff  is below this value a resampling occurs</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8IinAaEeCGMIM8YZNB5w" value="0.5"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8Ii3AaEeCGMIM8YZNB5w" name="lskip">
+          <ownedComment xmi:id="_8T5ekCJBEeCTtNLkwClVHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_47PgsCJBEeCTtNLkwClVHg"/>
+            <body>beams to skip in the likelihood computation</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8IjHAaEeCGMIM8YZNB5w" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8IjXAaEeCGMIM8YZNB5w" name="iterations">
+          <ownedComment xmi:id="_GYLcYCJBEeCTtNLkwClVHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_C-PFECJBEeCTtNLkwClVHg"/>
+            <body>iterations</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8IjnAaEeCGMIM8YZNB5w" value="5"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8Ij3AaEeCGMIM8YZNB5w" name="maxMove">
+          <ownedComment xmi:id="_XYrI8CJBEeCTtNLkwClVHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_NpS5kCJBEeCTtNLkwClVHg"/>
+            <body>maximum move among two scans. This detects some corrupted logs</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8IkHAaEeCGMIM8YZNB5w" value="1.0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8IkXAaEeCGMIM8YZNB5w" name="linearUpdate">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8IknAaEeCGMIM8YZNB5w" value="1.0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8Ik3AaEeCGMIM8YZNB5w" name="sigma">
+          <ownedComment xmi:id="_zVIpQCJAEeCTtNLkwClVHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_vXE4QCJAEeCTtNLkwClVHg"/>
+            <body>scan matcher cell sigma, for the greedy search</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8IlHAaEeCGMIM8YZNB5w" value="0.05"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8IlXAaEeCGMIM8YZNB5w" name="lstep">
+          <ownedComment xmi:id="_nQ_sgCJBEeCTtNLkwClVHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_hH2kACJBEeCTtNLkwClVHg"/>
+            <body>default settings for a 0.1 m map cell
+linear search step (choose delta)</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8IlnAaEeCGMIM8YZNB5w" value="0.05"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8Il3AaEeCGMIM8YZNB5w" name="xmin">
+          <ownedComment xmi:id="_QBd_8CJDEeCTtNLkwClVHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#__XadcCJCEeCTtNLkwClVHg"/>
+            <body># inital map params</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8ImHAaEeCGMIM8YZNB5w" value="-20.0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8ImXAaEeCGMIM8YZNB5w" name="kernelSize">
+          <ownedComment xmi:id="_NMPUsCJCEeCTtNLkwClVHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#__ytHwCJBEeCTtNLkwClVHg"/>
+            <body>the higher the value the slower the filter
+the better it can deal with noise, but the less precise and slower</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8ImnAaEeCGMIM8YZNB5w" value="1"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8Im3AaEeCGMIM8YZNB5w" name="astep">
+          <ownedComment xmi:id="_vU0ZACJBEeCTtNLkwClVHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_il2MACJBEeCTtNLkwClVHg"/>
+            <body>angular search step, this is fine, depending on the odometry error and the update interval</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8InHAaEeCGMIM8YZNB5w" value="0.05"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8InXAaEeCGMIM8YZNB5w" name="maxrange">
+          <ownedComment xmi:id="_hbuXsCJAEeCTtNLkwClVHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_ahxdUCJAEeCTtNLkwClVHg"/>
+            <body>scan matcher
+(maximum valid) for SICK LMS, 81m max, SICK PLS 50m</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8InnAaEeCGMIM8YZNB5w" value="81.0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8In3AaEeCGMIM8YZNB5w" name="angularUpdate">
+          <ownedComment xmi:id="_NcpaICJAEeCTtNLkwClVHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_uMqJACI_EeCTtNLkwClVHg"/>
+            <body>gfs measurement integration</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8IoHAaEeCGMIM8YZNB5w" value="0.5"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8IoXAaEeCGMIM8YZNB5w" name="srt">
+          <ownedComment xmi:id="_wXAZUCJCEeCTtNLkwClVHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_jUEHcCJCEeCTtNLkwClVHg"/>
+            <body>translation as a function of rotation</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8IonAaEeCGMIM8YZNB5w" value="0.1"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8Io3AaEeCGMIM8YZNB5w" name="critscore">
+          <ownedComment xmi:id="_NGegYCJBEeCTtNLkwClVHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_IF_CACJBEeCTtNLkwClVHg"/>
+            <body>critical score (leave this)</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8IpHAaEeCGMIM8YZNB5w" value="0.0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8IpXAaEeCGMIM8YZNB5w" name="ymin">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8IpnAaEeCGMIM8YZNB5w" value="-20.0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8Ip3AaEeCGMIM8YZNB5w" name="lsigma">
+          <ownedComment xmi:id="_4XD1kCJBEeCTtNLkwClVHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_x_4RECJBEeCTtNLkwClVHg"/>
+            <body>sigma likelihood of 1 beam</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8IqHAaEeCGMIM8YZNB5w" value="0.05"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8IqXAaEeCGMIM8YZNB5w" name="delta">
+          <ownedComment xmi:id="_YIUSoCJAEeCTtNLkwClVHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_UpKEICJAEeCTtNLkwClVHg"/>
+            <body>map resolution</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8IqnAaEeCGMIM8YZNB5w" value="0.05"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8Iq3AaEeCGMIM8YZNB5w" name="numScanBeams">
+          <ownedComment xmi:id="_2pM3gCI_EeCTtNLkwClVHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_Pta_YCI_EeCTtNLkwClVHg"/>
+            <body>number of scan beams used</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8IrHAaEeCGMIM8YZNB5w" value="181"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8IrXAaEeCGMIM8YZNB5w" name="regscore">
+          <ownedComment xmi:id="_AXzOUCJBEeCTtNLkwClVHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_8V4RACJAEeCTtNLkwClVHg"/>
+            <body>minimum score for regsistering a scan</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8IrnAaEeCGMIM8YZNB5w" value="0.0004"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8Ir3AaEeCGMIM8YZNB5w" name="generateMap">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8IsHAaEeCGMIM8YZNB5w" value="true"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8IsXAaEeCGMIM8YZNB5w" name="xmax">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8IsnAaEeCGMIM8YZNB5w" value="20.0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8Is3AaEeCGMIM8YZNB5w" name="particles">
+          <ownedComment xmi:id="_8-3ZECI_EeCTtNLkwClVHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_NiagYCI_EeCTtNLkwClVHg"/>
+            <body>gfs - number of particles</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8ItHAaEeCGMIM8YZNB5w" value="50"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8ItXAaEeCGMIM8YZNB5w" name="ogain">
+          <ownedComment xmi:id="_TlyQsCJCEeCTtNLkwClVHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_MMw0sCJCEeCTtNLkwClVHg"/>
+            <body>gain for smoothing the likelihood</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8ItnAaEeCGMIM8YZNB5w" value="3"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8It3AaEeCGMIM8YZNB5w" name="stt">
+          <ownedComment xmi:id="_yuE-YCJCEeCTtNLkwClVHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_pWGiYCJCEeCTtNLkwClVHg"/>
+            <body>rotation as a function of rotation</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8IuHAaEeCGMIM8YZNB5w" value="0.1"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8IuXAaEeCGMIM8YZNB5w" name="srr">
+          <ownedComment xmi:id="_t9gLUCJCEeCTtNLkwClVHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_eIfacCJCEeCTtNLkwClVHg"/>
+            <body># motion model parameters
+translation as a function of translation</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8IunAaEeCGMIM8YZNB5w" value="0.1"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8Iu3AaEeCGMIM8YZNB5w" name="str">
+          <ownedComment xmi:id="_yELs0CJCEeCTtNLkwClVHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_mFDoYCJCEeCTtNLkwClVHg"/>
+            <body>rotation as a function of translation</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8IvHAaEeCGMIM8YZNB5w" value="0.1"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8IvXAaEeCGMIM8YZNB5w" name="maxUrange">
+          <ownedComment xmi:id="_2maz0CJAEeCTtNLkwClVHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartGMapping/model/pim/SmartGMapping_pim.uml.out.uml#_knNcQCJAEeCTtNLkwClVHg"/>
+            <body>(use up to)</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8IvnAaEeCGMIM8YZNB5w" value="80.0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ub8Iv3AaEeCGMIM8YZNB5w" name="ymax">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ub8IwHAaEeCGMIM8YZNB5w" value="20.0"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_ub8IwXAaEeCGMIM8YZNB5w" name="active"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_ub8IwnAaEeCGMIM8YZNB5w" name="active"/>
+    </packagedElement>
+    <profileApplication xmi:id="_ub8Iw3AaEeCGMIM8YZNB5w">
+      <eAnnotations xmi:id="_ub8IxHAaEeCGMIM8YZNB5w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:SmartCorbaComponent xmi:id="_ub8IxXAaEeCGMIM8YZNB5w" base_Component="_ub8IgHAaEeCGMIM8YZNB5w"/>
+  <CorbaSmartSoft:SmartCorbaSendClient xmi:id="_ub8IxnAaEeCGMIM8YZNB5w" serviceName="positionUpdate" base_Port="_ub8IgXAaEeCGMIM8YZNB5w" serverName="SmartPioneerBaseServer">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_BQWcsEV8EeC6tb6-J2zOEA"/>
+  </CorbaSmartSoft:SmartCorbaSendClient>
+  <CorbaSmartSoft:SmartCorbaPushNewestClient xmi:id="_ub8Ix3AaEeCGMIM8YZNB5w" serviceName="scan" base_Port="_ub8IgnAaEeCGMIM8YZNB5w" serverName="SmartLaserLMS200Server">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
+  </CorbaSmartSoft:SmartCorbaPushNewestClient>
+  <CorbaSmartSoft:SmartCorbaStateServer xmi:id="_ub8IyHAaEeCGMIM8YZNB5w" serviceName="state" base_Port="_ub8Ig3AaEeCGMIM8YZNB5w" smartCorbaStateChangeHandler="_ub8IhnAaEeCGMIM8YZNB5w"/>
+  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="_ub8IyXAaEeCGMIM8YZNB5w" serviceName="param" base_Port="_ub8IhHAaEeCGMIM8YZNB5w" smartSendHandler="_ub8Ih3AaEeCGMIM8YZNB5w">
+    <commObject href="platform:/resource/CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_ayrOsFSWEeCurpai0_bv1w"/>
+  </CorbaSmartSoft:SmartCorbaSendServer>
+  <CorbaSmartSoft:SmartCorbaTask xmi:id="_ub8IynAaEeCGMIM8YZNB5w" period="0" base_Class="_ub8IhXAaEeCGMIM8YZNB5w" wcet="0"/>
+  <CorbaSmartSoft:SmartCorbaStateChangeHandler xmi:id="_ub8Iy3AaEeCGMIM8YZNB5w" base_Class="_ub8IhnAaEeCGMIM8YZNB5w"/>
+  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="_ub8IzHAaEeCGMIM8YZNB5w" base_Class="_ub8Ih3AaEeCGMIM8YZNB5w"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_ub8IzXAaEeCGMIM8YZNB5w" base_Class="_ub8IiHAaEeCGMIM8YZNB5w"/>
+  <CorbaSmartSoft:SmartCorbaMainState xmi:id="_ub8vkHAaEeCGMIM8YZNB5w" base_Class="_ub8IwXAaEeCGMIM8YZNB5w" smartCorbaSubState="_ub8IwnAaEeCGMIM8YZNB5w"/>
+  <CorbaSmartSoft:SmartCorbaSubState xmi:id="_ub8vkXAaEeCGMIM8YZNB5w" base_Class="_ub8IwnAaEeCGMIM8YZNB5w"/>
+</xmi:XMI>

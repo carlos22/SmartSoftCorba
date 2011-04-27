@@ -1,0 +1,25 @@
+Installation of GMapping:
+
+This SmartSoft component uses GMapping from OpenSlam in revision 40.
+=======================================================================
+
+Get GMapping from OpenSlam.org:
+   mkdir  $SMART_ROOT/src/utility/gmapping
+   svn co https://svn.openslam.org/data/svn/gmapping/trunk $SMART_ROOT/src/utility/gmapping
+
+
+Configure GMapping:
+    cd $SMART_ROOT/src/utility/gmapping
+   ./configure
+Warnings concerning ARIA and CARMEN directories can be ignored since we do not use neither of them!
+
+Build GMapping:
+   make
+
+
+Add the build library to the LD_LIBRARY_PATH:
+   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$SMART_ROOT/src/utility/gmapping/lib/
+
+========================================================================
+
+Past this installation you should be able to build and run the SmartSoft component smartGmapping.

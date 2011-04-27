@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+  <uml:Model xmi:id="_-4d7MEmgEeClkeIcJ6tU1A" name="SmartJoystickNavigation_pim">
+    <elementImport xmi:id="_V4-CYEmhEeClkeIcJ6tU1A">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
+    </elementImport>
+    <elementImport xmi:id="_V5BFsEmhEeClkeIcJ6tU1A">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
+    </elementImport>
+    <elementImport xmi:id="_V5Dh8EmhEeClkeIcJ6tU1A">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_l2oOMB2JEeCEHoCtEL5pNg"/>
+    </elementImport>
+    <elementImport xmi:id="_V5GlQEmhEeClkeIcJ6tU1A">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Rhs5cB2qEeCEHoCtEL5pNg"/>
+    </elementImport>
+    <elementImport xmi:id="_V5KPoEmhEeClkeIcJ6tU1A">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_HhoiQB4kEeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_V5PvMEmhEeClkeIcJ6tU1A">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_wh6OcB40EeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_V5VOwEmhEeClkeIcJ6tU1A">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_ms8XoB44EeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_V5b8cEmhEeClkeIcJ6tU1A">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_w_jacB45EeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_V5iDEEmhEeClkeIcJ6tU1A">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_3Yh5QB46EeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_V5pX0EmhEeClkeIcJ6tU1A">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_t0-UAEV5EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_V5xToEmhEeClkeIcJ6tU1A">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_BQWcsEV8EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_V55PcEmhEeClkeIcJ6tU1A">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_V6CZYEmhEeClkeIcJ6tU1A">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_MomccEV-EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_V6LjUEmhEeClkeIcJ6tU1A">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_9H6gUEV-EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_V6VUUEmhEeClkeIcJ6tU1A">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_bEoywEV_EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_V7X2IEmhEeClkeIcJ6tU1A">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_vz0uwEmJEeCfXId88PsX3A"/>
+    </elementImport>
+    <elementImport xmi:id="_V7hAEEmhEeClkeIcJ6tU1A">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_284MYEmaEeClkeIcJ6tU1A"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:Component" xmi:id="_-4d7MUmgEeClkeIcJ6tU1A" name="SmartJoystickNavigation">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_MwZUUEmhEeClkeIcJ6tU1A" name="joystick_client" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_UE6q0EmhEeClkeIcJ6tU1A" name="navigation_client" aggregation="composite"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_Ho3Z0EmhEeClkeIcJ6tU1A" name="JoystickNavigationThread"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_ZBEmUEmiEeClkeIcJ6tU1A" name="settings">
+        <ownedAttribute xmi:id="_ad9bEEmiEeClkeIcJ6tU1A" name="max_velocity" isUnique="false">
+          <ownedComment xmi:id="_igYZYEmiEeClkeIcJ6tU1A" annotatedElement="_ad9bEEmiEeClkeIcJ6tU1A">
+            <body>[m/s]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ghxXoEmiEeClkeIcJ6tU1A" value="1.0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ah5f4EmiEeClkeIcJ6tU1A" name="max_steering" isUnique="false">
+          <ownedComment xmi:id="_j6zwAEmiEeClkeIcJ6tU1A" annotatedElement="_ah5f4EmiEeClkeIcJ6tU1A">
+            <body>[rad/s]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_hnpakEmiEeClkeIcJ6tU1A" value="1.2"/>
+        </ownedAttribute>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:id="_-4d7MkmgEeClkeIcJ6tU1A">
+      <eAnnotations xmi:id="_-4d7M0mgEeClkeIcJ6tU1A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_-4d7NEmgEeClkeIcJ6tU1A">
+      <eAnnotations xmi:id="_-4d7NUmgEeClkeIcJ6tU1A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartComponent xmi:id="_-6jl4EmgEeClkeIcJ6tU1A" base_Component="_-4d7MUmgEeClkeIcJ6tU1A"/>
+  <SmartMARS:SmartTask xmi:id="_Hq-SoEmhEeClkeIcJ6tU1A" base_Class="_Ho3Z0EmhEeClkeIcJ6tU1A"/>
+  <SmartMARS:SmartPushNewestClient xmi:id="_MwjsYEmhEeClkeIcJ6tU1A" serviceName="joystick" base_Port="_MwZUUEmhEeClkeIcJ6tU1A" serverName="SmartJoystickServer">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_284MYEmaEeClkeIcJ6tU1A"/>
+  </SmartMARS:SmartPushNewestClient>
+  <SmartMARS:SmartSendClient xmi:id="_UFDNsEmhEeClkeIcJ6tU1A" serviceName="navVel" base_Port="_UE6q0EmhEeClkeIcJ6tU1A" serverName="SmartCdlServer">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_t0-UAEV5EeC6tb6-J2zOEA"/>
+  </SmartMARS:SmartSendClient>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_kP6SwEmhEeClkeIcJ6tU1A"/>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_srA20EmhEeClkeIcJ6tU1A"/>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_t93l0EmhEeClkeIcJ6tU1A"/>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_ZBYvYEmiEeClkeIcJ6tU1A" base_Class="_ZBEmUEmiEeClkeIcJ6tU1A"/>
+</xmi:XMI>

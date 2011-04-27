@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_dYXHkGaqEeCwRIvId514VA" name="SmartKatanaServer_psm">
+    <packagedElement xmi:type="uml:Component" xmi:id="_dYXHkWaqEeCwRIvId514VA" name="SmartKatanaServer">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_dYXHkmaqEeCwRIvId514VA" name="requestScan3dSendServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_dYXHk2aqEeCwRIvId514VA" name="basePushTimedClient"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_dYXHlGaqEeCwRIvId514VA" name="posePushTimedServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_dYXHlWaqEeCwRIvId514VA" name="scan3dEventServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_dYXHlmaqEeCwRIvId514VA" name="scan3dQueryServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_dYXHl2aqEeCwRIvId514VA" name="trajectorySendServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_dYXHmGaqEeCwRIvId514VA" name="stateServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_dYXHmWaqEeCwRIvId514VA" name="eventServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_dYXHmmaqEeCwRIvId514VA" name="paramServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_dYXHm2aqEeCwRIvId514VA" name="laserQueryClient"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dYXHnGaqEeCwRIvId514VA" name="RequestScan3dHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dYXHnWaqEeCwRIvId514VA" name="PosePushTimedHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dYXHnmaqEeCwRIvId514VA" name="ScanEventTestHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dYXHn2aqEeCwRIvId514VA" name="Scan3dHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dYXHoGaqEeCwRIvId514VA" name="TrajectorySendHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dYXHoWaqEeCwRIvId514VA" name="StateChangeHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dYXHomaqEeCwRIvId514VA" name="EventTestHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dYXHo2aqEeCwRIvId514VA" name="ParamHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dYXHpGaqEeCwRIvId514VA" name="PointCloudMutex"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dYXHpWaqEeCwRIvId514VA" name="ParameterMutex"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dYXHpmaqEeCwRIvId514VA" name="KatanaMutex"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dYXHp2aqEeCwRIvId514VA" name="EncoderMutex"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dYXHqGaqEeCwRIvId514VA" name="laser">
+        <ownedAttribute xmi:id="_dYXHqWaqEeCwRIvId514VA" name="elevation">
+          <ownedComment xmi:id="_nKvHIMDTEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_FotYQGMYEd-JQMHJ2GmZcQ"/>
+            <body>the elevation angle relative to the tcp [rad]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXHqmaqEeCwRIvId514VA" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXHq2aqEeCwRIvId514VA" name="z">
+          <ownedComment xmi:id="_kaksoMDTEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_AN9m0GMYEd-JQMHJ2GmZcQ"/>
+            <body>the z offset of the laser relative to the tcp [mm]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXHrGaqEeCwRIvId514VA" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXHrWaqEeCwRIvId514VA" name="roll">
+          <ownedComment xmi:id="_omhIoMDTEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_HhjwQGMYEd-JQMHJ2GmZcQ"/>
+            <body>the roll angle relative to the tcp [rad]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXHrmaqEeCwRIvId514VA" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXHr2aqEeCwRIvId514VA" name="y">
+          <ownedComment xmi:id="_i_LFoMDTEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_9KsqIGMXEd-JQMHJ2GmZcQ"/>
+            <body>the y offset of the laser relative to the tcp [mm]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXHsGaqEeCwRIvId514VA" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXHsWaqEeCwRIvId514VA" name="x">
+          <ownedComment xmi:id="_hqLooMDTEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_07LD8GMXEd-JQMHJ2GmZcQ"/>
+            <body>the x offset of the laser relative to the tcp [mm]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXHsmaqEeCwRIvId514VA" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXHs2aqEeCwRIvId514VA" name="laser_is_mounted">
+          <ownedComment xmi:id="_fWBNoMDTEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_VXVd4EJWEd-bo6v4Zd4LLA"/>
+            <body>true if a laser ranger is mounted on the katana</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXHtGaqEeCwRIvId514VA" value="false"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXHtWaqEeCwRIvId514VA" name="azimuth">
+          <ownedComment xmi:id="_lxA7IMDTEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_C7OeUGMYEd-JQMHJ2GmZcQ"/>
+            <body>the azimuth angle relative to the tcp [rad]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXHtmaqEeCwRIvId514VA" value="0"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dYXHt2aqEeCwRIvId514VA" name="serial_port">
+        <ownedAttribute xmi:id="_dYXHuGaqEeCwRIvId514VA" name="device">
+          <ownedComment xmi:id="_sWidoMDTEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#__S4AkNUaEd6I2533l4SMIw"/>
+            <body>the serial device where the katana is connected</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXHuWaqEeCwRIvId514VA" value="/dev/katana"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dYXHumaqEeCwRIvId514VA" name="network">
+        <ownedAttribute xmi:id="_dYXHu2aqEeCwRIvId514VA" name="port">
+          <ownedComment xmi:id="_vQKWIMDTEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_LVbzgNUbEd6I2533l4SMIw"/>
+            <body>the port where the katana is connected</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_7kThsIQIEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXHvGaqEeCwRIvId514VA" value="5566"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXHvWaqEeCwRIvId514VA" name="ip_address">
+          <ownedComment xmi:id="_tuWlIMDTEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_EDjhUNUbEd6I2533l4SMIw"/>
+            <body>the ip address where the katana is connected</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXHvmaqEeCwRIvId514VA" value="127.0.0.1"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dYXHv2aqEeCwRIvId514VA" name="base">
+        <ownedAttribute xmi:id="_dYXHwGaqEeCwRIvId514VA" name="x">
+          <ownedComment xmi:id="_RisAoMDTEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_e7A68D1xEd-LwfxoX8f4iA"/>
+            <body>the x world coordinate [mm]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXHwWaqEeCwRIvId514VA" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXHwmaqEeCwRIvId514VA" name="base_a">
+          <ownedComment xmi:id="_ZXQJIMDTEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_jGWS8D1xEd-LwfxoX8f4iA"/>
+            <body>the orientation of the base [rad]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXHw2aqEeCwRIvId514VA" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXHxGaqEeCwRIvId514VA" name="z">
+          <ownedComment xmi:id="_Uv_qIMDTEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_i4AU8D1xEd-LwfxoX8f4iA"/>
+            <body>the z world coordinate [mm]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXHxWaqEeCwRIvId514VA" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXHxmaqEeCwRIvId514VA" name="y">
+          <ownedComment xmi:id="_TeDhIMDTEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_iqsRsD1xEd-LwfxoX8f4iA"/>
+            <body>the y world coordinate [mm]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXHx2aqEeCwRIvId514VA" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXHyGaqEeCwRIvId514VA" name="turret_a">
+          <ownedComment xmi:id="_cTi7IMDTEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_tjoxMD1xEd-LwfxoX8f4iA"/>
+            <body>the angle of the turret on the base [rad]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXHyWaqEeCwRIvId514VA" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXHymaqEeCwRIvId514VA" name="steer_a">
+          <ownedComment xmi:id="_a121IMDTEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_jLAJcD1xEd-LwfxoX8f4iA"/>
+            <body>the steering angle of the base [rad]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXHy2aqEeCwRIvId514VA" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXHzGaqEeCwRIvId514VA" name="on_base">
+          <ownedComment xmi:id="_m3uW0FggEd-Ak4dTrgkA9w">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#__VQ1MD1wEd-LwfxoX8f4iA"/>
+            <body>specify if manipulator is mounted on a base.
+if false the values below are used.</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXHzWaqEeCwRIvId514VA" value="true"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dYXHzmaqEeCwRIvId514VA" name="katana">
+        <ownedAttribute xmi:id="_dYXHz2aqEeCwRIvId514VA" name="goal_position_approach">
+          <ownedComment xmi:id="_JS9JoMDUEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_vWyEMAXWEd-l7Kj4tbR4-w"/>
+            <body>the goal is reached when the difference between the
+goal and current tcp positions are smaller then this value [mm]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXH0GaqEeCwRIvId514VA" value="3"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXuoGaqEeCwRIvId514VA" name="goal_angle_approach">
+          <ownedComment xmi:id="_Ht8ToMDUEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_J_mV4AXXEd-l7Kj4tbR4-w"/>
+            <body>the goal is reached when the difference between the
+goal and current tcp angles are smaller then this value [rad]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXuoWaqEeCwRIvId514VA" value="0.1"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXuomaqEeCwRIvId514VA" name="elevation">
+          <ownedComment xmi:id="_QYcloMDUEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_6DjZED1yEd-LwfxoX8f4iA"/>
+            <body>the elevation angle of the katana relative to the robot [rad]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXuo2aqEeCwRIvId514VA" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXupGaqEeCwRIvId514VA" name="verbose">
+          <ownedComment xmi:id="_-Qs9IMDTEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_Tett8F22Ed-saMjdL6BmJg"/>
+            <body>activate/deactivate info messages</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXupWaqEeCwRIvId514VA" value="false"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXupmaqEeCwRIvId514VA" name="katana_device">
+          <ownedComment xmi:id="_nNMpAD1wEd-LwfxoX8f4iA">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_h4-uYNUaEd6I2533l4SMIw"/>
+            <body>Serial = katana is connected over the serial port
+Lan = katana is connected over the network</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXup2aqEeCwRIvId514VA" value="Serial"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXuqGaqEeCwRIvId514VA" name="gripper_empty_angle">
+          <ownedComment xmi:id="_S5oQsEAPEeC2VZxsEHDewQ">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_aVoksEAOEeC2VZxsEHDewQ"/>
+            <body>If the angle of the gripper is bigger than this value the GOAL_REACHED_GRIPPER_EMPTY event is send. Value in [rad]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXuqWaqEeCwRIvId514VA" value="0.43"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXuqmaqEeCwRIvId514VA" name="y">
+          <ownedComment xmi:id="_MW9GIMDUEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_v2w08D1yEd-LwfxoX8f4iA"/>
+            <body>the y offset of the katana relative to the robot [mm]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXuq2aqEeCwRIvId514VA" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXurGaqEeCwRIvId514VA" name="z">
+          <ownedComment xmi:id="_NmEkoMDUEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_08Xc0D1yEd-LwfxoX8f4iA"/>
+            <body>the z offset of the katana relative to the robot [mm]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXurWaqEeCwRIvId514VA" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXurmaqEeCwRIvId514VA" name="fast_calibration">
+          <ownedComment xmi:id="_w7LZ8Fg6Ed-Ak4dTrgkA9w">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_KdxagFgnEd-Ak4dTrgkA9w"/>
+            <body>the component checks if the katana is already calibrated
+by moving the first joint</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXur2aqEeCwRIvId514VA" value="false"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXusGaqEeCwRIvId514VA" name="roll">
+          <ownedComment xmi:id="_ReVPoMDUEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_-zhIID1yEd-LwfxoX8f4iA"/>
+            <body>the roll angle of the katana relative to the robot [rad]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXusWaqEeCwRIvId514VA" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXusmaqEeCwRIvId514VA" name="katana_config_file">
+          <ownedComment xmi:id="_GFfvIMDUEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_HxrOUNUaEd6I2533l4SMIw"/>
+            <body>the path to the katana config file</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXus2aqEeCwRIvId514VA" value="data/katana6M180.cfg"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXutGaqEeCwRIvId514VA" name="gripper_timeout">
+          <ownedComment xmi:id="_tv9iENBSEd-4JLnph6-rZg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_a4sMANBQEd-4JLnph6-rZg"/>
+            <body>Timeout for open or close gripper action [ms]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_7kThsIQIEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXutWaqEeCwRIvId514VA" value="3000"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXutmaqEeCwRIvId514VA" name="x">
+          <ownedComment xmi:id="_LWo4oMDUEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_OymQcD1yEd-LwfxoX8f4iA"/>
+            <body>the x offset of the katana relative to the robot [mm]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXut2aqEeCwRIvId514VA" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dYXuuGaqEeCwRIvId514VA" name="azimuth">
+          <ownedComment xmi:id="_PHkzoMDUEd-8M4BqCz5X3A">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartKatanaServer/model/pim/SmartKatanaServer_pim.uml.out.uml#_3RqgQD1yEd-LwfxoX8f4iA"/>
+            <body>the azimuth angle of the katana relative to the robot [rad]</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dYXuuWaqEeCwRIvId514VA" value="0"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dYXuumaqEeCwRIvId514VA" name="trajectory"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dYXuu2aqEeCwRIvId514VA" name="trajectory"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dYXuvGaqEeCwRIvId514VA" name="scan"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dYXuvWaqEeCwRIvId514VA" name="scan"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dYXuvmaqEeCwRIvId514VA" name="demonstration"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dYXuv2aqEeCwRIvId514VA" name="demonstration"/>
+    </packagedElement>
+    <profileApplication xmi:id="_dYXuwGaqEeCwRIvId514VA">
+      <eAnnotations xmi:id="_dYXuwWaqEeCwRIvId514VA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:SmartCorbaComponent xmi:id="_dYXuwmaqEeCwRIvId514VA" base_Component="_dYXHkWaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="_dYXuw2aqEeCwRIvId514VA" serviceName="request3dscan" base_Port="_dYXHkmaqEeCwRIvId514VA" smartSendHandler="_dYXHnGaqEeCwRIvId514VA">
+    <commObject href="platform:/resource/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_7cojQEMBEd-PisO7V4ZiLQ"/>
+  </CorbaSmartSoft:SmartCorbaSendServer>
+  <CorbaSmartSoft:SmartCorbaPushTimedClient xmi:id="_dYXuxGaqEeCwRIvId514VA" serviceName="basestate" base_Port="_dYXHk2aqEeCwRIvId514VA" serverName="smartPioneerBaseServer" interval="1">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
+  </CorbaSmartSoft:SmartCorbaPushTimedClient>
+  <CorbaSmartSoft:SmartCorbaPushTimedServer xmi:id="_dYXuxWaqEeCwRIvId514VA" serviceName="currentPose" base_Port="_dYXHlGaqEeCwRIvId514VA" smartPushTimedHandler="_dYXHnWaqEeCwRIvId514VA" cycle="0.1">
+    <commObject href="platform:/resource/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_a_vAsNRAEd6nTeGEf54M4w"/>
+  </CorbaSmartSoft:SmartCorbaPushTimedServer>
+  <CorbaSmartSoft:SmartCorbaEventServer xmi:id="_dYXuxmaqEeCwRIvId514VA" serviceName="newScan" base_Port="_dYXHlWaqEeCwRIvId514VA" smartEventTestHandler="_dYXHnmaqEeCwRIvId514VA">
+    <eventParameter href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
+    <eventResult href="platform:/resource/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_sY-W0EMBEd-PisO7V4ZiLQ"/>
+    <eventState href="platform:/resource/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_llHjALBSEd-06-HZ0NYnCg"/>
+  </CorbaSmartSoft:SmartCorbaEventServer>
+  <CorbaSmartSoft:SmartCorbaQueryServer xmi:id="_dYXux2aqEeCwRIvId514VA" serviceName="3dscan" base_Port="_dYXHlmaqEeCwRIvId514VA" smartQueryHandler="_dYXHn2aqEeCwRIvId514VA">
+    <commRequestObject href="platform:/resource/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_sY-W0EMBEd-PisO7V4ZiLQ"/>
+    <commAnswerObject href="platform:/resource/CommVisionObjects/model/pim/CommVisionObjects_pim.uml#_0ChAgFPAEeC2Ob6J1MZeDA"/>
+  </CorbaSmartSoft:SmartCorbaQueryServer>
+  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="_dYXuyGaqEeCwRIvId514VA" serviceName="performTrajectory" base_Port="_dYXHl2aqEeCwRIvId514VA" smartSendHandler="_dYXHoGaqEeCwRIvId514VA">
+    <commObject href="platform:/resource/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_mPzmwNRAEd6nTeGEf54M4w"/>
+  </CorbaSmartSoft:SmartCorbaSendServer>
+  <CorbaSmartSoft:SmartCorbaStateServer xmi:id="_dYXuyWaqEeCwRIvId514VA" serviceName="state" base_Port="_dYXHmGaqEeCwRIvId514VA" smartCorbaStateChangeHandler="_dYXHoWaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaEventServer xmi:id="_dYXuymaqEeCwRIvId514VA" serviceName="eventServer" base_Port="_dYXHmWaqEeCwRIvId514VA" smartEventTestHandler="_dYXHomaqEeCwRIvId514VA">
+    <eventParameter href="platform:/resource/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_w4c_sN_hEd6JssC1ymuMlA"/>
+    <eventResult href="platform:/resource/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_0DexQN_hEd6JssC1ymuMlA"/>
+    <eventState href="platform:/resource/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_izW_MN_fEd6mtOmaBIShAA"/>
+  </CorbaSmartSoft:SmartCorbaEventServer>
+  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="_dYXuy2aqEeCwRIvId514VA" serviceName="param" base_Port="_dYXHmmaqEeCwRIvId514VA" smartSendHandler="_dYXHo2aqEeCwRIvId514VA">
+    <commObject href="platform:/resource/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_fhLWINRBEd6nTeGEf54M4w"/>
+  </CorbaSmartSoft:SmartCorbaSendServer>
+  <CorbaSmartSoft:SmartCorbaQueryClient xmi:id="_dYXuzGaqEeCwRIvId514VA" serviceName="scan" base_Port="_dYXHm2aqEeCwRIvId514VA" serverName="SmartLaserHokuyoURGServer">
+    <commRequestObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
+    <commAnswerObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
+  </CorbaSmartSoft:SmartCorbaQueryClient>
+  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="_dYXuzWaqEeCwRIvId514VA" base_Class="_dYXHnGaqEeCwRIvId514VA" isActive="true"/>
+  <CorbaSmartSoft:SmartCorbaPushTimedHandler xmi:id="_dYXuzmaqEeCwRIvId514VA" base_Class="_dYXHnWaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaEventTestHandler xmi:id="_dYXuz2aqEeCwRIvId514VA" base_Class="_dYXHnmaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaQueryHandler xmi:id="_dYXu0GaqEeCwRIvId514VA" base_Class="_dYXHn2aqEeCwRIvId514VA" isActive="true"/>
+  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="_dYXu0WaqEeCwRIvId514VA" base_Class="_dYXHoGaqEeCwRIvId514VA" isActive="true"/>
+  <CorbaSmartSoft:SmartCorbaStateChangeHandler xmi:id="_dYXu0maqEeCwRIvId514VA" base_Class="_dYXHoWaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaEventTestHandler xmi:id="_dYXu02aqEeCwRIvId514VA" base_Class="_dYXHomaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="_dYXu1GaqEeCwRIvId514VA" base_Class="_dYXHo2aqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaMutex xmi:id="_dYXu1WaqEeCwRIvId514VA" base_Class="_dYXHpGaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaMutex xmi:id="_dYXu1maqEeCwRIvId514VA" base_Class="_dYXHpWaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaMutex xmi:id="_dYXu12aqEeCwRIvId514VA" base_Class="_dYXHpmaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaMutex xmi:id="_dYXu2GaqEeCwRIvId514VA" base_Class="_dYXHp2aqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_dYXu2WaqEeCwRIvId514VA" base_Class="_dYXHqGaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_dYXu2maqEeCwRIvId514VA" base_Class="_dYXHt2aqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_dYXu22aqEeCwRIvId514VA" base_Class="_dYXHumaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_dYXu3GaqEeCwRIvId514VA" base_Class="_dYXHv2aqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_dYXu3WaqEeCwRIvId514VA" base_Class="_dYXHzmaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaMainState xmi:id="_dYYVsGaqEeCwRIvId514VA" base_Class="_dYXuumaqEeCwRIvId514VA" smartCorbaSubState="_dYXuu2aqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaSubState xmi:id="_dYYVsWaqEeCwRIvId514VA" base_Class="_dYXuu2aqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaMainState xmi:id="_dYYVsmaqEeCwRIvId514VA" base_Class="_dYXuvGaqEeCwRIvId514VA" smartCorbaSubState="_dYXuvWaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaSubState xmi:id="_dYYVs2aqEeCwRIvId514VA" base_Class="_dYXuvWaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaMainState xmi:id="_dYYVtGaqEeCwRIvId514VA" base_Class="_dYXuvmaqEeCwRIvId514VA" smartCorbaSubState="_dYXuv2aqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaSubState xmi:id="_dYYVtWaqEeCwRIvId514VA" base_Class="_dYXuv2aqEeCwRIvId514VA"/>
+</xmi:XMI>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+  <uml:Model xmi:id="_GbTgcAg4EeCLEoY8B00OqA" name="SmartKinectTestClient_pim">
+    <elementImport xmi:id="_JEPdUGA3EeC_4q6CqdQ5QA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommVisionObjects/model/pim/CommVisionObjects_pim.uml#_ByxsoFCmEeCKI8aCFSQyHA"/>
+    </elementImport>
+    <elementImport xmi:id="_JETuwGA3EeC_4q6CqdQ5QA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommVisionObjects/model/pim/CommVisionObjects_pim.uml#_L0GyMFCnEeCKI8aCFSQyHA"/>
+    </elementImport>
+    <elementImport xmi:id="_JEXZIGA3EeC_4q6CqdQ5QA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommVisionObjects/model/pim/CommVisionObjects_pim.uml#_0ChAgFPAEeC2Ob6J1MZeDA"/>
+    </elementImport>
+    <elementImport xmi:id="_JEcRoGA3EeC_4q6CqdQ5QA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommVisionObjects/model/pim/CommVisionObjects_pim.uml#_k-5BIFkiEeCkYMJtM9_O3A"/>
+    </elementImport>
+    <elementImport xmi:id="_JEkNcGA3EeC_4q6CqdQ5QA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommVisionObjects/model/pim/CommVisionObjects_pim.uml#_n2TTIFkiEeCkYMJtM9_O3A"/>
+    </elementImport>
+    <elementImport xmi:id="_JEqUEGA3EeC_4q6CqdQ5QA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommVisionObjects/model/pim/CommVisionObjects_pim.uml#_C46bgFk8EeCkYMJtM9_O3A"/>
+    </elementImport>
+    <elementImport xmi:id="_JEyP4GA3EeC_4q6CqdQ5QA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommVisionObjects/model/pim/CommVisionObjects_pim.uml#_kqIvsFn_EeCMadxcQY1MDw"/>
+    </elementImport>
+    <elementImport xmi:id="_JE8n8GA3EeC_4q6CqdQ5QA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommVisionObjects/model/pim/CommVisionObjects_pim.uml#_VWWKoFoBEeC0KrvpolDjFw"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:Component" xmi:id="_GbTgcQg4EeCLEoY8B00OqA" name="SmartKinectTestClient">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_z8owQAg4EeCLEoY8B00OqA" name="imagePushNewestClient" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_0YVNwAg4EeCLEoY8B00OqA" name="stateClient" aggregation="composite"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_rROfUAg4EeCLEoY8B00OqA" name="ViewerTask"/>
+    </packagedElement>
+    <profileApplication xmi:id="_GbTgcgg4EeCLEoY8B00OqA">
+      <eAnnotations xmi:id="_GbTgcwg4EeCLEoY8B00OqA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_GbTgdAg4EeCLEoY8B00OqA">
+      <eAnnotations xmi:id="_GbTgdQg4EeCLEoY8B00OqA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartComponent xmi:id="_GfNwEAg4EeCLEoY8B00OqA" base_Component="_GbTgcQg4EeCLEoY8B00OqA"/>
+  <SmartMARS:SmartTask xmi:id="_rTxdAAg4EeCLEoY8B00OqA" base_Class="_rROfUAg4EeCLEoY8B00OqA"/>
+  <SmartMARS:SmartPushNewestClient xmi:id="_z9BKwAg4EeCLEoY8B00OqA" serviceName="imageNewest" base_Port="_z8owQAg4EeCLEoY8B00OqA" serverName="SmartKinectServer">
+    <commObject href="platform:/resource/CommVisionObjects/model/pim/CommVisionObjects_pim.uml#_kqIvsFn_EeCMadxcQY1MDw"/>
+  </SmartMARS:SmartPushNewestClient>
+  <SmartMARS:SmartStateClient xmi:id="_0Yfl0Ag4EeCLEoY8B00OqA" serviceName="state" base_Port="_0YVNwAg4EeCLEoY8B00OqA" serverName="SmartKinectServer"/>
+</xmi:XMI>
