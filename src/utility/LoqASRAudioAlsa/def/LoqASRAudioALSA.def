@@ -1,0 +1,10 @@
+LIBRARY LoqASRAudioALSA
+EXPORTS
+
+		NewHandle		@1
+		DeleteHandle	@2
+		SetData			@3
+		Register		@4
+		Unregister		@5
+		GetData			@6
+		GetErrorMessage	@7

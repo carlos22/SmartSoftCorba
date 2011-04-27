@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+  <uml:Model xmi:id="_ihOJcJKHEd6EiY036WM01w" name="SampleEventClient_pim">
+    <packageImport xmi:id="_Kf63IJKIEd6EiY036WM01w">
+      <importedPackage xmi:type="uml:Model" href="../../../CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_hxmf0I2kEd693O0rTX4LOw"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Component" xmi:id="_ihOJcZKHEd6EiY036WM01w" name="SampleEventClient">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_FUFEYJKIEd6EiY036WM01w" name="eventClient1" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_FxEiYJKIEd6EiY036WM01w" name="eventClient2" aggregation="composite"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_Lo0Y4JKIEd6EiY036WM01w" name="MyEventTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_OCoI4JKIEd6EiY036WM01w" name="MyEventHandler"/>
+    </packagedElement>
+    <profileApplication xmi:id="_ihOJcpKHEd6EiY036WM01w">
+      <eAnnotations xmi:id="_ihOJc5KHEd6EiY036WM01w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_ihOJdJKHEd6EiY036WM01w">
+      <eAnnotations xmi:id="_ihOJdZKHEd6EiY036WM01w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartComponent xmi:id="_ijR-8JKHEd6EiY036WM01w" base_Component="_ihOJcZKHEd6EiY036WM01w"/>
+  <SmartMARS:SmartEventClient xmi:id="_FWAXAJKIEd6EiY036WM01w" serviceName="eventMoreThan" base_Port="_FUFEYJKIEd6EiY036WM01w" serverName="SampleEventServer">
+    <eventParameter href="../../../CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_Tyz-0I2mEd693O0rTX4LOw"/>
+    <eventResult href="../../../CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_TdsJwI2uEd693O0rTX4LOw"/>
+  </SmartMARS:SmartEventClient>
+  <SmartMARS:SmartEventClient xmi:id="_FxLQEJKIEd6EiY036WM01w" serviceName="eventMoreThan" base_Port="_FxEiYJKIEd6EiY036WM01w" serverName="SampleEventServer" smartEventHandler="_OCrMMJKIEd6EiY036WM01w">
+    <eventParameter href="../../../CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_Tyz-0I2mEd693O0rTX4LOw"/>
+    <eventResult href="../../../CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_TdsJwI2uEd693O0rTX4LOw"/>
+  </SmartMARS:SmartEventClient>
+  <SmartMARS:SmartTask xmi:id="_Lo4DQJKIEd6EiY036WM01w" base_Class="_Lo0Y4JKIEd6EiY036WM01w"/>
+  <SmartMARS:SmartEventHandler xmi:id="_OCrMMJKIEd6EiY036WM01w" base_Class="_OCoI4JKIEd6EiY036WM01w"/>
+  <SmartMARS:SmartTimer xmi:id="_ydO1MDjCEd-FW4L_Css5yQ" cycle="1"/>
+  <SmartMARS:SmartTask xmi:id="_l1yFIDjFEd-FW4L_Css5yQ"/>
+  <SmartMARS:SmartConditionMutex xmi:id="_rk0rkDjFEd-FW4L_Css5yQ" mutex="_vOI7oDjFEd-FW4L_Css5yQ"/>
+  <SmartMARS:SmartMutex xmi:id="_vOI7oDjFEd-FW4L_Css5yQ"/>
+</xmi:XMI>

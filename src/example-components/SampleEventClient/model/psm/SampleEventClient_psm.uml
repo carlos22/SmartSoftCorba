@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_H1zFQA3aEeC_190lg--Ncg" name="SampleEventClient_psm">
+    <packagedElement xmi:type="uml:Component" xmi:id="_H1zFQQ3aEeC_190lg--Ncg" name="SampleEventClient">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_H1zFQg3aEeC_190lg--Ncg" name="eventClient1"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_H1zFQw3aEeC_190lg--Ncg" name="eventClient2"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_H1zFRA3aEeC_190lg--Ncg" name="MyEventTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_H1zFRQ3aEeC_190lg--Ncg" name="MyEventHandler"/>
+    </packagedElement>
+    <profileApplication xmi:id="_H1zFRg3aEeC_190lg--Ncg">
+      <eAnnotations xmi:id="_H1zFRw3aEeC_190lg--Ncg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:SmartCorbaComponent xmi:id="_H1zFSA3aEeC_190lg--Ncg" base_Component="_H1zFQQ3aEeC_190lg--Ncg"/>
+  <CorbaSmartSoft:SmartCorbaEventClient xmi:id="_H1zFSQ3aEeC_190lg--Ncg" serviceName="eventMoreThan" base_Port="_H1zFQg3aEeC_190lg--Ncg" serverName="SampleEventServer">
+    <eventParameter href="platform:/resource/CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_Tyz-0I2mEd693O0rTX4LOw"/>
+    <eventResult href="platform:/resource/CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_TdsJwI2uEd693O0rTX4LOw"/>
+  </CorbaSmartSoft:SmartCorbaEventClient>
+  <CorbaSmartSoft:SmartCorbaEventClient xmi:id="_H1zFSg3aEeC_190lg--Ncg" serviceName="eventMoreThan" base_Port="_H1zFQw3aEeC_190lg--Ncg" serverName="SampleEventServer" smartEventHandler="_H1zFRQ3aEeC_190lg--Ncg">
+    <eventParameter href="platform:/resource/CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_Tyz-0I2mEd693O0rTX4LOw"/>
+    <eventResult href="platform:/resource/CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_TdsJwI2uEd693O0rTX4LOw"/>
+  </CorbaSmartSoft:SmartCorbaEventClient>
+  <CorbaSmartSoft:SmartCorbaTask xmi:id="_H1zFSw3aEeC_190lg--Ncg" period="0" base_Class="_H1zFRA3aEeC_190lg--Ncg" wcet="0"/>
+  <CorbaSmartSoft:SmartCorbaEventHandler xmi:id="_H1zFTA3aEeC_190lg--Ncg" base_Class="_H1zFRQ3aEeC_190lg--Ncg"/>
+</xmi:XMI>

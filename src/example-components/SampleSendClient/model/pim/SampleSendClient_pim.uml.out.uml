@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+  <uml:Model xmi:id="_ILZ4oJJNEd6rhNtUgeT8mw" name="SampleSendClient_pim">
+    <packageImport xmi:id="_KrQw0JJOEd6rhNtUgeT8mw">
+      <importedPackage xmi:type="uml:Model" href="platform:/resource/CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_hxmf0I2kEd693O0rTX4LOw"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Component" xmi:id="_ILZ4oZJNEd6rhNtUgeT8mw" name="SampleSendClient">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_BHHhEJJOEd6rhNtUgeT8mw" name="printClient" aggregation="composite"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_M__zkJJOEd6rhNtUgeT8mw" name="PrintTask"/>
+    </packagedElement>
+    <profileApplication xmi:id="_ILZ4opJNEd6rhNtUgeT8mw">
+      <eAnnotations xmi:id="_ILZ4o5JNEd6rhNtUgeT8mw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_ILZ4pJJNEd6rhNtUgeT8mw">
+      <eAnnotations xmi:id="_ILZ4pZJNEd6rhNtUgeT8mw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartComponent xmi:id="_IOiFIJJNEd6rhNtUgeT8mw" base_Component="_ILZ4oZJNEd6rhNtUgeT8mw"/>
+  <SmartMARS:SmartSendClient xmi:id="_BJuJIJJOEd6rhNtUgeT8mw" serviceName="print" base_Port="_BHHhEJJOEd6rhNtUgeT8mw" serverName="SampleSendServer">
+    <commObject href="platform:/resource/CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_xZlE0I2lEd693O0rTX4LOw"/>
+  </SmartMARS:SmartSendClient>
+  <SmartMARS:SmartTask xmi:id="_dXUw4DELEd-tcdNPC2DcuA" base_Class="_M__zkJJOEd6rhNtUgeT8mw"/>
+</xmi:XMI>

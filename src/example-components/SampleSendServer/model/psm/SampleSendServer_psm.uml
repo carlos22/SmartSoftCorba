@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_kHcycA3ZEeC_190lg--Ncg" name="SampleSendServer_psm">
+    <packagedElement xmi:type="uml:Component" xmi:id="_kHcycQ3ZEeC_190lg--Ncg" name="SampleSendServer">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_kHcycg3ZEeC_190lg--Ncg" name="printServer"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_kHcycw3ZEeC_190lg--Ncg" name="PrintHandler"/>
+    </packagedElement>
+    <profileApplication xmi:id="_kHcydA3ZEeC_190lg--Ncg">
+      <eAnnotations xmi:id="_kHcydQ3ZEeC_190lg--Ncg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:SmartCorbaComponent xmi:id="_kHcydg3ZEeC_190lg--Ncg" base_Component="_kHcycQ3ZEeC_190lg--Ncg"/>
+  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="_kHcydw3ZEeC_190lg--Ncg" serviceName="print" base_Port="_kHcycg3ZEeC_190lg--Ncg" smartSendHandler="_kHcycw3ZEeC_190lg--Ncg">
+    <commObject href="platform:/resource/CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_xZlE0I2lEd693O0rTX4LOw"/>
+  </CorbaSmartSoft:SmartCorbaSendServer>
+  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="_kHcyeA3ZEeC_190lg--Ncg" base_Class="_kHcycw3ZEeC_190lg--Ncg"/>
+</xmi:XMI>

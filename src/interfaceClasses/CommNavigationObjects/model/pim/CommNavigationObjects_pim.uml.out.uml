@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+  <uml:Model xmi:id="_LgO24CLnEeC3a6HArJ6z5g" name="CommNavigationObjects_pim">
+    <elementImport xmi:id="_dGZ3QEmSEeC-KYWPZCFBzA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
+    </elementImport>
+    <elementImport xmi:id="_dPeTsEmSEeC-KYWPZCFBzA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
+    </elementImport>
+    <elementImport xmi:id="_dPx1sEmSEeC-KYWPZCFBzA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_l2oOMB2JEeCEHoCtEL5pNg"/>
+    </elementImport>
+    <elementImport xmi:id="_dP5xgEmSEeC-KYWPZCFBzA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Rhs5cB2qEeCEHoCtEL5pNg"/>
+    </elementImport>
+    <elementImport xmi:id="_dQEJkEmSEeC-KYWPZCFBzA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_HhoiQB4kEeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_dQSzEEmSEeC-KYWPZCFBzA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_wh6OcB40EeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_dQfAUEmSEeC-KYWPZCFBzA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_ms8XoB44EeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_dQtp0EmSEeC-KYWPZCFBzA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_w_jacB45EeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_dQ86YEmSEeC-KYWPZCFBzA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_3Yh5QB46EeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_dRMyAEmSEeC-KYWPZCFBzA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_t0-UAEV5EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_dRd3wEmSEeC-KYWPZCFBzA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_BQWcsEV8EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_dRvkkEmSEeC-KYWPZCFBzA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_dSSXIEmSEeC-KYWPZCFBzA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_MomccEV-EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_dSnHQEmSEeC-KYWPZCFBzA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_9H6gUEV-EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_dS-ToEmSEeC-KYWPZCFBzA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_bEoywEV_EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_kBWCYEmNEeC-KYWPZCFBzA" name="CommPlannerParameter">
+      <ownedAttribute xmi:id="_pwzfkEmNEeC-KYWPZCFBzA" name="tag" visibility="public" type="_rY9dQEmaEeC-KYWPZCFBzA" isUnique="false">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_qr3ZoEmNEeC-KYWPZCFBzA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_qryhIEmNEeC-KYWPZCFBzA" value="1"/>
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_qr-HUEmNEeC-KYWPZCFBzA">
+          <value xsi:nil="true"/>
+        </defaultValue>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_p7fFkEmNEeC-KYWPZCFBzA" name="parameter1" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_qAIVAEmNEeC-KYWPZCFBzA" name="parameter2" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_qKWoAEmNEeC-KYWPZCFBzA" name="parameter3" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_qOeTAEmNEeC-KYWPZCFBzA" name="parameter4" visibility="public" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_1WlP4EmNEeC-KYWPZCFBzA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_1Wg-cEmNEeC-KYWPZCFBzA" value="1"/>
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_1WvA4EmNEeC-KYWPZCFBzA">
+          <value xsi:nil="true"/>
+        </defaultValue>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_SdQrIEmOEeC-KYWPZCFBzA" name="CommPlannerEventParameter">
+      <ownedAttribute xmi:id="_V9WGsEmOEeC-KYWPZCFBzA" name="oldState" type="_q4PWAEm_EeC7G99uJVy_1A" isUnique="false"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_g9eMQEmOEeC-KYWPZCFBzA" name="CommPlannerEventResult">
+      <ownedAttribute xmi:id="_kPqVwEmOEeC-KYWPZCFBzA" name="state" type="_q4PWAEm_EeC7G99uJVy_1A" isUnique="false"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_SnAnkEmPEeC-KYWPZCFBzA" name="CommPlannerGoal">
+      <ownedAttribute xmi:id="_bWuJsEmPEeC-KYWPZCFBzA" name="id" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_bZnssEmPEeC-KYWPZCFBzA" name="flag" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_bcXesEmPEeC-KYWPZCFBzA" name="xWayPoint" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_begMsEmPEeC-KYWPZCFBzA" name="yWayPoint" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_bgaRMEmPEeC-KYWPZCFBzA" name="hWayPoint" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_biPdMEmPEeC-KYWPZCFBzA" name="xGoalPoint" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_bkrtMEmPEeC-KYWPZCFBzA" name="yGoalPoint" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_bpy2sEmPEeC-KYWPZCFBzA" name="hGoalPoint" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_2AI4UEmPEeC-KYWPZCFBzA" name="CommCdlParameter">
+      <ownedAttribute xmi:id="_56iRUEmPEeC-KYWPZCFBzA" name="tag" type="_0gS8kEmXEeC-KYWPZCFBzA" isUnique="false"/>
+      <ownedAttribute xmi:id="_58YrcEmPEeC-KYWPZCFBzA" name="parameter1" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_5-Hw0EmPEeC-KYWPZCFBzA" name="parameter2" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_5_4EUEmPEeC-KYWPZCFBzA" name="parameter3" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_6Ddj0EmPEeC-KYWPZCFBzA" name="parameter4" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_6HH70EmPEeC-KYWPZCFBzA" name="parameter5" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Idj14EmQEeC-KYWPZCFBzA" name="CommAmclParameter">
+      <ownedAttribute xmi:id="_kK0nIEmQEeC-KYWPZCFBzA" name="tag" type="_sfbhoEmQEeC-KYWPZCFBzA" isUnique="false"/>
+      <ownedAttribute xmi:id="_kVV1EEmQEeC-KYWPZCFBzA" name="parameter1" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_kXZqkEmQEeC-KYWPZCFBzA" name="parameter2" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_keWAEEmQEeC-KYWPZCFBzA" name="parameter3" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_sfbhoEmQEeC-KYWPZCFBzA" name="AmclTag">
+      <ownedLiteral xmi:id="_wc9uMEmQEeC-KYWPZCFBzA" name="GLOBALLOCALIZATION"/>
+      <ownedLiteral xmi:id="_wkR3IEmQEeC-KYWPZCFBzA" name="INITIALPOSE"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_7AFusEmQEeC-KYWPZCFBzA" name="CommCdlGoalEventParameter">
+      <ownedAttribute xmi:id="_GJCZEEmREeC-KYWPZCFBzA" name="oldState" type="_kF-xUEm6EeCpIIYUIGaLOw" isUnique="false"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_JlyMwEmREeC-KYWPZCFBzA" name="CommCdlGoalEventResult">
+      <ownedAttribute xmi:id="_Pddx0EmREeC-KYWPZCFBzA" name="state" visibility="public" type="_kF-xUEm6EeCpIIYUIGaLOw" isUnique="false">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Q3KvsEmREeC-KYWPZCFBzA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Q3KIoEmREeC-KYWPZCFBzA" value="1"/>
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_Q3LWwEmREeC-KYWPZCFBzA">
+          <value xsi:nil="true"/>
+        </defaultValue>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_U2Y-UEmREeC-KYWPZCFBzA" name="CommMapperParameter">
+      <ownedAttribute xmi:id="_fI1egEmREeC-KYWPZCFBzA" name="tag" type="_MoPsoEmbEeC-KYWPZCFBzA" isUnique="false"/>
+      <ownedAttribute xmi:id="_fKSQAEmREeC-KYWPZCFBzA" name="parameter1" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_fLqJAEmREeC-KYWPZCFBzA" name="parameter2" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_fM9JgEmREeC-KYWPZCFBzA" name="parameter3" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_fQ7DgEmREeC-KYWPZCFBzA" name="parameter4" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_faAHAEmREeC-KYWPZCFBzA" name="parameter5" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_fqGYgEmREeC-KYWPZCFBzA" name="parameter6" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_-s4UEEmREeC-KYWPZCFBzA" name="CommGridMap">
+      <ownedAttribute xmi:id="_FFI2oEmSEeC-KYWPZCFBzA" name="id" isUnique="false">
+        <ownedComment xmi:id="_fv1iMEmTEeC-KYWPZCFBzA" annotatedElement="_FFI2oEmSEeC-KYWPZCFBzA">
+          <body>identifies global frame of reference</body>
+        </ownedComment>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_FGgvoEmSEeC-KYWPZCFBzA" name="is_valid" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_FICZoEmSEeC-KYWPZCFBzA" name="time" isUnique="false">
+        <ownedComment xmi:id="_h1zwMEmTEeC-KYWPZCFBzA" annotatedElement="_FICZoEmSEeC-KYWPZCFBzA">
+          <body>the timestamp of the scan</body>
+        </ownedComment>
+        <type xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_l2oOMB2JEeCEHoCtEL5pNg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_FJaSoEmSEeC-KYWPZCFBzA" name="xOffsetMM" isUnique="false">
+        <ownedComment xmi:id="_q8XFAEmTEeC-KYWPZCFBzA" annotatedElement="_FJaSoEmSEeC-KYWPZCFBzA">
+          <body>offset of the map in mm relative to world coordinate system</body>
+        </ownedComment>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_FK78oEmSEeC-KYWPZCFBzA" name="yOffsetMM" isUnique="false">
+        <ownedComment xmi:id="_s4nWUEmTEeC-KYWPZCFBzA" annotatedElement="_FK78oEmSEeC-KYWPZCFBzA">
+          <body>offset of the map in mm relative to world coordinate system</body>
+        </ownedComment>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_FMO9IEmSEeC-KYWPZCFBzA" name="xOffsetCells" isUnique="false">
+        <ownedComment xmi:id="_urwu8EmTEeC-KYWPZCFBzA" annotatedElement="_FMO9IEmSEeC-KYWPZCFBzA">
+          <body>offset of the map in cells relative to the world coordinate system</body>
+        </ownedComment>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_FNruoEmSEeC-KYWPZCFBzA" name="yOffsetCells" isUnique="false">
+        <ownedComment xmi:id="_vwosUEmTEeC-KYWPZCFBzA" annotatedElement="_FNruoEmSEeC-KYWPZCFBzA">
+          <body>offset of the map in cells relative to the world coordinate system</body>
+        </ownedComment>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_FO-vIEmSEeC-KYWPZCFBzA" name="cellSizeMM" visibility="public" isUnique="false">
+        <ownedComment xmi:id="_xAXO0EmTEeC-KYWPZCFBzA" annotatedElement="_FO-vIEmSEeC-KYWPZCFBzA">
+          <body>size of one cell in mm</body>
+        </ownedComment>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_rBXWQEmSEeC-KYWPZCFBzA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_rBSdwEmSEeC-KYWPZCFBzA" value="1"/>
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_rBbnsEmSEeC-KYWPZCFBzA">
+          <value xsi:nil="true"/>
+        </defaultValue>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_FQbgoEmSEeC-KYWPZCFBzA" name="xSizeMM" isUnique="false">
+        <ownedComment xmi:id="_ym-nUEmTEeC-KYWPZCFBzA" annotatedElement="_FQbgoEmSEeC-KYWPZCFBzA">
+          <body>size of the map in mm</body>
+        </ownedComment>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Fb80IEmSEeC-KYWPZCFBzA" name="ySizeMM" isUnique="false">
+        <ownedComment xmi:id="_0a8fUEmTEeC-KYWPZCFBzA" annotatedElement="_Fb80IEmSEeC-KYWPZCFBzA">
+          <body>size of the map in mm</body>
+        </ownedComment>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_FdP0oEmSEeC-KYWPZCFBzA" name="xSizeCells" isUnique="false">
+        <ownedComment xmi:id="_1khWgEmTEeC-KYWPZCFBzA" annotatedElement="_FdP0oEmSEeC-KYWPZCFBzA">
+          <body>size of gridmap in number of cells in direction of x and y</body>
+        </ownedComment>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Fei1IEmSEeC-KYWPZCFBzA" name="ySizeCells" isUnique="false">
+        <ownedComment xmi:id="_54iJYEmTEeC-KYWPZCFBzA" annotatedElement="_Fei1IEmSEeC-KYWPZCFBzA">
+          <body>size of gridmap in number of cells in direction of x and y</body>
+        </ownedComment>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_FuCCoEmSEeC-KYWPZCFBzA" name="size" isUnique="false">
+        <ownedComment xmi:id="_6_o7YEmTEeC-KYWPZCFBzA" annotatedElement="_FuCCoEmSEeC-KYWPZCFBzA">
+          <body>total size of gridmap in number of cells</body>
+        </ownedComment>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_FynnsEmSEeC-KYWPZCFBzA" name="cell" visibility="public" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_IAsSUIgZEd6Va88Rz-zvaQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_W3puoEmVEeC-KYWPZCFBzA" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_W3kPEEmVEeC-KYWPZCFBzA"/>
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_BvsvYEmTEeC-KYWPZCFBzA">
+          <value xsi:nil="true"/>
+        </defaultValue>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Svv6kEmUEeC-KYWPZCFBzA" name="CommGridMapRequest">
+      <ownedAttribute xmi:id="_mVcHwEmUEeC-KYWPZCFBzA" name="id" isUnique="false">
+        <ownedComment xmi:id="_qrDAoEmVEeC-KYWPZCFBzA" annotatedElement="_mVcHwEmUEeC-KYWPZCFBzA">
+          <body>identifies global frame of reference</body>
+        </ownedComment>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_mYkUQEmUEeC-KYWPZCFBzA" name="xOffsetMM" isUnique="false">
+        <ownedComment xmi:id="_kANgUEmVEeC-KYWPZCFBzA" annotatedElement="_mYkUQEmUEeC-KYWPZCFBzA">
+          <body>offset of the map in mm relative to world coordinate system</body>
+        </ownedComment>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_mbQb4EmUEeC-KYWPZCFBzA" name="yOffsetMM" isUnique="false">
+        <ownedComment xmi:id="_tHJ2sEmVEeC-KYWPZCFBzA" annotatedElement="_mbQb4EmUEeC-KYWPZCFBzA">
+          <body>offset of the map in mm relative to world coordinate system</body>
+        </ownedComment>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_md6HQEmUEeC-KYWPZCFBzA" name="xSizeMM" isUnique="false">
+        <ownedComment xmi:id="_vnXwsEmVEeC-KYWPZCFBzA" annotatedElement="_md6HQEmUEeC-KYWPZCFBzA">
+          <body>size of the map in mm</body>
+        </ownedComment>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_mgp5QEmUEeC-KYWPZCFBzA" name="ySizeMM" isUnique="false">
+        <ownedComment xmi:id="_xKP4sEmVEeC-KYWPZCFBzA" annotatedElement="_mgp5QEmUEeC-KYWPZCFBzA">
+          <body>size of the map in mm</body>
+        </ownedComment>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_mj72wEmUEeC-KYWPZCFBzA" name="curLtmState" isUnique="false">
+        <ownedComment xmi:id="_yIvhQEmVEeC-KYWPZCFBzA" annotatedElement="_mj72wEmUEeC-KYWPZCFBzA">
+          <body>preoccupation with longterm map</body>
+        </ownedComment>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_mnhWQEmUEeC-KYWPZCFBzA" name="curLtmThreshold" isUnique="false">
+        <ownedComment xmi:id="_0M9bwEmVEeC-KYWPZCFBzA" annotatedElement="_mnhWQEmUEeC-KYWPZCFBzA">
+          <body>threshold for preoccupation with longterm map</body>
+        </ownedComment>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_0gS8kEmXEeC-KYWPZCFBzA" name="CdlTagType">
+      <ownedLiteral xmi:id="_WNny0EmYEeC-KYWPZCFBzA" name="CDL_SET_MODE_STRATEGY">
+        <ownedComment xmi:id="_b2oNQEmZEeC-KYWPZCFBzA" annotatedElement="_WNny0EmYEeC-KYWPZCFBzA">
+          <body></body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_WUt5UEmYEeC-KYWPZCFBzA" name="CDL_SET_FREE_BEHAVIOR">
+        <ownedComment xmi:id="_fU8uQEmZEeC-KYWPZCFBzA" annotatedElement="_WUt5UEmYEeC-KYWPZCFBzA">
+          <body>select behavior to free robot when stalled</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_WZhg0EmYEeC-KYWPZCFBzA" name="CDL_SET_LOOKUP_TABLE">
+        <ownedComment xmi:id="_g7QkwEmZEeC-KYWPZCFBzA" annotatedElement="_WZhg0EmYEeC-KYWPZCFBzA">
+          <body>select the lookup table to be used</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_Wg7JUEmYEeC-KYWPZCFBzA" name="CDL_SET_TRANS_VELOCITY">
+        <ownedComment xmi:id="_jKn_UEmZEeC-KYWPZCFBzA" annotatedElement="_Wg7JUEmYEeC-KYWPZCFBzA">
+          <body>set min, max trans velocity [mm/s,mm/s]</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_WkvSUEmYEeC-KYWPZCFBzA" name="CDL_SET_ROT_VELOCITY">
+        <ownedComment xmi:id="_kNTkUEmZEeC-KYWPZCFBzA" annotatedElement="_WkvSUEmYEeC-KYWPZCFBzA">
+          <body>set min, max rot velocity [deg/s,deg/s]</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_WoUx0EmYEeC-KYWPZCFBzA" name="CDL_SET_MODE_GOAL">
+        <ownedComment xmi:id="_mIEA0EmZEeC-KYWPZCFBzA" annotatedElement="_WoUx0EmYEeC-KYWPZCFBzA">
+          <body>set goal mode absolute position or planner</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_WrwgUEmYEeC-KYWPZCFBzA" name="CDL_SET_ID">
+        <ownedComment xmi:id="_nmFeAEmZEeC-KYWPZCFBzA" annotatedElement="_WrwgUEmYEeC-KYWPZCFBzA">
+          <body>set the id used for synchronisation</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_Wva4UEmYEeC-KYWPZCFBzA" name="CDL_SET_GOAL">
+        <ownedComment xmi:id="_o3KEUEmZEeC-KYWPZCFBzA" annotatedElement="_Wva4UEmYEeC-KYWPZCFBzA">
+          <body>set goal x,y,heading [mm,mm,deg]</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_W39wUEmYEeC-KYWPZCFBzA" name="CDL_SET_APPROACH_DIST">
+        <ownedComment xmi:id="_p-36UEmZEeC-KYWPZCFBzA" annotatedElement="_W39wUEmYEeC-KYWPZCFBzA">
+          <body>set the minimum distance to stop at goal [mm]</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_W7jP0EmYEeC-KYWPZCFBzA" name="CDL_SAVE_CURRENT_POS">
+        <ownedComment xmi:id="_rbHO0EmZEeC-KYWPZCFBzA" annotatedElement="_W7jP0EmYEeC-KYWPZCFBzA">
+          <body>save current robot pose for backward driving</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_W_hJ0EmYEeC-KYWPZCFBzA" name="CDL_SET_SAFETY_CLEARANCE">
+        <ownedComment xmi:id="_t737YEmZEeC-KYWPZCFBzA" annotatedElement="_W_hJ0EmYEeC-KYWPZCFBzA">
+          <body>set the global safety clearance</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_XDBw0EmYEeC-KYWPZCFBzA" name="CDL_NEUTRAL">
+        <ownedComment xmi:id="_vn1G4EmZEeC-KYWPZCFBzA" annotatedElement="_XDBw0EmYEeC-KYWPZCFBzA">
+          <body>indicate that no selection has been made</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_XHEjUEmYEeC-KYWPZCFBzA" name="CDL_REACTIVE">
+        <ownedComment xmi:id="_yjSLYEmZEeC-KYWPZCFBzA" annotatedElement="_XHEjUEmYEeC-KYWPZCFBzA">
+          <body>Strategy</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_XLMOUEmYEeC-KYWPZCFBzA" name="CDL_JOYSTICK">
+        <ownedComment xmi:id="_074acEmZEeC-KYWPZCFBzA" annotatedElement="_XLMOUEmYEeC-KYWPZCFBzA">
+          <body>Strategy</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_XPPA0EmYEeC-KYWPZCFBzA" name="CDL_TURN">
+        <ownedComment xmi:id="_2zDXcEmZEeC-KYWPZCFBzA" annotatedElement="_XPPA0EmYEeC-KYWPZCFBzA">
+          <body>Strategy</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_XT43UEmYEeC-KYWPZCFBzA" name="CDL_APPROACH_FLAT_SURF">
+        <ownedComment xmi:id="_3b3q8EmZEeC-KYWPZCFBzA" annotatedElement="_XT43UEmYEeC-KYWPZCFBzA">
+          <body>Strategy</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_XZw10EmYEeC-KYWPZCFBzA" name="CDL_APPROACH_HALT">
+        <ownedComment xmi:id="_4ETj8EmZEeC-KYWPZCFBzA" annotatedElement="_XZw10EmYEeC-KYWPZCFBzA">
+          <body>Strategy</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_Xd4g0EmYEeC-KYWPZCFBzA" name="CDL_APPROACH">
+        <ownedComment xmi:id="_4na4EEmZEeC-KYWPZCFBzA" annotatedElement="_Xd4g0EmYEeC-KYWPZCFBzA">
+          <body>Strategy</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_XinP0EmYEeC-KYWPZCFBzA" name="CDL_ROTATE">
+        <ownedComment xmi:id="_5K4KcEmZEeC-KYWPZCFBzA" annotatedElement="_XinP0EmYEeC-KYWPZCFBzA">
+          <body>Strategy</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_XnV-0EmYEeC-KYWPZCFBzA" name="CDL_FOLLOW">
+        <ownedComment xmi:id="_5tcE8EmZEeC-KYWPZCFBzA" annotatedElement="_XnV-0EmYEeC-KYWPZCFBzA">
+          <body>Strategy</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_Xsrx0EmYEeC-KYWPZCFBzA" name="CDL_BACKWARD">
+        <ownedComment xmi:id="_6P2OcEmZEeC-KYWPZCFBzA" annotatedElement="_Xsrx0EmYEeC-KYWPZCFBzA">
+          <body>Strategy</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_-NzHMEmYEeC-KYWPZCFBzA" name="CDL_ABSOLUTE">
+        <ownedComment xmi:id="_6ucO8EmZEeC-KYWPZCFBzA" annotatedElement="_-NzHMEmYEeC-KYWPZCFBzA">
+          <body>goal specification</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_-WzSMEmYEeC-KYWPZCFBzA" name="CDL_PLANNER">
+        <ownedComment xmi:id="_9lAzcEmZEeC-KYWPZCFBzA" annotatedElement="_-WzSMEmYEeC-KYWPZCFBzA">
+          <body>goal specification</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_-f3HkEmYEeC-KYWPZCFBzA" name="CDL_PERSON">
+        <ownedComment xmi:id="_-PhJAEmZEeC-KYWPZCFBzA" annotatedElement="_-f3HkEmYEeC-KYWPZCFBzA">
+          <body>goal specification</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_-j56EEmYEeC-KYWPZCFBzA" name="CDL_SAVED">
+        <ownedComment xmi:id="__NUOAEmZEeC-KYWPZCFBzA" annotatedElement="_-j56EEmYEeC-KYWPZCFBzA">
+          <body>goal specification</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_-nVokEmYEeC-KYWPZCFBzA" name="CDL_ANGLE_ABSOLUTE">
+        <ownedComment xmi:id="_ABCxAEmaEeC-KYWPZCFBzA" annotatedElement="_-nVokEmYEeC-KYWPZCFBzA">
+          <body>goal specification</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_-rAAkEmYEeC-KYWPZCFBzA" name="CDL_ANGLE_RELATIVE">
+        <ownedComment xmi:id="_A0PIgEmaEeC-KYWPZCFBzA" annotatedElement="_-rAAkEmYEeC-KYWPZCFBzA">
+          <body>goal specification</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_-vWVEEmYEeC-KYWPZCFBzA" name="CDL_DEFAULT_LOOKUP">
+        <ownedComment xmi:id="_ChG6AEmaEeC-KYWPZCFBzA" annotatedElement="_-vWVEEmYEeC-KYWPZCFBzA">
+          <body>lookup table</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_-1TMEEmYEeC-KYWPZCFBzA" name="CDL_SECOND_LOOKUP">
+        <ownedComment xmi:id="_DfcKgEmaEeC-KYWPZCFBzA" annotatedElement="_-1TMEEmYEeC-KYWPZCFBzA">
+          <body>lookup table</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_I9N3QEmZEeC-KYWPZCFBzA" name="CDL_NO_FREE_BEHAVIOR">
+        <ownedComment xmi:id="_E9DYAEmaEeC-KYWPZCFBzA" annotatedElement="_I9N3QEmZEeC-KYWPZCFBzA">
+          <body>free behavior</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_JHXRwEmZEeC-KYWPZCFBzA" name="CDL_FREE_BEHAVIOR">
+        <ownedComment xmi:id="_Ff_tAEmaEeC-KYWPZCFBzA" annotatedElement="_JHXRwEmZEeC-KYWPZCFBzA">
+          <body>free behavior</body>
+        </ownedComment>
+      </ownedLiteral>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_rY9dQEmaEeC-KYWPZCFBzA" name="PlannerTagType">
+      <ownedLiteral xmi:id="_xAGr8EmaEeC-KYWPZCFBzA" name="PLANNER_DELETE_GOAL">
+        <ownedComment xmi:id="_7nfhYEmaEeC-KYWPZCFBzA" annotatedElement="_xAGr8EmaEeC-KYWPZCFBzA">
+          <body>delete all specified goals</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_xDxD8EmaEeC-KYWPZCFBzA" name="PLANNER_SET_DESTINATION_LINE">
+        <ownedComment xmi:id="_9G764EmaEeC-KYWPZCFBzA" annotatedElement="_xDxD8EmaEeC-KYWPZCFBzA">
+          <body>send new goal line (x1,y1,x2,y2)</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_xK3KcEmaEeC-KYWPZCFBzA" name="PLANNER_SET_DESTINATION_CIRCLE">
+        <ownedComment xmi:id="_-Of_4EmaEeC-KYWPZCFBzA" annotatedElement="_xK3KcEmaEeC-KYWPZCFBzA">
+          <body>send new goal circle (x1,y1,r)</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_xQ458EmaEeC-KYWPZCFBzA" name="PLANNER_ID">
+        <ownedComment xmi:id="__fOn8EmaEeC-KYWPZCFBzA" annotatedElement="_xQ458EmaEeC-KYWPZCFBzA">
+          <body>for synchronization purposes</body>
+        </ownedComment>
+      </ownedLiteral>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_MoPsoEmbEeC-KYWPZCFBzA" name="MapperTagType">
+      <ownedLiteral xmi:id="_NazyAEmbEeC-KYWPZCFBzA" name="MAPPER_CUR_PARAMETER"/>
+      <ownedLiteral xmi:id="_NfAVgEmbEeC-KYWPZCFBzA" name="MAPPER_CUR_LTM"/>
+      <ownedLiteral xmi:id="_OpAqgEmbEeC-KYWPZCFBzA" name="MAPPER_CUR_EMPTY"/>
+      <ownedLiteral xmi:id="_OsXggEmbEeC-KYWPZCFBzA" name="MAPPER_CUR_SAVE"/>
+      <ownedLiteral xmi:id="_OvHSgEmbEeC-KYWPZCFBzA" name="MAPPER_CUR_LOAD"/>
+      <ownedLiteral xmi:id="_OzA7EEmbEeC-KYWPZCFBzA" name="MAPPER_CUR_LOAD_LTM"/>
+      <ownedLiteral xmi:id="_O2NZAEmbEeC-KYWPZCFBzA" name="MAPPER_CUR_SAVE_XPM"/>
+      <ownedLiteral xmi:id="_O4zaAEmbEeC-KYWPZCFBzA" name="MAPPER_LTM_PARAMETER"/>
+      <ownedLiteral xmi:id="_O7jzEEmbEeC-KYWPZCFBzA" name="MAPPER_LTM_INITIALIZE"/>
+      <ownedLiteral xmi:id="_O96jgEmbEeC-KYWPZCFBzA" name="MAPPER_LTM_SAVE"/>
+      <ownedLiteral xmi:id="_O_5ggEmbEeC-KYWPZCFBzA" name="MAPPER_LTM_LOAD"/>
+      <ownedLiteral xmi:id="_PEaNEEmbEeC-KYWPZCFBzA" name="MAPPER_LTM_SAVE_XPM"/>
+      <ownedLiteral xmi:id="_PHmrAEmbEeC-KYWPZCFBzA" name="MAPPER_LTM_SAVE_YAML_PGM"/>
+      <ownedLiteral xmi:id="_PLbbEEmbEeC-KYWPZCFBzA" name="MAPPER_LTM_SAVE_YAML_PPM"/>
+      <ownedLiteral xmi:id="_PPifAEmbEeC-KYWPZCFBzA" name="MAPPER_LTM_LOAD_YAML"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_MAnT0Em6EeCpIIYUIGaLOw" name="CdlGoalEventState">
+      <ownedAttribute xmi:id="_SjJXQEm7EeCpIIYUIGaLOw" name="newState" type="_kF-xUEm6EeCpIIYUIGaLOw" isUnique="false"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_kF-xUEm6EeCpIIYUIGaLOw" name="CdlGoalEventType">
+      <ownedLiteral xmi:id="_k8dtYEm6EeCpIIYUIGaLOw" name="CDL_GOAL_UNKNOWN"/>
+      <ownedLiteral xmi:id="_lHmmYEm6EeCpIIYUIGaLOw" name="CDL_GOAL_REACHED"/>
+      <ownedLiteral xmi:id="_lJSBYEm6EeCpIIYUIGaLOw" name="CDL_GOAL_NOT_REACHED"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_HJhPwEm_EeC7G99uJVy_1A" name="PlannerEventState">
+      <ownedAttribute xmi:id="_d8pM0EnAEeC7G99uJVy_1A" name="newState" type="_q4PWAEm_EeC7G99uJVy_1A" isUnique="false"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_q4PWAEm_EeC7G99uJVy_1A" name="PlannerEventType">
+      <ownedLiteral xmi:id="_t8ysIEm_EeC7G99uJVy_1A" name="PLANNER_NO_ERROR">
+        <ownedComment xmi:id="_BpA_IEnAEeC7G99uJVy_1A" annotatedElement="_t8ysIEm_EeC7G99uJVy_1A">
+          <body>everything ok</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_uGASgEm_EeC7G99uJVy_1A" name="PLANNER_UNKNOWN_ERROR">
+        <ownedComment xmi:id="_Ddl7IEnAEeC7G99uJVy_1A" annotatedElement="_uGASgEm_EeC7G99uJVy_1A">
+          <body>so far unknown problem</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_uJIfAEm_EeC7G99uJVy_1A" name="PLANNER_NO_GOAL_AVAILABLE">
+        <ownedComment xmi:id="_E0VroEnAEeC7G99uJVy_1A" annotatedElement="_uJIfAEm_EeC7G99uJVy_1A">
+          <body>no goal lines available</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_uMCCAEm_EeC7G99uJVy_1A" name="PLANNER_GOAL_OK">
+        <ownedComment xmi:id="_GIWRMEnAEeC7G99uJVy_1A" annotatedElement="_uMCCAEm_EeC7G99uJVy_1A">
+          <body>at least one goal cell labeled</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_uO2sgEm_EeC7G99uJVy_1A" name="PLANNER_GOAL_NOT_MARKED">
+        <ownedComment xmi:id="_HhE-sEnAEeC7G99uJVy_1A" annotatedElement="_uO2sgEm_EeC7G99uJVy_1A">
+          <body>every goal cell already occupied</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_uS9wcEm_EeC7G99uJVy_1A" name="PLANNER_START_OCCUPIED_OBSTACLE">
+        <ownedComment xmi:id="_I2_BsEnAEeC7G99uJVy_1A" annotatedElement="_uS9wcEm_EeC7G99uJVy_1A">
+          <body>start cell occupied by obstacle</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_uVpRAEm_EeC7G99uJVy_1A" name="PLANNER_START_OCCUPIED_GOAL">
+        <ownedComment xmi:id="_JxbQsEnAEeC7G99uJVy_1A" annotatedElement="_uVpRAEm_EeC7G99uJVy_1A">
+          <body>start cell occupied by goal cell</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_uY2WAEm_EeC7G99uJVy_1A" name="PLANNER_NO_PATH">
+        <ownedComment xmi:id="_Mr1zYEnAEeC7G99uJVy_1A" annotatedElement="_uY2WAEm_EeC7G99uJVy_1A">
+          <body>no path found</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_ucDbAEm_EeC7G99uJVy_1A" name="PLANNER_PATH_FOUND">
+        <ownedComment xmi:id="_No7GsEnAEeC7G99uJVy_1A" annotatedElement="_ucDbAEm_EeC7G99uJVy_1A">
+          <body>valid path found</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_uffJgEm_EeC7G99uJVy_1A" name="PLANNER_WRONG_MAPID">
+        <ownedComment xmi:id="_O9E2MEnAEeC7G99uJVy_1A" annotatedElement="_uffJgEm_EeC7G99uJVy_1A">
+          <body>map id does not match</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_ui64AEm_EeC7G99uJVy_1A" name="PLANNER_INVALID_MAP">
+        <ownedComment xmi:id="_P9yFQEnAEeC7G99uJVy_1A" annotatedElement="_ui64AEm_EeC7G99uJVy_1A">
+          <body>invalid map</body>
+        </ownedComment>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_unHbgEm_EeC7G99uJVy_1A" name="PLANNER_UNKNOWN">
+        <ownedComment xmi:id="_Q7sfAEnAEeC7G99uJVy_1A" annotatedElement="_unHbgEm_EeC7G99uJVy_1A">
+          <body>unknown</body>
+        </ownedComment>
+      </ownedLiteral>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_ayrOsFSWEeCurpai0_bv1w" name="CommGMappingParameter">
+      <ownedAttribute xmi:id="_j4zFsFSWEeCurpai0_bv1w" name="tag" type="_5eVDsFSWEeCurpai0_bv1w" isUnique="false"/>
+      <ownedAttribute xmi:id="_kIRsIFSWEeCurpai0_bv1w" name="parameter1" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_kJ9uMFSWEeCurpai0_bv1w" name="parameter2" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_kOr2IFSWEeCurpai0_bv1w" name="parameter3" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_kP5-IFSWEeCurpai0_bv1w" name="parameter4" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_l3XEIFSWEeCurpai0_bv1w" name="parameter5" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_l6HdMFSWEeCurpai0_bv1w" name="parameter6" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_5eVDsFSWEeCurpai0_bv1w" name="GMappingTagType">
+      <ownedLiteral xmi:id="_7pt9MFSWEeCurpai0_bv1w" name="SAVE_MAP"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_gs_MYFn5EeCMadxcQY1MDw" name="CommOctomapParameter">
+      <ownedAttribute xmi:id="_kGTRkFn5EeCMadxcQY1MDw" name="tag" type="_lL7c4Fn5EeCMadxcQY1MDw" isUnique="false"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_lL7c4Fn5EeCMadxcQY1MDw" name="OctomapTagType">
+      <ownedLiteral xmi:id="_mZAUAFn5EeCMadxcQY1MDw" name="RESET"/>
+    </packagedElement>
+    <profileApplication xmi:id="_LgO24SLnEeC3a6HArJ6z5g">
+      <eAnnotations xmi:id="_LgO24iLnEeC3a6HArJ6z5g" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_LgO24yLnEeC3a6HArJ6z5g">
+      <eAnnotations xmi:id="_LgO25CLnEeC3a6HArJ6z5g" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartCommObject xmi:id="_ooaG8CLnEeC3a6HArJ6z5g"/>
+  <SmartMARS:SmartCommObject xmi:id="_duSzQDSBEeC0-pI1Gz4akw"/>
+  <SmartMARS:SmartCommObject xmi:id="_kFVxkEmNEeC-KYWPZCFBzA" base_Class="_kBWCYEmNEeC-KYWPZCFBzA"/>
+  <SmartMARS:SmartCommObject xmi:id="_A5mnIEmOEeC-KYWPZCFBzA"/>
+  <SmartMARS:SmartCommObject xmi:id="_SdacIEmOEeC-KYWPZCFBzA" base_Class="_SdQrIEmOEeC-KYWPZCFBzA"/>
+  <SmartMARS:SmartCommObject xmi:id="_VsF-oEmOEeC-KYWPZCFBzA"/>
+  <SmartMARS:SmartCommObject xmi:id="_g9n9QEmOEeC-KYWPZCFBzA" base_Class="_g9eMQEmOEeC-KYWPZCFBzA"/>
+  <SmartMARS:SmartCommObject xmi:id="_SnMNwEmPEeC-KYWPZCFBzA" base_Class="_SnAnkEmPEeC-KYWPZCFBzA"/>
+  <SmartMARS:SmartCommObject xmi:id="_2AUegEmPEeC-KYWPZCFBzA" base_Class="_2AI4UEmPEeC-KYWPZCFBzA"/>
+  <SmartMARS:SmartCommObject xmi:id="_IdyfYEmQEeC-KYWPZCFBzA" base_Class="_Idj14EmQEeC-KYWPZCFBzA"/>
+  <SmartMARS:SmartCommObject xmi:id="_7ATxIEmQEeC-KYWPZCFBzA" base_Class="_7AFusEmQEeC-KYWPZCFBzA"/>
+  <SmartMARS:SmartCommObject xmi:id="_Jl-aAEmREeC-KYWPZCFBzA" base_Class="_JlyMwEmREeC-KYWPZCFBzA"/>
+  <SmartMARS:SmartCommObject xmi:id="_U2pdAEmREeC-KYWPZCFBzA" base_Class="_U2Y-UEmREeC-KYWPZCFBzA"/>
+  <SmartMARS:SmartCommObject xmi:id="_-tKn8EmREeC-KYWPZCFBzA" base_Class="_-s4UEEmREeC-KYWPZCFBzA"/>
+  <SmartMARS:SmartCommObject xmi:id="_SzMQIEmUEeC-KYWPZCFBzA" base_Class="_Svv6kEmUEeC-KYWPZCFBzA"/>
+  <SmartMARS:SmartEventState xmi:id="_MGaZ0Em6EeCpIIYUIGaLOw" base_Class="_MAnT0Em6EeCpIIYUIGaLOw"/>
+  <SmartMARS:SmartEventState xmi:id="_HPNoEEm_EeC7G99uJVy_1A" base_Class="_HJhPwEm_EeC7G99uJVy_1A"/>
+  <SmartMARS:SmartCommObject xmi:id="_a3uGwFSWEeCurpai0_bv1w" base_Class="_ayrOsFSWEeCurpai0_bv1w"/>
+  <SmartMARS:SmartCommObject xmi:id="_gx790Fn5EeCMadxcQY1MDw" base_Class="_gs_MYFn5EeCMadxcQY1MDw"/>
+</xmi:XMI>

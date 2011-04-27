@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:SmartMARS_1="http:///schemas/SmartMARS/_BbAR8JJEEd6KBYQyLRMWsQ/63" xmlns:SmartMARS_2="http:///schemas/SmartMARS/_MtOY8I5mEd6RktnxGt95qw/60" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ http:///schemas/SmartMARS/_BbAR8JJEEd6KBYQyLRMWsQ/63 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_Bc5vYJJEEd6KBYQyLRMWsQ http:///schemas/SmartMARS/_MtOY8I5mEd6RktnxGt95qw/60 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_MvIdcI5mEd6RktnxGt95qw">
+  <uml:Model xmi:id="_Nx9vMJGiEd6j5cjowev_Dw" name="SampleParameterComp_pim">
+    <packageImport xmi:id="_hs6kQJGuEd6j5cjowev_Dw">
+      <importedPackage xmi:type="uml:Model" href="platform:/resource/CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_hxmf0I2kEd693O0rTX4LOw"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Component" xmi:id="_Nx9vMZGiEd6j5cjowev_Dw" name="SampleParameterComp">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_eDU3QJKGEd6EiY036WM01w" name="samplePort" aggregation="composite"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_84v3cJIyEd6EX-qwrJsmTw" name="laser">
+        <ownedAttribute xmi:id="_neM14JI8Ed62_Kmjgoo1VQ" name="baudrate" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_8jM5sJI8Ed62_Kmjgoo1VQ" value="38400"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_4QJJEJI8Ed62_Kmjgoo1VQ" name="type" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_E3bZsJI9Ed62_Kmjgoo1VQ" value="LMS200"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_HmC_QJJBEd6KBYQyLRMWsQ" name="robot">
+        <ownedAttribute xmi:id="_JaBeUJJBEd6KBYQyLRMWsQ" name="name" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_MMUm0JJBEd6KBYQyLRMWsQ" value="Pioneer P3DX"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_O8av4JJBEd6KBYQyLRMWsQ" name="maxSpeed" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_QS3j4IgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_RwZTYJJBEd6KBYQyLRMWsQ" value="800"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_UoKxwJJBEd6KBYQyLRMWsQ" name="device" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_dGj6YJJBEd6KBYQyLRMWsQ" value="/dev/ttyUSB0"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_fOf3QJJBEd6KBYQyLRMWsQ" name="general">
+        <ownedAttribute xmi:id="_g7rKwJJBEd6KBYQyLRMWsQ" name="verbose" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_l_4EcJJBEd6KBYQyLRMWsQ"/>
+        </ownedAttribute>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:id="_Nx9vMpGiEd6j5cjowev_Dw">
+      <eAnnotations xmi:id="_Nx9vM5GiEd6j5cjowev_Dw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_Nx9vNJGiEd6j5cjowev_Dw">
+      <eAnnotations xmi:id="_Nx9vNZGiEd6j5cjowev_Dw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartComponent xmi:id="_N2tFQJGiEd6j5cjowev_Dw" base_Component="_Nx9vMZGiEd6j5cjowev_Dw"/>
+  <SmartMARS_1:SmartTask xmi:id="_UfVwsJGjEd6j5cjowev_Dw"/>
+  <SmartMARS_1:SmartPushNewestServer xmi:id="_ddgkkJGuEd6j5cjowev_Dw" serviceName="TestPort1Name">
+    <commObject href="platform:/resource/CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_8dmBUI2kEd693O0rTX4LOw"/>
+  </SmartMARS_1:SmartPushNewestServer>
+  <SmartMARS_1:SmartSendClient xmi:id="_IAiTYJGzEd6j5cjowev_Dw" serviceName="SendServiceName" serverName="SendServerName">
+    <commObject href="platform:/resource/CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_krN70I2lEd693O0rTX4LOw"/>
+  </SmartMARS_1:SmartSendClient>
+  <SmartMARS_2:SmartPushTimedServer xmi:id="_XKNoQJGzEd6j5cjowev_Dw"/>
+  <SmartMARS_2:SmartPushTimedHandler xmi:id="_aPc64JGzEd6j5cjowev_Dw"/>
+  <SmartMARS_1:SmartPushTimedClient xmi:id="_cwy2QJGzEd6j5cjowev_Dw" serviceName="PushTimedServiceName" serverName="PushTimedServerName">
+    <commObject href="platform:/resource/CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_krN70I2lEd693O0rTX4LOw"/>
+  </SmartMARS_1:SmartPushTimedClient>
+  <SmartMARS_1:SmartSendServer xmi:id="_w4lFcJIXEd6WLtuv2zM1vA" serviceName="SendServerServiceName" smartSendHandler="_yYlfoJIXEd6WLtuv2zM1vA">
+    <commObject href="platform:/resource/CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_krN70I2lEd693O0rTX4LOw"/>
+  </SmartMARS_1:SmartSendServer>
+  <SmartMARS_1:SmartSendHandler xmi:id="_yYlfoJIXEd6WLtuv2zM1vA"/>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_87vhEJIyEd6EX-qwrJsmTw" base_Class="_84v3cJIyEd6EX-qwrJsmTw"/>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_HmLiIJJBEd6KBYQyLRMWsQ" base_Class="_HmC_QJJBEd6KBYQyLRMWsQ"/>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_fOlW0JJBEd6KBYQyLRMWsQ" base_Class="_fOf3QJJBEd6KBYQyLRMWsQ"/>
+  <SmartMARS:SmartPushNewestServer xmi:id="_eDnLIJKGEd6EiY036WM01w" serviceName="sampleService" base_Port="_eDU3QJKGEd6EiY036WM01w">
+    <commObject href="platform:/resource/CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_8dmBUI2kEd693O0rTX4LOw"/>
+  </SmartMARS:SmartPushNewestServer>
+</xmi:XMI>

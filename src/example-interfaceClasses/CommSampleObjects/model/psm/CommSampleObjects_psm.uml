@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_5OQogGttEeC50cdCw2m9PA" name="CommSampleObjects_psm">
+    <packagedElement xmi:type="uml:Class" xmi:id="_5OQogWttEeC50cdCw2m9PA" name="CommSampleEvent1Result">
+      <ownedAttribute xmi:id="_5OQogmttEeC50cdCw2m9PA" name="value">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5OQog2ttEeC50cdCw2m9PA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_5OQohGttEeC50cdCw2m9PA" name="CommSampleEnumeration">
+      <ownedAttribute xmi:id="_5OQohWttEeC50cdCw2m9PA" name="value" type="_5OQoh2ttEeC50cdCw2m9PA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5OQohmttEeC50cdCw2m9PA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_5OQoh2ttEeC50cdCw2m9PA" name="SampleEnumeration">
+      <ownedLiteral xmi:id="_Oc6RgH0yEd-k9ZMEw5G2sQ" name="DEG"/>
+      <ownedLiteral xmi:id="_OxlhAH0yEd-k9ZMEw5G2sQ" name="RAD"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_5OQoiGttEeC50cdCw2m9PA" name="CommSampleValues">
+      <ownedAttribute xmi:id="_5OQoiWttEeC50cdCw2m9PA" name="values">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5OQoimttEeC50cdCw2m9PA" value="*"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_5OQoi2ttEeC50cdCw2m9PA" name="CommSampleEvent1Parameter">
+      <ownedAttribute xmi:id="_5OQojGttEeC50cdCw2m9PA" name="value">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5OQojWttEeC50cdCw2m9PA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_5OQojmttEeC50cdCw2m9PA" name="CommSampleResult">
+      <ownedAttribute xmi:id="_5OQoj2ttEeC50cdCw2m9PA" name="value">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5OQokGttEeC50cdCw2m9PA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_5OQokWttEeC50cdCw2m9PA" name="CommSamplePrint">
+      <ownedAttribute xmi:id="_5OQokmttEeC50cdCw2m9PA" name="time">
+        <type xmi:type="uml:Class" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/example-interfaceClasses/CommSampleObjects/model/pim/CommSampleObjects_pim.uml.out.uml#_VhI-UI2lEd693O0rTX4LOw"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5OQok2ttEeC50cdCw2m9PA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_5OQolGttEeC50cdCw2m9PA" name="text">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5OQolWttEeC50cdCw2m9PA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_5OQolmttEeC50cdCw2m9PA" name="CommSampleTime">
+      <ownedAttribute xmi:id="_5OQol2ttEeC50cdCw2m9PA" name="minute">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_2oH7kIQIEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5OQomGttEeC50cdCw2m9PA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_5OQomWttEeC50cdCw2m9PA" name="second">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_2oH7kIQIEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5OQommttEeC50cdCw2m9PA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_5OQom2ttEeC50cdCw2m9PA" name="hour">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_2oH7kIQIEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5OQonGttEeC50cdCw2m9PA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_5OQonWttEeC50cdCw2m9PA" name="SampleEventState">
+      <ownedAttribute xmi:id="_5OQonmttEeC50cdCw2m9PA" name="state">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5OQon2ttEeC50cdCw2m9PA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <profileApplication xmi:id="_5OQooGttEeC50cdCw2m9PA">
+      <eAnnotations xmi:id="_5OQooWttEeC50cdCw2m9PA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_5OQoomttEeC50cdCw2m9PA" base_Class="_5OQogWttEeC50cdCw2m9PA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_5OQoo2ttEeC50cdCw2m9PA" base_Class="_5OQohGttEeC50cdCw2m9PA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_5ORPkGttEeC50cdCw2m9PA" base_Class="_5OQoiGttEeC50cdCw2m9PA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_5ORPkWttEeC50cdCw2m9PA" base_Class="_5OQoi2ttEeC50cdCw2m9PA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_5ORPkmttEeC50cdCw2m9PA" base_Class="_5OQojmttEeC50cdCw2m9PA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_5ORPk2ttEeC50cdCw2m9PA" base_Class="_5OQokWttEeC50cdCw2m9PA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_5ORPlGttEeC50cdCw2m9PA" base_Class="_5OQolmttEeC50cdCw2m9PA"/>
+  <CorbaSmartSoft:SmartCorbaEventState xmi:id="_5ORPlWttEeC50cdCw2m9PA" base_Class="_5OQonWttEeC50cdCw2m9PA"/>
+</xmi:XMI>

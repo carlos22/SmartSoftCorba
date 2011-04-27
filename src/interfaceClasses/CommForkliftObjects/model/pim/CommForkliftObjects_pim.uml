@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+  <uml:Model xmi:id="_TQf7cFngEeCqEclf2nI-xQ" name="CommForkliftObjects_pim">
+    <packagedElement xmi:type="uml:Class" xmi:id="_Z8ocQFngEeCqEclf2nI-xQ" name="CommForkliftParameter">
+      <ownedAttribute xmi:id="_cQ-dcFngEeCqEclf2nI-xQ" name="tag" type="_d2LEMFnhEeCqEclf2nI-xQ" isUnique="false"/>
+      <ownedAttribute xmi:id="_aWyMMFnhEeCqEclf2nI-xQ" name="parameter1" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_d2LEMFnhEeCqEclf2nI-xQ" name="ForkliftTagType">
+      <ownedLiteral xmi:id="_gp7lQFnhEeCqEclf2nI-xQ" name="MOVE_ABS_MM"/>
+    </packagedElement>
+    <profileApplication xmi:id="_TQf7cVngEeCqEclf2nI-xQ">
+      <eAnnotations xmi:id="_TQf7clngEeCqEclf2nI-xQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_TQf7c1ngEeCqEclf2nI-xQ">
+      <eAnnotations xmi:id="_TQf7dFngEeCqEclf2nI-xQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartCommObject xmi:id="_Z-_MsFngEeCqEclf2nI-xQ" base_Class="_Z8ocQFngEeCqEclf2nI-xQ"/>
+</xmi:XMI>

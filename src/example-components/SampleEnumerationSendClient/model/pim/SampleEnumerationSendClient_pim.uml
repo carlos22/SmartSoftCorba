@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+  <uml:Model xmi:id="_2gkQUH01Ed-k9ZMEw5G2sQ" name="SampleEnumerationSendClient_pim">
+    <elementImport xmi:id="_Qeys4H02Ed-k9ZMEw5G2sQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_8dmBUI2kEd693O0rTX4LOw"/>
+    </elementImport>
+    <elementImport xmi:id="_QfVfcH02Ed-k9ZMEw5G2sQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_VhI-UI2lEd693O0rTX4LOw"/>
+    </elementImport>
+    <elementImport xmi:id="_Qfa_AH02Ed-k9ZMEw5G2sQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_krN70I2lEd693O0rTX4LOw"/>
+    </elementImport>
+    <elementImport xmi:id="_QffQcH02Ed-k9ZMEw5G2sQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_xZlE0I2lEd693O0rTX4LOw"/>
+    </elementImport>
+    <elementImport xmi:id="_QfkI8H02Ed-k9ZMEw5G2sQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_Tyz-0I2mEd693O0rTX4LOw"/>
+    </elementImport>
+    <elementImport xmi:id="_QfpBcH02Ed-k9ZMEw5G2sQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_TdsJwI2uEd693O0rTX4LOw"/>
+    </elementImport>
+    <elementImport xmi:id="_QfvIEH02Ed-k9ZMEw5G2sQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_2zMewI2uEd693O0rTX4LOw"/>
+    </elementImport>
+    <elementImport xmi:id="_Qf1OsH02Ed-k9ZMEw5G2sQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_yrFqYI4xEd6t15eMYXXb4w"/>
+    </elementImport>
+    <elementImport xmi:id="_Qf9KgH02Ed-k9ZMEw5G2sQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_HlF58I5EEd6xyLuDwPQjfQ"/>
+    </elementImport>
+    <elementImport xmi:id="_QgFGUH02Ed-k9ZMEw5G2sQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_AU_UkH0yEd-k9ZMEw5G2sQ"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:Component" xmi:id="_2gkQUX01Ed-k9ZMEw5G2sQ" name="SampleEnumerationSendClient">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_8pcTEH01Ed-k9ZMEw5G2sQ" name="enumSendClient" aggregation="composite"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_NBkYEH02Ed-k9ZMEw5G2sQ" name="EnumSendTask"/>
+    </packagedElement>
+    <profileApplication xmi:id="_2gkQUn01Ed-k9ZMEw5G2sQ">
+      <eAnnotations xmi:id="_2gkQU301Ed-k9ZMEw5G2sQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_2gkQVH01Ed-k9ZMEw5G2sQ">
+      <eAnnotations xmi:id="_2gkQVX01Ed-k9ZMEw5G2sQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartComponent xmi:id="_2kFeYH01Ed-k9ZMEw5G2sQ" base_Component="_2gkQUX01Ed-k9ZMEw5G2sQ"/>
+  <SmartMARS:SmartSendClient xmi:id="_8s7E4H01Ed-k9ZMEw5G2sQ" serviceName="enumSend" base_Port="_8pcTEH01Ed-k9ZMEw5G2sQ" serverName="SampleEnumerationSendServer">
+    <commObject href="../../../CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_AU_UkH0yEd-k9ZMEw5G2sQ"/>
+  </SmartMARS:SmartSendClient>
+  <SmartMARS:SmartTask xmi:id="_NBuJEH02Ed-k9ZMEw5G2sQ" base_Class="_NBkYEH02Ed-k9ZMEw5G2sQ"/>
+</xmi:XMI>

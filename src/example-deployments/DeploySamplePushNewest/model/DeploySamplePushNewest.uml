@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_FjU6IAL-Ed-eU8uvIVz00A" name="DeploySamplePushNewest">
+    <elementImport xmi:id="_P_og8AL-Ed-eU8uvIVz00A" alias="SamplePushNewestClient">
+      <importedElement xmi:type="uml:Component" href="../../SamplePushNewestClient/model/pim/SamplePushNewestClient_pim.uml#_wmI9EZKEEd6uCOP1Wu7ptg"/>
+    </elementImport>
+    <elementImport xmi:id="_P_1VQAL-Ed-eU8uvIVz00A" alias="SamplePushNewestServer">
+      <importedElement xmi:type="uml:Component" href="../../SamplePushNewestServer/model/pim/SamplePushNewestServer_pim.uml#_t1oH0ZKFEd6EiY036WM01w"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:Package" xmi:id="_FjU6IQL-Ed-eU8uvIVz00A" name="DeploySamplePushNewest">
+      <packagedElement xmi:type="uml:Class" xmi:id="_USpOQAL-Ed-eU8uvIVz00A" name="NamingService"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_nbThMAL-Ed-eU8uvIVz00A" name="FromtimeClienttotimeServer">
+        <supplier xmi:type="uml:Port" href="../../SamplePushNewestServer/model/pim/SamplePushNewestServer_pim.uml#_1Hd9wJKFEd6EiY036WM01w"/>
+        <client xmi:type="uml:Port" href="../../SamplePushNewestClient/model/pim/SamplePushNewestClient_pim.uml#_3ySasJKEEd6uCOP1Wu7ptg"/>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:id="_FjU6IgL-Ed-eU8uvIVz00A">
+      <eAnnotations xmi:id="_FjU6IwL-Ed-eU8uvIVz00A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_FjU6JAL-Ed-eU8uvIVz00A">
+      <eAnnotations xmi:id="_FjU6JQL-Ed-eU8uvIVz00A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+    <profileApplication xmi:id="_FjU6JgL-Ed-eU8uvIVz00A">
+      <eAnnotations xmi:id="_FjU6JwL-Ed-eU8uvIVz00A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:CorbaSmartSoftDevice xmi:id="_FnV3cAL-Ed-eU8uvIVz00A" base_Package="_FjU6IQL-Ed-eU8uvIVz00A"/>
+  <CorbaSmartSoft:CorbaNamingService xmi:id="_UVLk4AL-Ed-eU8uvIVz00A" base_Class="_USpOQAL-Ed-eU8uvIVz00A" ip="0.0.0.0" port="12345"/>
+</xmi:XMI>

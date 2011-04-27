@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_X_MF4JPLEd6VjOT4CXhd3g/67" xmlns:SmartMARS_1="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_X_MF4JPLEd6VjOT4CXhd3g/67 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_YA7yUJPLEd6VjOT4CXhd3g http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+  <uml:Model xmi:id="_wmI9EJKEEd6uCOP1Wu7ptg" name="SamplePushNewestClient_pim">
+    <packageImport xmi:id="_-hAVcJKEEd6uCOP1Wu7ptg">
+      <importedPackage xmi:type="uml:Model" href="platform:/resource/CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_hxmf0I2kEd693O0rTX4LOw"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Component" xmi:id="_wmI9EZKEEd6uCOP1Wu7ptg" name="SamplePushNewestClient">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_3ySasJKEEd6uCOP1Wu7ptg" name="timeClient" aggregation="composite"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_0UgFMJKEEd6uCOP1Wu7ptg" name="TimeTask"/>
+    </packagedElement>
+    <profileApplication xmi:id="_wmI9EpKEEd6uCOP1Wu7ptg">
+      <eAnnotations xmi:id="_wmI9E5KEEd6uCOP1Wu7ptg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_wmI9FJKEEd6uCOP1Wu7ptg">
+      <eAnnotations xmi:id="_wmI9FZKEEd6uCOP1Wu7ptg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartComponent xmi:id="_woREAJKEEd6uCOP1Wu7ptg" base_Component="_wmI9EZKEEd6uCOP1Wu7ptg"/>
+  <SmartMARS:SmartPushNewestClient xmi:id="_3yf2EJKEEd6uCOP1Wu7ptg" serviceName="time" base_Port="_3ySasJKEEd6uCOP1Wu7ptg" serverName="SamplePushNewestServer">
+    <commObject href="platform:/resource/CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_VhI-UI2lEd693O0rTX4LOw"/>
+  </SmartMARS:SmartPushNewestClient>
+  <SmartMARS_1:SmartTask xmi:id="_h9-PUFKeEd-7B7WIn76COA" base_Class="_0UgFMJKEEd6uCOP1Wu7ptg"/>
+</xmi:XMI>

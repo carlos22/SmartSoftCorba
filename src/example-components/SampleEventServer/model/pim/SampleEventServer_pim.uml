@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+  <uml:Model xmi:id="_970LcJKJEd6bA_4kRL0LbQ" name="SampleEventServer_pim">
+    <packageImport xmi:id="_PYgEwJKKEd6bA_4kRL0LbQ">
+      <importedPackage xmi:type="uml:Model" href="../../../CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_hxmf0I2kEd693O0rTX4LOw"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Component" xmi:id="_970LcZKJEd6bA_4kRL0LbQ" name="SampleEventServer">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_JhyJAJKKEd6bA_4kRL0LbQ" name="moreThanEventServer" aggregation="composite"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_DJr-gJKKEd6bA_4kRL0LbQ" name="CounterTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_FNSN8JKKEd6bA_4kRL0LbQ" name="Event1TestHandler"/>
+    </packagedElement>
+    <profileApplication xmi:id="_970LcpKJEd6bA_4kRL0LbQ">
+      <eAnnotations xmi:id="_970Lc5KJEd6bA_4kRL0LbQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_970LdJKJEd6bA_4kRL0LbQ">
+      <eAnnotations xmi:id="_970LdZKJEd6bA_4kRL0LbQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartComponent xmi:id="_9_DssJKJEd6bA_4kRL0LbQ" base_Component="_970LcZKJEd6bA_4kRL0LbQ"/>
+  <SmartMARS:SmartEventTestHandler xmi:id="_FNaw0JKKEd6bA_4kRL0LbQ" base_Class="_FNSN8JKKEd6bA_4kRL0LbQ"/>
+  <SmartMARS:SmartEventServer xmi:id="_Jh9vMJKKEd6bA_4kRL0LbQ" serviceName="eventMoreThan" base_Port="_JhyJAJKKEd6bA_4kRL0LbQ" smartEventTestHandler="_FNaw0JKKEd6bA_4kRL0LbQ">
+    <eventParameter href="../../../CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_Tyz-0I2mEd693O0rTX4LOw"/>
+    <eventResult href="../../../CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_TdsJwI2uEd693O0rTX4LOw"/>
+    <eventState href="../../../CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_2zMewI2uEd693O0rTX4LOw"/>
+  </SmartMARS:SmartEventServer>
+  <SmartMARS:SmartTask xmi:id="_iCOQwDjBEd-HapYWGPeQdw" base_Class="_DJr-gJKKEd6bA_4kRL0LbQ"/>
+</xmi:XMI>

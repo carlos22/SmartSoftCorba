@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+  <uml:Model xmi:id="_MQP0AFNhEd-CPukKvdN5lw" name="SampleStateServer_pim">
+    <packagedElement xmi:type="uml:Component" xmi:id="_MQP0AVNhEd-CPukKvdN5lw" name="SampleStateServer">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_ZZtkoFNhEd-CPukKvdN5lw" name="stateServer" aggregation="composite"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_OPkAYFNhEd-CPukKvdN5lw" name="mainActive"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_PXQBMFNhEd-CPukKvdN5lw" name="subActive"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_UMUSsFNhEd-CPukKvdN5lw" name="MyTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dPY1sFNhEd-CPukKvdN5lw" name="StateChange"/>
+    </packagedElement>
+    <profileApplication xmi:id="_MQP0AlNhEd-CPukKvdN5lw">
+      <eAnnotations xmi:id="_MQP0A1NhEd-CPukKvdN5lw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_MQP0BFNhEd-CPukKvdN5lw">
+      <eAnnotations xmi:id="_MQP0BVNhEd-CPukKvdN5lw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartComponent xmi:id="_MWb7kFNhEd-CPukKvdN5lw" base_Component="_MQP0AVNhEd-CPukKvdN5lw"/>
+  <SmartMARS:SmartMainState xmi:id="_OTF1gFNhEd-CPukKvdN5lw" base_Class="_OPkAYFNhEd-CPukKvdN5lw" subState="_PXX9AFNhEd-CPukKvdN5lw"/>
+  <SmartMARS:SmartSubState xmi:id="_PXX9AFNhEd-CPukKvdN5lw" base_Class="_PXQBMFNhEd-CPukKvdN5lw"/>
+  <SmartMARS:SmartTask xmi:id="_UMc1kFNhEd-CPukKvdN5lw" base_Class="_UMUSsFNhEd-CPukKvdN5lw"/>
+  <SmartMARS:SmartStateServer xmi:id="_ZadykFNhEd-CPukKvdN5lw" serviceName="state" base_Port="_ZZtkoFNhEd-CPukKvdN5lw" smartStateChangeHandler="_dPeVQFNhEd-CPukKvdN5lw"/>
+  <SmartMARS:SmartStateChangeHandler xmi:id="_dPeVQFNhEd-CPukKvdN5lw" base_Class="_dPY1sFNhEd-CPukKvdN5lw"/>
+</xmi:XMI>

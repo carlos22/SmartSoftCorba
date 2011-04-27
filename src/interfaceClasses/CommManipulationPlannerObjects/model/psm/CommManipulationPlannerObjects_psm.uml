@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_MDu-EGaqEeCwRIvId514VA" name="CommManipulationPlannerObjects_psm">
+    <packagedElement xmi:type="uml:Class" xmi:id="_MDu-EWaqEeCwRIvId514VA" name="CommManipulationPlannerEventState">
+      <ownedAttribute xmi:id="_MDu-EmaqEeCwRIvId514VA" name="event" type="_MDu-FGaqEeCwRIvId514VA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MDu-E2aqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_MDu-FGaqEeCwRIvId514VA" name="ManipulationPlannerEvent">
+      <ownedLiteral xmi:id="_9-cy0F2nEd-7Gft3vKY-LQ" name="MANIPULATOR_SYNC_FAIL"/>
+      <ownedLiteral xmi:id="_IdGjAF2oEd-7Gft3vKY-LQ" name="NO_IKSOLUTION_FOUND"/>
+      <ownedLiteral xmi:id="_J7ZtAF2oEd-7Gft3vKY-LQ" name="NO_PATH_FOUND"/>
+      <ownedLiteral xmi:id="_KIwMgF2oEd-7Gft3vKY-LQ" name="PATH_FOUND"/>
+      <ownedLiteral xmi:id="_RfTosF27Ed-J58fuBtPPZA" name="PLANNING_PATH"/>
+      <ownedLiteral xmi:id="_idc9UMvDEd-uFsJqD46Vgw" name="UNKNOWN"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_MDu-FWaqEeCwRIvId514VA" name="CommManipulationTaskPlanning">
+      <ownedAttribute xmi:id="_MDu-FmaqEeCwRIvId514VA" name="releaseObject">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MDu-F2aqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_MDu-GGaqEeCwRIvId514VA" name="endPose">
+        <type xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_3Yh5QB46EeCL5fWcuAqvBA"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MDu-GWaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_MDu-GmaqEeCwRIvId514VA" name="objectId">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_7kThsIQIEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MDu-G2aqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_MDu-HGaqEeCwRIvId514VA" name="CommManipulationPlannerParameter">
+      <ownedAttribute xmi:id="_MDu-HWaqEeCwRIvId514VA" name="parameter07">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MDu-HmaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_MDu-H2aqEeCwRIvId514VA" name="parameter06">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MDu-IGaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_MDu-IWaqEeCwRIvId514VA" name="parameter04">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MDu-ImaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_MDu-I2aqEeCwRIvId514VA" name="parameter08">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MDu-JGaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_MDu-JWaqEeCwRIvId514VA" name="mode" type="_MDu-L2aqEeCwRIvId514VA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MDu-JmaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_MDu-J2aqEeCwRIvId514VA" name="parameter03">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MDu-KGaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_MDu-KWaqEeCwRIvId514VA" name="parameter02">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MDu-KmaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_MDu-K2aqEeCwRIvId514VA" name="parameter05">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MDu-LGaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_MDu-LWaqEeCwRIvId514VA" name="parameter01">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MDu-LmaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_MDu-L2aqEeCwRIvId514VA" name="ManipulationPlannerParameterMode">
+      <ownedLiteral xmi:id="_Xhn1oF2pEd-7Gft3vKY-LQ" name="ENV_CLEAR"/>
+      <ownedLiteral xmi:id="_Xs_YIF2pEd-7Gft3vKY-LQ" name="ENV_LOAD_OBJECTRECOGNITION"/>
+      <ownedLiteral xmi:id="_X3v2oF2pEd-7Gft3vKY-LQ" name="ENV_LOAD_FILE"/>
+      <ownedLiteral xmi:id="_YCu-oF2pEd-7Gft3vKY-LQ" name="OBJ_DELETE"/>
+      <ownedLiteral xmi:id="_MHx9gJAHEd-4sLmghoiJuQ" name="ENV_SAVE_FILE"/>
+      <ownedLiteral xmi:id="_sb4SoKXiEd-IsJ5R4dYP7A" name="OBJ_COMPUTEGRASPTABLE"/>
+      <ownedLiteral xmi:id="_816wwMvBEd-uFsJqD46Vgw" name="OPENRAVE_GRASPOBJ"/>
+      <ownedLiteral xmi:id="_88TFkMvBEd-uFsJqD46Vgw" name="OPENRAVE_RELEASEOBJ"/>
+      <ownedLiteral xmi:id="_HoMOAP06Ed-b1s1dTdITEg" name="PARALLELIZATION_ON"/>
+      <ownedLiteral xmi:id="_HvgW8P06Ed-b1s1dTdITEg" name="PARALLELIZATION_OFF"/>
+      <ownedLiteral xmi:id="_Pa2SAP06Ed-b1s1dTdITEg" name="GRASPING_SIMPLE"/>
+      <ownedLiteral xmi:id="_Png1AP06Ed-b1s1dTdITEg" name="GRASPING_ADVANCED"/>
+      <ownedLiteral xmi:id="_JpEIoAzoEeCvAodVaomaSA" name="GRASPING_NONE"/>
+      <ownedLiteral xmi:id="_zViOoCMAEeCmpYnPOVFI6A" name="OBJ_ADD"/>
+      <ownedLiteral xmi:id="_1QMkgCMAEeCmpYnPOVFI6A" name="OBJ_MOVE"/>
+      <ownedLiteral xmi:id="_GRbA4D6MEeC9mdrmKyfTpw" name="SIMULATION_TEST_IK_ONLY"/>
+      <ownedLiteral xmi:id="_GbdGoD6MEeC9mdrmKyfTpw" name="SIMULATION_PLAN_ALL"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_MDu-MGaqEeCwRIvId514VA" name="CommManipulationPlannerEventParameter">
+      <ownedAttribute xmi:id="_MDu-MWaqEeCwRIvId514VA" name="event" type="_MDu-FGaqEeCwRIvId514VA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MDu-MmaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_MDu-M2aqEeCwRIvId514VA" name="CommManipulationPlannerEventResult">
+      <ownedAttribute xmi:id="_MDu-NGaqEeCwRIvId514VA" name="event" type="_MDu-FGaqEeCwRIvId514VA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MDu-NWaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <profileApplication xmi:id="_MDu-NmaqEeCwRIvId514VA">
+      <eAnnotations xmi:id="_MDu-N2aqEeCwRIvId514VA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:SmartCorbaEventState xmi:id="_MDvlIGaqEeCwRIvId514VA" base_Class="_MDu-EWaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_MDvlIWaqEeCwRIvId514VA" base_Class="_MDu-FWaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_MDvlImaqEeCwRIvId514VA" base_Class="_MDu-HGaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_MDvlI2aqEeCwRIvId514VA" base_Class="_MDu-MGaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_MDvlJGaqEeCwRIvId514VA" base_Class="_MDu-M2aqEeCwRIvId514VA"/>
+</xmi:XMI>

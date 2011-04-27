@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+  <uml:Model xmi:id="_mVo2UFKiEd-gcrvvr4bk-A" name="SampleRTAIComp_pim">
+    <packagedElement xmi:type="uml:Component" xmi:id="_mVo2UVKiEd-gcrvvr4bk-A" name="SampleRTAIComp">
+      <packagedElement xmi:type="uml:Class" xmi:id="_odIHQFKiEd-gcrvvr4bk-A" name="RtTask1"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_rOe0kFKiEd-gcrvvr4bk-A" name="RtTask2"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_ssx-kFKiEd-gcrvvr4bk-A" name="RtTask3"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_uRQpEFKiEd-gcrvvr4bk-A" name="Task1"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_vSpNkFKiEd-gcrvvr4bk-A" name="Task2"/>
+    </packagedElement>
+    <profileApplication xmi:id="_mVo2UlKiEd-gcrvvr4bk-A">
+      <eAnnotations xmi:id="_mVo2U1KiEd-gcrvvr4bk-A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_mVo2VFKiEd-gcrvvr4bk-A">
+      <eAnnotations xmi:id="_mVo2VVKiEd-gcrvvr4bk-A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartComponent xmi:id="_mZs28FKiEd-gcrvvr4bk-A" base_Component="_mVo2UVKiEd-gcrvvr4bk-A"/>
+  <SmartMARS:SmartTask xmi:id="_og9eYFKiEd-gcrvvr4bk-A" isRealtime="true" period="500" priority="1" base_Class="_odIHQFKiEd-gcrvvr4bk-A" isPeriodic="true" wcet="100" timeUnit="ms"/>
+  <SmartMARS:SmartTask xmi:id="_rOrB0FKiEd-gcrvvr4bk-A" isRealtime="true" period="1000" priority="2" base_Class="_rOe0kFKiEd-gcrvvr4bk-A" isPeriodic="true" wcet="150" timeUnit="ms"/>
+  <SmartMARS:SmartTask xmi:id="_ss4FMFKiEd-gcrvvr4bk-A" isRealtime="true" period="2000" priority="3" base_Class="_ssx-kFKiEd-gcrvvr4bk-A" isPeriodic="true" wcet="250" timeUnit="ms"/>
+  <SmartMARS:SmartTask xmi:id="_uRXWwFKiEd-gcrvvr4bk-A" period="3" base_Class="_uRQpEFKiEd-gcrvvr4bk-A" isPeriodic="true"/>
+  <SmartMARS:SmartTask xmi:id="_vSutIFKiEd-gcrvvr4bk-A" period="5" base_Class="_vSpNkFKiEd-gcrvvr4bk-A" isPeriodic="true"/>
+</xmi:XMI>

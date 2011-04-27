@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_ELwccA3aEeC_190lg--Ncg" name="SampleParameterComp_psm">
+    <packagedElement xmi:type="uml:Component" xmi:id="_ELwccQ3aEeC_190lg--Ncg" name="SampleParameterComp">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_ELwccg3aEeC_190lg--Ncg" name="samplePort"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_ELwccw3aEeC_190lg--Ncg" name="laser">
+        <ownedAttribute xmi:id="_ELwcdA3aEeC_190lg--Ncg" name="type">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ELwcdQ3aEeC_190lg--Ncg" value="LMS200"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ELwcdg3aEeC_190lg--Ncg" name="baudrate">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_7kThsIQIEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ELwcdw3aEeC_190lg--Ncg" value="38400"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_ELwceA3aEeC_190lg--Ncg" name="robot">
+        <ownedAttribute xmi:id="_ELwceQ3aEeC_190lg--Ncg" name="maxSpeed">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_2oH7kIQIEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ELwceg3aEeC_190lg--Ncg" value="800"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ELwcew3aEeC_190lg--Ncg" name="name">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ELwcfA3aEeC_190lg--Ncg" value="Pioneer P3DX"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_ELwcfQ3aEeC_190lg--Ncg" name="device">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ELwcfg3aEeC_190lg--Ncg" value="/dev/ttyUSB0"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_ELwcfw3aEeC_190lg--Ncg" name="general">
+        <ownedAttribute xmi:id="_ELwcgA3aEeC_190lg--Ncg" name="verbose">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ELwcgQ3aEeC_190lg--Ncg" value="false"/>
+        </ownedAttribute>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:id="_ELwcgg3aEeC_190lg--Ncg">
+      <eAnnotations xmi:id="_ELwcgw3aEeC_190lg--Ncg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:SmartCorbaComponent xmi:id="_ELxDgA3aEeC_190lg--Ncg" base_Component="_ELwccQ3aEeC_190lg--Ncg"/>
+  <CorbaSmartSoft:SmartCorbaPushNewestServer xmi:id="_ELxDgQ3aEeC_190lg--Ncg" serviceName="sampleService" base_Port="_ELwccg3aEeC_190lg--Ncg">
+    <commObject href="platform:/resource/CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_8dmBUI2kEd693O0rTX4LOw"/>
+  </CorbaSmartSoft:SmartCorbaPushNewestServer>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_ELxDgg3aEeC_190lg--Ncg" base_Class="_ELwccw3aEeC_190lg--Ncg"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_ELxDgw3aEeC_190lg--Ncg" base_Class="_ELwceA3aEeC_190lg--Ncg"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_ELxDhA3aEeC_190lg--Ncg" base_Class="_ELwcfw3aEeC_190lg--Ncg"/>
+</xmi:XMI>

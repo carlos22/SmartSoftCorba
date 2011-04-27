@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_Y06fcGtpEeCQ5ZGYEb3XXA" name="CommTrackingObjects_psm">
+    <packagedElement xmi:type="uml:Class" xmi:id="_Y06fcWtpEeCQ5ZGYEb3XXA" name="CommPersonLostEventResult">
+      <ownedAttribute xmi:id="_Y06fcmtpEeCQ5ZGYEb3XXA" name="state" type="_Y06fdGtpEeCQ5ZGYEb3XXA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Y06fc2tpEeCQ5ZGYEb3XXA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_Y06fdGtpEeCQ5ZGYEb3XXA" name="PersonLostEventType">
+      <ownedLiteral xmi:id="_DtOJQGtDEeCQ5ZGYEb3XXA" name="PERSON_LOST"/>
+      <ownedLiteral xmi:id="_DxpWQGtDEeCQ5ZGYEb3XXA" name="PERSON_FOUND"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Y06fdWtpEeCQ5ZGYEb3XXA" name="CommLaserTrackedObject">
+      <ownedAttribute xmi:id="_Y06fdmtpEeCQ5ZGYEb3XXA" name="id">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_7kThsIQIEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Y06fd2tpEeCQ5ZGYEb3XXA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Y06feGtpEeCQ5ZGYEb3XXA" name="first_point">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_2oH7kIQIEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Y06feWtpEeCQ5ZGYEb3XXA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Y06femtpEeCQ5ZGYEb3XXA" name="last_point">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_2oH7kIQIEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Y06fe2tpEeCQ5ZGYEb3XXA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Y06ffGtpEeCQ5ZGYEb3XXA" name="CommFollowMeParameter">
+      <ownedAttribute xmi:id="_Y06ffWtpEeCQ5ZGYEb3XXA" name="parameter5">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Y06ffmtpEeCQ5ZGYEb3XXA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Y06ff2tpEeCQ5ZGYEb3XXA" name="parameter2">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Y06fgGtpEeCQ5ZGYEb3XXA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Y06fgWtpEeCQ5ZGYEb3XXA" name="tag" type="_Y06fiWtpEeCQ5ZGYEb3XXA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Y06fgmtpEeCQ5ZGYEb3XXA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Y06fg2tpEeCQ5ZGYEb3XXA" name="parameter3">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Y06fhGtpEeCQ5ZGYEb3XXA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Y06fhWtpEeCQ5ZGYEb3XXA" name="parameter4">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Y06fhmtpEeCQ5ZGYEb3XXA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Y06fh2tpEeCQ5ZGYEb3XXA" name="parameter1">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Y06fiGtpEeCQ5ZGYEb3XXA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_Y06fiWtpEeCQ5ZGYEb3XXA" name="FollowMeTagType">
+      <ownedLiteral xmi:id="_vxNqoGs-EeCQ5ZGYEb3XXA" name="FOLLOW_RESET"/>
+      <ownedLiteral xmi:id="_v1yBkGs-EeCQ5ZGYEb3XXA" name="SET_MAX_COV"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Y06fimtpEeCQ5ZGYEb3XXA" name="PersonLostEventState">
+      <ownedAttribute xmi:id="_Y06fi2tpEeCQ5ZGYEb3XXA" name="newState" type="_Y06fdGtpEeCQ5ZGYEb3XXA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Y06fjGtpEeCQ5ZGYEb3XXA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Y06fjWtpEeCQ5ZGYEb3XXA" name="CommTrackingGoal">
+      <ownedAttribute xmi:id="_Y06fjmtpEeCQ5ZGYEb3XXA" name="distance">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Y06fj2tpEeCQ5ZGYEb3XXA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Y06fkGtpEeCQ5ZGYEb3XXA" name="angle">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Y06fkWtpEeCQ5ZGYEb3XXA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Y06fkmtpEeCQ5ZGYEb3XXA" name="valid">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Y06fk2tpEeCQ5ZGYEb3XXA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Y06flGtpEeCQ5ZGYEb3XXA" name="x">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Y06flWtpEeCQ5ZGYEb3XXA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Y06flmtpEeCQ5ZGYEb3XXA" name="y">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Y06fl2tpEeCQ5ZGYEb3XXA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Y06fmGtpEeCQ5ZGYEb3XXA" name="CommPersonLostEventParameter">
+      <ownedAttribute xmi:id="_Y06fmWtpEeCQ5ZGYEb3XXA" name="oldState" type="_Y06fdGtpEeCQ5ZGYEb3XXA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Y06fmmtpEeCQ5ZGYEb3XXA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Y06fm2tpEeCQ5ZGYEb3XXA" name="CommLaserTrackingData">
+      <ownedAttribute xmi:id="_Y06fnGtpEeCQ5ZGYEb3XXA" name="scan">
+        <type xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Y06fnWtpEeCQ5ZGYEb3XXA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Y06fnmtpEeCQ5ZGYEb3XXA" name="objects">
+        <type xmi:type="uml:Class" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/interfaceClasses/CommTrackingObjects/model/pim/CommTrackingObjects_pim.uml.out.uml#_A8SfwEozEeCeNt_YLTHJKA"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Y06fn2tpEeCQ5ZGYEb3XXA" value="*"/>
+      </ownedAttribute>
+    </packagedElement>
+    <profileApplication xmi:id="_Y06foGtpEeCQ5ZGYEb3XXA">
+      <eAnnotations xmi:id="_Y06foWtpEeCQ5ZGYEb3XXA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_Y06fomtpEeCQ5ZGYEb3XXA" base_Class="_Y06fcWtpEeCQ5ZGYEb3XXA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_Y06fo2tpEeCQ5ZGYEb3XXA" base_Class="_Y06fdWtpEeCQ5ZGYEb3XXA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_Y06fpGtpEeCQ5ZGYEb3XXA" base_Class="_Y06ffGtpEeCQ5ZGYEb3XXA"/>
+  <CorbaSmartSoft:SmartCorbaEventState xmi:id="_Y07GgGtpEeCQ5ZGYEb3XXA" base_Class="_Y06fimtpEeCQ5ZGYEb3XXA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_Y07GgWtpEeCQ5ZGYEb3XXA" base_Class="_Y06fjWtpEeCQ5ZGYEb3XXA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_Y07GgmtpEeCQ5ZGYEb3XXA" base_Class="_Y06fmGtpEeCQ5ZGYEb3XXA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_Y07Gg2tpEeCQ5ZGYEb3XXA" base_Class="_Y06fm2tpEeCQ5ZGYEb3XXA"/>
+</xmi:XMI>

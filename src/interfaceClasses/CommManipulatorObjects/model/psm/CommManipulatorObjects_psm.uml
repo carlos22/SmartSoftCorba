@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_NA6_EGaqEeCwRIvId514VA" name="CommManipulatorObjects_psm">
+    <packagedElement xmi:type="uml:Class" xmi:id="_NA6_EWaqEeCwRIvId514VA" name="CommManipulatorEventParameter">
+      <ownedAttribute xmi:id="_NA6_EmaqEeCwRIvId514VA" name="event" type="_NA6_FGaqEeCwRIvId514VA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_E2aqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_NA6_FGaqEeCwRIvId514VA" name="ManipulatorEvent">
+      <ownedLiteral xmi:id="_skm_UD2AEd-Bb4outWe31g" name="COLLISION"/>
+      <ownedLiteral xmi:id="_vFckYD2AEd-Bb4outWe31g" name="NO_SOLUTION_FOUND"/>
+      <ownedLiteral xmi:id="_w7VvAD2AEd-Bb4outWe31g" name="VALUE_OUT_OF_RANGE"/>
+      <ownedLiteral xmi:id="_yShkYD2AEd-Bb4outWe31g" name="GOAL_REACHED"/>
+      <ownedLiteral xmi:id="_znS-8D2AEd-Bb4outWe31g" name="GOAL_NOT_REACHED"/>
+      <ownedLiteral xmi:id="_iOLL0NBQEd-4JLnph6-rZg" name="UNKNOWN"/>
+      <ownedLiteral xmi:id="_TjXq4EAHEeC2VZxsEHDewQ" name="GOAL_REACHED_GRIPPER_EMPTY"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_NA6_FWaqEeCwRIvId514VA" name="CommManipulatorRequestScan3d">
+      <ownedAttribute xmi:id="_NA6_FmaqEeCwRIvId514VA" name="number_of_steps">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_2oH7kIQIEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_F2aqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_NA6_GGaqEeCwRIvId514VA" name="begin_joint_angles">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_GWaqEeCwRIvId514VA" value="*"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_NA6_GmaqEeCwRIvId514VA" name="laser_begin_angle">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_G2aqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_NA6_HGaqEeCwRIvId514VA" name="laser_end_angle">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_HWaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_NA6_HmaqEeCwRIvId514VA" name="end_joint_angles">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_H2aqEeCwRIvId514VA" value="*"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_NA6_IGaqEeCwRIvId514VA" name="CommMobileManipulatorState">
+      <ownedAttribute xmi:id="_NA6_IWaqEeCwRIvId514VA" name="manipulator_state">
+        <type xmi:type="uml:Class" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/interfaceClasses/CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml.out.uml#_rMVAkNQ_Ed6nTeGEf54M4w"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_ImaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_NA6_I2aqEeCwRIvId514VA" name="base_state">
+        <type xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_JGaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_NA6_JWaqEeCwRIvId514VA" name="CommManipulatorState">
+      <ownedAttribute xmi:id="_NA6_JmaqEeCwRIvId514VA" name="joint_angles">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_J2aqEeCwRIvId514VA" value="*"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_NA6_KGaqEeCwRIvId514VA" name="pose_tcp">
+        <type xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_3Yh5QB46EeCL5fWcuAqvBA"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_KWaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_NA6_KmaqEeCwRIvId514VA" name="gripper_angle">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_K2aqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_NA6_LGaqEeCwRIvId514VA" name="isValid">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_LWaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_NA6_LmaqEeCwRIvId514VA" name="pose_manipulator">
+        <type xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_3Yh5QB46EeCL5fWcuAqvBA"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_L2aqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_NA6_MGaqEeCwRIvId514VA" name="id">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_7kThsIQIEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_MWaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_NA6_MmaqEeCwRIvId514VA" name="CommManipulatorEventResult">
+      <ownedAttribute xmi:id="_NA6_M2aqEeCwRIvId514VA" name="event" type="_NA6_FGaqEeCwRIvId514VA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_NGaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_NA6_NWaqEeCwRIvId514VA" name="CommManipulatorId">
+      <ownedAttribute xmi:id="_NA6_NmaqEeCwRIvId514VA" name="id">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_7kThsIQIEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_N2aqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_NA6_OGaqEeCwRIvId514VA" name="valid">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_OWaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_NA6_OmaqEeCwRIvId514VA" name="CommManipulatorTrajectory">
+      <ownedAttribute xmi:id="_NA6_O2aqEeCwRIvId514VA" name="gripper_angles">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_PGaqEeCwRIvId514VA" value="*"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_NA6_PWaqEeCwRIvId514VA" name="sequence_size">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_7kThsIQIEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_PmaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_NA6_P2aqEeCwRIvId514VA" name="joint_angles" type="_NA6_SWaqEeCwRIvId514VA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_QGaqEeCwRIvId514VA" value="*"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_NA6_QWaqEeCwRIvId514VA" name="pose_tcp">
+        <type xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_3Yh5QB46EeCL5fWcuAqvBA"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_QmaqEeCwRIvId514VA" value="*"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_NA6_Q2aqEeCwRIvId514VA" name="gripper" type="_NA6_TGaqEeCwRIvId514VA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_RGaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_NA6_RWaqEeCwRIvId514VA" name="flag" type="_NA6_TWaqEeCwRIvId514VA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_RmaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_NA6_R2aqEeCwRIvId514VA" name="wait_until_each_pose_reached">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_SGaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_NA6_SWaqEeCwRIvId514VA" name="JointValues">
+      <ownedAttribute xmi:id="_NA6_SmaqEeCwRIvId514VA" name="values">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_S2aqEeCwRIvId514VA" value="*"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_NA6_TGaqEeCwRIvId514VA" name="ManipulatorGripperAction">
+      <ownedLiteral xmi:id="_TRJzgD1_Ed-Bb4outWe31g" name="ANGLE"/>
+      <ownedLiteral xmi:id="_galu8D1_Ed-Bb4outWe31g" name="CLOSE_BEFORE"/>
+      <ownedLiteral xmi:id="_iLuVYD1_Ed-Bb4outWe31g" name="OPEN_BEFORE"/>
+      <ownedLiteral xmi:id="_jjR-MD1_Ed-Bb4outWe31g" name="CLOSE_BEFORE_OPEN_AFTER"/>
+      <ownedLiteral xmi:id="_5dytsD1_Ed-Bb4outWe31g" name="NO_OP"/>
+      <ownedLiteral xmi:id="_7ROaMD1_Ed-Bb4outWe31g" name="CLOSE_AFTER"/>
+      <ownedLiteral xmi:id="_-b-e8D1_Ed-Bb4outWe31g" name="OPEN_AFTER"/>
+      <ownedLiteral xmi:id="_AbbOMD2AEd-Bb4outWe31g" name="OPEN_BEFORE_CLOSE_AFTER"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_NA6_TWaqEeCwRIvId514VA" name="ManipulatorTrajectoryFlag">
+      <ownedLiteral xmi:id="_ecRysD2AEd-Bb4outWe31g" name="JOINT_ANGLES"/>
+      <ownedLiteral xmi:id="_gLzPkD2AEd-Bb4outWe31g" name="POSES"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_NA6_TmaqEeCwRIvId514VA" name="ManipulatorEventState">
+      <ownedAttribute xmi:id="_NA6_T2aqEeCwRIvId514VA" name="event" type="_NA6_FGaqEeCwRIvId514VA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_UGaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_NA6_UWaqEeCwRIvId514VA" name="ScanEventState">
+      <ownedAttribute xmi:id="_NA6_UmaqEeCwRIvId514VA" name="valid">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_U2aqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_NA6_VGaqEeCwRIvId514VA" name="id">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_7kThsIQIEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_VWaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_NA6_VmaqEeCwRIvId514VA" name="CommManipulatorParameter">
+      <ownedAttribute xmi:id="_NA6_V2aqEeCwRIvId514VA" name="mode" type="_NA6_W2aqEeCwRIvId514VA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_WGaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_NA6_WWaqEeCwRIvId514VA" name="parameter01">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NA6_WmaqEeCwRIvId514VA" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_NA6_W2aqEeCwRIvId514VA" name="ManipulatorParameterMode">
+      <ownedLiteral xmi:id="_I-tocD2BEd-Bb4outWe31g" name="TRAJECTORY"/>
+      <ownedLiteral xmi:id="_KWAykD2BEd-Bb4outWe31g" name="SINGLE_POSE"/>
+      <ownedLiteral xmi:id="_L1zKUD2BEd-Bb4outWe31g" name="SET_ALL_JOINT_VELOCITY_LIMITS"/>
+      <ownedLiteral xmi:id="_OPry0D2BEd-Bb4outWe31g" name="SET_GRIPPER_VELOCITY_LIMIT"/>
+      <ownedLiteral xmi:id="_FZ4hQEWlEeCqkc0SFXo0wA" name="CALIBRATE"/>
+      <ownedLiteral xmi:id="_L_BpQEWlEeCqkc0SFXo0wA" name="CALIBRATE_AXIS"/>
+    </packagedElement>
+    <profileApplication xmi:id="_NA6_XGaqEeCwRIvId514VA">
+      <eAnnotations xmi:id="_NA6_XWaqEeCwRIvId514VA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_NA6_XmaqEeCwRIvId514VA" base_Class="_NA6_EWaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_NA6_X2aqEeCwRIvId514VA" base_Class="_NA6_FWaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_NA7mIGaqEeCwRIvId514VA" base_Class="_NA6_IGaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_NA7mIWaqEeCwRIvId514VA" base_Class="_NA6_JWaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_NA7mImaqEeCwRIvId514VA" base_Class="_NA6_MmaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_NA7mI2aqEeCwRIvId514VA" base_Class="_NA6_NWaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_NA7mJGaqEeCwRIvId514VA" base_Class="_NA6_OmaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaEventState xmi:id="_NA7mJWaqEeCwRIvId514VA" base_Class="_NA6_TmaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaEventState xmi:id="_NA7mJmaqEeCwRIvId514VA" base_Class="_NA6_UWaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_NA7mJ2aqEeCwRIvId514VA" base_Class="_NA6_VmaqEeCwRIvId514VA"/>
+</xmi:XMI>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+  <uml:Model xmi:id="_JQYUIFNiEd-CPukKvdN5lw" name="SampleStateClient_pim">
+    <packagedElement xmi:type="uml:Component" xmi:id="_JQYUIVNiEd-CPukKvdN5lw" name="SampleStateClient">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_PJvUMFNiEd-CPukKvdN5lw" name="stateClient" aggregation="composite"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_OTpZsFNiEd-CPukKvdN5lw" name="MyTask"/>
+    </packagedElement>
+    <profileApplication xmi:id="_JQYUIlNiEd-CPukKvdN5lw">
+      <eAnnotations xmi:id="_JQYUI1NiEd-CPukKvdN5lw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_JQYUJFNiEd-CPukKvdN5lw">
+      <eAnnotations xmi:id="_JQYUJVNiEd-CPukKvdN5lw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartComponent xmi:id="_JTG4AFNiEd-CPukKvdN5lw" base_Component="_JQYUIVNiEd-CPukKvdN5lw"/>
+  <SmartMARS:SmartTask xmi:id="_OVi3IFNiEd-CPukKvdN5lw" base_Class="_OTpZsFNiEd-CPukKvdN5lw"/>
+  <SmartMARS:SmartStateClient xmi:id="_PJ3QAFNiEd-CPukKvdN5lw" serviceName="state" base_Port="_PJvUMFNiEd-CPukKvdN5lw" serverName="SampleStateServer"/>
+</xmi:XMI>

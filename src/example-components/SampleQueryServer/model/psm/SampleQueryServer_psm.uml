@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_1dzaQA3ZEeC_190lg--Ncg" name="SampleQueryServer_psm">
+    <packagedElement xmi:type="uml:Component" xmi:id="_1dzaQQ3ZEeC_190lg--Ncg" name="SampleQueryServer">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_1dzaQg3ZEeC_190lg--Ncg" name="calcService"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_1dzaQw3ZEeC_190lg--Ncg" name="CalcHandler"/>
+    </packagedElement>
+    <profileApplication xmi:id="_1dzaRA3ZEeC_190lg--Ncg">
+      <eAnnotations xmi:id="_1dzaRQ3ZEeC_190lg--Ncg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:SmartCorbaComponent xmi:id="_1dzaRg3ZEeC_190lg--Ncg" base_Component="_1dzaQQ3ZEeC_190lg--Ncg"/>
+  <CorbaSmartSoft:SmartCorbaQueryServer xmi:id="_1dzaRw3ZEeC_190lg--Ncg" serviceName="calc" base_Port="_1dzaQg3ZEeC_190lg--Ncg" smartQueryHandler="_1dzaQw3ZEeC_190lg--Ncg">
+    <commRequestObject href="platform:/resource/CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_8dmBUI2kEd693O0rTX4LOw"/>
+    <commAnswerObject href="platform:/resource/CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_krN70I2lEd693O0rTX4LOw"/>
+  </CorbaSmartSoft:SmartCorbaQueryServer>
+  <CorbaSmartSoft:SmartCorbaQueryHandler xmi:id="_1dzaSA3ZEeC_190lg--Ncg" base_Class="_1dzaQw3ZEeC_190lg--Ncg"/>
+</xmi:XMI>

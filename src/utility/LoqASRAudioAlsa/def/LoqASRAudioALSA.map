@@ -1,0 +1,11 @@
+{ global:
+  NewHandle;
+  DeleteHandle;
+  SetData;
+  Register;
+  Unregister;
+  GetData;
+  GetErrorMessage;
+  local:
+  *;
+};

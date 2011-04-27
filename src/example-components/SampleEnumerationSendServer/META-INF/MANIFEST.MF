@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SampleEnumerationSendServer
+Bundle-SymbolicName: SampleEnumerationSendServer; singleton:=true
+Bundle-Version: 1.0.0
+Require-Bundle: org.openarchitectureware.dependencies,
+ org.openarchitectureware.uml2.adapter;bundle-version="4.3.0",
+ org.smartsoft.profile.smartmars;bundle-version="0.6.0",
+ org.smartsoft.profile.corbasmartsoft;bundle-version="0.6.0",
+ org.smartsoft.util.recipe.checks;bundle-version="0.6.0",
+ oaw.core.xpand2.extensions;bundle-version="0.2.0"
+Import-Package: org.openarchitectureware.recipe.checks.test,
+ org.openarchitectureware.recipe.core,
+ org.openarchitectureware.recipe.workflow

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:SmartMARS_1="http:///schemas/SmartMARS/_Ail-MI5dEd6Izba38NC9Yg/59" xmlns:SmartMARS_2="http:///schemas/SmartMARS/_MtOY8I5mEd6RktnxGt95qw/60" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ http:///schemas/SmartMARS/_Ail-MI5dEd6Izba38NC9Yg/59 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_AkpMoI5dEd6Izba38NC9Yg http:///schemas/SmartMARS/_MtOY8I5mEd6RktnxGt95qw/60 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_MvIdcI5mEd6RktnxGt95qw">
+  <uml:Model xmi:id="_hxmf0I2kEd693O0rTX4LOw" name="CommSampleObjects_pim">
+    <packagedElement xmi:type="uml:Class" xmi:id="_8dmBUI2kEd693O0rTX4LOw" name="CommSampleValues">
+      <ownedAttribute xmi:id="_JyVN0I2lEd693O0rTX4LOw" name="values" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_OpOEQI2lEd693O0rTX4LOw" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_OpJy0I2lEd693O0rTX4LOw"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_VhI-UI2lEd693O0rTX4LOw" name="CommSampleTime">
+      <ownedAttribute xmi:id="_Z2i4UI2lEd693O0rTX4LOw" name="hour" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_QS3j4IgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_aDvm0I2lEd693O0rTX4LOw" name="minute" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_QS3j4IgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_aGG-UI2lEd693O0rTX4LOw" name="second" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_QS3j4IgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_krN70I2lEd693O0rTX4LOw" name="CommSampleResult">
+      <ownedAttribute xmi:id="_nWvt8I2lEd693O0rTX4LOw" name="value" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_xZlE0I2lEd693O0rTX4LOw" name="CommSamplePrint">
+      <ownedAttribute xmi:id="_zqtZ8I2lEd693O0rTX4LOw" name="time" visibility="public" type="_VhI-UI2lEd693O0rTX4LOw" isUnique="false">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_H0vqUI2mEd693O0rTX4LOw" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_H0ucMI2mEd693O0rTX4LOw" value="1"/>
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_H0vqUY2mEd693O0rTX4LOw">
+          <value xsi:nil="true"/>
+        </defaultValue>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_EHn4UI2mEd693O0rTX4LOw" name="text" visibility="public" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_J53jwI2mEd693O0rTX4LOw" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_J5z5YI2mEd693O0rTX4LOw" value="1"/>
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_J57OII2mEd693O0rTX4LOw">
+          <value xsi:nil="true"/>
+        </defaultValue>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Tyz-0I2mEd693O0rTX4LOw" name="CommSampleEvent1Parameter">
+      <ownedAttribute xmi:id="_X25fUI2mEd693O0rTX4LOw" name="value" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_TdsJwI2uEd693O0rTX4LOw" name="CommSampleEvent1Result">
+      <ownedAttribute xmi:id="_Y8fUwI2uEd693O0rTX4LOw" name="value" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_2zMewI2uEd693O0rTX4LOw" name="SampleEventState">
+      <ownedAttribute xmi:id="_ES8ocI2vEd693O0rTX4LOw" name="state" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_AU_UkH0yEd-k9ZMEw5G2sQ" name="CommSampleEnumeration">
+      <ownedAttribute xmi:id="_HO0TIH0yEd-k9ZMEw5G2sQ" name="value" visibility="public" type="_NaFikH0yEd-k9ZMEw5G2sQ" isUnique="false">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_H2R7wH0yEd-k9ZMEw5G2sQ" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_H2McMH0yEd-k9ZMEw5G2sQ" value="1"/>
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_H2XbUH0yEd-k9ZMEw5G2sQ">
+          <value xsi:nil="true"/>
+        </defaultValue>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_NaFikH0yEd-k9ZMEw5G2sQ" name="SampleEnumeration">
+      <ownedLiteral xmi:id="_Oc6RgH0yEd-k9ZMEw5G2sQ" name="DEG"/>
+      <ownedLiteral xmi:id="_OxlhAH0yEd-k9ZMEw5G2sQ" name="RAD"/>
+    </packagedElement>
+    <profileApplication xmi:id="_hxmf0Y2kEd693O0rTX4LOw">
+      <eAnnotations xmi:id="_hxmf0o2kEd693O0rTX4LOw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_hxmf042kEd693O0rTX4LOw">
+      <eAnnotations xmi:id="_hxmf1I2kEd693O0rTX4LOw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartCommObject xmi:id="__4ok0I2kEd693O0rTX4LOw" base_Class="_8dmBUI2kEd693O0rTX4LOw"/>
+  <SmartMARS:SmartCommObject xmi:id="_X27J8I2lEd693O0rTX4LOw" base_Class="_VhI-UI2lEd693O0rTX4LOw"/>
+  <SmartMARS:SmartCommObject xmi:id="_mThWYI2lEd693O0rTX4LOw" base_Class="_krN70I2lEd693O0rTX4LOw"/>
+  <SmartMARS:SmartCommObject xmi:id="_y_O0AI2lEd693O0rTX4LOw" base_Class="_xZlE0I2lEd693O0rTX4LOw"/>
+  <SmartMARS:SmartCommObject xmi:id="_VIBeQI2mEd693O0rTX4LOw" base_Class="_Tyz-0I2mEd693O0rTX4LOw"/>
+  <SmartMARS:SmartCommObject xmi:id="_YdUsgI2uEd693O0rTX4LOw" base_Class="_TdsJwI2uEd693O0rTX4LOw"/>
+  <SmartMARS:SmartEventState xmi:id="_DytCII2vEd693O0rTX4LOw" base_Class="_2zMewI2uEd693O0rTX4LOw"/>
+  <SmartMARS:SmartCommObject xmi:id="_HnbcQI5EEd6xyLuDwPQjfQ"/>
+  <SmartMARS_1:SmartStruct xmi:id="_5B9B0I5dEd6VEd-76oeidw"/>
+  <SmartMARS_2:SmartCommObject xmi:id="_WC6OkI5pEd66epO4Zn45xg"/>
+  <SmartMARS:SmartCommObject xmi:id="_AfGS0H0yEd-k9ZMEw5G2sQ" base_Class="_AU_UkH0yEd-k9ZMEw5G2sQ"/>
+</xmi:XMI>

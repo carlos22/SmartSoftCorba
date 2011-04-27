@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+  <uml:Model xmi:id="_crkfQJM4Ed6s4pAs30clqA" name="SamplePushTimedServer2_pim">
+    <packageImport xmi:id="_0NyMYJM4Ed6s4pAs30clqA">
+      <importedPackage xmi:type="uml:Model" href="../../../CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_hxmf0I2kEd693O0rTX4LOw"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Component" xmi:id="_crkfQZM4Ed6s4pAs30clqA" name="SamplePushTimedServer2">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_rMCfEJM4Ed6s4pAs30clqA" name="timeServer" aggregation="composite"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_nktMAJM4Ed6s4pAs30clqA" name="TimeHandler"/>
+    </packagedElement>
+    <profileApplication xmi:id="_crkfQpM4Ed6s4pAs30clqA">
+      <eAnnotations xmi:id="_crkfQ5M4Ed6s4pAs30clqA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_crkfRJM4Ed6s4pAs30clqA">
+      <eAnnotations xmi:id="_crkfRZM4Ed6s4pAs30clqA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartComponent xmi:id="_cttNQJM4Ed6s4pAs30clqA" base_Component="_crkfQZM4Ed6s4pAs30clqA"/>
+  <SmartMARS:SmartPushTimedHandler xmi:id="_nmmpcJM4Ed6s4pAs30clqA" base_Class="_nktMAJM4Ed6s4pAs30clqA"/>
+  <SmartMARS:SmartPushTimedServer xmi:id="_rMLB8JM4Ed6s4pAs30clqA" serviceName="timeService" base_Port="_rMCfEJM4Ed6s4pAs30clqA" smartPushTimedHandler="_nmmpcJM4Ed6s4pAs30clqA" cycle="500" timeUnit="ms">
+    <commObject href="../../../CommSampleObjects/model/pim/CommSampleObjects_pim.uml#_VhI-UI2lEd693O0rTX4LOw"/>
+  </SmartMARS:SmartPushTimedServer>
+</xmi:XMI>
