@@ -1,0 +1,49 @@
+/*!
+
+\page page_property Properties
+  
+    The concept is similar to Properties of GUI Widgets etc, except
+    that it is possible to build organize UTIL::PropertyItem objects
+    in a tree. A simple property tree example for a base component
+    might look like this:
+    
+    - MyRobot
+      - name = garfield
+      - odometry
+        - wheel diameter = 0.3
+      - locomotion
+        - max velocity = 0.5
+        - max acceleration = 0.9
+      - watchdog timeout = 0.5
+
+    PropertyItem stores the property value as a string, and methods
+    like PropertyItem::getString(), PropertyItem::getInteger() and
+    similar can be used to retrieve the value as string, integer etc.
+      
+    A component will usually load these properties from a file. At the
+    moment a simple XML format is supported (look at the
+    examples), but old style .ini files as used by CHS::SmartParameter
+    can also be inserted into the tree (using the
+    UTIL::addParameter2Property helper function).
+
+    Changing properties during runtime is supported by the
+    UTIL::PropertyServerHandler helper class. This provides an
+    interface that other components can use to access and change a components
+    properties.
+
+    Usually some action needs to be taken whenever a property changed
+    (for example: recalcuating control
+    parameters). UTIL::Property::ChangeHandler provides this
+    capability to your class.
+
+    the <a href="../../src/utility/propertySmartSoft/">propertiesSmartSoft</a>
+    directory contains an example for this.
+
+    The \e ComponentWithProperties Component loads Properties from a
+    XML file and a .ini file, registers a ChangeHandler.
+
+    \e PropertyClient can then lists the properties remotely and
+    changes one. ComponentWithProperties will notice the change and
+    print the name of the changed property.
+
+*/

@@ -1,0 +1,70 @@
+/*!
+\page playerStage-demo SmartSoft simulator demo
+
+While the \ref page_basic-demo and \ref page_advanced-demo gives an overview in real-world scenarios. This demo describes how to run SmartSoft components with the simulator component.
+
+
+\image html smartsoft-simulator.png "SmartSoft simulator component using player/stage"
+
+The SmartSoft simulator component uses the simulator belonging to player/stage. Therefore, Player/Stage hat to be installed beforehand.<br>
+It simulates the robot base (providing the odometry and the robot speed) and <br>
+ the laser range finder.<br>
+The demo below describes how to drive to a commanded position. It is also possible to run other demos within the simulator, replacing the \e smartPioneerBaseServer and the \e smartLaserScanner with the \e smartPlayerStageSimulator component.
+
+    Components:
+     - \e smartPlayerStageSimulator
+     - \e smartMapperGridMap
+     - \e smartPlannerBreadthFirstSearch
+     - \e smartCdlServer 
+     - \e smartSpeechMaryOutputServer (if speech output is wanted)
+     - \e smartRobotConsole 
+
+
+    Run the demo:
+     - Be sure that the Corba Naming Service is running and the NameServiceIOR environment-variable is set correctly!
+     \verbatim
+     # $TAO_ROOT/orbsvcs/Naming_Service/Naming_Service -m 0 -ORBEndpoint iiop://localhost:9999 \endverbatim
+
+
+    - If you want to use the speech output component be sure that the MARY server is running and the voices configured in the
+      $SMART_ROOT/src/components/smartSpeechMaryOutputServer/smartSpeechMaryOutputServer.ini
+      are installed correctly!
+    
+    - compile the smartPlayerStageSimulator component first:
+    \verbatim
+    # $SMART_ROOT/smartPlayerStageSimulator make /endverbatim
+
+    - Now run player/stage and the components:
+    \verbatim
+    # cd $SMART_ROOT
+    # player src/components/smartPlayerStageSimulator/player_stage/smart_hospital_small.cfg
+
+    # bin/smartPlayerStageSimulator
+    # bin/smartMapperGridMap
+    # bin/smartPlannerBreadthFirstSearch
+    # bin/smartCdlServer
+    # bin/smartSpeechMaryOutputServer (if speech output is wanted) 
+    # bin/smartRobotConsole \endverbatim
+
+
+   Configure and start the demo using the smartRobotConsole:
+    - choose “08 - Demos” to get the list of the demos: <br>
+    - now choose “(2) Demo 2 Planner-CDL GOTO”
+
+    - choose whether you want to use the speech output component: "Activate speech output? (y/n): "
+    - now enter the goal coordinates measured in millimeter from the initial position (x:0 y:0) of the robot: <br>
+      <tt>(1000)(0)</tt> -> set the goal 1m ahead of the robot <br>
+
+    - the robot will move in the simulator to the entered position
+    - if the speech output is activated the robot will tell acoustically when the goal is reached
+
+    - to move the robot to another goal choose "Enter Goal? (y/n): " y and enter the coordinates
+
+    - the demo stops by entering "n" if you are asked whether you want to enter an goal.
+
+\section Hints
+   - To show the position of the robot select view --> position line; position text in stage
+     
+   - Stage is able to simulate uncertainties of the odometry. This mode is already set up in the .world file belonging to the .cfg file loaded with player. If the settings mentioned above are set, stage shows the position which the robot's odometry indicates. (also show in the status bar at the bottom when pointing at the robot)
+
+*/

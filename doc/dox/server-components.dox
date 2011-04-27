@@ -1,0 +1,90 @@
+/*!
+\page page_server-components Server Components
+
+  \subsection nomad_server Nomad Base Server
+
+    Path: <tt>$SMART_ROOT/src/components/smartNomad200BaseServer/</tt>
+
+    Purpose:
+    - provide access to the Scout, SuperScout, Nomad 150, and Nomad 200 series of robots
+      manufactured by Nomadic to other components.
+
+    Provided Services:
+    - PushTimed<Smart::CommBaseState>
+      pushes the configuration and velocity of the robot to subscribed clients at
+      regular intervals
+    - Send<Smart::CommNavigationVelocity>
+      accepts velocity commands from clients
+    - Send<Smart::CommBasePosition>
+      redefines the absolute position of the robots
+    - Send<Smart::CommBasePositionUpdate>
+      accepts relative correction of the base position
+      (not yet implemented)
+      
+    Missing:
+    - Accessing the robot's sensors (sonar, infrared, bumper) is not 
+      yet implemented.
+    
+    Examples:
+    - \ref example_base_client
+    - \ref example_joystick_navigation_client
+
+    Notes:
+    - There are instructions to build two servers in the Makefile:
+      - <tt>smartNomad200BaseServer-client</tt> connects to the Nomadic <tt>Nserver</tt>
+        simulation.
+      - <tt>smartNomad200BaseServer-direct</tt> directly connects to a Nomad robot.
+    - Therefore, you can use this server even if you don't have any robot by using
+      Nomadics simulation environment. You can download this software from
+      <a href="http://nomadic.sourceforge.net/production/host/">nomadic.sourceforge.net</a>.
+
+  \subsection laser_server Laser Server
+
+    Path: <tt>$SMART_ROOT/src/components/smartLaserServer/</tt>
+
+    Purpose:
+    - providing scans from laser scanners
+    - configuration of the laser scanner on start up
+
+    Provided Services:
+    - PushNewest<Smart::CommMobileLaserScan>
+      pushes current laser scans to subscribed clients
+    - Query<Smart::CommVoid,Smart::CommMobileLaserScan>
+      sends the current laser scan to clients on request only
+
+    Examples:
+    - \ref example_laser_client
+
+  \subsection laser_tracking_server Laser Tracking Server
+
+    Path: <tt>$SMART_ROOT/src/components/smartLaserTrackingServer/</tt>
+
+    Purpose:
+    - receive scans from a laser scanner,
+    - extract objects from the scan point sequence, and
+    - find matchings between objects from successive laser scans.
+    
+    Provided Services:
+    - PushNewest<Smart::CommLaserTrackingData>
+    
+    Imported Services:
+    - PushNewest<Smart::CommMobileLaserScan>
+    
+    Examples:
+    - \ref example_laser_tracking_client
+
+  \subsection joystick_server Joystick Server
+
+    Path: <tt>$SMART_ROOT/src/components/smartJoystickServer/</tt>
+
+    Purpose:
+    - connect to a PC gameport joystick, and 
+    - provide information about the joystick configuration to other components.
+    
+    Provided Services:
+    - PushNewest<Smart::CommJoystick>
+    
+    Examples:
+    - \ref example_joystick_navigation_client
+
+*/

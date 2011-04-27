@@ -1,0 +1,83 @@
+/*!
+\page page_developer_readme Developer README
+
+This page contains information on how we use CVS in developing OROCOS::SmartSoft.
+
+NOTE: this information does not reflect the current state, but the intented state
+after moving to SourceForge.
+
+\section sec_developer_new_package Creating a New Source Code Package
+
+(1) Choose the category: \c "smartSoftKernel", \c "interfaceClasses", \c "utility", or \c "components"
+
+(2) Create a subdirectory \c "yourPackage" below the category directory
+
+(3) Write your code.
+
+(4) Write your Makefile. You will have to provide at least the following targets 
+    (which may be empty):
+    - \c "export" to export header files, if needed
+    - \c "Makefile.depend" to (re)create your dependency file, if needed
+    - \c "build-libs" to build libraries you will provide for other and your own packages
+    - \c "build-components" to build your components, possibly using libraries created during
+      the preceeding step 
+
+(5) Create the flag file \c "SMARTSOFT_PACKAGE" in your package directory. This signals
+    the toplevel makefile to include your package during building. The contents of the file
+    is ignored. For example you could use that file to store shopping lists, credit 
+    card numbers, or your personal poetry.
+    
+(6) Append names of files containing doxygen documentation to a file called \c DOC_FILE_LIST.
+    Listed files will be used to generate documentation for your package. You may want to
+    include header files, source files, or documentation-only files.
+
+(7) If everything works fine, check-in your package to cvs:
+    - \c cd to your package root
+    - use "cvs -d /your/cvsroot import -m <your comment> <smartsoft-src>/<category>/yourPackage <vendor(=your name)> <release(=init)>"
+      to import your directory.
+    - Move your package directory away ("cd ..; mv yourPackage yourPackage.old;"), update ("cvs update -d"),
+      and see if everything still works fine ("cd ..; make").
+
+(8) Add your package to the respective SmartSoft distribution module definition (see below).
+
+\section sec_developer_misc More Stuff Missing Here
+
+Descriptions on how to
+
+- check out a working copy
+- commit changes
+- create new source packages 
+
+should appear here.
+
+\section sec_developer_cvs_modules CVS Modules and Repository Structure
+
+Different distributions are defined by means of defining different modules in the CVS modules
+file.
+Each distribution contains the generic SmartSoft root directory structure,
+and several source code packages are added depending on the purpose of the distribution.
+
+At the moment, there are four distributions defined: 
+- The \c minimal distribution contains only the SmartSoft Kernel package.
+- The \c lgpl distribution contains only packages which are available under the GNU Lesser General Public License.
+- The \c gpl distribution contains only packages which are available under the GNU General Public License (which are, in fact, all packages)
+- The \c complete distribution contains all packages.
+
+For the first three distributions (\c minimal, \c lgpl, \c gpl), a cvs update within a 
+directory of the working copy won't retrieve new packages. 
+For the \c complete distribution, a cvs update within a directory of the working copy will 
+retrieve packages newly added to the repository.
+
+In order to facilitate the maintenance of several distributions of SmartSoft,
+we split the source tree into two parts which reside
+in two separate directories below $CVSROOT:
+- Directory \c smartsoft-root contains the generic root part of SmartSoft, 
+  including documentation and Makefiles.
+- Directory \c smartsoft-src contains the source code packages. 
+  There is an intermediate directory layer which structures the source code packages into
+  four different categories (\c smartSoftKernel, \c interfaceClasses, \c utility, and \c components).
+
+See the \ref page_developer_cvs_modules_file for more details.
+
+*/
+
