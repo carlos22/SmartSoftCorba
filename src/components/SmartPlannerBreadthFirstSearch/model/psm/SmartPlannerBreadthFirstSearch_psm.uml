@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_1WrscGarEeCO2uZHSTM3Pg" name="SmartPlannerBreadthFirstSearch_psm">
+    <packagedElement xmi:type="uml:Component" xmi:id="_1WrscWarEeCO2uZHSTM3Pg" name="SmartPlannerBreadthFirstSearch">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_1WrscmarEeCO2uZHSTM3Pg" name="paramServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_1Wrsc2arEeCO2uZHSTM3Pg" name="stateServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_1WrsdGarEeCO2uZHSTM3Pg" name="curMapClient"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_1WrsdWarEeCO2uZHSTM3Pg" name="plannerGoalServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_1WrsdmarEeCO2uZHSTM3Pg" name="baseClient"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_1Wrsd2arEeCO2uZHSTM3Pg" name="plannerEventServer"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_1WrseGarEeCO2uZHSTM3Pg" name="PlannerTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_1WrseWarEeCO2uZHSTM3Pg" name="ParameterHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_1WrsemarEeCO2uZHSTM3Pg" name="StateChangeHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_1Wrse2arEeCO2uZHSTM3Pg" name="PlannerTestHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_1WrsfGarEeCO2uZHSTM3Pg" name="PlannerGoalLock"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_1WrsfWarEeCO2uZHSTM3Pg" name="PlannerTriggerLock"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_1WrsfmarEeCO2uZHSTM3Pg" name="PlannerGlobalLock"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_1Wrsf2arEeCO2uZHSTM3Pg" name="PlannerTrigger"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_1WrsgGarEeCO2uZHSTM3Pg" name="Settings">
+        <ownedAttribute xmi:id="_1WrsgWarEeCO2uZHSTM3Pg" name="no_path_event_timeout">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_1WrsgmarEeCO2uZHSTM3Pg" value="5.0"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_1Wrsg2arEeCO2uZHSTM3Pg" name="pathplanning"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_1WrshGarEeCO2uZHSTM3Pg" name="pathplanning"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_1WrshWarEeCO2uZHSTM3Pg" name="PlannerTriggerTimer"/>
+    </packagedElement>
+    <profileApplication xmi:id="_1WrshmarEeCO2uZHSTM3Pg">
+      <eAnnotations xmi:id="_1Wrsh2arEeCO2uZHSTM3Pg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:SmartCorbaComponent xmi:id="_1WrsiGarEeCO2uZHSTM3Pg" base_Component="_1WrscWarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="_1WrsiWarEeCO2uZHSTM3Pg" serviceName="param" base_Port="_1WrscmarEeCO2uZHSTM3Pg" smartSendHandler="_1WrseWarEeCO2uZHSTM3Pg">
+    <commObject href="platform:/resource/CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_kBWCYEmNEeC-KYWPZCFBzA"/>
+  </CorbaSmartSoft:SmartCorbaSendServer>
+  <CorbaSmartSoft:SmartCorbaStateServer xmi:id="_1WrsimarEeCO2uZHSTM3Pg" serviceName="state" base_Port="_1Wrsc2arEeCO2uZHSTM3Pg" smartCorbaStateChangeHandler="_1WrsemarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaPushNewestClient xmi:id="_1Wrsi2arEeCO2uZHSTM3Pg" serviceName="currentGridMap" base_Port="_1WrsdGarEeCO2uZHSTM3Pg" serverName="SmartMapperGridMap">
+    <commObject href="platform:/resource/CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_-s4UEEmREeC-KYWPZCFBzA"/>
+  </CorbaSmartSoft:SmartCorbaPushNewestClient>
+  <CorbaSmartSoft:SmartCorbaPushNewestServer xmi:id="_1WrsjGarEeCO2uZHSTM3Pg" serviceName="goal" base_Port="_1WrsdWarEeCO2uZHSTM3Pg">
+    <commObject href="platform:/resource/CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_SnAnkEmPEeC-KYWPZCFBzA"/>
+  </CorbaSmartSoft:SmartCorbaPushNewestServer>
+  <CorbaSmartSoft:SmartCorbaPushTimedClient xmi:id="_1WrsjWarEeCO2uZHSTM3Pg" serviceName="basestate" base_Port="_1WrsdmarEeCO2uZHSTM3Pg" serverName="SmartPioneerBaseServer" interval="1">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
+  </CorbaSmartSoft:SmartCorbaPushTimedClient>
+  <CorbaSmartSoft:SmartCorbaEventServer xmi:id="_1WrsjmarEeCO2uZHSTM3Pg" serviceName="plannerEvent" base_Port="_1Wrsd2arEeCO2uZHSTM3Pg" smartEventTestHandler="_1Wrse2arEeCO2uZHSTM3Pg">
+    <eventParameter href="platform:/resource/CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_SdQrIEmOEeC-KYWPZCFBzA"/>
+    <eventResult href="platform:/resource/CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_g9eMQEmOEeC-KYWPZCFBzA"/>
+    <eventState href="platform:/resource/CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_HJhPwEm_EeC7G99uJVy_1A"/>
+  </CorbaSmartSoft:SmartCorbaEventServer>
+  <CorbaSmartSoft:SmartCorbaTask xmi:id="_1Wrsj2arEeCO2uZHSTM3Pg" period="0" base_Class="_1WrseGarEeCO2uZHSTM3Pg" wcet="0"/>
+  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="_1WrskGarEeCO2uZHSTM3Pg" base_Class="_1WrseWarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaStateChangeHandler xmi:id="_1WrskWarEeCO2uZHSTM3Pg" base_Class="_1WrsemarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaEventTestHandler xmi:id="_1WrskmarEeCO2uZHSTM3Pg" base_Class="_1Wrse2arEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaMutex xmi:id="_1Wrsk2arEeCO2uZHSTM3Pg" base_Class="_1WrsfGarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaMutex xmi:id="_1WrslGarEeCO2uZHSTM3Pg" base_Class="_1WrsfWarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaMutex xmi:id="_1WrslWarEeCO2uZHSTM3Pg" base_Class="_1WrsfmarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaConditionMutex xmi:id="_1WrslmarEeCO2uZHSTM3Pg" base_Class="_1Wrsf2arEeCO2uZHSTM3Pg" mutex="_1WrsfWarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_1Wrsl2arEeCO2uZHSTM3Pg" base_Class="_1WrsgGarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaMainState xmi:id="_1WrsmGarEeCO2uZHSTM3Pg" base_Class="_1Wrsg2arEeCO2uZHSTM3Pg" smartCorbaSubState="_1WrshGarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaSubState xmi:id="_1WrsmWarEeCO2uZHSTM3Pg" base_Class="_1WrshGarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaTimer xmi:id="_1WrsmmarEeCO2uZHSTM3Pg" base_Class="_1WrshWarEeCO2uZHSTM3Pg" cycle="0.25"/>
+</xmi:XMI>
