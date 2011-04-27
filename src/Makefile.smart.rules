@@ -1,0 +1,130 @@
+# --------------------------------------------------------------------------
+#
+#  Copyright (C) 2002/2004 Christian Schlegel
+#
+#        schlegel@fh-ulm.de
+#
+#        Prof. Dr. Christian Schlegel
+#        University of Applied Sciences
+#        Prittwitzstr. 10
+#        D-89075 Ulm
+#        Germany
+#
+#        Previous affiliation:
+#
+#        FAW Ulm
+#        Research Institute for Applied Knowledge Processing
+#        Helmholtzstr. 16
+#        D-89081 Ulm
+#        Germany
+#
+#  This file is part of the "SmartSoft Communication Library".
+#  It provides standardized patterns for communication between
+#  different components.
+#
+#  This library is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU Lesser General Public
+#  License as published by the Free Software Foundation; either
+#  version 2.1 of the License, or (at your option) any later version.
+#
+#  This library is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with this library; if not, write to the Free Software
+#  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+#
+#  (partly based on joint work with Robert Wörz)
+#
+# --------------------------------------------------------------------------
+
+##
+## Standard rules
+##
+
+.SUFFIXES: .c .cc .o .S .s .l .y
+
+
+$(OBJ_DIR)/%.o %.o: %.c
+	$(ECHO) "    ---- Compiling $< (C)"
+	$(SILENT) $(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
+
+$(OBJ_DIR)/%.o %.o: %.cpp
+	$(ECHO) "    ---- Compiling $< (CPP)"
+	$(SILENT) $(CXX) $(CFLAGS) $(INCLUDES) -c -o $@ $<
+
+$(OBJ_DIR)/%.o %.o: %.cc
+	$(ECHO) "    ---- Compiling $< (C++)"
+	$(SILENT) $(CXX) $(CFLAGS) $(INCLUDES) -c -o $@ $<
+
+$(OBJ_DIR)/%.s %.s: %.c
+	$(ECHO) "    ---- Creating assembly file for $< (C)"
+	$(SILENT) $(CPP) $(CFLAGS) $(INCLUDES) -S $<
+
+$(OBJ_DIR)/%.s: %.cc
+	$(ECHO) "    ---- Creating assembly file for $< (C++)"
+	$(SILENT) $(CPP) $(CFLAGS) $(INCLUDES) -S $<
+
+$(OBJ_DIR)/%.c %.c: %.l
+	$(ECHO) "    ---- Creating C file for $< (LEX)"
+	$(SILENT) $(LEX) $<
+	$(SILENT) mv -f lex.yy.c $*.c
+
+$(OBJ_DIR)/%.C %.C: %.l
+	$(ECHO) "    ---- Creating C++ file for $< (LEX)"
+	$(SILENT) $(LEX) -+ $<
+	$(SILENT) mv -f lex.yy.cc $*.cc
+	$(SILENT) mv -f FlexLexer.h $*.h
+
+$(OBJ_DIR)/%.cc %.cc: %.l
+	$(ECHO) "    ---- Creating C++ file for $< (LEX)"
+	$(SILENT) $(LEX) -+ $<
+	$(SILENT) mv -f lex.yy.c $*.cc
+	$(SILENT) mv -f FlexLexer.h $*.h
+
+$(OBJ_DIR)/%.tab.c %.tab.c: %.y
+	$(ECHO) "    ----- Creating C file for $< (YACC)"
+	$(SILENT) $(YACC) -b $* $<
+
+$(OBJ_DIR)/%.tab.C %.tab.C: %.y
+	$(ECHO) "    ----- Creating C++ file for $< (YACC)"
+	$(SILENT) $(YACC) -b $* $<
+	$(SILENT) mv -f $*.tab.c $*.tab.cc
+
+$(OBJ_DIR)/%.tab.cc %.tab.cc: %.y
+	$(ECHO) "    ---- Creating C++ file for $< (YACC)"
+	$(SILENT) $(YACC) -b $* $<
+	$(SILENT) mv -f $*.tab.c $*.tab.cc
+
+##
+## Need come CVS and version rules
+##
+
+#cvs_ci:
+
+#cvs_co:
+
+#cvs_makever:
+
+#compile-date.h:
+
+
+##
+## Dependencies
+##
+
+dep $(DEPEND) depend:
+ifeq ($(DEPENDENCIES),)
+else
+	$(ECHO) "    ---- Analysing dependencies for $(DEPENDENCIES)"
+	$(SILENT) $(CPP) -M $(CFLAGS) $(INCLUDES) $(DEPENDENCIES)  | \
+	$(AWK) '{if (index($$0,".o:") > 0) printf "$(OBJ_DIR)/"; print $0}' \
+	> $(DEPEND)
+endif
+
+ifeq ($(DEPEND), $(wildcard $(DEPEND)))
+include $(DEPEND)
+endif

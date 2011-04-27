@@ -1,0 +1,82 @@
+// --------------------------------------------------------------------------
+//
+//  Copyright (C) 2002/2004 Christian Schlegel
+//
+//        schlegel@hs-ulm.de
+//
+//        Prof. Dr. Christian Schlegel
+//        University of Applied Sciences
+//        Prittwitzstr. 10
+//        D-89075 Ulm
+//        Germany
+//
+//  This file is part of the "SmartSoft Communication Library".
+//  It provides standardized patterns for communication between
+//  different components.
+//
+//  This library is free software; you can redistribute it and/or
+//  modify it under the terms of the GNU Lesser General Public
+//  License as published by the Free Software Foundation; either
+//  version 2.1 of the License, or (at your option) any later version.
+//
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//  Lesser General Public License for more details.
+//
+//  You should have received a copy of the GNU Lesser General Public
+//  License along with this library; if not, write to the Free Software
+//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+//
+//  (partly based on joint work with Robert Wörz)
+//
+// --------------------------------------------------------------------------
+
+// - those interface are used internally in the communication
+//   patterns and are not visible to the user
+// - each communication pattern like query / send etc. has such
+//   an individual interface describing the interaction between
+//   the client and the server part of the pattern at the system
+//   level
+// - Extending a pattern might result in additional methods at
+//   this system level
+// - Implementing the communication patterns on top of a message
+//   based system would require to replace the methods by messages
+//   and provide appropriate message dispatching mechanisms. In
+//   CORBA this is already available and not visible to the
+//   developer.
+
+interface SmartSendClientPattern
+{
+  void serverInitiatedDisconnect();
+  // clients are requested to disconnect themselves from the server
+  // in case the server gets destroyed while there are still connected
+  // clients
+};
+
+interface SmartSendServerPattern
+{
+  oneway void command(in any user);
+  // user   : user data type from the request communication object
+  //
+  // "oneway" is needed to finish the send command before the
+  // server handler finishes executing the request.
+  // Also works without "oneway" due to the carefully implemented
+  // locking mechanisms.
+
+  long connect(in SmartSendClientPattern client);
+  // add client to list of clients at server
+  //
+  // client : reference to the client object
+  //
+  // status : indicates whether connect has been accepted
+  //    SMART_OK                 : everything ok
+  //    SMART_SERVICEUNAVAILABLE : server in destruction and therefore didn't accept new connect
+
+  void disconnect(in SmartSendClientPattern client);
+  // remove client from list of clients
+  //
+  // client : reference to the client object
+};
+

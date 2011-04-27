@@ -1,0 +1,105 @@
+// --------------------------------------------------------------------------
+//
+//  Copyright (C) 2002/2004/2010 Christian Schlegel
+//
+//        schlegel@hs-ulm.de
+//
+//        Prof. Dr. Christian Schlegel
+//        University of Applied Sciences
+//        Prittwitzstr. 10
+//        D-89075 Ulm
+//        Germany
+//
+//  This file is part of the "SmartSoft Communication Library".
+//  It provides standardized patterns for communication between
+//  different components.
+//
+//  This library is free software; you can redistribute it and/or
+//  modify it under the terms of the GNU Lesser General Public
+//  License as published by the Free Software Foundation; either
+//  version 2.1 of the License, or (at your option) any later version.
+//
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//  Lesser General Public License for more details.
+//
+//  You should have received a copy of the GNU Lesser General Public
+//  License along with this library; if not, write to the Free Software
+//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+//
+//  (partly based on joint work with Robert Wörz)
+//
+// --------------------------------------------------------------------------
+
+#include <cassert>
+
+template<class T> typename T::_ptr_type CHS::resolve_init(CORBA::ORB_ptr orb, const char * id)
+{
+  CORBA::Object_var obj;
+  try {
+    obj = orb->resolve_initial_references (id);
+  }
+  catch (const CORBA::ORB::InvalidName & e) {
+    throw;
+  }
+  catch (const CORBA::Exception & e) {
+    std::cerr << "CommPattern: ERROR: Cannot get initial reference for " << id << ": ";
+    CHS::operator<<(std::cout, e) << std::endl;
+    throw;
+  }
+  assert (!CORBA::is_nil (obj.in ()));
+
+  typename T::_var_type ref;
+  try {
+    ref = T::_narrow (obj.in ());
+  }
+  catch (const CORBA::Exception & e) {
+    std::cerr << "CommPattern: ERROR: Narrow reference for " << id << ": ";
+    CHS::operator<<(std::cerr, e) << std::endl;
+    throw;
+  }
+  if (CORBA::is_nil (ref.in ())) {
+    std::cerr << "CommPattern: ERROR: Incorrect type of reference for " << id << std::endl;
+    throw 0;
+  }
+  return ref._retn ();
+}
+
+
+template<class T> typename T::_ptr_type CHS::resolve_name(CosNaming::NamingContext_ptr nc, const CosNaming::Name & name)
+{
+  CORBA::Object_var obj;
+  try {
+    obj = nc->resolve(name);
+  }
+  catch (const CosNaming::NamingContext::NotFound & e) {
+    throw;
+  }
+  catch (const CORBA::Exception & e) {
+    std::cerr << "CommPattern: ERROR: Cannot resolve binding: ";
+    CHS::operator<<(std::cerr, e) << std::endl;
+    throw;
+  }
+  if (CORBA::is_nil(obj.in())) {
+    std::cerr << "CommPattern: ERROR: Nil binding in Naming Service" << std::endl;
+    throw 0;
+  }
+
+  typename T::_var_type ref;
+  try {
+    ref = T::_narrow(obj.in());
+  }
+  catch (const CORBA::Exception & e) {
+    std::cerr << "CommPattern: ERROR: Cannot narrow reference: ";
+    CHS::operator<<(std::cerr, e) << std::endl;
+    throw;
+  }
+  if (CORBA::is_nil(ref.in())) {
+    std::cerr << "CommPattern: ERROR: Reference has incorrect type" << std::endl;
+    throw 0;
+  }
+  return ref._retn();
+}
+

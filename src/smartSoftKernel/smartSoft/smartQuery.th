@@ -1,0 +1,1256 @@
+// --------------------------------------------------------------------------
+//
+//  Copyright (C) 2002/2004 Christian Schlegel
+//
+//        schlegel@hs-ulm.de
+//
+//        Prof. Dr. Christian Schlegel
+//        University of Applied Sciences
+//        Prittwitzstr. 10
+//        D-89075 Ulm
+//        Germany
+//
+//  This file is part of the "SmartSoft Communication Library".
+//  It provides standardized patterns for communication between
+//  different components.
+//
+//  This library is free software; you can redistribute it and/or
+//  modify it under the terms of the GNU Lesser General Public
+//  License as published by the Free Software Foundation; either
+//  version 2.1 of the License, or (at your option) any later version.
+//
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//  Lesser General Public License for more details.
+//
+//  You should have received a copy of the GNU Lesser General Public
+//  License along with this library; if not, write to the Free Software
+//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+//
+//  (partly based on joint work with Robert Wörz)
+//
+// --------------------------------------------------------------------------
+
+/////////////////////////////////////////////////////////////////////////
+//
+// client part of query template
+//
+/////////////////////////////////////////////////////////////////////////
+
+//
+// static handle method called by CORBA object
+//
+template<class R, class A> void CHS::QueryClient<R,A>::hndAnsw(void* ptr,const CORBA::Any& user,const CORBA::Long cltId)
+{
+  QueryClient<R,A> *lthis = (QueryClient<R,A> *)ptr;
+  QueryClientList  *lptr = 0;
+
+  //
+  // hint: mutexConnection need not be acquired here since client can not get
+  //       disconnected or destroyed while this handler is being executed. The
+  //       server posseses the mutexClientList all the time this handler is being 
+  //       executed. Since this mutex is also needed to finish a disconnect, this
+  //       handler is first finished for sure before a disconnect is executed.
+  //
+  //       Acquiring mutexConnection in handlers can even result in deadlocks.
+  //       Calling queryRequest holds the mutexConnection and a concurrent call
+  //       to the answer member function at the server holds the counterpart 
+  //       mutexClientList. Neither call can be finished if the handlers now
+  //       also try to get the mutexConnection or the mutexClientList.
+  //
+  lthis->mutexQueryList.acquire();
+
+  for( lptr = lthis->queries; lptr != 0; lptr = lptr->next )
+    if( lptr->id == cltId )
+      break;
+
+  if( lptr != 0 ) {
+    if (lptr->querystatus == QUERY_PENDING) {
+      //
+      // everything is ok, answer is expected
+      //
+      lptr->a.set(user);
+      lptr->querystatus = QUERY_VALIDANSWER;
+      lptr->cond.signal();
+    } else if (lptr->querystatus == QUERY_DISCONNECTED) {
+      //
+      // the client is not interested anymore in this answer since answer
+      // has been received after a disconnect and this pending query is
+      // marked as being obsolete. The query id is however still available
+      // since the user has not yet asked for the result. As soon as the
+      // user tries to fetch the result he gets a SMART_DISCONNECTED and
+      // this entry is removed from the list of pending queries.
+      // Discard answer.
+      //
+    } else if (lptr->querystatus == QUERY_VALIDANSWER) {
+      //
+      // should not happen since this would mean that we have two
+      // answers for one query, therefore discard received answer
+      //
+    } else {
+      //
+      // something is completely wrong with the status of the pending query
+      // do nothing and discard received answer
+      //
+    }
+  } else {
+    //
+    // do nothing since answer has been received after query has been discarded
+    // by the user and therefore corresponding entry does not exist any longer. 
+    // Doesn't matter since in this case no thread is waiting for the answer since
+    // removing an entry from the list of pending queries is ony possible without
+    // having an active blocking wait.
+    //
+  }
+
+  lthis->mutexQueryList.release();
+}
+
+
+//
+// static handle method called by CORBA object
+//
+template<class R, class A> void CHS::QueryClient<R,A>::hndServDisc(void* ptr)
+{
+  QueryClient<R,A> *lthis = (QueryClient<R,A> *)ptr;
+
+  lthis->disconnect();
+}
+
+
+//
+// static internal interface methods used by wiring service
+//
+template<class R, class A> CHS::StatusCode CHS::QueryClient<R,A>::internalConnect(void *ptr,const std::string & srv, const std::string & svc)
+{
+  QueryClient<R,A>* lthis = (QueryClient<R,A> *)ptr;
+
+  return lthis->connect(srv,svc);
+}
+
+template<class R, class A> CHS::StatusCode CHS::QueryClient<R,A>::internalDisconnect(void *ptr)
+{
+  QueryClient<R,A>* lthis = (QueryClient<R,A> *)ptr;
+
+  return lthis->disconnect();
+}
+
+//
+// default constructor
+//
+template<class R, class A> inline CHS::QueryClient<R,A>::QueryClient(void) throw(CHS::SmartError)
+{
+  std::cerr << "CommPattern (queryClient): ERROR: Entered default constructor QueryClient" << std::endl;
+
+  throw(CHS::SmartError(CHS::SMART_ERROR,"CommPattern (queryClient): ERROR: Entered default constructor QueryClient"));
+}
+
+//
+// standard constructor port
+//
+template<class R, class A> inline CHS::QueryClient<R,A>::QueryClient(SmartComponent* m,const std::string& port, CHS::WiringSlave* slave) throw(CHS::SmartError)
+{
+  CHS::StatusCode status;
+
+  // set the configuration flags appropriately
+  statusConnected    = 0;
+  statusManagedPort  = 0;
+  portname           = port;
+  statusUserBlocking = true;
+  queryCnt           = 0;
+  queries            = 0;
+  component          = m;
+  wiringslave        = slave;
+
+  // Create the CORBA client object
+  corbaClient = new QueryClient_impl((void *)this,&QueryClient<R,A>::hndAnsw,&QueryClient<R,A>::hndServDisc);
+
+  // activate object to obtain the object reference, need not be registered at name service
+  // since object reference is sent to server with every request
+  h  = corbaClient->_this();
+
+  status = this->add(slave, port);
+
+  if (status == CHS::SMART_PORTALREADYUSED) {
+    //
+    // port name already in use therefore throw exception
+    //
+    throw(CHS::SmartError(CHS::SMART_PORTALREADYUSED,"CommPattern (queryClient): ERROR: port name already in use"));
+  } else if (status != CHS::SMART_OK) {
+    //
+    // throw exception since something went wrong
+    //
+    throw(CHS::SmartError(CHS::SMART_ERROR,"CommPattern (queryClient): ERROR: something went wrong"));
+  }
+}
+
+//
+// standard constructor
+//
+template<class R, class A> inline CHS::QueryClient<R,A>::QueryClient(SmartComponent* m) throw(CHS::SmartError)
+{
+  // set the configuration flags approriately
+  statusConnected    = 0;
+  statusManagedPort  = 0;
+  portname           = "";
+  statusUserBlocking = true;
+  queryCnt           = 0;
+  queries            = 0;
+  component          = m;
+  wiringslave        = 0;
+
+  // Create the CORBA client object
+  corbaClient = new QueryClient_impl((void *)this,&QueryClient<R,A>::hndAnsw,&QueryClient<R,A>::hndServDisc);
+
+  // activate object to obtain the object reference, need not be registered at name service
+  // since object reference is sent to server with every request
+  h  = corbaClient->_this();
+}
+
+//
+// standard constructor already wired
+//
+template<class R,class A> inline CHS::QueryClient<R,A>::QueryClient(SmartComponent* m,const std::string& srv,const std::string& svc) throw(CHS::SmartError)
+{
+  CHS::StatusCode status;
+  int flag;
+
+  // set the configuration flags appropriately
+  statusConnected    = 0;
+  statusManagedPort  = 0;
+  portname           = "";
+  statusUserBlocking = true;
+  queryCnt           = 0;
+  queries            = 0;
+  component          = m;
+  wiringslave        = 0;
+
+  // Create the CORBA client object
+  corbaClient = new QueryClient_impl((void *)this,&QueryClient<R,A>::hndAnsw,&QueryClient<R,A>::hndServDisc);
+
+  // activate object to obtain the object reference, need not be registered at name service
+  // since object reference is sent to server with every request
+  h  = corbaClient->_this();
+
+  // Now connect to the server side of the query pattern
+  std::cout << "Try to connect to (" << srv << ":query<" << R::identifier() << "," << A::identifier() << ">:" << svc << ") ..." << std::endl;
+
+  do {
+    status = this->connect(srv,svc);
+
+    if (status == CHS::SMART_OK) {
+      flag = 1;
+      std::cout << "... connected to (" << srv << ":query<" << R::identifier() << "," << A::identifier() << ">:" << svc << ")" << std::endl;
+    } else if (status == CHS::SMART_SERVICEUNAVAILABLE) {
+      std::cout << "CommPattern (queryClient): INFO: not yet found in naming service ..." << std::endl;
+      sleep(1);
+      flag = 0;
+    } else if (status == CHS::SMART_INCOMPATIBLESERVICE) {
+      std::cout << "CommPattern (queryClient): ERROR: incompatible service ..." << std::endl;
+      flag = 1;
+      throw(CHS::SmartError(status,"CommPattern (queryClient): ERROR: incompatible service"));
+    } else {
+      std::cout << "CommPattern (queryClient): ERROR: something went wrong ..." << std::endl;
+      flag = 1;
+      throw(CHS::SmartError(status,"CommPattern (queryClient): ERROR: something went wrong"));
+    };
+  } while (flag == 0);
+}
+
+//
+// destructor
+//
+template<class R, class A> inline CHS::QueryClient<R,A>::~QueryClient(void) throw()
+{
+  QueryClientList *lptr = 0;
+
+  //
+  // remove port from managed set of ports and disconnect from server even if not
+  // exposed as port or connected to a server since this is handled correctly inside
+  // remove() and disconnect()
+  //
+  this->remove();
+  this->disconnect();
+
+  // free memory
+  mutexQueryList.acquire();
+  while ( queries != 0 ) {
+    lptr = queries;
+    queries = queries->next;
+    delete lptr;
+  }
+  mutexQueryList.release();
+
+  // client does not bind object at naming service,
+  // therefore no unbind of objects needed here
+
+
+  // ### delete/deactivate the corbaServant object (Christian Schlegel)
+}
+
+//
+//
+//
+template<class R,class A> CHS::StatusCode CHS::QueryClient<R,A>::add(CHS::WiringSlave* slave, const std::string& port) throw()
+{
+  CHS::StatusCode status;
+
+  mutexConnection.acquire();
+
+  // first remove eventually valid registration
+  this->remove();
+
+  // now add client
+  portname          = port;
+  statusManagedPort = 1;
+
+  wiringslave = slave;
+  status      = this->wiringslave->add(port, (void*)this, &QueryClient<R,A>::internalConnect, &QueryClient<R,A>::internalDisconnect);
+
+  mutexConnection.release();
+
+  return status;
+}
+
+//
+//
+//
+template<class R,class A> CHS::StatusCode CHS::QueryClient<R,A>::remove() throw()
+{
+  CHS::StatusCode status;
+
+  mutexConnection.acquire();
+
+  if (statusManagedPort == 1) {
+    status = this->wiringslave->remove(portname);
+
+    portname          = "";
+    statusManagedPort = 0;
+
+  } else {
+    status = CHS::SMART_OK;
+  }
+
+  mutexConnection.release();
+
+  return status;
+}
+
+//
+//
+//
+template<class R,class A> CHS::StatusCode CHS::QueryClient<R,A>::connect(const std::string& srv, const std::string& svc) throw()
+{
+  CHS::StatusCode result;
+
+  result = CHS::SMART_ERROR;
+
+  mutexConnection.acquire();
+
+  // first disconnect eventually valid connection
+  this->disconnect();
+
+  try {
+    CosNaming::Name name;
+    name.length(6);
+    name[0].id = CORBA::string_dup("orocos");
+    name[1].id = CORBA::string_dup(srv.c_str());
+    name[2].id = CORBA::string_dup("query");
+    name[3].id = CORBA::string_dup(svc.c_str());
+    name[4].id = CORBA::string_dup(R::identifier().c_str());
+    name[5].id = CORBA::string_dup(A::identifier().c_str());
+
+    try {
+      corbaServant = resolve_name<SmartQueryServerPattern>(component->namingService.in(), name);
+      result = CHS::SMART_OK;
+    } catch (const CosNaming::NamingContext::NotFound &) {
+      // not found in naming service
+      result = CHS::SMART_SERVICEUNAVAILABLE;
+    }
+  } catch (const CORBA::Exception & e) {
+    result = CHS::SMART_ERROR;
+  }
+
+  if (result == CHS::SMART_OK) {
+    // now call server to introduce this client and to check whether the server really is
+    // available or whether it is in the process of destruction
+    try {
+      result = static_cast<CHS::StatusCode>(corbaServant->connect(h));
+    } catch (CORBA::SystemException &e) {
+      //
+      // it might be that the server is currently being destroyed and therefore any
+      // CORBA exception is interpreted as a not available service
+      //
+      result = CHS::SMART_ERROR_COMMUNICATION;
+    }
+
+    if (result == CHS::SMART_OK) {
+      // successfully connected to the server
+      statusConnected = 1;
+    }
+  }
+
+  mutexConnection.release();
+
+  return result;
+}
+
+//
+//
+//
+template<class R,class A> CHS::StatusCode CHS::QueryClient<R,A>::disconnect() throw()
+{
+  // disconnecting a query requires to consider several cases since a
+  // query client can get disconnected while the server calculates the
+  // query answer.
+  //
+  // server: queryRequest / disconnect / client destroyed / server sends answer 
+  //    - server must not call a non-existent client corba object
+  //    - would result in error at server side
+  //    => therefore mark pending queries at server side as QUERY_DISCONNECTED
+  //    => discard any answer of pending queries at the server side which are
+  //       marked as QUERY_DISCONNECTED and return SMART_DISCONNECTED as 
+  //       status code
+  // client: queryRequest / disconnect / answer received / queryReceive
+  //    - answer not yet received before disconnect
+  //    - status of query / queryReceive / queryReceiveWait: SMART_DISCONNECTED
+  // client: queryRequest / answer received / disconnect / queryReceive
+  //    - answer already received but not yet picked up
+  //    - return correct answer with status SMART_OK
+  //
+  // Performing disconnect
+  //   - go through the list of pending queries
+  //     - QUERY_PENDING
+  //       - mark it as QUERY_DISCONNECTED
+  //       - trigger CV
+  //     - QUERY_DISCONNECTED
+  //       - do nothing since already disconnected
+  //     - QUERY_VALIDANSWER
+  //       - do nothing since valid answer available but not yet
+  //         picked up. 
+  //   - now call the server and mark there any not yet answered request
+  //     from this client as QUERY_DISCONNECTED to indicate that an
+  //     calculated answer is not needed anymore.
+  //
+  // Changing valid flag in handler method for receiving answer
+  //   - QUERY_PENDING
+  //     - everything ok and answer is expected
+  //     - therefore change flag to QUERY_VALIDANSWER and signal CV
+  //   - QUERY_DISCONNECTED
+  //     - pending query marked as being obsolete
+  //     - client not interested anymore in this answer
+  //     - user however has not yet asked for the result
+  //     - discard received answer
+  //   - QUERY_VALIDANSWER
+  //     - should not happen since this would mean that we have two
+  //       answers for one query ! Discard received answer.
+  // 
+  // Evaluation of the "valid" flag inside the user blocking methods
+  //   - QUERY_PENDING
+  //     - can never be seen here since we either block on the CV or
+  //       CV has been triggered and then flag is QUERY_DISCONNECTED
+  //       or QUERY_VALIDANSWER
+  //   - QUERY_DISCONNECTED
+  //     - the pending query has been removed due to a disconnect and
+  //       no valid answer is available, return SMART_DISCONNECTED
+  //   - QUERY_VALIDANSWER
+  //     - valid answer available, return it with status SMART_OK
+
+  QueryClientList *lptr = 0;
+  CHS::StatusCode result;
+
+  //
+  // 
+  //
+  mutexConnection.acquire();
+
+  if (statusConnected == 0) {
+    result = CHS::SMART_OK;
+  } else {
+
+    statusConnected = 0;
+    //
+    // from now on, no new queries can be initiated from this
+    // client since we hold the mutexConnection and it is released
+    // only after the status is already set to disconnected.
+    //
+
+    //
+    // first mark pending queries to be disconnected ...
+    //
+    mutexQueryList.acquire();
+
+    for( lptr = queries; lptr != 0; lptr = lptr->next ) {
+      if( lptr->querystatus == QUERY_PENDING ) {
+        lptr->querystatus = QUERY_DISCONNECTED;
+        lptr->disconnect  = 1;
+      } else if (lptr->querystatus == QUERY_VALIDANSWER) {
+        // do nothing since answer already available
+        lptr->disconnect  = 0;
+      } else if (lptr->querystatus == QUERY_DISCONNECTED) {
+        // do nothing since already disconnected
+        lptr->disconnect  = 0;
+      } else {
+        // wrong status => do nothing
+        lptr->disconnect  = 0;
+      }
+    }
+
+    mutexQueryList.release();
+
+    // 
+    // We now perform cleanup operations at the server
+    //
+    result = CHS::SMART_OK;
+    try {
+      corbaServant->disconnect(h);
+    } catch (CORBA::SystemException &e) {
+      result = CHS::SMART_ERROR_COMMUNICATION;
+    }
+
+    //
+    // now signal all possibly pending queries
+    //
+    mutexQueryList.acquire();
+
+    for( lptr = queries; lptr != 0; lptr = lptr->next ) {
+      if( lptr->disconnect == 1) {
+        //
+        // found pending query which is affected by the disconnect
+        //
+        lptr->disconnect = 0;
+
+        // signal condition variable to abort blocking waits ...
+        lptr->cond.blockingPattern(false);
+      }
+    }
+
+    mutexQueryList.release();
+  }
+
+  mutexConnection.release();
+
+  return result;
+}
+
+//
+//
+//
+template<class R, class A> CHS::StatusCode CHS::QueryClient<R,A>::blocking(const bool b) throw()
+{
+  CHS::StatusCode result = CHS::SMART_OK;
+  QueryClientList *lptr = 0;
+
+  mutexConnection.acquire();
+
+  statusUserBlocking = b;
+
+  mutexQueryList.acquire();
+
+  for( lptr = queries; lptr != 0; lptr = lptr->next ) {
+    lptr->cond.blockingUser(statusUserBlocking);
+  }
+
+  mutexQueryList.release();
+
+  mutexConnection.release();
+
+  return result;
+}
+
+//
+//
+//
+template<class R, class A> CHS::StatusCode CHS::QueryClient<R,A>::query(const R& r, A& a) throw()
+{
+  CHS::StatusCode result;
+  CHS::QueryId    id;
+
+  result = this->queryRequest(r,id);
+  if (result != CHS::SMART_OK) return result;
+
+  result = this->queryReceiveWait(id, a);
+  if (result == CHS::SMART_CANCELLED) {
+    this->queryDiscard(id);
+  }
+
+  return result;
+}
+
+//
+//
+//
+template<class R, class A> CHS::StatusCode CHS::QueryClient<R,A>::queryRequest(const R& r, QueryId& id) throw()
+{
+  QueryClientList *lptr = 0;
+  CHS::StatusCode result;
+
+  mutexConnection.acquire();
+
+  if (statusConnected == 0) {
+    //
+    // no connection available
+    //
+    id     = 0;
+    result = CHS::SMART_DISCONNECTED;
+
+    mutexConnection.release();
+
+    return result;
+  }
+
+  mutexQueryList.acquire();
+
+  queryCnt++;
+  lptr              = new QueryClientList;
+  lptr->id          = queryCnt;
+  lptr->querystatus = QUERY_PENDING;
+  lptr->disconnect  = 0;
+  lptr->next        = queries;
+  queries           = lptr;
+
+  lptr->cond.blockingUser(statusUserBlocking);
+  component->addCV(&(lptr->cond)); 
+
+  id = lptr->id;
+
+  mutexQueryList.release();
+
+  //
+  // now call CORBA object to send request message
+  //
+  result = CHS::SMART_OK;
+  try {
+    CORBA::Any any;
+    r.get(any);
+    corbaServant->request(any,h,id);
+  } catch (CORBA::SystemException &e) {
+    result = CHS::SMART_ERROR_COMMUNICATION;
+  }
+
+  if (result != CHS::SMART_OK) {
+    //
+    // remove list entry
+    //
+    this->queryDiscard(id);
+  }
+
+  mutexConnection.release();
+
+  return result;
+}
+
+//
+//
+//
+template<class R, class A> CHS::StatusCode CHS::QueryClient<R,A>::queryReceive(const QueryId id,A& a) throw()
+{
+  QueryClientList *lptr  = 0;
+  QueryClientList *hlptr = 0;
+  CHS::StatusCode  result;
+  int status;
+
+  result = CHS::SMART_ERROR;
+
+  mutexQueryList.acquire();
+
+  for( lptr = queries; lptr != 0; lptr = lptr->next )
+    if( lptr->id == id )
+      break;
+
+  if( lptr == 0 ) {
+    result = CHS::SMART_WRONGID;
+  }
+
+  if (lptr->querystatus == QUERY_PENDING) {
+    result = CHS::SMART_NODATA;
+  } else if (lptr->querystatus == QUERY_VALIDANSWER) {
+    a      = lptr->a;
+    result = CHS::SMART_OK;
+  } else if (lptr->querystatus == QUERY_DISCONNECTED) {
+    result = CHS::SMART_DISCONNECTED;
+  }
+
+  if ((result == CHS::SMART_OK) || (result == CHS::SMART_DISCONNECTED) || (result == CHS::SMART_ERROR)) {
+    //
+    // now delete list entry
+    //
+    this->queryDiscard(id);
+  }
+
+  mutexQueryList.release();
+
+  return result;
+}
+
+//
+//
+//
+template<class R, class A> CHS::StatusCode CHS::QueryClient<R,A>::queryReceiveWait(const QueryId id,A& a) throw()
+{
+  QueryClientList *lptr  = 0;
+  CHS::StatusCode result;
+
+  mutexQueryList.acquire();
+
+  for( lptr = queries; lptr != 0; lptr = lptr->next )
+    if( lptr->id == id )
+      break;
+
+  mutexQueryList.release();
+
+  //
+  // since lptr is local to the method it can be used safely outside
+  // the mutex locked block. It gets only invalid if that query entry
+  // is removed from the list and that is only the case within this
+  // method or within queryReceive() or within queryDiscard() which
+  // are not called in parallel with the same id.
+  //
+  // BE CAREFUL: This assumption holds only if one does not concurrently call queryReceive()
+  //             or queryReceiveWait() with the same id, since then the memory pointed to by
+  //             lptr might have been deleted between the locks. Keeping the lock is no solution
+  //             since then every activity gets blocked due to the locked data structures. It
+  //             simply makes no sense to call queryReceive from several threads with the same
+  //             id since this causes a racing condition.
+  if( lptr == 0 ) {
+    return SMART_WRONGID;
+  }
+
+  result = lptr->cond.wait();
+
+  mutexQueryList.acquire();
+  if( result != SMART_OK ) {
+    //
+    // query has been cancelled
+    //
+    result = CHS::SMART_CANCELLED;
+  } else {
+    //
+    // after CV, have to check whether we really got an answer
+    //
+
+    if (lptr->querystatus == QUERY_VALIDANSWER) {
+      // got answer from server
+      a = lptr->a;
+      result = CHS::SMART_OK;
+    } else if (lptr->querystatus == QUERY_DISCONNECTED) {
+      result = CHS::SMART_DISCONNECTED;
+    } else {
+      result = CHS::SMART_ERROR;
+    }
+  }
+
+  if ((result == CHS::SMART_OK) || (result == CHS::SMART_DISCONNECTED) || (result == CHS::SMART_ERROR)) {
+    //
+    // now delete list entry
+    //
+    this->queryDiscard(id);
+  }
+
+  mutexQueryList.release();
+
+  return result;
+}
+
+
+//
+//
+//
+template<class R, class A> CHS::StatusCode CHS::QueryClient<R,A>::queryDiscard(const QueryId id) throw()
+{
+
+  QueryClientList *lptr  = 0;
+  QueryClientList *hlptr = 0;
+  CHS::StatusCode  result;
+
+  result = CHS::SMART_ERROR;
+
+  mutexQueryList.acquire();
+
+  for( lptr = queries; lptr != 0; lptr = lptr->next )
+    if( lptr->id == id )
+      break;
+
+  if( lptr == 0 ) {
+    result = CHS::SMART_WRONGID;
+  } else {
+    //
+    // now delete list entry
+    //
+    // since we have already found an entry with the correct id, we know
+    // that the entry is still in the list ... each id also occurs only
+    // once in the list
+    //
+    if ( id == queries->id ) {
+      //
+      // first entry in list therefore remove head of list ...
+      //
+      component->removeCV(&(lptr->cond));
+
+      lptr    = queries;
+      queries = lptr->next;
+      delete lptr;
+    } else {
+      //
+      // not first entry in list, must therefore be second or later one ...
+      //
+      lptr = queries;
+      while (lptr->next != 0) {
+        if (lptr->next->id == id) {
+          hlptr      = lptr->next;
+          lptr->next = lptr->next->next;
+          component->removeCV(&(hlptr->cond));
+          delete hlptr;
+        } else {
+          lptr = lptr->next;
+        }
+      }
+    }
+  }
+
+  mutexQueryList.release();
+
+  return result;
+}
+
+
+
+/////////////////////////////////////////////////////////////////////////
+//
+// server part of query template
+//
+/////////////////////////////////////////////////////////////////////////
+
+//
+// static handle method called by CORBA object
+//
+template<class R,class A> void CHS::QueryServer<R,A>::hndRqst(void* ptr, const CORBA::Any& user, const SmartQueryClientPattern_ptr client, const CORBA::Long cltId)
+{
+  QueryServer<R,A>* lthis = (QueryServer<R,A> *)ptr;
+  QueryServerList* lptr = 0;
+
+  lthis->mutexQueryList.acquire();
+
+  lthis->queryCnt++;
+  lptr              = new QueryServerList;
+  lptr->r.set(user);
+  lptr->id          = lthis->queryCnt;
+  lptr->cltId       = cltId;
+  lptr->client      = SmartQueryClientPattern::_duplicate(client);
+  lptr->querystatus = QUERY_PENDING;
+  lptr->next        = lthis->queries;
+  lthis->queries    = lptr;
+
+  lthis->mutexQueryList.release();
+
+  //
+  // now call user provided handle method, the lptr is local to the method
+  // and points directly to the new list entry and is therefore usable
+  // outside the mutex. That entry in the list of pending queries gets
+  // invalid only by answering the query with "answer(...)", therefore
+  // lptr can't be used anymore here AFTER calling handleQuery, since
+  // a passive handler returns the answer before it leaves "handleQuery(...)"
+  //
+  lthis->handler.handleQuery(*lthis, lptr->id,lptr->r);
+}
+
+//
+// static handle method called by CORBA object
+//
+template<class R,class A> CHS::StatusCode CHS::QueryServer<R,A>::hndCnct(void* ptr, const SmartQueryClientPattern_ptr client)
+{
+  QueryServer<R,A>* lthis = (QueryServer<R,A> *)ptr;
+  QueryClientList* cptr;
+
+  CHS::StatusCode result;
+
+  lthis->mutexClientList.acquire();
+
+  if (lthis->serverReady == 0) {
+    //
+    // don't accept any new clients since server is in process of destruction or not yet ready
+    //
+    result = CHS::SMART_SERVICEUNAVAILABLE;
+  } else {
+    //
+    // make new client list entry
+    //
+    cptr           = new QueryClientList;
+    cptr->client   = SmartQueryClientPattern::_duplicate(client);
+    cptr->next     = lthis->clients;
+    lthis->clients = cptr;
+  
+    result = CHS::SMART_OK;
+  }
+
+  lthis->mutexClientList.release();
+
+  return result;
+}
+
+//
+// static handle method called by CORBA object
+//
+template<class R,class A> void CHS::QueryServer<R,A>::hndDisc(void* ptr, const SmartQueryClientPattern_ptr client)
+{
+  QueryServer<R,A>* lthis = (QueryServer<R,A> *)ptr;
+  QueryServerList* lptr   = 0;
+  QueryClientList* cptr   = 0;
+  QueryClientList* hcptr  = 0;
+
+  lthis->mutexClientList.acquire();
+
+  lthis->mutexQueryList.acquire();
+
+  // mark all pending queries of this client as disconnected
+  for( lptr = lthis->queries; lptr != 0; lptr = lptr->next ) {
+    if (client->_is_equivalent(lptr->client)) {
+      lptr->querystatus = QUERY_DISCONNECTED;
+    }
+  }
+
+  lthis->mutexQueryList.release();
+
+  //
+  // If serverReady == 0 then do not modify the list of clients anymore since
+  // this list is stepped through by the destructor outside the mutexClientList
+  // to disconnect all still connected clients. See comments in destructor why
+  // no modifications are allowed then.
+  //
+  if (lthis->serverReady == 1) {
+    //
+    // remove client from list of clients.
+    //
+
+    //
+    // first remove entries from head as long as they match the corba client object
+    //
+    while ((lthis->clients != 0) && (client->_is_equivalent(lthis->clients->client))) {
+      cptr = lthis->clients;
+      lthis->clients = lthis->clients->next;
+      CORBA::release(cptr->client);
+      delete cptr;
+    }
+
+    //
+    // now search through the rest of the list which might be empty already. If the 
+    // length is greater than zero, than the first element never matches and never 
+    // gets deleted
+    //
+    cptr = lthis->clients;
+    if (cptr == 0) {
+      // list contains no element anymore => ready
+    } else {
+      // list can now contain one or more elements with the first element matching never
+      while (cptr->next != 0) {
+        if (client->_is_equivalent(cptr->next->client)) {
+          hcptr      = cptr->next;
+          cptr->next = cptr->next->next;
+          CORBA::release(hcptr->client);
+          delete hcptr;
+        } else {
+          cptr = cptr->next;
+        }
+      }
+    }
+  } else {
+    //
+    // do nothing since server is in process of destruction
+    //
+  }
+
+  lthis->mutexClientList.release();
+}
+
+//
+// default constructor
+//
+template<class R, class A> inline CHS::QueryServer<R,A>::QueryServer(void) throw(CHS::SmartError)
+{
+  std::cerr << "CommPattern (query): ERROR: Entered default constructor QueryServer" << std::endl;
+
+  throw(CHS::SmartError(CHS::SMART_ERROR,"CommPattern (query): ERROR: Entered default constructor QueryServer"));
+}
+
+//
+// standard constructor
+//
+template<class R, class A>
+inline CHS::QueryServer<R,A>::QueryServer(SmartComponent* m,
+					  const std::string & svc,
+					  QueryServerHandler<R,A> & hnd) throw(CHS::SmartError)
+  : component(m),
+    service(svc),
+    handler(hnd),
+    serverReady(0)
+{
+  mutexClientList.acquire();
+
+  // reset list, counter and other stuff
+  clients = 0;
+
+  mutexQueryList.acquire();
+  queryCnt = 0;
+  queries  = 0;
+  mutexQueryList.release();
+
+  // Create the CORBA server object
+  corbaServant = new QueryServer_impl((void *)this,&QueryServer<R,A>::hndRqst,&QueryServer<R,A>::hndCnct,&QueryServer<R,A>::hndDisc);
+
+  // activate object to obtain the object reference
+  SmartQueryServerPattern_var tm = corbaServant->_this ();
+
+  CosNaming::Name name;                                                   // initialize name
+
+  name.length(1);
+  name[0].id = CORBA::string_dup("orocos");
+  try {
+    CosNaming::NamingContext_var orocos = component->namingService->bind_new_context(name);    // inc -> orocos
+  } catch (const CosNaming::NamingContext::AlreadyBound &) {
+    // Fine, context already exists
+  }
+
+  std::string server = component->getComponentName();
+  name.length(2);
+  name[1].id = CORBA::string_dup(server.c_str());
+  try {
+    CosNaming::NamingContext_var compname = component->namingService->bind_new_context(name);   // orocos -> <<component name>>
+  } catch (const CosNaming::NamingContext::AlreadyBound &) {
+    // Fine, context already exists
+  }
+
+  name.length(3);
+  name[2].id = CORBA::string_dup("query");
+  try {
+    CosNaming::NamingContext_var queryname = component->namingService->bind_new_context(name); // <<component name>> -> query
+  } catch (const CosNaming::NamingContext::AlreadyBound &) {
+    // Fine, context already exists
+  }
+
+  name.length(4);
+  name[3].id = CORBA::string_dup(svc.c_str());
+  try {
+    CosNaming::NamingContext_var queryname = component->namingService->bind_new_context(name); // query -> <<service name>>
+  } catch (const CosNaming::NamingContext::AlreadyBound &) {
+    // Fine, context already exists
+  }
+
+  name.length(5);
+  name[4].id = CORBA::string_dup(R::identifier().c_str());
+  try {
+    CosNaming::NamingContext_var queryname = component->namingService->bind_new_context(name); // <<service name>> -> <<identifier R>>
+  } catch (const CosNaming::NamingContext::AlreadyBound &) {
+    // Fine, context already exists
+  }
+
+  name.length(6);
+  name[5].id = CORBA::string_dup(A::identifier().c_str());
+  try {
+    component->namingService->bind(name,tm.in());                                              // <<identifier R>> -> <<identifier A>>
+  } catch (const CosNaming::NamingContext::AlreadyBound &) {
+    std::cerr << "CommPattern (query): WARNING: service " << name[3].id << " in " << name[1].id << " rebound !" << std::endl;
+    component->namingService->rebind(name,tm.in());
+  }
+
+  //
+  //
+  //
+  serverReady = 1;
+
+  mutexClientList.release();
+}
+
+//
+// default destructor
+//
+template<class R, class A> inline CHS::QueryServer<R,A>::~QueryServer(void) throw()
+{
+  QueryServerList *lptr = 0;
+  QueryClientList *cptr = 0;
+
+  mutexClientList.acquire();
+  //
+  // since we now have the mutex, connects and disconnects from clients can not be
+  // executed while modifying the server state to serverReady = 0. From now on any
+  // tries to connect to this server are rejected
+  //
+  serverReady = 0;
+
+  mutexClientList.release();
+
+  //
+  // - pending disconnects from clients can now get the mutexClientList and can
+  //   therefore execute their disconnect
+  // - since serverReady == 0, from now on all modifications on the list of clients
+  //   are rejected inside the disconnect handler
+  // - therefore one can step through the list of clients without requiring to hold
+  //   the mutexClientList and can call disconnect at the client side
+  // - the server has to call the client's disconnect outside the mutexClientList since
+  //   the client calls back the server within the disconnect member function and the
+  //   server handler requires the mutexClientList
+  // - Concurrent calls to the client's disconnect member function from this server
+  //   and from the client are not critical since disconnects are executed sequentially 
+  //   in the client due to the client's mutexConnection
+  //
+
+  while (clients != 0) {
+    cptr = clients;
+    try {
+      cptr->client->serverInitiatedDisconnect();
+      //
+      // IMPORTANT HINT:
+      //
+      // It might happen that a client disconnects itself and connects to another server
+      // just after we released the mutexClientList and before we call serverInitiatedDisconnect
+      // here. We would now disconnect that client from its new server since that client has not 
+      // been removed from the client list due to serverready = 0. To avoid disconnecting the
+      // client from its new server in that case, we should transmit the server CORBA reference 
+      // to the client with the server initiated disconnect and then check whether the client
+      // is still connected to this server by comparing the CORBA object ids and only disconnect 
+      // it in case of equivalence. 
+      //
+      // ### NOT YET IMPLEMENTED ! Christian Schlegel
+      //
+    } catch (const CORBA::Exception & e) {
+      // do not rethrow, continue destruction
+ 
+      // the client might have disappeared meanwhile since we can't hold the
+      // mutexClientList here
+    }
+    CORBA::release(cptr->client);
+    clients = clients->next;
+    delete cptr;
+  }
+
+  // - since clients are now all disconnected, finally no more new requests are received
+  // - it might be the case that however still some passive handlers are executed. Since
+  //   their clients are however properly disconnected this does not matter anymore
+  // - active handlers might try to provide answers after this server has been destroyed.
+  //   It is the responsibility of the user to avoid this !
+
+  // unbind at naming service
+  try {
+
+    CosNaming::Name name;
+    name.length(6);
+    name[0].id = CORBA::string_dup("orocos");
+    name[1].id = CORBA::string_dup(component->getComponentName().c_str());
+    name[2].id = CORBA::string_dup("query");
+    name[3].id = CORBA::string_dup(service.c_str());
+    name[4].id = CORBA::string_dup(R::identifier().c_str());
+    name[5].id = CORBA::string_dup(A::identifier().c_str());
+
+    component->namingService->unbind(name);
+  } catch (const CosNaming::NamingContext::NotFound &) {
+    std::cerr << "could not unbind QueryServer "
+	 << component->getComponentName() << "/"
+	 << service << " from naming service" << std::endl;
+  } catch (const CORBA::Exception & e) {
+    std::cerr << "CORBA Error while unbinding from Naming Service: ";
+    CHS::operator<<(std::cerr, e) << std::endl;
+    // do not rethrow, continue destruction of object
+  }
+
+  // free memory
+  while ( queries != 0 ) {
+    lptr = queries;
+    CORBA::release(lptr->client);
+    queries = queries->next;
+    delete lptr;
+  }
+
+  // ### delete/deactivate the corbaServant object (Christian Schlegel)
+
+}
+
+//
+// function called by the user for returning the answer to a specific request (see id)
+//
+template<class R, class A> CHS::StatusCode CHS::QueryServer<R,A>::answer(const QueryId id, const A& a) throw()
+{
+  QueryServerList* lptr  = 0;
+  QueryServerList* hlptr = 0;
+  StatusCode       result;
+
+  result = CHS::SMART_OK;
+
+  //
+  // clients can not get disconnected while answer is sent back since disconnect
+  // as well requires this mutex. Answer is therefore always sent correctly before
+  // server executes disconnects for clients
+  //
+  mutexClientList.acquire();
+
+  mutexQueryList.acquire();
+  for( lptr = queries; lptr != 0; lptr = lptr->next )
+    if( lptr->id == id )
+      break;
+  mutexQueryList.release();
+
+  if( lptr != 0 ) {
+    if (lptr->querystatus == QUERY_DISCONNECTED) {
+      // 
+      // the client awaiting this answer has been disconnected
+      // answer is not sent back
+      //
+      result = CHS::SMART_DISCONNECTED;
+    } else {
+      //
+      // now call CORBA object to send answer message
+      //
+      try {
+        CORBA::Any any;
+        a.get(any);
+        lptr->client->answer(any,lptr->cltId);
+      } catch (CORBA::SystemException &e) {
+        result = CHS::SMART_ERROR_COMMUNICATION;
+      }
+    }
+
+    mutexQueryList.acquire();
+
+    //
+    // now delete list entry
+    //
+    // since we have already found an entry with the correct id, we know
+    // that the entry is still in the list ... each id also occurs only
+    // once in the list
+    //
+    if ( id == queries->id ) {
+      //
+      // first entry in list therefore remove head of list ...
+      //
+      lptr    = queries;
+      queries = lptr->next;
+      CORBA::release(lptr->client);
+      delete lptr;
+    } else {
+      //
+      // not first entry in list, must therefore be second or later one ...
+      //
+      lptr = queries;
+      while (lptr->next != 0) {
+        if (lptr->next->id == id) {
+          hlptr      = lptr->next;
+          lptr->next = lptr->next->next;
+          CORBA::release(hlptr->client);
+          delete hlptr;
+        } else {
+          lptr = lptr->next;
+        }
+      }
+    }
+
+    mutexQueryList.release();
+
+  } else {
+    result = SMART_WRONGID;
+  }
+
+  mutexClientList.release();
+
+  return result;
+}
+
