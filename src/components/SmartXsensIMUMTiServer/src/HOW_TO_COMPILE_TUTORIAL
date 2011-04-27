@@ -1,0 +1,39 @@
+#
+# component: SmartXsensIMUMTiServer
+#
+
+A) DEPENDENCIES
+   ------------
+
+   - Xsens SDK
+
+
+
+B) PREPARATIONS
+   ------------
+   
+   - Download and extract the MT SDK (Xsens SDK)
+     (Version used to develop this component: V3.2.1)
+     http://download.xsens.com/MTSDK.exe
+   - Specify the Xsens SDK location in the Makefile (line 39)
+
+     DO NOT CHANGE ANYTHING ELSE IN THE MAKEFILE UNTIL YOU ARE REALLY 
+     SURE ABOUT WHAT YOU ARE DOING!
+
+
+
+C) COMPILE
+   -------
+
+   <make>: creates a library of the MT SDK and compiles the component
+
+   other targets:
+
+    <clean>
+    <distclean>
+
+
+#
+# 10/2009, Florian Poppa
+#
+

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+  <uml:Model xmi:id="_3QAfMEvIEeClMZ_R22LoZg" name="SmartSTTLoquendo_pim">
+    <elementImport xmi:id="_poaDQEvXEeC2Jei_Bg2tyQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_BOOw8EvLEeClMZ_R22LoZg"/>
+    </elementImport>
+    <elementImport xmi:id="_poeUsEvXEeC2Jei_Bg2tyQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_OxFR8EvLEeClMZ_R22LoZg"/>
+    </elementImport>
+    <elementImport xmi:id="_poh_EEvXEeC2Jei_Bg2tyQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_mn4SgEvMEeClMZ_R22LoZg"/>
+    </elementImport>
+    <elementImport xmi:id="_polCYEvXEeC2Jei_Bg2tyQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_DIceEEvPEeClMZ_R22LoZg"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:Component" xmi:id="_3QAfMUvIEeClMZ_R22LoZg" name="SmartSTTLoquendo">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_icRMsEvXEeC2Jei_Bg2tyQ" name="eventServer" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_3y2IsEvXEeC2Jei_Bg2tyQ" name="stateServer" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_BeDCsEvYEeC2Jei_Bg2tyQ" name="paramServer" aggregation="composite"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_JcA0QEvXEeC2Jei_Bg2tyQ" name="loquendo">
+        <ownedAttribute xmi:id="_LVA9QEvXEeC2Jei_Bg2tyQ" name="session" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_TdwmAEvXEeC2Jei_Bg2tyQ" value="src/components/SmartSTTLoquendo/LoqASRexamples.session"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_LZqMsEvXEeC2Jei_Bg2tyQ" name="grammar" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_Vobt0EvXEeC2Jei_Bg2tyQ" value="src/components/SmartSTTLoquendo/grammars/followMe.grxml"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_rWpGsEvXEeC2Jei_Bg2tyQ" name="EventTestHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_5CCfsEvXEeC2Jei_Bg2tyQ" name="StateHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_Dn6SMEvYEeC2Jei_Bg2tyQ" name="ParamHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_xF220EvYEeCoUthXHMCjWw" name="SpeechInputTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_sCBXcEwCEeC_EvT5Sans-A" name="active"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_uWy2cEwCEeC_EvT5Sans-A" name="active"/>
+    </packagedElement>
+    <profileApplication xmi:id="_3QAfMkvIEeClMZ_R22LoZg">
+      <eAnnotations xmi:id="_3QAfM0vIEeClMZ_R22LoZg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_3QAfNEvIEeClMZ_R22LoZg">
+      <eAnnotations xmi:id="_3QAfNUvIEeClMZ_R22LoZg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartComponent xmi:id="_3SDGkEvIEeClMZ_R22LoZg" base_Component="_3QAfMUvIEeClMZ_R22LoZg"/>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_JfipYEvXEeC2Jei_Bg2tyQ" base_Class="_JcA0QEvXEeC2Jei_Bg2tyQ"/>
+  <SmartMARS:SmartEventClient xmi:id="_aUa70EvXEeC2Jei_Bg2tyQ"/>
+  <SmartMARS:SmartEventServer xmi:id="_ickusEvXEeC2Jei_Bg2tyQ" serviceName="event" base_Port="_icRMsEvXEeC2Jei_Bg2tyQ" smartEventTestHandler="_rWtYIEvXEeC2Jei_Bg2tyQ">
+    <eventParameter href="../../../CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_BOOw8EvLEeClMZ_R22LoZg"/>
+    <eventResult href="../../../CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_OxFR8EvLEeClMZ_R22LoZg"/>
+    <eventState href="../../../CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_mn4SgEvMEeClMZ_R22LoZg"/>
+  </SmartMARS:SmartEventServer>
+  <SmartMARS:SmartEventHandler xmi:id="_jJ-nQEvXEeC2Jei_Bg2tyQ"/>
+  <SmartMARS:SmartEventTestHandler xmi:id="_rWtYIEvXEeC2Jei_Bg2tyQ" base_Class="_rWpGsEvXEeC2Jei_Bg2tyQ"/>
+  <SmartMARS:SmartStateServer xmi:id="_3zH1gEvXEeC2Jei_Bg2tyQ" serviceName="state" base_Port="_3y2IsEvXEeC2Jei_Bg2tyQ" smartStateChangeHandler="_5CH_QEvXEeC2Jei_Bg2tyQ"/>
+  <SmartMARS:SmartStateChangeHandler xmi:id="_5CH_QEvXEeC2Jei_Bg2tyQ" base_Class="_5CCfsEvXEeC2Jei_Bg2tyQ"/>
+  <SmartMARS:SmartParameterClient xmi:id="__kPocEvXEeC2Jei_Bg2tyQ"/>
+  <SmartMARS:SmartParameterServer xmi:id="_BeUIcEvYEeC2Jei_Bg2tyQ" serviceName="param" base_Port="_BeDCsEvYEeC2Jei_Bg2tyQ" smartParameterHandler="_DoAY0EvYEeC2Jei_Bg2tyQ">
+    <commObject href="../../../CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_DIceEEvPEeClMZ_R22LoZg"/>
+  </SmartMARS:SmartParameterServer>
+  <SmartMARS:SmartParameterHandler xmi:id="_DoAY0EvYEeC2Jei_Bg2tyQ" base_Class="_Dn6SMEvYEeC2Jei_Bg2tyQ"/>
+  <SmartMARS:SmartTask xmi:id="_xIi-cEvYEeCoUthXHMCjWw" base_Class="_xF220EvYEeCoUthXHMCjWw"/>
+  <SmartMARS:SmartMainState xmi:id="_sFTU8EwCEeC_EvT5Sans-A" base_Class="_sCBXcEwCEeC_EvT5Sans-A" subState="_uW7ZUEwCEeC_EvT5Sans-A"/>
+  <SmartMARS:SmartSubState xmi:id="_uW7ZUEwCEeC_EvT5Sans-A" base_Class="_uWy2cEwCEeC_EvT5Sans-A"/>
+</xmi:XMI>

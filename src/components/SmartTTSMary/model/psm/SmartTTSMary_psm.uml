@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_rUicoGasEeCJ7e7RpJurgQ" name="SmartTTSMary_psm">
+    <packagedElement xmi:type="uml:Component" xmi:id="_rUicoWasEeCJ7e7RpJurgQ" name="SmartTTSMary">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_rUicomasEeCJ7e7RpJurgQ" name="sendServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_rUico2asEeCJ7e7RpJurgQ" name="queryServer"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_rUicpGasEeCJ7e7RpJurgQ" name="SpeechTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_rUicpWasEeCJ7e7RpJurgQ" name="SendHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_rUicpmasEeCJ7e7RpJurgQ" name="QueryHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_rUicp2asEeCJ7e7RpJurgQ" name="mary">
+        <ownedAttribute xmi:id="_rUicqGasEeCJ7e7RpJurgQ" name="inputType">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_rUicqWasEeCJ7e7RpJurgQ" value="TEXT_EN"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_rUicqmasEeCJ7e7RpJurgQ" name="maryServerHost">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_rUicq2asEeCJ7e7RpJurgQ" value="localhost"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_rUicrGasEeCJ7e7RpJurgQ" name="audioplayer">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_rUicrWasEeCJ7e7RpJurgQ" value="aplay"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_rUicrmasEeCJ7e7RpJurgQ" name="voiceType">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_rUicr2asEeCJ7e7RpJurgQ" value="hmm-slt"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_rUicsGasEeCJ7e7RpJurgQ" name="audioType">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_rUicsWasEeCJ7e7RpJurgQ" value="WAVE"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_rUicsmasEeCJ7e7RpJurgQ" name="outputType">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_rUics2asEeCJ7e7RpJurgQ" value="AUDIO"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_rUictGasEeCJ7e7RpJurgQ" name="maryServerPort">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_rUictWasEeCJ7e7RpJurgQ" value="59125"/>
+        </ownedAttribute>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:id="_rUictmasEeCJ7e7RpJurgQ">
+      <eAnnotations xmi:id="_rUict2asEeCJ7e7RpJurgQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:SmartCorbaComponent xmi:id="_rUicuGasEeCJ7e7RpJurgQ" base_Component="_rUicoWasEeCJ7e7RpJurgQ"/>
+  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="_rUicuWasEeCJ7e7RpJurgQ" serviceName="text2speech" base_Port="_rUicomasEeCJ7e7RpJurgQ" smartSendHandler="_rUicpWasEeCJ7e7RpJurgQ">
+    <commObject href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_WKwIAEvoEeCoUthXHMCjWw"/>
+  </CorbaSmartSoft:SmartCorbaSendServer>
+  <CorbaSmartSoft:SmartCorbaQueryServer xmi:id="_rUicumasEeCJ7e7RpJurgQ" serviceName="text2speech" base_Port="_rUico2asEeCJ7e7RpJurgQ" smartQueryHandler="_rUicpmasEeCJ7e7RpJurgQ">
+    <commRequestObject href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_WKwIAEvoEeCoUthXHMCjWw"/>
+    <commAnswerObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_vhHJwEvcEeCoUthXHMCjWw"/>
+  </CorbaSmartSoft:SmartCorbaQueryServer>
+  <CorbaSmartSoft:SmartCorbaTask xmi:id="_rUicu2asEeCJ7e7RpJurgQ" period="0" base_Class="_rUicpGasEeCJ7e7RpJurgQ" wcet="0"/>
+  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="_rUicvGasEeCJ7e7RpJurgQ" base_Class="_rUicpWasEeCJ7e7RpJurgQ"/>
+  <CorbaSmartSoft:SmartCorbaQueryHandler xmi:id="_rUicvWasEeCJ7e7RpJurgQ" base_Class="_rUicpmasEeCJ7e7RpJurgQ"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_rUjDsGasEeCJ7e7RpJurgQ" base_Class="_rUicp2asEeCJ7e7RpJurgQ"/>
+</xmi:XMI>

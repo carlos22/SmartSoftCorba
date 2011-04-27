@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+  <uml:Model xmi:id="_-LzZME4kEeCbnfqBf3zuBA" name="SmartSTTDummy_pim">
+    <elementImport xmi:id="_dAN2sE4nEeCbnfqBf3zuBA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_BOOw8EvLEeClMZ_R22LoZg"/>
+    </elementImport>
+    <elementImport xmi:id="_dAnfUE4nEeCbnfqBf3zuBA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_OxFR8EvLEeClMZ_R22LoZg"/>
+    </elementImport>
+    <elementImport xmi:id="_dAxQUE4nEeCbnfqBf3zuBA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_mn4SgEvMEeClMZ_R22LoZg"/>
+    </elementImport>
+    <elementImport xmi:id="_dA2I0E4nEeCbnfqBf3zuBA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_DIceEEvPEeClMZ_R22LoZg"/>
+    </elementImport>
+    <elementImport xmi:id="_dA7BUE4nEeCbnfqBf3zuBA">
+      <importedElement xmi:type="uml:Class" href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_WKwIAEvoEeCoUthXHMCjWw"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:Component" xmi:id="_-LzZMU4kEeCbnfqBf3zuBA" name="SmartSTTDummy">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_z3LAUE4nEeCbnfqBf3zuBA" name="eventServer" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_8RMmUE4nEeCbnfqBf3zuBA" name="parameterServer" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_oLXBAE5JEeC45-tib6fqsw" name="stateServer" aggregation="composite"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_JFvP0E4oEeCbnfqBf3zuBA" name="EventTestHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_NW3t0E4oEeCbnfqBf3zuBA" name="ParameterHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_ZbCqUE4oEeCbnfqBf3zuBA" name="SpeechInputTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_-IXt4E4oEeC45-tib6fqsw" name="Settings">
+        <ownedAttribute xmi:id="_-_xP8E4oEeC45-tib6fqsw" name="grammar_file" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_rXsLME4qEeC45-tib6fqsw" value="src/components/SmartSTTDummy/grammar.csv"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_q1CZAE5JEeC45-tib6fqsw" name="StateHandler"/>
+    </packagedElement>
+    <profileApplication xmi:id="_-LzZMk4kEeCbnfqBf3zuBA">
+      <eAnnotations xmi:id="_-LzZM04kEeCbnfqBf3zuBA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_-LzZNE4kEeCbnfqBf3zuBA">
+      <eAnnotations xmi:id="_-LzZNU4kEeCbnfqBf3zuBA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartComponent xmi:id="_-Ofg0E4kEeCbnfqBf3zuBA" base_Component="_-LzZMU4kEeCbnfqBf3zuBA"/>
+  <SmartMARS:SmartQueryServer xmi:id="__D_TgE4mEeCbnfqBf3zuBA" serviceName="text2speech" smartQueryHandler="_FzJTIE4nEeCbnfqBf3zuBA">
+    <commRequestObject href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_WKwIAEvoEeCoUthXHMCjWw"/>
+  </SmartMARS:SmartQueryServer>
+  <SmartMARS:SmartSendServer xmi:id="__46JUE4mEeCbnfqBf3zuBA" serviceName="text2speech" smartSendHandler="_AiG3UE4nEeCbnfqBf3zuBA"/>
+  <SmartMARS:SmartSendHandler xmi:id="_AiG3UE4nEeCbnfqBf3zuBA"/>
+  <SmartMARS:SmartQueryHandler xmi:id="_FzJTIE4nEeCbnfqBf3zuBA"/>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_g51MkE4nEeCbnfqBf3zuBA"/>
+  <SmartMARS:SmartEventServer xmi:id="_z3ja0E4nEeCbnfqBf3zuBA" serviceName="speechInputEvent" base_Port="_z3LAUE4nEeCbnfqBf3zuBA" smartEventTestHandler="_JF0vYE4oEeCbnfqBf3zuBA">
+    <eventParameter href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_BOOw8EvLEeClMZ_R22LoZg"/>
+    <eventResult href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_OxFR8EvLEeClMZ_R22LoZg"/>
+    <eventState href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_mn4SgEvMEeClMZ_R22LoZg"/>
+  </SmartMARS:SmartEventServer>
+  <SmartMARS:SmartParameterServer xmi:id="_8RdsEE4nEeCbnfqBf3zuBA" serviceName="param" base_Port="_8RMmUE4nEeCbnfqBf3zuBA" smartParameterHandler="_NW9NYE4oEeCbnfqBf3zuBA">
+    <commObject href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_DIceEEvPEeClMZ_R22LoZg"/>
+  </SmartMARS:SmartParameterServer>
+  <SmartMARS:SmartEventTestHandler xmi:id="_JF0vYE4oEeCbnfqBf3zuBA" base_Class="_JFvP0E4oEeCbnfqBf3zuBA"/>
+  <SmartMARS:SmartParameterHandler xmi:id="_NW9NYE4oEeCbnfqBf3zuBA" base_Class="_NW3t0E4oEeCbnfqBf3zuBA"/>
+  <SmartMARS:SmartTask xmi:id="_ZbIw8E4oEeCbnfqBf3zuBA" base_Class="_ZbCqUE4oEeCbnfqBf3zuBA"/>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_-IfpsE4oEeC45-tib6fqsw" base_Class="_-IXt4E4oEeC45-tib6fqsw"/>
+  <SmartMARS:SmartStateServer xmi:id="_oNBN4E5JEeC45-tib6fqsw" serviceName="state" base_Port="_oLXBAE5JEeC45-tib6fqsw" smartStateChangeHandler="_q1HRgE5JEeC45-tib6fqsw"/>
+  <SmartMARS:SmartStateChangeHandler xmi:id="_q1HRgE5JEeC45-tib6fqsw" base_Class="_q1CZAE5JEeC45-tib6fqsw"/>
+</xmi:XMI>

@@ -1,0 +1,18 @@
+\speed=10		: speak slowly
+\pitch
+\spell=yes		: spell
+
+\robot=MAX		: robot voices
+other: Robby, Gort, Hector, Twiki, Torg, Tobor, Ash, Lynjx
+
+\number=code 12345
+\number=time 14:30
+\number=time 14:30:45
+
+\pause
+\pause=10		: ms
+
+\item=laugh
+others cough, cry, eh, kiss, Mmm, Oh, Sniff, Swallow, Throat, Whistle, Yawn
+
+			

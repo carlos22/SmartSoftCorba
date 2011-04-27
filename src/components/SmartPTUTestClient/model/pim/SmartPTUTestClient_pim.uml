@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+  <uml:Model xmi:id="_U6qnwJZPEd-HwbMUlm4Qww" name="SmartPTUTestClient_pim">
+    <elementImport xmi:id="_nWyk0JZPEd-HwbMUlm4Qww">
+      <importedElement xmi:type="uml:Class" href="../../../CommPTUObjects/model/pim/CommPTUObjects_pim.uml#_5pkEgIBJEd-acYooFeoGmw"/>
+    </elementImport>
+    <elementImport xmi:id="_nW1BEJZPEd-HwbMUlm4Qww">
+      <importedElement xmi:type="uml:Class" href="../../../CommPTUObjects/model/pim/CommPTUObjects_pim.uml#_51_-AIBJEd-acYooFeoGmw"/>
+    </elementImport>
+    <elementImport xmi:id="_nW3dUJZPEd-HwbMUlm4Qww">
+      <importedElement xmi:type="uml:Class" href="../../../CommPTUObjects/model/pim/CommPTUObjects_pim.uml#_o54JMIBLEd-acYooFeoGmw"/>
+    </elementImport>
+    <elementImport xmi:id="_JeTHEFrcEeCbMMBlDdOreQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
+    </elementImport>
+    <elementImport xmi:id="_Jen3MFrcEeCbMMBlDdOreQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
+    </elementImport>
+    <elementImport xmi:id="_JewaEFrcEeCbMMBlDdOreQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_l2oOMB2JEeCEHoCtEL5pNg"/>
+    </elementImport>
+    <elementImport xmi:id="_Je3u0FrcEeCbMMBlDdOreQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Rhs5cB2qEeCEHoCtEL5pNg"/>
+    </elementImport>
+    <elementImport xmi:id="_JfCG4FrcEeCbMMBlDdOreQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_HhoiQB4kEeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_JfUawFrcEeCbMMBlDdOreQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_wh6OcB40EeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_JfeLwFrcEeCbMMBlDdOreQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_ms8XoB44EeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_JfmuoFrcEeCbMMBlDdOreQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_w_jacB45EeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_JfxtwFrcEeCbMMBlDdOreQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_3Yh5QB46EeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_Jf7ewFrcEeCbMMBlDdOreQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_t0-UAEV5EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_JgHsAFrcEeCbMMBlDdOreQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_BQWcsEV8EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_JgSrIFrcEeCbMMBlDdOreQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_Jge4YFrcEeCbMMBlDdOreQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_MomccEV-EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_JgqekFrcEeCbMMBlDdOreQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_9H6gUEV-EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_JhN4MFrcEeCbMMBlDdOreQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_bEoywEV_EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_JhchsFrcEeCbMMBlDdOreQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_vz0uwEmJEeCfXId88PsX3A"/>
+    </elementImport>
+    <elementImport xmi:id="_JhrLMFrcEeCbMMBlDdOreQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_284MYEmaEeClkeIcJ6tU1A"/>
+    </elementImport>
+    <elementImport xmi:id="_Jh50sFrcEeCbMMBlDdOreQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_vhHJwEvcEeCoUthXHMCjWw"/>
+    </elementImport>
+    <elementImport xmi:id="_JiJFQFrcEeCbMMBlDdOreQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_zrh7wEvcEeCoUthXHMCjWw"/>
+    </elementImport>
+    <elementImport xmi:id="_JiYV0FrcEeCbMMBlDdOreQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_1SX9wEvcEeCoUthXHMCjWw"/>
+    </elementImport>
+    <elementImport xmi:id="_Jio0gFrcEeCbMMBlDdOreQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_blbPcFFjEeC4q5gMSLe4ng"/>
+    </elementImport>
+    <elementImport xmi:id="_Ji4sIFrcEeCbMMBlDdOreQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_MEDhMFYiEeCr0d2zveaPSA"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:Component" xmi:id="_U6qnwZZPEd-HwbMUlm4Qww" name="SmartPTUTestClient">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_cWxM8JZPEd-HwbMUlm4Qww" name="stateClient" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_i1u0cJZPEd-HwbMUlm4Qww" name="moveQueryClient" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_8QJV4JlbEd-4u_zvtbRLmA" name="devicePoseStateClient" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_Tu_j8JlyEd-4u_zvtbRLmA" name="paramClient" aggregation="composite"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_YCWxcJZPEd-HwbMUlm4Qww" name="TestTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_n1G8cJlYEd-4u_zvtbRLmA" name="DevicePoseStateTask"/>
+    </packagedElement>
+    <profileApplication xmi:id="_U6qnwpZPEd-HwbMUlm4Qww">
+      <eAnnotations xmi:id="_U6qnw5ZPEd-HwbMUlm4Qww" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_U6qnxJZPEd-HwbMUlm4Qww">
+      <eAnnotations xmi:id="_U6qnxZZPEd-HwbMUlm4Qww" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartComponent xmi:id="_U8ga0JZPEd-HwbMUlm4Qww" base_Component="_U6qnwZZPEd-HwbMUlm4Qww"/>
+  <SmartMARS:SmartTask xmi:id="_YEQO4JZPEd-HwbMUlm4Qww" base_Class="_YCWxcJZPEd-HwbMUlm4Qww"/>
+  <SmartMARS:SmartStateClient xmi:id="_cXEH4JZPEd-HwbMUlm4Qww" serviceName="state" base_Port="_cWxM8JZPEd-HwbMUlm4Qww" serverName="SmartPTUServer"/>
+  <SmartMARS:SmartQueryClient xmi:id="_i15MgJZPEd-HwbMUlm4Qww" serviceName="movePTU" base_Port="_i1u0cJZPEd-HwbMUlm4Qww" serverName="SmartPTUServer">
+    <commRequestObject href="../../../CommPTUObjects/model/pim/CommPTUObjects_pim.uml#_5pkEgIBJEd-acYooFeoGmw"/>
+    <commAnswerObject href="../../../CommPTUObjects/model/pim/CommPTUObjects_pim.uml#_51_-AIBJEd-acYooFeoGmw"/>
+  </SmartMARS:SmartQueryClient>
+  <SmartMARS:SmartPushTimedClient xmi:id="_SepxsJlXEd-4u_zvtbRLmA" serviceName="devicePoseState" serverName="SmartPTUServer">
+    <commObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_BbkdsIBJEd-acYooFeoGmw"/>
+  </SmartMARS:SmartPushTimedClient>
+  <SmartMARS:SmartTask xmi:id="_n1NDEJlYEd-4u_zvtbRLmA" base_Class="_n1G8cJlYEd-4u_zvtbRLmA"/>
+  <SmartMARS:SmartPushNewestClient xmi:id="_8QU8EJlbEd-4u_zvtbRLmA" serviceName="devicePoseState" base_Port="_8QJV4JlbEd-4u_zvtbRLmA" serverName="SmartPTUServer">
+    <commObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_blbPcFFjEeC4q5gMSLe4ng"/>
+  </SmartMARS:SmartPushNewestClient>
+  <SmartMARS:SmartParameterClient xmi:id="_TxpPUJlyEd-4u_zvtbRLmA" serviceName="param" base_Port="_Tu_j8JlyEd-4u_zvtbRLmA" serverName="SmartPTUServer">
+    <commObject href="../../../CommPTUObjects/model/pim/CommPTUObjects_pim.uml#_o54JMIBLEd-acYooFeoGmw"/>
+  </SmartMARS:SmartParameterClient>
+</xmi:XMI>

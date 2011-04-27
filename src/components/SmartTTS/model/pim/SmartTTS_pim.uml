@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+  <uml:Model xmi:id="_wONkQFPHEeCves5MZCIrIQ" name="SmartTTS_pim">
+    <elementImport xmi:id="_MKLqcFPJEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_BOOw8EvLEeClMZ_R22LoZg"/>
+    </elementImport>
+    <elementImport xmi:id="_MKP74FPJEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_OxFR8EvLEeClMZ_R22LoZg"/>
+    </elementImport>
+    <elementImport xmi:id="_MKS_MFPJEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_mn4SgEvMEeClMZ_R22LoZg"/>
+    </elementImport>
+    <elementImport xmi:id="_MKWpkFPJEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_DIceEEvPEeClMZ_R22LoZg"/>
+    </elementImport>
+    <elementImport xmi:id="_MKcJIFPJEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_WKwIAEvoEeCoUthXHMCjWw"/>
+    </elementImport>
+    <elementImport xmi:id="_Fvj68FPKEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
+    </elementImport>
+    <elementImport xmi:id="_FvqBkFPKEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
+    </elementImport>
+    <elementImport xmi:id="_FvxWUFPKEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_l2oOMB2JEeCEHoCtEL5pNg"/>
+    </elementImport>
+    <elementImport xmi:id="_Fv4rEFPKEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Rhs5cB2qEeCEHoCtEL5pNg"/>
+    </elementImport>
+    <elementImport xmi:id="_FwDqMFPKEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_HhoiQB4kEeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_FwOpUFPKEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_wh6OcB40EeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_Fwa2kFPKEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_ms8XoB44EeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_FwnD0FPKEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_w_jacB45EeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_Fwxb4FPKEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_3Yh5QB46EeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_FxIBMFPKEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_t0-UAEV5EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_FxTnYFPKEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_BQWcsEV8EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_FxfNkFPKEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_Fxra0FPKEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_MomccEV-EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_Fx3oEFPKEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_9H6gUEV-EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_FyFqgFPKEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_bEoywEV_EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_FyUUAFPKEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_vz0uwEmJEeCfXId88PsX3A"/>
+    </elementImport>
+    <elementImport xmi:id="_FyjkkFPKEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_284MYEmaEeClkeIcJ6tU1A"/>
+    </elementImport>
+    <elementImport xmi:id="_Fyy1IFPKEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_vhHJwEvcEeCoUthXHMCjWw"/>
+    </elementImport>
+    <elementImport xmi:id="_FzCFsFPKEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_zrh7wEvcEeCoUthXHMCjWw"/>
+    </elementImport>
+    <elementImport xmi:id="_FzUZkFPKEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_1SX9wEvcEeCoUthXHMCjWw"/>
+    </elementImport>
+    <elementImport xmi:id="_FzlfUFPKEeCves5MZCIrIQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_blbPcFFjEeC4q5gMSLe4ng"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:Component" xmi:id="_wONkQVPHEeCves5MZCIrIQ" name="SmartTTS">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_GumykFPJEeCves5MZCIrIQ" name="sendServer" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_HgC2kFPJEeCves5MZCIrIQ" name="queryServer" aggregation="composite"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_JePeEFPIEeCves5MZCIrIQ" name="SpeechTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_SX_3kFPJEeCves5MZCIrIQ" name="SpeechSendHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_WSPfkFPJEeCves5MZCIrIQ" name="SpeechQueryHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_fIV9kFPJEeCves5MZCIrIQ" name="text2speech">
+        <ownedAttribute xmi:id="_kKY7IFPJEeCves5MZCIrIQ" name="player" isUnique="false">
+          <ownedComment xmi:id="_oVBvkFPJEeCves5MZCIrIQ" annotatedElement="_kKY7IFPJEeCves5MZCIrIQ">
+            <body>name of executable to be used for speech output
+(message text is piped to stdin of that process)
+e.g.:
+/bin/cat
+/usr/share/mbrola/say
+/usr/bin/festival --tts
+(echo won't work)</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_wA7rUFPJEeCves5MZCIrIQ" value="/bin/cat"/>
+        </ownedAttribute>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:id="_wONkQlPHEeCves5MZCIrIQ">
+      <eAnnotations xmi:id="_wONkQ1PHEeCves5MZCIrIQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_wONkRFPHEeCves5MZCIrIQ">
+      <eAnnotations xmi:id="_wONkRVPHEeCves5MZCIrIQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartComponent xmi:id="_wQNvYFPHEeCves5MZCIrIQ" base_Component="_wONkQVPHEeCves5MZCIrIQ"/>
+  <SmartMARS:SmartTask xmi:id="_JgEqEFPIEeCves5MZCIrIQ" base_Class="_JePeEFPIEeCves5MZCIrIQ"/>
+  <SmartMARS:SmartSendServer xmi:id="_GvUkQFPJEeCves5MZCIrIQ" serviceName="text2speech" base_Port="_GumykFPJEeCves5MZCIrIQ" smartSendHandler="_SYEJAFPJEeCves5MZCIrIQ">
+    <commObject href="../../../CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_WKwIAEvoEeCoUthXHMCjWw"/>
+  </SmartMARS:SmartSendServer>
+  <SmartMARS:SmartQueryServer xmi:id="_HgMnkFPJEeCves5MZCIrIQ" serviceName="text2speech" base_Port="_HgC2kFPJEeCves5MZCIrIQ" smartQueryHandler="_WSUYEFPJEeCves5MZCIrIQ">
+    <commRequestObject href="../../../CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_WKwIAEvoEeCoUthXHMCjWw"/>
+    <commAnswerObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_vhHJwEvcEeCoUthXHMCjWw"/>
+  </SmartMARS:SmartQueryServer>
+  <SmartMARS:SmartSendHandler xmi:id="_SYEJAFPJEeCves5MZCIrIQ" base_Class="_SX_3kFPJEeCves5MZCIrIQ"/>
+  <SmartMARS:SmartQueryHandler xmi:id="_WSUYEFPJEeCves5MZCIrIQ" base_Class="_WSPfkFPJEeCves5MZCIrIQ"/>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_fIZn8FPJEeCves5MZCIrIQ" base_Class="_fIV9kFPJEeCves5MZCIrIQ"/>
+</xmi:XMI>

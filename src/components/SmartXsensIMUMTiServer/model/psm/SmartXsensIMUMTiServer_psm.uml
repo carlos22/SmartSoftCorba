@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_R7f7UGatEeCJ7e7RpJurgQ" name="SmartXsensIMUMTiServer_psm">
+    <packagedElement xmi:type="uml:Component" xmi:id="_R7f7UWatEeCJ7e7RpJurgQ" name="SmartXsensIMUMTiServer">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_R7f7UmatEeCJ7e7RpJurgQ" name="pushTimedDataServer"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_R7f7U2atEeCJ7e7RpJurgQ" name="WorkerTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_R7f7VGatEeCJ7e7RpJurgQ" name="PushTimedDataHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_R7f7VWatEeCJ7e7RpJurgQ" name="xsens">
+        <ownedAttribute xmi:id="_R7f7VmatEeCJ7e7RpJurgQ" name="verbose">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_R7f7V2atEeCJ7e7RpJurgQ" value="true"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_R7f7WGatEeCJ7e7RpJurgQ" name="port">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_R7f7WWatEeCJ7e7RpJurgQ" value="/dev/ttyUSB0"/>
+        </ownedAttribute>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:id="_R7f7WmatEeCJ7e7RpJurgQ">
+      <eAnnotations xmi:id="_R7f7W2atEeCJ7e7RpJurgQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:SmartCorbaComponent xmi:id="_R7f7XGatEeCJ7e7RpJurgQ" base_Component="_R7f7UWatEeCJ7e7RpJurgQ"/>
+  <CorbaSmartSoft:SmartCorbaPushTimedServer xmi:id="_R7f7XWatEeCJ7e7RpJurgQ" serviceName="imuData" base_Port="_R7f7UmatEeCJ7e7RpJurgQ" smartPushTimedHandler="_R7f7VGatEeCJ7e7RpJurgQ" cycle="0.008333">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_MEDhMFYiEeCr0d2zveaPSA"/>
+  </CorbaSmartSoft:SmartCorbaPushTimedServer>
+  <CorbaSmartSoft:SmartCorbaTask xmi:id="_R7f7XmatEeCJ7e7RpJurgQ" period="0" base_Class="_R7f7U2atEeCJ7e7RpJurgQ" wcet="0"/>
+  <CorbaSmartSoft:SmartCorbaPushTimedHandler xmi:id="_R7f7X2atEeCJ7e7RpJurgQ" base_Class="_R7f7VGatEeCJ7e7RpJurgQ"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_R7f7YGatEeCJ7e7RpJurgQ" base_Class="_R7f7VWatEeCJ7e7RpJurgQ"/>
+</xmi:XMI>

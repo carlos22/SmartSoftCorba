@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-7"?>
+<grammar root="root" version="1.0" xml:lang="en-us" xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
+
+<rule id="root">
+  <!--<one-of>-->
+    <item><ruleref uri="#robotControl"/><tag>out.robotControl = rules.robotControl</tag></item>
+<!--
+    <item><ruleref uri="#answer"/><tag>out.answer = rules.answer</tag></item>
+  </one-of>
+-->
+</rule>
+
+
+<!--
+<rule id="answer">
+  <one-of>
+    <item>no<tag>{out="no";}</tag></item>
+    <item>
+      <one-of>
+        <item>yes</item>
+        <item>ok</item>
+      </one-of>
+      <tag>{out="yes";}</tag>
+    </item>
+    
+  </one-of>
+</rule>
+-->
+
+
+<rule id="robotControl">
+  <one-of>
+
+    <item>follow me<tag>{out="followPerson";}</tag></item>
+
+    <item>stop<tag>{out="stop";}</tag></item>
+
+    <item>reset<tag>{out="reset";}</tag></item>
+    <item>setup<tag>{out="reset";}</tag></item>
+
+<!--
+    <item>
+      <item repeat="0-1">turn</item>
+      <one-of>
+        <item>left<tag>{out="turnLeft";}</tag></item>
+        <item>right<tag>{out="turnRight";}</tag></item>
+      </one-of>
+    </item>
+
+    <item>
+      <item repeat="0-1">move</item>
+      <one-of>
+        <item>ahead<tag>{out="moveAhead";}</tag></item>
+        <item>
+          <one-of>
+            <item>backward</item>
+            <item>back</item>
+          </one-of>
+          <tag>{out="moveBackward";}</tag>
+        </item>
+      </one-of>
+    </item>
+-->
+  </one-of>
+</rule>
+
+</grammar>

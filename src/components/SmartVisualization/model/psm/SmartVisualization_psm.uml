@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_5Hy-UHAGEeCm0I0t1L3ZFQ" name="SmartVisualization_psm">
+    <packagedElement xmi:type="uml:Component" xmi:id="_5Hy-UXAGEeCm0I0t1L3ZFQ" name="SmartVisualization">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_5Hy-UnAGEeCm0I0t1L3ZFQ" name="laserClient1"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_5Hy-U3AGEeCm0I0t1L3ZFQ" name="tofImageClient"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_5Hy-VHAGEeCm0I0t1L3ZFQ" name="curPushClient"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_5Hy-VXAGEeCm0I0t1L3ZFQ" name="lmtQueryClient"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_5Hy-VnAGEeCm0I0t1L3ZFQ" name="laserClient3"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_5Hy-V3AGEeCm0I0t1L3ZFQ" name="baseClient"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_5Hy-WHAGEeCm0I0t1L3ZFQ" name="laserClient2"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_5Hy-WXAGEeCm0I0t1L3ZFQ" name="Laser3Task"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_5Hy-WnAGEeCm0I0t1L3ZFQ" name="Laser1Task"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_5Hy-W3AGEeCm0I0t1L3ZFQ" name="BaseTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_5Hy-XHAGEeCm0I0t1L3ZFQ" name="CurMapTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_5Hy-XXAGEeCm0I0t1L3ZFQ" name="TofTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_5Hy-XnAGEeCm0I0t1L3ZFQ" name="LtmTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_5Hy-X3AGEeCm0I0t1L3ZFQ" name="Laser2Task"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_5Hy-YHAGEeCm0I0t1L3ZFQ" name="services">
+        <ownedAttribute xmi:id="_5Hy-YXAGEeCm0I0t1L3ZFQ" name="show_ltm">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_5Hy-YnAGEeCm0I0t1L3ZFQ" value="true"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_5Hy-Y3AGEeCm0I0t1L3ZFQ" name="show_base">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_5Hy-ZHAGEeCm0I0t1L3ZFQ" value="true"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_5Hy-ZXAGEeCm0I0t1L3ZFQ" name="show_cur_map">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_5Hy-ZnAGEeCm0I0t1L3ZFQ" value="true"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_5Hy-Z3AGEeCm0I0t1L3ZFQ" name="show_laser_1">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_5Hy-aHAGEeCm0I0t1L3ZFQ" value="true"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_5Hy-aXAGEeCm0I0t1L3ZFQ" name="show_tof_image">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_5Hy-anAGEeCm0I0t1L3ZFQ" value="false"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_5Hy-a3AGEeCm0I0t1L3ZFQ" name="show_laser_3">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_5Hy-bHAGEeCm0I0t1L3ZFQ" value="false"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_5Hy-bXAGEeCm0I0t1L3ZFQ" name="show_laser_2">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_5Hy-bnAGEeCm0I0t1L3ZFQ" value="false"/>
+        </ownedAttribute>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:id="_5Hy-b3AGEeCm0I0t1L3ZFQ">
+      <eAnnotations xmi:id="_5Hy-cHAGEeCm0I0t1L3ZFQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:SmartCorbaComponent xmi:id="_5Hy-cXAGEeCm0I0t1L3ZFQ" base_Component="_5Hy-UXAGEeCm0I0t1L3ZFQ"/>
+  <CorbaSmartSoft:SmartCorbaPushNewestClient xmi:id="_5Hy-cnAGEeCm0I0t1L3ZFQ" serviceName="scan" base_Port="_5Hy-UnAGEeCm0I0t1L3ZFQ" serverName="SmartPlayerStageSimulator">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
+  </CorbaSmartSoft:SmartCorbaPushNewestClient>
+  <CorbaSmartSoft:SmartCorbaPushNewestClient xmi:id="_5Hy-c3AGEeCm0I0t1L3ZFQ" serviceName="imageNewest" base_Port="_5Hy-U3AGEeCm0I0t1L3ZFQ" serverName="SmartPMDServer">
+    <commObject href="platform:/resource/CommVisionObjects/model/pim/CommVisionObjects_pim.uml#_k-5BIFkiEeCkYMJtM9_O3A"/>
+  </CorbaSmartSoft:SmartCorbaPushNewestClient>
+  <CorbaSmartSoft:SmartCorbaPushNewestClient xmi:id="_5Hy-dHAGEeCm0I0t1L3ZFQ" serviceName="currentGridMap" base_Port="_5Hy-VHAGEeCm0I0t1L3ZFQ" serverName="SmartMapperGridMap">
+    <commObject href="platform:/resource/CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_-s4UEEmREeC-KYWPZCFBzA"/>
+  </CorbaSmartSoft:SmartCorbaPushNewestClient>
+  <CorbaSmartSoft:SmartCorbaQueryClient xmi:id="_5HzlYHAGEeCm0I0t1L3ZFQ" serviceName="ltmGridMapQuery" base_Port="_5Hy-VXAGEeCm0I0t1L3ZFQ" serverName="SmartMapperGridMap">
+    <commRequestObject href="platform:/resource/CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_Svv6kEmUEeC-KYWPZCFBzA"/>
+    <commAnswerObject href="platform:/resource/CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_-s4UEEmREeC-KYWPZCFBzA"/>
+  </CorbaSmartSoft:SmartCorbaQueryClient>
+  <CorbaSmartSoft:SmartCorbaPushNewestClient xmi:id="_5HzlYXAGEeCm0I0t1L3ZFQ" serviceName="" base_Port="_5Hy-VnAGEeCm0I0t1L3ZFQ" serverName="">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
+  </CorbaSmartSoft:SmartCorbaPushNewestClient>
+  <CorbaSmartSoft:SmartCorbaPushTimedClient xmi:id="_5HzlYnAGEeCm0I0t1L3ZFQ" serviceName="basestate" base_Port="_5Hy-V3AGEeCm0I0t1L3ZFQ" serverName="SmartPlayerStageSimulator" interval="1">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
+  </CorbaSmartSoft:SmartCorbaPushTimedClient>
+  <CorbaSmartSoft:SmartCorbaPushNewestClient xmi:id="_5HzlY3AGEeCm0I0t1L3ZFQ" serviceName="" base_Port="_5Hy-WHAGEeCm0I0t1L3ZFQ" serverName="">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
+  </CorbaSmartSoft:SmartCorbaPushNewestClient>
+  <CorbaSmartSoft:SmartCorbaTask xmi:id="_5HzlZHAGEeCm0I0t1L3ZFQ" period="0" base_Class="_5Hy-WXAGEeCm0I0t1L3ZFQ" wcet="0"/>
+  <CorbaSmartSoft:SmartCorbaTask xmi:id="_5HzlZXAGEeCm0I0t1L3ZFQ" period="0" base_Class="_5Hy-WnAGEeCm0I0t1L3ZFQ" wcet="0"/>
+  <CorbaSmartSoft:SmartCorbaTask xmi:id="_5HzlZnAGEeCm0I0t1L3ZFQ" period="0" base_Class="_5Hy-W3AGEeCm0I0t1L3ZFQ" wcet="0"/>
+  <CorbaSmartSoft:SmartCorbaTask xmi:id="_5HzlZ3AGEeCm0I0t1L3ZFQ" period="0" base_Class="_5Hy-XHAGEeCm0I0t1L3ZFQ" wcet="0"/>
+  <CorbaSmartSoft:SmartCorbaTask xmi:id="_5HzlaHAGEeCm0I0t1L3ZFQ" period="0" base_Class="_5Hy-XXAGEeCm0I0t1L3ZFQ" wcet="0"/>
+  <CorbaSmartSoft:SmartCorbaTask xmi:id="_5HzlaXAGEeCm0I0t1L3ZFQ" period="0" base_Class="_5Hy-XnAGEeCm0I0t1L3ZFQ" wcet="0"/>
+  <CorbaSmartSoft:SmartCorbaTask xmi:id="_5HzlanAGEeCm0I0t1L3ZFQ" period="0" base_Class="_5Hy-X3AGEeCm0I0t1L3ZFQ" wcet="0"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_5Hzla3AGEeCm0I0t1L3ZFQ" base_Class="_5Hy-YHAGEeCm0I0t1L3ZFQ"/>
+</xmi:XMI>

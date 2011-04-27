@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_-GhxcGarEeCO2uZHSTM3Pg" name="SmartSTTLoquendo_psm">
+    <packagedElement xmi:type="uml:Component" xmi:id="_-GhxcWarEeCO2uZHSTM3Pg" name="SmartSTTLoquendo">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_-GhxcmarEeCO2uZHSTM3Pg" name="eventServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_-Ghxc2arEeCO2uZHSTM3Pg" name="paramServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_-GhxdGarEeCO2uZHSTM3Pg" name="stateServer"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_-GhxdWarEeCO2uZHSTM3Pg" name="SpeechInputTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_-GhxdmarEeCO2uZHSTM3Pg" name="EventTestHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_-Ghxd2arEeCO2uZHSTM3Pg" name="ParamHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_-GhxeGarEeCO2uZHSTM3Pg" name="StateHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_-GhxeWarEeCO2uZHSTM3Pg" name="loquendo">
+        <ownedAttribute xmi:id="_-GhxemarEeCO2uZHSTM3Pg" name="session">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_-Ghxe2arEeCO2uZHSTM3Pg" value="src/components/SmartSTTLoquendo/LoqASRexamples.session"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_-GhxfGarEeCO2uZHSTM3Pg" name="grammar">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_-GhxfWarEeCO2uZHSTM3Pg" value="src/components/SmartSTTLoquendo/grammars/followMe.grxml"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_-GhxfmarEeCO2uZHSTM3Pg" name="active"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_-Ghxf2arEeCO2uZHSTM3Pg" name="active"/>
+    </packagedElement>
+    <profileApplication xmi:id="_-GhxgGarEeCO2uZHSTM3Pg">
+      <eAnnotations xmi:id="_-GhxgWarEeCO2uZHSTM3Pg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:SmartCorbaComponent xmi:id="_-GhxgmarEeCO2uZHSTM3Pg" base_Component="_-GhxcWarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaEventServer xmi:id="_-Ghxg2arEeCO2uZHSTM3Pg" serviceName="event" base_Port="_-GhxcmarEeCO2uZHSTM3Pg" smartEventTestHandler="_-GhxdmarEeCO2uZHSTM3Pg">
+    <eventParameter href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_BOOw8EvLEeClMZ_R22LoZg"/>
+    <eventResult href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_OxFR8EvLEeClMZ_R22LoZg"/>
+    <eventState href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_mn4SgEvMEeClMZ_R22LoZg"/>
+  </CorbaSmartSoft:SmartCorbaEventServer>
+  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="_-GhxhGarEeCO2uZHSTM3Pg" serviceName="param" base_Port="_-Ghxc2arEeCO2uZHSTM3Pg" smartSendHandler="_-Ghxd2arEeCO2uZHSTM3Pg">
+    <commObject href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_DIceEEvPEeClMZ_R22LoZg"/>
+  </CorbaSmartSoft:SmartCorbaSendServer>
+  <CorbaSmartSoft:SmartCorbaStateServer xmi:id="_-GhxhWarEeCO2uZHSTM3Pg" serviceName="state" base_Port="_-GhxdGarEeCO2uZHSTM3Pg" smartCorbaStateChangeHandler="_-GhxeGarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaTask xmi:id="_-GhxhmarEeCO2uZHSTM3Pg" period="0" base_Class="_-GhxdWarEeCO2uZHSTM3Pg" wcet="0"/>
+  <CorbaSmartSoft:SmartCorbaEventTestHandler xmi:id="_-Ghxh2arEeCO2uZHSTM3Pg" base_Class="_-GhxdmarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="_-GhxiGarEeCO2uZHSTM3Pg" base_Class="_-Ghxd2arEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaStateChangeHandler xmi:id="_-GhxiWarEeCO2uZHSTM3Pg" base_Class="_-GhxeGarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_-GhximarEeCO2uZHSTM3Pg" base_Class="_-GhxeWarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaMainState xmi:id="_-Ghxi2arEeCO2uZHSTM3Pg" base_Class="_-GhxfmarEeCO2uZHSTM3Pg" smartCorbaSubState="_-Ghxf2arEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaSubState xmi:id="_-GhxjGarEeCO2uZHSTM3Pg" base_Class="_-Ghxf2arEeCO2uZHSTM3Pg"/>
+</xmi:XMI>

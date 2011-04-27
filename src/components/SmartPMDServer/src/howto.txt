@@ -1,0 +1,9 @@
+To run the component the LD_LIBRARY_PATH sould be set to the bin directory within this component.
+The PMD API is needed: libpmdaccess2.so
+
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/stampfer/SOFTWARE/smartsoft/src/components/SmartPMDServer/src/pmd/bin
+
+
+udev rule:
+ATTRS{idVendor}=="1c28",ATTRS{idProduct}=="c003", GROUP="users", MODE="0766", SYMLINK+="pmdCamCube2"

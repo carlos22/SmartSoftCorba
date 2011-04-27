@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_A5av0GasEeCO2uZHSTM3Pg" name="SmartTTS_psm">
+    <packagedElement xmi:type="uml:Component" xmi:id="_A5av0WasEeCO2uZHSTM3Pg" name="SmartTTS">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_A5av0masEeCO2uZHSTM3Pg" name="sendServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_A5av02asEeCO2uZHSTM3Pg" name="queryServer"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_A5av1GasEeCO2uZHSTM3Pg" name="SpeechTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_A5av1WasEeCO2uZHSTM3Pg" name="SpeechSendHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_A5av1masEeCO2uZHSTM3Pg" name="SpeechQueryHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_A5av12asEeCO2uZHSTM3Pg" name="text2speech">
+        <ownedAttribute xmi:id="_A5av2GasEeCO2uZHSTM3Pg" name="player">
+          <ownedComment xmi:id="_oVBvkFPJEeCves5MZCIrIQ">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/stampfer/SOFTWARE/smartsoft-svn-corba-dev-mdsd/src/components/SmartTTS/model/pim/SmartTTS_pim.uml.out.uml#_kKY7IFPJEeCves5MZCIrIQ"/>
+            <body>name of executable to be used for speech output
+(message text is piped to stdin of that process)
+e.g.:
+/bin/cat
+/usr/share/mbrola/say
+/usr/bin/festival --tts
+(echo won't work)</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_A5av2WasEeCO2uZHSTM3Pg" value="/bin/cat"/>
+        </ownedAttribute>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:id="_A5av2masEeCO2uZHSTM3Pg">
+      <eAnnotations xmi:id="_A5av22asEeCO2uZHSTM3Pg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:SmartCorbaComponent xmi:id="_A5av3GasEeCO2uZHSTM3Pg" base_Component="_A5av0WasEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="_A5av3WasEeCO2uZHSTM3Pg" serviceName="text2speech" base_Port="_A5av0masEeCO2uZHSTM3Pg" smartSendHandler="_A5av1WasEeCO2uZHSTM3Pg">
+    <commObject href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_WKwIAEvoEeCoUthXHMCjWw"/>
+  </CorbaSmartSoft:SmartCorbaSendServer>
+  <CorbaSmartSoft:SmartCorbaQueryServer xmi:id="_A5av3masEeCO2uZHSTM3Pg" serviceName="text2speech" base_Port="_A5av02asEeCO2uZHSTM3Pg" smartQueryHandler="_A5av1masEeCO2uZHSTM3Pg">
+    <commRequestObject href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_WKwIAEvoEeCoUthXHMCjWw"/>
+    <commAnswerObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_vhHJwEvcEeCoUthXHMCjWw"/>
+  </CorbaSmartSoft:SmartCorbaQueryServer>
+  <CorbaSmartSoft:SmartCorbaTask xmi:id="_A5av32asEeCO2uZHSTM3Pg" period="0" base_Class="_A5av1GasEeCO2uZHSTM3Pg" wcet="0"/>
+  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="_A5av4GasEeCO2uZHSTM3Pg" base_Class="_A5av1WasEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaQueryHandler xmi:id="_A5bW4GasEeCO2uZHSTM3Pg" base_Class="_A5av1masEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_A5bW4WasEeCO2uZHSTM3Pg" base_Class="_A5av12asEeCO2uZHSTM3Pg"/>
+</xmi:XMI>

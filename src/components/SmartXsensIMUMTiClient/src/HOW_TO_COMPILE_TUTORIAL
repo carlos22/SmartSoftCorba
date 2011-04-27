@@ -1,0 +1,38 @@
+#
+# component: smartXsensIMUMTiServer
+#
+
+A) DEPENDENCIES
+   ------------
+
+   - MRPT library
+   - ncurses
+
+
+B) PREPARATIONS
+   ------------
+   
+   - Download and install the MRPT library
+     (Version used to develop this component: V0.6.5)
+     http://www.mrpt.org
+   - Specify the path to the mrpt-config folder in the Makefile (line 39)
+
+     DO NOT CHANGE ANYTHING ELSE IN THE MAKEFILE UNTIL YOU ARE REALLY 
+     SURE ABOUT WHAT YOU ARE DOING!
+
+
+C) COMPILE
+   -------
+
+   <make>: compiles the component
+
+   other targets:
+
+    <clean>
+    <distclean>
+
+
+#
+# 10/2009, Florian Poppa
+#
+

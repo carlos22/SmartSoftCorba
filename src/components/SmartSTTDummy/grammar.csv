@@ -1,0 +1,16 @@
+(robotControl followPerson);1.0;follow me;robotControl
+(robotControl stop);1.0;stop;robotControl
+(robotControl exit);1.0;leave the secnario;robotControl
+(memorizeLocation checkout);1.0;here is the checkout;memorizeLocation
+(memorizeLocation exit);1.0;here is the exit;memorizeLocation
+(memorizeLocation catchup);1.0;here is the catchup;memorizeLocation
+(memorizeLocation noodles);1.0;here is the noodles;memorizeLocation
+(memorizeLocation red,wine);1.0;here is the red wine;memorizeLocation
+(memorizeLocation sponge);1.0;here is the sponge;memorizeLocation
+(fetchObject catchup);1.0;fetch the catchup;fetchObject
+(fetchObject noodles);1.0;fetch the noodles;fetchObject
+(fetchObject red,wine);1.0;fetch the red wine;fetchObject
+(fetchObject sponge);1.0;fetch the sponge;fetchObject
+(robotControl done);1.0;I am done;robotControl
+(goto shelf);1.0;goto shelf;goto
+(goto diningRoom);1.0;goto dining room;goto
