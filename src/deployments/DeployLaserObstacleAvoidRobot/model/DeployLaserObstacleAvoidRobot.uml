@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
   <uml:Model xmi:id="_UUepcALXEeCNBrVW0_J5qA" name="DeployLaserObstacleAvoidRobot">
-    <elementImport xmi:id="_esyhEALXEeCNBrVW0_J5qA" alias="SmartLaserBaseEmpty">
-      <importedElement xmi:type="uml:Component" href="../../SmartLaserBaseEmpty/model/pim/SmartLaserBaseEmpty_pim.uml#_-IxyYQLNEeCeZs-4B278rA"/>
-    </elementImport>
     <elementImport xmi:id="_etE08ALXEeCNBrVW0_J5qA" alias="SmartPioneerBaseServer">
       <importedElement xmi:type="uml:Component" href="../../SmartPioneerBaseServer/model/pim/SmartPioneerBaseServer_pim.uml#_tNxB4Zf8Ed6diMgK3usWsg"/>
     </elementImport>
     <elementImport xmi:id="_95DaUGakEeCxT79DKJBTXA" alias="SmartLaserLMS200Server">
       <importedElement xmi:type="uml:Component" href="../../SmartLaserLMS200Server/model/pim/SmartLaserLMS200Server_pim.uml#_a7RbIZhuEd6s7_SKW4BMcg"/>
+    </elementImport>
+    <elementImport xmi:id="_a2YgAHTBEeCR1Jk8ChoEKg" alias="SmartLaserObstacleAvoid">
+      <importedElement xmi:type="uml:Component" href="../../SmartLaserObstacleAvoid/model/pim/SmartLaserObstacleAvoid_pim.uml#_rWr_sZilEd6ybMLNVUr2iw"/>
     </elementImport>
     <packagedElement xmi:type="uml:Package" xmi:id="_UUepcQLXEeCNBrVW0_J5qA" name="DeployLaserObstacleAvoidRobot">
       <packagedElement xmi:type="uml:Class" xmi:id="_XkPxEALXEeCNBrVW0_J5qA" name="NamingService"/>
@@ -23,6 +23,14 @@
       <packagedElement xmi:type="uml:Dependency" xmi:id="_Ecf5MGalEeCxT79DKJBTXA" name="FrombaseClienttobasePositionServer">
         <supplier xmi:type="uml:Port" href="../../SmartPioneerBaseServer/model/pim/SmartPioneerBaseServer_pim.uml#_Ty03kJgHEd6s7_SKW4BMcg"/>
         <client xmi:type="uml:Port" href="../../SmartLaserLMS200Server/model/pim/SmartLaserLMS200Server_pim.uml#_9xB5EJhuEd6s7_SKW4BMcg"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_f9j1MHTBEeCR1Jk8ChoEKg" name="FromlaserClienttolaserServer">
+        <supplier xmi:type="uml:Port" href="../../SmartLaserLMS200Server/model/pim/SmartLaserLMS200Server_pim.uml#_5ChikJhuEd6s7_SKW4BMcg"/>
+        <client xmi:type="uml:Port" href="../../SmartLaserObstacleAvoid/model/pim/SmartLaserObstacleAvoid_pim.uml#_7x6cAJilEd6ybMLNVUr2iw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_gVhCMHTBEeCR1Jk8ChoEKg" name="FromnavigationVelocitySendClienttonavigationVelocityServer">
+        <supplier xmi:type="uml:Port" href="../../SmartPioneerBaseServer/model/pim/SmartPioneerBaseServer_pim.uml#_CyaqkJgHEd6s7_SKW4BMcg"/>
+        <client xmi:type="uml:Port" href="../../SmartLaserObstacleAvoid/model/pim/SmartLaserObstacleAvoid_pim.uml#_FCt5AJimEd6ybMLNVUr2iw"/>
       </packagedElement>
     </packagedElement>
     <profileApplication xmi:id="_UUepcgLXEeCNBrVW0_J5qA">
@@ -44,6 +52,6 @@
       <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
     </profileApplication>
   </uml:Model>
-  <CorbaSmartSoft:CorbaSmartSoftDevice xmi:id="_UZrSgALXEeCNBrVW0_J5qA" base_Package="_UUepcQLXEeCNBrVW0_J5qA"/>
+  <CorbaSmartSoft:CorbaSmartSoftDevice xmi:id="_UZrSgALXEeCNBrVW0_J5qA" base_Package="_UUepcQLXEeCNBrVW0_J5qA" ip="192.168.31.115" deployed="remote" username="student" directory="/home/student/tmp/autms"/>
   <CorbaSmartSoft:CorbaNamingService xmi:id="_XnM-cALXEeCNBrVW0_J5qA" base_Class="_XkPxEALXEeCNBrVW0_J5qA" ip="0.0.0.0" port="12345"/>
 </xmi:XMI>

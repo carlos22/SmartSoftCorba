@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <di2:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di2="http://www.papyrusuml.org" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" isVisible="true" name="DeployLaserObstacleAvoidRobot" type="ComponentDiagram">
-  <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="8:12" size="541:452">
+  <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="8:12" size="710:452">
     <property key="PropStereoDisplay" value="CorbaSmartSoft::CorbaSmartSoftDevice"/>
     <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="17:41" size="161:85">
       <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
@@ -22,41 +22,7 @@
         <element xsi:type="uml:Class" href="DeployLaserObstacleAvoidRobot.uml#_XkPxEALXEeCNBrVW0_J5qA"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticChild="//@contained.0/@contained.2 //@contained.0/@contained.4" position="18:149" size="121:123">
-      <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
-      <property key="QUALIFIED_NAME_DEPTH" value="1"/>
-      <property key="papyruseditpart" value="COMPONENTDIAGRAM_NODE_COMPONENT"/>
-      <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="IconStereotype">
-        <element xsi:type="uml:Component" href="../../SmartLaserBaseEmpty/model/pim/SmartLaserBaseEmpty_pim.uml#_-IxyYQLNEeCeZs-4B278rA"/>
-      </semanticModel>
-    </contained>
-    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.1" semanticChild="//@contained.0/@contained.3" position="129:208" size="20:20">
-      <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
-      <property key="QUALIFIED_NAME_DEPTH" value="0"/>
-      <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="IconStereotype">
-        <element xsi:type="uml:Port" href="../../SmartLaserBaseEmpty/model/pim/SmartLaserBaseEmpty_pim.uml#_ChuvoALOEeCeZs-4B278rA"/>
-      </semanticModel>
-      <anchorage position="149:210" graphEdge="//@contained.0/@contained.17"/>
-    </contained>
-    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.2" position="144:208" size="100:100">
-      <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
-      <property key="QUALIFIED_NAME_DEPTH" value="0"/>
-      <property key="custom_disp" value="56"/>
-    </contained>
-    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.1" semanticChild="//@contained.0/@contained.5" position="129:240" size="20:20">
-      <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
-      <property key="QUALIFIED_NAME_DEPTH" value="0"/>
-      <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="IconStereotype">
-        <element xsi:type="uml:Port" href="../../SmartLaserBaseEmpty/model/pim/SmartLaserBaseEmpty_pim.uml#_HH8FwALOEeCeZs-4B278rA"/>
-      </semanticModel>
-      <anchorage position="149:256" graphEdge="//@contained.0/@contained.11"/>
-    </contained>
-    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.4" position="144:240" size="100:100">
-      <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
-      <property key="QUALIFIED_NAME_DEPTH" value="0"/>
-      <property key="custom_disp" value="56"/>
-    </contained>
-    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticChild="//@contained.0/@contained.7 //@contained.0/@contained.9" position="340:306" size="143:126">
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticChild="//@contained.0/@contained.2 //@contained.0/@contained.4" position="410:306" size="256:126">
       <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
       <property key="QUALIFIED_NAME_DEPTH" value="1"/>
       <property key="papyruseditpart" value="COMPONENTDIAGRAM_NODE_COMPONENT"/>
@@ -64,48 +30,33 @@
         <element xsi:type="uml:Component" href="../../SmartPioneerBaseServer/model/pim/SmartPioneerBaseServer_pim.uml#_tNxB4Zf8Ed6diMgK3usWsg"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.6" semanticChild="//@contained.0/@contained.8" position="330:395" size="20:20">
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.1" semanticChild="//@contained.0/@contained.3" position="400:395" size="20:20">
       <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
       <property key="QUALIFIED_NAME_DEPTH" value="0"/>
       <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="IconStereotype">
         <element xsi:type="uml:Port" href="../../SmartPioneerBaseServer/model/pim/SmartPioneerBaseServer_pim.uml#_CyaqkJgHEd6s7_SKW4BMcg"/>
       </semanticModel>
-      <anchorage position="329:403" graphEdge="//@contained.0/@contained.11"/>
+      <anchorage position="399:406" graphEdge="//@contained.0/@contained.18"/>
     </contained>
-    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.7" position="345:395" size="100:100">
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.2" position="415:395" size="100:100">
       <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
       <property key="QUALIFIED_NAME_DEPTH" value="0"/>
       <property key="custom_disp" value="56"/>
     </contained>
-    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.6" semanticChild="//@contained.0/@contained.10" position="330:362" size="20:20">
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.1" semanticChild="//@contained.0/@contained.5" position="400:362" size="20:20">
       <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
       <property key="QUALIFIED_NAME_DEPTH" value="0"/>
       <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="IconStereotype">
         <element xsi:type="uml:Port" href="../../SmartPioneerBaseServer/model/pim/SmartPioneerBaseServer_pim.uml#_Ty03kJgHEd6s7_SKW4BMcg"/>
       </semanticModel>
-      <anchorage position="329:367" graphEdge="//@contained.0/@contained.18"/>
+      <anchorage position="399:367" graphEdge="//@contained.0/@contained.11"/>
     </contained>
-    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.9" position="345:362" size="100:100">
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.4" position="415:362" size="100:100">
       <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
       <property key="QUALIFIED_NAME_DEPTH" value="0"/>
       <property key="custom_disp" value="56"/>
     </contained>
-    <contained xsi:type="di2:GraphEdge" isVisible="true" fontFamily="Arial" fontSize="9" lineStyle="solid" fontColor="0:0:0" foregroundColor="0:0:0" backgroundColor="0:0:0" borderColor="0:0:0" anchor="//@contained.0/@contained.4/@anchorage.0 //@contained.0/@contained.7/@anchorage.0">
-      <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
-      <property key="QUALIFIED_NAME_DEPTH" value="0"/>
-      <contained xsi:type="di2:GraphNode" fontFamily="Arial" fontSize="9" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="0:10" size="100:100">
-        <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
-        <property key="QUALIFIED_NAME_DEPTH" value="0"/>
-      </contained>
-      <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" fontSize="9" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="0:30" size="100:100">
-        <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
-        <property key="QUALIFIED_NAME_DEPTH" value="0"/>
-      </contained>
-      <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="TextStereotype">
-        <element xsi:type="uml:Dependency" href="DeployLaserObstacleAvoidRobot.uml#_6lPOoALXEeCNBrVW0_J5qA"/>
-      </semanticModel>
-    </contained>
-    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticChild="//@contained.0/@contained.13 //@contained.0/@contained.15" position="343:112" size="191:153">
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticChild="//@contained.0/@contained.7 //@contained.0/@contained.9" position="407:124" size="257:142">
       <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
       <property key="QUALIFIED_NAME_DEPTH" value="1"/>
       <property key="papyruseditpart" value="COMPONENTDIAGRAM_NODE_COMPONENT"/>
@@ -113,48 +64,33 @@
         <element xsi:type="uml:Component" href="../../SmartLaserLMS200Server/model/pim/SmartLaserLMS200Server_pim.uml#_a7RbIZhuEd6s7_SKW4BMcg"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.12" semanticChild="//@contained.0/@contained.14" position="333:177" size="20:20">
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.6" semanticChild="//@contained.0/@contained.8" position="397:189" size="20:20">
       <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
       <property key="QUALIFIED_NAME_DEPTH" value="0"/>
       <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="IconStereotype">
         <element xsi:type="uml:Port" href="../../SmartLaserLMS200Server/model/pim/SmartLaserLMS200Server_pim.uml#_5ChikJhuEd6s7_SKW4BMcg"/>
       </semanticModel>
-      <anchorage position="332:184" graphEdge="//@contained.0/@contained.17"/>
+      <anchorage position="396:199" graphEdge="//@contained.0/@contained.17"/>
     </contained>
-    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.13" position="348:177" size="100:100">
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.7" position="412:189" size="100:100">
       <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
       <property key="QUALIFIED_NAME_DEPTH" value="0"/>
       <property key="custom_disp" value="56"/>
     </contained>
-    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.12" semanticChild="//@contained.0/@contained.16" position="333:213" size="20:20">
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.6" semanticChild="//@contained.0/@contained.10" position="397:225" size="20:20">
       <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
       <property key="QUALIFIED_NAME_DEPTH" value="0"/>
       <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="IconStereotype">
         <element xsi:type="uml:Port" href="../../SmartLaserLMS200Server/model/pim/SmartLaserLMS200Server_pim.uml#_9xB5EJhuEd6s7_SKW4BMcg"/>
       </semanticModel>
-      <anchorage position="332:225" graphEdge="//@contained.0/@contained.18"/>
+      <anchorage position="396:237" graphEdge="//@contained.0/@contained.11"/>
     </contained>
-    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.15" position="348:213" size="100:100">
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.9" position="412:225" size="100:100">
       <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
       <property key="QUALIFIED_NAME_DEPTH" value="0"/>
       <property key="custom_disp" value="56"/>
     </contained>
-    <contained xsi:type="di2:GraphEdge" isVisible="true" fontFamily="Arial" fontSize="9" lineStyle="solid" fontColor="0:0:0" foregroundColor="0:0:0" backgroundColor="0:0:0" borderColor="0:0:0" anchor="//@contained.0/@contained.2/@anchorage.0 //@contained.0/@contained.13/@anchorage.0">
-      <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
-      <property key="QUALIFIED_NAME_DEPTH" value="0"/>
-      <contained xsi:type="di2:GraphNode" fontFamily="Arial" fontSize="9" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="0:10" size="100:100">
-        <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
-        <property key="QUALIFIED_NAME_DEPTH" value="0"/>
-      </contained>
-      <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" fontSize="9" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="0:30" size="100:100">
-        <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
-        <property key="QUALIFIED_NAME_DEPTH" value="0"/>
-      </contained>
-      <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="TextStereotype">
-        <element xsi:type="uml:Dependency" href="DeployLaserObstacleAvoidRobot.uml#_EB9SQGalEeCxT79DKJBTXA"/>
-      </semanticModel>
-    </contained>
-    <contained xsi:type="di2:GraphEdge" isVisible="true" fontFamily="Arial" fontSize="9" lineStyle="solid" fontColor="0:0:0" foregroundColor="0:0:0" backgroundColor="0:0:0" borderColor="0:0:0" anchor="//@contained.0/@contained.15/@anchorage.0 //@contained.0/@contained.9/@anchorage.0">
+    <contained xsi:type="di2:GraphEdge" isVisible="true" fontFamily="Arial" fontSize="9" lineStyle="solid" fontColor="0:0:0" foregroundColor="0:0:0" backgroundColor="0:0:0" borderColor="0:0:0" anchor="//@contained.0/@contained.9/@anchorage.0 //@contained.0/@contained.4/@anchorage.0">
       <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
       <property key="QUALIFIED_NAME_DEPTH" value="0"/>
       <contained xsi:type="di2:GraphNode" fontFamily="Arial" fontSize="9" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="0:10" size="100:100">
@@ -168,7 +104,72 @@
       <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="TextStereotype">
         <element xsi:type="uml:Dependency" href="DeployLaserObstacleAvoidRobot.uml#_Ecf5MGalEeCxT79DKJBTXA"/>
       </semanticModel>
-      <waypoints>292:299</waypoints>
+      <waypoints>371:249</waypoints>
+      <waypoints>372:380</waypoints>
+    </contained>
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticChild="//@contained.0/@contained.13 //@contained.0/@contained.15" position="17:141" size="194:181">
+      <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+      <property key="QUALIFIED_NAME_DEPTH" value="1"/>
+      <property key="papyruseditpart" value="COMPONENTDIAGRAM_NODE_COMPONENT"/>
+      <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="IconStereotype">
+        <element xsi:type="uml:Component" href="../../SmartLaserObstacleAvoid/model/pim/SmartLaserObstacleAvoid_pim.uml#_rWr_sZilEd6ybMLNVUr2iw"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.12" semanticChild="//@contained.0/@contained.14" position="201:195" size="20:20">
+      <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+      <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+      <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="IconStereotype">
+        <element xsi:type="uml:Port" href="../../SmartLaserObstacleAvoid/model/pim/SmartLaserObstacleAvoid_pim.uml#_7x6cAJilEd6ybMLNVUr2iw"/>
+      </semanticModel>
+      <anchorage position="221:201" graphEdge="//@contained.0/@contained.17"/>
+    </contained>
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.13" position="213:180" size="162:14">
+      <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+      <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+      <property key="custom_disp" value="56"/>
+    </contained>
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.12" semanticChild="//@contained.0/@contained.16" position="201:291" size="20:20">
+      <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+      <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+      <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="IconStereotype">
+        <element xsi:type="uml:Port" href="../../SmartLaserObstacleAvoid/model/pim/SmartLaserObstacleAvoid_pim.uml#_FCt5AJimEd6ybMLNVUr2iw"/>
+      </semanticModel>
+      <anchorage position="221:309" graphEdge="//@contained.0/@contained.18"/>
+    </contained>
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" semanticParent="//@contained.0/@contained.15" position="216:291" size="100:100">
+      <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+      <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+      <property key="custom_disp" value="56"/>
+    </contained>
+    <contained xsi:type="di2:GraphEdge" isVisible="true" fontFamily="Arial" fontSize="9" lineStyle="solid" fontColor="0:0:0" foregroundColor="0:0:0" backgroundColor="0:0:0" borderColor="0:0:0" anchor="//@contained.0/@contained.13/@anchorage.0 //@contained.0/@contained.7/@anchorage.0">
+      <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+      <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+      <contained xsi:type="di2:GraphNode" fontFamily="Arial" fontSize="9" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="0:10" size="100:100">
+        <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+        <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+      </contained>
+      <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" fontSize="9" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="0:30" size="100:100">
+        <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+        <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+      </contained>
+      <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="TextStereotype">
+        <element xsi:type="uml:Dependency" href="DeployLaserObstacleAvoidRobot.uml#_f9j1MHTBEeCR1Jk8ChoEKg"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di2:GraphEdge" isVisible="true" fontFamily="Arial" fontSize="9" lineStyle="solid" fontColor="0:0:0" foregroundColor="0:0:0" backgroundColor="0:0:0" borderColor="0:0:0" anchor="//@contained.0/@contained.15/@anchorage.0 //@contained.0/@contained.2/@anchorage.0">
+      <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+      <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+      <contained xsi:type="di2:GraphNode" fontFamily="Arial" fontSize="9" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="0:10" size="100:100">
+        <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+        <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+      </contained>
+      <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" fontSize="9" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="0:30" size="100:100">
+        <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+        <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+      </contained>
+      <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="TextStereotype">
+        <element xsi:type="uml:Dependency" href="DeployLaserObstacleAvoidRobot.uml#_gVhCMHTBEeCR1Jk8ChoEKg"/>
+      </semanticModel>
     </contained>
     <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="IconStereotype">
       <element xsi:type="uml:Package" href="DeployLaserObstacleAvoidRobot.uml#_UUepcQLXEeCNBrVW0_J5qA"/>

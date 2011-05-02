@@ -50,9 +50,9 @@ fi
 
 ## start components
 echo "starting components..."
-xterm -e $SMART_ROOT/bin/smartLaserBaseEmpty -filename=SmartLaserBaseEmpty.ini -ORBInitRef NameService=corbaloc:iiop:0.0.0.0:12345/NameService &
-xterm -e $SMART_ROOT/bin/smartLaserLMS200Server -filename=SmartLaserLMS200Server.ini -ORBInitRef NameService=corbaloc:iiop:0.0.0.0:12345/NameService &
-xterm -e $SMART_ROOT/bin/smartPioneerBaseServer -filename=SmartPioneerBaseServer.ini -ORBInitRef NameService=corbaloc:iiop:0.0.0.0:12345/NameService &
+xterm -e ./smartLaserLMS200Server -filename=SmartLaserLMS200Server.ini -ORBInitRef NameService=corbaloc:iiop:0.0.0.0:12345/NameService &
+xterm -e ./smartLaserObstacleAvoid -filename=SmartLaserObstacleAvoid.ini -ORBInitRef NameService=corbaloc:iiop:0.0.0.0:12345/NameService &
+xterm -e ./smartPioneerBaseServer -filename=SmartPioneerBaseServer.ini -ORBInitRef NameService=corbaloc:iiop:0.0.0.0:12345/NameService &
 
 ;; ## start
 		
@@ -62,8 +62,8 @@ xterm -e $SMART_ROOT/bin/smartPioneerBaseServer -filename=SmartPioneerBaseServer
 stop)
 
 echo "kill all components..."
-killall smartLaserBaseEmpty
 killall smartLaserLMS200Server
+killall smartLaserObstacleAvoid
 killall smartPioneerBaseServer
 ## TODO: ssh <username>@<target> 'killall xxx'
 
