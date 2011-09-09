@@ -98,22 +98,17 @@ public:
 	{
 	}
 
+	operator CommNavigationObjectsIDL::CommGMappingParameter() const
+	{
+		return idl_CommGMappingParameter;
+	}
+
 	virtual ~CommGMappingParameter()
 	{
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommNavigationObjectsIDL::CommGMappingParameter &get() const
-	{
-		return idl_CommGMappingParameter;
-	}
-
-	inline void set(const CommNavigationObjectsIDL::CommGMappingParameter &obj)
-	{
-		idl_CommGMappingParameter = obj;
-	}
 
 	static inline std::string identifier(void)
 	{

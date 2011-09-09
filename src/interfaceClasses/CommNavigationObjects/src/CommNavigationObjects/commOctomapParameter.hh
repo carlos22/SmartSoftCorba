@@ -55,6 +55,11 @@ public:
 	{
 	}
 
+	operator CommNavigationObjectsIDL::CommOctomapParameter() const
+	{
+		return idl_CommOctomapParameter;
+	}
+
 	virtual ~CommOctomapParameter()
 	{
 	}
@@ -62,15 +67,6 @@ public:
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
 
-	inline const CommNavigationObjectsIDL::CommOctomapParameter &get() const
-	{
-		return idl_CommOctomapParameter;
-	}
-
-	inline void set(const CommNavigationObjectsIDL::CommOctomapParameter &obj)
-	{
-		idl_CommOctomapParameter = obj;
-	}
 
 	static inline std::string identifier(void)
 	{

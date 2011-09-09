@@ -87,6 +87,11 @@ public:
 	{
 	}
 
+	operator CommBasicObjectsIDL::CommBaseVelocity() const
+	{
+		return idl_CommBaseVelocity;
+	}
+
 	virtual ~CommBaseVelocity()
 	{
 	}
@@ -94,29 +99,9 @@ public:
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
 
-	inline const CommBasicObjectsIDL::CommBaseVelocity &get() const
-	{
-		return idl_CommBaseVelocity;
-	}
-
-	inline void set(const CommBasicObjectsIDL::CommBaseVelocity &obj)
-	{
-		idl_CommBaseVelocity = obj;
-	}
-
 	static inline std::string identifier(void)
 	{
 		return "CommBasicObjects::CommBaseVelocity";
-	}
-
-	//
-	// user interfaces
-
-	inline const CommBasicObjectsIDL::CommBaseVelocity &get_idl() const {
-		return idl_CommBaseVelocity;
-	}
-	inline void set_idl(const CommBasicObjectsIDL::CommBaseVelocity &vel) {
-		idl_CommBaseVelocity = vel;
 	}
 
 	//

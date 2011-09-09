@@ -76,7 +76,7 @@ void CommBaseState::set(const CORBA::Any &a)
 CommBaseState CommBaseState::extrapolate(const CommTimeStamp &ts) const
 {
 	CommBasicObjectsIDL::CommBaseState extrapolated_state;
-  extrapolated_state.time = ts.get_idl();
+  extrapolated_state.time = ts;
   extrapolated_state.base_velocity = idl_CommBaseState.base_velocity;
   extrapolated_state.base_position.z = idl_CommBaseState.base_position.z;
 

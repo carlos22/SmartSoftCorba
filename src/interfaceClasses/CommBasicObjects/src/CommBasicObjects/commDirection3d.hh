@@ -95,21 +95,16 @@ public:
 	{
 	}
 
+	operator CommBasicObjectsIDL::CommDirection3d() const
+	{
+		return idl_CommDirection3d;
+	}
+
 	virtual ~CommDirection3d() {
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommBasicObjectsIDL::CommDirection3d &get() const
-	{
-		return idl_CommDirection3d;
-	}
-
-	inline void set(const CommBasicObjectsIDL::CommDirection3d &obj)
-	{
-		idl_CommDirection3d = obj;
-	}
 
 	static inline std::string identifier(void)
 	{
@@ -120,11 +115,6 @@ public:
 	// user interfaces
 	CommDirection3d(double azimuth, double elevation);
 	//CommDirection3d(const CommBasicObjectsIDL::CommDirection3d &dir);
-
-	/// internal use only
-	inline const CommBasicObjectsIDL::CommDirection3d &get_idl() const {
-		return idl_CommDirection3d;
-	}
 
 	/**
 	 Get the azimuth angle in radians.
@@ -170,10 +160,6 @@ public:
 	 For details, see \ref smart_basic_com-xml.
 	 */
 	void load_xml(std::istream &is);
-
-
-
-
 
 
 };

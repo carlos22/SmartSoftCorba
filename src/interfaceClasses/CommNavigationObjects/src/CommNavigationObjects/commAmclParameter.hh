@@ -86,22 +86,17 @@ public:
 	{
 	}
 
+	operator CommNavigationObjectsIDL::CommAmclParameter() const
+	{
+		return idl_CommAmclParameter;
+	}
+
 	virtual ~CommAmclParameter()
 	{
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommNavigationObjectsIDL::CommAmclParameter &get() const
-	{
-		return idl_CommAmclParameter;
-	}
-
-	inline void set(const CommNavigationObjectsIDL::CommAmclParameter &obj)
-	{
-		idl_CommAmclParameter = obj;
-	}
 
 	static inline std::string identifier(void)
 	{

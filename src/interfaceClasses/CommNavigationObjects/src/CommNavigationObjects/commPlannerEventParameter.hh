@@ -88,23 +88,17 @@ public:
 	{
 	}
 
+	operator CommNavigationObjectsIDL::CommPlannerEventParameter() const
+	{
+		return idl_CommPlannerEventParameter;
+	}
+
 	virtual ~CommPlannerEventParameter()
 	{
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommNavigationObjectsIDL::CommPlannerEventParameter &get() const
-	{
-		return idl_CommPlannerEventParameter;
-	}
-
-	inline void set(
-			const CommNavigationObjectsIDL::CommPlannerEventParameter &obj)
-	{
-		idl_CommPlannerEventParameter = obj;
-	}
 
 	static inline std::string identifier(void)
 	{

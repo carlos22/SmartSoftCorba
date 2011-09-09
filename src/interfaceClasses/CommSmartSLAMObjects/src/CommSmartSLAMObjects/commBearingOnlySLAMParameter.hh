@@ -69,6 +69,9 @@
 #define LISP_STRING    1000
 #endif
 
+/**
+ * The repository for SLAM objects.
+ */
 namespace CommSmartSLAMObjects
 {
 
@@ -89,23 +92,17 @@ public:
 	{
 	}
 
+	operator CommSmartSLAMObjectsIDL::CommBearingOnlySLAMParameter() const
+	{
+		return idl_CommBearingOnlySLAMParameter;
+	}
+
 	virtual ~CommBearingOnlySLAMParameter()
 	{
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommSmartSLAMObjectsIDL::CommBearingOnlySLAMParameter &get() const
-	{
-		return idl_CommBearingOnlySLAMParameter;
-	}
-
-	inline void set(
-			const CommSmartSLAMObjectsIDL::CommBearingOnlySLAMParameter &obj)
-	{
-		idl_CommBearingOnlySLAMParameter = obj;
-	}
 
 	static inline std::string identifier(void)
 	{

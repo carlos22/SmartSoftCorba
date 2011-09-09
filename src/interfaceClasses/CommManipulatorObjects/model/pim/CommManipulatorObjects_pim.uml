@@ -181,8 +181,6 @@
       <ownedLiteral xmi:id="_KWAykD2BEd-Bb4outWe31g" name="SINGLE_POSE"/>
       <ownedLiteral xmi:id="_L1zKUD2BEd-Bb4outWe31g" name="SET_ALL_JOINT_VELOCITY_LIMITS"/>
       <ownedLiteral xmi:id="_OPry0D2BEd-Bb4outWe31g" name="SET_GRIPPER_VELOCITY_LIMIT"/>
-      <ownedLiteral xmi:id="_FZ4hQEWlEeCqkc0SFXo0wA" name="CALIBRATE"/>
-      <ownedLiteral xmi:id="_L_BpQEWlEeCqkc0SFXo0wA" name="CALIBRATE_AXIS"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_sY-W0EMBEd-PisO7V4ZiLQ" name="CommManipulatorId">
       <ownedAttribute xmi:id="_2zlUgEMBEd-PisO7V4ZiLQ" name="id" visibility="public" isUnique="false">
@@ -228,6 +226,40 @@
         <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_xm2PgLBSEd-06-HZ0NYnCg"/>
       </ownedAttribute>
     </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_onwMUNhlEeC4maQwlGGf-A" name="GripperEvent">
+      <ownedLiteral xmi:id="_qWGkgNhlEeC4maQwlGGf-A" name="GRIPPER_GOAL_REACHED"/>
+      <ownedLiteral xmi:id="_t5YeANhlEeC4maQwlGGf-A" name="GRIPPER_GOAL_NOT_REACHED"/>
+      <ownedLiteral xmi:id="_ymqiINiJEeCAgLYXi7v1SA" name="GRIPPER_UNKNOWN"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_xu4I4NhlEeC4maQwlGGf-A" name="CommGripperEvent">
+      <ownedAttribute xmi:id="_2UZigNhlEeC4maQwlGGf-A" name="gripper_event" type="_onwMUNhlEeC4maQwlGGf-A" isUnique="false"/>
+      <ownedAttribute xmi:id="_569ZgNhlEeC4maQwlGGf-A" name="pos" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_R8w54IgZEd6Va88Rz-zvaQ"/>
+        <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_8Q9nkNhlEeC4maQwlGGf-A"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_BVLvYNhmEeC4maQwlGGf-A" name="CommGripperState">
+      <ownedAttribute xmi:id="_EE_kkNhmEeC4maQwlGGf-A" name="pos" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_R8w54IgZEd6Va88Rz-zvaQ"/>
+        <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_GL9RENhmEeC4maQwlGGf-A"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_HJbl8NhmEeC4maQwlGGf-A" name="CommGripperParam">
+      <ownedAttribute xmi:id="_LK7sgNhmEeC4maQwlGGf-A" name="p1" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_R8w54IgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_QcOnANhmEeC4maQwlGGf-A" name="tag" type="_cCxMUNhmEeC4maQwlGGf-A" isUnique="false"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_cCxMUNhmEeC4maQwlGGf-A" name="GripperTagType">
+      <ownedLiteral xmi:id="_goYFgNhmEeC4maQwlGGf-A" name="GRIPPER_OPEN"/>
+      <ownedLiteral xmi:id="_ih1hgNhmEeC4maQwlGGf-A" name="GRIPPER_CLOSE"/>
+      <ownedLiteral xmi:id="_jt0zgNhmEeC4maQwlGGf-A" name="SET_ACCELERATION"/>
+      <ownedLiteral xmi:id="_ly9UANhmEeC4maQwlGGf-A" name="SET_CURRENT"/>
+      <ownedLiteral xmi:id="_nLnJANhmEeC4maQwlGGf-A" name="SET_SPEED"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_HGbnUNlNEeCYqryvX-lwtA" name="CommGripperEventParameter">
+      <ownedAttribute xmi:id="_IL2-UNlNEeCYqryvX-lwtA" name="gripper_event" type="_onwMUNhlEeC4maQwlGGf-A" isUnique="false"/>
+    </packagedElement>
     <profileApplication xmi:id="_du5LENQ_Ed6nTeGEf54M4w">
       <eAnnotations xmi:id="_du5LEdQ_Ed6nTeGEf54M4w" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
@@ -256,4 +288,9 @@
   <SmartMARS:SmartCommObject xmi:id="_4FJqEEMBEd-PisO7V4ZiLQ"/>
   <SmartMARS:SmartCommObject xmi:id="_7c5pAEMBEd-PisO7V4ZiLQ" base_Class="_7cojQEMBEd-PisO7V4ZiLQ"/>
   <SmartMARS:SmartEventState xmi:id="_lnorgLBSEd-06-HZ0NYnCg" base_Class="_llHjALBSEd-06-HZ0NYnCg"/>
+  <SmartMARS:SmartCommObject xmi:id="_yGrk4NhlEeC4maQwlGGf-A" base_Class="_xu4I4NhlEeC4maQwlGGf-A"/>
+  <SmartMARS:SmartCommObject xmi:id="_BudyENhmEeC4maQwlGGf-A" base_Class="_BVLvYNhmEeC4maQwlGGf-A"/>
+  <SmartMARS:SmartCommObject xmi:id="_HKdgsNhmEeC4maQwlGGf-A" base_Class="_HJbl8NhmEeC4maQwlGGf-A"/>
+  <SmartMARS:SmartEventState xmi:id="_JrfFYNlKEeCYqryvX-lwtA"/>
+  <SmartMARS:SmartCommObject xmi:id="_HHmsANlNEeCYqryvX-lwtA" base_Class="_HGbnUNlNEeCYqryvX-lwtA"/>
 </xmi:XMI>

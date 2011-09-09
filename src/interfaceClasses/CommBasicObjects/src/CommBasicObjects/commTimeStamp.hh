@@ -92,22 +92,17 @@ public:
 	{
 	}
 
+	operator CommBasicObjectsIDL::CommTimeStamp() const
+	{
+		return idl_CommTimeStamp;
+	}
+
 	virtual ~CommTimeStamp()
 	{
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	//inline const CommBasicObjectsIDL::CommTimeStamp &get() const
-	//{
-	//	return idl_CommTimeStamp;
-	//}
-
-	inline void set(const CommBasicObjectsIDL::CommTimeStamp &obj)
-	{
-		idl_CommTimeStamp = obj;
-	}
 
 	static inline std::string identifier(void)
 	{
@@ -118,15 +113,6 @@ public:
 	// user interfaces
 	inline CommTimeStamp(const timeval &tv) {
 		set(tv);
-	}
-
-	/// internal use only
-	inline const CommBasicObjectsIDL::CommTimeStamp &get_idl() const {
-		return idl_CommTimeStamp;
-	}
-	/// internal use only
-	inline void set_idl(const CommBasicObjectsIDL::CommTimeStamp &ts) {
-		idl_CommTimeStamp = ts;
 	}
 
 	/**

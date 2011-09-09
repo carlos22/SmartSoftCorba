@@ -86,22 +86,17 @@ public:
 	{
 	}
 
+	operator CommSpeechObjectsIDL::CommSpeechOutputMessage() const
+	{
+		return idl_CommSpeechOutputMessage;
+	}
+
 	virtual ~CommSpeechOutputMessage()
 	{
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommSpeechObjectsIDL::CommSpeechOutputMessage &get() const
-	{
-		return idl_CommSpeechOutputMessage;
-	}
-
-	inline void set(const CommSpeechObjectsIDL::CommSpeechOutputMessage &obj)
-	{
-		idl_CommSpeechOutputMessage = obj;
-	}
 
 	static inline std::string identifier(void)
 	{

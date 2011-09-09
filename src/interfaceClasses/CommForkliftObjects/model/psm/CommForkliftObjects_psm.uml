@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
-  <uml:Model xmi:id="_LFudsGaqEeCwRIvId514VA" name="CommForkliftObjects_psm">
-    <packagedElement xmi:type="uml:Class" xmi:id="_LFudsWaqEeCwRIvId514VA" name="CommForkliftParameter">
-      <ownedAttribute xmi:id="_LFudsmaqEeCwRIvId514VA" name="tag" type="_LFudtmaqEeCwRIvId514VA">
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LFuds2aqEeCwRIvId514VA" value="1"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:id="_LFudtGaqEeCwRIvId514VA" name="parameter1">
+  <uml:Model xmi:id="__wfBwKFXEeC05cW7LP1BKw" name="CommForkliftObjects_psm">
+    <packagedElement xmi:type="uml:Class" xmi:id="__wfBwaFXEeC05cW7LP1BKw" name="CommForkliftParameter">
+      <ownedAttribute xmi:id="__wfBwqFXEeC05cW7LP1BKw" name="parameter1">
         <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LFudtWaqEeCwRIvId514VA" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="__wfo0KFXEeC05cW7LP1BKw" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="__wfo0aFXEeC05cW7LP1BKw" name="tag" type="__wfo06FXEeC05cW7LP1BKw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="__wfo0qFXEeC05cW7LP1BKw" value="1"/>
       </ownedAttribute>
     </packagedElement>
-    <packagedElement xmi:type="uml:Enumeration" xmi:id="_LFudtmaqEeCwRIvId514VA" name="ForkliftTagType">
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="__wfo06FXEeC05cW7LP1BKw" name="ForkliftTagType">
       <ownedLiteral xmi:id="_gp7lQFnhEeCqEclf2nI-xQ" name="MOVE_ABS_MM"/>
     </packagedElement>
-    <profileApplication xmi:id="_LFudt2aqEeCwRIvId514VA">
-      <eAnnotations xmi:id="_LFuduGaqEeCwRIvId514VA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <profileApplication xmi:id="__wfo1KFXEeC05cW7LP1BKw">
+      <eAnnotations xmi:id="__wfo1aFXEeC05cW7LP1BKw" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
       </eAnnotations>
       <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
     </profileApplication>
   </uml:Model>
-  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_LFuduWaqEeCwRIvId514VA" base_Class="_LFudsWaqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="__wfo1qFXEeC05cW7LP1BKw" base_Class="__wfBwaFXEeC05cW7LP1BKw"/>
 </xmi:XMI>

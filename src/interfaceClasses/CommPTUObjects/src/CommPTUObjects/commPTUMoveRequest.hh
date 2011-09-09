@@ -82,22 +82,17 @@ public:
 	{
 	}
 
+	operator CommPTUObjectsIDL::CommPTUMoveRequest() const
+	{
+		return idl_CommPTUMoveRequest;
+	}
+
 	virtual ~CommPTUMoveRequest()
 	{
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommPTUObjectsIDL::CommPTUMoveRequest &get() const
-	{
-		return idl_CommPTUMoveRequest;
-	}
-
-	inline void set(const CommPTUObjectsIDL::CommPTUMoveRequest &obj)
-	{
-		idl_CommPTUMoveRequest = obj;
-	}
 
 	static inline std::string identifier(void)
 	{

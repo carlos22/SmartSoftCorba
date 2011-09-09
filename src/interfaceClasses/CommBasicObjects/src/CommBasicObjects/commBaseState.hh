@@ -112,58 +112,37 @@ public:
 	void set(const CORBA::Any &a);
 
 
-	inline const CommBasicObjectsIDL::CommBaseState &get() const
-	{
-		return idl_CommBaseState;
-	}
-
-	inline void set(const CommBasicObjectsIDL::CommBaseState &obj)
-	{
-		idl_CommBaseState = obj;
-	}
-
 	static inline std::string identifier(void)
 	{
 		return "CommBasicObjects::CommBaseState";
-	}
-
-	//
-	// user interfaces
-    /// internal use only
-	inline const CommBasicObjectsIDL::CommBaseState &get_idl() const {
-		return idl_CommBaseState;
-	}
-	/// internal use only
-	inline void set_idl(const CommBasicObjectsIDL::CommBaseState &state) {
-		idl_CommBaseState = state;
 	}
 
 	/**
 	 Set the time stamp.
 	 */
 	inline void set_time_stamp(const CommTimeStamp &ts) {
-		idl_CommBaseState.time = ts.get_idl();
+		idl_CommBaseState.time = ts;
 	}
 
 	/**
 	 Set the base position.
 	 */
 	inline void set_base_position(const CommBasePosition &bp) {
-		idl_CommBaseState.base_position = bp.get_idl();
+		idl_CommBaseState.base_position = bp;
 	}
 
 	/**
 	 Set the base raw position.
 	 */
 	inline void set_base_raw_position(const CommBasePosition &bp) {
-		idl_CommBaseState.base_raw_position = bp.get_idl();
+		idl_CommBaseState.base_raw_position = bp;
 	}
 
 	/**
 	 Set the base velocity.
 	 */
 	inline void set_base_velocity(const CommBaseVelocity &bv) {
-		idl_CommBaseState.base_velocity = bv.get_idl();
+		idl_CommBaseState.base_velocity = bv;
 	}
 
 	/**

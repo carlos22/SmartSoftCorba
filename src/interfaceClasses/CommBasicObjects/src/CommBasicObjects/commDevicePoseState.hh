@@ -99,16 +99,6 @@ public:
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
 
-	inline const CommBasicObjectsIDL::CommDevicePoseState &get() const
-	{
-		return idl_CommDevicePoseState;
-	}
-
-	inline void set(const CommBasicObjectsIDL::CommDevicePoseState &obj)
-	{
-		idl_CommDevicePoseState = obj;
-	}
-
 	static inline std::string identifier(void)
 	{
 		return "CommBasicObjects::CommDevicePoseState";
@@ -160,7 +150,7 @@ public:
 	 * Set the state of the base.
 	 */
 	inline void set_base_state(const CommBasicObjects::CommBaseState& state) {
-		idl_CommDevicePoseState.stateBase = state.get_idl();
+		idl_CommDevicePoseState.stateBase = state;
 	}
 	/**
 	 * Get the state of the base.

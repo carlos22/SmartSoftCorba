@@ -89,32 +89,22 @@ public:
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
 
-	inline const CommBasicObjectsIDL::CommPosition3d &get() const
-	{
-		return idl_CommPosition3d;
-	}
-
-	inline void set(const CommBasicObjectsIDL::CommPosition3d &obj)
-	{
-		idl_CommPosition3d = obj;
-	}
-
 	static inline std::string identifier(void)
 	{
 		return "CommBasicObjects::CommPosition3d";
 	}
 
+
+	operator CommBasicObjectsIDL::CommPosition3d() const
+	{
+		return idl_CommPosition3d;
+	}
+
 	//
 	// user interfaces
 	CommPosition3d(double x, double y, double z, const double unit = 0.001);
-	//CommPosition3d(const CommBasicObjectsIDL::CommPosition3d &pos);
 
-	inline const CommBasicObjectsIDL::CommPosition3d &get_idl() const {
-		return idl_CommPosition3d;
-	}
-	inline void set_idl(const CommBasicObjectsIDL::CommPosition3d &pos) {
-		idl_CommPosition3d = pos;
-	}
+
 
 	/**
 	 Get the x coordinate of the position.

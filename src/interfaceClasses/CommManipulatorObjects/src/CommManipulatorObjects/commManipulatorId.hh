@@ -71,19 +71,16 @@ public:
 		idl_CommManipulatorId(obj) {
 	}
 
+	operator CommManipulatorObjectsIDL::CommManipulatorId() const
+	{
+		return idl_CommManipulatorId;
+	}
+
 	virtual ~CommManipulatorId() {
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommManipulatorObjectsIDL::CommManipulatorId &get() const {
-		return idl_CommManipulatorId;
-	}
-
-	inline void set(const CommManipulatorObjectsIDL::CommManipulatorId &obj) {
-		idl_CommManipulatorId = obj;
-	}
 
 	static inline std::string identifier(void) {
 		return "CommManipulatorObjects::CommManipulatorId";

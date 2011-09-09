@@ -124,6 +124,28 @@
       <ownedLiteral xmi:id="_DtOJQGtDEeCQ5ZGYEb3XXA" name="PERSON_LOST"/>
       <ownedLiteral xmi:id="_DxpWQGtDEeCQ5ZGYEb3XXA" name="PERSON_FOUND"/>
     </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_WV1KMId-EeC7TO_oLYki_w" name="CommFollowMeRegainParameter">
+      <ownedAttribute xmi:id="_ZI02QId-EeC7TO_oLYki_w" name="tag" type="_gMyoQId-EeC7TO_oLYki_w" isUnique="false"/>
+      <ownedAttribute xmi:id="_Z-wYsId-EeC7TO_oLYki_w" name="parameter1" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_aEZtsId-EeC7TO_oLYki_w" name="parameter2" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_aI5zMId-EeC7TO_oLYki_w" name="parameter3" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_aMy0sId-EeC7TO_oLYki_w" name="parameter4" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_aQ1nMId-EeC7TO_oLYki_w" name="parameter5" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_gMyoQId-EeC7TO_oLYki_w" name="FollowMeRegainTagType">
+      <ownedLiteral xmi:id="_ieb6wId-EeC7TO_oLYki_w" name="REGAIN_RESET"/>
+      <ownedLiteral xmi:id="_ikFPwId-EeC7TO_oLYki_w" name="Literal_1"/>
+    </packagedElement>
     <profileApplication xmi:id="_l-SdsUoxEeC6vIUqTH6m4Q">
       <eAnnotations xmi:id="_l-SdskoxEeC6vIUqTH6m4Q" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
@@ -144,4 +166,6 @@
   <SmartMARS:SmartCommObject xmi:id="_Bt6ZYGtCEeCQ5ZGYEb3XXA" base_Class="_BtDdwGtCEeCQ5ZGYEb3XXA"/>
   <SmartMARS:SmartCommObject xmi:id="_CCNOYGtCEeCQ5ZGYEb3XXA" base_Class="_CBgDwGtCEeCQ5ZGYEb3XXA"/>
   <SmartMARS:SmartEventState xmi:id="_CXMm8GtCEeCQ5ZGYEb3XXA" base_Class="_CWVEQGtCEeCQ5ZGYEb3XXA"/>
+  <SmartMARS:SmartCommObject xmi:id="_OolGsIbmEeCpkawErpPh8Q"/>
+  <SmartMARS:SmartCommObject xmi:id="_WXJY0Id-EeC7TO_oLYki_w" base_Class="_WV1KMId-EeC7TO_oLYki_w"/>
 </xmi:XMI>

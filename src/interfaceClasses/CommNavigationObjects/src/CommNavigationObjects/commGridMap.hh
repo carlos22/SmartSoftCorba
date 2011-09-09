@@ -125,9 +125,14 @@ public:
 	}
 
 	CommGridMap(const CommNavigationObjectsIDL::CommGridMap &obj) :
-		idl_CommGridMap(obj)
-		{
-		}
+	idl_CommGridMap(obj)
+	{
+	}
+
+	operator CommNavigationObjectsIDL::CommGridMap() const
+	{
+		return idl_CommGridMap;
+	}
 
 	virtual ~CommGridMap()
 	{
@@ -136,15 +141,6 @@ public:
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
 
-	inline const CommNavigationObjectsIDL::CommGridMap &get() const
-	{
-		return idl_CommGridMap;
-	}
-
-	inline void set(const CommNavigationObjectsIDL::CommGridMap &obj)
-	{
-		idl_CommGridMap = obj;
-	}
 
 	static inline std::string identifier(void)
 	{
@@ -186,12 +182,12 @@ public:
 	/**
 	      Get the time stamp.
 	 */
-	inline CommBasicObjects::CommTimeStamp get_time_stamp() const { return CommBasicObjects::CommTimeStamp(idl_CommGridMap.time); }
+	inline CommBasicObjects::CommTimeStamp get_time_stamp() const { return idl_CommGridMap.time; }
 
 	/**
 	      Set the time stamp.
 	 */
-	inline void set_time_stamp(const CommBasicObjects::CommTimeStamp &ts) { idl_CommGridMap.time = ts.get_idl(); }
+	inline void set_time_stamp(const CommBasicObjects::CommTimeStamp &ts) { idl_CommGridMap.time = ts; }
 
 
 };

@@ -102,6 +102,11 @@ public:
 	{
 	}
 
+	operator CommBasicObjectsIDL::CommBasePositionUpdate() const
+	{
+		return idl_CommBasePositionUpdate;
+	}
+
 	virtual ~CommBasePositionUpdate()
 	{
 	}
@@ -109,26 +114,10 @@ public:
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
 
-	inline const CommBasicObjectsIDL::CommBasePositionUpdate &get() const
-	{
-		return idl_CommBasePositionUpdate;
-	}
-
-	inline void set(const CommBasicObjectsIDL::CommBasePositionUpdate &obj)
-	{
-		idl_CommBasePositionUpdate = obj;
-	}
-
 	static inline std::string identifier(void)
 	{
 		return "CommBasicObjects::CommBasePositionUpdate";
 	}
-
-
-
-
-
-
 
 	//
 	// user interfaces
@@ -150,17 +139,17 @@ public:
 	  /**
 	    Set the time stamp.
 	   */
-	  inline void set_time_stamp(const CommTimeStamp &ts) { idl_CommBasePositionUpdate.time = ts.get_idl(); }
+	  inline void set_time_stamp(const CommTimeStamp &ts) { idl_CommBasePositionUpdate.time = ts; }
 
 	  /**
 	    Set the old and inaccurate position.
 	   */
-	  inline void set_old_position(const CommBasePosition &bp) { idl_CommBasePositionUpdate.position = bp.get_idl(); }
+	  inline void set_old_position(const CommBasePosition &bp) { idl_CommBasePositionUpdate.position = bp; }
 
 	  /**
 	    Set the new and corrected position.
 	   */
-	  inline void set_corrected_position(const CommBasePosition &bp) { idl_CommBasePositionUpdate.corrected_position = bp.get_idl(); }
+	  inline void set_corrected_position(const CommBasePosition &bp) { idl_CommBasePositionUpdate.corrected_position = bp; }
 
 	  /**
 	    Write information about this update to the given output stream.

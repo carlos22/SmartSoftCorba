@@ -461,6 +461,7 @@
           <body>free behavior</body>
         </ownedComment>
       </ownedLiteral>
+      <ownedLiteral xmi:id="_XOI54JIAEeCaFrPkETTiEA" name="CDL_APPROACH_COVERAGE"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Enumeration" xmi:id="_rY9dQEmaEeC-KYWPZCFBzA" name="PlannerTagType">
       <ownedLiteral xmi:id="_xAGr8EmaEeC-KYWPZCFBzA" name="PLANNER_DELETE_GOAL">

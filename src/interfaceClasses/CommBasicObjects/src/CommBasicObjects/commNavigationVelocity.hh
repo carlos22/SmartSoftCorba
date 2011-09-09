@@ -94,6 +94,13 @@ public:
 	{
 	}
 
+
+	operator CommBasicObjectsIDL::CommNavigationVelocity() const
+	{
+		return idl_CommNavigationVelocity;
+	}
+
+
 	virtual ~CommNavigationVelocity()
 	{
 	}
@@ -101,15 +108,6 @@ public:
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
 
-	inline const CommBasicObjectsIDL::CommNavigationVelocity &get() const
-	{
-		return idl_CommNavigationVelocity;
-	}
-
-	inline void set(const CommBasicObjectsIDL::CommNavigationVelocity &obj)
-	{
-		idl_CommNavigationVelocity = obj;
-	}
 
 	static inline std::string identifier(void)
 	{

@@ -399,6 +399,7 @@ the direction of scan point i is (first_angle + scan_points[i].index * resolutio
     </packagedElement>
     <packagedElement xmi:type="uml:Enumeration" xmi:id="_HdQqsEo5EeC6vIUqTH6m4Q" name="BaseTagType">
       <ownedLiteral xmi:id="_IiAsQEo5EeC6vIUqTH6m4Q" name="BASE_RESET"/>
+      <ownedLiteral xmi:id="_Vm9SwKfPEeCtvMdvwTXqDQ" name="BASE_SONAR"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_vhHJwEvcEeCoUthXHMCjWw" name="CommPropertySet">
       <ownedAttribute xmi:id="_y0Y4YEvcEeCoUthXHMCjWw" name="sets" type="_zrh7wEvcEeCoUthXHMCjWw" isUnique="false">
@@ -529,6 +530,33 @@ the direction of scan point i is (first_angle + scan_points[i].index * resolutio
         <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
       </ownedAttribute>
     </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Iy_iQKZ1EeCdLa25mXpO3A" name="CommBatteryEvent">
+      <ownedAttribute xmi:id="_ONMhIKZ1EeCdLa25mXpO3A" name="chargeValue" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_lyC5QKZ6EeCdLa25mXpO3A" name="state" type="_ZU6qMKZ6EeCdLa25mXpO3A" isUnique="false"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_qjBHMKZ1EeCdLa25mXpO3A" name="CommBatteryParameter">
+      <ownedAttribute xmi:id="_zAuTUKZ1EeCdLa25mXpO3A" name="lowerThreshold" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_AjwagKZ2EeCdLa25mXpO3A" name="upperThreshold" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_tftSoKb1EeCkMo57t2kfWg" name="desiredState" type="_ZU6qMKZ6EeCdLa25mXpO3A" isUnique="false"/>
+      <ownedAttribute xmi:id="_zHRYEKb1EeCkMo57t2kfWg" name="currentState" type="_ZU6qMKZ6EeCdLa25mXpO3A" isUnique="false"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_tiqvMKZ1EeCdLa25mXpO3A" name="CommBatteryState">
+      <ownedAttribute xmi:id="_EGMmgKZ2EeCdLa25mXpO3A" name="chargeValue" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_ZU6qMKZ6EeCdLa25mXpO3A" name="ComparisonState">
+      <ownedLiteral xmi:id="_cP_UMKZ6EeCdLa25mXpO3A" name="GREATER"/>
+      <ownedLiteral xmi:id="_dy8UsKZ6EeCdLa25mXpO3A" name="INBETWEEN"/>
+      <ownedLiteral xmi:id="_i2WkMKZ6EeCdLa25mXpO3A" name="LOWER"/>
+      <ownedLiteral xmi:id="_ZUMtgKbzEeCkMo57t2kfWg" name="UNKNOWN"/>
+    </packagedElement>
     <profileApplication xmi:id="_tpjfUR2GEeCEHoCtEL5pNg">
       <eAnnotations xmi:id="_tpjfUh2GEeCEHoCtEL5pNg" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
@@ -563,4 +591,7 @@ the direction of scan point i is (first_angle + scan_points[i].index * resolutio
   <SmartMARS:SmartCommObject xmi:id="_vjxcMEvcEeCoUthXHMCjWw" base_Class="_vhHJwEvcEeCoUthXHMCjWw"/>
   <SmartMARS:SmartCommObject xmi:id="_boJzUFFjEeC4q5gMSLe4ng" base_Class="_blbPcFFjEeC4q5gMSLe4ng"/>
   <SmartMARS:SmartCommObject xmi:id="_MHX68FYiEeCr0d2zveaPSA" base_Class="_MEDhMFYiEeCr0d2zveaPSA"/>
+  <SmartMARS:SmartCommObject xmi:id="_I1y-oKZ1EeCdLa25mXpO3A" base_Class="_Iy_iQKZ1EeCdLa25mXpO3A"/>
+  <SmartMARS:SmartCommObject xmi:id="_qjrOgKZ1EeCdLa25mXpO3A" base_Class="_qjBHMKZ1EeCdLa25mXpO3A"/>
+  <SmartMARS:SmartEventState xmi:id="_tjVdkKZ1EeCdLa25mXpO3A" base_Class="_tiqvMKZ1EeCdLa25mXpO3A"/>
 </xmi:XMI>

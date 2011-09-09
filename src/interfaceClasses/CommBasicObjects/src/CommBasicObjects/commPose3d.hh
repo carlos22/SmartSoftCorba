@@ -107,16 +107,6 @@ public:
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
 
-	inline const CommBasicObjectsIDL::CommPose3d &get() const
-	{
-		return idl_CommPose3d;
-	}
-
-	inline void set(const CommBasicObjectsIDL::CommPose3d &obj)
-	{
-		idl_CommPose3d = obj;
-	}
-
 	static inline std::string identifier(void)
 	{
 		return "CommBasicObjects::CommPose3d";
@@ -157,24 +147,18 @@ public:
 
 
 	/// internal use only
-	const CommBasicObjectsIDL::CommPose3d &get_idl() const {
-		return idl_CommPose3d;
-	}
-	void set_idl(const CommBasicObjectsIDL::CommPose3d &pose) {
-		idl_CommPose3d = pose;
-	}
 
 	/**
 	 Set the position.
 	 */
 	inline void set_position(const CommPosition3d &pos) {
-		idl_CommPose3d.position = pos.get_idl();
+		idl_CommPose3d.position = pos;
 	}
 	/**
 	 Set the orientation.
 	 */
 	inline void set_orientation(const CommOrientation3d &ori) {
-		idl_CommPose3d.orientation = ori.get_idl();
+		idl_CommPose3d.orientation = ori;
 	}
 
 	/**

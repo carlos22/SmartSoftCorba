@@ -89,22 +89,17 @@ public:
 	{
 	}
 
+	operator CommTrackingObjectsIDL::CommTrackingGoal() const
+	{
+		return idl_CommTrackingGoal;
+	}
+
 	virtual ~CommTrackingGoal()
 	{
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommTrackingObjectsIDL::CommTrackingGoal &get() const
-	{
-		return idl_CommTrackingGoal;
-	}
-
-	inline void set(const CommTrackingObjectsIDL::CommTrackingGoal &obj)
-	{
-		idl_CommTrackingGoal = obj;
-	}
 
 	static inline std::string identifier(void)
 	{

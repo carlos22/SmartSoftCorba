@@ -96,22 +96,17 @@ public:
 	{
 	}
 
+	operator CommBasicObjectsIDL::CommJoystick() const
+	{
+		return idl_CommJoystick;
+	}
+
 	virtual ~CommJoystick()
 	{
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommBasicObjectsIDL::CommJoystick &get() const
-	{
-		return idl_CommJoystick;
-	}
-
-	inline void set(const CommBasicObjectsIDL::CommJoystick &obj)
-	{
-		idl_CommJoystick = obj;
-	}
 
 	static inline std::string identifier(void)
 	{
@@ -120,12 +115,6 @@ public:
 
 	//
 	// user interfaces
-
-	  // duplicate (kept for backward compatibility)
-	  inline const CommBasicObjectsIDL::CommJoystick &get_idl() const { return idl_CommJoystick; }
-
-	  // duplicate (kept for backward compatibility)
-	  inline void set_idl(const CommBasicObjectsIDL::CommJoystick &js) { idl_CommJoystick = js; }
 
 	  /**
 	    Get the position of the x axis as value between -1 and +1.
@@ -202,11 +191,6 @@ public:
 	    if(f<-1) return -32767;
 	    return int(::rint(f*32767));
 	  }
-
-
-
-
-
 
 
 

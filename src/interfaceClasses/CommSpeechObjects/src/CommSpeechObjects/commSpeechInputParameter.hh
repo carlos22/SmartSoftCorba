@@ -72,6 +72,10 @@
 #include "CommSpeechObjects/gen/smartCommSpeechInputParameterC.hh"
 #include "CommSpeechObjects/gen/enumSpeechInputTagType.hh"
 
+
+/**
+ * The repository for speech objects.
+ */
 namespace CommSpeechObjects
 {
 
@@ -93,6 +97,11 @@ public:
 	{
 	}
 
+	operator CommSpeechObjectsIDL::CommSpeechInputParameter() const
+	{
+		return idl_CommSpeechInputParameter;
+	}
+
 	virtual ~CommSpeechInputParameter()
 	{
 	}
@@ -100,15 +109,6 @@ public:
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
 
-	inline const CommSpeechObjectsIDL::CommSpeechInputParameter &get() const
-	{
-		return idl_CommSpeechInputParameter;
-	}
-
-	inline void set(const CommSpeechObjectsIDL::CommSpeechInputParameter &obj)
-	{
-		idl_CommSpeechInputParameter = obj;
-	}
 
 	static inline std::string identifier(void)
 	{

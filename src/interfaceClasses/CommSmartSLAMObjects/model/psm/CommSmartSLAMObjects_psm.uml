@@ -1,101 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
-  <uml:Model xmi:id="_RCNDMGaqEeCwRIvId514VA" name="CommSmartSLAMObjects_psm">
-    <packagedElement xmi:type="uml:Class" xmi:id="_RCNDMWaqEeCwRIvId514VA" name="CommBearingOnlySLAMParameter">
-      <ownedAttribute xmi:id="_RCNDMmaqEeCwRIvId514VA" name="tag" type="_RCNDOmaqEeCwRIvId514VA">
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RCNDM2aqEeCwRIvId514VA" value="1"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:id="_RCNDNGaqEeCwRIvId514VA" name="parameter1">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RCNDNWaqEeCwRIvId514VA" value="1"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:id="_RCNDNmaqEeCwRIvId514VA" name="parameter3">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RCNDN2aqEeCwRIvId514VA" value="1"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:id="_RCNDOGaqEeCwRIvId514VA" name="parameter2">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RCNDOWaqEeCwRIvId514VA" value="1"/>
+  <uml:Model xmi:id="_ykAj8KFYEeC05cW7LP1BKw" name="CommSmartSLAMObjects_psm">
+    <packagedElement xmi:type="uml:Class" xmi:id="_ykAj8aFYEeC05cW7LP1BKw" name="CommViewpointLocations">
+      <ownedAttribute xmi:id="_ykAj8qFYEeC05cW7LP1BKw" name="database" type="_ykAj9KFYEeC05cW7LP1BKw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ykAj86FYEeC05cW7LP1BKw" value="*"/>
       </ownedAttribute>
     </packagedElement>
-    <packagedElement xmi:type="uml:Enumeration" xmi:id="_RCNDOmaqEeCwRIvId514VA" name="BearingOnlySLAMTag">
+    <packagedElement xmi:type="uml:Class" xmi:id="_ykAj9KFYEeC05cW7LP1BKw" name="ViewpointLocation">
+      <ownedAttribute xmi:id="_ykAj9aFYEeC05cW7LP1BKw" name="mean" type="_ykAkAaFYEeC05cW7LP1BKw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ykAj9qFYEeC05cW7LP1BKw" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_ykAj96FYEeC05cW7LP1BKw" name="id">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ykAj-KFYEeC05cW7LP1BKw" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_ykAj-aFYEeC05cW7LP1BKw" name="possibleObservations">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ykAj-qFYEeC05cW7LP1BKw" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_ykAj-6FYEeC05cW7LP1BKw" name="cov" type="_ykAkDKFYEeC05cW7LP1BKw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ykAj_KFYEeC05cW7LP1BKw" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_ykAj_aFYEeC05cW7LP1BKw" name="observationCount">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ykAj_qFYEeC05cW7LP1BKw" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_ykAj_6FYEeC05cW7LP1BKw" name="invCov" type="_ykAkDKFYEeC05cW7LP1BKw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ykAkAKFYEeC05cW7LP1BKw" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_ykAkAaFYEeC05cW7LP1BKw" name="CPose2D">
+      <ownedAttribute xmi:id="_ykAkAqFYEeC05cW7LP1BKw" name="m_is3D">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ykAkA6FYEeC05cW7LP1BKw" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_ykAkBKFYEeC05cW7LP1BKw" name="m_y">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ykAkBaFYEeC05cW7LP1BKw" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_ykAkBqFYEeC05cW7LP1BKw" name="m_phi">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ykAkB6FYEeC05cW7LP1BKw" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_ykAkCKFYEeC05cW7LP1BKw" name="m_z">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ykAkCaFYEeC05cW7LP1BKw" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_ykAkCqFYEeC05cW7LP1BKw" name="m_x">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ykAkC6FYEeC05cW7LP1BKw" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_ykAkDKFYEeC05cW7LP1BKw" name="CMatrixDouble22">
+      <ownedAttribute xmi:id="_ykAkDaFYEeC05cW7LP1BKw" name="m_10">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ykAkDqFYEeC05cW7LP1BKw" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_ykAkD6FYEeC05cW7LP1BKw" name="m_11">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ykAkEKFYEeC05cW7LP1BKw" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_ykAkEaFYEeC05cW7LP1BKw" name="m_01">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ykAkEqFYEeC05cW7LP1BKw" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_ykAkE6FYEeC05cW7LP1BKw" name="m_00">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ykAkFKFYEeC05cW7LP1BKw" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_ykAkFaFYEeC05cW7LP1BKw" name="CommBearingOnlySLAMParameter">
+      <ownedAttribute xmi:id="_ykAkFqFYEeC05cW7LP1BKw" name="parameter2">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ykAkF6FYEeC05cW7LP1BKw" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_ykAkGKFYEeC05cW7LP1BKw" name="parameter1">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ykAkGaFYEeC05cW7LP1BKw" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_ykAkGqFYEeC05cW7LP1BKw" name="parameter3">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ykAkG6FYEeC05cW7LP1BKw" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_ykAkHKFYEeC05cW7LP1BKw" name="tag" type="_ykBLAKFYEeC05cW7LP1BKw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ykAkHaFYEeC05cW7LP1BKw" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_ykBLAKFYEeC05cW7LP1BKw" name="BearingOnlySLAMTag">
       <ownedLiteral xmi:id="_oJn6YE7zEeCjzfDaL2pTSw" name="LANDMARKCOUNT"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_RCNDO2aqEeCwRIvId514VA" name="CommViewpointLocations">
-      <ownedAttribute xmi:id="_RCNDPGaqEeCwRIvId514VA" name="database" type="_RCNDPmaqEeCwRIvId514VA">
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RCNDPWaqEeCwRIvId514VA" value="*"/>
-      </ownedAttribute>
-    </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_RCNDPmaqEeCwRIvId514VA" name="ViewpointLocation">
-      <ownedAttribute xmi:id="_RCNDP2aqEeCwRIvId514VA" name="cov" type="_RCNDS2aqEeCwRIvId514VA">
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RCNDQGaqEeCwRIvId514VA" value="1"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:id="_RCNDQWaqEeCwRIvId514VA" name="id">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RCNDQmaqEeCwRIvId514VA" value="1"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:id="_RCNDQ2aqEeCwRIvId514VA" name="possibleObservations">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RCNDRGaqEeCwRIvId514VA" value="1"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:id="_RCNDRWaqEeCwRIvId514VA" name="observationCount">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RCNDRmaqEeCwRIvId514VA" value="1"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:id="_RCNDR2aqEeCwRIvId514VA" name="invCov" type="_RCNDS2aqEeCwRIvId514VA">
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RCNDSGaqEeCwRIvId514VA" value="1"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:id="_RCNDSWaqEeCwRIvId514VA" name="mean" type="_RCNDVGaqEeCwRIvId514VA">
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RCNDSmaqEeCwRIvId514VA" value="1"/>
-      </ownedAttribute>
-    </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_RCNDS2aqEeCwRIvId514VA" name="CMatrixDouble22">
-      <ownedAttribute xmi:id="_RCNDTGaqEeCwRIvId514VA" name="m_10">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RCNDTWaqEeCwRIvId514VA" value="1"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:id="_RCNDTmaqEeCwRIvId514VA" name="m_11">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RCNDT2aqEeCwRIvId514VA" value="1"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:id="_RCNDUGaqEeCwRIvId514VA" name="m_01">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RCNDUWaqEeCwRIvId514VA" value="1"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:id="_RCNDUmaqEeCwRIvId514VA" name="m_00">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RCNDU2aqEeCwRIvId514VA" value="1"/>
-      </ownedAttribute>
-    </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_RCNDVGaqEeCwRIvId514VA" name="CPose2D">
-      <ownedAttribute xmi:id="_RCNDVWaqEeCwRIvId514VA" name="m_z">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RCNDVmaqEeCwRIvId514VA" value="1"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:id="_RCNDV2aqEeCwRIvId514VA" name="m_is3D">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RCNDWGaqEeCwRIvId514VA" value="1"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:id="_RCNDWWaqEeCwRIvId514VA" name="m_phi">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RCNDWmaqEeCwRIvId514VA" value="1"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:id="_RCNDW2aqEeCwRIvId514VA" name="m_x">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RCNDXGaqEeCwRIvId514VA" value="1"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:id="_RCNDXWaqEeCwRIvId514VA" name="m_y">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_Lv-fEIQJEd658-uedLdk2A"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RCNDXmaqEeCwRIvId514VA" value="1"/>
-      </ownedAttribute>
-    </packagedElement>
-    <profileApplication xmi:id="_RCNDX2aqEeCwRIvId514VA">
-      <eAnnotations xmi:id="_RCNDYGaqEeCwRIvId514VA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <profileApplication xmi:id="_ykBLAaFYEeC05cW7LP1BKw">
+      <eAnnotations xmi:id="_ykBLAqFYEeC05cW7LP1BKw" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
       </eAnnotations>
       <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
     </profileApplication>
   </uml:Model>
-  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_RCNDYWaqEeCwRIvId514VA" base_Class="_RCNDMWaqEeCwRIvId514VA"/>
-  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_RCNDYmaqEeCwRIvId514VA" base_Class="_RCNDO2aqEeCwRIvId514VA"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_ykBLA6FYEeC05cW7LP1BKw" base_Class="_ykAj8aFYEeC05cW7LP1BKw"/>
+  <CorbaSmartSoft:SmartCorbaCommObject xmi:id="_ykBLBKFYEeC05cW7LP1BKw" base_Class="_ykAkFaFYEeC05cW7LP1BKw"/>
 </xmi:XMI>

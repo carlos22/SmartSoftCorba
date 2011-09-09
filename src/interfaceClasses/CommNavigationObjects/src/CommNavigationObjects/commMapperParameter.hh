@@ -85,12 +85,13 @@ protected:
 public:
 	CommMapperParameter()
 	{
-		//idl_CommMapperParameter.tag = 0;
+		idl_CommMapperParameter.tag = CommNavigationObjectsIDL::LITERAL_MAPPER_CUR_LTM;
 		idl_CommMapperParameter.parameter1 = 0;
 		idl_CommMapperParameter.parameter2 = 0;
 		idl_CommMapperParameter.parameter3 = 0;
 		idl_CommMapperParameter.parameter4 = 0;
 		idl_CommMapperParameter.parameter5 = 0;
+		idl_CommMapperParameter.parameter6 = "";
 	}
 
 	CommMapperParameter(
@@ -99,22 +100,17 @@ public:
 	{
 	}
 
+	operator CommNavigationObjectsIDL::CommMapperParameter() const
+	{
+		return idl_CommMapperParameter;
+	}
+
 	virtual ~CommMapperParameter()
 	{
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommNavigationObjectsIDL::CommMapperParameter &get() const
-	{
-		return idl_CommMapperParameter;
-	}
-
-	inline void set(const CommNavigationObjectsIDL::CommMapperParameter &obj)
-	{
-		idl_CommMapperParameter = obj;
-	}
 
 	static inline std::string identifier(void)
 	{

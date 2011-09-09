@@ -74,6 +74,9 @@
 #define LISP_STRING    1000
 #endif
 
+/**
+ * The repository for forklift objects.
+ */
 namespace CommForkliftObjects
 {
 
@@ -94,22 +97,17 @@ public:
 	{
 	}
 
+	operator CommForkliftObjectsIDL::CommForkliftParameter() const
+	{
+		return idl_CommForkliftParameter;
+	}
+
 	virtual ~CommForkliftParameter()
 	{
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommForkliftObjectsIDL::CommForkliftParameter &get() const
-	{
-		return idl_CommForkliftParameter;
-	}
-
-	inline void set(const CommForkliftObjectsIDL::CommForkliftParameter &obj)
-	{
-		idl_CommForkliftParameter = obj;
-	}
 
 	static inline std::string identifier(void)
 	{

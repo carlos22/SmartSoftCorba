@@ -139,15 +139,15 @@ void CommMobileLaserScan::load_xml(std::istream &is)
 
   CommPose3d world_pose;
   world_pose.load_xml(is);
-  _scan.laser_world_pose = world_pose.get_idl();
+  _scan.laser_world_pose = world_pose;
 
   CommPose3d sensor_pose;
   sensor_pose.load_xml(is);
-  _scan.laser_scan_pose.sensor_pose = sensor_pose.get_idl();
+  _scan.laser_scan_pose.sensor_pose = sensor_pose;
 
   CommLaserScan scan;
   scan.load_xml(is);
-  _scan.laser_scan_pose.laser_scan = scan.get_idl();
+  _scan.laser_scan_pose.laser_scan = scan;
 
   kmp_end.search(is);
 }

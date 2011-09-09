@@ -685,7 +685,7 @@
       <element xsi:type="uml:Class" href="CommNavigationObjects_pim.uml#_Svv6kEmUEeC-KYWPZCFBzA"/>
     </semanticModel>
   </contained>
-  <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="612:515" size="265:542">
+  <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="612:515" size="265:562">
     <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
     <property key="QUALIFIED_NAME_DEPTH" value="0"/>
     <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="20:20" size="100:100">
@@ -906,6 +906,13 @@
         <property key="QUALIFIED_NAME_DEPTH" value="0"/>
         <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="TextStereotype">
           <element xsi:type="uml:EnumerationLiteral" href="CommNavigationObjects_pim.uml#_JHXRwEmZEeC-KYWPZCFBzA"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="20:20" size="100:100">
+        <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+        <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+        <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="TextStereotype">
+          <element xsi:type="uml:EnumerationLiteral" href="CommNavigationObjects_pim.uml#_XOI54JIAEeCaFrPkETTiEA"/>
         </semanticModel>
       </contained>
     </contained>

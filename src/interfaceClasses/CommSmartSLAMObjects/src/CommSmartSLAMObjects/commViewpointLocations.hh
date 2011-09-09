@@ -86,22 +86,19 @@ public:
 	{
 	}
 
+
+	operator CommSmartSLAMObjectsIDL::CommViewpointLocations() const
+	{
+		return idl_CommViewpointLocations;
+	}
+
+
 	virtual ~CommViewpointLocations()
 	{
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommSmartSLAMObjectsIDL::CommViewpointLocations &get() const
-	{
-		return idl_CommViewpointLocations;
-	}
-
-	inline void set(const CommSmartSLAMObjectsIDL::CommViewpointLocations &obj)
-	{
-		idl_CommViewpointLocations = obj;
-	}
 
 	static inline std::string identifier(void)
 	{

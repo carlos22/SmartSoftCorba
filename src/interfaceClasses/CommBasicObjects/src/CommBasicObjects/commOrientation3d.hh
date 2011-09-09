@@ -101,42 +101,24 @@ public:
 	{
 	}
 
-
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommBasicObjectsIDL::CommOrientation3d &get() const
-	{
-		return idl_CommOrientation3d;
-	}
-
-	inline void set(const CommBasicObjectsIDL::CommOrientation3d &obj)
-	{
-		idl_CommOrientation3d = obj;
-	}
 
 	static inline std::string identifier(void)
 	{
 		return "CommBasicObjects::CommOrientation3d";
 	}
 
-
-
-
+	operator CommBasicObjectsIDL::CommOrientation3d() const
+	{
+		return idl_CommOrientation3d;
+	}
 
 	//
 	// user interfaces
 
 	CommOrientation3d(double azimuth, double elevation, double roll);
 
-	/// internal use only
-	inline const CommBasicObjectsIDL::CommOrientation3d &get_idl() const {
-		return idl_CommOrientation3d;
-	}
-	/// internal use only
-	inline void set_idl(const CommBasicObjectsIDL::CommOrientation3d &ori) {
-		idl_CommOrientation3d = ori;
-	}
 
 	/**
 	 Get the azimuth in radians.

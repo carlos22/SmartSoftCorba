@@ -96,7 +96,7 @@
       <element xsi:type="uml:Class" href="CommPTUObjects_pim.uml#_51_-AIBJEd-acYooFeoGmw"/>
     </semanticModel>
   </contained>
-  <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="35:228" size="208:177">
+  <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="35:173" size="208:177">
     <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
     <property key="QUALIFIED_NAME_DEPTH" value="0"/>
     <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="20:20" size="100:100">
@@ -163,7 +163,7 @@
       <element xsi:type="uml:Enumeration" href="CommPTUObjects_pim.uml#_n_FKUIBKEd-acYooFeoGmw"/>
     </semanticModel>
   </contained>
-  <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="307:228" size="323:177">
+  <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="307:173" size="323:178">
     <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
     <property key="QUALIFIED_NAME_DEPTH" value="0"/>
     <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="20:20" size="100:100">
@@ -174,6 +174,13 @@
         <property key="QUALIFIED_NAME_DEPTH" value="0"/>
         <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="TextStereotype">
           <element xsi:type="uml:EnumerationLiteral" href="CommPTUObjects_pim.uml#_Jwl9AIBLEd-acYooFeoGmw"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="20:20" size="100:100">
+        <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+        <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+        <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="TextStereotype">
+          <element xsi:type="uml:EnumerationLiteral" href="CommPTUObjects_pim.uml#_mJeosJG8EeC0aKIDSnFHLA"/>
         </semanticModel>
       </contained>
       <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="20:20" size="100:100">
@@ -211,12 +218,19 @@
           <element xsi:type="uml:EnumerationLiteral" href="CommPTUObjects_pim.uml#_NRvvkIBLEd-acYooFeoGmw"/>
         </semanticModel>
       </contained>
+      <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="20:20" size="100:100">
+        <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+        <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+        <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="TextStereotype">
+          <element xsi:type="uml:EnumerationLiteral" href="CommPTUObjects_pim.uml#_4A59YJeHEeCSzqY0oMxIUQ"/>
+        </semanticModel>
+      </contained>
     </contained>
     <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="TextStereotype">
       <element xsi:type="uml:Enumeration" href="CommPTUObjects_pim.uml#_GWw6cIBLEd-acYooFeoGmw"/>
     </semanticModel>
   </contained>
-  <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="683:51" size="228:163">
+  <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="683:51" size="228:168">
     <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
     <property key="QUALIFIED_NAME_DEPTH" value="0"/>
     <property key="PropStereoDisplay" value="SmartMARS::SmartCommObject"/>
@@ -378,6 +392,90 @@
     </contained>
     <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="TextStereotype">
       <element xsi:type="uml:Enumeration" href="CommPTUObjects_pim.uml#_AJEn4JlfEd-4u_zvtbRLmA"/>
+    </semanticModel>
+  </contained>
+  <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="308:368" size="323:70">
+    <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+    <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+    <property key="PropStereoDisplay" value="SmartMARS::SmartEventState"/>
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="20:20" size="100:100">
+      <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+      <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+      <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="166:157:183" position="20:20" size="100:100">
+        <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+        <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+        <property key="custom_disp" value="252"/>
+        <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="TextStereotype">
+          <element xsi:type="uml:Property" href="CommPTUObjects_pim.uml#_-YKuMJGkEeCJ6P3V2Q1peA"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="20:20" size="100:100">
+      <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+      <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+    </contained>
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="20:20" size="100:100">
+      <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+      <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+    </contained>
+    <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="IconStereotype">
+      <element xsi:type="uml:Class" href="CommPTUObjects_pim.uml#_68IFIJGkEeCJ6P3V2Q1peA"/>
+    </semanticModel>
+  </contained>
+  <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="308:453" size="323:70">
+    <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+    <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+    <property key="PropStereoDisplay" value="SmartMARS::SmartCommObject"/>
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="20:20" size="100:100">
+      <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+      <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+      <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="166:157:183" position="20:20" size="100:100">
+        <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+        <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+        <property key="custom_disp" value="252"/>
+        <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="TextStereotype">
+          <element xsi:type="uml:Property" href="CommPTUObjects_pim.uml#_W1VAoJGlEeCJ6P3V2Q1peA"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="20:20" size="100:100">
+      <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+      <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+    </contained>
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="20:20" size="100:100">
+      <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+      <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+    </contained>
+    <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="IconStereotype">
+      <element xsi:type="uml:Class" href="CommPTUObjects_pim.uml#_Mny1oJGlEeCJ6P3V2Q1peA"/>
+    </semanticModel>
+  </contained>
+  <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="29:368" size="253:70">
+    <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+    <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+    <property key="PropStereoDisplay" value="SmartMARS::SmartCommObject"/>
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="20:20" size="100:100">
+      <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+      <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+      <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="166:157:183" position="20:20" size="100:100">
+        <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+        <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+        <property key="custom_disp" value="252"/>
+        <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="TextStereotype">
+          <element xsi:type="uml:Property" href="CommPTUObjects_pim.uml#_knIjoJGlEeCJ6P3V2Q1peA"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="20:20" size="100:100">
+      <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+      <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+    </contained>
+    <contained xsi:type="di2:GraphNode" isVisible="true" fontFamily="Arial" lineStyle="solid" fontColor="0:0:0" foregroundColor="248:249:214" backgroundColor="248:249:214" borderColor="157:124:47" position="20:20" size="100:100">
+      <property key="STEREOTYPE_DISPLAY_LOCATION" value="Comment"/>
+      <property key="QUALIFIED_NAME_DEPTH" value="0"/>
+    </contained>
+    <semanticModel xsi:type="di2:Uml1SemanticModelBridge" presentation="IconStereotype">
+      <element xsi:type="uml:Class" href="CommPTUObjects_pim.uml#_fn_wIJGlEeCJ6P3V2Q1peA"/>
     </semanticModel>
   </contained>
   <owner xsi:type="di2:Uml1SemanticModelBridge">

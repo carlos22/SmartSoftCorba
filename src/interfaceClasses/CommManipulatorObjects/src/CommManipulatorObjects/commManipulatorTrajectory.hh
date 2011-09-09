@@ -74,19 +74,16 @@ public:
 		idl_CommManipulatorTrajectory(obj) {
 	}
 
+	operator CommManipulatorObjectsIDL::CommManipulatorTrajectory() const
+	{
+		return idl_CommManipulatorTrajectory;
+	}
+
 	virtual ~CommManipulatorTrajectory() {
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommManipulatorObjectsIDL::CommManipulatorTrajectory &get() const {
-		return idl_CommManipulatorTrajectory;
-	}
-
-	inline void set(const CommManipulatorObjectsIDL::CommManipulatorTrajectory &obj) {
-		idl_CommManipulatorTrajectory = obj;
-	}
 
 	static inline std::string identifier(void) {
 		return "CommManipulatorObjects::CommManipulatorTrajectory";

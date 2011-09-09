@@ -78,22 +78,17 @@ public:
 	{
 	}
 
+	operator CommBasicObjectsIDL::CommIMUData() const
+	{
+		return idl_CommIMUData;
+	}
+
 	virtual ~CommIMUData()
 	{
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommBasicObjectsIDL::CommIMUData &get() const
-	{
-		return idl_CommIMUData;
-	}
-
-	inline void set(const CommBasicObjectsIDL::CommIMUData &obj)
-	{
-		idl_CommIMUData = obj;
-	}
 
 	static inline std::string identifier(void)
 	{

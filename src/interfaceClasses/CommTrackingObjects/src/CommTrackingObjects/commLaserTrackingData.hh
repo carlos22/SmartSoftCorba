@@ -87,6 +87,11 @@ public:
 	{
 	}
 
+	operator CommTrackingObjectsIDL::CommLaserTrackingData() const
+	{
+		return idl_CommLaserTrackingData;
+	}
+
 	virtual ~CommLaserTrackingData()
 	{
 	}
@@ -94,15 +99,6 @@ public:
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
 
-	inline const CommTrackingObjectsIDL::CommLaserTrackingData &get() const
-	{
-		return idl_CommLaserTrackingData;
-	}
-
-	inline void set(const CommTrackingObjectsIDL::CommLaserTrackingData &obj)
-	{
-		idl_CommLaserTrackingData = obj;
-	}
 
 	static inline std::string identifier(void)
 	{
@@ -112,9 +108,7 @@ public:
 	//
 	// user interfaces
 	/// internal use only
-	inline const CommTrackingObjects::CommLaserTrackingData &get_idl() const { return idl_CommLaserTrackingData; }
-//	/// internal use only
-	inline void set_idl(const CommTrackingObjectsIDL::CommLaserTrackingData &data) { idl_CommLaserTrackingData = data; }
+
 
 	 //
 	  // SET
@@ -125,7 +119,7 @@ public:
 	   */
 	  inline void set_laser_scan(const CommBasicObjects::CommMobileLaserScan &scan)
 	  {
-		  idl_CommLaserTrackingData.scan = scan.get();
+		  idl_CommLaserTrackingData.scan = scan;
 	  }
 
 	  /**

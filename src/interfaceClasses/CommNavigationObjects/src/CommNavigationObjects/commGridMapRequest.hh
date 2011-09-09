@@ -98,9 +98,14 @@ public:
 
 	// copy constructor
 	CommGridMapRequest(const CommNavigationObjectsIDL::CommGridMapRequest &obj) :
-		idl_CommGridMapRequest(obj)
-		{
-		}
+	idl_CommGridMapRequest(obj)
+	{
+	}
+
+	operator CommNavigationObjectsIDL::CommGridMapRequest() const
+	{
+		return idl_CommGridMapRequest;
+	}
 
 	// implicitly destroy the map class
 	virtual ~CommGridMapRequest()
@@ -110,15 +115,6 @@ public:
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
 
-	inline const CommNavigationObjectsIDL::CommGridMapRequest &get() const
-	{
-		return idl_CommGridMapRequest;
-	}
-
-	inline void set(const CommNavigationObjectsIDL::CommGridMapRequest &obj)
-	{
-		idl_CommGridMapRequest = obj;
-	}
 
 	static inline std::string identifier(void)
 	{

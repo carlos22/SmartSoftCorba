@@ -89,22 +89,18 @@ public:
 	{
 	}
 
+	operator CommBasicObjectsIDL::CommVoid() const
+	{
+		return idl_CommVoid;
+	}
+
+
 	virtual ~CommVoid()
 	{
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommBasicObjectsIDL::CommVoid &get() const
-	{
-		return idl_CommVoid;
-	}
-
-	inline void set(const CommBasicObjectsIDL::CommVoid &obj)
-	{
-		idl_CommVoid = obj;
-	}
 
 	static inline std::string identifier(void)
 	{

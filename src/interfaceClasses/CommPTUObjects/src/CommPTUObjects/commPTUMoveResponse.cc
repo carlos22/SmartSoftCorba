@@ -67,36 +67,12 @@ void CommPTUMoveResponse::set(const CORBA::Any &a)
 	}
 }
 
-std::string CommPTUMoveResponse::stateToString(PTUMoveStatus status) {
-	switch (status) {
-	case PTUMoveStatus::OK: {
-		return std::string("OK");
-	}
-	case PTUMoveStatus::PAN_OUT_OF_RANGE: {
-		return std::string("PAN_OUT_OF_RANGE");
-	}
-	case PTUMoveStatus::TILT_OUT_OF_RANGE: {
-		return std::string("TILT_OUT_OF_RANGE");
-	}
-	case PTUMoveStatus::PAN_TILT_OUT_OF_RANGE: {
-		return std::string("PAN_TILT_OUT_OF_RANGE");
-	}
-	case PTUMoveStatus::FAILURE: {
-		return std::string("FAILURE");
-	}
-	case PTUMoveStatus::HALTED: {
-		return std::string("HALTED");
-	}
-	}
-	return "";
-}
-
 void CommPTUMoveResponse::print(std::ostream &os) const {
 	CommBasicObjects::CommBaseState base(idl_CommPTUMoveResponse.stateBase);
 	CommBasicObjects::CommPose3d pose(idl_CommPTUMoveResponse.devicePose);
 
 	os << "CommPTUMoveResponse (\n";
 	os << base << ",\n" << pose;
-	os << ",\n" << "status=" << stateToString(get_status());
+	os << ",\n" << "status=" << get_status();
 	os << "\n)";
 }

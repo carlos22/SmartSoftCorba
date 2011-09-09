@@ -76,23 +76,17 @@ public:
 	{
 	}
 
+	operator CommManipulationPlannerObjectsIDL::CommManipulationPlannerEventParameter() const
+	{
+		return idl_CommManipulationPlannerEventParameter;
+	}
+
 	virtual ~CommManipulationPlannerEventParameter()
 	{
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommManipulationPlannerObjectsIDL::CommManipulationPlannerEventParameter &get() const
-	{
-		return idl_CommManipulationPlannerEventParameter;
-	}
-
-	inline void set(
-			const CommManipulationPlannerObjectsIDL::CommManipulationPlannerEventParameter &obj)
-	{
-		idl_CommManipulationPlannerEventParameter = obj;
-	}
 
 	static inline std::string identifier(void)
 	{

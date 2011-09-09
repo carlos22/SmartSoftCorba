@@ -114,6 +114,11 @@ public:
 	{
 	}
 
+	operator CommBasicObjectsIDL::CommMobileLaserScan() const
+	{
+		return _scan;
+	}
+
 	virtual ~CommMobileLaserScan()
 	{
 	}
@@ -121,15 +126,6 @@ public:
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
 
-	inline const CommBasicObjectsIDL::CommMobileLaserScan &get() const
-	{
-		return _scan;
-	}
-
-	inline void set(const CommBasicObjectsIDL::CommMobileLaserScan &obj)
-	{
-		_scan = obj;
-	}
 
 	static inline std::string identifier(void)
 	{
@@ -889,7 +885,7 @@ public:
 	  /**
 	    Set the base state associated to this laser scan.
 	   */
-	  inline void set_base_state(const CommBaseState &bs) { _scan.base_state = bs.get_idl(); }
+	  inline void set_base_state(const CommBaseState &bs) { _scan.base_state = bs; }
 
 	  /**
 	    Set the global x position of the scanner at the moment when the scan was recorded.
@@ -925,7 +921,7 @@ public:
 	    Set the pose of the sensor relative to the robot coordinate system.
 	  */
 	  inline void set_sensor_pose(const CommPose3d &pose) {
-		_scan.laser_scan_pose.sensor_pose = pose.get_idl();
+		_scan.laser_scan_pose.sensor_pose = pose;
 	  }
 
 
@@ -937,7 +933,7 @@ public:
 	  /**
 	    Set the time stamp of this scan.
 	   */
-	  inline void set_scan_time_stamp(const CommTimeStamp &ts) { _scan.laser_scan_pose.laser_scan.time = ts.get_idl(); }
+	  inline void set_scan_time_stamp(const CommTimeStamp &ts) { _scan.laser_scan_pose.laser_scan.time = ts; }
 
 	  /**
 	    Set the sequence counter of this scan.

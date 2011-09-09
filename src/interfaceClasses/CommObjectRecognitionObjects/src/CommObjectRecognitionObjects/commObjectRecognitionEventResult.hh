@@ -81,6 +81,12 @@ public:
 	{
 	}
 
+	operator CommObjectRecognitionObjectsIDL::CommObjectRecognitionEventResult() const
+	{
+		return idl_CommObjectRecognitionEventResult;
+	}
+
+
 	virtual ~CommObjectRecognitionEventResult()
 	{
 	}
@@ -88,16 +94,6 @@ public:
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
 
-	inline const CommObjectRecognitionObjectsIDL::CommObjectRecognitionEventResult &get() const
-	{
-		return idl_CommObjectRecognitionEventResult;
-	}
-
-	inline void set(
-			const CommObjectRecognitionObjectsIDL::CommObjectRecognitionEventResult &obj)
-	{
-		idl_CommObjectRecognitionEventResult = obj;
-	}
 
 	static inline std::string identifier(void)
 	{
@@ -125,6 +121,12 @@ public:
 			break;
 		case CommObjectRecognitionObjectsIDL::LITERAL_UNSET:
 			stream << "((behaviour unset)";
+			break;
+		case CommObjectRecognitionObjectsIDL::LITERAL_CLUSTERING_OFF:
+			stream << "((behaviour clusteringoff)";
+			break;
+		case CommObjectRecognitionObjectsIDL::LITERAL_CLUSTERING_ON:
+			stream << "((behaviour clusteringon)";
 			break;
 		}
 

@@ -85,23 +85,17 @@ public:
 	{
 	}
 
+	operator CommSpeechObjectsIDL::CommSpeechInputEventParameter() const
+	{
+		return idl_CommSpeechInputEventParameter;
+	}
+
 	virtual ~CommSpeechInputEventParameter()
 	{
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommSpeechObjectsIDL::CommSpeechInputEventParameter &get() const
-	{
-		return idl_CommSpeechInputEventParameter;
-	}
-
-	inline void set(
-			const CommSpeechObjectsIDL::CommSpeechInputEventParameter &obj)
-	{
-		idl_CommSpeechInputEventParameter = obj;
-	}
 
 	static inline std::string identifier(void)
 	{

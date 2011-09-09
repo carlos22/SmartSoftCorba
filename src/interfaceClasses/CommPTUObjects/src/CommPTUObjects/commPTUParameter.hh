@@ -70,6 +70,10 @@
 #define LISP_STRING    1000
 #endif
 
+
+/**
+ * The repository for pan tilt units communication objects.
+ */
 namespace CommPTUObjects {
 
 class CommPTUParameter {
@@ -84,19 +88,16 @@ public:
 		idl_CommPTUParameter(obj) {
 	}
 
+	operator CommPTUObjectsIDL::CommPTUParameter() const
+	{
+		return idl_CommPTUParameter;
+	}
+
 	virtual ~CommPTUParameter() {
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommPTUObjectsIDL::CommPTUParameter &get() const {
-		return idl_CommPTUParameter;
-	}
-
-	inline void set(const CommPTUObjectsIDL::CommPTUParameter &obj) {
-		idl_CommPTUParameter = obj;
-	}
 
 	static inline std::string identifier(void) {
 		return "CommPTUObjects::CommPTUParameter";

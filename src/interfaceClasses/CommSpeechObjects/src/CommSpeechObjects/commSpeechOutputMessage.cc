@@ -71,7 +71,7 @@ void CommSpeechOutputMessage::set(const CORBA::Any &a)
 }
 CommSpeechOutputMessage::CommSpeechOutputMessage(const std::string &text)
 {
-	idl_CommSpeechOutputMessage.time = CommBasicObjects::CommTimeStamp::now().get_idl();
+	idl_CommSpeechOutputMessage.time = CommBasicObjects::CommTimeStamp::now();
 	idl_CommSpeechOutputMessage.reset = false;
 	idl_CommSpeechOutputMessage.ttl = 3600;
 	idl_CommSpeechOutputMessage.text = text.c_str();
@@ -79,7 +79,7 @@ CommSpeechOutputMessage::CommSpeechOutputMessage(const std::string &text)
 
 void CommSpeechOutputMessage::set_creation_time_now()
 {
-	idl_CommSpeechOutputMessage.time = CommBasicObjects::CommTimeStamp::now().get_idl();
+	idl_CommSpeechOutputMessage.time = CommBasicObjects::CommTimeStamp::now();
 }
 
 void CommSpeechOutputMessage::print(std::ostream &os) const
@@ -114,7 +114,7 @@ void CommSpeechOutputMessage::load_xml(std::istream &is)
 
   CommBasicObjects::CommTimeStamp ts;
   ts.load_xml(is);
-  idl_CommSpeechOutputMessage.time = ts.get_idl();
+  idl_CommSpeechOutputMessage.time = ts;
 
   kmp_ttl.search(is);
   is >> idl_CommSpeechOutputMessage.ttl;

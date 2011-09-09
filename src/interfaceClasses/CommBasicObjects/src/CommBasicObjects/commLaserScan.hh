@@ -103,6 +103,11 @@ public:
 	{
 	}
 
+	operator CommBasicObjectsIDL::CommLaserScan() const
+	{
+		return _scan;
+	}
+
 	virtual ~CommLaserScan()
 	{
 	}
@@ -110,42 +115,10 @@ public:
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
 
-	inline const CommBasicObjectsIDL::CommLaserScan &get() const
-	{
-		return _scan;
-	}
-
-	inline void set(const CommBasicObjectsIDL::CommLaserScan &obj)
-	{
-		_scan = obj;
-	}
-
 	static inline std::string identifier(void)
 	{
 		return "CommBasicObjects::CommLaserScan";
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-	//
-	// user interfaces
-
-	  /// \internal
-	  inline const CommBasicObjectsIDL::CommLaserScan &get_idl() const { return _scan; }
-	  /// \internal
-	  inline void set_idl(const CommBasicObjectsIDL::CommLaserScan &scan) { _scan = scan; }
-
-
-
 
 	  //
 	  // TYPES
@@ -356,7 +329,7 @@ public:
 	  /**
 	    Set the time stamp of this scan.
 	   */
-	  inline void set_scan_time_stamp(const CommTimeStamp &ts) { _scan.time = ts.get_idl(); }
+	  inline void set_scan_time_stamp(const CommTimeStamp &ts) { _scan.time = ts; }
 
 	  /**
 	    Set the sequence counter of this scan.

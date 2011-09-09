@@ -89,15 +89,16 @@ public:
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
 
-	inline const CommBasicObjectsIDL::CommPropertySet &get() const
+	CommPropertySet(const CommBasicObjectsIDL::CommPropertySet &obj) :
+		idl_CommPropertySet(obj)
+	{
+	}
+
+	operator CommBasicObjectsIDL::CommPropertySet() const
 	{
 		return idl_CommPropertySet;
 	}
 
-	inline void set(const CommBasicObjectsIDL::CommPropertySet &obj)
-	{
-		idl_CommPropertySet = obj;
-	}
 
 	static inline std::string identifier(void)
 	{

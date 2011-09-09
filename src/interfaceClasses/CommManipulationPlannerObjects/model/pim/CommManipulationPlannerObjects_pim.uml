@@ -69,9 +69,15 @@
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_IEiugF2nEd-7Gft3vKY-LQ" name="CommManipulationPlannerEventResult">
       <ownedAttribute xmi:id="_2SA2IF2oEd-7Gft3vKY-LQ" name="event" type="_ndNagF2nEd-7Gft3vKY-LQ" isUnique="false"/>
+      <ownedAttribute xmi:id="_LG-ZoNeiEeCsKLm_ChzcvQ" name="pose" isUnique="false">
+        <type xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_3Yh5QB46EeCL5fWcuAqvBA"/>
+      </ownedAttribute>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_J74DkF2nEd-7Gft3vKY-LQ" name="CommManipulationPlannerEventState">
       <ownedAttribute xmi:id="_B3HRAF2pEd-7Gft3vKY-LQ" name="event" type="_ndNagF2nEd-7Gft3vKY-LQ" isUnique="false"/>
+      <ownedAttribute xmi:id="_BvtIQNeiEeCsKLm_ChzcvQ" name="pose" isUnique="false">
+        <type xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_3Yh5QB46EeCL5fWcuAqvBA"/>
+      </ownedAttribute>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_QRwnkF2nEd-7Gft3vKY-LQ" name="CommManipulationPlannerParameter">
       <ownedAttribute xmi:id="_KSgwAF2pEd-7Gft3vKY-LQ" name="mode" type="_PDYeAF2pEd-7Gft3vKY-LQ" isUnique="false"/>
@@ -98,6 +104,12 @@
       </ownedAttribute>
       <ownedAttribute xmi:id="_7jIZ0DQlEeCCisrHnsnnjA" name="parameter08" isUnique="false">
         <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_mmBycLRFEeCiJr3n6tLqvQ" name="parameter09" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_mpv00LRFEeCiJr3n6tLqvQ" name="parameter10" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
       </ownedAttribute>
     </packagedElement>
     <packagedElement xmi:type="uml:Enumeration" xmi:id="_ndNagF2nEd-7Gft3vKY-LQ" name="ManipulationPlannerEvent">

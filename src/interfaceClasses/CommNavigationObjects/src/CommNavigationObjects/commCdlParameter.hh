@@ -72,6 +72,9 @@
 // tags for communicating with the planner are defined in enumCdlTagType.hh
 // ------------------------------------------------------------------
 
+/**
+ * The repository for navigation objects.
+ */
 namespace CommNavigationObjects
 {
 
@@ -99,22 +102,17 @@ public:
 	{
 	}
 
+	operator CommNavigationObjectsIDL::CommCdlParameter() const
+	{
+		return idl_CommCdlParameter;
+	}
+
 	virtual ~CommCdlParameter()
 	{
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommNavigationObjectsIDL::CommCdlParameter &get() const
-	{
-		return idl_CommCdlParameter;
-	}
-
-	inline void set(const CommNavigationObjectsIDL::CommCdlParameter &obj)
-	{
-		idl_CommCdlParameter = obj;
-	}
 
 	static inline std::string identifier(void)
 	{
@@ -217,6 +215,10 @@ inline int CommCdlParameter::set(std::string& inString)
       else if(strcasecmp("APPROACH_HALT",param)==0)
       {
     	  idl_CommCdlParameter.parameter1 = CommNavigationObjectsIDL::LITERAL_CDL_APPROACH_HALT;
+      }
+      else if(strcasecmp("APPROACH_COVERAGE",param)==0)
+      {
+    	  idl_CommCdlParameter.parameter1 = CommNavigationObjectsIDL::LITERAL_CDL_APPROACH_COVERAGE;
       }
       else if(strcasecmp("APPROACH",param)==0)
       {

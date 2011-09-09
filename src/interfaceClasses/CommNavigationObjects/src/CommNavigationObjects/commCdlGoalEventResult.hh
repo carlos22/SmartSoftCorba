@@ -86,22 +86,17 @@ public:
 	{
 	}
 
+	operator CommNavigationObjectsIDL::CommCdlGoalEventResult() const
+	{
+		return idl_CommCdlGoalEventResult;
+	}
+
 	virtual ~CommCdlGoalEventResult()
 	{
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommNavigationObjectsIDL::CommCdlGoalEventResult &get() const
-	{
-		return idl_CommCdlGoalEventResult;
-	}
-
-	inline void set(const CommNavigationObjectsIDL::CommCdlGoalEventResult &obj)
-	{
-		idl_CommCdlGoalEventResult = obj;
-	}
 
 	static inline std::string identifier(void)
 	{

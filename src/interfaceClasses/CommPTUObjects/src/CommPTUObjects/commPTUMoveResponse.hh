@@ -84,22 +84,17 @@ public:
 	{
 	}
 
+	operator CommPTUObjectsIDL::CommPTUMoveResponse() const
+	{
+		return idl_CommPTUMoveResponse;
+	}
+
 	virtual ~CommPTUMoveResponse()
 	{
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommPTUObjectsIDL::CommPTUMoveResponse &get() const
-	{
-		return idl_CommPTUMoveResponse;
-	}
-
-	inline void set(const CommPTUObjectsIDL::CommPTUMoveResponse &obj)
-	{
-		idl_CommPTUMoveResponse = obj;
-	}
 
 	static inline std::string identifier(void)
 	{
@@ -110,16 +105,11 @@ public:
 	// user interfaces
 
 	/**
-	 * Translate the PTUMoveStatus enum to a string representation.
-	 */
-	static std::string stateToString(PTUMoveStatus status);
-
-	/**
 	 * Set the pose of the device relative to the robot coordinate system.
 	 * (in case of a moving the device the endeffector pose)
 	 */
 	inline void set_device_pose3d_robot(const CommBasicObjects::CommPose3d& pose) {
-		idl_CommPTUMoveResponse.devicePose = pose.get_idl();
+		idl_CommPTUMoveResponse.devicePose = pose;
 	}
 
 	/**
@@ -157,7 +147,7 @@ public:
 	 * Set the state of the base.
 	 */
 	inline void set_base_state(const CommBasicObjects::CommBaseState& state) {
-		idl_CommPTUMoveResponse.stateBase = state.get_idl();
+		idl_CommPTUMoveResponse.stateBase = state;
 	}
 
 	/**

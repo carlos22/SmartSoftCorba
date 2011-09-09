@@ -322,7 +322,6 @@ It is expected that the opening angle in positive and negative direction is the 
         </ownedComment>
         <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
       </ownedAttribute>
-      <ownedAttribute xmi:id="_NRoekFoHEeC0KrvpolDjFw" name="parameter" type="_VWWKoFoBEeC0KrvpolDjFw" isUnique="false"/>
       <ownedAttribute xmi:id="_RZJXcFoQEeC0KrvpolDjFw" name="rgb_data" isUnique="false">
         <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_IAsSUIgZEd6Va88Rz-zvaQ"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ZHKMAFoQEeC0KrvpolDjFw" value="*"/>
@@ -333,30 +332,16 @@ It is expected that the opening angle in positive and negative direction is the 
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ZhIyQFoQEeC0KrvpolDjFw" value="*"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ZhEg0FoQEeC0KrvpolDjFw"/>
       </ownedAttribute>
-    </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_VWWKoFoBEeC0KrvpolDjFw" name="KinectImageParameters">
-      <ownedAttribute xmi:id="_c7eI8FoBEeC0KrvpolDjFw" name="width" isUnique="false">
-        <ownedComment xmi:id="_WVDuQFoEEeC0KrvpolDjFw" annotatedElement="_c7eI8FoBEeC0KrvpolDjFw">
-          <body>The width of the image in pixels.</body>
-        </ownedComment>
+      <ownedAttribute xmi:id="_cT8DIKCzEeCoNsalx3hxjw" name="rgb_width" isUnique="false">
         <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
       </ownedAttribute>
-      <ownedAttribute xmi:id="_c_AlIFoBEeC0KrvpolDjFw" name="height" isUnique="false">
-        <ownedComment xmi:id="_YR4AQFoEEeC0KrvpolDjFw" annotatedElement="_c_AlIFoBEeC0KrvpolDjFw">
-          <body>The height of the image in pixels.</body>
-        </ownedComment>
+      <ownedAttribute xmi:id="_fzFDgKCzEeCoNsalx3hxjw" name="rgb_height" isUnique="false">
         <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
       </ownedAttribute>
-      <ownedAttribute xmi:id="_dGj-oFoBEeC0KrvpolDjFw" name="color_image_size" isUnique="false">
-        <ownedComment xmi:id="_bllzwFoEEeC0KrvpolDjFw" annotatedElement="_dGj-oFoBEeC0KrvpolDjFw">
-          <body>Size of the color image in bytes.</body>
-        </ownedComment>
+      <ownedAttribute xmi:id="_gtrDgKCzEeCoNsalx3hxjw" name="distance_width" isUnique="false">
         <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
       </ownedAttribute>
-      <ownedAttribute xmi:id="_hALUgFoBEeC0KrvpolDjFw" name="distance_image_size" isUnique="false">
-        <ownedComment xmi:id="_dDDQQFoEEeC0KrvpolDjFw" annotatedElement="_hALUgFoBEeC0KrvpolDjFw">
-          <body>Size of the distance image in bytes.</body>
-        </ownedComment>
+      <ownedAttribute xmi:id="_g07iEKCzEeCoNsalx3hxjw" name="distance_height" isUnique="false">
         <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
       </ownedAttribute>
     </packagedElement>

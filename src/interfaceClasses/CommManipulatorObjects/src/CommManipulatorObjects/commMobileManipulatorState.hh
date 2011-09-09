@@ -68,19 +68,16 @@ public:
 		idl_CommMobileManipulatorState(obj) {
 	}
 
+	operator CommManipulatorObjectsIDL::CommMobileManipulatorState() const
+	{
+		return idl_CommMobileManipulatorState;
+	}
+
 	virtual ~CommMobileManipulatorState() {
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommManipulatorObjectsIDL::CommMobileManipulatorState &get() const {
-		return idl_CommMobileManipulatorState;
-	}
-
-	inline void set(const CommManipulatorObjectsIDL::CommMobileManipulatorState &obj) {
-		idl_CommMobileManipulatorState = obj;
-	}
 
 	static inline std::string identifier(void) {
 		return "CommManipulatorObjects::CommMobileManipulatorState";
@@ -94,29 +91,28 @@ public:
 	 * Set the state of the base.
 	 */
 	inline void set_base_state(const CommBasicObjects::CommBaseState &baseState) {
-		idl_CommMobileManipulatorState.base_state = baseState.get_idl();
+		idl_CommMobileManipulatorState.base_state = baseState;
 	}
 
 	/**
 	 * Get the state of the base.
 	 */
 	inline CommBasicObjects::CommBaseState get_base_state() const {
-		return CommBasicObjects::CommBaseState(idl_CommMobileManipulatorState.base_state);
+		return idl_CommMobileManipulatorState.base_state;
 	}
 
 	/**
 	 * Set the state of the manipulator.
 	 */
 	inline void set_manipulator_state(const CommManipulatorState &manipState) {
-		idl_CommMobileManipulatorState.manipulator_state = manipState.get();
+		idl_CommMobileManipulatorState.manipulator_state = manipState;
 	}
 
 	/**
 	 * Get the state of the manipulator.
 	 */
 	inline CommManipulatorState get_manipulator_state() const {
-		return CommManipulatorState(
-				idl_CommMobileManipulatorState.manipulator_state);
+		return 	idl_CommMobileManipulatorState.manipulator_state;
 	}
 
 	/**

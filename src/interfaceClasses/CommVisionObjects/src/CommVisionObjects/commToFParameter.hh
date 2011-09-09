@@ -84,22 +84,17 @@ public:
 	{
 	}
 
+	operator CommVisionObjectsIDL::CommToFParameter() const
+	{
+		return idl_CommToFParameter;
+	}
+
 	virtual ~CommToFParameter()
 	{
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommVisionObjectsIDL::CommToFParameter &get() const
-	{
-		return idl_CommToFParameter;
-	}
-
-	inline void set(const CommVisionObjectsIDL::CommToFParameter &obj)
-	{
-		idl_CommToFParameter = obj;
-	}
 
 	static inline std::string identifier(void)
 	{

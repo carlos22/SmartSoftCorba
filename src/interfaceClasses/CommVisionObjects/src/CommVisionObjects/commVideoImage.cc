@@ -243,6 +243,14 @@ void CommVideoImage::_get_as_rgb(unsigned char *target, int mode) const
         case CommVisionObjects::FormatType::YUV422:
         case CommVisionObjects::FormatType::YUYV:
         {
+        	// Implementation as of after May 30th 2011 (Dennis Stampfer):
+//            yuv2rgb(source[0],source[1],source[3], *target++,*target++,*target++);
+//            if((mode==1) || (mode==2)) *target++ = 0;
+//            yuv2rgb(source[2],source[1],source[3], *target++,*target++,*target++);
+//            source += 4;
+//            x += 2;
+
+// 			Implementation as of before May 30th 2011:
           unsigned char* p1,*p2,*p3;
           p1=target++;
           p2=target++;

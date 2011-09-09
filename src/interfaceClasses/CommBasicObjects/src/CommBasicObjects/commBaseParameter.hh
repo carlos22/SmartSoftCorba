@@ -74,6 +74,9 @@
 #define LISP_STRING    1000
 #endif
 
+/**
+ * The repository for basic communication objects that may be used in every robot application.
+ */
 namespace CommBasicObjects
 {
 
@@ -110,22 +113,17 @@ public:
 	{
 	}
 
+	operator CommBasicObjectsIDL::CommBaseParameter() const
+	{
+		return idl_CommBaseParameter;
+	}
+
 	virtual ~CommBaseParameter()
 	{
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommBasicObjectsIDL::CommBaseParameter &get() const
-	{
-		return idl_CommBaseParameter;
-	}
-
-	inline void set(const CommBasicObjectsIDL::CommBaseParameter &obj)
-	{
-		idl_CommBaseParameter = obj;
-	}
 
 	static inline std::string identifier(void)
 	{
@@ -173,13 +171,37 @@ inline int CommBaseParameter::set(const std::string& inString)
 
   if (strcasecmp(param,"RESET")==0)
   {
-    // --------------------
-    // set parameter RESET
-    // --------------------
-    parse = (char *)calloc(LISP_STRING,sizeof(char));
-    idl_CommBaseParameter.tag = CommBasicObjectsIDL::LITERAL_BASE_RESET;
+	  // --------------------
+	  // set parameter RESET
+	  // --------------------
+	  idl_CommBaseParameter.tag = CommBasicObjectsIDL::LITERAL_BASE_RESET;
   }
+  else if (strcasecmp(param,"SONAR")==0)
+  {
+	  // --------------------
+	  // set parameter SONAR
+	  // --------------------
+	  idl_CommBaseParameter.tag = CommBasicObjectsIDL::LITERAL_BASE_SONAR;
 
+          parse = (char *)calloc(LISP_STRING,sizeof(char));
+	  do
+	  {
+		  param = strsep(&input,LISP_SEPARATOR);
+	  } while ((param != NULL) && (strlen(param)==0));
+	  parse = strcat(parse,param);
+	  parse = strcat(parse," ");
+
+	  if (sscanf(parse,"%d",&idl_CommBaseParameter.parameter1) == 1)
+	{
+		  error = 0;
+	}
+	  else
+	  {
+		  error = -1;
+	  }
+	  free(parse);
+
+  }
   else
   {
     // --------------------

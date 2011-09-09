@@ -99,12 +99,14 @@
       <ownedLiteral xmi:id="_tVnIIJZZEd-HwbMUlm4Qww" name="PAN_ABSOLUTE"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Enumeration" xmi:id="_GWw6cIBLEd-acYooFeoGmw" name="PTUMoveStatus">
-      <ownedLiteral xmi:id="_Jwl9AIBLEd-acYooFeoGmw" name="OK"/>
+      <ownedLiteral xmi:id="_Jwl9AIBLEd-acYooFeoGmw" name="GOAL_REACHED"/>
       <ownedLiteral xmi:id="_Kv6sAIBLEd-acYooFeoGmw" name="TILT_OUT_OF_RANGE"/>
       <ownedLiteral xmi:id="_LAeQgIBLEd-acYooFeoGmw" name="PAN_OUT_OF_RANGE"/>
       <ownedLiteral xmi:id="_LM6KAIBLEd-acYooFeoGmw" name="PAN_TILT_OUT_OF_RANGE"/>
       <ownedLiteral xmi:id="_LhDOAIBLEd-acYooFeoGmw" name="HALTED"/>
       <ownedLiteral xmi:id="_NRvvkIBLEd-acYooFeoGmw" name="FAILURE"/>
+      <ownedLiteral xmi:id="_mJeosJG8EeC0aKIDSnFHLA" name="GOAL_NOT_REACHED"/>
+      <ownedLiteral xmi:id="_4A59YJeHEeCSzqY0oMxIUQ" name="UNKNOWN"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_o54JMIBLEd-acYooFeoGmw" name="CommPTUParameter">
       <ownedAttribute xmi:id="_t1IiQIBLEd-acYooFeoGmw" name="parameter01" isUnique="false">
@@ -140,6 +142,15 @@
       <ownedLiteral xmi:id="__da7IPxsEd-DW_C6HD_ptg" name="UNSET"/>
       <ownedLiteral xmi:id="_chnNoPxuEd-DW_C6HD_ptg" name="START_UP_SPEED_TILT"/>
     </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_68IFIJGkEeCJ6P3V2Q1peA" name="PTUGoalEventState">
+      <ownedAttribute xmi:id="_-YKuMJGkEeCJ6P3V2Q1peA" name="newState" type="_GWw6cIBLEd-acYooFeoGmw" isUnique="false"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Mny1oJGlEeCJ6P3V2Q1peA" name="CommPTUGoalEventResult">
+      <ownedAttribute xmi:id="_W1VAoJGlEeCJ6P3V2Q1peA" name="state" type="_GWw6cIBLEd-acYooFeoGmw" isUnique="false"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_fn_wIJGlEeCJ6P3V2Q1peA" name="CommPTUGoalEventParameter">
+      <ownedAttribute xmi:id="_knIjoJGlEeCJ6P3V2Q1peA" name="oldState" type="_GWw6cIBLEd-acYooFeoGmw" isUnique="false"/>
+    </packagedElement>
     <profileApplication xmi:id="_fd-94YBIEd-acYooFeoGmw">
       <eAnnotations xmi:id="_fd-94oBIEd-acYooFeoGmw" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
@@ -156,4 +167,7 @@
   <SmartMARS:SmartCommObject xmi:id="_5runsIBJEd-acYooFeoGmw" base_Class="_5pkEgIBJEd-acYooFeoGmw"/>
   <SmartMARS:SmartCommObject xmi:id="_52JH8IBJEd-acYooFeoGmw" base_Class="_51_-AIBJEd-acYooFeoGmw"/>
   <SmartMARS:SmartCommObject xmi:id="_o9OYIIBLEd-acYooFeoGmw" base_Class="_o54JMIBLEd-acYooFeoGmw"/>
+  <SmartMARS:SmartEventState xmi:id="_6_BoIJGkEeCJ6P3V2Q1peA" base_Class="_68IFIJGkEeCJ6P3V2Q1peA"/>
+  <SmartMARS:SmartCommObject xmi:id="_Mo8sMJGlEeCJ6P3V2Q1peA" base_Class="_Mny1oJGlEeCJ6P3V2Q1peA"/>
+  <SmartMARS:SmartCommObject xmi:id="_fpN4IJGlEeCJ6P3V2Q1peA" base_Class="_fn_wIJGlEeCJ6P3V2Q1peA"/>
 </xmi:XMI>

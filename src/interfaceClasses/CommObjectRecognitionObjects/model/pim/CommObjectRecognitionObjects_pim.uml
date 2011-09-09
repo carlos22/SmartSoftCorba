@@ -73,7 +73,6 @@
           <value xsi:nil="true"/>
         </defaultValue>
       </ownedAttribute>
-      <ownedAttribute xmi:id="_17k8cGl3Ed-Pj6iJGOhC9g" name="color" type="_h19nYGjaEd-WId1SkmeadA" isUnique="false"/>
       <ownedAttribute xmi:id="_5QgQ4Gl3Ed-Pj6iJGOhC9g" name="type" isUnique="false">
         <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
       </ownedAttribute>
@@ -82,6 +81,13 @@
       </ownedAttribute>
       <ownedAttribute xmi:id="_ph17cGl-Ed-Pj6iJGOhC9g" name="cloud_id" isUnique="false">
         <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_RGEicIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_X9dcQMS8EeCqAPalj0iqSQ" name="sensor" type="_el4-QMS7EeCqAPalj0iqSQ" isUnique="false"/>
+      <ownedAttribute xmi:id="_kMLgQMdLEeC2SvVY04oaLQ" name="algorithm" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_ULR10Ml3EeCtB40GlYjjMQ" name="belief_threshold" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
       </ownedAttribute>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_6ieTsGQUEd-X2o5mGpZM5Q" name="CommObjectRecognitionEventResult">
@@ -117,7 +123,6 @@
       <ownedAttribute xmi:id="_L7jlkGjaEd-WId1SkmeadA" name="object_type" isUnique="false">
         <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
       </ownedAttribute>
-      <ownedAttribute xmi:id="_TDf4oGjaEd-WId1SkmeadA" name="object_color" type="_h19nYGjaEd-WId1SkmeadA" isUnique="false"/>
       <ownedAttribute xmi:id="_bSONkGjaEd-WId1SkmeadA" name="pose" visibility="public" isUnique="false">
         <type xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_3Yh5QB46EeCL5fWcuAqvBA"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MftmEGjbEd-WId1SkmeadA" value="1"/>
@@ -138,11 +143,17 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
         <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_4WH4QNbQEd-C_MOhc8wU0Q"/>
       </ownedAttribute>
+      <ownedAttribute xmi:id="_7a6l0MdNEeC2SvVY04oaLQ" name="beliefs" type="_tztwUMdNEeC2SvVY04oaLQ" isUnique="false">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_VGBSEMdOEeC2SvVY04oaLQ" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_VF6kYMdOEeC2SvVY04oaLQ"/>
+      </ownedAttribute>
     </packagedElement>
     <packagedElement xmi:type="uml:Enumeration" xmi:id="_esQWYGjYEd-WId1SkmeadA" name="ObjectRecognitionBehavior">
       <ownedLiteral xmi:id="_jnYMkGjYEd-WId1SkmeadA" name="SEARCH"/>
       <ownedLiteral xmi:id="_pn92AGjYEd-WId1SkmeadA" name="FULLSEARCH"/>
       <ownedLiteral xmi:id="_xH584GjZEd-WId1SkmeadA" name="UNSET"/>
+      <ownedLiteral xmi:id="_AYytgMS7EeCqAPalj0iqSQ" name="CLUSTERING_ON"/>
+      <ownedLiteral xmi:id="_AlPOEMS7EeCqAPalj0iqSQ" name="CLUSTERING_OFF"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Enumeration" xmi:id="__Buo4GjYEd-WId1SkmeadA" name="ObjectRecognitionState">
       <ownedLiteral xmi:id="_A4UXEGjZEd-WId1SkmeadA" name="VISIBLE"/>
@@ -155,12 +166,11 @@
       <ownedLiteral xmi:id="_jt5xcGl_Ed-Pj6iJGOhC9g" name="CLOUD"/>
       <ownedLiteral xmi:id="_Cw0isNtJEd-kgciLBnzGiw" name="RECOGNIZE"/>
       <ownedLiteral xmi:id="_mkz4kNtLEd-kgciLBnzGiw" name="DELOBJECTS"/>
-    </packagedElement>
-    <packagedElement xmi:type="uml:Enumeration" xmi:id="_h19nYGjaEd-WId1SkmeadA" name="Color">
-      <ownedLiteral xmi:id="_nCKmgGjaEd-WId1SkmeadA" name="RED"/>
-      <ownedLiteral xmi:id="_n9rzkGjaEd-WId1SkmeadA" name="GREEN"/>
-      <ownedLiteral xmi:id="_o8T_AGjaEd-WId1SkmeadA" name="BLUE"/>
-      <ownedLiteral xmi:id="_UabVcGmBEd-Pj6iJGOhC9g" name="NO_COLOR"/>
+      <ownedLiteral xmi:id="_0CVHIMS6EeCqAPalj0iqSQ" name="ADDSENSOR"/>
+      <ownedLiteral xmi:id="_TXe6MMS9EeCqAPalj0iqSQ" name="DELSENSORS"/>
+      <ownedLiteral xmi:id="_49fBcMdKEeC2SvVY04oaLQ" name="ADDALGORITHM"/>
+      <ownedLiteral xmi:id="_5GKcUMdKEeC2SvVY04oaLQ" name="DELALGORITHMS"/>
+      <ownedLiteral xmi:id="_aTrXcMl3EeCtB40GlYjjMQ" name="BELIEF_THRESHOLD"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_OO7DMGmGEd-CP8IiI6MHGA" name="CommObjectRecognitionEventState">
       <ownedAttribute xmi:id="_Rd0BEGmGEd-CP8IiI6MHGA" name="behavior" visibility="public" type="_esQWYGjYEd-WId1SkmeadA" isUnique="false">
@@ -213,6 +223,24 @@
       <ownedLiteral xmi:id="_827pMGnJEeCg0NHS7AJa1w" name="OBJECT_FOUND"/>
       <ownedLiteral xmi:id="_875BsGnJEeCg0NHS7AJa1w" name="OBJECT_NOT_FOUND"/>
     </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_el4-QMS7EeCqAPalj0iqSQ" name="ObjectRecognitionSensor">
+      <ownedLiteral xmi:id="_guRAAMS7EeCqAPalj0iqSQ" name="KINECT"/>
+      <ownedLiteral xmi:id="_hemQwMS7EeCqAPalj0iqSQ" name="MANIPULATOR_CAMERA"/>
+      <ownedLiteral xmi:id="_hkA8QMS7EeCqAPalj0iqSQ" name="MANIPULATOR_LASER"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_tztwUMdNEeC2SvVY04oaLQ" name="ObjectBelief">
+      <ownedAttribute xmi:id="_viHL0MdNEeC2SvVY04oaLQ" name="type" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_vpqlUMdNEeC2SvVY04oaLQ" name="probability" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_2Scw8NlFEeCuc4U-WUnhjg" name="CommSimpleObjectParameter">
+      <ownedAttribute xmi:id="_5g5p8NlFEeCuc4U-WUnhjg" name="type" isUnique="false">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+      </ownedAttribute>
+    </packagedElement>
     <profileApplication xmi:id="_jO-YAWQUEd-X2o5mGpZM5Q">
       <eAnnotations xmi:id="_jO-YAmQUEd-X2o5mGpZM5Q" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
@@ -236,4 +264,5 @@
   <SmartMARS:SmartCommObject xmi:id="_lyyHMGnAEeCg0NHS7AJa1w" base_Class="_lu2CYGnAEeCg0NHS7AJa1w"/>
   <SmartMARS:SmartCommObject xmi:id="_4Tr88GnIEeCg0NHS7AJa1w" base_Class="_4SfqIGnIEeCg0NHS7AJa1w"/>
   <SmartMARS:SmartEventState xmi:id="_6ehc0GnIEeCg0NHS7AJa1w" base_Class="_6c5FIGnIEeCg0NHS7AJa1w"/>
+  <SmartMARS:SmartCommObject xmi:id="_2VvVgNlFEeCuc4U-WUnhjg" base_Class="_2Scw8NlFEeCuc4U-WUnhjg"/>
 </xmi:XMI>

@@ -68,19 +68,17 @@ public:
 		idl_CommManipulatorEventResult(obj) {
 	}
 
+	operator CommManipulatorObjectsIDL::CommManipulatorEventResult() const
+	{
+		return idl_CommManipulatorEventResult;
+	}
+
 	virtual ~CommManipulatorEventResult() {
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
 
-	inline const CommManipulatorObjectsIDL::CommManipulatorEventResult &get() const {
-		return idl_CommManipulatorEventResult;
-	}
-
-	inline void set(const CommManipulatorObjectsIDL::CommManipulatorEventResult &obj) {
-		idl_CommManipulatorEventResult = obj;
-	}
 
 	static inline std::string identifier(void) {
 		return "CommManipulatorObjects::CommManipulatorEventResult";

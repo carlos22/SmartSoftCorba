@@ -78,23 +78,17 @@ public:
 	{
 	}
 
+	operator CommObjectRecognitionObjectsIDL::CommObjectRecognitionEnvironment() const
+	{
+		return idl_CommObjectRecognitionEnvironment;
+	}
+
 	virtual ~CommObjectRecognitionEnvironment()
 	{
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
-
-	inline const CommObjectRecognitionObjectsIDL::CommObjectRecognitionEnvironment &get() const
-	{
-		return idl_CommObjectRecognitionEnvironment;
-	}
-
-	inline void set(
-			const CommObjectRecognitionObjectsIDL::CommObjectRecognitionEnvironment &obj)
-	{
-		idl_CommObjectRecognitionEnvironment = obj;
-	}
 
 	static inline std::string identifier(void)
 	{
@@ -137,7 +131,7 @@ public:
 	 * Set the properties for a specific object.
 	 */
 	inline void set_object_properties(uint32_t index, const CommObjectRecognitionObjectProperties& obj) {
-		idl_CommObjectRecognitionEnvironment.objects[index] = obj.get();
+		idl_CommObjectRecognitionEnvironment.objects[index] = obj;
 	}
 
 	/**

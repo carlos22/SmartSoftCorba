@@ -86,6 +86,11 @@ public:
 	{
 	}
 
+	operator CommTrackingObjectsIDL::CommLaserTrackedObject() const
+	{
+		return idl_CommLaserTrackedObject;
+	}
+
 	virtual ~CommLaserTrackedObject()
 	{
 	}
@@ -93,15 +98,6 @@ public:
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
 
-	inline const CommTrackingObjectsIDL::CommLaserTrackedObject &get() const
-	{
-		return idl_CommLaserTrackedObject;
-	}
-
-	inline void set(const CommTrackingObjectsIDL::CommLaserTrackedObject &obj)
-	{
-		idl_CommLaserTrackedObject = obj;
-	}
 
 	static inline std::string identifier(void)
 	{

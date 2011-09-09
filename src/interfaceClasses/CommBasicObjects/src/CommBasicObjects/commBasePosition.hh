@@ -111,19 +111,14 @@ public:
 	{
 	}
 
-
-	void get(CORBA::Any &a) const;
-	void set(const CORBA::Any &a);
-
-	inline const CommBasicObjectsIDL::CommBasePosition &get() const
+	operator CommBasicObjectsIDL::CommBasePosition() const
 	{
 		return idl_CommBasePosition;
 	}
 
-	inline void set(const CommBasicObjectsIDL::CommBasePosition &obj)
-	{
-		idl_CommBasePosition = obj;
-	}
+
+	void get(CORBA::Any &a) const;
+	void set(const CORBA::Any &a);
 
 	static inline std::string identifier(void)
 	{
@@ -154,13 +149,6 @@ public:
 	/**
 	 Default constructor.
 	 */
-
-	inline const CommBasicObjectsIDL::CommBasePosition &get_idl() const {
-		return idl_CommBasePosition;
-	}
-	inline void set_idl(const CommBasicObjectsIDL::CommBasePosition &pos) {
-		idl_CommBasePosition = pos;
-	}
 
 	//
 	// GET

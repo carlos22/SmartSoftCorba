@@ -76,19 +76,18 @@ public:
 		idl_CommManipulatorRequestScan3d(obj) {
 	}
 
+	operator CommManipulatorObjectsIDL::CommManipulatorRequestScan3d() const
+	{
+		return idl_CommManipulatorRequestScan3d;
+	}
+
 	virtual ~CommManipulatorRequestScan3d() {
 	}
+
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
 
-	inline const CommManipulatorObjectsIDL::CommManipulatorRequestScan3d &get() const {
-		return idl_CommManipulatorRequestScan3d;
-	}
-
-	inline void set(const CommManipulatorObjectsIDL::CommManipulatorRequestScan3d &obj) {
-		idl_CommManipulatorRequestScan3d = obj;
-	}
 
 	static inline std::string identifier(void) {
 		return "CommManipulatorObjects::CommManipulatorRequestScan3d";

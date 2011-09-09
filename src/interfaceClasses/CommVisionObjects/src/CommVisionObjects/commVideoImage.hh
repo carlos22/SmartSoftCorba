@@ -82,9 +82,14 @@ public:
 
 
 	CommVideoImage(const CommVisionObjectsIDL::CommVideoImage &obj) :
-		idl_CommVideoImage(obj)
-		{
-		}
+	idl_CommVideoImage(obj)
+	{
+	}
+
+	operator CommVisionObjectsIDL::CommVideoImage() const
+	{
+		return idl_CommVideoImage;
+	}
 
 	virtual ~CommVideoImage()
 	{
@@ -303,14 +308,13 @@ public:
 	 * Set the pose of the sensor relative to the robot coordinate system.
 	 */
 	inline void set_sensor_pose(const CommBasicObjects::CommPose3d& pose) {
-		idl_CommVideoImage.sensor_pose = pose.get_idl();
+		idl_CommVideoImage.sensor_pose = pose;
 	}
 
 	/**
 	 * Set the state of the base.
 	 */
 	inline void set_base_state(const CommBasicObjects::CommBaseState& state) {
-		//idl_CommVideoImage.base_state = state.get_idl();
 		idl_CommVideoImage.base_state = state;
 	}
 

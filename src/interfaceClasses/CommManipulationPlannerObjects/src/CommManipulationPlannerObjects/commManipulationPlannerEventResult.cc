@@ -68,37 +68,39 @@ void CommManipulationPlannerEventResult::get(char* r) const
 	case ManipulationPlannerEvent::MANIPULATOR_SYNC_FAIL:
 
 	{
-		strcpy(r,"(MANIPULATOR SYNC FAIL)");
+		strcpy(r,"((MANIPULATOR SYNC FAIL))");
 		break;
 	}
 
 	case ManipulationPlannerEvent::NO_IKSOLUTION_FOUND:
 	{
-		strcpy(r,"(NO IK SOLUTION FOUND)");
+		strcpy(r,"((NO IK SOLUTION FOUND))");
 		break;
 	}
 
 	case ManipulationPlannerEvent::PATH_FOUND:
 	{
-		strcpy(r,"(PATH FOUND)");
+		strcpy(r,"((PATH FOUND))");
 		break;
 	}
 
 	case ManipulationPlannerEvent::PLANNING_PATH:
 	{
-		strcpy(r,"(PLANNING PATH)");
+		CommBasicObjects::CommPose3d p(idl_CommManipulationPlannerEventResult.pose);
+		sprintf(r,"((PLANNING_PATH) (%lf %lf %lf %lf %lf %lf))",p.get_x(1),p.get_y(1),p.get_z(1),p.get_azimuth(),p.get_elevation(),p.get_roll());
+		//strcpy(r,"(PLANNING PATH (x y z ))");
 		break;
 	}
 
 	case ManipulationPlannerEvent::NO_PATH_FOUND:
 	{
-		strcpy(r,"(NO PATH FOUND)");
+		strcpy(r,"((NO PATH FOUND))");
 		break;
 	}
 
 	default:
 	{
-		strcpy(r,"(ERROR)");
+		strcpy(r,"((ERROR))");
 		break;
 	}
 

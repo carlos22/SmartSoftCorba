@@ -75,19 +75,17 @@ public:
 		idl_CommManipulatorState(obj) {
 	}
 
+	operator CommManipulatorObjectsIDL::CommManipulatorState() const
+	{
+		return idl_CommManipulatorState;
+	}
+
 	virtual ~CommManipulatorState() {
 	}
 
 	void get(CORBA::Any &a) const;
 	void set(const CORBA::Any &a);
 
-	inline const CommManipulatorObjectsIDL::CommManipulatorState &get() const {
-		return idl_CommManipulatorState;
-	}
-
-	inline void set(const CommManipulatorObjectsIDL::CommManipulatorState &obj) {
-		idl_CommManipulatorState = obj;
-	}
 
 	static inline std::string identifier(void) {
 		return "CommManipulatorObjects::CommManipulatorState";
