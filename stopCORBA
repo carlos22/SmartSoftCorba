@@ -1,0 +1,8 @@
+if [ `ps -Al | grep -c Naming_Service` -eq 1 ]
+then 
+  echo "shuttting down CORBA Naming Service ..."
+  killall Naming_Service
+  echo "CORBA Naming Service is down!"
+else 
+  echo "CORBA Naming Service is not running!"
+fi

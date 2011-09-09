@@ -1,0 +1,25 @@
+if [ `ps -Al | grep -c Naming_Service` -eq 1 ]
+then 
+  echo "shuttting down CORBA Naming Service ..."
+  killall Naming_Service
+  echo "starting CORBA Naming Service ..."
+  $TAO_ROOT/orbsvcs/Naming_Service/Naming_Service -m 0 -ORBEndpoint iiop://0.0.0.0:12345 &
+  echo "CORBA Naming Service is running!"
+else 
+  echo "starting CORBA Naming Service ..."
+  $TAO_ROOT/orbsvcs/Naming_Service/Naming_Service -m 0 -ORBEndpoint iiop://0.0.0.0:12345 &
+  echo "CORBA Naming Service is running!"
+fi
+
+if [ "$NameServiceIOR" == "" ]; 
+then
+  echo "WARNING: environment variable NameServiceIOR is not set"
+  echo "(set variable: export NameServiceIOR=corbaloc:iiop:localhost:12345/NameService)"
+fi
+
+if [ "$NameServiceIOR" != "corbaloc:iiop:localhost:12345/NameService" ]; 
+then
+  echo "WARNING: please check environment variable NameServiceIOR, something might be wrong"
+  echo "         NameServiceIOR should be: corbaloc:iiop:localhost:12345/NameService"
+  echo "         but is set to           : $NameServiceIOR"
+fi

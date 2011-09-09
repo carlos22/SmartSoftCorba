@@ -1,0 +1,18 @@
+if [ "$NameServiceIOR" == "" ]; 
+then
+  echo "ERROR: environment variable NameServiceIOR is not set"
+else
+
+  if test -e $ACE_ROOT/bin/nslist
+  then
+    $ACE_ROOT/bin/nslist
+
+  elif test -e $TAO_ROOT/utils/nslist/tao_nslist
+  then
+    $TAO_ROOT/utils/nslist/tao_nslist
+
+  else
+    echo "ERROR: could not find CORBA nslist!"
+
+  fi
+fi
