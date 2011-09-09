@@ -49,16 +49,25 @@
 
 // Called when a substate is entered
 void StateChangeHandler::handleEnterState(const std::string & substate) throw() {
-	if (substate == "active") {
+	std::cout<<"handleEnterState: "<<substate<<std::endl;
+	if (substate == "nonneutral") {
 		COMP->imageTask.startCapturing();
-		COMP->componentActive = true;
+	}
+	if (substate == "pushimage"){
+		COMP->colorImagePushTimedServer->start();
+		std::cout << "Push Newest started.\n";
 	}
 }
 
 // Called when a substate is left
 void StateChangeHandler::handleQuitState(const std::string & substate) throw() {
-	if (substate == "active") {
+	std::cout<<"handleQuitState: "<<substate<<std::endl;
+	if (substate == "nonneutral") {
 		COMP->imageTask.stopCapturing();
-		COMP->componentActive = false;
+	}
+
+	if (substate == "pushimage"){
+			COMP->colorImagePushTimedServer->stop();
+			std::cout << "Push Timed stopped.\n";
 	}
 }

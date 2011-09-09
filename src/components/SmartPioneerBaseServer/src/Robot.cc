@@ -959,6 +959,21 @@ void Robot::setV( int v )
 }
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void Robot::setSonarState( bool state )
+{
+	param_enable_sonar = state;
+	updateSonar = true;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+unsigned short* Robot::getSonarReadings()
+{
+	return sonars;
+}
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 double Robot::getOmegaRad()
@@ -1160,6 +1175,18 @@ int Robot::svc()
        packet.Send(serial_fd);
        //usleep(P2OS_CYCLETIME_USEC);
        updateOmega = false;
+    }
+
+    if( updateSonar )
+    {
+    	  command[0] = SONAR;
+    	  command[1] = ARGINT;
+    	  command[2] = (unsigned char)param_enable_sonar;
+    	  command[3] = 0;
+    	  packet.Build(command, 4);
+    	  packet.Send(serial_fd);
+    	  usleep(P2OS_CYCLETIME_USEC);
+    	  updateSonar = false;
     }
 
   } // while

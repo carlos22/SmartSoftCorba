@@ -24,6 +24,7 @@
 #include <highgui.h>
 #include <CommVisionObjects/commVideoImage.hh>
 #include <smartSoft.hh>
+#include "OpenCVHelpers.hh"
 
 class SmartUnicapImageClientCore
 {

@@ -120,48 +120,15 @@ void OpenRave::resetAll() {
 	guard.release();
 }
 
-void OpenRave::applyParameters() {
-
-	CHS::SmartGuard guard(COMP->ParameterMutex);
-	if (this->globalParameters.modified) {
-		this->globalParameters.modified = false;
-
-		if (this->globalParameters.clearEnvironment) {
-			this->resetAll();
-			this->globalParameters.clearEnvironment = false;
-		}
-		if (this->globalParameters.loadEnvironmentObjectRecognition) {
-			this->loadEnvironment(this->globalParameters.loadEnvironmentObjectRecognition_id);
-			this->globalParameters.loadEnvironmentObjectRecognition = false;
-		}
-		if (this->globalParameters.computeGraspTable) {
-			// TODO: currently not available
-			//			this->computeGraspTable(this->globalParameters.computeGraspTable_id);
-			this->globalParameters.computeGraspTable = false;
-		}
-		if (this->globalParameters.openrave_GraspObject) {
-			// TODO: look how the gripper could be closed differently
-			this->openGripper();
-			this->graspKinBody(this->globalParameters.openrave_GraspObject_id);
-			this->globalParameters.openrave_GraspObject = false;
-		}
-		if (this->globalParameters.openrave_ReleaseObject) {
-			this->releaseKinBody(this->globalParameters.openrave_ReleaseObject_id);
-			this->globalParameters.openrave_ReleaseObject = false;
-		}
-		localParameters = globalParameters;
-	}
-	guard.release();
-}
-
 void OpenRave::syncManipulator() {
 	std::cout << "OpenRave::syncManipulator()\n";
-	if (this->localParameters.parallelization == true && this->parallelization_initial_sync == true) {
-		ErrorHandler::handleMessage(
-				"Manipulator will not be synchronized because of Parallelization mode. [syncManipulator in OpenRave]",
-				ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
-		return;
-	}
+	//TODO parallelization disabled !!
+//	if (this->localParameters.parallelization == true && this->parallelization_initial_sync == true) {
+//		ErrorHandler::handleMessage(
+//				"Manipulator will not be synchronized because of Parallelization mode. [syncManipulator in OpenRave]",
+//				ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
+//		return;
+//	}
 	// If the manipulator is attached, we work with it, otherwise we have a default behavior.
 	if (COMP->ini.PortParameter.withManipulator) {
 		CommManipulatorObjects::CommMobileManipulatorState manipulatorState;
@@ -169,8 +136,8 @@ void OpenRave::syncManipulator() {
 			CHS::StatusCode status = COMP->manipulatorStatePushTimedClient->getUpdateWait(manipulatorState);
 
 			if (status != CHS::SMART_OK) {
-				ErrorHandler::handleMessage("Timed update of ManipulatorState could not be get. [syncManipulator in OpenRave]",
-						CommManipulationPlannerObjects::ManipulationPlannerEvent::MANIPULATOR_SYNC_FAIL, ErrorHandler::ERROR);
+				ErrorHandler::handleMessage("This is a WARNING, NOT AN ERROR: :) Timed update of ManipulatorState could not be get. [syncManipulator in OpenRave]",
+						CommManipulationPlannerObjects::ManipulationPlannerEvent::MANIPULATOR_SYNC_FAIL, ErrorHandler::WARNING);
 				return;
 			}
 		} while (!manipulatorState.is_valid());
@@ -187,6 +154,8 @@ void OpenRave::syncManipulator() {
 			double elevation = 0;
 			double roll = 0;
 			manipulatorState.get_manipulator_state().get_pose_manipulator(x, y, z, azimuth, elevation, roll, 1);
+			std::cout << "Manipulator manipulatorState.get_manipulator_state().get_pose_manipulator():" << std::endl
+				  << "   x,y,z, azimuth, elevation, roll [m] = " << x << " " << y << " " << z << " " << azimuth << " " << elevation << " " << roll << std::endl;
 
 			arma::mat matrix(4, 4);
 
@@ -197,13 +166,19 @@ void OpenRave::syncManipulator() {
 			double offset_X = 0;
 			double offset_Y = 0;
 			double offset_Z = 0;
+
+			// get offset for the sake of coordinate differences: we have the origin in the first joint, open rave in the ground plate
 			specificManipulator->getOffsetRealManipulatortoOpenRaveManipulator(offset_X, offset_Y, offset_Z);
+
 			transform.trans.x -= offset_X;
 			transform.trans.y -= offset_Y;
 			transform.trans.z -= offset_Z;
 
+			std::cout << "Transform: (new pose of manipulator in open rave incl 'OffsetRealManipulatortoOpenRaveManipulator')" << std::endl
+				  << "   x,y,z = " << transform.trans.x << " " << transform.trans.y << " " << transform.trans.z << std::endl;
+
 			OpenRaveGuard guard(this->environment->GetMutex());
-			this->manipulator->SetTransform(transform);
+			this->manipulator->SetTransform(transform); // Transforms the robot and updates the attached sensors and grabbed bodies.
 			guard.release();
 
 			this->initial_sync = true;
@@ -217,11 +192,38 @@ void OpenRave::syncManipulator() {
 		// TODO: sync without gripper
 		//manipulatorAngles.push_back(manipulatorState.get_manipulator_state().get_gripper_angle());
 
+
 		this->specificManipulator->convertRealAnglesToOpenRaveAngles(manipulatorAngles, manipulatorAngles);
+
+
+
+		{
+		std::vector<dReal> angles;
+		OpenRaveGuard guard(this->environment->GetMutex());
+			this->manipulator->GetActiveDOFValues(angles);
+		guard.release();
+		std::cout<<"Old Joint states: ";
+		for(u_int32_t i = 0;i<angles.size();++i){
+			std::cout<<angles[i]<<" ";
+		}
+		std::cout<<endl;
+		}
 
 		// Move the robot arm in OpenRave to the same position of real robot arm
 		this->moveManipulatorToPosition(manipulatorAngles, false);
-		this->parallelization_initial_sync = true;
+
+		{
+		std::vector<dReal> angles;
+		OpenRaveGuard guard(this->environment->GetMutex());
+					this->manipulator->GetActiveDOFValues(angles);
+				guard.release();
+		std::cout<<"New Joint states: ";
+		for(u_int32_t i = 0;i<angles.size();++i){
+					std::cout<<angles[i]<<" ";
+				}
+		std::cout<<std::endl;
+		}
+		//this->parallelization_initial_sync = true;
 	} else {
 		// Sync only once at the beginning. Arm should be stationary during the runtime of the component.
 		if (!this->initial_sync) {
@@ -230,7 +232,11 @@ void OpenRave::syncManipulator() {
 			double offset_X = 0;
 			double offset_Y = 0;
 			double offset_Z = 0;
+
+			// get offset for the sake of coordinate differences: we have the origin in the first joint, open rave in the ground plate
 			specificManipulator->getOffsetRealManipulatortoOpenRaveManipulator(offset_X, offset_Y, offset_Z);
+
+			// z-pose hardocded because only simulation and no real katana conected that can offer that pose
 			transform.trans.x -= offset_X;
 			transform.trans.y -= offset_Y;
 			transform.trans.z = 0.590 - offset_Z;
@@ -250,13 +256,14 @@ void OpenRave::syncManipulator() {
 		manipulatorAngles.push_back(M_PI - 0.271071);
 
 		this->moveManipulatorToPosition(manipulatorAngles, false);
-		this->parallelization_initial_sync = true;
+		//this->parallelization_initial_sync = true;
 	}
 	ErrorHandler::handleMessage("Manipulator successfully synchronized. [syncManipulator in OpenRave]", ErrorHandler::INFO,
 			COMP->ini.OpenRave.debugOpenRave);
 }
 
-void OpenRave::setParameter(const CommManipulationPlannerObjects::CommManipulationPlannerParameter& param) {
+void OpenRave::setParameter(const CommManipulationPlannerObjects::CommManipulationPlannerParameter& param)
+{
 	CommManipulationPlannerObjects::ManipulationPlannerParameterMode tag(
 			CommManipulationPlannerObjects::ManipulationPlannerParameterMode::ENV_CLEAR);
 
@@ -268,164 +275,127 @@ void OpenRave::setParameter(const CommManipulationPlannerObjects::CommManipulati
 	double w = 0;
 	double lowerAngle = 0;
 	double upperAngle = 0;
+	double lowerRoll = 0;
+	double upperRoll = 0;
 	std::string type;
 
-	param.get(tag, id, x, y, z, w, lowerAngle, upperAngle, type);
+	param.get(tag, id, x, y, z, w, lowerAngle, upperAngle, type, lowerRoll, upperRoll);
 
 	CHS::SmartGuard guard(COMP->ParameterMutex);
 	switch (tag) {
 	case CommManipulationPlannerObjects::ManipulationPlannerParameterMode::ENV_CLEAR: {
-		ss << "PARAMETER received: ENV_CLEAR";
+		this->resetAll();
+		ss << "PARAMETER applied: ENV_CLEAR";
 		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
-		this->globalParameters.clearEnvironment = true;
-		this->globalParameters.modified = true;
 		break;
 	}
 
 	case CommManipulationPlannerObjects::ManipulationPlannerParameterMode::ENV_LOAD_OBJECTRECOGNITION: {
-		ss << "PARAMETER received: ENV_LOAD_OBJECTRECOGNITION " << id;
+		this->loadEnvironment(id);
+		ss << "PARAMETER applied: ENV_LOAD_OBJECTRECOGNITION " << id;
 		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
-		this->globalParameters.loadEnvironmentObjectRecognition = true;
-		this->globalParameters.loadEnvironmentObjectRecognition_id = id;
-		this->parallelization_initial_sync = false;
-		this->globalParameters.clearEnvironment = true;
-		this->globalParameters.modified = true;
 		break;
 	}
 
 	case CommManipulationPlannerObjects::ManipulationPlannerParameterMode::ENV_LOAD_FILE: {
-		ss << "PARAMETER received: ENV_LOAD_FILE " << id;
-		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
-		this->resetAll();
 		this->loadEnvironmentFromFile(id);
+		ss << "PARAMETER applied: ENV_LOAD_FILE " << id;
+		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
 		break;
 	}
 
 	case CommManipulationPlannerObjects::ManipulationPlannerParameterMode::OBJ_DELETE: {
-		ss << "PARAMETER received: OBJ_DELETE " << id;
-		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
 		this->deleteKinBody(id);
+		ss << "PARAMETER applied: OBJ_DELETE " << id;
+		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
 		break;
 	}
 
 	case CommManipulationPlannerObjects::ManipulationPlannerParameterMode::OBJ_ADD: {
-		ss << "PARAMETER received: OBJ_ADD " << id << " " << type;
+		this->loadSingelObjectFromObjRecognition(id);
+		ss << "PARAMETER applied: OBJ_ADD " << id << " " << type; //TODO delte type
 		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
-
-		CommBasicObjects::CommPose3d pose(0, 0, 0, 0, 0, 0, 1);
-
-		ObjectXMLWriter writer;
-		ObjectDatabase database("");
-
-		std::stringstream stream;
-		stream << id;
-
-		std::string output;
-		if (database.isKnownObject(type)) {
-			if (database.getObjectShape(type) == ObjectDatabase::BOUNDINGBOX) {
-				database.getObjectBoundingBox(x, y, z);
-				writer.writeKinBodyBox(stream.str(), x, y, z, output);
-			} else if (database.getObjectShape(type) == ObjectDatabase::CYLINDER) {
-				database.getObjectCylinder(x, y);
-				writer.writeKinBodyCylinder(stream.str(), x, y, output);
-				pose.set_roll(pose.get_roll() + M_PI_2);
-			} else if (database.getObjectShape(type) == ObjectDatabase::MESH) {
-				std::string name;
-				database.getObjectMeshFilename(name);
-				writer.writeKinBodyMesh(stream.str(), name, output);
-				pose.set_roll(pose.get_roll() + M_PI_2);
-			}
-			this->addKinBody(output, pose.getHomogeneousMatrix(1));
-		} else {
-			ErrorHandler::handleMessage("Object could not be added. [setParameter in OpenRave]", ErrorHandler::WARNING);
-		}
 		break;
 	}
 
 	case CommManipulationPlannerObjects::ManipulationPlannerParameterMode::OBJ_MOVE: {
-		ss << "PARAMETER received: OBJ_MOVE " << id << " " << x << " " << y << " " << z;
-		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
 		std::stringstream name;
 		name << id;
 		KinBodyPtr kinbody = this->environment->GetKinBody(name.str());
 		if (kinbody == NULL) {
+			std::cout<<"Error moving unkown object!"<<std::endl;
 			break;
 		}
-		TransformMatrix transform = kinbody->GetTransform();
-		transform.trans.x = x;
-		transform.trans.y = y;
-		transform.trans.z = z;
+
+		CommBasicObjects::CommPose3d pose(x, y, z, 0, 0, M_PI_2, 1);
+
+		arma::mat matrix = pose.getHomogeneousMatrix(1);
+
+		TransformMatrix transform;
+		this->copy4x4MatrixToTransformMatrix(matrix, transform);
+
 		kinbody->SetTransform(transform);
+		ss << "PARAMETER applied: OBJ_MOVE " << id << " " << x << " " << y << " " << z;
+		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
 		break;
 	}
 
 	case CommManipulationPlannerObjects::ManipulationPlannerParameterMode::ENV_SAVE_FILE: {
-		ss << "PARAMETER received: ENV_SAVE_FILE " << id;
-		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
 		this->saveEnvironmentToFile(id);
+		ss << "PARAMETER applied: ENV_SAVE_FILE " << id;
+		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
 		break;
 	}
 
 	case CommManipulationPlannerObjects::ManipulationPlannerParameterMode::OBJ_COMPUTEGRASPTABLE: {
-		ss << "PARAMETER received: OBJ_COMPUTEGRASPTABLE " << id;
-		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
 		this->globalParameters.computeGraspTable = true;
 		this->globalParameters.computeGraspTable_id = id;
 		this->globalParameters.modified = true;
+		ss << "PARAMETER applied: OBJ_COMPUTEGRASPTABLE " << id;
+		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
 		break;
 	}
 
 	case CommManipulationPlannerObjects::ManipulationPlannerParameterMode::OPENRAVE_GRASPOBJ: {
-		ss << "PARAMETER received: OPENRAVE_GRASPOBJ " << id;
+
+			this->openGripper();
+		this->graspKinBody(id);
+		ss << "PARAMETER applied: OPENRAVE_GRASPOBJ " << id;
 		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
-		//		this->openGripper();
-		//		this->graspKinBody(id);
-		this->globalParameters.openrave_GraspObject = true;
-		this->globalParameters.openrave_GraspObject_id = id;
-		this->globalParameters.modified = true;
 		break;
 	}
 
 	case CommManipulationPlannerObjects::ManipulationPlannerParameterMode::OPENRAVE_RELEASEOBJ: {
-		ss << "PARAMETER received: OPENRAVE_RELEASEOBJ " << id;
+
+		this->releaseKinBody(id);
+		ss << "PARAMETER applied: OPENRAVE_RELEASEOBJ " << id;
 		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
-		//		this->releaseKinBody(id);
-		this->globalParameters.openrave_ReleaseObject = true;
-		this->globalParameters.openrave_ReleaseObject_id = id;
-		this->globalParameters.modified = true;
 		break;
 	}
 
 	case CommManipulationPlannerObjects::ManipulationPlannerParameterMode::PARALLELIZATION_ON: {
-		ss << "PARAMETER received: PARALLELIZATION_ON";
+		ss << "PARAMETER applied: PARALLELIZATION_ON --> WARNING PARAMETER IGNORED";
 		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
-		this->globalParameters.parallelization = true;
-		this->globalParameters.modified = true;
 		break;
 	}
 
 	case CommManipulationPlannerObjects::ManipulationPlannerParameterMode::PARALLELIZATION_OFF: {
-		ss << "PARAMETER received: PARALLELIZATION_OFF";
+		ss << "PARAMETER applied: PARALLELIZATION_OFF --> WARNING PARAMETER IGNORED ";
 		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
-		this->globalParameters.parallelization = false;
-		this->parallelization_initial_sync = false;
-		this->globalParameters.modified = true;
 		break;
 	}
 
 	case CommManipulationPlannerObjects::ManipulationPlannerParameterMode::GRASPING_NONE: {
-		ss << "PARAMETER received: GRASPING_NONE";
-		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
 		this->globalParameters.grasping_none = true;
 		this->globalParameters.grasping_simple = false;
 		this->globalParameters.grasping_advanced = false;
 		this->globalParameters.modified = true;
+		ss << "PARAMETER applied: GRASPING_NONE";
+		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
 		break;
 	}
 
 	case CommManipulationPlannerObjects::ManipulationPlannerParameterMode::GRASPING_SIMPLE: {
-		ss << "PARAMETER received: GRASPING_SIMPLE";
-		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
 		this->globalParameters.grasping_none = false;
 		this->globalParameters.grasping_simple = true;
 		this->globalParameters.grasping_simple_lowerHeightBound = x;
@@ -434,37 +404,50 @@ void OpenRave::setParameter(const CommManipulationPlannerObjects::CommManipulati
 		this->globalParameters.grasping_simple_upperDepthBound = w;
 		this->globalParameters.grasping_simple_lowerAngleBound = lowerAngle;
 		this->globalParameters.grasping_simple_upperAngleBound = upperAngle;
+		this->globalParameters.grasping_simple_lowerRollBound = lowerRoll;
+		this->globalParameters.grasping_simple_upperRollBound = upperRoll;
 		this->globalParameters.grasping_advanced = false;
 		this->globalParameters.modified = true;
+		ss << "PARAMETER applied: GRASPING_SIMPLE";
+		ss <<"height (" <<x<< " " <<y<< ")" <<" depth (" <<z<< " " <<w<< ")" << " angle (" <<lowerAngle<< " " <<upperAngle<< ")" << " roll (" <<lowerRoll<< " " <<upperRoll<< ")\n";
+		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
 		break;
 	}
 
 	case CommManipulationPlannerObjects::ManipulationPlannerParameterMode::GRASPING_ADVANCED: {
-		ss << "PARAMETER received: GRASPING_ADVANCED";
-		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
 		this->globalParameters.grasping_none = false;
 		this->globalParameters.grasping_simple = false;
 		this->globalParameters.grasping_advanced = true;
 		this->globalParameters.modified = true;
+		ss << "PARAMETER applied: GRASPING_ADVANCED";
+		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
 		break;
 	}
 
 	case CommManipulationPlannerObjects::ManipulationPlannerParameterMode::SIMULATION_TEST_IK_ONLY: {
-		ss << "PARAMETER received: SIMULATION_TEST_IK_ONLY";
-		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
 		this->globalParameters.simulation_test_ik_only = true;
 		this->globalParameters.modified = true;
+		ss << "PARAMETER applied: SIMULATION_TEST_IK_ONLY";
+		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
 		break;
 	}
 
 	case CommManipulationPlannerObjects::ManipulationPlannerParameterMode::SIMULATION_PLAN_ALL: {
-		ss << "PARAMETER received: SIMULATION_PLAN_ALL";
-		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
 		this->globalParameters.simulation_test_ik_only = false;
 		this->globalParameters.modified = true;
+		ss << "PARAMETER applied: SIMULATION_PLAN_ALL";
+		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
 		break;
 	}
+
+	default:{
+		ss << "UNKNOWN PARAMETER";
+		ErrorHandler::handleMessage(ss.str(), ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
+		break;
 	}
+
+	}
+	localParameters = globalParameters;
 	guard.release();
 }
 
@@ -478,9 +461,14 @@ void OpenRave::moveManipulatorToPosition(const std::vector<dReal>& angles, bool 
 	} else {
 		this->setActiveDofsWithoutGripper();
 	}
+	std::cout<<__LINE__<<std::endl;
 	OpenRaveGuard guard(this->environment->GetMutex());
+	std::cout<<__LINE__<<std::endl;
 	this->manipulator->SetActiveDOFValues(angles, false);
+	std::cout<<__LINE__<<std::endl;
 	guard.release();
+	std::cout<<__LINE__<<std::endl;
+
 }
 
 void OpenRave::moveManipulatorToPosition(TrajectoryBaseConstPtr trajectory, bool withGripper) {
@@ -494,7 +482,7 @@ void OpenRave::moveManipulatorToPosition(TrajectoryBaseConstPtr trajectory, bool
 		for (unsigned int i = 0; i < trajectory->GetPoints().size(); ++i) {
 			this->manipulator->SetActiveDOFValues(trajectory->GetPoints()[i].q, false);
 			guard.release();
-			usleep(50000);
+			usleep(13000);
 			guard.acquire();
 		}
 	} else {
@@ -539,53 +527,81 @@ void OpenRave::startGUI() {
 }
 
 bool OpenRave::calculateIKSolution(const dReal& x, const dReal& y, const dReal& z, const dReal& azimuth, const dReal& elevation,
-		const dReal& roll, std::vector<dReal>& solution) {
+		const dReal& roll, std::vector<dReal>& solution, CommBasicObjects::CommPose3d& pose) {
 
-	arma::mat rotmatrix(4, 4);
-	//	EulerTransformationMatrices::create_zyx_matrix(0, 0, 0, -M_PI_2, -M_PI_2, 0, rotmatrix);
-	//	EulerTransformationMatrices::create_zyx_matrix(0, 0, 0, 0, 0, M_PI_2, rotmatrix);
+//	std::cout << "calculateIkSolution(): " << "  --- x, y, z, azimuth, elevation, roll :  " << x << "  " << y << "  " << z << "  "
+//			<< azimuth << "  " << elevation << "  " << roll << std::endl;
+
+
 
 	double zxz_phi = 0;
 	double zxz_theta = 0;
 	double zxz_psi = 0;
-	EulerTransformationMatrices::zyx_to_zxz_angles(azimuth, elevation, roll, zxz_phi, zxz_theta, zxz_psi);
+	//EulerTransformationMatrices::zyx_to_zxz_angles(azimuth, elevation, roll, zxz_phi, zxz_theta, zxz_psi);
+	//std::cout << "ROLL --------------------------- " << roll << std::endl;
+	EulerTransformationMatrices::zyx_to_zxz_angles(azimuth, 0, elevation, zxz_phi, zxz_theta, zxz_psi);
 
 	arma::mat matrix(4, 4);
 
 	EulerTransformationMatrices::create_zxz_matrix(x, y, z, zxz_phi, zxz_theta, zxz_psi - M_PI_2, matrix);
 
-	//	matrix = matrix * rotmatrix;
+
+
+	arma::mat rotmatrix(4, 4);
+	//	EulerTransformationMatrices::create_zyx_matrix(0, 0, 0, -M_PI_2, -M_PI_2, 0, rotmatrix);
+	EulerTransformationMatrices::create_zxz_matrix(0, 0, 0, 0, 0, roll, rotmatrix);
+	matrix = matrix * rotmatrix;
+
+
 
 	TransformMatrix transform;
 	std::vector<std::vector<dReal> > solutions;
 
 	this->copy4x4MatrixToTransformMatrix(matrix, transform);
 
-	IkParameterization ikPara;
+	IkParameterization ikPara; 	//The transformation of the end-effector in the global coord system
 	ikPara.SetTransform(transform);
 
 	if (this->manipulator->GetActiveManipulator()->FindIKSolutions(ikPara, solutions, OpenRAVE::IKFO_CheckEnvCollisions)) {
 		solution = solutions.front();
+                pose.set_x(x,1);
+                pose.set_y(y,1);
+                pose.set_z(z,1);
+                pose.set_azimuth(azimuth);
+                pose.set_elevation(elevation);
+                pose.set_roll(roll);
 		return true;
 	}
 	return false;
 }
 
-bool OpenRave::iterateToGetGraspingIKSolution(const dReal& x, const dReal& y, const dReal& z, std::vector<dReal>& solution) {
+bool OpenRave::iterateToGetGraspingIKSolution(const dReal& x, const dReal& y, const dReal& z, std::vector<dReal>& solution, CommBasicObjects::CommPose3d& pose) {
 	double x_offset = 0;
 	double y_offset = 0;
 	double z_offset = 0;
 	this->specificManipulator->getOffsetRealManipulatortoOpenRaveManipulator(x_offset, y_offset, z_offset);
 
+	//std::cout << "################### iterating over roll lower = " << localParameters.grasping_simple_lowerRollBound << " upper = " << localParameters.grasping_simple_upperRollBound << std::endl;
+
+	TransformMatrix transform;
+	OpenRaveGuard guardTransform(this->environment->GetMutex());
+	transform = this->manipulator->GetTransform(); // Transforms the robot and updates the attached sensors and grabbed bodies.
+	guardTransform.release();
+	std::cout << "Transform: (pose of manipulator in open rave)" << std::endl
+	          << "   x,y,z = " << transform.trans.x << " " << transform.trans.y << " " << transform.trans.z << std::endl;
+
 	dReal azimuth = 0;
 	dReal elevation = 0;
 	dReal roll = 0;
-	dReal default_calculation = 180 / M_PI * M_PI_2;
+	dReal default_calculation = 90; //was: 180 / M_PI * M_PI_2;
 
-	double v = sqrt(x * x + y * y);
-	double vnew = v;
+
+//	double objDist = sqrt(x * x + y * y);
+//	double objDistNew = objDist;
 	double new_x = 0;
 	double new_y = 0;
+	double dx = 0;
+	double dy = 0;
 
 	OpenRaveGuard guard(this->environment->GetMutex());
 	/**
@@ -608,12 +624,32 @@ bool OpenRave::iterateToGetGraspingIKSolution(const dReal& x, const dReal& y, co
 	double iter_depth = localParameters.grasping_simple_lowerDepthBound;
 	bool depthExpression = false;
 	do {
-		vnew = v + iter_depth;
+		//objDistNew = objDist + iter_depth;
+		//new_x = (x / objDist) * objDistNew;
+		//new_y = (y / objDist) * objDistNew;
 
-		new_x = (x / v) * vnew;
-		new_y = (y / v) * vnew;
 
-		azimuth = atan((new_y + y_offset) / (new_x + x_offset)) + M_PI_2;
+
+
+		//why calculate the x offset of the MANIPUlATOR in here?
+		//it was already moved to that pos in syncManipulator?
+		//azimuth = atan((new_y + y_offset) / (new_x + x_offset)) + M_PI_2;
+		//azimuth = atan(new_y / new_x) + M_PI_2;
+
+		//azimuth = atan2(x-transform.trans.x,y-transform.trans.y);
+		azimuth = atan2(y-transform.trans.y,x-transform.trans.x);
+		dx = cos(azimuth)*iter_depth;
+		dy = sin(azimuth)*iter_depth;
+
+		new_x = dx + x;
+		new_y = dy + y;
+
+		azimuth += M_PI_2;
+
+
+
+		//azimuth = atan(  ( ((y-transform.trans.y) / v) * sqrt((x-transform.trans.x) * (x-transform.trans.x) + (y-transform.trans.y) * (y-transform.trans.y)) )   /   ( ((x-transform.trans.x) / v) *  sqrt((x-transform.trans.x) * (x-transform.trans.x) + (y-transform.trans.y) * (y-transform.trans.y)) )  ) + M_PI_2;
+
 
 		double iter_height = 0;
 		bool heightExpression = false;
@@ -625,38 +661,69 @@ bool OpenRave::iterateToGetGraspingIKSolution(const dReal& x, const dReal& y, co
 				// Calculate new angle for grasping starting from 90° (gripper is horizontal) to 180° (gripper is vertical)
 				elevation = M_PI / 180 * ((default_calculation) + iter_angle);
 
-				std::cout << "Iteration: " << iter_depth << " " << iter_height << " " << iter_angle
-						<< "  --- x, y, z, azimuth, roll, elevation :  " << new_x << "  " << new_y << "  " << iter_height << "  "
-						<< azimuth << "  " << roll << "  " << elevation << std::endl;
+				double iter_roll = localParameters.grasping_simple_lowerRollBound;
+				bool rollExpression = false;
+				do { // loop over roll
+	//////
+					roll = iter_roll * M_PI / 180; // deg to rad
 
-				// Roll has to be in the middle, don't know why but it works
-				if (calculateIKSolution(new_x, new_y, iter_height, azimuth, roll, elevation, solution)) {
-					std::cout << "iterateToGetGraspingIKSolution found IK solution\n";
-					guard.release();
-					return true;
-				}
+					//std::cout << "Iteration: " << iter_depth << " " << iter_height << " " << iter_angle
+					//		<< "  --- x, y, z, azimuth, elevation, roll :  " << new_x << "  " << new_y << "  " << iter_height << "  "
+					//		<< azimuth << "  " << elevation << "  " << roll << std::endl;
+
+					// Roll has to be in the middle, don't know why but it works
+					//if (calculateIKSolution(new_x, new_y, iter_height, azimuth, roll, elevation, solution)) {
+					if (calculateIKSolution(new_x, new_y, iter_height, azimuth, elevation, roll, solution, pose)) {
+						std::cout << "iterateToGetGraspingIKSolution found IK solution\n";
+
+						std::cout << "Final TCP after iteration: " << iter_depth << " " << iter_height << " " << iter_angle
+								<< "  --- x, y, z, azimuth, elevation, roll :  " << new_x << "  " << new_y << "  " << iter_height << "  "
+								<< azimuth << "  " << elevation << "  " << roll << std::endl;
+						std::cout << (roll*180.0/M_PI) << std::endl;
+						std::cout << (azimuth*180.0/M_PI) << std::endl;
+
+						guard.release();
+						return true;
+					}
+	//////
+					if (localParameters.grasping_simple_lowerRollBound < localParameters.grasping_simple_upperRollBound) {
+						iter_roll += 1.0;
+						rollExpression = iter_roll <= localParameters.grasping_simple_upperRollBound ? true : false;
+					} else {
+						iter_roll -= 1.0;
+						rollExpression = iter_roll >= localParameters.grasping_simple_upperRollBound ? true : false;
+					}
+				} while (rollExpression);
+
 				if (localParameters.grasping_simple_lowerAngleBound < localParameters.grasping_simple_upperAngleBound) {
 					iter_angle += 1.0;
-					angleExpression = iter_angle < localParameters.grasping_simple_upperAngleBound ? true : false;
+					angleExpression = iter_angle <= localParameters.grasping_simple_upperAngleBound ? true : false;
 				} else {
 					iter_angle -= 1.0;
-					angleExpression = iter_angle > localParameters.grasping_simple_upperAngleBound ? true : false;
+					angleExpression = iter_angle >= localParameters.grasping_simple_upperAngleBound ? true : false;
 				}
 			} while (angleExpression);
+
+
+
+
 			if (localParameters.grasping_simple_lowerHeightBound < localParameters.grasping_simple_upperHeightBound) {
 				iter_height += 0.005;
-				heightExpression = iter_height < z + localParameters.grasping_simple_upperHeightBound ? true : false;
+				heightExpression = iter_height <= z + localParameters.grasping_simple_upperHeightBound ? true : false;
 			} else {
 				iter_height -= 0.005;
-				heightExpression = iter_height > z + localParameters.grasping_simple_upperHeightBound ? true : false;
+				heightExpression = iter_height >= z + localParameters.grasping_simple_upperHeightBound ? true : false;
 			}
+
+
+
 		} while (heightExpression);
 		if (localParameters.grasping_simple_lowerDepthBound < localParameters.grasping_simple_upperDepthBound) {
 			iter_depth += 0.002;
-			depthExpression = iter_depth < localParameters.grasping_simple_upperDepthBound ? true : false;
+			depthExpression = iter_depth <= localParameters.grasping_simple_upperDepthBound ? true : false;
 		} else {
 			iter_depth -= 0.002;
-			depthExpression = iter_depth > localParameters.grasping_simple_upperDepthBound ? true : false;
+			depthExpression = iter_depth >= localParameters.grasping_simple_upperDepthBound ? true : false;
 		}
 	} while (depthExpression);
 	return false;
@@ -692,6 +759,11 @@ bool OpenRave::planPath(const std::vector<dReal>& angles, TrajectoryBasePtr& tra
 	}
 	ErrorHandler::handleMessage("Plan Path Finished.", ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
 
+	if(success == false){
+		std::cout<<"OpenRave.cc::planPath: Planner returned false!"<<std::endl;
+	}else{
+		std::cout<<"OpenRave.cc::planPath: Planner returned true!"<<std::endl;
+	}
 	return success;
 }
 
@@ -889,7 +961,7 @@ void OpenRave::testPython() {
 
 OpenRave::OpenRave() {
 	this->specificManipulator = MANIPULATORFACTORY->createManipulatorClass(COMP->ini.OpenRave.robotName);
-	this->globalParameters.clearEnvironment = false;
+	//this->globalParameters.clearEnvironment = false;
 	this->globalParameters.computeGraspTable = false;
 	this->globalParameters.computeGraspTable_id = 0;
 	this->globalParameters.grasping_advanced = false;
@@ -901,19 +973,104 @@ OpenRave::OpenRave() {
 	this->globalParameters.grasping_simple_upperDepthBound = 0.0;
 	this->globalParameters.grasping_simple_lowerAngleBound = 0.0;
 	this->globalParameters.grasping_simple_upperAngleBound = 0.0;
-	this->globalParameters.loadEnvironmentObjectRecognition = false;
-	this->globalParameters.loadEnvironmentObjectRecognition_id = 0;
-	this->globalParameters.openrave_GraspObject = false;
-	this->globalParameters.openrave_GraspObject_id = 0;
-	this->globalParameters.openrave_ReleaseObject = false;
-	this->globalParameters.openrave_ReleaseObject_id = 0;
-	this->globalParameters.parallelization = false;
+//	this->globalParameters.loadEnvironmentObjectRecognition = false;
+//	this->globalParameters.loadEnvironmentObjectRecognition_id = 0;
+//	this->globalParameters.loadSingleObjectFromObjectRecognition = false;
+//	this->globalParameters.loadSingleObjectFromObjectRecognition_id = 0;
+//	this->globalParameters.openrave_GraspObject = false;
+//	this->globalParameters.openrave_GraspObject_id = 0;
+//	this->globalParameters.openrave_ReleaseObject = false;
+//	this->globalParameters.openrave_ReleaseObject_id = 0;
+	//this->globalParameters.parallelization = false;
 	this->globalParameters.simulation_test_ik_only = false;
 	this->globalParameters.modified = false;
 	this->localParameters = this->globalParameters;
-	this->parallelization_initial_sync = false;
+	//this->parallelization_initial_sync = false;
 
 	this->initial_sync = false;
+}
+
+
+void OpenRave::loadSingelObjectFromObjRecognition(unsigned int objId){
+
+	CommObjectRecognitionObjects::CommObjectRecognitionId request;
+	request.set_id(objId);
+	CommObjectRecognitionObjects::CommObjectRecognitionObjectProperties response;
+
+	CHS::StatusCode status = COMP->objectQueryClient->query(request, response);
+
+	if (status != CHS::SMART_OK) {
+		ErrorHandler::handleMessage("Object could not be get from object recognition. [loadSingelObjectFromObjRecognition in OpenRave]",
+				ErrorHandler::WARNING);
+		return;
+	}
+	else
+	{
+		ErrorHandler::handleMessage("Object queried [loadSingelObjectFromObjRecognition in OpenRave]",
+				ErrorHandler::INFO);
+	}
+
+	double x = 0;
+	double y = 0;
+	double z = 0;
+	ObjectXMLWriter writer;
+
+
+	//////////////////////////////////////////////////////
+
+	ObjectDatabase database("");
+
+	CommObjectRecognitionObjects::CommObjectRecognitionObjectProperties object = response;
+
+	std::string output;
+
+	std::string type;
+	object.get_type(type);
+
+	std::cout << "[loadSingelObjectFromObjRecognition] Loading object in env " << type << std::endl;
+
+	CommBasicObjects::CommPose3d pose = object.get_pose();
+
+	// Move the table a little bit down to prevent collisions with objects
+	if (type == "TABLE" || type == "table") {
+		// move table 10cm down, then make it 20cm thick. this will prevent open rave
+		// from planning under the table while the robot still can stand inside the contour of
+		// the table
+		std::cout<<"Table pose from Objrec.: "<<pose.get_x(1)<<" "<<pose.get_y(1)<<" "<<pose.get_z(1)<<std::endl;
+		pose.set_z(pose.get_z(1) - 0.10, 1);
+		object.get_dimension(x, y, z, 1);
+		object.set_dimension(x, y, 0.20, 1);
+		//object.set_dimension(x, y, 0.001, 1);
+	}
+
+	std::stringstream stream;
+	stream << object.get_id();
+
+	if (database.isKnownObject(type)) {
+		if (database.getObjectShape(type) == ObjectDatabase::BOUNDINGBOX) {
+			database.getObjectBoundingBox(x, y, z);
+			writer.writeKinBodyBox(stream.str(), x, y, z, output, COMP->ini.OpenRave.saveObjectsToFile);
+		} else if (database.getObjectShape(type) == ObjectDatabase::CYLINDER) {
+			database.getObjectCylinder(x, y);
+			writer.writeKinBodyCylinder(stream.str(), x, y, output, COMP->ini.OpenRave.saveObjectsToFile);
+			pose.set_roll(pose.get_roll() + M_PI_2);
+		} else if (database.getObjectShape(type) == ObjectDatabase::MESH) {
+			std::string filename;
+			database.getObjectMeshFilename(filename);
+			writer.writeKinBodyMesh(stream.str(), filename, output, COMP->ini.OpenRave.saveObjectsToFile);
+			pose.set_roll(pose.get_roll() + M_PI_2);
+		}
+	} else {
+		// x,y,z = dimensions in width, height, length
+		object.get_dimension(x, y, z, 1);
+		writer.writeKinBodyBox(stream.str(), x, y, z, output, COMP->ini.OpenRave.saveObjectsToFile);
+	}
+	this->addKinBody(output, pose.getHomogeneousMatrix(1));
+
+	ErrorHandler::handleMessage("Single Object loaded successfully. [loadSingelObjectFromObjRecognition in OpenRave]", ErrorHandler::INFO,
+				COMP->ini.OpenRave.debugOpenRave);
+
+
 }
 
 void OpenRave::loadEnvironment(unsigned int envId) {
@@ -928,6 +1085,8 @@ void OpenRave::loadEnvironment(unsigned int envId) {
 	// TODO: Database inizializieren
 	ObjectDatabase database("");
 
+	std::cout << "[loadEnvironment] Loading Environment size: " << response.get_size()  << std::endl;
+
 	for (uint32_t i = 0; i < response.get_size(); i++) {
 		CommObjectRecognitionObjects::CommObjectRecognitionObjectProperties object = response.get_object_properties(i);
 
@@ -936,10 +1095,20 @@ void OpenRave::loadEnvironment(unsigned int envId) {
 		std::string type;
 		object.get_type(type);
 
+		std::cout << "[loadEnvironment] Loading object in env " << type << std::endl;
+
 		CommBasicObjects::CommPose3d pose = object.get_pose();
+
 		// Move the table a little bit down to prevent collisions with objects
-		if (type == "table") {
-			pose.set_z(pose.get_z(1) - 0.0075, 1);
+		if (type == "TABLE" || type == "table") {
+			// move table 10cm down, then make it 20cm thick. this will prevent open rave
+			// from planning under the table while the robot still can stand inside the contour of
+			// the table
+			std::cout<<"Table pose from Objrec.: "<<pose.get_x(1)<<" "<<pose.get_y(1)<<" "<<pose.get_z(1)<<std::endl;
+			pose.set_z(pose.get_z(1) - 0.10, 1);
+			object.get_dimension(x, y, z, 1);
+			object.set_dimension(x, y, 0.20, 1);
+			//object.set_dimension(x, y, 0.001, 1);
 		}
 
 		std::stringstream stream;
@@ -960,6 +1129,7 @@ void OpenRave::loadEnvironment(unsigned int envId) {
 				pose.set_roll(pose.get_roll() + M_PI_2);
 			}
 		} else {
+			// x,y,z = dimensions in width, height, length
 			object.get_dimension(x, y, z, 1);
 			writer.writeKinBodyBox(stream.str(), x, y, z, output, COMP->ini.OpenRave.saveObjectsToFile);
 		}
@@ -1007,6 +1177,7 @@ void OpenRave::addKinBody(const std::string& data, const arma::mat& matrix) {
 	this->copy4x4MatrixToTransformMatrix(matrix, transform);
 
 	body->SetTransform(transform);
+	std::cout<<"Add kinbody with tranform: "<<transform<<std::endl;
 
 	if (this->environment->AddKinBody(body)) {
 		ErrorHandler::handleMessage("KinBody has been successfully added. ID: " + body->GetName() + " [addKinBody in OpenRave]",
@@ -1041,6 +1212,25 @@ void OpenRave::deleteKinBody(unsigned int objId) {
 				ErrorHandler::ERROR);
 	}
 	guard.release();
+}
+
+
+bool OpenRave::getPositonOfKinbody(unsigned int objId, TransformMatrix& transform ) {
+	OpenRaveGuard guard(this->environment->GetMutex());
+	std::stringstream stream;
+	stream << objId;
+	KinBodyPtr body = this->environment->GetKinBody(stream.str());
+	if (body == NULL) {
+		ErrorHandler::handleMessage("KinBody cannot be found. ID: " + stream.str() + " [deleteKinBody in OpenRave]",
+				ErrorHandler::WARNING);
+		guard.release();
+		return false;
+	}
+	transform = body->GetTransform();
+	std::cout<<" Position of obj: "<<objId<<"x: "<<transform.trans.x <<" y: "<<	transform.trans.y <<" z: "<<transform.trans.z <<std::endl;
+	guard.release();
+
+	return true;
 }
 
 void OpenRave::graspKinBody(unsigned int objId) {
@@ -1179,12 +1369,22 @@ void OpenRave::deleteAllKinBodies(bool withManipulator, bool onlyManipulator) {
 	std::vector<KinBodyPtr> bodies;
 	OpenRaveGuard guard(this->environment->GetMutex());
 	this->environment->GetBodies(bodies);
+
+
 	for (unsigned int i = 0; i < bodies.size(); ++i) {
+	 KinBody::LinkPtr plink = this->manipulator->IsGrabbing(bodies[i]);
+	 if(!!plink){
+		 ErrorHandler::handleMessage("Grabbed object will not be deleted. [deleteAllKinBodies in OpenRave]", ErrorHandler::INFO,
+		 			COMP->ini.OpenRave.debugOpenRave);
+	 }
+	 else
+	 {
 		if ((bodies[i]->IsRobot() && withManipulator == true) || (bodies[i]->IsRobot() && onlyManipulator == true)) {
 			this->environment->Remove(bodies[i]);
 		} else if (!bodies[i]->IsRobot() && onlyManipulator == false) {
 			this->environment->Remove(bodies[i]);
 		}
+	 }
 	}
 	guard.release();
 }

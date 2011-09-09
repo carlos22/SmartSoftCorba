@@ -87,6 +87,7 @@ int ConsoleTask::svc()
     while(true) {
 	  std::cout << "Enter your text ('quit' to exit): " << std::endl;
 
+	  oss.str("");	// clear the stingstream
       while(true)
       {
         std::cin.get(ch);

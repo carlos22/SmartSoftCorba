@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
-  <uml:Model xmi:id="_CvlAMGasEeCO2uZHSTM3Pg" name="SmartSpeechOutputClient_psm">
-    <packagedElement xmi:type="uml:Component" xmi:id="_CvlAMWasEeCO2uZHSTM3Pg" name="SmartTTSClient">
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_CvlAMmasEeCO2uZHSTM3Pg" name="queryClient"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_CvlAM2asEeCO2uZHSTM3Pg" name="sendClient"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_CvlANGasEeCO2uZHSTM3Pg" name="ConsoleTask"/>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/__Bw8gKlYEeC66fsk0J29Zw/98" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/__Bw8gKlYEeC66fsk0J29Zw/98 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#__DieIKlYEeC66fsk0J29Zw">
+  <uml:Model xmi:id="_gqDxcNrgEeCXRLZCF2eW6A" name="SmartSpeechOutputClient_psm">
+    <packagedElement xmi:type="uml:Component" xmi:id="_gqDxcdrgEeCXRLZCF2eW6A" name="SmartTTSClient">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_gqDxctrgEeCXRLZCF2eW6A" name="wiringSlave"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_gqDxc9rgEeCXRLZCF2eW6A" name="queryClient"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_gqDxdNrgEeCXRLZCF2eW6A" name="sendClient"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_gqDxddrgEeCXRLZCF2eW6A" name="ConsoleTask"/>
     </packagedElement>
-    <profileApplication xmi:id="_CvlANWasEeCO2uZHSTM3Pg">
-      <eAnnotations xmi:id="_CvlANmasEeCO2uZHSTM3Pg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+    <profileApplication xmi:id="_gqDxdtrgEeCXRLZCF2eW6A">
+      <eAnnotations xmi:id="_gqDxd9rgEeCXRLZCF2eW6A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#__DieIKlYEeC66fsk0J29Zw"/>
       </eAnnotations>
       <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
     </profileApplication>
   </uml:Model>
-  <CorbaSmartSoft:SmartCorbaComponent xmi:id="_CvlnQGasEeCO2uZHSTM3Pg" base_Component="_CvlAMWasEeCO2uZHSTM3Pg"/>
-  <CorbaSmartSoft:SmartCorbaQueryClient xmi:id="_CvlnQWasEeCO2uZHSTM3Pg" serviceName="text2speech" base_Port="_CvlAMmasEeCO2uZHSTM3Pg" serverName="SmartTTSLoquendo">
+  <CorbaSmartSoft:SmartCorbaComponent xmi:id="_gqDxeNrgEeCXRLZCF2eW6A" base_Component="_gqDxcdrgEeCXRLZCF2eW6A"/>
+  <CorbaSmartSoft:SmartCorbaWiringSlave xmi:id="_gqDxedrgEeCXRLZCF2eW6A" base_Port="_gqDxctrgEeCXRLZCF2eW6A"/>
+  <CorbaSmartSoft:SmartCorbaQueryClient xmi:id="_gqDxetrgEeCXRLZCF2eW6A" base_Port="_gqDxc9rgEeCXRLZCF2eW6A" serviceName="text2speech" serverName="SmartTTSLoquendo" wiringName="queryClient">
     <commRequestObject href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_WKwIAEvoEeCoUthXHMCjWw"/>
     <commAnswerObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_vhHJwEvcEeCoUthXHMCjWw"/>
   </CorbaSmartSoft:SmartCorbaQueryClient>
-  <CorbaSmartSoft:SmartCorbaSendClient xmi:id="_CvlnQmasEeCO2uZHSTM3Pg" serviceName="text2speech" base_Port="_CvlAM2asEeCO2uZHSTM3Pg" serverName="SmartTTSLoquendo">
+  <CorbaSmartSoft:SmartCorbaSendClient xmi:id="_gqDxe9rgEeCXRLZCF2eW6A" base_Port="_gqDxdNrgEeCXRLZCF2eW6A" serviceName="text2speech" serverName="SmartTTSLoquendo" wiringName="sendClient">
     <commObject href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_WKwIAEvoEeCoUthXHMCjWw"/>
   </CorbaSmartSoft:SmartCorbaSendClient>
-  <CorbaSmartSoft:SmartCorbaTask xmi:id="_CvlnQ2asEeCO2uZHSTM3Pg" period="0" base_Class="_CvlANGasEeCO2uZHSTM3Pg" wcet="0"/>
+  <CorbaSmartSoft:SmartCorbaTask xmi:id="_gqDxfNrgEeCXRLZCF2eW6A" period="0" base_Class="_gqDxddrgEeCXRLZCF2eW6A" wcet="0"/>
 </xmi:XMI>

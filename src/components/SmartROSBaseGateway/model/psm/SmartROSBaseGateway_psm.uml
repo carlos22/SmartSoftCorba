@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="_T5AEAIbREeC0rPPgWdO49Q" name="SmartROSBaseGateway_psm">
+    <packagedElement xmi:type="uml:Component" xmi:id="_T5AEAYbREeC0rPPgWdO49Q" name="SmartROSBaseGateway">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_T5AEAobREeC0rPPgWdO49Q" name="basePositionUpdateSendServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_T5AEA4bREeC0rPPgWdO49Q" name="baseStateQueryServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_T5AEBIbREeC0rPPgWdO49Q" name="basePositionPushTimedServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_T5AEBYbREeC0rPPgWdO49Q" name="navigationVelocitySendServer"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_T5AEBobREeC0rPPgWdO49Q" name="ROS_SpinTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_T5AEB4bREeC0rPPgWdO49Q" name="BasePositionUpdateSendHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_T5AECIbREeC0rPPgWdO49Q" name="BaseStateQueryHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_T5AECYbREeC0rPPgWdO49Q" name="BaseStatePushTimedHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_T5AECobREeC0rPPgWdO49Q" name="NavigationVelocitySendServerHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_T5AEC4bREeC0rPPgWdO49Q" name="GlobalLock"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_T5AEDIbREeC0rPPgWdO49Q" name="general">
+        <ownedAttribute xmi:id="_T5AEDYbREeC0rPPgWdO49Q" name="verbose">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_T5AEDobREeC0rPPgWdO49Q" value="false"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_T5AED4bREeC0rPPgWdO49Q" name="start_push_timed">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_T5AEEIbREeC0rPPgWdO49Q" value="true"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_T5AEEYbREeC0rPPgWdO49Q" name="ROS">
+        <ownedAttribute xmi:id="_T5AEEobREeC0rPPgWdO49Q" name="vel_publ_name">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_T5AEE4bREeC0rPPgWdO49Q" value="/cmd_vel"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_T5AEFIbREeC0rPPgWdO49Q" name="raw_odom_subscr_name">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_T5AEFYbREeC0rPPgWdO49Q" value="/odom"/>
+        </ownedAttribute>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:id="_T5AEFobREeC0rPPgWdO49Q">
+      <eAnnotations xmi:id="_T5AEF4bREeC0rPPgWdO49Q" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:SmartCorbaComponent xmi:id="_T5AEGIbREeC0rPPgWdO49Q" base_Component="_T5AEAYbREeC0rPPgWdO49Q"/>
+  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="_T5AEGYbREeC0rPPgWdO49Q" serviceName="positionUpdate" base_Port="_T5AEAobREeC0rPPgWdO49Q" smartSendHandler="_T5AEB4bREeC0rPPgWdO49Q">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_BQWcsEV8EeC6tb6-J2zOEA"/>
+  </CorbaSmartSoft:SmartCorbaSendServer>
+  <CorbaSmartSoft:SmartCorbaQueryServer xmi:id="_T5AEGobREeC0rPPgWdO49Q" serviceName="basestatequery" base_Port="_T5AEA4bREeC0rPPgWdO49Q" smartQueryHandler="_T5AECIbREeC0rPPgWdO49Q">
+    <commRequestObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
+    <commAnswerObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
+  </CorbaSmartSoft:SmartCorbaQueryServer>
+  <CorbaSmartSoft:SmartCorbaPushTimedServer xmi:id="_T5AEG4bREeC0rPPgWdO49Q" serviceName="basestate" base_Port="_T5AEBIbREeC0rPPgWdO49Q" smartPushTimedHandler="_T5AECYbREeC0rPPgWdO49Q" cycle="0.025">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
+  </CorbaSmartSoft:SmartCorbaPushTimedServer>
+  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="_T5AEHIbREeC0rPPgWdO49Q" serviceName="navigationvelocity" base_Port="_T5AEBYbREeC0rPPgWdO49Q" smartSendHandler="_T5AECobREeC0rPPgWdO49Q">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_t0-UAEV5EeC6tb6-J2zOEA"/>
+  </CorbaSmartSoft:SmartCorbaSendServer>
+  <CorbaSmartSoft:SmartCorbaTask xmi:id="_T5AEHYbREeC0rPPgWdO49Q" period="0" base_Class="_T5AEBobREeC0rPPgWdO49Q" wcet="0"/>
+  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="_T5AEHobREeC0rPPgWdO49Q" base_Class="_T5AEB4bREeC0rPPgWdO49Q"/>
+  <CorbaSmartSoft:SmartCorbaQueryHandler xmi:id="_T5AEH4bREeC0rPPgWdO49Q" base_Class="_T5AECIbREeC0rPPgWdO49Q"/>
+  <CorbaSmartSoft:SmartCorbaPushTimedHandler xmi:id="_T5AEIIbREeC0rPPgWdO49Q" base_Class="_T5AECYbREeC0rPPgWdO49Q"/>
+  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="_T5ArEIbREeC0rPPgWdO49Q" base_Class="_T5AECobREeC0rPPgWdO49Q"/>
+  <CorbaSmartSoft:SmartCorbaMutex xmi:id="_T5ArEYbREeC0rPPgWdO49Q" base_Class="_T5AEC4bREeC0rPPgWdO49Q"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_T5ArEobREeC0rPPgWdO49Q" base_Class="_T5AEDIbREeC0rPPgWdO49Q"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_T5ArE4bREeC0rPPgWdO49Q" base_Class="_T5AEEYbREeC0rPPgWdO49Q"/>
+</xmi:XMI>

@@ -26,29 +26,38 @@ SmartUnicapImageClientCore::SmartUnicapImageClientCore()
 
 IplImage* SmartUnicapImageClientCore::convertDataArrayToIplImage(CommVisionObjects::CommVideoImage &query_image, CvSize size)
 {
-		 IplImage* ipl_image = NULL;
+	IplImage* ipl_image = NULL;
 
-		 if(query_image.get_format()==CommVisionObjects::FormatType::UYVY){
+	if (query_image.get_format() == CommVisionObjects::FormatType::UYVY || query_image.get_format() == CommVisionObjects::FormatType::RGB24)
+	{
+		unsigned char* arr_image = new unsigned char[query_image.get_size_as_rgb24()];
+		query_image.get_as_rgb24(arr_image);
 
-			 CvMat dataMatrix;
-			 unsigned char* arr_image = new unsigned char[query_image.get_size_as_rgb24()];
+		ipl_image = OpenCVHelpers::copyRGBToIplImage(arr_image, query_image.get_height(), query_image.get_width());
+		delete arr_image;
 
-			 query_image.get_as_rgb24(arr_image);
-			 cvInitMatHeader(&dataMatrix, query_image.get_height(), query_image.get_width(), CV_8UC3, arr_image);
-			 ipl_image = cvCreateImage(size,IPL_DEPTH_8U, 3); //IPL_DEPTH_32F
-			 // copy matrix data into image
-			 cvCopy(&dataMatrix, ipl_image);
-		 }
-		 else if(query_image.get_format()==CommVisionObjects::FormatType::GREY){
+	} else if (query_image.get_format() == CommVisionObjects::FormatType::GREY)
+	{
+		CvMat mat;
+		cvInitMatHeader(&mat, size.height, size.width, CV_8UC1, const_cast<unsigned char *> (query_image.get_data()));
+		ipl_image = cvCreateImage(size, IPL_DEPTH_8U, 1);
 
-             CvMat mat;
-             cvInitMatHeader(&mat, size.height, size.width, CV_8UC1, const_cast<unsigned char *> (query_image.get_data()));
-             ipl_image = cvCreateImage(size,IPL_DEPTH_8U, 1);
-             // copy matrix data into image
-             cvCopy(&mat, ipl_image);
+		// copy matrix data into image
+		cvCopy(&mat, ipl_image);
 
-		 }
+	} else if (query_image.get_format() == CommVisionObjects::FormatType::YUV422)
+	{
+		unsigned char* arr_image = new unsigned char[query_image.get_size_as_rgb24()];
+		query_image.get_as_rgb24(arr_image);
 
-		 return ipl_image;
+		ipl_image = OpenCVHelpers::copyRGBToIplImage(arr_image, query_image.get_height(), query_image.get_width());
+		delete arr_image;
+
+	} else
+	{
+		std::cout << "Image Format: " << query_image.get_format() << " not supported!" << std::endl;
+	}
+
+	return ipl_image;
 
 }

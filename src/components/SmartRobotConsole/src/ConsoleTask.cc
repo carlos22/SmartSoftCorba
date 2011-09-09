@@ -54,7 +54,6 @@
 #include "ConsoleTask.hh"
 #include "gen/SmartRobotConsole.hh"
 
-
 #include <CommBasicObjects/commMobileLaserScan.hh>
 #include <CommNavigationObjects/commPlannerEventParameter.hh>
 #include <CommNavigationObjects/commCdlParameter.hh>
@@ -62,6 +61,8 @@
 #include <CommNavigationObjects/commPlannerParameter.hh>
 #include <CommNavigationObjects/commAmclParameter.hh>
 #include <CommNavigationObjects/commGMappingParameter.hh>
+#include <CommTrackingObjects/commFollowMeParameter.hh>
+#include <CommPersonDetectionObjects/commPersonDetectionParameter.hh>
 
 #include "corbalist.cpp"
 
@@ -74,1701 +75,1838 @@ ConsoleTask::ConsoleTask()
 
 int ConsoleTask::svc()
 {
-	  CHS::StatusCode status;
-	  int mainMenuItem;
+	CHS::StatusCode status;
+	int mainMenuItem;
 
-	  std::cout << "------------------------------------------------------------------------\n";
-	  std::cout << "| smartRobotConsole                                                    |\n";
-	  std::cout << "| ZAFH Servicerobotik Ulm                                              |\n";
-	  std::cout << "| Copyright (C) 2008 Christian Schlegel, Andreas Steck                 |\n";
+	std::cout << "------------------------------------------------------------------------\n";
+	std::cout << "| smartRobotConsole                                                    |\n";
+	std::cout << "| ZAFH Servicerobotik Ulm                                              |\n";
+	std::cout << "| Copyright (C) 2008 Christian Schlegel, Andreas Steck                 |\n";
 
-	  while(true)
-	  {
-	    // main menu
-	    std::cout << "------------------------------------------------------------------------\n";
-	    std::cout << "Main Menu:\n";
+	while (true)
+	{
+		// main menu
+		std::cout << "------------------------------------------------------------------------\n";
+		std::cout << "Main Menu:\n";
 
-	    std::cout << " 01 - Mapper state\n";
-	    std::cout << " 02 - Mapper parameter\n";
-	    std::cout << " 03 - Planner state\n";
-	    std::cout << " 04 - Planner parameter\n";
-	    std::cout << " 05 - ForkLift parameter\n";
-	    std::cout << " 06 - CDL state\n";
-	    std::cout << " 07 - CDL parameter\n";
-	    std::cout << " 08 - Base parameter\n";
-	    std::cout << " 09 - Speech-input state\n";
-	    std::cout << " 10 - Speech-input parameter\n";
-	    std::cout << " 11 - VisionFollowMeRegain state\n";
-	    std::cout << " 12 - VisionFollowMeRegain parameter\n";
-	    std::cout << " 13 - UNUSED\n";
-	    std::cout << " 14 - PMD state\n";
-	    std::cout << " 15 - PMD parameter\n";
-	    std::cout << " 16 - Amcl parameter\n";
-	    std::cout << " 17 - Amcl state\n";
-	    std::cout << " 18 - Gmapping parameter\n";
-	    std::cout << " 19 - PTU state\n";
-	    std::cout << " 20 - PTU move (query)\n";
-	    std::cout << " 98 - State Client\n";
-	    std::cout << " 99 - Demos\n";
-	    std::cout << " 00 - EXIT\n";
-	    std::cout << "------------------------------------------------------------------------\n";
+		std::cout << " 01 - Mapper state\n";
+		std::cout << " 02 - Mapper parameter\n";
+		std::cout << " 03 - Planner state\n";
+		std::cout << " 04 - Planner parameter\n";
+		std::cout << " 05 - ForkLift parameter\n";
+		std::cout << " 06 - CDL state\n";
+		std::cout << " 07 - CDL parameter\n";
+		std::cout << " 08 - Base parameter\n";
+		std::cout << " 09 - Speech-input state\n";
+		std::cout << " 10 - Speech-input parameter\n";
+		std::cout << " 11 - VisionFollowMeRegain state\n";
+		std::cout << " 12 - VisionFollowMeRegain parameter\n";
+		std::cout << " 13 - FollowMe parameter\n";
+		std::cout << " 14 - PMD state\n";
+		std::cout << " 15 - PMD parameter\n";
+		std::cout << " 16 - Amcl parameter\n";
+		std::cout << " 17 - Amcl state\n";
+		std::cout << " 18 - Gmapping parameter\n";
+		std::cout << " 19 - PTU state\n";
+		std::cout << " 20 - PTU move (query)\n";
+		std::cout << " 21 - PersonDetection param\n";
+		std::cout << " 22 - SchunkGripper param\n";
+		std::cout << " 98 - State Client\n";
+		std::cout << " 99 - Demos\n";
+		std::cout << " 00 - EXIT\n";
+		std::cout << "------------------------------------------------------------------------\n";
 
-	    std::cout << "\nplease choose number:  ";
-	    cin >> mainMenuItem;
+		std::cout << "\nplease choose number:  ";
+		cin >> mainMenuItem;
 
-	    // sub menu
-	    switch( mainMenuItem )
-	    {
-	      // 1 - Mapper state
-	      case 1:
-	      {
-	        std::list<std::string> mainstates;
-	        //std::string stateServerName = "smartMapper";
-	        //CHS::SmartStateClient stateClient(component, stateServerName);
+		// sub menu
+		switch (mainMenuItem)
+		{
+		// 1 - Mapper state
+		case 1:
+		{
+			std::list<std::string> mainstates;
+			//std::string stateServerName = "smartMapper";
+			//CHS::SmartStateClient stateClient(component, stateServerName);
 
-	    	std::cout << "connecting to: " << COMP->ini.mapperStateClient.serverName
-	    			<< "; " << COMP->ini.mapperStateClient.serviceName << std::endl;
-	    	status = COMP->mapperStateClient->connect(
-	    			COMP->ini.mapperStateClient.serverName,
-	    			COMP->ini.mapperStateClient.serviceName);
-	    	if (status != CHS::SMART_OK) {
-	    		std::cout << "COULD NOT CONNECT mapper state" << std::endl;
-	    	} else {
-	    		std::cout << "connected.\n";
-	    	}
-
-
-	        // first get list of main states
-	        status = COMP->mapperStateClient->getWaitMainStates(mainstates);
-	        if(status != CHS::SMART_OK)
-	        {
-	          std::cout << "could not connect to mapper state\n\n";
-	        }
-	        else
-	        {
-	          // print list of main states
-	          unsigned int itemNumber = 1;
-
-	          std::cout << "\nlist of possible main states: " << std::endl;
-	          for (std::list<std::string>::iterator iterator1=mainstates.begin();iterator1 != mainstates.end(); ++iterator1)
-	          {
-	            std::cout << setw(2) << itemNumber << " -- mainstate :  " << *iterator1 << std::endl;
-	            itemNumber++;
-	          }
-	          std::cout << setw(2) << itemNumber << " -- return to main menu" << std::endl;
-
-	          // ask which state should be sent
-	          std::cout << "\nplease choose number:  ";
-	          cin >> itemNumber;
-
-	          // check input
-	          if( itemNumber <= mainstates.size() )
-	          {
-	            // iterate to selected state
-	            std::list<std::string>::iterator iterator1 = mainstates.begin();
-	            for(unsigned int i=1; i < itemNumber; i++)
-	            {
-	              ++iterator1;
-	            }
-	            // send selected state
-	            COMP->mapperStateClient->setWaitState( *iterator1 );
-	            std::cout << "state <" << *iterator1 << "> sent\n";
-	          }
-
-	        } // else
-
-	        break;
-	      } // case 1
-
-
-
-	      // 2 - Mapper parameter
-	      case 2:
-	      {
-	        CommNavigationObjects::CommMapperParameter cmd;
-	        std::string inString;
-
-	        //CHS::SendClient<Smart::CommMapperParameter> smartMapperParameterSendClient(component,"smartMapper","mapperParameter");
-	    	std::cout << "connecting to: "
-	    			<< COMP->ini.mapperParameterClient.serverName << "; "
-	    			<< COMP->ini.mapperParameterClient.serviceName << std::endl;
-	    	status = COMP->mapperParameterClient->connect(
-	    			COMP->ini.mapperParameterClient.serverName,
-	    			COMP->ini.mapperParameterClient.serviceName);
-	    	if (status != CHS::SMART_OK) {
-	    		std::cout << "COULD NOT CONNECT mapper parameter" << std::endl;
-	    	} else {
-	    		std::cout << "connected.\n";
-	    	}
-
-
-
-
-	        std::cout << std::endl;
-	        std::cout << "CURPARAMETER ?xsize ?ysize ?xoff ?yoff ?id  : create current map (size/offset)\n";
-	        std::cout << "CURLTM DISABLE/ENABLE ?threshold            : preoccupy cur out of ltm each cycle\n";
-	        std::cout << "CUREMPTY ACCUMULATE/EMPTY                   : accumulate/clear cur map each cycle\n";
-	        std::cout << "CURSAVE ?filename                             : save current map (xml)\n";
-	        std::cout << "CURLOAD ?filename                             : load current map (xml)\n";
-	        std::cout << "CURLOADLTM                                  : load current map out of ltm\n";
-	        std::cout << "CURSAVEXPM ?filename                          : save current map (xpm)\n\n";
-	        std::cout << "LTMPARAMETER ?xsize ?ysize ?xpos ?ypos ?id  : create longterm map\n";
-	        std::cout << "LTMINITIALIZE ?init                         : clear map and initialize\n";
-	        std::cout << "LTMSAVE ?filename                             : save longterm map (xml)\n";
-	        std::cout << "LTMLOAD ?filename                             : load longterm map (xml)\n";
-	        std::cout << "LTMSAVEXPM ?filename                          : save longterm map (xpm)\n";
-	        std::cout << "LTMSAVEYAMLPGM ?filename                      : save longterm map (pgm)\n";
-	        std::cout << "LTMSAVEYAMLPPM ?filename                      : save longterm map (ppm)\n";
-	        std::cout << "LTMLOADYAML ?filename                         : load longterm map (yaml)\n\n";
-	        std::cout << "m to return to main menu" << std::endl;
-
-	        std::cout << std::endl;
-	        std::cout << "usage: command(param1)(param2)(param3)\n";
-	        std::cout << "       ltmparameter(80000)(80000)(-20000)(-40000)(0)\n";
-
-	        std::cout << "\nplease enter command:  ";
-
-	        cin >> inString;
-	        std::cout << "your input: " << inString << std::endl;
-
-	        if( strcasecmp("m", inString.c_str() ) != 0 )
-	        {
-
-	          cmd.set(inString);
-	          COMP->mapperParameterClient->send(cmd);
-	          std::cout << "send.\n\n";
-	        }
-	        break;
-	      } // case 2
-
-
-
-
-	      // 3 - Planner state
-	      case 3:
-	      {
-	        //std::string stateServerName = "smartPlanner";
-	        std::list<std::string> mainstates;
-
-	        //CHS::SmartStateClient stateClient(component, stateServerName);
-			std::cout << "connecting to: " << COMP->ini.plannerStateClient.serverName
-					<< "; " << COMP->ini.plannerStateClient.serviceName << std::endl;
-			status = COMP->plannerStateClient->connect(
-					COMP->ini.plannerStateClient.serverName,
-					COMP->ini.plannerStateClient.serviceName);
-			if (status != CHS::SMART_OK) {
-				std::cout << "ERROR CONNECTING planner state" << std::endl;
-			} else {
+			std::cout << "connecting to: " << COMP->ini.mapperStateClient.serverName << "; " << COMP->ini.mapperStateClient.serviceName
+					<< std::endl;
+			status = COMP->mapperStateClient->connect(COMP->ini.mapperStateClient.serverName, COMP->ini.mapperStateClient.serviceName);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "COULD NOT CONNECT mapper state" << std::endl;
+			} else
+			{
 				std::cout << "connected.\n";
 			}
 
-
-	        // first get list of main states
-	        status = COMP->plannerStateClient->getWaitMainStates(mainstates);
-	        if(status != CHS::SMART_OK)
-	        {
-	          std::cout << "could not connect to planner state \n\n";
-	        }
-	        else
-	        {
-	          // print list of main states
-	          unsigned int itemNumber = 1;
-
-	          std::cout << "\nlist of possible main states: " << std::endl;
-	          for (std::list<std::string>::iterator iterator1=mainstates.begin();iterator1 != mainstates.end(); ++iterator1)
-	          {
-	            std::cout << setw(2) << itemNumber << " -- mainstate :  " << *iterator1 << std::endl;
-	            itemNumber++;
-	          }
-	          std::cout << setw(2) << itemNumber << " -- return to main menu" << std::endl;
-
-	          // ask which state should be sent
-	          std::cout << "\nplease choose number:  ";
-	          cin >> itemNumber;
-
-	          // check input
-	          if( itemNumber <= mainstates.size() )
-	          {
-	            // iterate to selected state
-	            std::list<std::string>::iterator iterator1 = mainstates.begin();
-	            for(unsigned int i=1; i < itemNumber; i++)
-	            {
-	              ++iterator1;
-	            }
-	            // send selected state
-	            COMP->plannerStateClient->setWaitState( *iterator1 );
-	            std::cout << "state <" << *iterator1 << "> sent\n";
-	          }
-
-	        } // else
-
-	        break;
-	      } // case 3
-
-
-
-	      // 4 - Planner parameter
-	      case 4:
-	      {
-	    	  //@TODO RobotConsole
-	    	  CommNavigationObjects::CommPlannerParameter cmd;
-	        std::string inString;
-
-	        //CHS::SendClient<Smart::CommPlannerParameter> smartPlannerParameterSendClient(component,"smartPlanner","plannerParameter");
-	    	std::cout << "connecting to: "
-	    			<< COMP->ini.plannerParameterClient.serverName << "; "
-	    			<< COMP->ini.plannerParameterClient.serviceName << std::endl;
-	    	status = COMP->plannerParameterClient->connect(
-	    			COMP->ini.plannerParameterClient.serverName,
-	    			COMP->ini.plannerParameterClient.serviceName);
-	    	if (status != CHS::SMART_OK) {
-	    		std::cout << "COULD NOT CONNECT planner parameter" << std::endl;
-	    	}
-	    	std::cout << "connected.\n";
-
-
-
-	        std::cout << std::endl;
-	        std::cout << "ID ?id  : set Planner_ID\n";
-	        std::cout << "DELETEGOAL       : delete all specified goals in path planner\n";
-	        std::cout << "SETDESTINATIONLINE ?xstart ?ystart ?xend ?yend : set destination line in path planner\n";
-	        std::cout << "SETDESTINATIONCIRCLE ?xcenter ?ycenter ?radius : set destination circle in path planner\n";
-	        std::cout << "m to return to main menu" << std::endl;
-
-	        std::cout << std::endl;
-	        std::cout << "usage: command(param1)(param2)(param3)\n";
-	        std::cout << "       setdestinationcircle(8000)(8000)(150)\n";
-
-	        std::cout << "\nplease enter command:  ";
-
-	        cin >> inString;
-	        std::cout << "your input: " << inString << std::endl;
-
-	        if( strcasecmp("m", inString.c_str() ) != 0 )
-	        {
-
-	          cmd.set(inString);
-	          COMP->plannerParameterClient->send(cmd);
-	          std::cout << "send.\n\n";
-	        }
-	        break;
-
-	      } // case 4
-
-
-
-	      // 5 - Forklift parameter
-	      case 5:
-	      {
-	        CommForkliftObjects::CommForkliftParameter cmd;
-
-	        //CHS::SendClient<Smart::CommForkLiftCommand> smartForkLiftCommandSendClient(component,"SmartForkLiftServer","param");
-	        std::string inString;
-	        //CHS::SendClient<Smart::CommCdlParameter> smartCdlParameterSendClient(component,"smartCdlServer","cdlParameter");
-	    	std::cout << "connecting to: " << COMP->ini.forkliftParameterClient.serverName
-	    			<< "; " << COMP->ini.forkliftParameterClient.serviceName << std::endl;
-	    	status = COMP->forkliftParameterClient->connect(
-	    			COMP->ini.forkliftParameterClient.serverName,
-	    			COMP->ini.forkliftParameterClient.serviceName);
-	    	if(status != CHS::SMART_OK) {
-	    		std::cout << "COULD NOT CONNECT TO forklift parameter" << std::endl;
-	    	} else {
-	    		std::cout << "connected.\n";
-	    	}
-
-	        std::cout << std::endl;
-	        std::cout << "MOVE_ABS_MM: forklift position in mm\n";
-	        std::cout << "m to return to main menu" << std::endl;
-	        std::cout << "parameter: ";
-	        cin >> inString;
-	        std::cout << "your input: " << inString << std::endl;
-
-	        if( strcasecmp("m", inString.c_str() ) != 0 )
-	        {
-	          cmd.set(inString);
-	          COMP->forkliftParameterClient->send(cmd);
-	          std::cout << "sent.\n\n";
-	        }
-
-
-	        break;
-	      } // case 5
-
-
-
-
-	      // 6 - CDL state
-	      case 6:
-	      {
-	        //std::string stateServerName = "smartCdlServer";
-	        std::list<std::string> mainstates;
-	        //CHS::SmartStateClient stateClient(component, stateServerName);
-
-	    	std::cout << "connecting to: " << COMP->ini.cdlStateClient.serverName
-	    			<< "; " << COMP->ini.cdlStateClient.serviceName << std::endl;
-	    	status = COMP->cdlStateClient->connect(COMP->ini.cdlStateClient.serverName,
-	    			COMP->ini.cdlStateClient.serviceName);
-	    	if (status != CHS::SMART_OK) {
-	    		std::cout << "COULD NOT CONNECT TO state client" << std::endl;
-	    	} else {
-	    		std::cout << "connected.\n";
-	    	}
-
-
-
-	        // first get list of main states
-	        status = COMP->cdlStateClient->getWaitMainStates(mainstates);
-	        if(status != CHS::SMART_OK)
-	        {
-	          std::cout << "could not connect to cdl state\n\n";
-	        }
-	        else
-	        {
-	          // print list of main states
-	          unsigned int itemNumber = 1;
-
-	          std::cout << "\nlist of possible main states: " << std::endl;
-	          for (std::list<std::string>::iterator iterator1=mainstates.begin();iterator1 != mainstates.end(); ++iterator1)
-	          {
-	            std::cout << setw(2) << itemNumber << " -- mainstate :  " << *iterator1 << std::endl;
-	            itemNumber++;
-	          }
-	          std::cout << setw(2) << itemNumber << " -- return to main menu" << std::endl;
-
-	          // ask which state should be sent
-	          std::cout << "\nplease choose number:  ";
-	          cin >> itemNumber;
-
-	          // check input
-	          if( itemNumber <= mainstates.size() )
-	          {
-	            // iterate to selected state
-	            std::list<std::string>::iterator iterator1 = mainstates.begin();
-	            for(unsigned int i=1; i < itemNumber; i++)
-	            {
-	              ++iterator1;
-	            }
-	            // send selected state
-	            COMP->cdlStateClient->setWaitState( *iterator1 );
-	            std::cout << "state <" << *iterator1 << "> sent\n";
-	          }
-
-	        } // else
-
-
-	        break;
-	      } // case 6
-
-
-
-	      // 7 - CDL parameter
-	      case 7:
-	      {
-	    	  CommNavigationObjects::CommCdlParameter cmd;
-	        std::string inString;
-	        //CHS::SendClient<Smart::CommCdlParameter> smartCdlParameterSendClient(component,"smartCdlServer","cdlParameter");
-	    	std::cout << "connecting to: " << COMP->ini.cdlParameterClient.serverName
-	    			<< "; " << COMP->ini.cdlParameterClient.serviceName << std::endl;
-	    	status = COMP->cdlParameterClient->connect(
-	    			COMP->ini.cdlParameterClient.serverName,
-	    			COMP->ini.cdlParameterClient.serviceName);
-	    	if(status != CHS::SMART_OK) {
-	    		std::cout << "COULD NOT CONNECT TO cdl parameter" << std::endl;
-	    	} else {
-	    		std::cout << "connected.\n";
-	    	}
-
-
-	        std::cout << std::endl;
-	        std::cout << "STRATEGY REACTIVE / JOYSTICK / BACKWARD\n";
-	        std::cout << "         APPROACH_HALT / APPROACH\n";
-	        std::cout << "         TURN / ROTATE / FOLLOW\n";
-	        std::cout << "         APPROACH_FLAT_SURF                 : set the cdl strategy\n";
-	        std::cout << "FREEBEHAVIOR ACTIVATE / DEACTIVATE          : freebehavior in stall situation\n";
-	        std::cout << "LOOKUPTABLE DEFAULT / SECOND                : set cdl lookup table\n";
-	        std::cout << "TRANSVEL ?vmin ?vmax                        : set translation velocity min,max in mm/s\n";
-	        std::cout << "ROTVEL ?wmin ?wmax (deg/sec)                : set rotational velocity min,max in deg/s\n";
-	        std::cout << "GOALMODE ABSOLUTE / PLANNER / PERSON /\n";
-	        std::cout << "         SAVED / ANGLEABSOLUT /\n";
-	        std::cout << "         ANGLERELATIVE                      : set the cdl goal mode\n";
-	        std::cout << "GOALREGION ?x ?y ?a ?id (mm,mm,deg,id)      : set cdl goal x,y,heading,goalId\n";
-	        std::cout << "APPROACHDIST ?dist (mm)                     : set cdl goal approach distance in mm\n";
-	        std::cout << "SAFETYCL ?dist (mm)                         : set cdl global safety clearance distance in mm\n";
-	        std::cout << "ID ?id                                      : set CDL_ID\n";
-	        std::cout << "SAVECURPOS ?id                              : save current robot pose (for relative movements)\n";
-	        std::cout << "m to return to main menu" << std::endl;
-
-	        std::cout << std::endl;
-	        std::cout << "usage: command(param1)(param2)(param3)\n";
-	        std::cout << "       strategy(reactive) or transvel(0)(500)\n";
-
-	        std::cout << "\nplease enter command:  ";
-
-	        cin >> inString;
-	        std::cout << "your input: " << inString << std::endl;
-
-	        if( strcasecmp("m", inString.c_str() ) != 0 )
-	        {
-
-	          cmd.set(inString);
-	          COMP->cdlParameterClient->send(cmd);
-	          std::cout << "send.\n\n";
-	        }
-	        break;
-	      } // case 7
-
-
-	      // 8 - Base parameter
-	      case 8:
-	      {
-	        CommBasicObjects::CommBaseParameter cmd;
-	        std::string inString;
-
-	        //CHS::SendClient<Smart::CommBaseParameter> smartBaseParameterSendClient(component,"smartPioneerBaseServer","baseParameter");
-	    	std::cout << "connecting to: " << COMP->ini.baseParameterClient.serverName
-	    			<< "; " << COMP->ini.baseParameterClient.serviceName << std::endl;
-	    	status = COMP->baseParameterClient->connect(
-	    			COMP->ini.baseParameterClient.serverName,
-	    			COMP->ini.baseParameterClient.serviceName);
-	    	if (status != CHS::SMART_OK) {
-	    		std::cout << "COULD NOT CONNECT TO base parameter" << std::endl;
-	    	} else {
-	    		std::cout << "connected.\n";
-	    	}
-
-	        std::cout << std::endl;
-	        std::cout << "RESET   : reset the Base Postion \n";
-	        std::cout << "        !!ALL POSITIONS ARE RESET!! \n";
-	        std::cout << "        !!INCLUDING THE RAW POS!! \n";
-	        std::cout << "m to return to main menu" << std::endl;
-
-	        std::cout << std::endl;
-	        std::cout << "usage: command(param1)(param2)(param3)\n";
-	        std::cout << "       setdestinationcircle(8000)(8000)(150)\n";
-
-	        std::cout << "\nplease enter command:  ";
-
-	        cin >> inString;
-	        std::cout << "your input: " << inString << std::endl;
-
-	        if( strcasecmp("m", inString.c_str() ) != 0 )
-	        {
-
-	          cmd.set(inString);
-	          COMP->baseParameterClient->send(cmd);
-	          std::cout << "send.\n\n";
-	        }
-	        break;
-
-	      } // case 8
-
-
-	      // 9 - Speech-input state
-	      case 9:
-	      {
-	        //std::string stateServerName = "smartSpeechInputServer";
-	        std::list<std::string> mainstates;
-
-
-	        //CHS::SmartStateClient stateClient(component, stateServerName);
-	    	std::cout << "connecting to: " << COMP->ini.speechStateClient.serverName
-	    			<< "; " << COMP->ini.speechStateClient.serviceName << std::endl;
-	    	status = COMP->speechStateClient->connect(
-	    			COMP->ini.speechStateClient.serverName,
-	    			COMP->ini.speechStateClient.serviceName);
-	    	if (status != CHS::SMART_OK) {
-	    		std::cout << "COULD NOT CONNECT to speech state" << std::endl;
-	    	} else {
-	    		std::cout << "connected.\n";
-	    	}
-
-
-	        // first get list of main states
-	        status = COMP->speechStateClient->getWaitMainStates(mainstates);
-	        if(status != CHS::SMART_OK)
-	        {
-	          std::cout << "could not connect to " << COMP->ini.speechStateClient.serverName << "\n\n";
-	        }
-	        else
-	        {
-	          // print list of main states
-	          unsigned int itemNumber = 1;
-
-	          std::cout << "\nlist of possible main states: " << std::endl;
-	          for (std::list<std::string>::iterator iterator1=mainstates.begin();iterator1 != mainstates.end(); ++iterator1)
-	          {
-	            std::cout << setw(2) << itemNumber << " -- mainstate :  " << *iterator1 << std::endl;
-	            itemNumber++;
-	          }
-	          std::cout << setw(2) << itemNumber << " -- return to main menu" << std::endl;
-
-	          // ask which state should be sent
-	          std::cout << "\nplease choose number:  ";
-	          cin >> itemNumber;
-
-	          // check input
-	          if( itemNumber <= mainstates.size() )
-	          {
-	            // iterate to selected state
-	            std::list<std::string>::iterator iterator1 = mainstates.begin();
-	            for(unsigned int i=1; i < itemNumber; i++)
-	            {
-	              ++iterator1;
-	            }
-	            // send selected state
-	            COMP->speechStateClient->setWaitState( *iterator1 );
-	            std::cout << "state <" << *iterator1 << "> sent\n";
-	          }
-
-	        } // else
-
-
-	        break;
-	      } // case 9
-
-
-
-
-	      // 10 - Speech-Input parameter
-	      case 10:
-	      {
-	        CommSpeechObjects::CommSpeechInputParameter cmd;
-	        std::string inString;
-
-
-	        //CHS::SendClient<Smart::CommSpeechInputParameter> smartSpeechInputParameterSendClient(component,"smartSpeechInputServer","speechInputParameter");
-	    	std::cout << "connecting to: " << COMP->ini.speechParameterClient.serverName
-	    			<< "; " << COMP->ini.speechParameterClient.serviceName << std::endl;
-	    	status = COMP->speechParameterClient->connect(
-	    			COMP->ini.speechParameterClient.serverName,
-	    			COMP->ini.speechParameterClient.serviceName);
-	    	if (status != CHS::SMART_OK) {
-	    		std::cout << "COULD NOT CONNECT to speechParameterClient" << std::endl;
-	    	} else {
-	    		std::cout << "connected.\n";
-	    	}
-
-
-	        std::cout << std::endl;
-	        std::cout << "SETGRAMMER ?file_name                       : set the speech input grammer\n";
-	        std::cout << "m to return to main menu" << std::endl;
-
-	        std::cout << std::endl;
-	        std::cout << "usage: command(param1)(param2)(param3)\n";
-	        std::cout << "       setgrammer(/home/user/grammer.gxml)\n";
-
-	        std::cout << "\nplease enter command:  ";
-
-	        cin >> inString;
-	        std::cout << "your input: " << inString << std::endl;
-
-	        if( strcasecmp("m", inString.c_str() ) != 0 )
-	        {
-
-	          cmd.set(inString);
-	          COMP->speechParameterClient->send(cmd);
-	          std::cout << "send.\n\n";
-	        }
-	        break;
-	      } // case 10
+			// first get list of main states
+			status = COMP->mapperStateClient->getWaitMainStates(mainstates);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "could not connect to mapper state\n\n";
+			} else
+			{
+				// print list of main states
+				unsigned int itemNumber = 1;
+
+				std::cout << "\nlist of possible main states: " << std::endl;
+				for (std::list<std::string>::iterator iterator1 = mainstates.begin(); iterator1 != mainstates.end(); ++iterator1)
+				{
+					std::cout << setw(2) << itemNumber << " -- mainstate :  " << *iterator1 << std::endl;
+					itemNumber++;
+				}
+				std::cout << setw(2) << itemNumber << " -- return to main menu" << std::endl;
+
+				// ask which state should be sent
+				std::cout << "\nplease choose number:  ";
+				cin >> itemNumber;
+
+				// check input
+				if (itemNumber <= mainstates.size())
+				{
+					// iterate to selected state
+					std::list<std::string>::iterator iterator1 = mainstates.begin();
+					for (unsigned int i = 1; i < itemNumber; i++)
+					{
+						++iterator1;
+					}
+					// send selected state
+					COMP->mapperStateClient->setWaitState(*iterator1);
+					std::cout << "state <" << *iterator1 << "> sent\n";
+				}
+
+			} // else
+
+			break;
+		} // case 1
+
+
+			// 2 - Mapper parameter
+		case 2:
+		{
+			CommNavigationObjects::CommMapperParameter cmd;
+			std::string inString;
+
+			//CHS::SendClient<Smart::CommMapperParameter> smartMapperParameterSendClient(component,"smartMapper","mapperParameter");
+			std::cout << "connecting to: " << COMP->ini.mapperParameterClient.serverName << "; "
+					<< COMP->ini.mapperParameterClient.serviceName << std::endl;
+			status = COMP->mapperParameterClient->connect(COMP->ini.mapperParameterClient.serverName,
+					COMP->ini.mapperParameterClient.serviceName);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "COULD NOT CONNECT mapper parameter" << std::endl;
+			} else
+			{
+				std::cout << "connected.\n";
+			}
+
+			std::cout << std::endl;
+			std::cout << "CURPARAMETER ?xsize ?ysize ?xoff ?yoff ?id  : create current map (size/offset)\n";
+			std::cout << "CURLTM DISABLE/ENABLE ?threshold            : preoccupy cur out of ltm each cycle\n";
+			std::cout << "CUREMPTY ACCUMULATE/EMPTY                   : accumulate/clear cur map each cycle\n";
+			std::cout << "CURSAVE ?filename                             : save current map (xml)\n";
+			std::cout << "CURLOAD ?filename                             : load current map (xml)\n";
+			std::cout << "CURLOADLTM                                  : load current map out of ltm\n";
+			std::cout << "CURSAVEXPM ?filename                          : save current map (xpm)\n\n";
+			std::cout << "LTMPARAMETER ?xsize ?ysize ?xpos ?ypos ?id  : create longterm map\n";
+			std::cout << "LTMINITIALIZE ?init                         : clear map and initialize\n";
+			std::cout << "LTMSAVE ?filename                             : save longterm map (xml)\n";
+			std::cout << "LTMLOAD ?filename                             : load longterm map (xml)\n";
+			std::cout << "LTMSAVEXPM ?filename                          : save longterm map (xpm)\n";
+			std::cout << "LTMSAVEYAMLPGM ?filename                      : save longterm map (pgm)\n";
+			std::cout << "LTMSAVEYAMLPPM ?filename                      : save longterm map (ppm)\n";
+			std::cout << "LTMLOADYAML ?filename                         : load longterm map (yaml)\n\n";
+			std::cout << "m to return to main menu" << std::endl;
+
+			std::cout << std::endl;
+			std::cout << "usage: command(param1)(param2)(param3)\n";
+			std::cout << "       ltmparameter(80000)(80000)(-20000)(-40000)(0)\n";
+
+			std::cout << "\nplease enter command:  ";
+
+			cin >> inString;
+			std::cout << "your input: " << inString << std::endl;
+
+			if (strcasecmp("m", inString.c_str()) != 0)
+			{
+
+				cmd.set(inString);
+				COMP->mapperParameterClient->send(cmd);
+				std::cout << "send.\n\n";
+			}
+			break;
+		} // case 2
+
+
+			// 3 - Planner state
+		case 3:
+		{
+			//std::string stateServerName = "smartPlanner";
+			std::list<std::string> mainstates;
+
+			//CHS::SmartStateClient stateClient(component, stateServerName);
+			std::cout << "connecting to: " << COMP->ini.plannerStateClient.serverName << "; " << COMP->ini.plannerStateClient.serviceName
+					<< std::endl;
+			status = COMP->plannerStateClient->connect(COMP->ini.plannerStateClient.serverName, COMP->ini.plannerStateClient.serviceName);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "ERROR CONNECTING planner state" << std::endl;
+			} else
+			{
+				std::cout << "connected.\n";
+			}
+
+			// first get list of main states
+			status = COMP->plannerStateClient->getWaitMainStates(mainstates);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "could not connect to planner state \n\n";
+			} else
+			{
+				// print list of main states
+				unsigned int itemNumber = 1;
+
+				std::cout << "\nlist of possible main states: " << std::endl;
+				for (std::list<std::string>::iterator iterator1 = mainstates.begin(); iterator1 != mainstates.end(); ++iterator1)
+				{
+					std::cout << setw(2) << itemNumber << " -- mainstate :  " << *iterator1 << std::endl;
+					itemNumber++;
+				}
+				std::cout << setw(2) << itemNumber << " -- return to main menu" << std::endl;
+
+				// ask which state should be sent
+				std::cout << "\nplease choose number:  ";
+				cin >> itemNumber;
+
+				// check input
+				if (itemNumber <= mainstates.size())
+				{
+					// iterate to selected state
+					std::list<std::string>::iterator iterator1 = mainstates.begin();
+					for (unsigned int i = 1; i < itemNumber; i++)
+					{
+						++iterator1;
+					}
+					// send selected state
+					COMP->plannerStateClient->setWaitState(*iterator1);
+					std::cout << "state <" << *iterator1 << "> sent\n";
+				}
+
+			} // else
+
+			break;
+		} // case 3
+
+
+			// 4 - Planner parameter
+		case 4:
+		{
+			//@TODO RobotConsole
+			CommNavigationObjects::CommPlannerParameter cmd;
+			std::string inString;
+
+			//CHS::SendClient<Smart::CommPlannerParameter> smartPlannerParameterSendClient(component,"smartPlanner","plannerParameter");
+			std::cout << "connecting to: " << COMP->ini.plannerParameterClient.serverName << "; "
+					<< COMP->ini.plannerParameterClient.serviceName << std::endl;
+			status = COMP->plannerParameterClient->connect(COMP->ini.plannerParameterClient.serverName,
+					COMP->ini.plannerParameterClient.serviceName);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "COULD NOT CONNECT planner parameter" << std::endl;
+			}
+			std::cout << "connected.\n";
+
+			std::cout << std::endl;
+			std::cout << "ID ?id  : set Planner_ID\n";
+			std::cout << "DELETEGOAL       : delete all specified goals in path planner\n";
+			std::cout << "SETDESTINATIONLINE ?xstart ?ystart ?xend ?yend : set destination line in path planner\n";
+			std::cout << "SETDESTINATIONCIRCLE ?xcenter ?ycenter ?radius : set destination circle in path planner\n";
+			std::cout << "m to return to main menu" << std::endl;
+
+			std::cout << std::endl;
+			std::cout << "usage: command(param1)(param2)(param3)\n";
+			std::cout << "       setdestinationcircle(8000)(8000)(150)\n";
+
+			std::cout << "\nplease enter command:  ";
+
+			cin >> inString;
+			std::cout << "your input: " << inString << std::endl;
+
+			if (strcasecmp("m", inString.c_str()) != 0)
+			{
+
+				cmd.set(inString);
+				COMP->plannerParameterClient->send(cmd);
+				std::cout << "send.\n\n";
+			}
+			break;
+
+		} // case 4
+
+
+			// 5 - Forklift parameter
+		case 5:
+		{
+			CommForkliftObjects::CommForkliftParameter cmd;
+
+			//CHS::SendClient<Smart::CommForkLiftCommand> smartForkLiftCommandSendClient(component,"SmartForkLiftServer","param");
+			std::string inString;
+			//CHS::SendClient<Smart::CommCdlParameter> smartCdlParameterSendClient(component,"smartCdlServer","cdlParameter");
+			std::cout << "connecting to: " << COMP->ini.forkliftParameterClient.serverName << "; "
+					<< COMP->ini.forkliftParameterClient.serviceName << std::endl;
+			status = COMP->forkliftParameterClient->connect(COMP->ini.forkliftParameterClient.serverName,
+					COMP->ini.forkliftParameterClient.serviceName);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "COULD NOT CONNECT TO forklift parameter" << std::endl;
+			} else
+			{
+				std::cout << "connected.\n";
+			}
+
+			std::cout << std::endl;
+			std::cout << "MOVE_ABS_MM: forklift position in mm\n";
+			std::cout << "m to return to main menu" << std::endl;
+			std::cout << "parameter: ";
+			cin >> inString;
+			std::cout << "your input: " << inString << std::endl;
+
+			if (strcasecmp("m", inString.c_str()) != 0)
+			{
+				cmd.set(inString);
+				COMP->forkliftParameterClient->send(cmd);
+				std::cout << "sent.\n\n";
+			}
+
+			break;
+		} // case 5
+
+
+			// 6 - CDL state
+		case 6:
+		{
+			//std::string stateServerName = "smartCdlServer";
+			std::list<std::string> mainstates;
+			//CHS::SmartStateClient stateClient(component, stateServerName);
+
+			std::cout << "connecting to: " << COMP->ini.cdlStateClient.serverName << "; " << COMP->ini.cdlStateClient.serviceName
+					<< std::endl;
+			status = COMP->cdlStateClient->connect(COMP->ini.cdlStateClient.serverName, COMP->ini.cdlStateClient.serviceName);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "COULD NOT CONNECT TO state client" << std::endl;
+			} else
+			{
+				std::cout << "connected.\n";
+			}
+
+			// first get list of main states
+			status = COMP->cdlStateClient->getWaitMainStates(mainstates);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "could not connect to cdl state\n\n";
+			} else
+			{
+				// print list of main states
+				unsigned int itemNumber = 1;
+
+				std::cout << "\nlist of possible main states: " << std::endl;
+				for (std::list<std::string>::iterator iterator1 = mainstates.begin(); iterator1 != mainstates.end(); ++iterator1)
+				{
+					std::cout << setw(2) << itemNumber << " -- mainstate :  " << *iterator1 << std::endl;
+					itemNumber++;
+				}
+				std::cout << setw(2) << itemNumber << " -- return to main menu" << std::endl;
+
+				// ask which state should be sent
+				std::cout << "\nplease choose number:  ";
+				cin >> itemNumber;
+
+				// check input
+				if (itemNumber <= mainstates.size())
+				{
+					// iterate to selected state
+					std::list<std::string>::iterator iterator1 = mainstates.begin();
+					for (unsigned int i = 1; i < itemNumber; i++)
+					{
+						++iterator1;
+					}
+					// send selected state
+					COMP->cdlStateClient->setWaitState(*iterator1);
+					std::cout << "state <" << *iterator1 << "> sent\n";
+				}
+
+			} // else
+
+
+			break;
+		} // case 6
+
+
+			// 7 - CDL parameter
+		case 7:
+		{
+			CommNavigationObjects::CommCdlParameter cmd;
+			std::string inString;
+			//CHS::SendClient<Smart::CommCdlParameter> smartCdlParameterSendClient(component,"smartCdlServer","cdlParameter");
+			std::cout << "connecting to: " << COMP->ini.cdlParameterClient.serverName << "; " << COMP->ini.cdlParameterClient.serviceName
+					<< std::endl;
+			status = COMP->cdlParameterClient->connect(COMP->ini.cdlParameterClient.serverName, COMP->ini.cdlParameterClient.serviceName);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "COULD NOT CONNECT TO cdl parameter" << std::endl;
+			} else
+			{
+				std::cout << "connected.\n";
+			}
+
+			std::cout << std::endl;
+			std::cout << "STRATEGY REACTIVE / JOYSTICK / BACKWARD\n";
+			std::cout << "         APPROACH_HALT / APPROACH\n";
+			std::cout << "         TURN / ROTATE / FOLLOW\n";
+			std::cout << "         APPROACH_FLAT_SURF \n";
+			std::cout << "		   APPROACH_COVERAGE                  : set the cdl strategy\n";
+			std::cout << "FREEBEHAVIOR ACTIVATE / DEACTIVATE          : freebehavior in stall situation\n";
+			std::cout << "LOOKUPTABLE DEFAULT / SECOND                : set cdl lookup table\n";
+			std::cout << "TRANSVEL ?vmin ?vmax                        : set translation velocity min,max in mm/s\n";
+			std::cout << "ROTVEL ?wmin ?wmax (deg/sec)                : set rotational velocity min,max in deg/s\n";
+			std::cout << "GOALMODE ABSOLUTE / PLANNER / PERSON /\n";
+			std::cout << "         SAVED / ANGLEABSOLUT /\n";
+			std::cout << "         ANGLERELATIVE                      : set the cdl goal mode\n";
+			std::cout << "GOALREGION ?x ?y ?a ?id (mm,mm,deg,id)      : set cdl goal x,y,heading,goalId\n";
+			std::cout << "APPROACHDIST ?dist (mm)                     : set cdl goal approach distance in mm\n";
+			std::cout << "SAFETYCL ?dist (mm)                         : set cdl global safety clearance distance in mm\n";
+			std::cout << "ID ?id                                      : set CDL_ID\n";
+			std::cout << "SAVECURPOS ?id                              : save current robot pose (for relative movements)\n";
+			std::cout << "m to return to main menu" << std::endl;
+
+			std::cout << std::endl;
+			std::cout << "usage: command(param1)(param2)(param3)\n";
+			std::cout << "       strategy(reactive) or transvel(0)(500)\n";
+
+			std::cout << "\nplease enter command:  ";
+
+			cin >> inString;
+			std::cout << "your input: " << inString << std::endl;
+
+			if (strcasecmp("m", inString.c_str()) != 0)
+			{
+
+				cmd.set(inString);
+				COMP->cdlParameterClient->send(cmd);
+				std::cout << "send.\n\n";
+			}
+			break;
+		} // case 7
+
+
+			// 8 - Base parameter
+		case 8:
+		{
+			CommBasicObjects::CommBaseParameter cmd;
+			std::string inString;
+
+			//CHS::SendClient<Smart::CommBaseParameter> smartBaseParameterSendClient(component,"smartPioneerBaseServer","baseParameter");
+			std::cout << "connecting to: " << COMP->ini.baseParameterClient.serverName << "; " << COMP->ini.baseParameterClient.serviceName
+					<< std::endl;
+			status
+					= COMP->baseParameterClient->connect(COMP->ini.baseParameterClient.serverName,
+							COMP->ini.baseParameterClient.serviceName);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "COULD NOT CONNECT TO base parameter" << std::endl;
+			} else
+			{
+				std::cout << "connected.\n";
+			}
+
+			std::cout << std::endl;
+			std::cout << "SONAR 0/1  : sonar on/off \n";
+			std::cout << "RESET      : reset the Base Postion \n";
+			std::cout << "             !!ALL POSITIONS ARE RESET!! \n";
+			std::cout << "             !!INCLUDING THE RAW POS!! \n";
+			std::cout << "m to return to main menu" << std::endl;
+
+			std::cout << std::endl;
+			std::cout << "usage: command(param1)(param2)(param3)\n";
+			std::cout << "       setdestinationcircle(8000)(8000)(150)\n";
+
+			std::cout << "\nplease enter command:  ";
+
+			cin >> inString;
+			std::cout << "your input: " << inString << std::endl;
+
+			if (strcasecmp("m", inString.c_str()) != 0)
+			{
+
+				cmd.set(inString);
+				COMP->baseParameterClient->send(cmd);
+				std::cout << "send.\n\n";
+			}
+			break;
+
+		} // case 8
+
+
+			// 9 - Speech-input state
+		case 9:
+		{
+			//std::string stateServerName = "smartSpeechInputServer";
+			std::list<std::string> mainstates;
+
+			//CHS::SmartStateClient stateClient(component, stateServerName);
+			std::cout << "connecting to: " << COMP->ini.speechStateClient.serverName << "; " << COMP->ini.speechStateClient.serviceName
+					<< std::endl;
+			status = COMP->speechStateClient->connect(COMP->ini.speechStateClient.serverName, COMP->ini.speechStateClient.serviceName);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "COULD NOT CONNECT to speech state" << std::endl;
+			} else
+			{
+				std::cout << "connected.\n";
+			}
+
+			// first get list of main states
+			status = COMP->speechStateClient->getWaitMainStates(mainstates);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "could not connect to " << COMP->ini.speechStateClient.serverName << "\n\n";
+			} else
+			{
+				// print list of main states
+				unsigned int itemNumber = 1;
+
+				std::cout << "\nlist of possible main states: " << std::endl;
+				for (std::list<std::string>::iterator iterator1 = mainstates.begin(); iterator1 != mainstates.end(); ++iterator1)
+				{
+					std::cout << setw(2) << itemNumber << " -- mainstate :  " << *iterator1 << std::endl;
+					itemNumber++;
+				}
+				std::cout << setw(2) << itemNumber << " -- return to main menu" << std::endl;
+
+				// ask which state should be sent
+				std::cout << "\nplease choose number:  ";
+				cin >> itemNumber;
+
+				// check input
+				if (itemNumber <= mainstates.size())
+				{
+					// iterate to selected state
+					std::list<std::string>::iterator iterator1 = mainstates.begin();
+					for (unsigned int i = 1; i < itemNumber; i++)
+					{
+						++iterator1;
+					}
+					// send selected state
+					COMP->speechStateClient->setWaitState(*iterator1);
+					std::cout << "state <" << *iterator1 << "> sent\n";
+				}
+
+			} // else
+
+
+			break;
+		} // case 9
+
+
+			// 10 - Speech-Input parameter
+		case 10:
+		{
+			CommSpeechObjects::CommSpeechInputParameter cmd;
+			std::string inString;
+
+			//CHS::SendClient<Smart::CommSpeechInputParameter> smartSpeechInputParameterSendClient(component,"smartSpeechInputServer","speechInputParameter");
+			std::cout << "connecting to: " << COMP->ini.speechParameterClient.serverName << "; "
+					<< COMP->ini.speechParameterClient.serviceName << std::endl;
+			status = COMP->speechParameterClient->connect(COMP->ini.speechParameterClient.serverName,
+					COMP->ini.speechParameterClient.serviceName);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "COULD NOT CONNECT to speechParameterClient" << std::endl;
+			} else
+			{
+				std::cout << "connected.\n";
+			}
+
+			std::cout << std::endl;
+			std::cout << "SETGRAMMER ?file_name                       : set the speech input grammer\n";
+			std::cout << "m to return to main menu" << std::endl;
+
+			std::cout << std::endl;
+			std::cout << "usage: command(param1)(param2)(param3)\n";
+			std::cout << "       setgrammer(/home/user/grammer.gxml)\n";
+
+			std::cout << "\nplease enter command:  ";
+
+			cin >> inString;
+			std::cout << "your input: " << inString << std::endl;
+
+			if (strcasecmp("m", inString.c_str()) != 0)
+			{
+
+				cmd.set(inString);
+				COMP->speechParameterClient->send(cmd);
+				std::cout << "send.\n\n";
+			}
+			break;
+		} // case 10
 
 #if 0
-	      // 11 - VisionFollowMeRegain state
-	      case 11:
-	      {
-	        std::string stateServerName = "smartVisionFollowMeRegain";
-	        std::list<std::string> mainstates;
-	        CHS::SmartStateClient stateClient(component, stateServerName);
+			// 11 - VisionFollowMeRegain state
+			case 11:
+			{
+				std::string stateServerName = "smartVisionFollowMeRegain";
+				std::list<std::string> mainstates;
+				CHS::SmartStateClient stateClient(component, stateServerName);
 
-	        // first get list of main states
-	        status = stateClient.getWaitMainStates(mainstates);
-	        if(status != CHS::SMART_OK)
-	        {
-	          std::cout << "could not connect to " << stateServerName << "\n\n";
-	        }
-	        else
-	        {
-	          // print list of main states
-	          unsigned int itemNumber = 1;
+				// first get list of main states
+				status = stateClient.getWaitMainStates(mainstates);
+				if(status != CHS::SMART_OK)
+				{
+					std::cout << "could not connect to " << stateServerName << "\n\n";
+				}
+				else
+				{
+					// print list of main states
+					unsigned int itemNumber = 1;
 
-	          std::cout << "\nlist of possible main states: " << std::endl;
-	          for (std::list<std::string>::iterator iterator1=mainstates.begin();iterator1 != mainstates.end(); ++iterator1)
-	          {
-	            std::cout << setw(2) << itemNumber << " -- mainstate :  " << *iterator1 << std::endl;
-	            itemNumber++;
-	          }
-	          std::cout << setw(2) << itemNumber << " -- return to main menu" << std::endl;
+					std::cout << "\nlist of possible main states: " << std::endl;
+					for (std::list<std::string>::iterator iterator1=mainstates.begin();iterator1 != mainstates.end(); ++iterator1)
+					{
+						std::cout << setw(2) << itemNumber << " -- mainstate :  " << *iterator1 << std::endl;
+						itemNumber++;
+					}
+					std::cout << setw(2) << itemNumber << " -- return to main menu" << std::endl;
 
-	          // ask which state should be sent
-	          std::cout << "\nplease choose number:  ";
-	          cin >> itemNumber;
+					// ask which state should be sent
+					std::cout << "\nplease choose number:  ";
+					cin >> itemNumber;
 
-	          // check input
-	          if( itemNumber <= mainstates.size() )
-	          {
-	            // iterate to selected state
-	            std::list<std::string>::iterator iterator1 = mainstates.begin();
-	            for(unsigned int i=1; i < itemNumber; i++)
-	            {
-	              ++iterator1;
-	            }
-	            // send selected state
-	            stateClient.setWaitState( *iterator1 );
-	            std::cout << "state <" << *iterator1 << "> sent\n";
-	          }
+					// check input
+					if( itemNumber <= mainstates.size() )
+					{
+						// iterate to selected state
+						std::list<std::string>::iterator iterator1 = mainstates.begin();
+						for(unsigned int i=1; i < itemNumber; i++)
+						{
+							++iterator1;
+						}
+						// send selected state
+						stateClient.setWaitState( *iterator1 );
+						std::cout << "state <" << *iterator1 << "> sent\n";
+					}
 
-	        } // else
+				} // else
 
 
-	        break;
-	      } //case 11
+				break;
+			} //case 11
 
 #endif
 
-
 #if 0
-	      // 12 - VisionFollowMeGain parameter
-	      case 12:
-	      {
-	        Smart::CommBaseParameter cmd;
-	        std::string inString;
+			// 12 - VisionFollowMeGain parameter
+			case 12:
+			{
+				Smart::CommBaseParameter cmd;
+				std::string inString;
 
-	        CHS::SendClient<Smart::CommBaseParameter> smartBaseParameterSendClient(component,"smartVisionFollowMeRegain","regainParameter");
+				CHS::SendClient<Smart::CommBaseParameter> smartBaseParameterSendClient(component,"smartVisionFollowMeRegain","regainParameter");
 
-	        std::cout << std::endl;
-	        std::cout << "RESET   : Init VisionFollowMeGain \n";
-	        std::cout << "m to return to main menu" << std::endl;
+				std::cout << std::endl;
+				std::cout << "RESET   : Init VisionFollowMeGain \n";
+				std::cout << "m to return to main menu" << std::endl;
 
-	        std::cout << std::endl;
-	        std::cout << "usage: command(param1)(param2)(param3)\n";
-	        std::cout << "       setdestinationcircle(8000)(8000)(150)\n";
+				std::cout << std::endl;
+				std::cout << "usage: command(param1)(param2)(param3)\n";
+				std::cout << "       setdestinationcircle(8000)(8000)(150)\n";
 
-	        std::cout << "\nplease enter command:  ";
+				std::cout << "\nplease enter command:  ";
 
-	        cin >> inString;
-	        std::cout << "your input: " << inString << std::endl;
+				cin >> inString;
+				std::cout << "your input: " << inString << std::endl;
 
-	        if( strcasecmp("m", inString.c_str() ) != 0 )
-	        {
+				if( strcasecmp("m", inString.c_str() ) != 0 )
+				{
 
-	          cmd.set(inString);
-	          smartBaseParameterSendClient.send(cmd);
-	          std::cout << "send.\n\n";
-	        }
-	        break;
+					cmd.set(inString);
+					smartBaseParameterSendClient.send(cmd);
+					std::cout << "send.\n\n";
+				}
+				break;
 
-	      } // case 12
+			} // case 12
 #endif
 
-	    // 13 - unused
-	      case 13: {
-	    	  std::cout << "UNUSED!!!!!!!!!!!!!" << std::endl;
-	    	  break;
-	      } // case 13
+			// 13 - unused
+		case 13:
+		{
+			std::cout << "connecting to: " << COMP->ini.followMeParameterClient.serverName << "; "
+					<< COMP->ini.followMeParameterClient.serviceName << std::endl;
+			status = COMP->followMeParameterClient->connect(COMP->ini.followMeParameterClient.serverName,
+					COMP->ini.followMeParameterClient.serviceName);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "COULD NOT CONNECT followMeParameterClient" << std::endl;
+			} else
+			{
+				std::cout << "connected.\n";
+			}
 
+			CommTrackingObjects::CommFollowMeParameter cmd;
 
+			std::cout << std::endl;
+			std::cout << "parameters: " << std::endl;
+			std::cout << "RESET(px)(py)     : position relative to robot\n";
+			std::cout << "SETMAXCOV(px)     : max distance radius until lost [?]\n";
 
+			std::cout << "m to return to main menu" << std::endl;
 
-#if 0
-	    // 14 - PMD state
-		case 14:
-	    {
-	        std::string stateServerName = "SmartPMDServer";
-	        std::list<std::string> mainstates;
-	        CHS::SmartStateClient stateClient(component, stateServerName, "stateServer");
+			std::cout << std::endl;
+			std::cout << "usage: command(param1)(param2)(param3)\n";
+			std::cout << "       strategy(reactive) or transvel(0)(500)\n";
 
-	        // first get list of main states
-	        status = stateClient.getWaitMainStates(mainstates);
-	        if(status != CHS::SMART_OK)
-	        {
-	          std::cout << "could not connect to " << stateServerName << "\n\n";
-	        }
-	        else
-	        {
-	          // print list of main states
-	          unsigned int itemNumber = 1;
+			std::cout << "\nplease enter command:  ";
 
-	          std::cout << "\nlist of possible main states: " << std::endl;
-	          for (std::list<std::string>::iterator iterator1=mainstates.begin();iterator1 != mainstates.end(); ++iterator1)
-	          {
-	            std::cout << setw(2) << itemNumber << " -- mainstate :  " << *iterator1 << std::endl;
-	            itemNumber++;
-	          }
-	          std::cout << setw(2) << itemNumber << " -- return to main menu" << std::endl;
+			std::string inString;
+			std::cin >> inString;
+			std::cout << "your input: " << inString << std::endl;
 
-	          // ask which state should be sent
-	          std::cout << "\nplease choose number:  ";
-	          cin >> itemNumber;
+			if (strcasecmp("m", inString.c_str()) != 0)
+			{
 
-	          // check input
-	          if( itemNumber <= mainstates.size() )
-	          {
-	            // iterate to selected state
-	            std::list<std::string>::iterator iterator1 = mainstates.begin();
-	            for(unsigned int i=1; i < itemNumber; i++)
-	            {
-	              ++iterator1;
-	            }
-	            // send selected state
-	            stateClient.setWaitState( *iterator1 );
-	            std::cout << "state <" << *iterator1 << "> sent\n";
-	          }
+				cmd.set(inString);
+				COMP->followMeParameterClient->send(cmd);
+				std::cout << "send.\n\n";
+			}
 
-	        } // else
-
-	    	break;
-		} // case 14
-#endif
+			break;
+		} // case 13
 
 
 #if 0
-		// 15 - PMD parameter
-		case 15:
-	    {
-	        CommToFObjects::CommToFParameter cmd;
-	        std::string inString;
+			// 14 - PMD state
+			case 14:
+			{
+				std::string stateServerName = "SmartPMDServer";
+				std::list<std::string> mainstates;
+				CHS::SmartStateClient stateClient(component, stateServerName, "stateServer");
 
-	        CHS::SendClient<CommToFObjects::CommToFParameter> smartPMDParameterSendClient(component,"SmartPMDServer","paramServer");
+				// first get list of main states
+				status = stateClient.getWaitMainStates(mainstates);
+				if(status != CHS::SMART_OK)
+				{
+					std::cout << "could not connect to " << stateServerName << "\n\n";
+				}
+				else
+				{
+					// print list of main states
+					unsigned int itemNumber = 1;
 
-	        std::cout << std::endl;
-	        std::cout << "IntegTime ?value			 : set integration time [ms]\n";
-	      	std::cout << "ModFreq ?value			 : set modulation frequency [Hz]\n";
-	        std::cout << "m to return to main menu" << std::endl;
+					std::cout << "\nlist of possible main states: " << std::endl;
+					for (std::list<std::string>::iterator iterator1=mainstates.begin();iterator1 != mainstates.end(); ++iterator1)
+					{
+						std::cout << setw(2) << itemNumber << " -- mainstate :  " << *iterator1 << std::endl;
+						itemNumber++;
+					}
+					std::cout << setw(2) << itemNumber << " -- return to main menu" << std::endl;
 
-	        std::cout << std::endl;
-	        std::cout << "usage: command(param1)\n";
-	        std::cout << "       IntegTime(3000)\n";
+					// ask which state should be sent
+					std::cout << "\nplease choose number:  ";
+					cin >> itemNumber;
 
-	        std::cout << "\nplease enter command:  ";
+					// check input
+					if( itemNumber <= mainstates.size() )
+					{
+						// iterate to selected state
+						std::list<std::string>::iterator iterator1 = mainstates.begin();
+						for(unsigned int i=1; i < itemNumber; i++)
+						{
+							++iterator1;
+						}
+						// send selected state
+						stateClient.setWaitState( *iterator1 );
+						std::cout << "state <" << *iterator1 << "> sent\n";
+					}
 
-	        cin >> inString;
-	        std::cout << "your input: " << inString << std::endl;
+				} // else
 
-	        if( strcasecmp("m", inString.c_str() ) != 0 )
-	        {
-	          cmd.set(inString);
-	          smartPMDParameterSendClient.send(cmd);
-	          std::cout << "send.\n\n";
-	        }
-	        break;
-	    } // case 15
+				break;
+			} // case 14
 #endif
 
+#if 0
+			// 15 - PMD parameter
+			case 15:
+			{
+				CommToFObjects::CommToFParameter cmd;
+				std::string inString;
 
-	     // 16 - Amcl parameter
-	    case 16:
-	    {
-	        CommNavigationObjects::CommAmclParameter cmd;
-	        std::string inString;
+				CHS::SendClient<CommToFObjects::CommToFParameter> smartPMDParameterSendClient(component,"SmartPMDServer","paramServer");
 
-	        // CHS::SendClient<CommAmclObjects::CommAmclParameter> smartAmclParameterSendClient(component,"SmartAmcl","param");
-	    	std::cout << "connecting to: "
-	    			<< COMP->ini.amclParameterClient.serverName << "; "
-	    			<< COMP->ini.amclParameterClient.serviceName << std::endl;
-	    	status = COMP->amclParameterClient->connect(
-	    			COMP->ini.amclParameterClient.serverName,
-	    			COMP->ini.amclParameterClient.serviceName);
-	    	if (status != CHS::SMART_OK) {
-	    		std::cout << "COULD NOT CONNECT amclParameterClient" << std::endl;
-	    	} else {
-	    		std::cout << "connected.\n";
-	    	}
+				std::cout << std::endl;
+				std::cout << "IntegTime ?value			 : set integration time [ms]\n";
+				std::cout << "ModFreq ?value			 : set modulation frequency [Hz]\n";
+				std::cout << "m to return to main menu" << std::endl;
 
-	        std::cout << std::endl;
-	        std::cout << "GLOBALLOCALIZATION         : trigger global localization\n";
-	        std::cout << "INITIALPOSE ?x ?y ?a       : initialize localization at pose\n";
-	        std::cout << "m to return to main menu" << std::endl;
+				std::cout << std::endl;
+				std::cout << "usage: command(param1)\n";
+				std::cout << "       IntegTime(3000)\n";
 
-	        std::cout << std::endl;
-	        std::cout << "usage: command(param1)\n";
-	        std::cout << "       initialpose(0)(0)(0)\n";
+				std::cout << "\nplease enter command:  ";
 
-	        std::cout << "\nplease enter command:  ";
+				cin >> inString;
+				std::cout << "your input: " << inString << std::endl;
 
-	        cin >> inString;
-	        std::cout << "your input: " << inString << std::endl;
+				if( strcasecmp("m", inString.c_str() ) != 0 )
+				{
+					cmd.set(inString);
+					smartPMDParameterSendClient.send(cmd);
+					std::cout << "send.\n\n";
+				}
+				break;
+			} // case 15
+#endif
 
-	        if( strcasecmp("m", inString.c_str() ) != 0 )
-	        {
-	          cmd.set(inString);
-	          COMP->amclParameterClient->send(cmd);
-	          std::cout << "send.\n\n";
-	        }
-	        break;
-	    } // case 16
+			// 16 - Amcl parameter
+		case 16:
+		{
+			CommNavigationObjects::CommAmclParameter cmd;
+			std::string inString;
 
+			// CHS::SendClient<CommAmclObjects::CommAmclParameter> smartAmclParameterSendClient(component,"SmartAmcl","param");
+			std::cout << "connecting to: " << COMP->ini.amclParameterClient.serverName << "; " << COMP->ini.amclParameterClient.serviceName
+					<< std::endl;
+			status
+					= COMP->amclParameterClient->connect(COMP->ini.amclParameterClient.serverName,
+							COMP->ini.amclParameterClient.serviceName);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "COULD NOT CONNECT amclParameterClient" << std::endl;
+			} else
+			{
+				std::cout << "connected.\n";
+			}
 
+			std::cout << std::endl;
+			std::cout << "GLOBALLOCALIZATION         : trigger global localization\n";
+			std::cout << "INITIALPOSE ?x ?y ?a       : initialize localization at pose\n";
+			std::cout << "m to return to main menu" << std::endl;
 
+			std::cout << std::endl;
+			std::cout << "usage: command(param1)\n";
+			std::cout << "       initialpose(0)(0)(0)\n";
 
-	    // 17 - Amcl state
-	    case 17:
-	    {
-	        //std::string stateServerName = "SmartAmcl";
-	        std::list<std::string> mainstates;
+			std::cout << "\nplease enter command:  ";
 
+			cin >> inString;
+			std::cout << "your input: " << inString << std::endl;
 
-
-	        //CHS::SmartStateClient stateClient(component, stateServerName, "state");
-	    	std::cout << "connecting to: " << COMP->ini.amclStateClient.serverName
-	    			<< "; " << COMP->ini.amclStateClient.serviceName << std::endl;
-	    	status = COMP->amclStateClient->connect(
-	    			COMP->ini.amclStateClient.serverName,
-	    			COMP->ini.amclStateClient.serviceName);
-	    	if (status != CHS::SMART_OK) {
-	    		std::cout << "COULD NOT CONNECT amclStateClient" << std::endl;
-	    	} else {
-	    		std::cout << "connected.\n";
-	    	}
-
-
-	        // first get list of main states
-	        status = COMP->amclStateClient->getWaitMainStates(mainstates);
-	        if(status != CHS::SMART_OK)
-	        {
-	          std::cout << "could not connect to amcl state\n\n";
-	        }
-	        else
-	        {
-	          // print list of main states
-	          unsigned int itemNumber = 1;
-
-	          std::cout << "\nlist of possible main states: " << std::endl;
-	          for (std::list<std::string>::iterator iterator1=mainstates.begin();iterator1 != mainstates.end(); ++iterator1)
-	          {
-	            std::cout << setw(2) << itemNumber << " -- mainstate :  " << *iterator1 << std::endl;
-	            itemNumber++;
-	          }
-	          std::cout << setw(2) << itemNumber << " -- return to main menu" << std::endl;
-
-	          // ask which state should be sent
-	          std::cout << "\nplease choose number:  ";
-	          cin >> itemNumber;
-
-	          // check input
-	          if( itemNumber <= mainstates.size() )
-	          {
-	            // iterate to selected state
-	            std::list<std::string>::iterator iterator1 = mainstates.begin();
-	            for(unsigned int i=1; i < itemNumber; i++)
-	            {
-	              ++iterator1;
-	            }
-	            // send selected state
-	            COMP->amclStateClient->setWaitState( *iterator1 );
-	            std::cout << "state <" << *iterator1 << "> sent\n";
-	          }
-
-	        } // else
-
-	      break;
-	    } // case 17
+			if (strcasecmp("m", inString.c_str()) != 0)
+			{
+				cmd.set(inString);
+				COMP->amclParameterClient->send(cmd);
+				std::cout << "send.\n\n";
+			}
+			break;
+		} // case 16
 
 
+			// 17 - Amcl state
+		case 17:
+		{
+			//std::string stateServerName = "SmartAmcl";
+			std::list<std::string> mainstates;
 
-	    // 18 - GMapping parameter
-	    case 18:
-	    {
-	        CommNavigationObjects::CommGMappingParameter cmd;
-	        std::string inString;
+			//CHS::SmartStateClient stateClient(component, stateServerName, "state");
+			std::cout << "connecting to: " << COMP->ini.amclStateClient.serverName << "; " << COMP->ini.amclStateClient.serviceName
+					<< std::endl;
+			status = COMP->amclStateClient->connect(COMP->ini.amclStateClient.serverName, COMP->ini.amclStateClient.serviceName);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "COULD NOT CONNECT amclStateClient" << std::endl;
+			} else
+			{
+				std::cout << "connected.\n";
+			}
 
-	        //CHS::SendClient<Smart::CommGMappingParameter> smartGMappingParameterSendClient(component,"smartGmapping","param");
-	    	std::cout << "connecting to: " << COMP->ini.gmappingParameterClient.serverName
-	    			<< "; " << COMP->ini.gmappingParameterClient.serviceName << std::endl;
-	    	status = COMP->gmappingParameterClient->connect(
-	    			COMP->ini.gmappingParameterClient.serverName,
-	    			COMP->ini.gmappingParameterClient.serviceName);
-	    	if (status != CHS::SMART_OK) {
-	    		std::cout << "COULD NOT CONNECT gmappingParameterClient" << std::endl;
-	    	} else {
-	    		std::cout << "connected.\n";
-	    	}
+			// first get list of main states
+			status = COMP->amclStateClient->getWaitMainStates(mainstates);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "could not connect to amcl state\n\n";
+			} else
+			{
+				// print list of main states
+				unsigned int itemNumber = 1;
 
-	        std::cout << std::endl;
-	        std::cout << "SAVEMAP ?filename       : save the girdmap to pgm and yaml \n";
-	        std::cout << "m to return to main menu" << std::endl;
+				std::cout << "\nlist of possible main states: " << std::endl;
+				for (std::list<std::string>::iterator iterator1 = mainstates.begin(); iterator1 != mainstates.end(); ++iterator1)
+				{
+					std::cout << setw(2) << itemNumber << " -- mainstate :  " << *iterator1 << std::endl;
+					itemNumber++;
+				}
+				std::cout << setw(2) << itemNumber << " -- return to main menu" << std::endl;
 
-	        std::cout << std::endl;
-	        std::cout << "usage: command(param1)\n";
-	        std::cout << "       initialpose(0)(0)(0)\n";
+				// ask which state should be sent
+				std::cout << "\nplease choose number:  ";
+				cin >> itemNumber;
 
-	        std::cout << "\nplease enter command:  ";
+				// check input
+				if (itemNumber <= mainstates.size())
+				{
+					// iterate to selected state
+					std::list<std::string>::iterator iterator1 = mainstates.begin();
+					for (unsigned int i = 1; i < itemNumber; i++)
+					{
+						++iterator1;
+					}
+					// send selected state
+					COMP->amclStateClient->setWaitState(*iterator1);
+					std::cout << "state <" << *iterator1 << "> sent\n";
+				}
 
-	        cin >> inString;
-	        std::cout << "your input: " << inString << std::endl;
+			} // else
 
-	        if( strcasecmp("m", inString.c_str() ) != 0 )
-	        {
-	          cmd.set(inString);
-	          COMP->gmappingParameterClient->send(cmd);
-	          std::cout << "send.\n\n";
-	        }
-	        break;
-	    } // case 18
+			break;
+		} // case 17
 
 
+			// 18 - GMapping parameter
+		case 18:
+		{
+			CommNavigationObjects::CommGMappingParameter cmd;
+			std::string inString;
+
+			//CHS::SendClient<Smart::CommGMappingParameter> smartGMappingParameterSendClient(component,"smartGmapping","param");
+			std::cout << "connecting to: " << COMP->ini.gmappingParameterClient.serverName << "; "
+					<< COMP->ini.gmappingParameterClient.serviceName << std::endl;
+			status = COMP->gmappingParameterClient->connect(COMP->ini.gmappingParameterClient.serverName,
+					COMP->ini.gmappingParameterClient.serviceName);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "COULD NOT CONNECT gmappingParameterClient" << std::endl;
+			} else
+			{
+				std::cout << "connected.\n";
+			}
+
+			std::cout << std::endl;
+			std::cout << "SAVEMAP ?filename       : save the girdmap to pgm and yaml \n";
+			std::cout << "m to return to main menu" << std::endl;
+
+			std::cout << std::endl;
+			std::cout << "usage: command(param1)\n";
+			std::cout << "       initialpose(0)(0)(0)\n";
+
+			std::cout << "\nplease enter command:  ";
+
+			cin >> inString;
+			std::cout << "your input: " << inString << std::endl;
+
+			if (strcasecmp("m", inString.c_str()) != 0)
+			{
+				cmd.set(inString);
+				COMP->gmappingParameterClient->send(cmd);
+				std::cout << "send.\n\n";
+			}
+			break;
+		} // case 18
 
 
-
-	    // 19 - PTU state
-	    case 19: {
+			// 19 - PTU state
+		case 19:
+		{
 			//CHS::SmartStateClient stateClient(component, "SmartPTUServer", "stateServer");
-	    	// activate PTU
-	    	//stateClient.setWaitState("active");
+			// activate PTU
+			//stateClient.setWaitState("active");
 
-	        std::list<std::string> mainstates;
+			std::list<std::string> mainstates;
 
-	        //CHS::SmartStateClient stateClient(component, stateServerName, "state");
-	    	std::cout << "connecting to: " << COMP->ini.ptuStateClient.serverName
-	    			<< "; " << COMP->ini.ptuStateClient.serviceName << std::endl;
-	    	status = COMP->ptuStateClient->connect(
-	    			COMP->ini.ptuStateClient.serverName,
-	    			COMP->ini.ptuStateClient.serviceName);
-	    	if (status != CHS::SMART_OK) {
-	    		std::cout << "COULD NOT CONNECT ptuStateClient" << std::endl;
-	    	} else {
-	    		std::cout << "connected.\n";
-	    	}
+			//CHS::SmartStateClient stateClient(component, stateServerName, "state");
+			std::cout << "connecting to: " << COMP->ini.ptuStateClient.serverName << "; " << COMP->ini.ptuStateClient.serviceName
+					<< std::endl;
+			status = COMP->ptuStateClient->connect(COMP->ini.ptuStateClient.serverName, COMP->ini.ptuStateClient.serviceName);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "COULD NOT CONNECT ptuStateClient" << std::endl;
+			} else
+			{
+				std::cout << "connected.\n";
+			}
 
+			// first get list of main states
+			status = COMP->ptuStateClient->getWaitMainStates(mainstates);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "could not connect to amcl state\n\n";
+			} else
+			{
+				// print list of main states
+				unsigned int itemNumber = 1;
 
-	        // first get list of main states
-	        status = COMP->ptuStateClient->getWaitMainStates(mainstates);
-	        if(status != CHS::SMART_OK)
-	        {
-	          std::cout << "could not connect to amcl state\n\n";
-	        }
-	        else
-	        {
-	          // print list of main states
-	          unsigned int itemNumber = 1;
+				std::cout << "\nlist of possible main states: " << std::endl;
+				for (std::list<std::string>::iterator iterator1 = mainstates.begin(); iterator1 != mainstates.end(); ++iterator1)
+				{
+					std::cout << setw(2) << itemNumber << " -- mainstate :  " << *iterator1 << std::endl;
+					itemNumber++;
+				}
+				std::cout << setw(2) << itemNumber << " -- return to main menu" << std::endl;
 
-	          std::cout << "\nlist of possible main states: " << std::endl;
-	          for (std::list<std::string>::iterator iterator1=mainstates.begin();iterator1 != mainstates.end(); ++iterator1)
-	          {
-	            std::cout << setw(2) << itemNumber << " -- mainstate :  " << *iterator1 << std::endl;
-	            itemNumber++;
-	          }
-	          std::cout << setw(2) << itemNumber << " -- return to main menu" << std::endl;
+				// ask which state should be sent
+				std::cout << "\nplease choose number:  ";
+				cin >> itemNumber;
 
-	          // ask which state should be sent
-	          std::cout << "\nplease choose number:  ";
-	          cin >> itemNumber;
+				// check input
+				if (itemNumber <= mainstates.size())
+				{
+					// iterate to selected state
+					std::list<std::string>::iterator iterator1 = mainstates.begin();
+					for (unsigned int i = 1; i < itemNumber; i++)
+					{
+						++iterator1;
+					}
+					// send selected state
+					COMP->ptuStateClient->setWaitState(*iterator1);
+					std::cout << "state <" << *iterator1 << "> sent\n";
+				}
 
-	          // check input
-	          if( itemNumber <= mainstates.size() )
-	          {
-	            // iterate to selected state
-	            std::list<std::string>::iterator iterator1 = mainstates.begin();
-	            for(unsigned int i=1; i < itemNumber; i++)
-	            {
-	              ++iterator1;
-	            }
-	            // send selected state
-	            COMP->ptuStateClient->setWaitState( *iterator1 );
-	            std::cout << "state <" << *iterator1 << "> sent\n";
-	          }
-
-	        } // else
+			} // else
 
 
-
-	    	break;
-	    } // PTU move
-
+			break;
+		} // PTU move
 
 
+			// 20 - PTU move
+		case 20:
+		{
+			int pan = 0, tilt = 0;
 
-	    // 20 - PTU move
-	    case 20:
-	    {
-	        int pan = 0, tilt = 0;
+			std::cout << "\nenter pan [deg]:  ";
+			cin >> pan;
 
-	        std::cout << "\nenter pan [deg]:  ";
-		    cin >> pan;
+			std::cout << "enter tilt [deg]:  ";
+			cin >> tilt;
 
-		    std::cout << "enter tilt [deg]:  ";
-		    cin >> tilt;
-
-	        std::cout << "\nmove to: " << pan << ", " << tilt << std::endl;
+			std::cout << "\nmove to: " << pan << ", " << tilt << std::endl;
 
 			//CHS::QueryClient<CommPTUObjects::CommPTUMoveRequest, CommPTUObjects::CommPTUMoveResponse> smartPTUMoveQueryClient(component, "SmartPTUServer", "movePTU");
-	    	std::cout << "connecting to: " << COMP->ini.ptuQueryClient.serverName
-	    			<< "; " << COMP->ini.ptuQueryClient.serviceName << std::endl;
-	    	status = COMP->ptuQueryClient->connect(
-	    			COMP->ini.ptuQueryClient.serverName,
-	    			COMP->ini.ptuQueryClient.serviceName);
-	    	if (status != CHS::SMART_OK) {
-	    		std::cout << "COULD NOT CONNECT ptuStateClient" << std::endl;
-	    	} else {
-	    		std::cout << "connected.\n";
-	    	}
+			std::cout << "connecting to: " << COMP->ini.ptuQueryClient.serverName << "; " << COMP->ini.ptuQueryClient.serviceName
+					<< std::endl;
+			status = COMP->ptuQueryClient->connect(COMP->ini.ptuQueryClient.serverName, COMP->ini.ptuQueryClient.serviceName);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "COULD NOT CONNECT ptuStateClient" << std::endl;
+			} else
+			{
+				std::cout << "connected.\n";
+			}
 
-	        CommPTUObjects::CommPTUMoveRequest request;
+			CommPTUObjects::CommPTUMoveRequest request;
 			CommPTUObjects::CommPTUMoveResponse response;
 
 			request.set_move_mode(CommPTUObjects::PTUMoveFlag::PAN_TILT_ABSOLUTE);
-			request.set_pan(pan  * (M_PI / 180.0));
+			request.set_pan(pan * (M_PI / 180.0));
 			request.set_tilt(tilt * (M_PI / 180.0));
 			std::cout << "Sending move request...\n";
 			//smartPTUMoveQueryClient.query(request, response);
 			COMP->ptuQueryClient->query(request, response);
-
-	        if (response.get_status() == CommPTUObjects::PTUMoveStatus::OK) {
+			if (response.get_status() == CommPTUObjects::PTUMoveStatus::GOAL_REACHED)
+			{
 				std::cout << "move was successful\n";
-			}
-			else {
+			} else
+			{
 				std::cout << "error while moving\n";
 			}
 
-		    break;
-	    } // case 20
+			break;
+		} // case 20
 
 
+			// 21 - PersonDetectionParam
+		case 21:
+		{
+			CommPersonDetectionObjects::CommPersonDetectionParameter cmd;
+			std::string inString;
 
-	    // 98 - Universal state client
-	    case 98:
-	    {
+			std::cout << "connecting to: " << COMP->ini.personDetectionParameterClient.serverName << "; "
+					<< COMP->ini.personDetectionParameterClient.serviceName << std::endl;
+			status = COMP->personDetectionParameterClient->connect(COMP->ini.personDetectionParameterClient.serverName,
+					COMP->ini.personDetectionParameterClient.serviceName);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "COULD NOT CONNECT personDetectionParameterClient" << std::endl;
+				break;
+			} else
+			{
+				std::cout << "connected.\n";
+			}
 
-	      std::vector< std::pair<std::string,std::string> > list_of_state_clients;
+			std::cout << std::endl;
+			std::cout << "MODE: ONESHOT/CONTINUOUS\n";
+			std::cout << "TYPE: SINGLESCAN/FULLSCAN\n";
+			std::cout << "PMANAGER: RESET/ACTIVATE/DEACTIVATE\n";
+			std::cout << "m to return to main menu" << std::endl;
 
-	      get_list (list_of_state_clients, COMP->component);
+			std::cout << std::endl;
+			std::cout << "usage: command(param1)\n";
+			std::cout << "       mode(oneshot)\n";
 
-	      int input;
-	      std::string stateServerName;
-	      std::string portName;
-	      std::cout << "\n------------------------------------------------------------------------\n";
-	      std::cout<<"List of Components with State: "<<std::endl;
+			std::cout << "\nplease enter command:  ";
 
-	      for(unsigned int i=0;i<list_of_state_clients.size();i++)
-	      {
-		      std::cout<<i<<" - "<<list_of_state_clients[i].first<<" - "<<list_of_state_clients[i].second<<std::endl;
-	      }
-	      std::cout<<"99 - other"<<std::endl;
-	      std::cout<<"Enter component to connect to: ";
-	      cin>>input;
-	      if(input== 99)
-	      {
-	    	  std::cout<<"Enter Component name: ";
-	    	  cin>>stateServerName;
-	    	  std::cout<<"Enter Port name: ";
-	    	  cin>>portName;
-	      }
-	      else
-	      {
-	        stateServerName = list_of_state_clients[input].first;
-	        portName = list_of_state_clients[input].second;
-	      }
+			cin >> inString;
+			std::cout << "your input: " << inString << std::endl;
 
-	        std::list<std::string> mainstates;
-	        CHS::SmartStateClient stateClient(COMP->component, stateServerName, portName);
-	        // first get list of main states
-	        status = stateClient.getWaitMainStates(mainstates);
-	        if(status != CHS::SMART_OK)
-	        {
-	          std::cout << "could not connect to " << stateServerName << "\n\n";
-	        }
-	        else
-	        {
-	          // print list of main states
-	          unsigned int itemNumber = 1;
-
-	          std::cout << "\nlist of possible main states, in component "<<stateServerName<< ": " << std::endl;
-	          for (std::list<std::string>::iterator iterator1=mainstates.begin();iterator1 != mainstates.end(); ++iterator1)
-	          {
-	            std::cout << setw(2) << itemNumber << " -- mainstate :  " << *iterator1 << std::endl;
-	            itemNumber++;
-	          }
-	          std::cout << setw(2) << itemNumber << " -- return to main menu" << std::endl;
-
-	          // ask which state should be sent
-	          std::cout << "\nplease choose number:  ";
-	          cin >> itemNumber;
-
-	          // check input
-	          if( itemNumber <= mainstates.size() )
-	          {
-	            // iterate to selected state
-	            std::list<std::string>::iterator iterator1 = mainstates.begin();
-	            for(unsigned int i=1; i < itemNumber; i++)
-	            {
-	              ++iterator1;
-	            }
-	            // send selected state
-	            stateClient.setWaitState( *iterator1 );
-	            std::cout << "state <" << *iterator1 << "> sent\n";
-	          }
-
-	        } // else
-
-	      break;
-	    } // case 98
+			if (strcasecmp("m", inString.c_str()) != 0)
+			{
+				cmd.set(inString);
+				COMP->personDetectionParameterClient->send(cmd);
+				std::cout << "send.\n\n";
+			}
+			break;
+		} // case 21
 
 
+			// 22 - SchunkGripperParam
+		case 22:
+		{
+			CommManipulatorObjects::CommGripperParam cmd;
+			std::string inString;
+
+			std::cout << "connecting to: " << COMP->ini.schunkGripperParameterClient.serverName << "; "
+					<< COMP->ini.schunkGripperParameterClient.serviceName << std::endl;
+			status = COMP->schunkGripperParameterClient->connect(COMP->ini.schunkGripperParameterClient.serverName,
+					COMP->ini.schunkGripperParameterClient.serviceName);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "COULD NOT CONNECT schunkGripperParameterClient" << std::endl;
+				break;
+			} else
+			{
+				std::cout << "connected.\n";
+			}
+
+			std::cout << std::endl;
+			std::cout << "OPEN\n";
+			std::cout << "CLOSE\n";
+			std::cout << "ACC(value) - acceleration\n";
+			std::cout << "VEL(value) - velocity\n";
+			std::cout << "CUR(value) - current\n";
+			std::cout << "m to return to main menu" << std::endl;
+
+			std::cout << std::endl;
+			std::cout << "usage: cur(6)\n";
+			std::cout << "       vel(200)\n";
+
+			std::cout << "\nplease enter command:  ";
+
+			cin >> inString;
+			std::cout << "your input: " << inString << std::endl;
+
+			if (strcasecmp("m", inString.c_str()) != 0)
+			{
+				cmd.set(inString);
+				COMP->schunkGripperParameterClient->send(cmd);
+				std::cout << "send.\n\n";
+			}
+			break;
+		} // case 22
+
+			// 98 - Universal state client
+		case 98:
+		{
+
+			std::vector<std::pair<std::string, std::string> > list_of_state_clients;
+
+			get_list(list_of_state_clients, COMP->component);
+
+			int input;
+			std::string stateServerName;
+			std::string portName;
+			std::cout << "\n------------------------------------------------------------------------\n";
+			std::cout << "List of Components with State: " << std::endl;
+
+			for (unsigned int i = 0; i < list_of_state_clients.size(); i++)
+			{
+				std::cout << i << " - " << list_of_state_clients[i].first << " - " << list_of_state_clients[i].second << std::endl;
+			}
+			std::cout << "99 - other" << std::endl;
+			std::cout << "Enter component to connect to: ";
+			cin >> input;
+			if (input == 99)
+			{
+				std::cout << "Enter Component name: ";
+				cin >> stateServerName;
+				std::cout << "Enter Port name: ";
+				cin >> portName;
+			} else
+			{
+				stateServerName = list_of_state_clients[input].first;
+				portName = list_of_state_clients[input].second;
+			}
+
+			std::list<std::string> mainstates;
+			CHS::SmartStateClient stateClient(COMP->component, stateServerName, portName);
+			// first get list of main states
+			status = stateClient.getWaitMainStates(mainstates);
+			if (status != CHS::SMART_OK)
+			{
+				std::cout << "could not connect to " << stateServerName << "\n\n";
+			} else
+			{
+				// print list of main states
+				unsigned int itemNumber = 1;
+
+				std::cout << "\nlist of possible main states, in component " << stateServerName << ": " << std::endl;
+				for (std::list<std::string>::iterator iterator1 = mainstates.begin(); iterator1 != mainstates.end(); ++iterator1)
+				{
+					std::cout << setw(2) << itemNumber << " -- mainstate :  " << *iterator1 << std::endl;
+					itemNumber++;
+				}
+				std::cout << setw(2) << itemNumber << " -- return to main menu" << std::endl;
+
+				// ask which state should be sent
+				std::cout << "\nplease choose number:  ";
+				cin >> itemNumber;
+
+				// check input
+				if (itemNumber <= mainstates.size())
+				{
+					// iterate to selected state
+					std::list<std::string>::iterator iterator1 = mainstates.begin();
+					for (unsigned int i = 1; i < itemNumber; i++)
+					{
+						++iterator1;
+					}
+					// send selected state
+					stateClient.setWaitState(*iterator1);
+					std::cout << "state <" << *iterator1 << "> sent\n";
+				}
+
+			} // else
+
+			break;
+		} // case 98
 
 
-	    // 99 - Demo
-	    case 99:
-	    {
+			// 99 - Demo
+		case 99:
+		{
 			unsigned int itemNumber;
-	        std::list<std::string> mainstates;
+			std::list<std::string> mainstates;
 
-	        CommNavigationObjects::CommCdlParameter cmd;
-	        CommNavigationObjects::CommMapperParameter cmdMap;
-	        int input;
-	        std::string str;
+			CommNavigationObjects::CommCdlParameter cmd;
+			CommNavigationObjects::CommMapperParameter cmdMap;
+			int input;
+			std::string str;
 
-	        CommNavigationObjects::CommPlannerParameter cmd_planner;
+			CommNavigationObjects::CommPlannerParameter cmd_planner;
 
-	        std::cout << std::endl;
-	        std::cout << "(1) Demo 1 Introduction robot speechoutput\n";
-	        std::cout << "(2) Demo 2 Planner-CDL GOTO \n";
-	        std::cout << "(3) Demo 3 CDL Reactive Mode \n";
-	        std::cout << "(4) Demo 4 Cdl Joystick Mode \n";
-	        std::cout << "(5) Demo 5 Follow Me \n";
-	        std::cout << "(0) to return to main menu" << std::endl;
+			std::cout << std::endl;
+			std::cout << "(1) Demo 1 Introduction robot speechoutput\n";
+			std::cout << "(2) Demo 2 Planner-CDL GOTO \n";
+			std::cout << "(3) Demo 3 CDL Reactive Mode \n";
+			std::cout << "(4) Demo 4 Cdl Joystick Mode \n";
+			std::cout << "(5) Demo 5 Follow Me \n";
+			std::cout << "(6) Demo 6 PlannerSpanningTreeCoverage \n";
+			std::cout << "(0) to return to main menu" << std::endl;
 
-	        std::cout << std::endl;
-	        std::cout << "usage: 1\n";
+			std::cout << std::endl;
+			std::cout << "usage: 1\n";
 
-	        std::cout << "\nplease enter command:  ";
+			std::cout << "\nplease enter command:  ";
 
-	        cin >> input;
-	        std::cout << "your input: " << input << std::endl;
+			cin >> input;
+			std::cout << "your input: " << input << std::endl;
 
-
-		switch(input){
+			switch (input)
+			{
 #if 0
-	          /////////////////////////////////
-	          // Demo 1 welcome the audience
-	          /////////////////////////////////
-	          case 1:
-	          {
-	            // Turn towards the audience
-	            CHS::SendClient<Smart::CommCdlParameter> smartCdlParameterSendClient(component,"smartCdlServer","cdlParameter");
-	            CHS::SmartStateClient cdlStateClient(component, "smartCdlServer");
+			/////////////////////////////////
+			// Demo 1 welcome the audience
+			/////////////////////////////////
+			case 1:
+			{
+				// Turn towards the audience
+				CHS::SendClient<Smart::CommCdlParameter> smartCdlParameterSendClient(component,"smartCdlServer","cdlParameter");
+				CHS::SmartStateClient cdlStateClient(component, "smartCdlServer");
 
-	            str = "STRATEGY(ROTATE)";
-	            cmd.set(str);
-	            smartCdlParameterSendClient.send(cmd);
-	            str = "LOOKUPTABLE(DEFAULT)";
-	            cmd.set(str);
-	            smartCdlParameterSendClient.send(cmd);
-	            str = "GOALMODE(ABSOLUTE)";
-	            cmd.set(str);
-	            smartCdlParameterSendClient.send(cmd);
+				str = "STRATEGY(ROTATE)";
+				cmd.set(str);
+				smartCdlParameterSendClient.send(cmd);
+				str = "LOOKUPTABLE(DEFAULT)";
+				cmd.set(str);
+				smartCdlParameterSendClient.send(cmd);
+				str = "GOALMODE(ABSOLUTE)";
+				cmd.set(str);
+				smartCdlParameterSendClient.send(cmd);
 
-	            str = "GOALREGION(-1000)(0)(0)";
-	            cmd.set(str);
-	            smartCdlParameterSendClient.send(cmd);
-	            itemNumber = 2;
+				str = "GOALREGION(-1000)(0)(0)";
+				cmd.set(str);
+				smartCdlParameterSendClient.send(cmd);
+				itemNumber = 2;
 
+				// CDL State --> GO!
+				itemNumber = 2;
+				cdlStateClient.getWaitMainStates(mainstates);
+				// check input
+				if( itemNumber <= mainstates.size() )
+				{
+					// iterate to selected state
+					std::list<std::string>::iterator iterator1 = mainstates.begin();
+					for(unsigned int i=1; i < itemNumber; i++)
+					{
+						++iterator1;
+					}
+					// send selected state
+					cdlStateClient.setWaitState( *iterator1 );
+					std::cout << "state <" << *iterator1 << "> sent\n";
+				}
 
-	            // CDL State --> GO!
-	            itemNumber = 2;
-	            cdlStateClient.getWaitMainStates(mainstates);
-	            // check input
-	            if( itemNumber <= mainstates.size() )
-	            {
-	              // iterate to selected state
-	              std::list<std::string>::iterator iterator1 = mainstates.begin();
-	              for(unsigned int i=1; i < itemNumber; i++)
-	              {
-	                ++iterator1;
-	              }
-	              // send selected state
-	              cdlStateClient.setWaitState( *iterator1 );
-	              std::cout << "state <" << *iterator1 << "> sent\n";
-	            }
+				//Cdl Goal Event!!
+				CHS::EventClient<Smart::CommCdlGoalEventParameter,Smart::CommCdlGoalEventResult> cdlGoalEventClient(component, "smartCdlServer","cdlGoalEvent");
 
+				Smart::CommCdlGoalEventParameter parameter;
+				Smart::CommCdlGoalEventResult result;
+				CHS::EventId id;
 
-	            //Cdl Goal Event!!
-	            CHS::EventClient<Smart::CommCdlGoalEventParameter,Smart::CommCdlGoalEventResult> cdlGoalEventClient(component, "smartCdlServer","cdlGoalEvent");
+				CHS::StatusCode status;
+				int b;
+				int a = 0;
+				//
+				// continuous event
+				//
+				parameter.set(a);
 
+				status = cdlGoalEventClient.activate(CHS::single, parameter, id);
 
-	            Smart::CommCdlGoalEventParameter parameter;
-	            Smart::CommCdlGoalEventResult    result;
-	            CHS::EventId               id;
+				status = cdlGoalEventClient.getEvent(id, result);
+				if (status == CHS::SMART_OK)
+				{
+					result.get(b);
+					std::cout << "event id: " << id << " event fired: " << b << "\n";
+				}
 
-	            CHS::StatusCode status;
-	            int b;
-	            int a = 0;
-	            //
-	            // continuous event
-	            //
-	            parameter.set(a);
+				status = cdlGoalEventClient.deactivate(id);
 
-	            status = cdlGoalEventClient.activate(CHS::single, parameter, id);
+				//Speechoutput
+				CHS::SendClient<Smart::CommSpeechOutputMessage> smartSpeechSendClient(component, "smartSpeechOutputServer" ,"text2speech");
+				smartSpeechSendClient.send(Smart::CommSpeechOutputMessage("Welcome to the smartsoft robotic framework!"));
 
-
-	            status = cdlGoalEventClient.getEvent(id, result);
-	            if (status == CHS::SMART_OK) {
-	              result.get(b);
-	              std::cout << "event id: " << id << " event fired: " << b << "\n";
-	            }
-
-
-	            status = cdlGoalEventClient.deactivate(id);
-
-	            //Speechoutput
-	            CHS::SendClient<Smart::CommSpeechOutputMessage> smartSpeechSendClient(component, "smartSpeechOutputServer" ,"text2speech");
-	            smartSpeechSendClient.send(Smart::CommSpeechOutputMessage("Welcome to the smartsoft robotic framework!"));
-
-	            // CDL State --> STOP!
-	            itemNumber = 1;
-	            cdlStateClient.getWaitMainStates(mainstates);
-	            // check input
-	            if( itemNumber <= mainstates.size() )
-	            {
-	              // iterate to selected state
-	              std::list<std::string>::iterator iterator1 = mainstates.begin();
-	              for(unsigned int i=1; i < itemNumber; i++)
-	              {
-	                ++iterator1;
-	              }
-	              // send selected state
-	              cdlStateClient.setWaitState( *iterator1 );
-	              std::cout << "state <" << *iterator1 << "> sent\n";
-	            }
-	            break;
-	          }
+				// CDL State --> STOP!
+				itemNumber = 1;
+				cdlStateClient.getWaitMainStates(mainstates);
+				// check input
+				if( itemNumber <= mainstates.size() )
+				{
+					// iterate to selected state
+					std::list<std::string>::iterator iterator1 = mainstates.begin();
+					for(unsigned int i=1; i < itemNumber; i++)
+					{
+						++iterator1;
+					}
+					// send selected state
+					cdlStateClient.setWaitState( *iterator1 );
+					std::cout << "state <" << *iterator1 << "> sent\n";
+				}
+				break;
+			}
 #endif
 
+			////////////////////////////////////
+			// Demo 2 move with planner and CDL
+			////////////////////////////////////
+			case 2:
+			{
+				int cdlId = 0;
+				std::string inString;
 
-	          ////////////////////////////////////
-	          // Demo 2 move with planner and CDL
-	          ////////////////////////////////////
-	          case 2:
-	          {
-	          int cdlId = 0;
-	          std::string inString;
-
-	          // CHS::SendClient<Smart::CommCdlParameter> smartCdlParameterSendClient(component,"smartCdlServer","cdlParameter");
-		    	std::cout << "connecting to: " << COMP->ini.cdlParameterClient.serverName
-		    			<< "; " << COMP->ini.cdlParameterClient.serviceName << std::endl;
-		    	status = COMP->cdlParameterClient->connect(
-		    			COMP->ini.cdlParameterClient.serverName,
-		    			COMP->ini.cdlParameterClient.serviceName);
-		    	if (status != CHS::SMART_OK) {
-		    		std::cout << "COULD NOT CONNECT TO cdl parameter" << std::endl;
-		    	} else {
-		    		std::cout << "connected.\n";
-		    	}
-
-
-	          //CHS::SmartStateClient mapperStateClient(component, "smartMapper");
-		    	std::cout << "connecting to: " << COMP->ini.mapperStateClient.serverName
-		    			<< "; " << COMP->ini.mapperStateClient.serviceName << std::endl;
-		    	status = COMP->mapperStateClient->connect(
-		    			COMP->ini.mapperStateClient.serverName,
-		    			COMP->ini.mapperStateClient.serviceName);
-		    	if (status != CHS::SMART_OK) {
-		    		std::cout << "COULD NOT CONNECT to mapper state" << std::endl;
-		    	} else {
-		    		std::cout << "connected.\n";
-		    	}
-
-
-
-	          //CHS::SendClient<Smart::CommPlannerParameter> smartPlannerParameterSendClient(component,"smartPlanner","plannerParameter");
-		    	std::cout << "connecting to: "
-		    			<< COMP->ini.plannerParameterClient.serverName << "; "
-		    			<< COMP->ini.plannerParameterClient.serviceName << std::endl;
-		    	status = COMP->plannerParameterClient->connect(
-		    			COMP->ini.plannerParameterClient.serverName,
-		    			COMP->ini.plannerParameterClient.serviceName);
-		    	if (status != CHS::SMART_OK) {
-		    		std::cout << "COULD NOT CONNECT planner parameter" << std::endl;
-		    	}
-		    	std::cout << "connected.\n";
-
-
-
-
-	          //CHS::SmartStateClient plannerStateClient(component, "smartPlanner");
-				std::cout << "connecting to: " << COMP->ini.plannerStateClient.serverName
-						<< "; " << COMP->ini.plannerStateClient.serviceName << std::endl;
-				status = COMP->plannerStateClient->connect(
-						COMP->ini.plannerStateClient.serverName,
-						COMP->ini.plannerStateClient.serviceName);
-				if (status != CHS::SMART_OK) {
-					std::cout << "ERROR CONNECTING planner state" << std::endl;
-				} else {
+				// CHS::SendClient<Smart::CommCdlParameter> smartCdlParameterSendClient(component,"smartCdlServer","cdlParameter");
+				std::cout << "connecting to: " << COMP->ini.cdlParameterClient.serverName << "; "
+						<< COMP->ini.cdlParameterClient.serviceName << std::endl;
+				status = COMP->cdlParameterClient->connect(COMP->ini.cdlParameterClient.serverName,
+						COMP->ini.cdlParameterClient.serviceName);
+				if (status != CHS::SMART_OK)
+				{
+					std::cout << "COULD NOT CONNECT TO cdl parameter" << std::endl;
+				} else
+				{
 					std::cout << "connected.\n";
 				}
 
-
-
-
-
-	          //CHS::SendClient<Smart::CommMapperParameter> smartMapperParameterSendClient(component,"smartMapper","mapperParameter");
-		    	std::cout << "connecting to: "
-		    			<< COMP->ini.mapperParameterClient.serverName << "; "
-		    			<< COMP->ini.mapperParameterClient.serviceName << std::endl;
-		    	status = COMP->mapperParameterClient->connect(
-		    			COMP->ini.mapperParameterClient.serverName,
-		    			COMP->ini.mapperParameterClient.serviceName);
-		    	if (status != CHS::SMART_OK) {
-		    		std::cout << "COULD NOT CONNECT mapper parameter" << std::endl;
-		    	} else {
-		    		std::cout << "connected.\n";
-		    	}
-
-
-
-
-	          //CHS::SmartStateClient cdlStateClient(component, "smartCdlServer");
-		    	std::cout << "connecting to: " << COMP->ini.cdlStateClient.serverName
-		    			<< "; " << COMP->ini.cdlStateClient.serviceName << std::endl;
-		    	status = COMP->cdlStateClient->connect(COMP->ini.cdlStateClient.serverName,
-		    			COMP->ini.cdlStateClient.serviceName);
-		    	if (status != CHS::SMART_OK) {
-		    		std::cout << "COULD NOT CONNECT TO state client" << std::endl;
-		    	} else {
-		    		std::cout << "connected.\n";
-		    	}
-
-
-
-
-
-	          //GoalEventThread goalEventThread;
-
-	          std::cout<<"\nActivate speech output? (y/n): ";
-	          cin>>inString;
-	          if( strcasecmp("n", inString.c_str() ) != 0 )
-	          {
-	            std::cout<<"Speach output activated!\n";
-	            //Event Thread
-	            //goalEventThread.open();
-	            COMP->goalEventTask.open();
-	          }
-
-	          //PlannerNoPathEventThread plannerNoPathEventThread;
-	          //plannerNoPathEventThread.open();
-	          COMP->plannerNoPathEventTask.open();
-
-	          str = "CURLTM(DISABLE)(10)";
-	          cmdMap.set(str);
-	          COMP->mapperParameterClient->send(cmdMap);
-
-	          str = "CUREMPTY(ACCUMULATE)";
-	          cmdMap.set(str);
-	          COMP->mapperParameterClient->send(cmdMap);
-
-	          // set build both Map
-	          COMP->mapperStateClient->setWaitState("buildbothmaps");
-
-
-	          // CDL SETUP
-	          str = "STRATEGY(APPROACH_HALT)";
-	          cmd.set(str);
-	          COMP->cdlParameterClient->send(cmd);
-	          str = "FREEBEHAVIOR(ACTIVATE)";
-	          cmd.set(str);
-	          COMP->cdlParameterClient->send(cmd);
-	          str = "LOOKUPTABLE(DEFAULT)";
-	          cmd.set(str);
-	          COMP->cdlParameterClient->send(cmd);
-	          str = "TRANSVEL(0)(400)";
-	          cmd.set(str);
-	          COMP->cdlParameterClient->send(cmd);
-	          str = "GOALMODE(PLANNER)";
-	          cmd.set(str);
-	          COMP->cdlParameterClient->send(cmd);
-	          str = "APPROACHDIST(100)";
-	          cmd.set(str);
-	          COMP->cdlParameterClient->send(cmd);
-
-	          // Planner Setup
-	          itemNumber = 2;
-	          COMP->plannerStateClient->getWaitMainStates(mainstates);
-	          // check input
-	          if( itemNumber <= mainstates.size() )
-	          {
-	            // iterate to selected state
-	            std::list<std::string>::iterator iterator1 = mainstates.begin();
-	            for(unsigned int i=1; i < itemNumber; i++)
-	            {
-	              ++iterator1;
-	            }
-	            // send selected state
-	            COMP->plannerStateClient->setWaitState( *iterator1 );
-	            std::cout << "state <" << *iterator1 << "> sent\n";
-	          }
-
-	          ////////////////////
-	          //Goal 1 first goal
-	          ////////////////////
-
-	          str = "DELETEGOAL";
-	          cmd_planner.set(str);
-	          COMP->plannerParameterClient->send(cmd_planner);
-
-	          //wait for connections to ensure a clean prompt
-	          sleep(1);
-
-	          std::cout<<"Enter first goal (x)(y): ";
-	          cin>>inString;
-	          str = "SETDESTINATIONCIRCLE";
-	          str.append(inString);
-	          str.append("(100)");
-	          cmd_planner.set(str);
-	          COMP->plannerParameterClient->send(cmd_planner);
-
-	          //wait for communication planner-cdl
-	          sleep(1);
-	          COMP->SpeechLock.release();
-
-	          itemNumber = 2;
-
-	          // CDL State --> GO!
-	          itemNumber = 2;
-	          COMP->cdlStateClient->getWaitMainStates(mainstates);
-	          // check input
-	          if( itemNumber <= mainstates.size() )
-	          {
-	            // iterate to selected state
-	            std::list<std::string>::iterator iterator1 = mainstates.begin();
-	            for(unsigned int i=1; i < itemNumber; i++)
-	            {
-	              ++iterator1;
-	            }
-	            // send selected state
-	            COMP->cdlStateClient->setWaitState( *iterator1 );
-	            std::cout << "state <" << *iterator1 << "> sent\n";
-	          }
-
-
-
-	          ////////////////////////////
-	          //Goal X
-	          ///////////////////////////
-
-
-	          while(true){
-	            std::cout<<"Enter another Goal? (y/n): ";
-	            cin>>inString;
-	            if( strcasecmp("n", inString.c_str() ) != 0 )
-	            {
-	              str = "DELETEGOAL";
-	              cmd_planner.set(str);
-	              COMP->plannerParameterClient->send(cmd_planner);
-
-	              std::cout<<"Next Goal (x)(y):";
-	              cin>>inString;
-	              str = "SETDESTINATIONCIRCLE";
-	              str.append(inString);
-	              str.append("(100)");
-	              cmd_planner.set(str);
-	              COMP->plannerParameterClient->send(cmd_planner);
-
-	              //wait for communication planner-cdl
-	              sleep(1);
-	              COMP->SpeechLock.release();
-
-
-	            }
-	            else
-	            {
-	              // CDL State --> STOP!
-	              itemNumber = 1;
-	              COMP->cdlStateClient->getWaitMainStates(mainstates);
-	              // check input
-	              if( itemNumber <= mainstates.size() )
-	              {
-	                // iterate to selected state
-	                std::list<std::string>::iterator iterator1 = mainstates.begin();
-	                for(unsigned int i=1; i < itemNumber; i++)
-	                {
-	                  ++iterator1;
-	                }
-	                // send selected state
-	                COMP->cdlStateClient->setWaitState( *iterator1 );
-	                std::cout << "state <" << *iterator1 << "> sent\n";
-	              }
-	              break;
-	            }
-
-	          }//while(true)
-
-	          } //case 2:
-
-
-	          ///////////////////////////////////////
-	          // Demo 3 move with CDL in reactive mode
-	          ///////////////////////////////////////
-	          case 3:
-	          {
-	           // Reaktives CDL
-
-	           // CHS::SendClient<Smart::CommCdlParameter> smartCdlParameterSendClient(component,"smartCdlServer","cdlParameter");
-	  	    	std::cout << "connecting to: " << COMP->ini.cdlParameterClient.serverName
-	  	    			<< "; " << COMP->ini.cdlParameterClient.serviceName << std::endl;
-	  	    	status = COMP->cdlParameterClient->connect(
-	  	    			COMP->ini.cdlParameterClient.serverName,
-	  	    			COMP->ini.cdlParameterClient.serviceName);
-	  	    	if (status != CHS::SMART_OK) {
-	  	    		std::cout << "COULD NOT CONNECT TO cdl parameter" << std::endl;
-	  	    	} else {
-	  	    		std::cout << "connected.\n";
-	  	    	}
-
-	          // CDL SETUP
-	          str = "STRATEGY(REACTIVE)";
-	          cmd.set(str);
-	          COMP->cdlParameterClient->send(cmd);
-	          str = "FREEBEHAVIOR(ACTIVATE)";
-	          cmd.set(str);
-	          COMP->cdlParameterClient->send(cmd);
-	          str = "LOOKUPTABLE(DEFAULT)";
-	          cmd.set(str);
-	          COMP->cdlParameterClient->send(cmd);
-	          str = "TRANSVEL(0)(800)";
-	          cmd.set(str);
-	          COMP->cdlParameterClient->send(cmd);
-
-	          std::cout<<"To start the demo set CDL in moverobot state!\n";
-
-	           break;
-	          }
-
-
-
-	          ///////////////////////////////////////////////
-	          // Demo 4 move with CDL controlled by joystick
-	          ///////////////////////////////////////////////
-	          case 4:
-	          {
-	           //joystick demo!!
-	          // CHS::SendClient<Smart::CommCdlParameter> smartCdlParameterSendClient(component,"smartCdlServer","cdlParameter");
-	  	    	std::cout << "connecting to: " << COMP->ini.cdlParameterClient.serverName
-	  	    			<< "; " << COMP->ini.cdlParameterClient.serviceName << std::endl;
-	  	    	status = COMP->cdlParameterClient->connect(
-	  	    			COMP->ini.cdlParameterClient.serverName,
-	  	    			COMP->ini.cdlParameterClient.serviceName);
-	  	    	if (status != CHS::SMART_OK) {
-	  	    		std::cout << "COULD NOT CONNECT TO cdl parameter" << std::endl;
-	  	    	} else {
-	  	    		std::cout << "connected.\n";
-	  	    	}
-
-
-
-	          //CHS::SmartStateClient cdlStateClient(component, "smartCdlServer");
-		    	std::cout << "connecting to: " << COMP->ini.cdlStateClient.serverName
-		    			<< "; " << COMP->ini.cdlStateClient.serviceName << std::endl;
-		    	status = COMP->cdlStateClient->connect(COMP->ini.cdlStateClient.serverName,
-		    			COMP->ini.cdlStateClient.serviceName);
-		    	if (status != CHS::SMART_OK) {
-		    		std::cout << "COULD NOT CONNECT TO state client" << std::endl;
-		    	} else {
-		    		std::cout << "connected.\n";
-		    	}
-
-
-
-	          // CDL SETUP
-	          str = "STRATEGY(JOYSTICK)";
-	          cmd.set(str);
-	          COMP->cdlParameterClient->send(cmd);
-	          str = "FREEBEHAVIOR(DEACTIVATE)";
-	          cmd.set(str);
-	          COMP->cdlParameterClient->send(cmd);
-	          str = "LOOKUPTABLE(DEFAULT)";
-	          cmd.set(str);
-	          COMP->cdlParameterClient->send(cmd);
-	          str = "TRANSVEL(-200)(500)";
-	          cmd.set(str);
-	          COMP->cdlParameterClient->send(cmd);
-	          str = "ROTVEL(-50)(50)";
-	          cmd.set(str);
-	          COMP->cdlParameterClient->send(cmd);
-
-
-	          // CDL State --> GO!
-	          itemNumber = 2;
-	          COMP->cdlStateClient->getWaitMainStates(mainstates);
-	          // check input
-	          if( itemNumber <= mainstates.size() )
-	          {
-	            // iterate to selected state
-	            std::list<std::string>::iterator iterator1 = mainstates.begin();
-	            for(unsigned int i=1; i < itemNumber; i++)
-	            {
-	              ++iterator1;
-	            }
-	            // send selected state
-	            COMP->cdlStateClient->setWaitState( *iterator1 );
-	            std::cout << "state <" << *iterator1 << "> sent\n";
-	          }
-
-	            break;
-	          } // case 4
-
-
-
-#if 0
-	          ///////////////////////////////////////////////
-	          // Demo 5: following
-	          ///////////////////////////////////////////////
-		  case 5:
-	          {
-	            CHS::SendClient<Smart::CommCdlParameter> smartCdlParameterSendClient(component,"smartCdlServer","cdlParameter");
-	            // CDL SETUP
-	            str = "STRATEGY(FOLLOW)";
-	            cmd.set(str);
-	            smartCdlParameterSendClient.send(cmd);
-	            str = "GOALMODE(PERSON)";
-	            cmd.set(str);
-	            smartCdlParameterSendClient.send(cmd);
-	            str = "LOOKUPTABLE(DEFAULT)";
-	            cmd.set(str);
-	            smartCdlParameterSendClient.send(cmd);
-	            str = "APPROACHDIST(600)";
-	            cmd.set(str);
-	            smartCdlParameterSendClient.send(cmd);
-	            //str = "TRANSVEL(0)(200)";
-	            str = "TRANSVEL(0)(200)";
-	            cmd.set(str);
-	            smartCdlParameterSendClient.send(cmd);
-	            str = "ROTVEL(-40)(40)";
-	            cmd.set(str);
-	            smartCdlParameterSendClient.send(cmd);
-
-	            std::cout<<"To start the demo set CDL in moverobot state!\n";
-
-	            break;
-	          } // case 5
-#endif
-
-
-	          default:
-	          {
-	        	  std::cout << "unsupported demo (maybe some ''#if 0'' in the sources?) !!!\n\n";
-	            break;
-	          }
-
+				//CHS::SmartStateClient mapperStateClient(component, "smartMapper");
+				std::cout << "connecting to: " << COMP->ini.mapperStateClient.serverName << "; " << COMP->ini.mapperStateClient.serviceName
+						<< std::endl;
+				status = COMP->mapperStateClient->connect(COMP->ini.mapperStateClient.serverName, COMP->ini.mapperStateClient.serviceName);
+				if (status != CHS::SMART_OK)
+				{
+					std::cout << "COULD NOT CONNECT to mapper state" << std::endl;
+				} else
+				{
+					std::cout << "connected.\n";
+				}
+
+				//CHS::SendClient<Smart::CommPlannerParameter> smartPlannerParameterSendClient(component,"smartPlanner","plannerParameter");
+				std::cout << "connecting to: " << COMP->ini.plannerParameterClient.serverName << "; "
+						<< COMP->ini.plannerParameterClient.serviceName << std::endl;
+				status = COMP->plannerParameterClient->connect(COMP->ini.plannerParameterClient.serverName,
+						COMP->ini.plannerParameterClient.serviceName);
+				if (status != CHS::SMART_OK)
+				{
+					std::cout << "COULD NOT CONNECT planner parameter" << std::endl;
+				}
+				std::cout << "connected.\n";
+
+				//CHS::SmartStateClient plannerStateClient(component, "smartPlanner");
+				std::cout << "connecting to: " << COMP->ini.plannerStateClient.serverName << "; "
+						<< COMP->ini.plannerStateClient.serviceName << std::endl;
+				status = COMP->plannerStateClient->connect(COMP->ini.plannerStateClient.serverName,
+						COMP->ini.plannerStateClient.serviceName);
+				if (status != CHS::SMART_OK)
+				{
+					std::cout << "ERROR CONNECTING planner state" << std::endl;
+				} else
+				{
+					std::cout << "connected.\n";
+				}
+
+				//CHS::SendClient<Smart::CommMapperParameter> smartMapperParameterSendClient(component,"smartMapper","mapperParameter");
+				std::cout << "connecting to: " << COMP->ini.mapperParameterClient.serverName << "; "
+						<< COMP->ini.mapperParameterClient.serviceName << std::endl;
+				status = COMP->mapperParameterClient->connect(COMP->ini.mapperParameterClient.serverName,
+						COMP->ini.mapperParameterClient.serviceName);
+				if (status != CHS::SMART_OK)
+				{
+					std::cout << "COULD NOT CONNECT mapper parameter" << std::endl;
+				} else
+				{
+					std::cout << "connected.\n";
+				}
+
+				//CHS::SmartStateClient cdlStateClient(component, "smartCdlServer");
+				std::cout << "connecting to: " << COMP->ini.cdlStateClient.serverName << "; " << COMP->ini.cdlStateClient.serviceName
+						<< std::endl;
+				status = COMP->cdlStateClient->connect(COMP->ini.cdlStateClient.serverName, COMP->ini.cdlStateClient.serviceName);
+				if (status != CHS::SMART_OK)
+				{
+					std::cout << "COULD NOT CONNECT TO state client" << std::endl;
+				} else
+				{
+					std::cout << "connected.\n";
+				}
+
+				//GoalEventThread goalEventThread;
+
+				std::cout << "\nActivate speech output? (y/n): ";
+				cin >> inString;
+				if (strcasecmp("n", inString.c_str()) != 0)
+				{
+					std::cout << "Speach output activated!\n";
+					//Event Thread
+					//goalEventThread.open();
+					COMP->goalEventTask.open();
+				}
+
+				//PlannerNoPathEventThread plannerNoPathEventThread;
+				//plannerNoPathEventThread.open();
+				COMP->plannerNoPathEventTask.open();
+
+				str = "CURLTM(DISABLE)(10)";
+				cmdMap.set(str);
+				COMP->mapperParameterClient->send(cmdMap);
+
+				str = "CUREMPTY(ACCUMULATE)";
+				cmdMap.set(str);
+				COMP->mapperParameterClient->send(cmdMap);
+
+				// set build both Map
+				COMP->mapperStateClient->setWaitState("buildbothmaps");
+
+				// CDL SETUP
+				str = "STRATEGY(APPROACH_HALT)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+				str = "FREEBEHAVIOR(ACTIVATE)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+				str = "LOOKUPTABLE(DEFAULT)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+				str = "TRANSVEL(0)(400)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+				str = "GOALMODE(PLANNER)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+				str = "APPROACHDIST(100)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+
+				// Planner Setup
+				itemNumber = 2;
+				COMP->plannerStateClient->getWaitMainStates(mainstates);
+				// check input
+				if (itemNumber <= mainstates.size())
+				{
+					// iterate to selected state
+					std::list<std::string>::iterator iterator1 = mainstates.begin();
+					for (unsigned int i = 1; i < itemNumber; i++)
+					{
+						++iterator1;
+					}
+					// send selected state
+					COMP->plannerStateClient->setWaitState(*iterator1);
+					std::cout << "state <" << *iterator1 << "> sent\n";
+				}
+
+				////////////////////
+				//Goal 1 first goal
+				////////////////////
+
+				str = "DELETEGOAL";
+				cmd_planner.set(str);
+				COMP->plannerParameterClient->send(cmd_planner);
+
+				//wait for connections to ensure a clean prompt
+				sleep(1);
+
+				std::cout << "Enter first goal (x)(y): ";
+				cin >> inString;
+				str = "SETDESTINATIONCIRCLE";
+				str.append(inString);
+				str.append("(100)");
+				cmd_planner.set(str);
+				COMP->plannerParameterClient->send(cmd_planner);
+
+				//wait for communication planner-cdl
+				sleep(1);
+				COMP->SpeechLock.release();
+
+				itemNumber = 2;
+
+				// CDL State --> GO!
+				itemNumber = 2;
+				COMP->cdlStateClient->getWaitMainStates(mainstates);
+				// check input
+				if (itemNumber <= mainstates.size())
+				{
+					// iterate to selected state
+					std::list<std::string>::iterator iterator1 = mainstates.begin();
+					for (unsigned int i = 1; i < itemNumber; i++)
+					{
+						++iterator1;
+					}
+					// send selected state
+					COMP->cdlStateClient->setWaitState(*iterator1);
+					std::cout << "state <" << *iterator1 << "> sent\n";
+				}
+
+				////////////////////////////
+				//Goal X
+				///////////////////////////
+
+
+				while (true)
+				{
+					std::cout << "Enter another Goal? (y/n): ";
+					cin >> inString;
+					if (strcasecmp("n", inString.c_str()) != 0)
+					{
+						str = "DELETEGOAL";
+						cmd_planner.set(str);
+						COMP->plannerParameterClient->send(cmd_planner);
+
+						std::cout << "Next Goal (x)(y):";
+						cin >> inString;
+						str = "SETDESTINATIONCIRCLE";
+						str.append(inString);
+						str.append("(100)");
+						cmd_planner.set(str);
+						COMP->plannerParameterClient->send(cmd_planner);
+
+						//wait for communication planner-cdl
+						sleep(1);
+						COMP->SpeechLock.release();
+
+					} else
+					{
+						// CDL State --> STOP!
+						itemNumber = 1;
+						COMP->cdlStateClient->getWaitMainStates(mainstates);
+						// check input
+						if (itemNumber <= mainstates.size())
+						{
+							// iterate to selected state
+							std::list<std::string>::iterator iterator1 = mainstates.begin();
+							for (unsigned int i = 1; i < itemNumber; i++)
+							{
+								++iterator1;
+							}
+							// send selected state
+							COMP->cdlStateClient->setWaitState(*iterator1);
+							std::cout << "state <" << *iterator1 << "> sent\n";
+						}
+						break;
+					}
+
+				}//while(true)
+
+			} //case 2:
+
+
+				///////////////////////////////////////
+				// Demo 3 move with CDL in reactive mode
+				///////////////////////////////////////
+			case 3:
+			{
+				// Reaktives CDL
+
+				// CHS::SendClient<Smart::CommCdlParameter> smartCdlParameterSendClient(component,"smartCdlServer","cdlParameter");
+				std::cout << "connecting to: " << COMP->ini.cdlParameterClient.serverName << "; "
+						<< COMP->ini.cdlParameterClient.serviceName << std::endl;
+				status = COMP->cdlParameterClient->connect(COMP->ini.cdlParameterClient.serverName,
+						COMP->ini.cdlParameterClient.serviceName);
+				if (status != CHS::SMART_OK)
+				{
+					std::cout << "COULD NOT CONNECT TO cdl parameter" << std::endl;
+				} else
+				{
+					std::cout << "connected.\n";
+				}
+
+				// CDL SETUP
+				str = "STRATEGY(REACTIVE)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+				str = "FREEBEHAVIOR(ACTIVATE)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+				str = "LOOKUPTABLE(DEFAULT)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+				str = "TRANSVEL(0)(800)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+
+				std::cout << "To start the demo set CDL in moverobot state!\n";
+
+				break;
+			}
+
+				///////////////////////////////////////////////
+				// Demo 4 move with CDL controlled by joystick
+				///////////////////////////////////////////////
+			case 4:
+			{
+				//joystick demo!!
+				// CHS::SendClient<Smart::CommCdlParameter> smartCdlParameterSendClient(component,"smartCdlServer","cdlParameter");
+				std::cout << "connecting to: " << COMP->ini.cdlParameterClient.serverName << "; "
+						<< COMP->ini.cdlParameterClient.serviceName << std::endl;
+				status = COMP->cdlParameterClient->connect(COMP->ini.cdlParameterClient.serverName,
+						COMP->ini.cdlParameterClient.serviceName);
+				if (status != CHS::SMART_OK)
+				{
+					std::cout << "COULD NOT CONNECT TO cdl parameter" << std::endl;
+				} else
+				{
+					std::cout << "connected.\n";
+				}
+
+				//CHS::SmartStateClient cdlStateClient(component, "smartCdlServer");
+				std::cout << "connecting to: " << COMP->ini.cdlStateClient.serverName << "; " << COMP->ini.cdlStateClient.serviceName
+						<< std::endl;
+				status = COMP->cdlStateClient->connect(COMP->ini.cdlStateClient.serverName, COMP->ini.cdlStateClient.serviceName);
+				if (status != CHS::SMART_OK)
+				{
+					std::cout << "COULD NOT CONNECT TO state client" << std::endl;
+				} else
+				{
+					std::cout << "connected.\n";
+				}
+
+				// CDL SETUP
+				str = "STRATEGY(JOYSTICK)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+				str = "FREEBEHAVIOR(DEACTIVATE)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+				str = "LOOKUPTABLE(DEFAULT)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+				str = "TRANSVEL(-200)(500)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+				str = "ROTVEL(-50)(50)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+
+				// CDL State --> GO!
+				itemNumber = 2;
+				COMP->cdlStateClient->getWaitMainStates(mainstates);
+				// check input
+				if (itemNumber <= mainstates.size())
+				{
+					// iterate to selected state
+					std::list<std::string>::iterator iterator1 = mainstates.begin();
+					for (unsigned int i = 1; i < itemNumber; i++)
+					{
+						++iterator1;
+					}
+					// send selected state
+					COMP->cdlStateClient->setWaitState(*iterator1);
+					std::cout << "state <" << *iterator1 << "> sent\n";
+				}
+
+				break;
+			} // case 4
+
+
+				///////////////////////////////////////////////
+				// Demo 5: following
+				///////////////////////////////////////////////
+			case 5:
+			{
+				//CHS::SendClient<Smart::CommCdlParameter> smartCdlParameterSendClient(component,"smartCdlServer","cdlParameter");
+				std::cout << "connecting to: " << COMP->ini.cdlParameterClient.serverName << "; "
+						<< COMP->ini.cdlParameterClient.serviceName << std::endl;
+				status = COMP->cdlParameterClient->connect(COMP->ini.cdlParameterClient.serverName,
+						COMP->ini.cdlParameterClient.serviceName);
+				if (status != CHS::SMART_OK)
+				{
+					std::cout << "COULD NOT CONNECT TO cdl parameter" << std::endl;
+				} else
+				{
+					std::cout << "connected.\n";
+				}
+
+				// CDL SETUP
+				str = "STRATEGY(FOLLOW)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+				str = "GOALMODE(PERSON)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+				str = "LOOKUPTABLE(DEFAULT)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+				str = "APPROACHDIST(600)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+				//str = "TRANSVEL(0)(200)";
+				str = "TRANSVEL(0)(200)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+				str = "ROTVEL(-40)(40)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+
+				std::cout << "To start the demo set CDL in moverobot state and laser tracker to follow!\n";
+
+				break;
+			} // case 5
+
+
+				////////////////////////////////////
+				// Demo 6 move with planner coverage
+				////////////////////////////////////
+			case 6:
+			{
+				int cdlId = 0;
+				std::string inString;
+
+				std::cout << "connecting to: " << COMP->ini.cdlStateClient.serverName << "; " << COMP->ini.cdlStateClient.serviceName
+						<< std::endl;
+				status = COMP->cdlStateClient->connect(COMP->ini.cdlStateClient.serverName, COMP->ini.cdlStateClient.serviceName);
+				if (status != CHS::SMART_OK)
+				{
+					std::cout << "COULD NOT CONNECT TO state client" << std::endl;
+				} else
+				{
+					std::cout << "connected.\n";
+				}
+
+				std::cout << "connecting to: " << COMP->ini.cdlParameterClient.serverName << "; "
+						<< COMP->ini.cdlParameterClient.serviceName << std::endl;
+				status = COMP->cdlParameterClient->connect(COMP->ini.cdlParameterClient.serverName,
+						COMP->ini.cdlParameterClient.serviceName);
+				if (status != CHS::SMART_OK)
+				{
+					std::cout << "COULD NOT CONNECT TO cdl parameter" << std::endl;
+				} else
+				{
+					std::cout << "connected.\n";
+				}
+
+				// CDL SETUP
+				str = "STRATEGY(APPROACH_COVERAGE)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+				str = "FREEBEHAVIOR(DEACTIVATE)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+				str = "LOOKUPTABLE(DEFAULT)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+				str = "TRANSVEL(0)(400)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+				str = "GOALMODE(PLANNER)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+				str = "APPROACHDIST(100)";
+				cmd.set(str);
+				COMP->cdlParameterClient->send(cmd);
+
+				// CDL State --> GO!
+				itemNumber = 2;
+				COMP->cdlStateClient->getWaitMainStates(mainstates);
+				// check input
+				if (itemNumber <= mainstates.size())
+				{
+					// iterate to selected state
+					std::list<std::string>::iterator iterator1 = mainstates.begin();
+					for (unsigned int i = 1; i < itemNumber; i++)
+					{
+						++iterator1;
+					}
+					// send selected state
+					COMP->cdlStateClient->setWaitState(*iterator1);
+					std::cout << "state <" << *iterator1 << "> sent\n";
+				}
+
+			} //case 6:
+
+
+			default:
+			{
+				std::cout << "unsupported demo (maybe some ''#if 0'' in the sources?) !!!\n\n";
+				break;
+			}
+
+			}
+			break;
+		} // case 99
+
+		case 0:
+		{
+			exit(0);
+			break;
 		}
-	        break;
-	      } // case 99
 
-	      case 0:
-	      {
-		exit(0);
-		break;
-	      }
+			// default
+		default:
+		{
+			std::cout << "unsupported menu item (maybe some ''#if 0'' in the sources?) !!!\n\n";
+			break;
+		}
 
+		} // switch( mainMenuItem )
 
-	      // default
-	      default:
-	      {
-	        std::cout << "unsupported menu item (maybe some ''#if 0'' in the sources?) !!!\n\n";
-	        break;
-	      }
+	} // while(true)
 
-	    } // switch( mainMenuItem )
-
-	  } // while(true)
-
-	  return 0;
+	return 0;
 
 }

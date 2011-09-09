@@ -1,0 +1,18 @@
+<package>
+  <description brief="SmartROSLaserGateway">
+
+     SmartROSLaserGateway
+
+  </description>
+  <author>Alexej Lotz</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/SmartROSLaserGateway</url>
+  <depend package="roscpp"/>
+  <depend package="nav_msgs"/>
+  <depend package="geometry_msgs"/>
+  <depend package="tf"/>
+
+</package>
+
+

@@ -88,9 +88,9 @@ INI_FILES    =	SmartKatanaTestClient.ini
 ##----------------------------------------------------------------------------
 # PROTECTED REGION ID(CustomUserLibs) ENABLED START
 ## user libs  -- add your own libs here
-USER_CPP_CFLAGS = `pkg-config --cflags libmrpt` -D__STDC_FORMAT_MACROS
-USER_CPP_LFLAGS = `pkg-config --libs libmrpt` -lglut -lGL -lGLU 
-INCLUDES +=	-I/usr/local/include/mrpt/mrpt-config/
+USER_CPP_CFLAGS = `pkg-config --cflags mrpt-base mrpt-opengl mrpt-gui mrpt-maps` -D__STDC_FORMAT_MACROS
+USER_CPP_LFLAGS = `pkg-config --libs mrpt-base mrpt-opengl mrpt-gui mrpt-maps` -lglut -lGL -lGLU 
+INCLUDES += -I$(SMART_ROOT)/src/utility/eigen3/
 # PROTECTED REGION END
 ##----------------------------------------------------------------------------
 

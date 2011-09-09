@@ -32,6 +32,7 @@
 #include <string>
 
 #include <CommManipulationPlannerObjects/commManipulationPlannerEventState.hh>
+#include <CommBasicObjects/commPose3d.hh>
 
 /**
  * This class can handle messages.
@@ -73,6 +74,9 @@ public:
 	 */
 	void static handleMessage(const std::string& message, CommManipulationPlannerObjects::ManipulationPlannerEvent event, ErrorHandler::ErrorTypes type =
 			ErrorHandler::INFO, bool sendMessage = true);
+	
+	void static handleMessage(const std::string& message, CommManipulationPlannerObjects::ManipulationPlannerEvent event, CommBasicObjects::CommPose3d& pose,
+                        ErrorHandler::ErrorTypes type = ErrorHandler::INFO,   bool sendMessage = true);
 };
 
 #endif /* _ERRORHANDLER_HH_ */

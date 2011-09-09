@@ -1,0 +1,185 @@
+
+<div id="right">
+<style type="text/css">
+
+#entry td {
+	vertical-align: top;
+	padding-right: 15px;
+}
+
+#entry table {
+}
+
+.rowsep td {
+	/* comment for debug print with large gaps in table rows */
+	   padding-bottom: 15px;
+}
+
+#entry li {
+	padding-bottom: 15px;
+}
+
+.keyword {
+	font-style: italic;
+}
+
+
+
+/* UNcomment for debug print with large gaps in table rows */
+/*
+.rowsep td {
+	padding-bottom: 100px;
+}
+#entry li {
+	padding-bottom: 100px;
+}
+*/
+</style>
+
+
+
+
+<p style="margin-top: 100px">
+
+
+<h1>SmartLaserLMS200Server</h1>
+
+
+<a href='SmartLaserLMS200Server.jpg'>
+			<img src="SmartLaserLMS200Server.jpg" style="float: right; width: 200px; margin-left: 10px; margin-bottom: 10px">
+		  </a>The SmartLaserLMS200Server makes laser scans from SICK LMS 200 and PLS langer rangers
+		available. Scans can be requested by push newest or query communication.
+
+		<p>GPL-License: includes <a
+		href='http://playerstage.sourceforge.net/doc/Player-2.1.0/player/group__driver__sicklms200.html'>Code
+		from the Player Project</a>.<p>
+
+<table>
+
+<tr>
+	 	<td>Purpose:
+ 		<td>Hardware-Driver<tr>
+	 	<td>License:
+ 		<td>GPL<tr>
+	 	<td>Hardware:
+ 		<td>SICK LMS 200 and PLS<tr>
+	 	<td>Library Dependencies:
+ 		<td>smartSickInterface (included in SmartSoft's utilities)<tr>
+	 	<td>SVN:
+ 		<td><a href='http://smart-robotics.svn.sourceforge.net/viewvc/smart-robotics/trunk/smartsoft/src/components/SmartLaserLMS200Server/'>browse SVN...</a></table>
+
+
+
+
+
+
+
+
+
+
+<h2>Services</h2>
+<a name="services"></a>
+
+
+
+
+<h3>Client-Ports</h3>
+<table>
+<tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartPushTimedClient&#187;
+			<br>baseClient
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>interval:
+					<td>1<tr>
+					<td>commObject:
+					<td>CommBaseState
+			</table>
+			<p>
+
+			Typically connected to the robot
+				base (e.g. SmartPioneerBaseServer) to receive the base state which is
+				included in the laser scan. Whether this port is connected or not can be
+				configured via the ini file. Used to stamp every laser scan with the base state
+				where the scan was recorded, if laser is mounted on a mobile platform. If
+				this port is not connected, the pose where recorded will contain the values 
+				configured in the ini file.
+			<p>
+			</table>
+
+
+
+
+
+
+
+<h3>Server-Ports</h3>
+<table>
+<tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartQueryServer&#187;
+			<br>laserQueryServer
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>serviceName:
+					<td>scan<tr>
+					<td>commRequestObject:
+					<td>CommVoid<tr>
+					<td>commAnswerObject:
+					<td>CommMobileLaserScan
+			</table>
+			<p>
+
+			Query to request the latest laser scan. Scan will be
+				stamped invalid if it was not possible to get the base state but the baseClient
+				port is connected. 
+			<p>
+			<tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartPushNewestServer&#187;
+			<br>laserServer
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>serviceName:
+					<td>scan<tr>
+					<td>commObject:
+					<td>CommMobileLaserScan
+			</table>
+			<p>
+
+			Push latest laser scan. The rate with which the server pushes depends on the
+				parametrization of the laser scanner, especially baudrate and
+				resolution. A typical rate is 38 Hz (500000 bps, 0.5 degree resolution). Scan
+				will be stamped invalid if it was not possible to get the base state but the
+				baseClient port is connected.
+			<p>
+			</table>
+
+
+
+
+<h2>Ini-Configuration</h2>
+
+<table class='rowsep'><tr><td colspan=2><b>[laser]</b><tr><td><i>sick_type: string</i>
+				<td>Type of SICK Scanner. Possible values: LMS and PLS. Default: LMS<tr><td><i>on_turrent: boolean</i>
+				<td>Does the scanner rotate with the turrent (true) or is it fixed with the base (false)? Default: true<tr><td><i>x, y, z, azimuth: double</i>
+				<td>The position of the scanner on the
+				robot. The azimuth is relative to the perspective mounting point
+				(turrent or base) on the robot. Units in [mm] and [rad]. Default: 0<tr><td><i>device: string</i>
+				<td>Serial device of the laser scanner. Default: /dev/ttyS0.<tr><td><i>baudrate: int32</i>
+				<td>Speed for communication [bps]. Possible values: 9600, 38400 and 500000. Default: 38400<tr><td><i>resolution: int32</i>
+				<td>The angular resolution [0.01 degree].
+				Possible Values are 25 (0.25 degree), 50 (0.5 degree) and 100 (1
+				degree). However, in 0.25 degree mode, only 100 degree scans
+				are reported. This value is directly passed to the SICK device. Default: 50<tr><td><i>length_unit: int32</i>
+				<td>Length unit of reported distances [mm].
+				Possible values are 1, 10. Corresponding maximum distances are
+				8m, 80m. This value is directly passed to the SICK device. Default: 1<tr><td><i>verbose: boolean</i>
+				<td>Used when debugging the laser interface. Default: false</table><p><table class='rowsep'><tr><td colspan=2><b>[base]</b><tr><td><i>subscribe: boolean</i>
+				<td>Subscribe to base server for position updates (true)? Default: true<tr><td><i>x, y, z: double</i>
+				<td>Use fixed values x, y, z [mm] for pose of the scanner if not subscribed to base server. See server ports. Default: 0<tr><td><i>base_a: double</i>
+				<td>Use fixed value base_a [rad] for pose of the scanner if not subscribed to base server. See server ports. Default: 0<tr><td><i>steer_a: double</i>
+				<td>Use fixed value for steer_a [rad] for pose of the scanner if not subscribed to base server. See server ports. Default: 0<tr><td><i>turrent_a: double</i>
+				<td>Use fixed value for turrent_a [rad] for pose of the scanner if not subscribed to base server. See server ports. Default: 0</table><p>
+
+
+
+</div>

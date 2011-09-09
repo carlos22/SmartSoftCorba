@@ -48,5 +48,4 @@
 SmartUnicapImageServerCore::SmartUnicapImageServerCore()
 {
 	newestImage = 0;
-	componentActive = false;
 }

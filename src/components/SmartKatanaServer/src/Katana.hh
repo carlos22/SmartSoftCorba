@@ -47,13 +47,13 @@
 #include <CommBasicObjects/commVoid.hh>
 #include <CommBasicObjects/commMobileLaserScan.hh>
 
-
-
 // katana api
 #include "kniBase.h"
 
 #include <vector>
 #include <list>
+
+#include "faulhaberMCDCGripper.hh"
 
 #define KATANA Katana::instance()
 
@@ -62,13 +62,15 @@
  * an easy interface for performing trajectories, getting the
  * current state and setting different parameters for the Katana
  */
-class Katana {
+class Katana
+{
 public:
 	/**
 	 * Struct which includes all parameters of the Katana
 	 * which can be set from external
 	 */
-	struct KatanaParameters {
+	struct KatanaParameters
+	{
 		/**
 		 * Indicates if one of the parameters was modified since
 		 * the last apply
@@ -91,27 +93,15 @@ public:
 		 */
 		int gripperVelocityLimit;
 
-		/**
-		 * If true, calibrate manipulator
-		 */
-		bool calibrate;
-
-		/**
-		 * If true, calibrate axis specified in axis_to_calibrate
-		 */
-		bool calibrate_axis;
-
-		/**
-		 * number of axis to calibrate
-		 */
-		int axis_to_calibrate;
 	};
 
 private:
 
-	struct Point3d {
+	struct Point3d
+	{
 		inline Point3d(double px = 0, double py = 0, double pz = 0) :
-			x(px), y(py), z(pz) {
+			x(px), y(py), z(pz)
+		{
 		}
 		double x;
 		double y;
@@ -177,7 +167,6 @@ private:
 	 */
 	std::vector<int> lastEncoderValues;
 
-
 	/**
 	 * The last captured point cloud.
 	 */
@@ -197,6 +186,11 @@ private:
 	std::auto_ptr<CikBase> katana;
 	std::auto_ptr<CCdlBase> device;
 	std::auto_ptr<CCplBase> protocol;
+
+	/**
+	 * Faulhaber MCDC Gripper
+	 */
+	FaulhaberMCDCGripper faulhaberGripper;
 
 public:
 	/**
@@ -229,7 +223,7 @@ public:
 	 *
 	 * @param state The current state is written to this parameter
 	 */
-	void getCurrentState(CommManipulatorObjects::CommManipulatorState &state);
+	void getCurrentState(CommManipulatorObjects::CommManipulatorState &state, bool block = false);
 
 	/**
 	 * Set the given parameter to the Katana.
@@ -249,6 +243,16 @@ public:
 	 * is in a save position.
 	 */
 	void switchOff();
+
+	void activate()
+	{
+		activated = true;
+	}
+
+	void deactivate()
+	{
+		activated = false;
+	}
 
 	/**
 	 * Set activated=true and unblock motors when a collision happend before.
@@ -284,8 +288,7 @@ public:
 	 * Returns the 3d point cloud for a given id. If the id
 	 * does not exist the point cloud size is zero.
 	 */
-	void get3dPointCloud(const CommManipulatorObjects::CommManipulatorId &request,
-			CommVisionObjects::Comm3dPointCloud &answer);
+	void get3dPointCloud(const CommManipulatorObjects::CommManipulatorId &request, CommVisionObjects::Comm3dPointCloud &answer);
 
 private:
 	/**
@@ -300,11 +303,6 @@ private:
 	void calibrate(bool fastCalibration = false);
 
 	/**
-	 * Calibrates one axis of the manipulator
-	 */
-	void calibrate(int axis);
-
-	/**
 	 * Checks all motors if the had a collision and if one happend
 	 * a MotorCrashedException is thrown.
 	 */
@@ -317,10 +315,8 @@ private:
 	 * 				   for the gripper is appended to the vector
 	 * @param index Index of the current trajectory element which is performed
 	 */
-	void
-			moveManipulator(const CommManipulatorObjects::CommManipulatorTrajectory &trajectory,
-					uint32_t trajectorySize, std::vector<int> &encoders,
-					uint32_t index);
+	void moveManipulator(const CommManipulatorObjects::CommManipulatorTrajectory &trajectory, uint32_t trajectorySize,
+			std::vector<int> &encoders, uint32_t index);
 
 	/**
 	 * Open the gripper.
@@ -343,16 +339,14 @@ private:
 	 * @param angles Vector of joint angles which should be converted [rad]
 	 * @param encoders Vector of joint encoders
 	 */
-	void convertJointsRadToEnc(const std::vector<double> &angles, std::vector<
-			int>& encoders) const;
+	void convertJointsRadToEnc(const std::vector<double> &angles, std::vector<int>& encoders) const;
 
 	/**
 	 * Convert a vector of joint encoders to a vector of joint angles.
 	 * @param angles Vector of joint angles [rad]
 	 * @param encoders Vector of joint encoders which should be converted
 	 */
-	void convertJointsEncToRad(std::vector<double> &angles, const std::vector<
-			int>& encoders) const;
+	void convertJointsEncToRad(std::vector<double> &angles, const std::vector<int>& encoders) const;
 
 	/**
 	 * Convert a joint angle value to a joint encoder value.
@@ -390,8 +384,7 @@ private:
 	/**
 	 * Sends the given event to all listeners and set activated=false
 	 */
-	void handleException(const std::string& message,
-			CommManipulatorObjects::ManipulatorEvent event);
+	void handleException(const std::string& message, CommManipulatorObjects::ManipulatorEvent event);
 };
 
 #endif /* KATANA_HH_ */

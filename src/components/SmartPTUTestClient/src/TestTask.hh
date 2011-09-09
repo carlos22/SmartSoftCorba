@@ -52,7 +52,6 @@ class TestTask: public TestTaskCore {
 public:
 	TestTask();
 	int svc();
-	void checkResponse(const CommPTUObjects::CommPTUMoveResponse& response) const;
 };
 
 #endif

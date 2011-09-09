@@ -9,7 +9,7 @@
 <folderInfo id="preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.1317089895." name="/" resourcePath="">
 <toolChain id="org.eclipse.cdt.build.core.prefbase.toolchain.1397559100" name="No ToolChain" resourceTypeBasedDiscovery="false" superClass="org.eclipse.cdt.build.core.prefbase.toolchain">
 <targetPlatform id="org.eclipse.cdt.build.core.prefbase.toolchain.1397559100.542793114" name=""/>
-<builder buildPath="${workspace_loc:/smartUnicapImageServer/src}" cleanBuildTarget="distclean" enableAutoBuild="false" id="org.eclipse.cdt.build.core.settings.default.builder.2007527515" incrementalBuildTarget="distclean all" keepEnvironmentInBuildfile="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
+<builder buildPath="${workspace_loc:/SmartUnicapImageServer/src}" cleanBuildTarget="distclean" enableAutoBuild="false" id="org.eclipse.cdt.build.core.settings.default.builder.2007527515" incrementalBuildTarget="distclean all" keepEnvironmentInBuildfile="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
 <tool id="org.eclipse.cdt.build.core.settings.holder.libs.895391226" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs"/>
 <tool id="org.eclipse.cdt.build.core.settings.holder.1120346943" name="Assembly" superClass="org.eclipse.cdt.build.core.settings.holder">
 <inputType id="org.eclipse.cdt.build.core.settings.holder.inType.516677988" languageId="org.eclipse.cdt.core.assembly" languageName="Assembly" sourceContentType="org.eclipse.cdt.core.asmSource" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>

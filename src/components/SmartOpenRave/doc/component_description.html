@@ -1,0 +1,427 @@
+
+<div id="right">
+<style type="text/css">
+
+#entry td {
+	vertical-align: top;
+	padding-right: 15px;
+}
+
+#entry table {
+}
+
+.rowsep td {
+	/* comment for debug print with large gaps in table rows */
+	   padding-bottom: 15px;
+}
+
+#entry li {
+	padding-bottom: 15px;
+}
+
+.keyword {
+	font-style: italic;
+}
+
+
+
+/* UNcomment for debug print with large gaps in table rows */
+/*
+.rowsep td {
+	padding-bottom: 100px;
+}
+#entry li {
+	padding-bottom: 100px;
+}
+*/
+</style>
+
+
+
+
+<p style="margin-top: 100px">
+
+
+<h1>SmartOpenRave</h1>
+
+
+<a href='SmartOpenRave.jpg'>
+			<img src="SmartOpenRave.jpg" style="float: right; width: 200px; margin-left: 10px; margin-bottom: 10px">
+		  </a>
+		This component is based on the OpenRAVE framework. It allows to plan a
+		trajectory to a given point with the specified manipulator. The path
+		planning performs collision free manipulation by taking, for example,
+		obstacles in the scene into account.
+		The scene can be loaded from a XML file or via an
+		object recognition. Furthermore it is possible to plan higher level
+		tasks like grasping an object and putting it on a table.
+		All coordinates are on the robot coordinate system.
+		<p>
+
+<table>
+
+<tr>
+	 	<td>Purpose:
+ 		<td>Manipulation<tr>
+	 	<td>License:
+ 		<td>LGPL<tr>
+	 	<td>Hardware:
+ 		<td>-<tr>
+	 	<td>Library Dependencies:
+ 		<td>OpenRave = rev. 1780<tr>
+	 	<td>SVN:
+ 		<td><a href='http://smart-robotics.svn.sourceforge.net/viewvc/smart-robotics/trunk/smartsoft/src/components/SmartOpenRave/'>browse SVN...</a></table>
+
+
+
+<h2 style="clear: both">States</h2>
+
+High level description of states. See <a href="#services">Services</a> for a detailed description how
+individual ports behave in specific states.
+<p>
+<table class="rowsep">
+<tr>
+	 	<td><i>neutral:</i>
+ 		<td>The component does not perform any planning or IK calculation. It accepts parameters.<tr>
+	 	<td><i>trajectory:</i>
+ 		<td>The component can plan paths or plan higher level tasks like grasping an object and place it somewhere.<tr>
+	 	<td><i>demonstration:</i>
+ 		<td>The component just synchronizes the modeled manipulator with the real manipulator. This state is mainly for testing purpose.<tr>
+	 	<td><i>simulation:</i>
+ 		<td>The component does not send any trajectory to the real manipulator. It computes all IK solutions and plans path as in ''trajectory'' state.</table>
+
+
+
+
+
+<h2>Parameters</h2>
+
+<table class="rowsep">
+<tr>
+	 	<td><i>ENV_CLEAR:</i>
+ 		<td>The scene is reset to its default as loaded initially from the ini-configuration.<tr>
+	 	<td><i>ENV_LOAD_OBJECTRECOGNITION(?envid):</i>
+ 		<td>The environment with id ?envid is loaded from the object recognition. The environmentQueryClient is used to get the environment from the object recognition.<tr>
+	 	<td><i>ENV_SAVE_FILE(?fileid):</i>
+ 		<td>Saves the complete environment to a file. The filename can be specified in the ini-file. The ?fileid specifies the concrete file.<tr>
+	 	<td><i>ENV_LOAD_FILE(?fileid):</i>
+ 		<td>The environment is loaded from a file. The filename can be specified in the ini-file. The ?fileid specifies the concrete file.<tr>
+	 	<td><i>OPENRAVE_GRASPOBJ(?objid):</i>
+ 		<td>The specified object with id ?objid is grasped in OpenRAVE. This parameter is necessary for linking the object to the manipulator. After this operation the grasped object is part of the manipulator and is therefore considered in the path planning process. There will be no calculation how the object is grasped, the object will be just linked to the manipulator. If the object is not between the gripper the object will also be linked to the manipulator even if the object is not grasped in real. So be aware when to set this parameter.<tr>
+	 	<td><i>OPENRAVE_RELEASEOBJ(?objid):</i>
+ 		<td>The specified object with id ?objid is released in OpenRAVE and is no longer part of the manipulator. See GRASPOBJ for more information.<tr>
+	 	<td><i>OBJ_COMPUTEGRASPTABLE(?objid):</i>
+ 		<td>Computes the grasp tables to a given object with id ?objid. The grasp tables are necessary for the higher tasks. The grasp tables will be computed only once for one type of object, for example a cup will only have one grasp table as long as it has the same dimensions. Furthermore the computation needs a couple of minutes and should always be done separately, for example when new objects are learned.<tr>
+	 	<td><i>OBJ_ADD(?objid)(?type):</i>
+ 		<td>An object from ?type with ?objid is added to the current environment. The object type has to be known by the OpenRave component. The object is added into the origin (0,0,0).<tr>
+	 	<td><i>OBJ_DELETE(?objid):</i>
+ 		<td>Deletes the object with id ?objid out of the current environment.<tr>
+	 	<td><i>OBJ_MOVE(?objid)(?x)(?y)(?z):</i>
+ 		<td>Moves the object with ?objid to the specified (absolute) coords [m] in robot coordinates.<tr>
+	 	<td><i>GRASPING_NONE:</i>
+ 		<td>Only the trajectory to the specific point is planned upon the next path planning send request to pathPlanningSendServer<tr>
+	 	<td><i>GRASPING_SIMPLE(?lowerHeight)(?upperHeight)(?lowerDepth)(?upperDepth)(?lowerAngle)(?upperAngle)(?lowerRoll)(?upperRoll):</i>
+ 		<td>When this is set, a simple iterative grasping method is applied to compoute a grasping pose to the given grasping position. The pose will be iterated through the given boundaries. Iteration starts at the lower bound and proceeds to the upper bound. Direction can be changed by giving the upper bound a lower value than the lower bound. Height, depth in meter. Angles in degree.<tr>
+	 	<td><i>GRASPING_ADVANCED:</i>
+ 		<td>Not implemented.<tr>
+	 	<td><i>SIMULATION_TEST_IK_ONLY:</i>
+ 		<td>When set, the component only tests whether an IK solution can be found and fires PATH_FOUND if found. No path calculation and manipulation will be done. Works only in ''simulation'' state.<tr>
+	 	<td><i>SIMULATION_PLAN_ALL:</i>
+ 		<td>IK solution and path will be calculated.<tr>
+	 	<td><i>PARALLELIZATION_ON:</i>
+ 		<td>Turns parallelization mode on. The virtual openRave manipulator is only synchronized once before the next trajectory. For all further trajectories, the openRave manipulator will not be synchronized with the real one.<tr>
+	 	<td><i>PARALLELIZATION_OFF:</i>
+ 		<td>Turns parallelization mode off. The virtual openRave manipulator will be synchronized before every trajectory planning.</table>
+
+
+
+<h2>Services</h2>
+<a name="services"></a>
+
+
+
+
+<h3>Client-Ports</h3>
+<table>
+<tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartSendClient&#187;
+			<br>trajectorySendClient
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>commObject:
+					<td>CommManipulatorTrajectory
+			</table>
+			<p>
+
+			
+				Connect this send client service to the real manipulator component, e.g. SmartKatanaServer. Via this port the trajectory which has been planned is sent to the real manipulator.
+			
+			<p>
+			
+			<table><tr><td colspan=2><b>States:</b><tr>
+					<td>neutral:
+					<td>The port is neutral and does nothing.<tr>
+					<td>trajectory:
+					<td>The port sends the planned trajectroy to the manipulator.<tr>
+					<td>demonstration:
+					<td>The port is neutral and does nothing.<tr>
+					<td>simulation:
+					<td>The port is neutral and does nothing.</table><tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartPushTimedClient&#187;
+			<br>manipulatorStatePushTimedClient
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>interval:
+					<td>1<tr>
+					<td>commObject:
+					<td>CommMobileManipulatorState
+			</table>
+			<p>
+
+			
+				Connect this client service to the real manipulator component (e.g. SmartKatanaServer)
+				to receive the current joint configuration and tool center point of the manipulator.
+			
+			<p>
+			
+			<table><tr><td colspan=2><b>States:</b><tr>
+					<td>neutral:
+					<td>The port is neutral and does nothing.<tr>
+					<td>trajectory:
+					<td>The port receives new updates from the server.<tr>
+					<td>demonstration:
+					<td>The port receives new updates from the server.<tr>
+					<td>simulation:
+					<td>The port receives new updates from the server.</table><tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartEventClient&#187;
+			<br>manipulatorEventClient
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>eventParameter:
+					<td>CommManipulatorEventParameter<tr>
+					<td>eventResult:
+					<td>CommManipulatorEventResult
+			</table>
+			<p>
+
+			
+				Connect this client service to the real manipulator component
+				to receive events. The events are important for the path planning. For example it is necessary to receive the "GOAL_REACHED" event to know if the real manipulator is ready to receive a next trajectory.
+			
+			<p>
+			
+			<table><tr><td colspan=2><b>States:</b><tr>
+					<td>neutral:
+					<td>The port is neutral and does nothing.<tr>
+					<td>trajectory:
+					<td>The port receives new events from the server.<tr>
+					<td>demonstration:
+					<td>The port receives new events from the server.<tr>
+					<td>simulation:
+					<td>The port receives new events from the server.</table><tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartQueryClient&#187;
+			<br>environmentQueryClient
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>commRequestObject:
+					<td>CommObjectRecognitionId<tr>
+					<td>commAnswerObject:
+					<td>CommObjectRecognitionEnvironment
+			</table>
+			<p>
+
+			
+				Connect this query client service to an object recognition to
+				load an environment from it. The environment contains serveral objects which will be loaded into OpenRAVE. These objects will be considered in the path planning process. If no object recognition is available it is possible to load an
+				environment from a file which can be specified in the ini-configuration.
+			
+			<p>
+			
+			<table><tr><td colspan=2><b>States:</b><tr>
+					<td>neutral:
+					<td>The port is neutral and does nothing.<tr>
+					<td>trajectory:
+					<td>The port queries the environment with the objects in it.<tr>
+					<td>demonstration:
+					<td>The port is neutral and does nothing.</table><tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartQueryClient&#187;
+			<br>objectQueryClient
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>commRequestObject:
+					<td>CommObjectRecognitionId<tr>
+					<td>commAnswerObject:
+					<td>CommObjectRecognitionObjectFeatures
+			</table>
+			<p>
+
+			
+				Connect this query client service to an object recognition to
+				load objects from it. The object has to be loaded from this port to get information about the type and extents of the object. This values are necessary to compute the grasp tables for this object. If this port is not connected the computation of the grasp tables cannot be done.
+			
+			<p>
+			
+			<table><tr><td colspan=2><b>States:</b><tr>
+					<td>neutral:
+					<td>The port is neutral and does nothing.<tr>
+					<td>trajectory:
+					<td>The port queries the object.<tr>
+					<td>demonstration:
+					<td>The port is neutral and does nothing.</table></table>
+
+
+
+
+
+
+
+<h3>Server-Ports</h3>
+<table>
+<tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartStateServer&#187;
+			<br>stateServer
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>serviceName:
+					<td>stateServer
+			</table>
+			<p>
+
+			
+				See States for descriptions of possible states and their meaning.
+			
+			<p>
+			<tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartSendServer&#187;
+			<br>pathPlanningSendServer
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>serviceName:
+					<td>pathPlanning<tr>
+					<td>commObject:
+					<td>CommManipulatorTrajectory
+			</table>
+			<p>
+
+			
+				Only the first tool center point or joint angle configuration in the communication object is used. For this tool center point or joint angle configuration a path planning is performed. The handler fires events when it begins to plan a trajectory ('PLANNING_PATH') or when a trajectory has been found ('PATH_FOUND') or when no trajectory can be calculated ('NO_PATH_FOUND' if the planning is unsuccessful or 'NO_IKSOLUTION_FOUND' if the inverse kinematic cannot be calculated). The environment has to be loaded before this handler is called over the parameter port. The tool center point in the trajectory must be given in the robot coordinate system.
+			
+			<p>
+			
+			<table><tr><td colspan=2><b>States:</b><tr>
+					<td>neutral:
+					<td>Port is neutral, does not consume new input while in this state.<tr>
+					<td>trajectory:
+					<td>A path to the given pose is planned and sent to the real manipulator.<tr>
+					<td>demonstration:
+					<td>Port is neutral, does not consume new input while in this state.<tr>
+					<td>simulation:
+					<td>A path to the given pose is planned but not sent to the real manipulator.</table><tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartEventServer&#187;
+			<br>eventServer
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>serviceName:
+					<td>eventServer<tr>
+					<td>eventParameter:
+					<td>CommManipulationPlannerEventParameter<tr>
+					<td>eventResult:
+					<td>CommManipulationPlannerEventResult<tr>
+					<td>eventState:
+					<td>CommManipulationPlannerEventState
+			</table>
+			<p>
+
+			
+				The event state UNKNOWN can be used for activation if the current state is unknown. The port will send the following events:
+
+				<ul>
+					<li>PLANNING_PATH: Fired when component started planning
+						the path.
+
+					<li>PATH_FOUND: Fired when the path planing was successful
+						and a trajectory has been found.
+
+					<li>NO_PATH_FOUND: Fired when no trajectory can be found
+						to the specified position.
+
+					<li>NO_IKSOLUTION_FOUND: Fired when the inverse kinematic caluclation fails.
+
+					<li>MANIPULATOR_SYNC_FAIL: Event is fired if the modeled
+						manipulator cannot be synced with the real manipulator.
+				</ul>
+
+					
+			<p>
+			
+			<table><tr><td colspan=2><b>States:</b><tr>
+					<td>neutral:
+					<td>The port is neutral and does nothing.<tr>
+					<td>trajectory:
+					<td>All events are fired in this state.<tr>
+					<td>demonstration:
+					<td>All events are fired in this state.<tr>
+					<td>simulation:
+					<td>All events are fired in this state.</table><tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartSendServer&#187;
+			<br>parameterServer
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>serviceName:
+					<td>param<tr>
+					<td>commObject:
+					<td>CommManipulationPlannerParameter
+			</table>
+			<p>
+
+			
+				Accepts various parameters to handle the environment and objects in OpenRAVE. PARAMETER_SUCCESS and PARAMETER_FAIL are fired from the handler. Not all parameters fire the mentioned events. See parameter description for further information.
+			
+			<p>
+			
+			<table><tr><td colspan=2><b>States:</b><tr>
+					<td>neutral:
+					<td>All parameters are accepted in this state.<tr>
+					<td>trajectory:
+					<td>No parameters are accepted in this state.<tr>
+					<td>demonstration:
+					<td>No parameters are accepted in this state.<tr>
+					<td>simulation:
+					<td>No parameters are accepted in this state.</table></table>
+
+
+
+
+<h2>Ini-Configuration</h2>
+
+<table class='rowsep'><tr><td colspan=2><b>[OpenRave]</b><tr><td><i>debugOpenRave: boolean</i>
+				<td>Debugs communication with OpenRAVE. Default:
+				false<tr><td><i>debugSend: boolean</i>
+				<td>Debugging for path planning send server. Default:
+				false<tr><td><i>defaultEnvironmentPath: string</i>
+				<td>File to default OpenRAVE environment.
+				Default: none, current working directory.<tr><td><i>gui_active: boolean</i>
+				<td>Enable/disable GUI to visualize. Default: true<tr><td><i>robotName: string</i>
+				<td>Name of the manipulator as specified in the
+				robotPath xml file. Default: Katana<tr><td><i>robotPath: string</i>
+				<td>Xml file which contains the robot/manipulator
+				specification. Default: robots/katana.robot.xml<tr><td><i>saveObjectsToFile: boolean</i>
+				<td>Saves every object in the scenes
+				automatically to files named after object id. Default: file<tr><td><i>saveTrajectoryToFile: boolean</i>
+				<td>Saves automatically the trajectory to a
+				file, see above. Default: false<tr><td><i>showCompleteTrajectory: boolean</i>
+				<td>Live visualization of robot movement
+				while trajectory is executed. Default: false<tr><td><i>storedEnvironmentName: string</i>
+				<td>Filename prefix used to store the
+				environment. Filename: &lt;storedEnvironmentName&gt;&lt;id&gt;.dae. Default:
+				storedEnvironment<tr><td><i>storedEnvironmentPath: string</i>
+				<td>Path to store the files.</table><p><table class='rowsep'><tr><td colspan=2><b>[PortParameter]</b><tr><td><i>withManipulator: boolean</i>
+				<td>Component does not connect to katana server and does
+				not perform real trajectories. Can be used for testing.
+				Default: true<tr><td><i>withObjectRecognition: boolean</i>
+				<td>Specify whether component connects to the object recognition. If not connected only environments from the file can be loaded.
+				Default: true</table><p>
+
+
+
+</div>

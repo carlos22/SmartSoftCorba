@@ -3,9 +3,6 @@
 	<name>SmartJoystickServer</name>
 	<comment></comment>
 	<projects>
-		<project>CommObjectRepository.Test1</project>
-		<project>CorbaSmartSoft_flat.Profile.Project</project>
-		<project>MARS.Profile.Project</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

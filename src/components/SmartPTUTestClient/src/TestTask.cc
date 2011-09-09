@@ -56,12 +56,18 @@ int TestTask::svc() {
 
 	COMP->stateClient->setWaitState("active");
 
+	// activate event
+	CommPTUObjects::CommPTUGoalEventParameter parameter;
+	parameter.set_state(CommPTUObjects::PTUMoveStatus::GOAL_NOT_REACHED);
+	CHS::EventId id;
+
+	COMP->goalEventClient->activate(CHS::continuous, parameter, id);
+
 	while (1) {
 		CommPTUObjects::CommPTUMoveRequest request;
 		CommPTUObjects::CommPTUMoveResponse response;
 
-		request.set_move_mode(CommPTUObjects::PTUMoveFlag::PAN_TILT_ABSOLUTE);
-
+		// request.set_move_mode(CommPTUObjects::PTUMoveFlag::PAN_TILT_ABSOLUTE);
 		//		request.set_pan(-M_PI_2);
 		//		request.set_tilt(0);
 		//		COMP->moveQueryClient->query(request, response);
@@ -74,27 +80,60 @@ int TestTask::svc() {
 		//		checkResponse(response);
 		//		//		sleep(1);
 
+
+		// straight on
+		std::cout << "## going straight on" << std::endl;
 		request.set_move_mode(CommPTUObjects::PTUMoveFlag::PAN_TILT_ABSOLUTE);
-		    	request.set_pan(-M_PI_2);
-		    	request.set_tilt(0);
-		    	COMP->moveQueryClient->query(request, response);
-		    	checkResponse(response);
-				sleep(1);
-		
-		request.set_move_mode(CommPTUObjects::PTUMoveFlag::TILT_ABSOLUTE);
-		    	request.set_tilt(-M_PI_4 / 2);
-		    	COMP->moveQueryClient->query(request, response);
-		    	checkResponse(response);
-				sleep(1);
+		request.set_pan(0);
+		request.set_tilt(0);
+		COMP->moveSendClient->send(request);
+		sleep(2);
+
+		// circa table
+		std::cout << "## going CIRCA TABLE" << std::endl;
+		request.set_move_mode(CommPTUObjects::PTUMoveFlag::PAN_TILT_ABSOLUTE);
+		request.set_pan(0);
+		request.set_tilt(-M_PI_4);
+		COMP->moveSendClient->send(request);
+		sleep(10);
+
+		// left 
+		std::cout << "## going LEFT" << std::endl;
+		request.set_move_mode(CommPTUObjects::PTUMoveFlag::PAN_TILT_ABSOLUTE);
+		request.set_pan(M_PI_2);
+		request.set_tilt(0);
+		COMP->moveSendClient->send(request);
+		sleep(10);
+
+		// right
+		std::cout << "## going RIGHT" << std::endl;
+		request.set_move_mode(CommPTUObjects::PTUMoveFlag::PAN_TILT_ABSOLUTE);
+		request.set_pan(-M_PI_2);
+		request.set_tilt(0);
+		COMP->moveSendClient->send(request);
+		sleep(10);
 
 
-//		paramValue = "SENSOROFFSET(0)(800)(200)(0)(0)(0)";
-//		param.set(paramValue);
-//		COMP->paramClient->send(param);
-//
-//		paramValue = "PANACC(2)";
-//		param.set(paramValue);
-//		COMP->paramClient->send(param);
+
+		//request.set_move_mode(CommPTUObjects::PTUMoveFlag::TILT_ABSOLUTE);
+		//request.set_tilt(-M_PI_4 / 2);
+		//COMP->moveQueryClient->query(request, response);
+		//std::cout << response.get_status() << std::endl;
+		//sleep(1);
+
+		//request.set_move_mode(CommPTUObjects::PTUMoveFlag::PAN_TILT_ABSOLUTE);
+		//request.set_pan(0);
+		//request.set_tilt(0);
+		//COMP->moveSendClient->send(request);
+		//sleep(5);
+
+		//		paramValue = "SENSOROFFSET(0)(800)(200)(0)(0)(0)";
+		//		param.set(paramValue);
+		//		COMP->paramClient->send(param);
+		//
+		//		paramValue = "PANACC(2)";
+		//		param.set(paramValue);
+		//		COMP->paramClient->send(param);
 
 		//request.set_move_mode(CommPTUObjects::PTUMoveFlag::POSITION_WORLD);
 		//request.set_position(2000, 1000, 0);
@@ -102,43 +141,14 @@ int TestTask::svc() {
 		//checkResponse(response);
 		//		sleep(1);
 
-//		paramValue ="SENSOROFFSET(0)(-400)(-20)(0)(0)(0)";
-//		param.set(paramValue);
-//		COMP->paramClient->send(param);
-//
-//		request.set_move_mode(CommPTUObjects::PTUMoveFlag::POSITION_ROBOT);
-//		request.set_position(2000, 0, 0);
-//		COMP->moveQueryClient->query(request, response);
-//		checkResponse(response);
+		//		paramValue ="SENSOROFFSET(0)(-400)(-20)(0)(0)(0)";
+		//		param.set(paramValue);
+		//		COMP->paramClient->send(param);
+		//
+		//		request.set_move_mode(CommPTUObjects::PTUMoveFlag::POSITION_ROBOT);
+		//		request.set_position(2000, 0, 0);
+		//		COMP->moveQueryClient->query(request, response);
+		//		checkResponse(response);
 	}
 	return 0;
-}
-
-void TestTask::checkResponse(const CommPTUObjects::CommPTUMoveResponse& response) const {
-	switch (response.get_status()) {
-	case CommPTUObjects::PTUMoveStatus::OK: {
-		std::cout << "move was successful\n";
-		break;
-	}
-	case CommPTUObjects::PTUMoveStatus::PAN_OUT_OF_RANGE: {
-		std::cout << "pan out of range\n";
-		break;
-	}
-	case CommPTUObjects::PTUMoveStatus::TILT_OUT_OF_RANGE: {
-		std::cout << "tilt out of range\n";
-		break;
-	}
-	case CommPTUObjects::PTUMoveStatus::PAN_TILT_OUT_OF_RANGE: {
-		std::cout << "pan/tilt out of range\n";
-		break;
-	}
-	case CommPTUObjects::PTUMoveStatus::FAILURE: {
-		std::cout << "failure\n";
-		break;
-	}
-	case CommPTUObjects::PTUMoveStatus::HALTED: {
-		std::cout << "halted\n";
-		break;
-	}
-	}
 }

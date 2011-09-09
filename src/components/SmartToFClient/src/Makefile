@@ -88,9 +88,9 @@ INI_FILES    =	SmartToFClient.ini
 ##----------------------------------------------------------------------------
 # PROTECTED REGION ID(CustomUserLibs) ENABLED START
 ## user libs  -- add your own libs here
-USER_CPP_CFLAGS = `pkg-config opencv --cflags`
-USER_CPP_LFLAGS = `pkg-config --libs libmrpt` `pkg-config opencv --libs`
-INCLUDES += -I/usr/local/include/mrpt/mrpt-config/ -I$(SMART_ROOT)/src/utility/openCVHelpers
+USER_CPP_CFLAGS = `pkg-config --cflags mrpt-base mrpt-opengl mrpt-gui mrpt-maps` `pkg-config opencv --cflags`
+USER_CPP_LFLAGS = `pkg-config --libs mrpt-base mrpt-opengl mrpt-gui mrpt-maps` `pkg-config opencv --libs`
+INCLUDES += -I$(SMART_ROOT)/src/utility/eigen3/ -I$(SMART_ROOT)/src/utility/openCVHelpers
 # PROTECTED REGION END
 ##----------------------------------------------------------------------------
 

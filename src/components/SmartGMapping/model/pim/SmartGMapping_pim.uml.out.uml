@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124" xmlns:SmartMARS_1="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
   <uml:Model xmi:id="_BMQqwCI5EeCTtNLkwClVHg" name="SmartGMapping_pim">
     <elementImport xmi:id="_BzwIcFSVEeCurpai0_bv1w">
       <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
@@ -111,6 +111,7 @@
       <ownedAttribute xmi:type="uml:Port" xmi:id="_SSjdUCI5EeCTtNLkwClVHg" name="basePositionUpdateClient" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_Zocs0CI5EeCTtNLkwClVHg" name="stateServer" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_b2lYUCI5EeCTtNLkwClVHg" name="paramServer" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_77rWQNrlEeCfGaX5KHyzng" name="wiringSlave" aggregation="composite"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_u4VK8CI5EeCTtNLkwClVHg" name="GMappingTask"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_6r8i8CI5EeCTtNLkwClVHg" name="StateChangeHandler"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_AbKIgCI6EeCTtNLkwClVHg" name="active">
@@ -376,27 +377,28 @@ translation as a function of translation</body>
     </profileApplication>
     <profileApplication xmi:id="_BMQqxCI5EeCTtNLkwClVHg">
       <eAnnotations xmi:id="_BMQqxSI5EeCTtNLkwClVHg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw"/>
       </eAnnotations>
       <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
     </profileApplication>
   </uml:Model>
   <SmartMARS:SmartComponent xmi:id="_BQ4sECI5EeCTtNLkwClVHg" base_Component="_BMQqwSI5EeCTtNLkwClVHg"/>
-  <SmartMARS:SmartPushNewestClient xmi:id="_KGRYYCI5EeCTtNLkwClVHg" serviceName="scan" base_Port="_KDl30CI5EeCTtNLkwClVHg" serverName="SmartLaserLMS200Server">
+  <SmartMARS:SmartPushNewestClient xmi:id="_KGRYYCI5EeCTtNLkwClVHg" base_Port="_KDl30CI5EeCTtNLkwClVHg" serviceName="scan" serverName="SmartLaserLMS200Server" wiringName="laserClient">
     <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
   </SmartMARS:SmartPushNewestClient>
-  <SmartMARS:SmartSendClient xmi:id="_SSvqkCI5EeCTtNLkwClVHg" serviceName="positionUpdate" base_Port="_SSjdUCI5EeCTtNLkwClVHg" serverName="SmartPioneerBaseServer">
+  <SmartMARS:SmartSendClient xmi:id="_SSvqkCI5EeCTtNLkwClVHg" base_Port="_SSjdUCI5EeCTtNLkwClVHg" serviceName="positionUpdate" serverName="SmartPioneerBaseServer" wiringName="basePositionUpdateClient">
     <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_BQWcsEV8EeC6tb6-J2zOEA"/>
   </SmartMARS:SmartSendClient>
-  <SmartMARS:SmartStateServer xmi:id="_Zoo6ECI5EeCTtNLkwClVHg" serviceName="state" base_Port="_Zocs0CI5EeCTtNLkwClVHg" smartStateChangeHandler="_6sG7ACI5EeCTtNLkwClVHg"/>
-  <SmartMARS:SmartParameterServer xmi:id="_b2xlkCI5EeCTtNLkwClVHg" serviceName="param" base_Port="_b2lYUCI5EeCTtNLkwClVHg" smartParameterHandler="_iXS20CI6EeCTtNLkwClVHg">
+  <SmartMARS:SmartStateServer xmi:id="_Zoo6ECI5EeCTtNLkwClVHg" base_Port="_Zocs0CI5EeCTtNLkwClVHg" serviceName="state" smartStateChangeHandler="_6sG7ACI5EeCTtNLkwClVHg"/>
+  <SmartMARS:SmartParameterServer xmi:id="_b2xlkCI5EeCTtNLkwClVHg" base_Port="_b2lYUCI5EeCTtNLkwClVHg" serviceName="param" smartParameterHandler="_iXS20CI6EeCTtNLkwClVHg">
     <commObject href="platform:/resource/CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_ayrOsFSWEeCurpai0_bv1w"/>
   </SmartMARS:SmartParameterServer>
   <SmartMARS:SmartTask xmi:id="_u4dt0CI5EeCTtNLkwClVHg" base_Class="_u4VK8CI5EeCTtNLkwClVHg"/>
   <SmartMARS:SmartStateChangeHandler xmi:id="_6sG7ACI5EeCTtNLkwClVHg" base_Class="_6r8i8CI5EeCTtNLkwClVHg"/>
   <SmartMARS:SmartMainState xmi:id="_AbSEUCI6EeCTtNLkwClVHg" base_Class="_AbKIgCI6EeCTtNLkwClVHg" subState="_CuvUsCI6EeCTtNLkwClVHg"/>
   <SmartMARS:SmartSubState xmi:id="_CuvUsCI6EeCTtNLkwClVHg" base_Class="_CujugCI6EeCTtNLkwClVHg"/>
-  <SmartMARS:SmartStateChangeHandler xmi:id="_ZTMZECI6EeCTtNLkwClVHg"/>
+  <SmartMARS_1:SmartStateChangeHandler xmi:id="_ZTMZECI6EeCTtNLkwClVHg"/>
   <SmartMARS:SmartParameterHandler xmi:id="_iXS20CI6EeCTtNLkwClVHg" base_Class="_iXMJICI6EeCTtNLkwClVHg"/>
   <SmartMARS:SmartIniParameterGroup xmi:id="_6JSvkCI-EeCTtNLkwClVHg" base_Class="_6JKzwCI-EeCTtNLkwClVHg"/>
+  <SmartMARS:SmartWiringSlave xmi:id="_79O1cNrlEeCfGaX5KHyzng" base_Port="_77rWQNrlEeCfGaX5KHyzng"/>
 </xmi:XMI>

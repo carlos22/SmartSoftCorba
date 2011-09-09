@@ -1,0 +1,1 @@
+Requires uEye_Linux_370_32Bit

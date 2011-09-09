@@ -112,6 +112,8 @@ int SpeechOutputTask::svc()
 
     	/* Sends samples directly to the audio board */
     	r = ttsSetAudio(hReader, "LTTS7AudioBoard", NULL, 44100, tts_LINEAR, tts_STEREO, 0);
+	/* Sends the sample to audio file */
+//    	r = ttsSetAudio(hReader, "LTTS7AudioFile", "Loquendo_audio_output.wav", 44100, tts_ALAW, tts_MONO, 0);
 
     	if(r != tts_OK)
     	{

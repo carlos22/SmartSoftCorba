@@ -37,6 +37,7 @@
 #include "ManipulatorFactory.hh"
 
 #include <CommManipulationPlannerObjects/commManipulationPlannerEventState.hh>
+#include <CommBasicObjects/commPose3d.hh>
 #include <EulerTransformationMatrices.hh>
 
 using namespace OpenRAVE;
@@ -58,19 +59,22 @@ public:
 	struct OpenRaveParameter {
 		bool modified;
 
-		bool clearEnvironment;
-		bool loadEnvironmentObjectRecognition;
-		int loadEnvironmentObjectRecognition_id;
+		//bool clearEnvironment;
+		//bool loadEnvironmentObjectRecognition;
+		//int loadEnvironmentObjectRecognition_id;
+
+		//bool loadSingleObjectFromObjectRecognition;
+		//int loadSingleObjectFromObjectRecognition_id;
 
 		bool computeGraspTable;
 		int computeGraspTable_id;
 
-		bool openrave_GraspObject;
-		int openrave_GraspObject_id;
-		bool openrave_ReleaseObject;
-		int openrave_ReleaseObject_id;
+//		bool openrave_GraspObject;
+//		int openrave_GraspObject_id;
+//		bool openrave_ReleaseObject;
+//		int openrave_ReleaseObject_id;
 
-		bool parallelization;
+		//bool parallelization;
 
 		bool simulation_test_ik_only;
 
@@ -78,10 +82,16 @@ public:
 		bool grasping_simple;
 		double grasping_simple_lowerHeightBound;
 		double grasping_simple_upperHeightBound;
+
 		double grasping_simple_lowerDepthBound;
 		double grasping_simple_upperDepthBound;
+
 		double grasping_simple_lowerAngleBound;
 		double grasping_simple_upperAngleBound;
+
+		double grasping_simple_lowerRollBound;
+		double grasping_simple_upperRollBound;
+
 		bool grasping_advanced;
 	};
 public:
@@ -105,11 +115,6 @@ public:
 	 * The default environment will be loaded after cleanup
 	 */
 	void resetAll();
-
-	/**
-	 * Applies the current Parameters.
-	 */
-	void applyParameters();
 
 	/**
 	 * Synchronizes the real manipulator with the OpenRAVE manipulator.
@@ -187,7 +192,7 @@ public:
 	 * return: true if the calculation succeeds, otherwise false
 	 */
 	bool calculateIKSolution(const dReal& x, const dReal& y, const dReal& z, const dReal& azimuth, const dReal& elevation,
-			const dReal& roll, std::vector<dReal>& solution);
+			const dReal& roll, std::vector<dReal>& solution, CommBasicObjects::CommPose3d& pose);
 
 	/**
 	 * Iterate from 0° (horizontal) to 90° (vertical) with the gripper to get a grasping position
@@ -197,7 +202,7 @@ public:
 	 *
 	 * return: true if the calculation succeeds, otherwise false
 	 */
-	bool iterateToGetGraspingIKSolution(const dReal& x, const dReal& y, const dReal& z, std::vector<dReal>& solution);
+	bool iterateToGetGraspingIKSolution(const dReal& x, const dReal& y, const dReal& z, std::vector<dReal>& solution, CommBasicObjects::CommPose3d& pose);
 
 	/**
 	 * Plans the collision free path from the current position of the robot the the given joint angles.
@@ -209,6 +214,8 @@ public:
 	 * return: true if a path could be found, otherwise false
 	 */
 	bool planPath(const std::vector<dReal>& angles, TrajectoryBasePtr& trajectory);
+
+	bool getPositonOfKinbody(unsigned int objId, TransformMatrix& transform );
 
 	// TODO:
 	void testConstraint();
@@ -275,6 +282,18 @@ private:
 
 	OpenRave();
 
+
+	/**
+	 * Loads an single object from a given ID over the ObjectRecognition. This method will make a query to the ObjectRecognition
+	 * and gets over this the object.
+	 *
+	 * objId:	ID which specifies the object which should be loaded
+	 */
+
+	void loadSingelObjectFromObjRecognition(unsigned int objId);
+
+
+
 	/**
 	 * Loads an environment from a given ID over the ObjectRecognition. This method will make a query to the ObjectRecognition
 	 * and gets over this all the objects in the environment.
@@ -311,6 +330,7 @@ private:
 	 * objId:	ID of the object which should be deleted
 	 */
 	void deleteKinBody(unsigned int objId);
+
 
 	/**
 	 * Grasps a KinBody in the OpenRAVE environment.
@@ -362,6 +382,7 @@ private:
 
 	/**
 	 * Deletes all KinBodies in the environment.
+	 * Except those KindBodies grabbed by the manipulator.
 	 *
 	 * withManipulator:	if true all KinBodies including the manipulator will be deleted
 	 * 					if false the manipulator will not be deleted
@@ -404,7 +425,7 @@ private:
 	 * be modified from external
 	 */
 	OpenRaveParameter localParameters;
-	bool parallelization_initial_sync;
+	//bool parallelization_initial_sync;
 
 };
 

@@ -1,0 +1,517 @@
+
+<div id="right">
+<style type="text/css">
+
+#entry td {
+	vertical-align: top;
+	padding-right: 15px;
+}
+
+#entry table {
+}
+
+.rowsep td {
+	/* comment for debug print with large gaps in table rows */
+	   padding-bottom: 15px;
+}
+
+#entry li {
+	padding-bottom: 15px;
+}
+
+.keyword {
+	font-style: italic;
+}
+
+
+
+/* UNcomment for debug print with large gaps in table rows */
+/*
+.rowsep td {
+	padding-bottom: 100px;
+}
+#entry li {
+	padding-bottom: 100px;
+}
+*/
+</style>
+
+
+
+
+<p style="margin-top: 100px">
+
+
+<h1>SmartKatanaServer</h1>
+
+
+<a href='SmartKatanaServer.jpg'>
+			<img src="SmartKatanaServer.jpg" style="float: right; width: 200px; margin-left: 10px; margin-bottom: 10px">
+		  </a>This component controls a Katana manipulator. It is
+		possible to perform trajectories consisting of a sequence of points. The
+		arm can also be set to demonstration where it is possible to move the arm
+		by hand. Further, if a laser ranger is mounted on the Katana, it is
+		possible to request a 3d laser scan, which is then captured by the
+		component.
+
+		<p>GPL-License: Component includes a patched Katana KNI 4.2.0 which is licensed
+		under GPL.
+		<p>
+
+<table>
+
+<tr>
+	 	<td>Purpose:
+ 		<td>Hardware-Driver<tr>
+	 	<td>License:
+ 		<td>GPL<tr>
+	 	<td>Hardware:
+ 		<td>Katana 300, 350, 400, 450<tr>
+	 	<td>Library Dependencies:
+ 		<td>-<tr>
+	 	<td>SVN:
+ 		<td><a href='http://smart-robotics.svn.sourceforge.net/viewvc/smart-robotics/trunk/smartsoft/src/components/SmartKatanaServer/'>browse SVN...</a></table>
+
+
+
+<h2 style="clear: both">States</h2>
+
+High level description of states. See <a href="#services">Services</a> for a detailed description how
+individual ports behave in specific states.
+<p>
+<table class="rowsep">
+<tr>
+	 	<td><i>neutral:</i>
+ 		<td>In 'neutral' state the Katana does not perform any
+			trajectory. No manipulator state is pushed to posePushTimedServer port.<tr>
+	 	<td><i>trajectory:</i>
+ 		<td>In
+			'trajectory' state given trajectories are performed by the Katana.<tr>
+	 	<td><i>demonstration:</i>
+ 		<td>In 'demonstration' state the Katana deactivates its motors,
+			so that the arm can be moved by a person. It is important to bring the arm in a
+			save position before the state change, so it does not fall down on the robot.<tr>
+	 	<td><i>scan:</i>
+ 		<td>In 'scan' state and if a laser ranger is mounted on the Katana it is
+			possible to capture 3d point clouds by the manipulator.</table>
+
+
+
+
+
+<h2>Parameters</h2>
+
+<table class="rowsep">
+<tr>
+	 	<td><i>STRATEGY(?value):</i>
+ 		<td>The following strategies can be set:
+							   <ul>
+									<li>TRAJECTORY: All poses specified in the trajecotry sequence are performed.</li>
+									<li>SINGLEPOSE: Only the first pose in a trajectory sequence is performed.</li>
+							   </ul><tr>
+	 	<td><i>ALLJOINTVELLIMITS(?limit):</i>
+ 		<td>Set the velocity limit ?limit [rad/s] for all joints.<tr>
+	 	<td><i>GRIPPERVELLIMIT(?limit):</i>
+ 		<td>Set the velocity limit ?limit [rad/s] for the gripper.</table>
+
+
+
+<h2>Services</h2>
+<a name="services"></a>
+
+
+
+
+<h3>Client-Ports</h3>
+<table>
+<tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartPushTimedClient&#187;
+			<br>basePushTimedClient
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>commObject:
+					<td>CommBaseState<tr>
+					<td>interval:
+					<td>1
+			</table>
+			<p>
+
+			Typically connected to the robot base (e.g.
+				SmartPioneerBaseServer) to receive the base state which is included in the
+				laser scan. This port is connected optionally and can be activated/deactivated in the .ini file
+				with the base.on_base parameter.
+			<p>
+			
+			<table><tr><td colspan=2><b>States:</b><tr>
+					<td>neutral:
+					<td>Port is neutral, does not consume new input while in this state.<tr>
+					<td>trajectory:
+					<td>???<tr>
+					<td>demonstration:
+					<td>???<tr>
+					<td>scan:
+					<td>??The base state is included in the laser.??</table><tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartQueryClient&#187;
+			<br>laserQueryClient
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>commRequestObject:
+					<td>CommVoid<tr>
+					<td>commAnswerObject:
+					<td>CommMobileLaserScan
+			</table>
+			<p>
+
+			If it should be possible to capture 3d laser
+				scans, a laser must be mounted on the last joint of the Katana.
+				Connect this client service to the component that is responsible
+				for this laser ranger. This port is optional and can be activated/deactivated in the .ini file
+				with the laser.laser_is_mounted parameter.
+			<p>
+			
+			<table><tr><td colspan=2><b>States:</b><tr>
+					<td>neutral:
+					<td>Inactive in this state.<tr>
+					<td>trajectory:
+					<td>Inactive in this state.<tr>
+					<td>demonstration:
+					<td>Inactive in this state.<tr>
+					<td>scan:
+					<td>Requests the current laser scan from the laser ranger.</table><tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartStateClient&#187;
+			<br>laserStateClient
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>commAnswerObject:
+					<td>CommMobileLaserScan
+			</table>
+			<p>
+
+			If it should be possible to capture 3d laser
+				scans, a laser must be mounted on the last joint of the Katana.
+				Connect this client service to the component that is responsible
+				for this laser ranger. This port is optional and can be activated/deactivated in the .ini file
+				with the laser.laser_is_mounted parameter.
+			<p>
+			
+			<table><tr><td colspan=2><b>States:</b><tr>
+					<td>neutral:
+					<td>Inactive in this state.<tr>
+					<td>trajectory:
+					<td>Inactive in this state.<tr>
+					<td>demonstration:
+					<td>Inactive in this state.<tr>
+					<td>scan:
+					<td>Sets the state of the laser ranger to active.</table></table>
+
+
+
+
+
+
+
+<h3>Server-Ports</h3>
+<table>
+<tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartSendServer&#187;
+			<br>trajectorySendServer
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>serviceName:
+					<td>performTrajectory<tr>
+					<td>commObject:
+					<td>CommManipulatorTrajectory
+			</table>
+			<p>
+
+			A new trajectory (one or more points) which is sent to the Katana is performed.
+					The trajectories are stored in a queue. The next trajectory is performed when the
+					last point from the current trajectory is send to the Katana. There is no check if
+					the next trajectory starts at the current TCP position. The
+					component fires an event (see eventServer) when the Katana
+					reaches the last position. The poses of the trajectory must
+					be given in the robot coordinate system.
+					
+					It is possible to choose between different gripper actions
+					for a trajectory, which can be set in
+					CommManipulatorTrajectory.
+					<ul>
+						<li>NO_OP: No action is performed on the gripper.</li>
+						<li>ANGLE: The joint angles given in the trajectory are used.</li>
+						<li>CLOSE_AFTER: The gripper is closed after the arm reaches the goal.</li>
+						<li>CLOSE_BEFORE: The gripper is closed before the arm starts to move.</li>
+						<li>CLOSE_BEFORE_OPEN_AFTER: The gripper is closed before the arm starts to move
+							and opend after it reaches the goal.</li>
+						<li>OPEN_AFTER: The gripper is opend after the arm reaches the goal.</li>
+						<li>OPEN_BEFORE: The gripper is opend before the arm starts to move.</li>
+						<li>OPEN_BEFORE_CLOSE_AFTER: The gripper is opend before the arm starts to move
+							and closed after it reaches the goal.</li>
+					</ul>
+					
+					Wann kommt GOAL_RECHED bei OPEN_AFTER zb? nachdem gripper offen oder nachdem punkt angefahren?
+					
+			<p>
+			
+			<table><tr><td colspan=2><b>States:</b><tr>
+					<td>neutral:
+					<td>Port is neutral, does not consume new input while in this state.<tr>
+					<td>trajectory:
+					<td>A trajectory is performed.<tr>
+					<td>demonstration:
+					<td>Port is neutral, does not consume new input while in this state.<tr>
+					<td>scan:
+					<td>Port is neutral, does not consume new input while in this state.</table><tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartPushTimedServer&#187;
+			<br>posePushTimedServer
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>serviceName:
+					<td>currentPose<tr>
+					<td>cycle:
+					<td>100ms<tr>
+					<td>commObject:
+					<td>CommMobileManipulatorState
+			</table>
+			<p>
+
+			The current pose of the manipulator (tcp pose,
+				angles, ...) is pushed to all clients which are subscribed.
+			<p>
+			
+			<table><tr><td colspan=2><b>States:</b><tr>
+					<td>neutral:
+					<td>Port is neutral, does not publish new poses while in this state.<tr>
+					<td>trajectory:
+					<td>The Katana pose is pushed but there is no guarantee that it is the current pose.
+						   It can also be the last pose of the Katana.<tr>
+					<td>demonstration:
+					<td>The current pose is always read from the Katana.<tr>
+					<td>scan:
+					<td>The Katana pose is pushed but there is no guarantee that it is the current pose.
+						   It can also be the last pose of the Katana.</table><tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartStateServer&#187;
+			<br>stateServer
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>serviceName:
+					<td>state
+			</table>
+			<p>
+
+			See States for descriptions of possible states and their meaning.
+			<p>
+			<tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartEventServer&#187;
+			<br>eventServer
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>serviceName:
+					<td>eventServer<tr>
+					<td>eventParameter:
+					<td>CommManipulatorEventParameter<tr>
+					<td>eventResult:
+					<td>CommManipulatorEventResult
+			</table>
+			<p>
+
+			
+				The event state PLANNER_UNKNOWN can be used for activation if the current state is unknown. 
+				
+				The following events are sent by this port:
+				<ul>
+					<li>COLLISION: Is fired when the arm collides with an
+						obstacle
+
+					<li>NO_SOLUTION_FOUND: Is fired if the given tcp pose
+						is not reachable by the Katana
+					
+					<li>VALUE_OUT_OF_RANGE: Is fired if an
+						angle specified in a trajectory is not reachable by the Katana
+			
+					<li>GOAL_REACHED: Is fired when the arm reaches the position specified
+						by the last trajectory
+	
+					<li>GOAL_NOT_REACHED: Sent when a new goal was specified.
+
+				</ul>
+			<p>
+			
+			<table><tr><td colspan=2><b>States:</b><tr>
+					<td>neutral:
+					<td>Port is neutral, does not publish new events while in this state.<tr>
+					<td>trajectory:
+					<td>Will send Katana events.<tr>
+					<td>demonstration:
+					<td>Port is neutral, does not publish new events while in this state.<tr>
+					<td>scan:
+					<td>Port is neutral, does not publish new events while in this state.</table><tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartParameterServer&#187;
+			<br>paramServer
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>serviceName:
+					<td>param<tr>
+					<td>commObject:
+					<td>CommManipulatorParameter
+			</table>
+			<p>
+
+			Allows the parametrization of the component. See Parameters.
+			<p>
+			
+			<table><tr><td colspan=2><b>States:</b><tr>
+					<td>neutral:
+					<td>Accepts parameters.<tr>
+					<td>trajectory:
+					<td>Accepts parameters.<tr>
+					<td>demonstration:
+					<td>Accepts parameters.<tr>
+					<td>scan:
+					<td>Accepts parameters.</table><tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartSendServer&#187;
+			<br>requestScan3dSendServer
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>serviceName:
+					<td>request3dscan<tr>
+					<td>commObject:
+					<td>CommManipulatorRequestScan3d
+			</table>
+			<p>
+
+			3d laser scans can be requested if a laser ranger
+				is mounted on the manipulator. The scan is then performed in the
+				area, specified by the commObject, and if the scan is finished an event is sent.
+			<p>
+			
+			<table><tr><td colspan=2><b>States:</b><tr>
+					<td>neutral:
+					<td>Port is neutral, does not consume new input while in this state.<tr>
+					<td>trajectory:
+					<td>Port is neutral, does not consume new input while in this state.<tr>
+					<td>demonstration:
+					<td>Port is neutral, does not consume new input while in this state.<tr>
+					<td>scan:
+					<td>Laser scans can be requested.</table><tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartEventServer&#187;
+			<br>scan3dEventServer
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>serviceName:
+					<td>newScan<tr>
+					<td>eventParameter:
+					<td>CommVoid<tr>
+					<td>eventResult:
+					<td>CommManipulatorId
+			</table>
+			<p>
+
+			If a new 3d laser scan was captured, an event with
+				an id is fired. The id allows to get the 3d point cloud from the
+				component.
+			<p>
+			
+			<table><tr><td colspan=2><b>States:</b><tr>
+					<td>neutral:
+					<td>Port is neutral, does not publish new events while in this state.<tr>
+					<td>trajectory:
+					<td>Port is neutral, does not publish new events while in this state.<tr>
+					<td>demonstration:
+					<td>Port is neutral, does not publish new events while in this state.<tr>
+					<td>scan:
+					<td>Sends new id of 3d point cloud.</table><tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartQueryServer&#187;
+			<br>scan3dQueryServer
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>serviceName:
+					<td>3dscan<tr>
+					<td>commRequestObject:
+					<td>CommManipulatorId<tr>
+					<td>commAnswerObject:
+					<td>Comm3dPointCloud
+			</table>
+			<p>
+
+			A 3d point cloud for the specified id is
+				returned. The component only saves the last point cloud. If the id of the last
+				point cloud is different from the requested one, a point cloud with zero points is returned.
+			<p>
+			
+			<table><tr><td colspan=2><b>States:</b><tr>
+					<td>neutral:
+					<td>Port is neutral, does not consume new input while in this state.<tr>
+					<td>trajectory:
+					<td>Port is neutral, does not consume new input while in this state.<tr>
+					<td>demonstration:
+					<td>Port is neutral, does not consume new input while in this state.<tr>
+					<td>scan:
+					<td>Returns 3d point cloud.</table></table>
+
+
+
+
+<h2>Ini-Configuration</h2>
+
+<table class='rowsep'><tr><td colspan=2><b>[base]</b><tr><td><i>on_base</i>
+				<td>Specify if manipulator is mounted (true) on a mobile
+				platform or not mounted on a mobile (false) platform. If false, fixed values
+				will be used as the base pose. Default: true<tr><td><i>base_a</i>
+				<td>The orientation [rad] of the base if not mounted on a
+				mobile platform. Default: 0<tr><td><i>steer_a</i>
+				<td>The steering angle [rad] of the base if not mounted on a
+				mobile platform. Default: 0<tr><td><i>turret_a</i>
+				<td>The angle [rad] of the turret on the base if not mounted on a
+				mobile platform. Default: 0<tr><td><i>x</i>
+				<td>The x world coordinate [mm] of the base if not mounted on a
+				mobile platform. Default: 0<tr><td><i>y</i>
+				<td>The y world coordinate [mm] of the base if not mounted on a
+				mobile platform. Default: 0<tr><td><i>z</i>
+				<td>The z world coordinate [mm] of the base if not mounted on a
+				mobile platform. Default: 0</table><p><table class='rowsep'><tr><td colspan=2><b>[katana]</b><tr><td><i>verbose</i>
+				<td>Activate (true) or deactivate (false) debugging messages. Default: false<tr><td><i>fast_calibration</i>
+				<td>Turn fast calibration on (true) or off
+				(false). If fast calibration is turned on, the component will check
+				whether the katana is already calibrated by moving the first joint.
+				Default: false<tr><td><i>katana_device</i>
+				<td>Specifies katana connection. Values: Serial:
+				Katana is connected via the serial port. Lan: Katana is connected
+				over the network. Default: Serial<tr><td><i>katana_config_file</i>
+				<td>The path to the katana configuration file.
+				Default: src/config/katana6M180.cfg<tr><td><i>goal_angle_approach</i>
+				<td>The goal is reached when the difference between the
+				goal and current tcp angles are smaller then this value [rad]. Default: 0.1<tr><td><i>goal_position_approach</i>
+				<td>The goal is reached when the difference between the
+				goal and current tcp positions are smaller then this value [mm]. Default: 3<tr><td><i>azimuth</i>
+				<td>The azimuth angle of the katana relative to the robot [rad]. Default: 0<tr><td><i>elevation</i>
+				<td>The elevation angle of the katana relative to the robot [rad]. Default: 0<tr><td><i>roll</i>
+				<td>The roll angle of the katana relative to the robot [rad]. Default: 0<tr><td><i>x</i>
+				<td>The x offset of the katana relative to the robot [mm]. Default: 0<tr><td><i>y</i>
+				<td>The y offset of the katana relative to the robot [mm]. Default: 0<tr><td><i>z</i>
+				<td>The z offset of the katana relative to the robot [mm]. Default: 0</table><p><table class='rowsep'><tr><td colspan=2><b>[laser]</b><tr><td><i>laser_is_mounted</i>
+				<td>Specifies whether a laser is mounted (true)
+				on the Katana or not (false). Default: false<tr><td><i>high_precision</i>
+				<td>In high precision the laser ranger is run in query_only state
+				which ensures that the laser scan is captured when the katana
+				has stopped. Need about twice the time. Default: false<tr><td><i>azimuth</i>
+				<td>The azimuth angle relative to the tcp [rad]. Default:
+				0<tr><td><i>elevation</i>
+				<td>The elevation angle relative to the tcp [rad].
+				Default: 0<tr><td><i>roll</i>
+				<td>The roll angle relative to the tcp [rad]. Default: 0<tr><td><i>x</i>
+				<td>The x offset of the laser relative to the tcp [mm].
+				Default: 0<tr><td><i>y</i>
+				<td>The y offset of the laser relative to the tcp [mm].
+				Default: 0<tr><td><i>z</i>
+				<td>The z offset of the laser relative to the tcp [mm].
+				Default: 0</table><p><table class='rowsep'><tr><td colspan=2><b>[network]</b><tr><td><i>ip_address</i>
+				<td>The ip address where the katana is connected if on
+				network. See katana_device. Default: 127.0.0.1<tr><td><i>port</i>
+				<td>The port where the katana is connected, if connected
+				through serial port. See katana_device. Default: 5566</table><p><table class='rowsep'><tr><td colspan=2><b>[serial_port]</b><tr><td><i>device</i>
+				<td>The serial device where the katana is connected.
+				Default: /dev/ttyS0</table><p>
+
+
+
+</div>

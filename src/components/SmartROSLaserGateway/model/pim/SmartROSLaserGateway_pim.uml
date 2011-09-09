@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:SmartMARS_1="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw">
+  <uml:Model xmi:id="_q_g2oH5MEeCYc8AF_NNHaw" name="SmartROSLaserGateway_pim">
+    <elementImport xmi:id="_BpJ9AH5NEeCYc8AF_NNHaw">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
+    </elementImport>
+    <elementImport xmi:id="_BpQDoH5NEeCYc8AF_NNHaw">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
+    </elementImport>
+    <elementImport xmi:id="_BpVjMH5NEeCYc8AF_NNHaw">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_l2oOMB2JEeCEHoCtEL5pNg"/>
+    </elementImport>
+    <elementImport xmi:id="_Bqzi0H5NEeCYc8AF_NNHaw">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Rhs5cB2qEeCEHoCtEL5pNg"/>
+    </elementImport>
+    <elementImport xmi:id="_Bq63kH5NEeCYc8AF_NNHaw">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_HhoiQB4kEeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_BrIS8H5NEeCYc8AF_NNHaw">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_wh6OcB40EeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_BrQ10H5NEeCYc8AF_NNHaw">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_ms8XoB44EeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_BrZ_wH5NEeCYc8AF_NNHaw">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_w_jacB45EeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_BrjwwH5NEeCYc8AF_NNHaw">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_3Yh5QB46EeCL5fWcuAqvBA"/>
+    </elementImport>
+    <elementImport xmi:id="_BruI0H5NEeCYc8AF_NNHaw">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_t0-UAEV5EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_Br5H8H5NEeCYc8AF_NNHaw">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_BQWcsEV8EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_BsEHEH5NEeCYc8AF_NNHaw">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_BsQ7YH5NEeCYc8AF_NNHaw">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_MomccEV-EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_BsdIoH5NEeCYc8AF_NNHaw">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_9H6gUEV-EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_Bsp88H5NEeCYc8AF_NNHaw">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_bEoywEV_EeC6tb6-J2zOEA"/>
+    </elementImport>
+    <elementImport xmi:id="_Bs3YUH5NEeCYc8AF_NNHaw">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_vz0uwEmJEeCfXId88PsX3A"/>
+    </elementImport>
+    <elementImport xmi:id="_BtC-gH5NEeCYc8AF_NNHaw">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_284MYEmaEeClkeIcJ6tU1A"/>
+    </elementImport>
+    <elementImport xmi:id="_BtPy0H5NEeCYc8AF_NNHaw">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_vhHJwEvcEeCoUthXHMCjWw"/>
+    </elementImport>
+    <elementImport xmi:id="_BtcAEH5NEeCYc8AF_NNHaw">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_zrh7wEvcEeCoUthXHMCjWw"/>
+    </elementImport>
+    <elementImport xmi:id="_BtoNUH5NEeCYc8AF_NNHaw">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_1SX9wEvcEeCoUthXHMCjWw"/>
+    </elementImport>
+    <elementImport xmi:id="_Bt0akH5NEeCYc8AF_NNHaw">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_blbPcFFjEeC4q5gMSLe4ng"/>
+    </elementImport>
+    <elementImport xmi:id="_BuBO4H5NEeCYc8AF_NNHaw">
+      <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_MEDhMFYiEeCr0d2zveaPSA"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:Component" xmi:id="_q_g2oX5MEeCYc8AF_NNHaw" name="SmartROSLaserGateway">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_9GCXIH5MEeCYc8AF_NNHaw" name="laserServer" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_-5tWIH76EeC3xJHc-rngHg" name="laserQueryServer" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_s4QckNr0EeCgWfwLsebBhw" name="baseStateClient" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_72IKENr0EeCgWfwLsebBhw" name="wiringSlave" aggregation="composite"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_3e-HUH5UEeCYc8AF_NNHaw" name="ROS_SpinTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_4WYzEH76EeC3xJHc-rngHg" name="LaserQueryHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_rfpfQH78EeC3xJHc-rngHg" name="ROS">
+        <ownedAttribute xmi:id="_9vRRYH78EeC3xJHc-rngHg" name="is_static_mounted_lrf" isUnique="false">
+          <ownedComment xmi:id="_4pQ8sH8DEeC3xJHc-rngHg" annotatedElement="_9vRRYH78EeC3xJHc-rngHg">
+            <body>Describes whether laser-range-finder is statically mounted on the base device or is mounted on a manipulator.
+Thus the offset between base and lrf is either calculated once at the beginning or is determined for each laser scan separatelly.</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_BIhdcH8DEeC3xJHc-rngHg" value="true"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_NU7I4H8DEeC3xJHc-rngHg" name="tf_base_link_name" isUnique="false">
+          <ownedComment xmi:id="_K_SRwH8EEeC3xJHc-rngHg" annotatedElement="_NU7I4H8DEeC3xJHc-rngHg">
+            <body>Is the name for the base-link tf-frame.</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_WWKf4H8DEeC3xJHc-rngHg" value="/base_link"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_SJJs4H8DEeC3xJHc-rngHg" name="tf_laser_base_link_name" isUnique="false">
+          <ownedComment xmi:id="_RWIfEH8EEeC3xJHc-rngHg" annotatedElement="_SJJs4H8DEeC3xJHc-rngHg">
+            <body>New_Comment</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_YP2lYH8DEeC3xJHc-rngHg" value="/laser_base_link"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dmLw4H8DEeC3xJHc-rngHg" name="laser_subscr_name" isUnique="false">
+          <ownedComment xmi:id="_WfHLEH8EEeC3xJHc-rngHg" annotatedElement="_dmLw4H8DEeC3xJHc-rngHg">
+            <body>The name for the laser-publisher topic to subscribe to.</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_l2cW4H8DEeC3xJHc-rngHg" value="/base_scan/scan"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_o73uMIFdEeC_SLK0Yi0bFw" name="services">
+        <ownedAttribute xmi:id="_sJ8zwIFdEeC_SLK0Yi0bFw" name="subscribe_base" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_0oMLYIFdEeC_SLK0Yi0bFw" value="true"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_xUJAsIFdEeC_SLK0Yi0bFw" name="verbose" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_26lr0IFdEeC_SLK0Yi0bFw"/>
+        </ownedAttribute>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:id="_q_g2on5MEeCYc8AF_NNHaw">
+      <eAnnotations xmi:id="_q_g2o35MEeCYc8AF_NNHaw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_q_g2pH5MEeCYc8AF_NNHaw">
+      <eAnnotations xmi:id="_q_g2pX5MEeCYc8AF_NNHaw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <SmartMARS:SmartComponent xmi:id="_rI1KsH5MEeCYc8AF_NNHaw" base_Component="_q_g2oX5MEeCYc8AF_NNHaw"/>
+  <SmartMARS:SmartMutex xmi:id="_1gKK4H5MEeCYc8AF_NNHaw"/>
+  <SmartMARS:SmartPushNewestServer xmi:id="_9GRnsH5MEeCYc8AF_NNHaw" serviceName="scan" base_Port="_9GCXIH5MEeCYc8AF_NNHaw">
+    <commObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
+  </SmartMARS:SmartPushNewestServer>
+  <SmartMARS:SmartTask xmi:id="_3jCvAH5UEeCYc8AF_NNHaw" base_Class="_3e-HUH5UEeCYc8AF_NNHaw"/>
+  <SmartMARS:SmartQueryHandler xmi:id="_4WikEH76EeC3xJHc-rngHg" base_Class="_4WYzEH76EeC3xJHc-rngHg"/>
+  <SmartMARS:SmartQueryServer xmi:id="_-6k40H76EeC3xJHc-rngHg" serviceName="scan" base_Port="_-5tWIH76EeC3xJHc-rngHg" smartQueryHandler="_4WikEH76EeC3xJHc-rngHg">
+    <commRequestObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
+    <commAnswerObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
+  </SmartMARS:SmartQueryServer>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_rfu-0H78EeC3xJHc-rngHg" base_Class="_rfpfQH78EeC3xJHc-rngHg"/>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_vyLEYH78EeC3xJHc-rngHg"/>
+  <SmartMARS:SmartStateClient xmi:id="_Afh44H8FEeC3xJHc-rngHg"/>
+  <SmartMARS:SmartStateChangeHandler xmi:id="_L8XvoH8FEeC3xJHc-rngHg"/>
+  <SmartMARS:SmartStateServer xmi:id="_XCMNgH8FEeC3xJHc-rngHg" serviceName="state" smartStateChangeHandler="_L8XvoH8FEeC3xJHc-rngHg"/>
+  <SmartMARS:SmartMainState xmi:id="_mkalQH8FEeC3xJHc-rngHg" subState="_wf4I0H8FEeC3xJHc-rngHg"/>
+  <SmartMARS:SmartSubState xmi:id="_wf4I0H8FEeC3xJHc-rngHg"/>
+  <SmartMARS:SmartPushTimedClient xmi:id="_mq-7kIFbEeC_SLK0Yi0bFw" serviceName="basestate" serverName="SmartROSBaseGateway">
+    <commObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
+  </SmartMARS:SmartPushTimedClient>
+  <SmartMARS:SmartIniParameterGroup xmi:id="_o7900IFdEeC_SLK0Yi0bFw" base_Class="_o73uMIFdEeC_SLK0Yi0bFw"/>
+  <SmartMARS_1:SmartPushTimedClient xmi:id="_s5WowNr0EeCgWfwLsebBhw" base_Port="_s4QckNr0EeCgWfwLsebBhw" serviceName="basestate" serverName="SmartROSBaseGateway" wiringName="baseStateClient">
+    <commObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
+  </SmartMARS_1:SmartPushTimedClient>
+  <SmartMARS_1:SmartWiringSlave xmi:id="_72_swNr0EeCgWfwLsebBhw" base_Port="_72IKENr0EeCgWfwLsebBhw"/>
+</xmi:XMI>

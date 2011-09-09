@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:SmartMARS_1="http:///schemas/SmartMARS/_2KPH4MrkEd688Ztvebp4-A/101" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ http:///schemas/SmartMARS/_2KPH4MrkEd688Ztvebp4-A/101 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_2LsgcMrkEd688Ztvebp4-A">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:SmartMARS_1="http:///schemas/SmartMARS/_2KPH4MrkEd688Ztvebp4-A/101" xmlns:SmartMARS_2="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ http:///schemas/SmartMARS/_2KPH4MrkEd688Ztvebp4-A/101 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_2LsgcMrkEd688Ztvebp4-A http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw">
   <uml:Model xmi:id="_ETeVkJhzEd6s7_SKW4BMcg" name="SmartPlannerBreadthFirstSearch_pim">
     <elementImport xmi:id="_WjRA0EtHEeC0-sNaqHHU9g">
       <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
@@ -95,12 +95,13 @@
       <importedElement xmi:type="uml:Class" href="platform:/resource/CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_HJhPwEm_EeC7G99uJVy_1A"/>
     </elementImport>
     <packagedElement xmi:type="uml:Component" xmi:id="_ETeVkZhzEd6s7_SKW4BMcg" name="SmartPlannerBreadthFirstSearch">
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_WGiukJhzEd6s7_SKW4BMcg" name="baseClient" aggregation="composite"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_g94rkJhzEd6s7_SKW4BMcg" name="curMapClient" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_l3dCkJhzEd6s7_SKW4BMcg" name="plannerGoalServer" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_WxzKUM3iEd6A_NeNg8bJ4Q" name="paramServer" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_CxbhYM3kEd6A_NeNg8bJ4Q" name="plannerEventServer" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_aNSu4M3kEd6A_NeNg8bJ4Q" name="stateServer" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_hgdCYNrqEeCfGaX5KHyzng" name="curMapClient" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_0hfDUNrqEeCfGaX5KHyzng" name="baseClient" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_IkcbUNrrEeCfGaX5KHyzng" name="wiringSlave" aggregation="composite"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_qqYmEJhzEd6s7_SKW4BMcg" name="PlannerTask"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_nXSLUM3hEd6A_NeNg8bJ4Q" name="PlannerGoalLock"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_p8mnwM3hEd6A_NeNg8bJ4Q" name="PlannerGlobalLock"/>
@@ -127,20 +128,20 @@
     </profileApplication>
     <profileApplication xmi:id="_ETeVlJhzEd6s7_SKW4BMcg">
       <eAnnotations xmi:id="_ETeVlZhzEd6s7_SKW4BMcg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw"/>
       </eAnnotations>
       <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
     </profileApplication>
   </uml:Model>
   <SmartMARS:SmartComponent xmi:id="_EViyIJhzEd6s7_SKW4BMcg" base_Component="_ETeVkZhzEd6s7_SKW4BMcg"/>
-  <SmartMARS:SmartPushTimedClient xmi:id="_WI3CwJhzEd6s7_SKW4BMcg" serviceName="basestate" base_Port="_WGiukJhzEd6s7_SKW4BMcg" serverName="SmartPioneerBaseServer">
+  <SmartMARS:SmartPushTimedClient xmi:id="_WI3CwJhzEd6s7_SKW4BMcg" serviceName="basestate" serverName="SmartPioneerBaseServer">
     <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
   </SmartMARS:SmartPushTimedClient>
   <SmartMARS_1:SmartSendServer xmi:id="_ZzdFMJhzEd6s7_SKW4BMcg" serviceName="plannerParam" smartSendHandler="_bkK04JhzEd6s7_SKW4BMcg">
     <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_aAbuEJhvEd6s7_SKW4BMcg"/>
   </SmartMARS_1:SmartSendServer>
   <SmartMARS_1:SmartSendHandler xmi:id="_bkK04JhzEd6s7_SKW4BMcg"/>
-  <SmartMARS:SmartPushNewestClient xmi:id="_g-AAUJhzEd6s7_SKW4BMcg" serviceName="currentGridMap" base_Port="_g94rkJhzEd6s7_SKW4BMcg" serverName="SmartMapperGridMap">
+  <SmartMARS:SmartPushNewestClient xmi:id="_g-AAUJhzEd6s7_SKW4BMcg" serviceName="currentGridMap" serverName="SmartMapperGridMap">
     <commObject href="platform:/resource/CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_-s4UEEmREeC-KYWPZCFBzA"/>
   </SmartMARS:SmartPushNewestClient>
   <SmartMARS:SmartPushNewestServer xmi:id="_l3k-YJhzEd6s7_SKW4BMcg" serviceName="goal" base_Port="_l3dCkJhzEd6s7_SKW4BMcg">
@@ -167,4 +168,11 @@
   <SmartMARS:SmartMainState xmi:id="_KQElsM6_Ed6xeJj4jmvCKg" base_Class="_JV_jEM6_Ed6xeJj4jmvCKg" subState="_RmYE4M6_Ed6xeJj4jmvCKg"/>
   <SmartMARS:SmartSubState xmi:id="_RmYE4M6_Ed6xeJj4jmvCKg" base_Class="_RmLQkM6_Ed6xeJj4jmvCKg"/>
   <SmartMARS:SmartIniParameterGroup xmi:id="_LoQ2YEtIEeC0-sNaqHHU9g" base_Class="_LmFsIEtIEeC0-sNaqHHU9g"/>
+  <SmartMARS_2:SmartPushNewestClient xmi:id="_hhs_kNrqEeCfGaX5KHyzng" base_Port="_hgdCYNrqEeCfGaX5KHyzng" serviceName="currentGridMap" serverName="SmartMapperGridMap" wiringName="curMapClient">
+    <commObject href="platform:/resource/CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_-s4UEEmREeC-KYWPZCFBzA"/>
+  </SmartMARS_2:SmartPushNewestClient>
+  <SmartMARS_2:SmartPushTimedClient xmi:id="_0iyD0NrqEeCfGaX5KHyzng" base_Port="_0hfDUNrqEeCfGaX5KHyzng" serviceName="basestate" serverName="SmartPioneerBaseServer" wiringName="baseClient">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
+  </SmartMARS_2:SmartPushTimedClient>
+  <SmartMARS_2:SmartWiringSlave xmi:id="_IlngANrrEeCfGaX5KHyzng" base_Port="_IkcbUNrrEeCfGaX5KHyzng"/>
 </xmi:XMI>

@@ -45,6 +45,7 @@
 #define _SMARTOPENRAVECORE_HH
 
 #include "smartSoft.hh"
+#include <queue>
 
 class SmartOpenRaveCore
 {

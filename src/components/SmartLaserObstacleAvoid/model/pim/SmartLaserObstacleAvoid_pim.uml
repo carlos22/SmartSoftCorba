@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_c1t3YMi6Ed6mjK7Nkv1U3A/100" xmlns:SmartMARS_1="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_c1t3YMi6Ed6mjK7Nkv1U3A/100 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_c3lfoMi6Ed6mjK7Nkv1U3A http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124" xmlns:SmartMARS_1="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
   <uml:Model xmi:id="_rWr_sJilEd6ybMLNVUr2iw" name="SmartLaserObstacleAvoid_pim">
     <elementImport xmi:id="_sgkaMFrgEeCbMMBlDdOreQ">
       <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
@@ -70,6 +70,7 @@
     <packagedElement xmi:type="uml:Component" xmi:id="_rWr_sZilEd6ybMLNVUr2iw" name="SmartLaserObstacleAvoid">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_7x6cAJilEd6ybMLNVUr2iw" name="laserClient" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_FCt5AJimEd6ybMLNVUr2iw" name="navigationVelocitySendClient" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_wpZGgNrhEeCafu9Mh-_JFw" name="wiringSlave" aggregation="composite"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_QOIBgJimEd6ybMLNVUr2iw" name="RobotTask"/>
     </packagedElement>
     <profileApplication xmi:id="_rWr_spilEd6ybMLNVUr2iw">
@@ -80,17 +81,18 @@
     </profileApplication>
     <profileApplication xmi:id="_rWr_tJilEd6ybMLNVUr2iw">
       <eAnnotations xmi:id="_rWr_tZilEd6ybMLNVUr2iw" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw"/>
       </eAnnotations>
       <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
     </profileApplication>
   </uml:Model>
   <SmartMARS:SmartComponent xmi:id="_rY5mMJilEd6ybMLNVUr2iw" base_Component="_rWr_sZilEd6ybMLNVUr2iw"/>
-  <SmartMARS:SmartPushNewestClient xmi:id="_7z4K4JilEd6ybMLNVUr2iw" serviceName="scan" base_Port="_7x6cAJilEd6ybMLNVUr2iw" serverName="SmartLaserLMS200Server">
+  <SmartMARS:SmartPushNewestClient xmi:id="_7z4K4JilEd6ybMLNVUr2iw" base_Port="_7x6cAJilEd6ybMLNVUr2iw" serviceName="scan" serverName="SmartLaserLMS200Server" wiringName="laserClient">
     <commObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
   </SmartMARS:SmartPushNewestClient>
-  <SmartMARS:SmartSendClient xmi:id="_FC2b4JimEd6ybMLNVUr2iw" serviceName="navigationvelocity" base_Port="_FCt5AJimEd6ybMLNVUr2iw" serverName="SmartPioneerBaseServer">
+  <SmartMARS:SmartSendClient xmi:id="_FC2b4JimEd6ybMLNVUr2iw" base_Port="_FCt5AJimEd6ybMLNVUr2iw" serviceName="navigationvelocity" serverName="SmartPioneerBaseServer" wiringName="navigationVelocitySendClient">
     <commObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_t0-UAEV5EeC6tb6-J2zOEA"/>
   </SmartMARS:SmartSendClient>
   <SmartMARS_1:SmartTask xmi:id="_D-dC0FI2Ed-YQ77JuK4vhg" base_Class="_QOIBgJimEd6ybMLNVUr2iw"/>
+  <SmartMARS:SmartWiringSlave xmi:id="_wqDN0NrhEeCafu9Mh-_JFw" base_Port="_wpZGgNrhEeCafu9Mh-_JFw"/>
 </xmi:XMI>

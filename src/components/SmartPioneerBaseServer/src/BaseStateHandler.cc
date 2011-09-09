@@ -71,4 +71,8 @@ void BaseStateHandler::handlePushTimer(CHS::PushTimedServer<CommBasicObjects::Co
 	if (status != CHS::SMART_OK) {
 		std::cerr << "ERROR: failed to push base state (" << CHS::StatusCodeConversion(status) << ")" << std::endl;
 	}
+
+	CommBasicObjects::CommBatteryState batteryState;
+	batteryState.setVoltage(COMP->robot->getBatteryVoltage());
+	COMP->batteryEventServer->put(batteryState);
 }

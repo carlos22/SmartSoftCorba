@@ -1,0 +1,334 @@
+
+<div id="right">
+<style type="text/css">
+
+#entry td {
+	vertical-align: top;
+	padding-right: 15px;
+}
+
+#entry table {
+}
+
+.rowsep td {
+	/* comment for debug print with large gaps in table rows */
+	   padding-bottom: 15px;
+}
+
+#entry li {
+	padding-bottom: 15px;
+}
+
+.keyword {
+	font-style: italic;
+}
+
+
+
+/* UNcomment for debug print with large gaps in table rows */
+/*
+.rowsep td {
+	padding-bottom: 100px;
+}
+#entry li {
+	padding-bottom: 100px;
+}
+*/
+</style>
+
+
+
+
+<p style="margin-top: 100px">
+
+
+<h1>SmartPlannerBreadthFirstSearch</h1>
+
+
+<a href='SmartPlannerBreadthFirstSearch.jpg'>
+			<img src="SmartPlannerBreadthFirstSearch.jpg" style="float: right; width: 200px; margin-left: 10px; margin-bottom: 10px">
+		  </a>	
+		The SmartPlannerBreadthFirstSearch provides path planning services
+		based on grid maps. It uses a grid map from a map building component
+		(e.g. SmartMapperGridMap) and sends an intermediate waypoint as well as
+		the goalpoint to the motion execution (e.g. SmartCdlServer).
+		
+		<p>A wave propagation algorithm starting from goal cells backward to the
+		current position of the robot is used to calculate a path. The path
+		planning is further enhanced by a path shortening heuristic: the path
+		is followed starting at the current robot position until a straight
+		line from the robot position to the cell in question on the path
+		interferes with an obstacle. The prior cell is then sent as an
+		intermediate waypoint. The geometric path planning is applied
+		continuously every one second.
+		
+		<p>Several goal circles and/or goal lines can be specified as goals in
+		the planner. The planner will generate a path to the goal with the shortest
+		distance.
+
+		<p>The SmartPlannerBreadthFirstSearch for example can be used with SmartCdlServer
+		which cannot handle local minimas. Goals are then specified in the
+		SmartPlannerBreadthFirstSearch. A CDL_GOAL_REACHED event is fired by the CDL
+		component as soon as the final goal is reached.
+
+		<p>See also:<br>
+		<i>
+		Christian Schlegel. <a
+		href='http://www.hs-ulm.de/users/cschlege/_downloads/phd-thesis-schlegel.pdf'>Navigation
+		and Execution for Mobile Robots in Dynamic Environments: An Integrated
+		Approach.</a> p. 27-29. Dissertation, Fakult&auml;t f&uuml;r Informatik, Universit&auml;t Ulm,
+		2004.
+		</i>
+
+<p>
+
+<table>
+
+<tr>
+	 	<td>Purpose:
+ 		<td>Navigation<tr>
+	 	<td>License:
+ 		<td>LGPL<tr>
+	 	<td>Hardware:
+ 		<td>-<tr>
+	 	<td>Library Dependencies:
+ 		<td>none<tr>
+	 	<td>SVN:
+ 		<td><a href='http://smart-robotics.svn.sourceforge.net/viewvc/smart-robotics/trunk/smartsoft/src/components/SmartPlannerBreadthFirstSearch/'>browse SVN...</a></table>
+
+
+
+<h2 style="clear: both">States</h2>
+
+High level description of states. See <a href="#services">Services</a> for a detailed description how
+individual ports behave in specific states.
+<p>
+<table class="rowsep">
+<tr>
+	 	<td><i>neutral:</i>
+ 		<td>The path planning execution cycle is stopped. No path
+			planning is performed, no intermediate waypoints and goal points are sent.<tr>
+	 	<td><i>pathplanning:</i>
+ 		<td>The component will continuously (every 1 second)
+			plan a path to the goalpoints. Intermediate waypoints and goals are sent.</table>
+
+
+
+
+
+<h2>Parameters</h2>
+
+<table class="rowsep">
+<tr>
+	 	<td><i>ID(?id):</i>
+ 		<td>Set the goal id. Used to synchronize components, for
+			example with SmartMapperGridMap and SmartCdlServer.<tr>
+	 	<td><i>DELETEGOAL:</i>
+ 		<td>Delete all specified planner goals.<tr>
+	 	<td><i>SETDESTINATIONCIRCLE(?x)(?y)(?r):</i>
+ 		<td>Specify a goal point by setting
+			the coordinates [mm] ?x, ?y and radius ?r for the goal circle.<tr>
+	 	<td><i>SETDESTINATIONLINE(?x1)(?y1)(?x2)(?y2):</i>
+ 		<td>Specify a goal as a line:
+			the planner will plan the shortest path from the current position to a
+			line between the point ?x1,?y1 and ?x2, ?y2.</table>
+
+
+
+<h2>Services</h2>
+<a name="services"></a>
+
+
+
+
+<h3>Client-Ports</h3>
+<table>
+<tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartPushNewestClient&#187;
+			<br>curMapClient
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>commObject:
+					<td>CommGridMap
+			</table>
+			<p>
+
+			
+				The planner will plan paths in grid maps sent to this port.
+				Typically connected to a map building component such as 
+				SmartMapperGridMap.
+				
+			<p>
+			
+			<table><tr><td colspan=2><b>States:</b><tr>
+					<td>neutral:
+					<td>Port is neutral, does not consume new input while in this state.<tr>
+					<td>pathplanning:
+					<td>Latest map from this port is considered for path planning.</table><tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartPushTimedClient&#187;
+			<br>baseClient
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>interval:
+					<td>1<tr>
+					<td>commObject:
+					<td>CommBaseState
+			</table>
+			<p>
+
+			
+				Base states as input for path planning shall be sent to this
+				port.  The path is planned based on the current position sent
+				through this port. Typically connected to the robot base, e.g.
+				SmartPioneerBaseServer.
+			<p>
+			
+			<table><tr><td colspan=2><b>States:</b><tr>
+					<td>neutral:
+					<td>Port is neutral, does not consume new input while
+					in this state.<tr>
+					<td>pathplanning:
+					<td>The latest position is
+					considered as the current position for path planning.</table></table>
+
+
+
+
+
+
+
+<h3>Server-Ports</h3>
+<table>
+<tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartStateServer&#187;
+			<br>stateServer
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>serviceName:
+					<td>state
+			</table>
+			<p>
+
+			
+				See States for descriptions of possible states and their meaning.
+				
+			<p>
+			<tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartSendServer&#187;
+			<br>paramServer
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>serviceName:
+					<td>param<tr>
+					<td>commObject:
+					<td>CommPlannerParameter
+			</table>
+			<p>
+
+			
+				Accepts various parameters for managing goals. See Parameters.
+				
+			<p>
+			
+			<table><tr><td colspan=2><b>States:</b><tr>
+					<td>neutral:
+					<td>Accepts parameters.<tr>
+					<td>pathplanning:
+					<td>Accepts parameters.</table><tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartPushNewestServer&#187;
+			<br>plannerGoalServer
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>serviceName:
+					<td>goal<tr>
+					<td>commObject:
+					<td>CommPlannerGoal
+			</table>
+			<p>
+
+			If a path was found (event PLANNER_NO_ERROR
+				fired), this port pushes an valid
+				(invalid flag set to false) intermediate waypoint and goal
+				point calculated by the planner to the motion execution. If no
+				path was found, the waypoint and goalpoint are sent with the
+				invalid flag set to true.
+			<p>
+			
+			<table><tr><td colspan=2><b>States:</b><tr>
+					<td>neutral:
+					<td>Port is neutral, does not send any intermediate
+					waypoints and goal points while in this state.<tr>
+					<td>pathplanning:
+					<td>Planner goals are sent to the motion
+					execution as intermediate waypoints and goal points.</table><tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartEventServer&#187;
+			<br>plannerEventServer
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>serviceName:
+					<td>plannerEvent<tr>
+					<td>eventParameter:
+					<td>CommPlannerEventParameter<tr>
+					<td>eventResult:
+					<td>CommPlannerEventResult<tr>
+					<td>eventState:
+					<td>PlannerEventState
+			</table>
+			<p>
+
+			
+				The event state PLANNER_UNKNOWN can be used for activation if
+				the current state is unknown. Events are sent on every change.
+
+				<p>The port will send the events listed below:
+
+				<ul>
+					<li>PLANNER_NO_PATH: 
+						Fired if no path could be found for at least five
+						seconds. Invalid goals (invalid flag=true) are pushed
+						via plannerUpdateNewestServer when no path was found.
+
+					<li>PLANNER_NO_ERROR:
+						No errors in planner, valid goals (invalid flag=false)
+						are pushed via plannerUpdateNewestServer.
+
+					<li>PLANNER_UNKNOWN_ERROR:
+		  				An unknown error occurred.
+
+					<li>PLANNER_NO_GOAL_AVAILABLE:
+			 			No goals available.
+
+					<li>PLANNER_GOAL_NOT_MARKED:
+						Every goal cell is already occupied. The goal cells
+						could not be marked.
+
+					<li>PLANNER_START_OCCUPIED_OBSTACLE:
+						The start cell (current robot position) is occupied by
+						an obstacle.
+
+					<li>PLANNER_START_OCCUPIED_GOAL:
+						The robot is standing on the goal cell.
+
+					<li>PLANNER_WRONG_MAPID:
+						The latest grid map is of another id than the current
+						planner id.  The planner will not plan anything and
+						will not send intermediate waypoints and goal points.
+
+				</ul>
+				
+			<p>
+			
+			<table><tr><td colspan=2><b>States:</b><tr>
+					<td>neutral:
+					<td>Neutral, will not send any events.<tr>
+					<td>pathplanning:
+					<td>Will send the above events.</table></table>
+
+
+
+
+
+
+
+
+</div>

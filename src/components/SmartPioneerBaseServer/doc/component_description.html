@@ -1,0 +1,222 @@
+
+<div id="right">
+<style type="text/css">
+
+#entry td {
+	vertical-align: top;
+	padding-right: 15px;
+}
+
+#entry table {
+}
+
+.rowsep td {
+	/* comment for debug print with large gaps in table rows */
+	   padding-bottom: 15px;
+}
+
+#entry li {
+	padding-bottom: 15px;
+}
+
+.keyword {
+	font-style: italic;
+}
+
+
+
+/* UNcomment for debug print with large gaps in table rows */
+/*
+.rowsep td {
+	padding-bottom: 100px;
+}
+#entry li {
+	padding-bottom: 100px;
+}
+*/
+</style>
+
+
+
+
+<p style="margin-top: 100px">
+
+
+<h1>SmartPioneerBaseServer</h1>
+
+
+<a href='SmartPioneerBaseServer.jpg'>
+			<img src="SmartPioneerBaseServer.jpg" style="float: right; width: 200px; margin-left: 10px; margin-bottom: 10px">
+		  </a>The SmartPioneerBaseServer makes P2OS-based robot
+		platforms available. It handles all the communication with the hardware. It
+		offers several services for controlling the robot, such as sending navigation
+		commands to the base and providing access to the robot's odometry.
+		Position updates can be sent to the component to overcome odometry
+		failures.
+	
+		<p>GPL-License: includes <a
+		href='http://playerstage.sourceforge.net/doc/Player-2.1.0/player/group__driver__p2os.html'>Code
+		from the Player Project</a>.<p>
+
+<table>
+
+<tr>
+	 	<td>Purpose:
+ 		<td>Hardware-Driver<tr>
+	 	<td>License:
+ 		<td>GPL<tr>
+	 	<td>Hardware:
+ 		<td>P2OS-based platforms. Currently supported: P3DX, P3DXSH, P3ATSH. Others can simply be added.<tr>
+	 	<td>Library Dependencies:
+ 		<td>Boost >=1.33.1<tr>
+	 	<td>SVN:
+ 		<td><a href='http://smart-robotics.svn.sourceforge.net/viewvc/smart-robotics/trunk/smartsoft/src/components/SmartPioneerBaseServer/'>browse SVN...</a></table>
+
+
+
+
+
+
+
+<h2>Parameters</h2>
+
+<table class="rowsep">
+<tr>
+	 	<td><i>RESET:</i>
+ 		<td>Reset the connection to the base at runtime. The serial
+			connection is closed and reopened. All estimated positions are
+			set to zero.</table>
+
+
+
+<h2>Services</h2>
+<a name="services"></a>
+
+
+
+
+<h3>Client-Ports</h3>
+<table>
+</table>
+
+
+
+
+
+
+
+<h3>Server-Ports</h3>
+<table>
+<tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartSendServer&#187;
+			<br>basePositionUpdateServer
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>commObject:
+					<td>CommBasePositionUpdate<tr>
+					<td>serviceName:
+					<td>positionUpdate
+			</table>
+			<p>
+
+			Port to send corrections of base pose to
+				overcome the odometry failure. Accepts a pair of an old
+				uncorrected pose and a new corrected pose. The deviation
+				between these two poses is applied to correct the current pose
+				of the robot.
+			<p>
+			<tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartSendServer&#187;
+			<br>navigationVelocityServer
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>commObject:
+					<td>CommNavigationVelocity<tr>
+					<td>serviceName:
+					<td>navigationvelocity
+			</table>
+			<p>
+
+			Send new navigation velocity commands v and omega
+				to hardware base. The values are thresholded by the min and max values
+				specified in the ini file before being sent.
+				<br>Note that the base will perform an emergency stop if no new velocity
+				command was sent within the timeout specified in firmware.
+			<p>
+			<tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartPushTimedServer&#187;
+			<br>basePositionServer
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>commObject:
+					<td>CommBaseState<tr>
+					<td>serviceName:
+					<td>basestate
+			</table>
+			<p>
+
+			Push the base state containing current
+				information about the robot's velocity, pose, raw pose. Should
+				be used when a continuous base pose is required. For example,
+				the SmartLaserLMS200Server uses the latest base pose (received
+				continuously) to stamp the laser scan with the robot's
+				pose at the time the scan was recorded.
+			<p>
+			<tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartSendServer&#187;
+			<br>paramServer
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>commObject:
+					<td>CommBaseParameter<tr>
+					<td>serviceName:
+					<td>param
+			</table>
+			<p>
+
+			Accept parameters at runtime. See section Parameters.
+			<p>
+			<tr>
+		<td class="keyword" style="padding-bottom: 20px; border-bottom: 1px black dashed;">&#171;SmartQueryServer&#187;
+			<br>baseQueryServer
+		<td style="padding-bottom: 20px; border-bottom: 1px black dashed;">
+			<table><tr>
+					<td>commRequestObject:
+					<td>CommVoid<tr>
+					<td>commAnswerObject:
+					<td>CommBaseState<tr>
+					<td>serviceName:
+					<td>basestatequery
+			</table>
+			<p>
+
+			Query port to request the base state. Analogous
+				to basePositionPushTimedServer, but a query service. Should be used
+				when the base pose is needed sporadically, for example by a behavior
+				component which explicitly needs to query the base pose from
+				time to time.
+			<p>
+			</table>
+
+
+
+
+<h2>Ini-Configuration</h2>
+
+<table class='rowsep'><tr><td colspan=2><b>[robot]</b><tr><td><i>robotType: string</i>
+				<td>Type of pioneer platform. Currently supported: p3dx, p3dxsh, p3atsh.<tr><td><i>enable_motors: boolean</i>
+				<td>Enable (true) or disable (false)
+				motors at startup. Defines the state of the base' 'motors'-button
+				on startup. Default: true<tr><td><i>enable_sonar: boolean</i>
+				<td>Enable (true) or disable (false) sonar at startup. Default: false<tr><td><i>serialport: int32</i>
+				<td>Device name to access Pioneer Base, e.g. /dev/ttyS0<tr><td><i>maxVel: int32</i>
+				<td>Set maximum translation valocity of robot [mm/s]. Default: 1000<tr><td><i>maxVelAcc: int32</i>
+				<td>Set maximum translation acceleration of robot [mm/s^2]. Default 800<tr><td><i>maxVelDecel: int32</i>
+				<td>Set maximum translation deceleration of robot [mm/s^2]. Negative value. Default -500<tr><td><i>maxRotVel: int32</i>
+				<td>Set maximum rotation velocity of robot [deg/s]. Default 50<tr><td><i>maxRotVelAcc: int32</i>
+				<td>Set maximum rotation acceleration of robot [deg/s^2]. Default 500<tr><td><i>maxRotVelDecel: int32</i>
+				<td>Set maximum rotation deceleration of robot [deg/s^2]. Negative value. Default -500</table><p>
+
+
+
+</div>

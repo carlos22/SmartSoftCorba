@@ -115,13 +115,21 @@ void Katana::init() {
 		globalParameters.jointVelocityLimit[i] = katana->getMotorVelocityLimit(i);
 	}
 	globalParameters.gripperVelocityLimit = katana->getMotorVelocityLimit(gripperId);
-	globalParameters.calibrate = false;
-	globalParameters.calibrate_axis = false;
 	globalParameters.modified = true;
 	parGuard.release();
 
 	// calibrate katana
 	calibrate(COMP->ini.katana.fast_calibration);
+
+        // calibrate faulhaber gripper
+        if(COMP->ini.katana.faulhaberGripper == true)
+        {
+          CHS::SmartGuard g(COMP->FaulhaberGripperLock);
+          faulhaberGripper.connect(COMP->ini.serial_port.faulhaberDevice);
+          // calibrate( motorspeed in rpm,  force in mA );
+          faulhaberGripper.calibrate(7000, 800);
+        }
+
 
 	guard.release();
 }
@@ -146,6 +154,7 @@ void Katana::performTrajectory(const CommManipulatorObjects::CommManipulatorTraj
 		// send event that katana is now moving
 		CommManipulatorObjects::ManipulatorEventState state;
 		state.set_event(CommManipulatorObjects::ManipulatorEvent::GOAL_NOT_REACHED);
+                std::cout << "[Katana] SEND-EVENT: GOAL_NOT_REACHED\n";
 		COMP->eventServer->put(state);
 
 		///////////////////////////
@@ -215,8 +224,8 @@ void Katana::performTrajectory(const CommManipulatorObjects::CommManipulatorTraj
 				// lock Katana
 				CHS::SmartGuard guard(COMP->KatanaMutex);
 
-				//				std::cout << tcp_manip.get_x() << ", " << tcp_manip.get_y() << ", " << tcp_manip.get_z() << ", " << phi
-				//						<< ", " << theta << ", " << psi << "\n";
+								std::cout << tcp_manip.get_x() << ", " << tcp_manip.get_y() << ", " << tcp_manip.get_z() << ", " << phi
+										<< ", " << theta << ", " << psi << "\n";
 
 				katana->IKCalculate(tcp_manip.get_x(), tcp_manip.get_y(), tcp_manip.get_z(), phi, theta, psi,
 						encoders.begin());
@@ -253,7 +262,7 @@ void Katana::performTrajectory(const CommManipulatorObjects::CommManipulatorTraj
 	}
 }
 
-void Katana::getCurrentState(CommManipulatorObjects::CommManipulatorState &state) {
+void Katana::getCurrentState(CommManipulatorObjects::CommManipulatorState &state, bool block) {
 	try {
 		// set id for the state
 		state.set_id(stateIdCounter++);
@@ -266,13 +275,20 @@ void Katana::getCurrentState(CommManipulatorObjects::CommManipulatorState &state
 				COMP->ini.katana.azimuth, COMP->ini.katana.elevation, COMP->ini.katana.roll);
 
 		// read values from katana
-		CHS::SmartGuard guard(COMP->KatanaMutex, false);
+		CHS::SmartGuard guard(COMP->KatanaMutex, block);
 		if (guard.locked()) {
 			// check if the manipulator collided
 			checkForCollision();
 
 			// read current encoders from the manipulator
 			katana->getRobotEncoders(encoders.begin(), encoders.end(), true);
+
+                        if(COMP->ini.katana.faulhaberGripper == true)
+                        {
+                          CHS::SmartGuard g(COMP->FaulhaberGripperLock);
+                          encoders[gripperId] = faulhaberGripper.read_pos();
+                          std::cout << "faulhaberGripper.read_pos() = " << encoders[gripperId] << std::endl;
+                        }
 
 			// all actions which must be synchronized are done
 			guard.release();
@@ -282,6 +298,8 @@ void Katana::getCurrentState(CommManipulatorObjects::CommManipulatorState &state
 			encoders = lastEncoderValues;
 			encoderGuard.release();
 		}
+
+		std::cout<<"encoders.size: "<<encoders.size()<<std::endl;
 
 		if (encoders.size() >= (size_t) motorCount) {
 			// calculate the pose from the encoders
@@ -299,16 +317,16 @@ void Katana::getCurrentState(CommManipulatorObjects::CommManipulatorState &state
 
 					CommManipulatorObjects::ManipulatorEventState state;
 
-					//					std::cout << "[Katana] send goal reached event before wait 2 sec\n";
-					sleep(1);
-					//					std::cout << "[Katana] send goal reached event after wait 2 sec\n";
+										std::cout << "[Katana] send goal reached event before wait 5 sec\n";
+					usleep(1000000);
+										std::cout << "[Katana] send goal reached event after wait 5 sec\n";
 
 					if (convertJointEncToRad(gripperId, encoders[gripperId]) > COMP->ini.katana.gripper_empty_angle) {
 						state.set_event(CommManipulatorObjects::ManipulatorEvent::GOAL_REACHED_GRIPPER_EMPTY);
-						std::cout << "[Katana] GOAL_REACHED_GRIPPER_EMPTY, ";
+						std::cout << "[Katana] SEND-EVENT: GOAL_REACHED_GRIPPER_EMPTY, ";
 					} else {
 						state.set_event(CommManipulatorObjects::ManipulatorEvent::GOAL_REACHED);
-						std::cout << "[Katana] GOAL_REACHED, ";
+						std::cout << "[Katana] SEND-EVENT: GOAL_REACHED, ";
 					}
 
 					if (COMP->ini.katana.verbose) {
@@ -347,8 +365,11 @@ void Katana::getCurrentState(CommManipulatorObjects::CommManipulatorState &state
 			// set angle of gripper
 			state.set_gripper_angle(angles[angles.size() - 1]);
 
+
 			// set state to valid
 			state.set_valid(true);
+
+			std::cout<<"Manip. State: "<<state <<std::endl;
 		}
 
 	} catch (MotorCrashException ex) {
@@ -406,20 +427,6 @@ void Katana::setParameter(const CommManipulatorObjects::CommManipulatorParameter
 			break;
 		}
 
-		case CommManipulatorObjects::ManipulatorParameterMode::CALIBRATE: {
-			globalParameters.calibrate = true;
-			std::cout << "ManipulatorParameterMode::CALIBRATE: received \n";
-			break;
-		}
-
-		case CommManipulatorObjects::ManipulatorParameterMode::CALIBRATE_AXIS: {
-			globalParameters.calibrate_axis = true;
-			globalParameters.axis_to_calibrate = p1;
-			globalParameters.modified = true;
-			std::cout << "ManipulatorParameterMode::CALIBRATE_AXIS: "<<p1<<" received \n";
-			break;
-		}
-
 		}
 		guard.release();
 	} catch (...) {
@@ -434,6 +441,11 @@ void Katana::switchOn() {
 		CHS::SmartGuard guard(COMP->KatanaMutex);
 		katana->switchRobotOn();
 		guard.release();
+                if(COMP->ini.katana.faulhaberGripper == true)
+                {
+                  CHS::SmartGuard g(COMP->FaulhaberGripperLock);
+                  faulhaberGripper.enable();
+                }
 	} catch (...) {
 		handleException("Unhandled exception in Katana::switchOn()");
 	}
@@ -445,6 +457,11 @@ void Katana::switchOff() {
 		CHS::SmartGuard guard(COMP->KatanaMutex);
 		katana->switchRobotOff();
 		guard.release();
+                if(COMP->ini.katana.faulhaberGripper == true)
+                {
+                  CHS::SmartGuard g(COMP->FaulhaberGripperLock);
+                  faulhaberGripper.disable();
+                }
 	} catch (...) {
 		handleException("Unhandled exception in Katana::switchOff()");
 	}
@@ -685,8 +702,6 @@ void Katana::applyGlobalParameters() {
 		// copy global parameters for local use which must not be synchronized
 		globalParameters.modified = false;
 		localParameters = globalParameters;
-		globalParameters.calibrate = false;
-		globalParameters.calibrate_axis = false;
 		parGuard.release();
 
 		// print the current Katana mode
@@ -709,18 +724,6 @@ void Katana::applyGlobalParameters() {
 		// set gripper velocity limit
 		std::cout << "set gripper velocity limit: " << localParameters.gripperVelocityLimit << "\n";
 		katana->setMotorVelocityLimit(gripperId, localParameters.gripperVelocityLimit);
-
-		if (localParameters.calibrate){
-			calibrate();
-		}
-
-
-		if (localParameters.calibrate_axis){
-			calibrate(localParameters.axis_to_calibrate);
-
-		 std::cout<<"Katana::calibrate(localParameters.axis_to_calibrate) past"<<std::endl;
-
-		}
 
 		guard.release();
 	}
@@ -758,13 +761,6 @@ void Katana::calibrate(bool fastCalibration) {
 		katana->calibrate();
 		katana->enableCrashLimits();
 	}
-}
-
-void Katana::calibrate(int axis) {
-
-	katana->disableCrashLimits();
-	katana->calibrate_axis(axis);
-	katana->enableCrashLimits();
 }
 
 void Katana::checkForCollision() {
@@ -856,7 +852,14 @@ void Katana::moveManipulator(const CommManipulatorObjects::CommManipulatorTrajec
 
 	// ANGLE
 	else if (action == CommManipulatorObjects::ManipulatorGripperAction::ANGLE) {
-		encoders.push_back(convertJointRadToEnc(encoders.size(), trajectory.get_gripper_angle(index)));
+        if(COMP->ini.katana.faulhaberGripper == true)
+        {
+             CHS::SmartGuard g(COMP->FaulhaberGripperLock);
+             std::cout << "faulhaberGripper.move_to_pos: "<<convertJointRadToEnc(5, trajectory.get_gripper_angle(index))<<" trajectory.get_gripper_angle(index): "<<trajectory.get_gripper_angle(index)<<std::endl;
+             //faulhaberGripper.move_to_pos(convertJointRadToEnc(5, trajectory.get_gripper_angle(index)));
+        } else {
+			encoders.push_back(convertJointRadToEnc(encoders.size(), trajectory.get_gripper_angle(index)));
+		}
 		katana->moveRobotToEnc(encoders.begin(), encoders.end(), trajectory.get_wait_until_each_pose_reached());
 
 		CHS::SmartGuard encoderGuard(COMP->EncoderMutex);
@@ -871,12 +874,21 @@ void Katana::moveManipulator(const CommManipulatorObjects::CommManipulatorTrajec
 		//		std::cout << __LINE__ << " [Katana] gripperEndPoseReached = true\n";
 		encoderGuard.release();
 	}
+
+	usleep(25000);
 }
 
 void Katana::openGripper(bool waitUntilReached) {
+
+  if(COMP->ini.katana.faulhaberGripper == true)
+  {
+    CHS::SmartGuard g(COMP->FaulhaberGripperLock);
+    faulhaberGripper.open();
+  }
+  else
+  {
 	try {
-		//katana->openGripper(waitUntilReached, gripperTimeout);
-                katana->calibrate_axis(gripperId);
+		katana->openGripper(waitUntilReached, gripperTimeout);
 		std::cout << "[Katana] openGripper encoders reached!\n";
 	} catch (MotorCrashException ex) {
 		// Is not thrown by Katana for the gripper
@@ -884,32 +896,19 @@ void Katana::openGripper(bool waitUntilReached) {
 	} catch (MotorTimeoutException ex) {
 		std::cout << "[Katana] " << ex.message() << " in openGripper()\n";
 	}
-   //lutz duplicated to prevent gripper from not oppening
-        try {
-                //katana->openGripper(waitUntilReached, gripperTimeout);
-                katana->calibrate_axis(gripperId);
-                std::cout << "[Katana] openGripper encoders reached!\n";
-        } catch (MotorCrashException ex) {
-                // Is not thrown by Katana for the gripper
-                std::cout << "[Katana] " << ex.message() << " in openGripper()\n";
-        } catch (MotorTimeoutException ex) {
-                std::cout << "[Katana] " << ex.message() << " in openGripper()\n";
-        }
+  }
 }
 
 void Katana::closeGripper(bool waitUntilReached) {
-       std::vector<int> encoders(motorCount);
-       std::vector<int> encoders_new(motorCount);
-       // read current encoders from the manipulator
-       katana->getRobotEncoders(encoders.begin(), encoders.end(), true);
 
-
-
-     for(size_t i=0;i<3;i++){
+  if(COMP->ini.katana.faulhaberGripper == true)
+  {
+    CHS::SmartGuard g(COMP->FaulhaberGripperLock);
+    faulhaberGripper.close();
+  }
+  else
+  {
 	try {
-		//		katana->moveMotorToEnc(gripperId, -16768, false, 100, gripperTimeout);
-		//		if (waitUntilReached)
-		//			katana->waitForMotor(gripperId, -16768, 100, 0, gripperTimeout);
 		katana->closeGripper(waitUntilReached, gripperTimeout);
 		std::cout << "[Katana] closeGripper encoders reached!\n";
 	} catch (MotorCrashException ex) {
@@ -918,19 +917,7 @@ void Katana::closeGripper(bool waitUntilReached) {
 	} catch (MotorTimeoutException ex) {
 		std::cout << "[Katana] " << ex.message() << " in closeGripper()\n";
 	}
-
-        // read current encoders from the manipulator
-        katana->getRobotEncoders(encoders_new.begin(), encoders_new.end(), true);
-        std::cout<<"convertJointEncToRad(gripperId, encoders_new[gripperId]): "<<convertJointEncToRad(gripperId, encoders_new[gripperId])<<" > "<<COMP->ini.katana.gripper_empty_angle<<std::endl;
-        if(encoders[gripperId] - 1000 > encoders_new[gripperId] || convertJointEncToRad(gripperId, encoders_new[gripperId]) > COMP->ini.katana.gripper_empty_angle)
-        {
-          std::cout<<"Gripper close count: "<<i<<std::endl;
-          return;
-        }
-     }
-    std::cout<<"[Katana] closeGripper Gipper not closed enc: "<<encoders_new[gripperId]<<std::endl;
-    //handleException("Gripper not closed exep. in Katana::closeGripper()",
-    //                            CommManipulatorObjects::ManipulatorEvent::COLLISION);
+  }
 }
 
 void Katana::convertJointsRadToEnc(const std::vector<double>& angles, std::vector<int>& encoders) const {
@@ -1019,5 +1006,6 @@ void Katana::handleException(const std::string& message, CommManipulatorObjects:
 	// send event to other components
 	CommManipulatorObjects::ManipulatorEventState state;
 	state.set_event(event);
+        std::cout << "[Katana] SEND-EVENT: " << event << std::endl;
 	COMP->eventServer->put(state);
 }

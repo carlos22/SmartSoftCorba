@@ -88,9 +88,8 @@ INI_FILES    =	SmartOpenRave.ini
 ##----------------------------------------------------------------------------
 # PROTECTED REGION ID(CustomUserLibs) ENABLED START
 ## user libs  -- add your own libs here
-USER_CPP_CFLAGS = 
-USER_CPP_LFLAGS = `pkg-config --libs libmrpt` -L/usr/local/lib -lopenrave -lopenrave-core -L/usr/lib -lboost_python -lboost_iostreams -lpython2.6
-INCLUDES += -I/usr/local/include/mrpt/mrpt-config -I./specificManipulator -I/usr/local/include	-I/usr/include/python
+USER_CPP_CFLAGS = -I/usr/include/python2.6 -I./specificManipulator -I/usr/local/include
+USER_CPP_LFLAGS = -L/usr/local/lib -lopenrave -lopenrave-core -L/usr/lib -lboost_python -lboost_iostreams -lpython2.6
 # PROTECTED REGION END
 ##----------------------------------------------------------------------------
 
@@ -101,12 +100,12 @@ CPNT =	1
 
 # <asteck, dstampfer> --------------------------------------------------------
 # Include all libs
-#ALL_LIBS=  $(patsubst $(SMART_ROOT)/lib/lib%.a,-l%,$(wildcard $(SMART_ROOT)/lib/lib*))
-ALL_LIBS=`pkg-config --libs libmrpt` -L/usr/local/lib -lopenrave -lopenrave-core \
-	-lboost_python -lboost_iostreams -lpython2.6 -lCommManipulatorObjects -lCommManipulationPlannerObjects -lCommBasicObjects \
-	-lCommNavigationObjects -lCommObjectRecognitionObjects -lCommSpeechObjects \
-	-lCommTrackingObjects -lCommVisionObjects -lfawVisualization -lfawXfig -lsmartProperty \
-	-lsmartQtProcessingPatterns -lsmartSickInterface -lsmartSoft
+#ALL_LIBS=-L/usr/local/lib -lopenrave -lopenrave-core \
+#	-lboost_python -lboost_iostreams -lpython2.6 -lCommManipulatorObjects -lCommManipulationPlannerObjects -lCommBasicObjects \
+#	-lCommNavigationObjects -lCommObjectRecognitionObjects -lCommSpeechObjects \
+#	-lCommTrackingObjects -lCommVisionObjects -lsmartProperty \
+#	-lsmartQtProcessingPatterns -lsmartSickInterface -lsmartSoft
+ALL_LIBS= -Xlinker --start-group $(patsubst $(SMART_ROOT)/lib/lib%.a,-l%,$(wildcard $(SMART_ROOT)/lib/lib*)) -Xlinker --end-group
 
 CPNT_CFLAGS = 	$(USER_CPP_CFLAGS) 
 CPNT_LFLAGS = 	$(LFLAGS) $(USER_CPP_LFLAGS) $(ALL_LIBS) \

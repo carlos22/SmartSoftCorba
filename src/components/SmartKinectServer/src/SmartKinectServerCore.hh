@@ -46,8 +46,10 @@
 #define _SMARTKINECTSERVERCORE_HH
 
 #include <iostream>
+#include "smartSoft.hh"
 
 #include <CommVisionObjects/commKinectImage.hh>
+#include "KinectWrapperMRPT.hh"
 
 class SmartKinectServerCore
 {
@@ -58,7 +60,9 @@ public:
 
 	CommVisionObjects::CommKinectImage* newestImage;
 
-	bool componentActive;
+
+	KinectWrapper* device;
+	CHS::SmartMutex kinectMutex;
 };
 
 #endif

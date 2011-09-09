@@ -32,21 +32,24 @@
 
 #include <iostream>
 
-PTUWrapper::PTUWrapper() {
+PTUWrapper::PTUWrapper()
+{
 }
 
-PTUWrapper::~PTUWrapper() {
+PTUWrapper::~PTUWrapper()
+{
 	CHS::SmartGuard guard(COMP->PTUMutex);
 	ptu.close();
 	guard.release();
 }
 
-bool PTUWrapper::init(const std::string& device) {
+bool PTUWrapper::init(const std::string& device)
+{
 	bool success = false;
 
 	// calculate transformation matrix for robot offset
-	EulerTransformationMatrices::create_zyx_matrix(COMP->ini.PTU.x, COMP->ini.PTU.y, COMP->ini.PTU.z,
-			COMP->ini.PTU.azimuth, COMP->ini.PTU.elevation, COMP->ini.PTU.roll, ptuRobotOffset);
+	EulerTransformationMatrices::create_zyx_matrix(COMP->ini.PTU.x, COMP->ini.PTU.y, COMP->ini.PTU.z, COMP->ini.PTU.azimuth,
+			COMP->ini.PTU.elevation, COMP->ini.PTU.roll, ptuRobotOffset);
 
 	default_base_position.set_x(COMP->ini.base.x);
 	default_base_position.set_y(COMP->ini.base.y);
@@ -62,13 +65,22 @@ bool PTUWrapper::init(const std::string& device) {
 
 	CHS::SmartGuard guard(COMP->PTUMutex);
 	{
-		success = ptu.init(device);
-		if (success) {
-			success = ptu.inmediateExecution(true);
+		while (!success)
+		{
+			std::cout << "[PTUWrapper] init ptu ...\n";
+			success = ptu.init(device);
+			if (success)
+			{
+				success = ptu.inmediateExecution(true);
+				ptu.clearErrors();
+				ptu.save();
+			}
+			else {
+				sleep(1);
+			}
 		}
 
-		ptu.clearErrors();
-		ptu.save();
+		std::cout << "[PTUWrapper] ptu init done!\n";
 	}
 	guard.release();
 
@@ -109,7 +121,8 @@ bool PTUWrapper::init(const std::string& device) {
 	return success;
 }
 
-void PTUWrapper::setParameter(const CommPTUObjects::CommPTUParameter& param) {
+void PTUWrapper::setParameter(const CommPTUObjects::CommPTUParameter& param)
+{
 	CommPTUObjects::PTUTagType tag = CommPTUObjects::PTUTagType::UNSET;
 	double p1, p2, p3, p4, p5, p6;
 
@@ -119,46 +132,57 @@ void PTUWrapper::setParameter(const CommPTUObjects::CommPTUParameter& param) {
 	globalParam.reset = false;
 
 	CHS::SmartGuard guard(COMP->ParamMutex);
-	switch (tag) {
-	case CommPTUObjects::PTUTagType::RESET: {
+	switch (tag)
+	{
+	case CommPTUObjects::PTUTagType::RESET:
+	{
 		globalParam.reset = true;
 		break;
 	}
-	case CommPTUObjects::PTUTagType::ACCELERATION_PAN: {
+	case CommPTUObjects::PTUTagType::ACCELERATION_PAN:
+	{
 		globalParam.acceleration_pan = p1;
 		break;
 	}
-	case CommPTUObjects::PTUTagType::ACCELERATION_TILT: {
+	case CommPTUObjects::PTUTagType::ACCELERATION_TILT:
+	{
 		globalParam.acceleration_tilt = p1;
 		break;
 	}
-	case CommPTUObjects::PTUTagType::SPEED_LIMIT_PAN: {
+	case CommPTUObjects::PTUTagType::SPEED_LIMIT_PAN:
+	{
 		globalParam.min_speed_pan = p1;
 		globalParam.max_speed_pan = p2;
 		break;
 	}
-	case CommPTUObjects::PTUTagType::SPEED_LIMIT_TILT: {
+	case CommPTUObjects::PTUTagType::SPEED_LIMIT_TILT:
+	{
 		globalParam.min_speed_tilt = p1;
 		globalParam.max_speed_tilt = p2;
 		break;
 	}
-	case CommPTUObjects::PTUTagType::SPEED_PAN: {
+	case CommPTUObjects::PTUTagType::SPEED_PAN:
+	{
 		globalParam.speed_pan = p1;
 		break;
 	}
-	case CommPTUObjects::PTUTagType::SPEED_TILT: {
+	case CommPTUObjects::PTUTagType::SPEED_TILT:
+	{
 		globalParam.speed_tilt = p1;
 		break;
 	}
-	case CommPTUObjects::PTUTagType::START_UP_SPEED_PAN: {
+	case CommPTUObjects::PTUTagType::START_UP_SPEED_PAN:
+	{
 		globalParam.start_up_speed_pan = p1;
 		break;
 	}
-	case CommPTUObjects::PTUTagType::START_UP_SPEED_TILT: {
+	case CommPTUObjects::PTUTagType::START_UP_SPEED_TILT:
+	{
 		globalParam.start_up_speed_tilt = p1;
 		break;
 	}
-	case CommPTUObjects::PTUTagType::SENSOR_OFFSET: {
+	case CommPTUObjects::PTUTagType::SENSOR_OFFSET:
+	{
 		globalParam.sensorOffset.set_x(p1);
 		globalParam.sensorOffset.set_y(p2);
 		globalParam.sensorOffset.set_z(p3);
@@ -167,7 +191,8 @@ void PTUWrapper::setParameter(const CommPTUObjects::CommPTUParameter& param) {
 		globalParam.sensorOffset.set_roll(p6);
 		break;
 	}
-	case CommPTUObjects::PTUTagType::UNSET: {
+	case CommPTUObjects::PTUTagType::UNSET:
+	{
 		std::cerr << "[PTU Wrapper] parameter flag is unset\n";
 		break;
 	}
@@ -181,26 +206,31 @@ void PTUWrapper::setParameter(const CommPTUObjects::CommPTUParameter& param) {
 /*-----------------------------------------------------------------
  move
  ----------------------------------------------------------------*/
-void PTUWrapper::move(const CommPTUObjects::CommPTUMoveRequest& request, CommPTUObjects::CommPTUMoveResponse& answer) {
-	PTUStatus status = PTUStatus::OK;
+void PTUWrapper::move(const CommPTUObjects::CommPTUMoveRequest& request, CommPTUObjects::CommPTUMoveResponse& answer)
+{
+	PTUStatus status = PTUStatus::GOAL_REACHED;
 
-	if (ptuActive) {
+	if (ptuActive)
+	{
 
 		/////////////////////////////
 		// apply parameters
 		/////////////////////////////
 
 		CHS::SmartGuard paramGuard(COMP->ParamMutex);
-		if (globalParam.modified) {
+		if (globalParam.modified)
+		{
 			localParam = globalParam;
 			globalParam.modified = false;
 
-			if (COMP->ini.PTU.verbose) {
+			if (COMP->ini.PTU.verbose)
+			{
 				std::cout << "Setting new parameters to PTU ...\n";
 			}
 
 			CHS::SmartGuard guard(COMP->PTUMutex);
-			if (localParam.reset) {
+			if (localParam.reset)
+			{
 				ptu.reset();
 			}
 
@@ -219,7 +249,8 @@ void PTUWrapper::move(const CommPTUObjects::CommPTUMoveRequest& request, CommPTU
 			ptu.aceleration(CPtuDPerception::Tilt, localParam.acceleration_tilt);
 			guard.release();
 
-			if (COMP->ini.PTU.verbose) {
+			if (COMP->ini.PTU.verbose)
+			{
 				std::cout << "New parameters were set to PTU\n";
 			}
 		}
@@ -240,7 +271,8 @@ void PTUWrapper::move(const CommPTUObjects::CommPTUMoveRequest& request, CommPTU
 		}
 		guard.release();
 
-		switch (request.get_move_mode()) {
+		switch (request.get_move_mode())
+		{
 
 		case CommPTUObjects::PTUMoveFlag::PAN_ABSOLUTE:
 			status = movePanAbs(request.get_pan());
@@ -276,14 +308,16 @@ void PTUWrapper::move(const CommPTUObjects::CommPTUMoveRequest& request, CommPTU
 
 		}
 		answer.set_status(status);
-	} else {
+	} else
+	{
 		answer.set_status(CommPTUObjects::PTUMoveStatus::FAILURE);
 	}
 
 	posChanged = true;
 }
 
-PTUWrapper::PTUStatus PTUWrapper::lookPointRobot(const CommPTUObjects::CommPTUMoveRequest& request) {
+PTUWrapper::PTUStatus PTUWrapper::lookPointRobot(const CommPTUObjects::CommPTUMoveRequest& request)
+{
 	arma::mat offset;
 	arma::vec point(4);
 	point[3] = 1;
@@ -299,7 +333,8 @@ PTUWrapper::PTUStatus PTUWrapper::lookPointRobot(const CommPTUObjects::CommPTUMo
 	return moveToAbsPos(pan, tilt);
 }
 
-PTUWrapper::PTUStatus PTUWrapper::lookPointWorld(const CommPTUObjects::CommPTUMoveRequest& request) {
+PTUWrapper::PTUStatus PTUWrapper::lookPointWorld(const CommPTUObjects::CommPTUMoveRequest& request)
+{
 	CommBasicObjects::CommVoid voidRequest;
 	CommBasicObjects::CommBaseState baseState;
 
@@ -309,17 +344,19 @@ PTUWrapper::PTUStatus PTUWrapper::lookPointWorld(const CommPTUObjects::CommPTUMo
 	arma::vec point(4);
 	point[3] = 1;
 
-	if (COMP->ini.base.on_base) {
+	if (COMP->ini.base.on_base)
+	{
 		statusCode = COMP->baseStateQueryClient->query(voidRequest, baseState);
-		if (statusCode != CHS::SMART_OK) {
+		if (statusCode != CHS::SMART_OK)
+		{
 			std::cerr << "ERROR during base get update state: " << CHS::StatusCodeConversion(statusCode) << "\n";
 			return CommPTUObjects::PTUMoveStatus::FAILURE;
 		}
 		robotPose = baseState.get_base_position().get_base_pose3d().getHomogeneousMatrix();
-	} else {
+	} else
+	{
 		robotPose = default_base_position.get_base_pose3d().getHomogeneousMatrix();
 	}
-
 
 	std::cout << "robot Pose: " << robotPose << std::endl;
 
@@ -334,9 +371,11 @@ PTUWrapper::PTUStatus PTUWrapper::lookPointWorld(const CommPTUObjects::CommPTUMo
 	return moveToAbsPos(pan, tilt);
 }
 
-void PTUWrapper::getPos(double& pan, double& tilt) {
+void PTUWrapper::getPos(double& pan, double& tilt)
+{
 
-	if (posChanged) {
+	if (posChanged)
+	{
 		CHS::SmartGuard guard(COMP->PTUMutex);
 		ptu.absPosQ(CPtuDPerception::Pan, currentPan);
 		ptu.absPosQ(CPtuDPerception::Tilt, currentTilt);
@@ -348,30 +387,35 @@ void PTUWrapper::getPos(double& pan, double& tilt) {
 	tilt = currentTilt;
 }
 
-void PTUWrapper::start() {
+void PTUWrapper::start()
+{
 	ptuActive = true;
 }
 
-void PTUWrapper::stop() {
+void PTUWrapper::stop()
+{
 	ptuActive = false;
 	CHS::SmartGuard guard(COMP->PTUMutex);
 	ptu.haltAll();
 	guard.release();
 
-	if (COMP->ini.PTU.verbose) {
+	if (COMP->ini.PTU.verbose)
+	{
 		std::cout << ">> PTU halted\n";
 	}
 }
 
-PTUWrapper::PTUStatus PTUWrapper::movePanAbs(double pan) {
+PTUWrapper::PTUStatus PTUWrapper::movePanAbs(double pan)
+{
 	std::cout << "[absolute] pan: " << pan << "\n";
 
-	PTUStatus status = PTUStatus::OK;
+	PTUStatus status = PTUStatus::GOAL_REACHED;
 	CHS::SmartGuard guard(COMP->PTUMutex);
 	{
 		// check if angle is in limits
 		ptu.clearErrors();
-		if (!ptu.moveToAbsPos(CPtuDPerception::Pan, pan)) {
+		if (!ptu.moveToAbsPos(CPtuDPerception::Pan, pan))
+		{
 			checkForErros(status, PAN);
 			return status;
 		}
@@ -383,14 +427,16 @@ PTUWrapper::PTUStatus PTUWrapper::movePanAbs(double pan) {
 	return status;
 }
 
-PTUWrapper::PTUStatus PTUWrapper::movePanOff(double pan) {
+PTUWrapper::PTUStatus PTUWrapper::movePanOff(double pan)
+{
 	std::cout << "[relative] pan: " << pan << "\n";
 
-	PTUStatus status = PTUStatus::OK;
+	PTUStatus status = PTUStatus::GOAL_REACHED;
 	CHS::SmartGuard guard(COMP->PTUMutex);
 	{
 		// check if angle is in limits
-		if (!ptu.moveToOffPos(CPtuDPerception::Pan, pan)) {
+		if (!ptu.moveToOffPos(CPtuDPerception::Pan, pan))
+		{
 			checkForErros(status, PAN);
 			return status;
 		}
@@ -403,14 +449,16 @@ PTUWrapper::PTUStatus PTUWrapper::movePanOff(double pan) {
 	return status;
 }
 
-PTUWrapper::PTUStatus PTUWrapper::moveTiltAbs(double tilt) {
+PTUWrapper::PTUStatus PTUWrapper::moveTiltAbs(double tilt)
+{
 	std::cout << "[absolute] tilt: " << tilt << "\n";
 
-	PTUStatus status = PTUStatus::OK;
+	PTUStatus status = PTUStatus::GOAL_REACHED;
 	CHS::SmartGuard guard(COMP->PTUMutex);
 	{
 		// check if angle is in limits
-		if (!ptu.moveToAbsPos(CPtuDPerception::Tilt, tilt)) {
+		if (!ptu.moveToAbsPos(CPtuDPerception::Tilt, tilt))
+		{
 			checkForErros(status, TILT);
 			return status;
 		}
@@ -423,15 +471,17 @@ PTUWrapper::PTUStatus PTUWrapper::moveTiltAbs(double tilt) {
 	return status;
 }
 
-PTUWrapper::PTUStatus PTUWrapper::moveTiltOff(double tilt) {
+PTUWrapper::PTUStatus PTUWrapper::moveTiltOff(double tilt)
+{
 	std::cout << "[relative] tilt: " << tilt << "\n";
 
-	PTUStatus status = PTUStatus::OK;
+	PTUStatus status = PTUStatus::GOAL_REACHED;
 	CHS::SmartGuard guard(COMP->PTUMutex);
 	{
 		// check if angle is in limits
 
-		if (!ptu.moveToOffPos(CPtuDPerception::Tilt, tilt)) {
+		if (!ptu.moveToOffPos(CPtuDPerception::Tilt, tilt))
+		{
 			checkForErros(status, TILT);
 			return status;
 		}
@@ -444,20 +494,23 @@ PTUWrapper::PTUStatus PTUWrapper::moveTiltOff(double tilt) {
 	return status;
 }
 
-PTUWrapper::PTUStatus PTUWrapper::moveToAbsPos(double pan, double tilt) {
+PTUWrapper::PTUStatus PTUWrapper::moveToAbsPos(double pan, double tilt)
+{
 	std::cout << "[absolute] pan: " << pan << ", tilt: " << tilt << "\n";
 
-	PTUStatus status = PTUStatus::OK;
+	PTUStatus status = PTUStatus::GOAL_REACHED;
 	CHS::SmartGuard guard(COMP->PTUMutex);
 	{
 		// check if angle is in limits
 
 
-		if (!ptu.moveToAbsPos(CPtuDPerception::Pan, pan)) {
+		if (!ptu.moveToAbsPos(CPtuDPerception::Pan, pan))
+		{
 			checkForErros(status, PAN);
 			return status;
 		}
-		if (!ptu.moveToAbsPos(CPtuDPerception::Tilt, tilt)) {
+		if (!ptu.moveToAbsPos(CPtuDPerception::Tilt, tilt))
+		{
 			checkForErros(status, TILT);
 			return status;
 		}
@@ -471,20 +524,23 @@ PTUWrapper::PTUStatus PTUWrapper::moveToAbsPos(double pan, double tilt) {
 	return status;
 }
 
-PTUWrapper::PTUStatus PTUWrapper::moveToOffPos(double pan, double tilt) {
+PTUWrapper::PTUStatus PTUWrapper::moveToOffPos(double pan, double tilt)
+{
 	std::cout << "[relative] pan: " << pan << ", tilt: " << tilt << "\n";
 
-	PTUStatus status = PTUStatus::OK;
+	PTUStatus status = PTUStatus::GOAL_REACHED;
 	CHS::SmartGuard guard(COMP->PTUMutex);
 	{
 		// check if angle is in limits
 
 
-		if (!ptu.moveToOffPos(CPtuDPerception::Pan, pan)) {
+		if (!ptu.moveToOffPos(CPtuDPerception::Pan, pan))
+		{
 			checkForErros(status, PAN);
 			return status;
 		}
-		if (!ptu.moveToOffPos(CPtuDPerception::Tilt, tilt)) {
+		if (!ptu.moveToOffPos(CPtuDPerception::Tilt, tilt))
+		{
 			checkForErros(status, TILT);
 			return status;
 		}
@@ -498,13 +554,16 @@ PTUWrapper::PTUStatus PTUWrapper::moveToOffPos(double pan, double tilt) {
 	return status;
 }
 
-void PTUWrapper::waitTillPosReached(PTUStatus& status) {
+void PTUWrapper::waitTillPosReached(PTUStatus& status)
+{
 	uint32_t tries = 0;
-	while (ptuActive && tries < waitTries) {
+	while (ptuActive && tries < waitTries)
+	{
 		ptu.clearErrors();
 		ptu.aWait();
 
-		if (!ptu.timeoutError()) {
+		if (!ptu.timeoutError())
+		{
 			checkForErros(status, NONE);
 			return;
 		}
@@ -514,29 +573,39 @@ void PTUWrapper::waitTillPosReached(PTUStatus& status) {
 	checkForErros(status, NONE);
 }
 
-void PTUWrapper::checkForErros(PTUStatus& status, PTUAxis axis) {
+void PTUWrapper::checkForErros(PTUStatus& status, PTUAxis axis)
+{
 
 	// check if there is an error
-	if (!ptu.noError() || !ptuActive) {
+	if (!ptu.noError() || !ptuActive)
+	{
 
-		if (ptu.maxLimitError() || ptu.minLimitError() || ptu.outOfRange()) {
-			if (status == PTUStatus::OK && axis == PAN) {
+		if (ptu.maxLimitError() || ptu.minLimitError() || ptu.outOfRange())
+		{
+			if (status == PTUStatus::GOAL_REACHED && axis == PAN)
+			{
 				status = PTUStatus::PAN_OUT_OF_RANGE;
-			} else if (status == PTUStatus::OK && axis == TILT) {
+			} else if (status == PTUStatus::GOAL_REACHED && axis == TILT)
+			{
 				status = PTUStatus::TILT_OUT_OF_RANGE;
-			} else if (status == PTUStatus::TILT_OUT_OF_RANGE && axis == PAN) {
+			} else if (status == PTUStatus::TILT_OUT_OF_RANGE && axis == PAN)
+			{
 				status = PTUStatus::PAN_TILT_OUT_OF_RANGE;
-			} else if (status == PTUStatus::PAN_OUT_OF_RANGE && axis == TILT) {
+			} else if (status == PTUStatus::PAN_OUT_OF_RANGE && axis == TILT)
+			{
 				status = PTUStatus::PAN_TILT_OUT_OF_RANGE;
 			}
-		} else if (!ptuActive) {
+		} else if (!ptuActive)
+		{
 			ptu.haltAll();
 			status = PTUStatus::HALTED;
-		} else {
+		} else
+		{
 			status = PTUStatus::FAILURE;
 		}
 
-		if (COMP->ini.PTU.verbose) {
+		if (COMP->ini.PTU.verbose)
+		{
 			// check if errors occurred during movement
 			std::cout << ">> PTU Error: " << ptu.checkErrors() << "\n";
 		}

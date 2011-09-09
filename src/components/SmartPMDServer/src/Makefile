@@ -89,8 +89,8 @@ INI_FILES    =	SmartPMDServer.ini
 # PROTECTED REGION ID(CustomUserLibs) ENABLED START
 ## user libs  -- add your own libs here
 USER_CPP_CFLAGS = 
-USER_CPP_LFLAGS = -L'$(SMART_ROOT)/libraries' -L./pmd/bin/ -lpmdaccess2
-INCLUDES +=	-I./pmd/include
+USER_CPP_LFLAGS = -L$(SMART_ROOT)/src/utility/pmd-lib/bin -lpmdaccess2
+INCLUDES +=	-I$(SMART_ROOT)/src/utility/pmd-lib/include
 # PROTECTED REGION END
 ##----------------------------------------------------------------------------
 

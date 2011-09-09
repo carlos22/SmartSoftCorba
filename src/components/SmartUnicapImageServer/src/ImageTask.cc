@@ -162,6 +162,7 @@ int ImageTask::svc() {
 				std::cout << "Newest: Image sent.\n";
 			}
 
+
 			// calculate new index in the ring_buffer
 			_image_buffer_index++;
 			if (_image_buffer_index == _image_buffer.size())
@@ -179,7 +180,7 @@ int ImageTask::svc() {
 
 ImageTask::~ImageTask() {
 	COMP->imageTask.close();
-	for (unsigned int i = 0; i < _image_buffer.size() - 2; i++) {
+	for (unsigned int i = 0; i < _image_buffer.size(); i++) {
 		delete _image_buffer[i];
 	}
 	_image_buffer.clear();

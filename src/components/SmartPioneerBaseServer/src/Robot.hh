@@ -315,6 +315,10 @@ public:
 
   void setParameters( int maxVel, int maxRotVel, int maxVelAcc, int maxVelDecel, int maxRotVelAcc, int maxRotVelDecel );
 
+  void setSonarState( bool state );
+
+  unsigned short* getSonarReadings ();
+
 
 /////////////////////////////// private
 private:
@@ -343,7 +347,7 @@ private:
   // serialPort filedescriptor
   int serial_fd;
 
-  bool updateV, updateOmega;
+  bool updateV, updateOmega, updateSonar;
   int newV, newOmega;
 
   int maxVel, maxRotVel;

@@ -56,7 +56,7 @@ void ImageQueryHandler::handleQuery(CHS::QueryServer<CommBasicObjects::CommVoid,
 	image.set_data_invalid();
 	CommVisionObjects::FormatType format;
 
-	if (COMP->ini.component.debug_info) {
+	if (COMP->ini.settings.debug_info) {
 		std::cout<<"Query Request received.."<<std::endl;
 	}
 
@@ -70,7 +70,7 @@ void ImageQueryHandler::handleQuery(CHS::QueryServer<CommBasicObjects::CommVoid,
 		// If Newest and Timed active get image from global Reference otherwise get it directly from Unicap
 		if (COMP->stateServer->tryAcquire("pushimage")==CHS::SMART_OK)
 		{
-			if (COMP->ini.component.debug_info) {
+			if (COMP->ini.settings.debug_info) {
 							std::cout << "Push image mode"<<std::endl;
 			}
 
@@ -89,7 +89,7 @@ void ImageQueryHandler::handleQuery(CHS::QueryServer<CommBasicObjects::CommVoid,
 		else
 		{
 
-			if (COMP->ini.component.debug_info) {
+			if (COMP->ini.settings.debug_info) {
 					std::cout << "Query only mode"<<std::endl;
 			}
 
@@ -172,7 +172,7 @@ void ImageQueryHandler::handleQuery(CHS::QueryServer<CommBasicObjects::CommVoid,
 	else
 	{
 		image.set_data_invalid();
-		if (COMP->ini.component.debug_info) {
+		if (COMP->ini.settings.debug_info) {
 			    std::cout << "Query: StatusCode: "<<CHS::StatusCodeConversion(status)<<std::endl;
 				std::cout << "Query: Set Data invalid!"<< std::endl;
 
@@ -181,7 +181,7 @@ void ImageQueryHandler::handleQuery(CHS::QueryServer<CommBasicObjects::CommVoid,
 	}
 
 	server.answer(id, image);
-	if (COMP->ini.component.debug_info) {
+	if (COMP->ini.settings.debug_info) {
 		std::cout << "Query: Answer sent: "<<image.is_data_valid()<<" with ID: " << id << std::endl;
 	}
 

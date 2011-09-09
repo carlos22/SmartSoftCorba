@@ -56,7 +56,8 @@ void PathPlanningSendHandler::handleSend(const CommManipulatorObjects::CommManip
 		// trajectory otherwise perform it.
 		// ------------------------------------------------
 		if ((COMP->stateServer->tryAcquire("trajectory") == CHS::SMART_OK) || (COMP->stateServer->tryAcquire("simulation")
-				== CHS::SMART_OK)) {
+				== CHS::SMART_OK))
+		{
 			// release trajectory state so a state change can happen
 			COMP->stateServer->release("trajectory");
 			COMP->stateServer->release("simulation");
@@ -64,17 +65,7 @@ void PathPlanningSendHandler::handleSend(const CommManipulatorObjects::CommManip
 					COMP->ini.OpenRave.debugSend);
 
 			COMP->manipulatorMode = COMP->SEND_TRAJECTORY;
-
-			try {
-				OPENRAVE->applyParameters();
-			} catch (std::exception& e) {
-				ErrorHandler::handleMessage("Parameters could not be applied. [handleSend in PathPlanningSendHandler]",
-						CommManipulationPlannerObjects::ManipulationPlannerEvent::UNKNOWN, ErrorHandler::ERROR);
-				return;
-			} catch (...) {
-				ErrorHandler::handleMessage("UnkownError: applyParameters() [handleSend in PathPlanningSendHandler]",
-						CommManipulationPlannerObjects::ManipulationPlannerEvent::UNKNOWN, ErrorHandler::ERROR);
-			}
+			COMP->parameterTask.waitQueueEmpty();
 
 			// Create temporal variables which are needed for calculation
 			OpenRAVE::TrajectoryBasePtr openraveTrajectory;
@@ -132,9 +123,10 @@ void PathPlanningSendHandler::handleSend(const CommManipulatorObjects::CommManip
 			}
 
 			// Set component into PLANNING_PATH mode
-			ErrorHandler::handleMessage("Planning Path. [handleSend in PathPlanningSendHandler]",
+			/*ErrorHandler::handleMessage("Planning Path. [handleSend in PathPlanningSendHandler]",
 					CommManipulationPlannerObjects::ManipulationPlannerEvent::PLANNING_PATH, ErrorHandler::INFO,
 					COMP->ini.OpenRave.debugSend);
+			*/
 
 			/*
 			 * Iterate over the whole trajectory which came on the port but we have a break at the end of the loop.
@@ -167,6 +159,11 @@ void PathPlanningSendHandler::handleSend(const CommManipulatorObjects::CommManip
 				 * JOINT_ANGLES in the incoming trajectory
 				 */
 				if (r.get_valid_values() == CommManipulatorObjects::ManipulatorTrajectoryFlag::JOINT_ANGLES) {
+
+					ErrorHandler::handleMessage("Planning Path. [handleSend in PathPlanningSendHandler]",
+					CommManipulationPlannerObjects::ManipulationPlannerEvent::PLANNING_PATH, ErrorHandler::INFO,
+					COMP->ini.OpenRave.debugSend);
+
 					for (uint32_t j = 0; j < r.get_joint_count(); ++j) {
 						angles.push_back(r.get_joint_angle(i, j));
 					}
@@ -217,20 +214,34 @@ void PathPlanningSendHandler::handleSend(const CommManipulatorObjects::CommManip
 
 					try {
 						if (OPENRAVE->getParameter().grasping_simple) {
-							if (!OPENRAVE->iterateToGetGraspingIKSolution(x, y, z, angles)) {
+							CommBasicObjects::CommPose3d pose_past_iteration;
+							if (!OPENRAVE->iterateToGetGraspingIKSolution(x, y, z, angles, pose_past_iteration)) {
 								ErrorHandler::handleMessage(
 										"Iteration exceeded to find grasping IK solution. [handleSend in PathPlanningSendHandler]",
 										CommManipulationPlannerObjects::ManipulationPlannerEvent::NO_IKSOLUTION_FOUND,
 										ErrorHandler::ERROR);
 								return;
+							}else {
+							        //found IK soulution for simple grasping	
+								// Send PLANNING_PATH event with final TCP pose where the path is planned to
+								ErrorHandler::handleMessage("Planning Path. [handleSend in PathPlanningSendHandler]",
+								CommManipulationPlannerObjects::ManipulationPlannerEvent::PLANNING_PATH, pose_past_iteration, ErrorHandler::INFO,
+								COMP->ini.OpenRave.debugSend);
 							}
 						} else {
-							if (!OPENRAVE->calculateIKSolution(x, y, z, phi, theta, psi, angles)) {
+							CommBasicObjects::CommPose3d pose_past_iteration;
+							if (!OPENRAVE->calculateIKSolution(x, y, z, phi, theta, psi, angles,pose_past_iteration)) {
 								ErrorHandler::handleMessage(
 										"IK solution cannot be calculated. [handleSend in PathPlanningSendHandler]",
 										CommManipulationPlannerObjects::ManipulationPlannerEvent::NO_IKSOLUTION_FOUND,
 										ErrorHandler::ERROR);
 								return;
+							} else {
+							        //found IK soulution	
+								// Send PLANNING_PATH event with final TCP pose where the path is planned to
+								ErrorHandler::handleMessage("Planning Path. [handleSend in PathPlanningSendHandler]",
+								CommManipulationPlannerObjects::ManipulationPlannerEvent::PLANNING_PATH, pose_past_iteration, ErrorHandler::INFO,
+								COMP->ini.OpenRave.debugSend);
 							}
 						}
 						if (!specificManipulator->removeDummyJointAngles(angles)) {
@@ -303,7 +314,6 @@ void PathPlanningSendHandler::handleSend(const CommManipulatorObjects::CommManip
 				CHS::SmartGuard guard(COMP->ManipulatorModeMutex);
 				while (COMP->manipulatorMode != COMP->SEND_TRAJECTORY) {
 					if (COMP->manipulatorMode == COMP->FAILURE) {
-
 						ErrorHandler::handleMessage(
 								"Something wrong with the Manipulator. [handleSend in PathPlanningSendHandler]",
 								CommManipulationPlannerObjects::ManipulationPlannerEvent::NO_PATH_FOUND, ErrorHandler::ERROR);
@@ -319,7 +329,8 @@ void PathPlanningSendHandler::handleSend(const CommManipulatorObjects::CommManip
 				 * If parallelization mode is true we have to move the manipulator in OpenRAVE to represent the reality.
 				 */
 				try {
-					if (COMP->ini.OpenRave.showCompleteTrajectory || OPENRAVE->getParameter().parallelization) {
+					//if (COMP->ini.OpenRave.showCompleteTrajectory || OPENRAVE->getParameter().parallelization) {
+					if (COMP->ini.OpenRave.showCompleteTrajectory) {
 						OPENRAVE->moveManipulatorToPosition(openraveTrajectory, false);
 
 						if (r.get_gripper_action() == CommManipulatorObjects::ManipulatorGripperAction::OPEN_AFTER
@@ -342,7 +353,8 @@ void PathPlanningSendHandler::handleSend(const CommManipulatorObjects::CommManip
 							CommManipulationPlannerObjects::ManipulationPlannerEvent::UNKNOWN, ErrorHandler::ERROR);
 				}
 
-				if (COMP->stateServer->tryAcquire("trajectory") == CHS::SMART_OK) {
+				CHS::StatusCode status = COMP->stateServer->tryAcquire("trajectory");
+				if ( status == CHS::SMART_OK) {
 					COMP->stateServer->release("trajectory");
 					std::cout << "component is in state TRAJECTORY -> check withManipulator \n";
 					if (COMP->ini.PortParameter.withManipulator) {
@@ -361,6 +373,8 @@ void PathPlanningSendHandler::handleSend(const CommManipulatorObjects::CommManip
 						std::cout << "Component is in state TRAJECTORY, but withManipulator is false \n";
 					}
 				}
+
+				std::cout<<CHS::StatusCodeConversion(status);
 				angles.clear();
 
 				/**

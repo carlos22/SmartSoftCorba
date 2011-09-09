@@ -52,7 +52,8 @@
 #include <CommBasicObjects/commPose3d.hh>
 #include <CommBasicObjects/commBaseState.hh>
 
-#include "KinectWrapper.hh"
+//#include "KinectWrapper.hh"
+#include "KinectWrapperMRPT.hh"
 
 class ImageTask: public ImageTaskCore {
 
@@ -66,11 +67,13 @@ public:
 	int svc();
 
 private:
+
+	void visualization();
 	unsigned int _ring_buffer_index;
 	std::vector<CommVisionObjects::CommKinectImage*> _ring_buffer;
 
-	KinectWrapper* device;
-	CHS::SmartMutex kinectMutex;
+	//KinectWrapper* device;
+	//CHS::SmartMutex kinectMutex;
 
 };
 

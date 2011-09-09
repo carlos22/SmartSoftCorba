@@ -48,3 +48,14 @@ void ErrorHandler::handleMessage(const std::string& message, CommManipulationPla
 	state.set_event(event);
 	COMP->eventServer->put(state);
 }
+
+void ErrorHandler::handleMessage(const std::string& message, CommManipulationPlannerObjects::ManipulationPlannerEvent event, CommBasicObjects::CommPose3d& pose,
+			ErrorHandler::ErrorTypes type,   bool sendMessage){
+	ErrorHandler::handleMessage(message, type, sendMessage);
+	// send event to other components
+	CommManipulationPlannerObjects::CommManipulationPlannerEventState state;
+	state.set_event(event);
+	state.set_pose(pose);
+	std::cout<<" INFO: "<< "Pose past Iteration: "<<pose<<std::endl;
+	COMP->eventServer->put(state);
+}

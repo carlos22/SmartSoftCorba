@@ -33,9 +33,17 @@
 namespace SpecificManipulator {
 
 Katana::Katana() {
+	// TODO: possible HACK? WTH is this?
+	// this offset is required as we measure the position of katana from the first
+	// joint to floor and not from base to floor as it is estimated here. we thus
+	// need to substract z later to get this distance.
 	this->manipulatorCoord_x = 0;
 	this->manipulatorCoord_y = 0;
-	this->manipulatorCoord_z = 0.215;
+	//this->manipulatorCoord_z = 0.215;
+
+	// The offset of 21.5cm is the offset between coordinates of robot and open rave.
+	// 12mm is to correct a difference between the ZAFH Ulm Manipulator and the model in Open Rave
+	this->manipulatorCoord_z = 0.215 - 0.012;
 
 	//	this->closedAngleOpenRave = -0.436;
 	this->closedAngleOpenRave = -0.39;
@@ -119,6 +127,10 @@ bool Katana::removeDummyJointAngles(std::vector<double>& angles) {
 }
 
 void Katana::getOffsetRealManipulatortoOpenRaveManipulator(double& x, double& y, double& z) {
+	// this offset is required as we measure the position of katana from the first
+	// joint to floor and not from base to floor as it is estimated here. we thus
+	// need to substract z later to get this distance.
+
 	x = this->manipulatorCoord_x;
 	y = this->manipulatorCoord_y;
 	z = this->manipulatorCoord_z;

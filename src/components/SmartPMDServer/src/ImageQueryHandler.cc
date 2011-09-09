@@ -58,7 +58,7 @@ void ImageQueryHandler::handleQuery(CHS::QueryServer<CommBasicObjects::CommVoid,
 		CommVisionObjects::CommToFImage image(COMP->ini.hardware_properties.width, COMP->ini.hardware_properties.height);
 		image.set_data_valid(false);
 
-		if (COMP->ini.component.debug_info) {
+		if (COMP->ini.general.debug_info) {
 			std::cout<<"Query Request received.."<<std::endl;
 		}
 
@@ -108,14 +108,14 @@ void ImageQueryHandler::handleQuery(CHS::QueryServer<CommBasicObjects::CommVoid,
 		else
 		{
 			image.set_data_valid(false);
-			if (COMP->ini.component.debug_info) {
+			if (COMP->ini.general.debug_info) {
 					std::cout << "Query: Set Data invalid!"<< std::endl;
 			}
 
 		}
 
 		server.answer(id, image);
-		if (COMP->ini.component.debug_info) {
+		if (COMP->ini.general.debug_info) {
 			std::cout << "Query: Answer sent with ID: " << id << std::endl;
 		}
 	} // try

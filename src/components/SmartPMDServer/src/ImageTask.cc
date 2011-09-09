@@ -91,7 +91,7 @@ int ImageTask::svc() {
 
 				//if (COMP->ini.component.push_newest_active) {
 				COMP->imagePushNewestServer->put(*image);
-				if (COMP->ini.component.debug_info) {
+				if (COMP->ini.general.debug_info) {
 					std::cout << "[Image Task] Newest: Image sent.\n";
 				}
 				//}

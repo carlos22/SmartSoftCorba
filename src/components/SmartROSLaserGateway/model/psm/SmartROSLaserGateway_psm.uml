@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
+  <uml:Model xmi:id="__4zkAIFdEeC_SLK0Yi0bFw" name="SmartROSLaserGateway_psm">
+    <packagedElement xmi:type="uml:Component" xmi:id="__4zkAYFdEeC_SLK0Yi0bFw" name="SmartROSLaserGateway">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="__4zkAoFdEeC_SLK0Yi0bFw" name="laserServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="__4zkA4FdEeC_SLK0Yi0bFw" name="baseStateClient"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="__4zkBIFdEeC_SLK0Yi0bFw" name="laserQueryServer"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="__4zkBYFdEeC_SLK0Yi0bFw" name="ROS_SpinTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="__4zkBoFdEeC_SLK0Yi0bFw" name="LaserQueryHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="__4zkB4FdEeC_SLK0Yi0bFw" name="services">
+        <ownedAttribute xmi:id="__4zkCIFdEeC_SLK0Yi0bFw" name="verbose">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="__4zkCYFdEeC_SLK0Yi0bFw" value="false"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="__4zkCoFdEeC_SLK0Yi0bFw" name="subscribe_base">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="__4zkC4FdEeC_SLK0Yi0bFw" value="true"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="__4zkDIFdEeC_SLK0Yi0bFw" name="ROS">
+        <ownedAttribute xmi:id="__4zkDYFdEeC_SLK0Yi0bFw" name="tf_base_link_name">
+          <ownedComment xmi:id="_K_SRwH8EEeC3xJHc-rngHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/alexej/SOFTWARE/smartsoft_dev_corba_mdsd/src/components/SmartROSLaserGateway/model/pim/SmartROSLaserGateway_pim.uml.out.uml#_NU7I4H8DEeC3xJHc-rngHg"/>
+            <body>Is the name for the base-link tf-frame.</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="__4zkDoFdEeC_SLK0Yi0bFw" value="/base_link"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="__4zkD4FdEeC_SLK0Yi0bFw" name="laser_subscr_name">
+          <ownedComment xmi:id="_WfHLEH8EEeC3xJHc-rngHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/alexej/SOFTWARE/smartsoft_dev_corba_mdsd/src/components/SmartROSLaserGateway/model/pim/SmartROSLaserGateway_pim.uml.out.uml#_dmLw4H8DEeC3xJHc-rngHg"/>
+            <body>The name for the laser-publisher topic to subscribe to.</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="__4zkEIFdEeC_SLK0Yi0bFw" value="/base_scan/scan"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="__4zkEYFdEeC_SLK0Yi0bFw" name="is_static_mounted_lrf">
+          <ownedComment xmi:id="_4pQ8sH8DEeC3xJHc-rngHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/alexej/SOFTWARE/smartsoft_dev_corba_mdsd/src/components/SmartROSLaserGateway/model/pim/SmartROSLaserGateway_pim.uml.out.uml#_9vRRYH78EeC3xJHc-rngHg"/>
+            <body>Describes whether laser-range-finder is statically mounted on the base device or is mounted on a manipulator.
+Thus the offset between base and lrf is either calculated once at the beginning or is determined for each laser scan separatelly.</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="__4zkEoFdEeC_SLK0Yi0bFw" value="true"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="__4zkE4FdEeC_SLK0Yi0bFw" name="tf_laser_base_link_name">
+          <ownedComment xmi:id="_RWIfEH8EEeC3xJHc-rngHg">
+            <annotatedElement xmi:type="uml:Property" href="file:///home/alexej/SOFTWARE/smartsoft_dev_corba_mdsd/src/components/SmartROSLaserGateway/model/pim/SmartROSLaserGateway_pim.uml.out.uml#_SJJs4H8DEeC3xJHc-rngHg"/>
+            <body>New_Comment</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="__4zkFIFdEeC_SLK0Yi0bFw" value="/laser_base_link"/>
+        </ownedAttribute>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:id="__4zkFYFdEeC_SLK0Yi0bFw">
+      <eAnnotations xmi:id="__4zkFoFdEeC_SLK0Yi0bFw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
+    </profileApplication>
+  </uml:Model>
+  <CorbaSmartSoft:SmartCorbaComponent xmi:id="__4zkF4FdEeC_SLK0Yi0bFw" base_Component="__4zkAYFdEeC_SLK0Yi0bFw"/>
+  <CorbaSmartSoft:SmartCorbaPushNewestServer xmi:id="__4zkGIFdEeC_SLK0Yi0bFw" serviceName="scan" base_Port="__4zkAoFdEeC_SLK0Yi0bFw">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
+  </CorbaSmartSoft:SmartCorbaPushNewestServer>
+  <CorbaSmartSoft:SmartCorbaPushTimedClient xmi:id="__4zkGYFdEeC_SLK0Yi0bFw" serviceName="basestate" base_Port="__4zkA4FdEeC_SLK0Yi0bFw" serverName="SmartROSBaseGateway" interval="1">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
+  </CorbaSmartSoft:SmartCorbaPushTimedClient>
+  <CorbaSmartSoft:SmartCorbaQueryServer xmi:id="__4zkGoFdEeC_SLK0Yi0bFw" serviceName="scan" base_Port="__4zkBIFdEeC_SLK0Yi0bFw" smartQueryHandler="__4zkBoFdEeC_SLK0Yi0bFw">
+    <commRequestObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
+    <commAnswerObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
+  </CorbaSmartSoft:SmartCorbaQueryServer>
+  <CorbaSmartSoft:SmartCorbaTask xmi:id="__4zkG4FdEeC_SLK0Yi0bFw" period="0" base_Class="__4zkBYFdEeC_SLK0Yi0bFw" wcet="0"/>
+  <CorbaSmartSoft:SmartCorbaQueryHandler xmi:id="__4zkHIFdEeC_SLK0Yi0bFw" base_Class="__4zkBoFdEeC_SLK0Yi0bFw"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="__4zkHYFdEeC_SLK0Yi0bFw" base_Class="__4zkB4FdEeC_SLK0Yi0bFw"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="__4zkHoFdEeC_SLK0Yi0bFw" base_Class="__4zkDIFdEeC_SLK0Yi0bFw"/>
+</xmi:XMI>

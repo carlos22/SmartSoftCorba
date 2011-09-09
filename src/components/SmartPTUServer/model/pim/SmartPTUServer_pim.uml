@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw">
   <uml:Model xmi:id="_SjbocIBHEd-acYooFeoGmw" name="SmartPTUServer_pim">
     <elementImport xmi:id="_nbdN8IBMEd-acYooFeoGmw">
       <importedElement xmi:type="uml:Class" href="../../../CommPTUObjects/model/pim/CommPTUObjects_pim.uml#_5pkEgIBJEd-acYooFeoGmw"/>
@@ -76,6 +76,15 @@
     <elementImport xmi:id="_iR99YFrOEeC6PLJfjEnW0g">
       <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_MEDhMFYiEeCr0d2zveaPSA"/>
     </elementImport>
+    <elementImport xmi:id="_3YZDMJGlEeCJ6P3V2Q1peA">
+      <importedElement xmi:type="uml:Class" href="../../../CommPTUObjects/model/pim/CommPTUObjects_pim.uml#_68IFIJGkEeCJ6P3V2Q1peA"/>
+    </elementImport>
+    <elementImport xmi:id="_3YtzUJGlEeCJ6P3V2Q1peA">
+      <importedElement xmi:type="uml:Class" href="../../../CommPTUObjects/model/pim/CommPTUObjects_pim.uml#_Mny1oJGlEeCJ6P3V2Q1peA"/>
+    </elementImport>
+    <elementImport xmi:id="_3ZdaMJGlEeCJ6P3V2Q1peA">
+      <importedElement xmi:type="uml:Class" href="../../../CommPTUObjects/model/pim/CommPTUObjects_pim.uml#_fn_wIJGlEeCJ6P3V2Q1peA"/>
+    </elementImport>
     <packagedElement xmi:type="uml:Component" xmi:id="_SjbocYBHEd-acYooFeoGmw" name="SmartPTUServer">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_CE7cYIBMEd-acYooFeoGmw" name="moveQueryServer" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_cLofgIBMEd-acYooFeoGmw" name="paramServer" aggregation="composite"/>
@@ -83,6 +92,9 @@
       <ownedAttribute xmi:type="uml:Port" xmi:id="_04T0oIBMEd-acYooFeoGmw" name="devicePoseStateServer" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_A07-sIBNEd-acYooFeoGmw" name="baseStateClient" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_f_2fQE7lEeCHaazSyNbKOA" name="baseStateQueryClient" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_SFsF4JGeEeCJ6P3V2Q1peA" name="moveSendServer" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_exEMUJGeEeCJ6P3V2Q1peA" name="goalEventServer" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_F7XG8NrwEeCWfcht2nzMXg" name="wiringSlave" aggregation="composite"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_DI5a0IBMEd-acYooFeoGmw" name="MoveQueryHandler"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_czYcAIBMEd-acYooFeoGmw" name="ParamHandler"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_sqBkkIBMEd-acYooFeoGmw" name="StateChangeHandler"/>
@@ -93,21 +105,21 @@
             <body>The x position of the ptu on the robot. [mm] Default = 0</body>
           </ownedComment>
           <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
-          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_3DQP8IBREd-acYooFeoGmw"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_3DQP8IBREd-acYooFeoGmw" value="-140"/>
         </ownedAttribute>
         <ownedAttribute xmi:id="_Yw4TEIBQEd-acYooFeoGmw" name="y" isUnique="false">
           <ownedComment xmi:id="_xwrVsP0ZEd-KItJoa9Y6lA" annotatedElement="_Yw4TEIBQEd-acYooFeoGmw">
             <body>The y position of the ptu on the robot. [mm] Default = 0</body>
           </ownedComment>
           <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
-          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_3khJ8IBREd-acYooFeoGmw"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_3khJ8IBREd-acYooFeoGmw" value="-13"/>
         </ownedAttribute>
         <ownedAttribute xmi:id="_Y8yBEIBQEd-acYooFeoGmw" name="z" isUnique="false">
           <ownedComment xmi:id="_zVFHsP0ZEd-KItJoa9Y6lA" annotatedElement="_Y8yBEIBQEd-acYooFeoGmw">
             <body>The z position of the ptu on the robot. [mm] Default = 0</body>
           </ownedComment>
           <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
-          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_4B0xAIBREd-acYooFeoGmw"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_4B0xAIBREd-acYooFeoGmw" value="1112"/>
         </ownedAttribute>
         <ownedAttribute xmi:id="_Y_SigIBQEd-acYooFeoGmw" name="azimuth" isUnique="false">
           <ownedComment xmi:id="_0mS38P0ZEd-KItJoa9Y6lA" annotatedElement="_Y_SigIBQEd-acYooFeoGmw">
@@ -135,13 +147,71 @@
             <body>The device which represents the ptu. Default = /dev/ttyS0</body>
           </ownedComment>
           <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_W8SH4IgZEd6Va88Rz-zvaQ"/>
-          <defaultValue xmi:type="uml:LiteralString" xmi:id="_6QuRgIBREd-acYooFeoGmw" value="/dev/ttyS0"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_6QuRgIBREd-acYooFeoGmw" value="/dev/ptu"/>
         </ownedAttribute>
         <ownedAttribute xmi:id="_immGsJiIEd-4peW4FW-bAw" name="verbose" isUnique="false">
           <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
           <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_l11p4JiIEd-4peW4FW-bAw"/>
         </ownedAttribute>
       </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_EtsHAIBPEd-acYooFeoGmw" name="base">
+        <ownedAttribute xmi:id="_Nv7jkIBPEd-acYooFeoGmw" name="on_base" isUnique="false">
+          <ownedComment xmi:id="__Am6sP0ZEd-KItJoa9Y6lA" annotatedElement="_Nv7jkIBPEd-acYooFeoGmw">
+            <body>Flag which indicates if the ptu is on a robot. Default = true</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_iULqwIBPEd-acYooFeoGmw" value="true"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_N3GikIBPEd-acYooFeoGmw" name="x" isUnique="false">
+          <ownedComment xmi:id="_CMHNYP0aEd-KItJoa9Y6lA" annotatedElement="_N3GikIBPEd-acYooFeoGmw">
+            <body>If on_base = false this represents the x position of the robot. [mm] Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_h9wHwIBPEd-acYooFeoGmw"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_N8hOEIBPEd-acYooFeoGmw" name="y" isUnique="false">
+          <ownedComment xmi:id="_TTmSwP0aEd-KItJoa9Y6lA" annotatedElement="_N8hOEIBPEd-acYooFeoGmw">
+            <body>If on_base = false this represents the y position of the robot. [mm] Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_hivmwIBPEd-acYooFeoGmw"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_OBU1kIBPEd-acYooFeoGmw" name="z" isUnique="false">
+          <ownedComment xmi:id="_U0ihEP0aEd-KItJoa9Y6lA" annotatedElement="_OBU1kIBPEd-acYooFeoGmw">
+            <body>If on_base = false this represents the z position of the robot. [mm] Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_hDiiQIBPEd-acYooFeoGmw"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_OFSvkIBPEd-acYooFeoGmw" name="base_a" isUnique="false">
+          <ownedComment xmi:id="_WJT7oP0aEd-KItJoa9Y6lA" annotatedElement="_OFSvkIBPEd-acYooFeoGmw">
+            <body>If on_base = false this represents the base angle of the robot. [mm] Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kNQsQIBPEd-acYooFeoGmw" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_OKBekIBPEd-acYooFeoGmw" name="steer_a" isUnique="false">
+          <ownedComment xmi:id="_cAGI0P0aEd-KItJoa9Y6lA" annotatedElement="_OKBekIBPEd-acYooFeoGmw">
+            <body>If on_base = false this represents the steering angle of the robot. [mm] Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_k4Ej0IBPEd-acYooFeoGmw" value="0"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_V8O2oIBPEd-acYooFeoGmw" name="turret_a" isUnique="false">
+          <ownedComment xmi:id="_dY02UP0aEd-KItJoa9Y6lA" annotatedElement="_V8O2oIBPEd-acYooFeoGmw">
+            <body>If on_base = false this represents the turret angle of the robot. [mm] Default = 0</body>
+          </ownedComment>
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_lTYm0IBPEd-acYooFeoGmw" value="0"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_RHv_UJiKEd-4peW4FW-bAw" name="PTUMutex"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_I3rcMJiuEd-gLqQgLWMt9A" name="active"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_KHZXoJiuEd-gLqQgLWMt9A" name="active"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_L46qcJlwEd-4u_zvtbRLmA" name="ParamMutex"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_Ga5CQEv7EeC5qJQCBBflLQ" name="BaseStateTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_YY034JGeEeCJ6P3V2Q1peA" name="MoveSendHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_mC1w0JGeEeCJ6P3V2Q1peA" name="GoalEventTestHandler"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_7-EEcIBOEd-acYooFeoGmw" name="hardware">
         <ownedAttribute xmi:id="_Iz2EEIBPEd-acYooFeoGmw" name="max_speed_pan" isUnique="false">
           <ownedComment xmi:id="_8L6BQIBQEd-acYooFeoGmw" annotatedElement="_Iz2EEIBPEd-acYooFeoGmw">
@@ -216,62 +286,6 @@
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_XAScYP0ZEd-KItJoa9Y6lA" value="0.2"/>
         </ownedAttribute>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_EtsHAIBPEd-acYooFeoGmw" name="base">
-        <ownedAttribute xmi:id="_Nv7jkIBPEd-acYooFeoGmw" name="on_base" isUnique="false">
-          <ownedComment xmi:id="__Am6sP0ZEd-KItJoa9Y6lA" annotatedElement="_Nv7jkIBPEd-acYooFeoGmw">
-            <body>Flag which indicates if the ptu is on a robot. Default = true</body>
-          </ownedComment>
-          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
-          <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_iULqwIBPEd-acYooFeoGmw" value="true"/>
-        </ownedAttribute>
-        <ownedAttribute xmi:id="_N3GikIBPEd-acYooFeoGmw" name="x" isUnique="false">
-          <ownedComment xmi:id="_CMHNYP0aEd-KItJoa9Y6lA" annotatedElement="_N3GikIBPEd-acYooFeoGmw">
-            <body>If on_base = false this represents the x position of the robot. [mm] Default = 0</body>
-          </ownedComment>
-          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
-          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_h9wHwIBPEd-acYooFeoGmw"/>
-        </ownedAttribute>
-        <ownedAttribute xmi:id="_N8hOEIBPEd-acYooFeoGmw" name="y" isUnique="false">
-          <ownedComment xmi:id="_TTmSwP0aEd-KItJoa9Y6lA" annotatedElement="_N8hOEIBPEd-acYooFeoGmw">
-            <body>If on_base = false this represents the y position of the robot. [mm] Default = 0</body>
-          </ownedComment>
-          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
-          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_hivmwIBPEd-acYooFeoGmw"/>
-        </ownedAttribute>
-        <ownedAttribute xmi:id="_OBU1kIBPEd-acYooFeoGmw" name="z" isUnique="false">
-          <ownedComment xmi:id="_U0ihEP0aEd-KItJoa9Y6lA" annotatedElement="_OBU1kIBPEd-acYooFeoGmw">
-            <body>If on_base = false this represents the z position of the robot. [mm] Default = 0</body>
-          </ownedComment>
-          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
-          <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_hDiiQIBPEd-acYooFeoGmw"/>
-        </ownedAttribute>
-        <ownedAttribute xmi:id="_OFSvkIBPEd-acYooFeoGmw" name="base_a" isUnique="false">
-          <ownedComment xmi:id="_WJT7oP0aEd-KItJoa9Y6lA" annotatedElement="_OFSvkIBPEd-acYooFeoGmw">
-            <body>If on_base = false this represents the base angle of the robot. [mm] Default = 0</body>
-          </ownedComment>
-          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
-          <defaultValue xmi:type="uml:LiteralString" xmi:id="_kNQsQIBPEd-acYooFeoGmw" value="0"/>
-        </ownedAttribute>
-        <ownedAttribute xmi:id="_OKBekIBPEd-acYooFeoGmw" name="steer_a" isUnique="false">
-          <ownedComment xmi:id="_cAGI0P0aEd-KItJoa9Y6lA" annotatedElement="_OKBekIBPEd-acYooFeoGmw">
-            <body>If on_base = false this represents the steering angle of the robot. [mm] Default = 0</body>
-          </ownedComment>
-          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
-          <defaultValue xmi:type="uml:LiteralString" xmi:id="_k4Ej0IBPEd-acYooFeoGmw" value="0"/>
-        </ownedAttribute>
-        <ownedAttribute xmi:id="_V8O2oIBPEd-acYooFeoGmw" name="turret_a" isUnique="false">
-          <ownedComment xmi:id="_dY02UP0aEd-KItJoa9Y6lA" annotatedElement="_V8O2oIBPEd-acYooFeoGmw">
-            <body>If on_base = false this represents the turret angle of the robot. [mm] Default = 0</body>
-          </ownedComment>
-          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_jmdUcIgZEd6Va88Rz-zvaQ"/>
-          <defaultValue xmi:type="uml:LiteralString" xmi:id="_lTYm0IBPEd-acYooFeoGmw" value="0"/>
-        </ownedAttribute>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_RHv_UJiKEd-4peW4FW-bAw" name="PTUMutex"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_I3rcMJiuEd-gLqQgLWMt9A" name="active"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_KHZXoJiuEd-gLqQgLWMt9A" name="active"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_L46qcJlwEd-4u_zvtbRLmA" name="ParamMutex"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_Ga5CQEv7EeC5qJQCBBflLQ" name="BaseStateTask"/>
     </packagedElement>
     <profileApplication xmi:id="_SjbocoBHEd-acYooFeoGmw">
       <eAnnotations xmi:id="_Sjboc4BHEd-acYooFeoGmw" source="http://www.eclipse.org/uml2/2.0.0/UML">
@@ -281,27 +295,27 @@
     </profileApplication>
     <profileApplication xmi:id="_SjbodIBHEd-acYooFeoGmw">
       <eAnnotations xmi:id="_SjbodYBHEd-acYooFeoGmw" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw"/>
       </eAnnotations>
       <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
     </profileApplication>
   </uml:Model>
   <SmartMARS:SmartComponent xmi:id="_Sm2I0IBHEd-acYooFeoGmw" base_Component="_SjbocYBHEd-acYooFeoGmw"/>
-  <SmartMARS:SmartQueryServer xmi:id="_CH5Q0IBMEd-acYooFeoGmw" serviceName="movePTU" base_Port="_CE7cYIBMEd-acYooFeoGmw" smartQueryHandler="_DJAIgIBMEd-acYooFeoGmw">
+  <SmartMARS:SmartQueryServer xmi:id="_CH5Q0IBMEd-acYooFeoGmw" base_Port="_CE7cYIBMEd-acYooFeoGmw" serviceName="movePTU" smartQueryHandler="_DJAIgIBMEd-acYooFeoGmw">
     <commRequestObject href="../../../CommPTUObjects/model/pim/CommPTUObjects_pim.uml#_5pkEgIBJEd-acYooFeoGmw"/>
     <commAnswerObject href="../../../CommPTUObjects/model/pim/CommPTUObjects_pim.uml#_51_-AIBJEd-acYooFeoGmw"/>
   </SmartMARS:SmartQueryServer>
   <SmartMARS:SmartQueryHandler xmi:id="_DJAIgIBMEd-acYooFeoGmw" base_Class="_DI5a0IBMEd-acYooFeoGmw" isActive="true"/>
-  <SmartMARS:SmartParameterServer xmi:id="_cL8okIBMEd-acYooFeoGmw" serviceName="param" base_Port="_cLofgIBMEd-acYooFeoGmw" smartParameterHandler="_czfJsIBMEd-acYooFeoGmw">
+  <SmartMARS:SmartParameterServer xmi:id="_cL8okIBMEd-acYooFeoGmw" base_Port="_cLofgIBMEd-acYooFeoGmw" serviceName="param" smartParameterHandler="_czfJsIBMEd-acYooFeoGmw">
     <commObject href="../../../CommPTUObjects/model/pim/CommPTUObjects_pim.uml#_o54JMIBLEd-acYooFeoGmw"/>
   </SmartMARS:SmartParameterServer>
   <SmartMARS:SmartParameterHandler xmi:id="_czfJsIBMEd-acYooFeoGmw" base_Class="_czYcAIBMEd-acYooFeoGmw"/>
-  <SmartMARS:SmartStateServer xmi:id="_sLsp0IBMEd-acYooFeoGmw" serviceName="state" base_Port="_sLRzEIBMEd-acYooFeoGmw" smartStateChangeHandler="_sqISQIBMEd-acYooFeoGmw"/>
+  <SmartMARS:SmartStateServer xmi:id="_sLsp0IBMEd-acYooFeoGmw" base_Port="_sLRzEIBMEd-acYooFeoGmw" serviceName="state" smartStateChangeHandler="_sqISQIBMEd-acYooFeoGmw"/>
   <SmartMARS:SmartStateChangeHandler xmi:id="_sqISQIBMEd-acYooFeoGmw" base_Class="_sqBkkIBMEd-acYooFeoGmw"/>
-  <SmartMARS:SmartPushNewestServer xmi:id="_04zj4IBMEd-acYooFeoGmw" serviceName="devicePoseState" base_Port="_04T0oIBMEd-acYooFeoGmw">
+  <SmartMARS:SmartPushNewestServer xmi:id="_04zj4IBMEd-acYooFeoGmw" base_Port="_04T0oIBMEd-acYooFeoGmw" serviceName="devicePoseState">
     <commObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_blbPcFFjEeC4q5gMSLe4ng"/>
   </SmartMARS:SmartPushNewestServer>
-  <SmartMARS:SmartPushTimedClient xmi:id="_A1c8EIBNEd-acYooFeoGmw" serviceName="basestate" base_Port="_A07-sIBNEd-acYooFeoGmw" serverName="SmartPioneerBaseServer" interval="100">
+  <SmartMARS:SmartPushTimedClient xmi:id="_A1c8EIBNEd-acYooFeoGmw" base_Port="_A07-sIBNEd-acYooFeoGmw" serviceName="basestate" serverName="SmartPioneerBaseServer" wiringName="baseStateClient" interval="100">
     <commObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
   </SmartMARS:SmartPushTimedClient>
   <SmartMARS:SmartTask xmi:id="_OsfH4IBOEd-acYooFeoGmw" base_Class="_OsYaMIBOEd-acYooFeoGmw"/>
@@ -313,8 +327,19 @@
   <SmartMARS:SmartSubState xmi:id="_KHihkJiuEd-gLqQgLWMt9A" base_Class="_KHZXoJiuEd-gLqQgLWMt9A"/>
   <SmartMARS:SmartMutex xmi:id="_L7Hp4JlwEd-4u_zvtbRLmA" base_Class="_L46qcJlwEd-4u_zvtbRLmA"/>
   <SmartMARS:SmartTask xmi:id="_Gd7vMEv7EeC5qJQCBBflLQ" base_Class="_Ga5CQEv7EeC5qJQCBBflLQ"/>
-  <SmartMARS:SmartQueryClient xmi:id="_gCpUkE7lEeCHaazSyNbKOA" serviceName="basestatequery" base_Port="_f_2fQE7lEeCHaazSyNbKOA" serverName="SmartPioneerBaseServer">
+  <SmartMARS:SmartQueryClient xmi:id="_gCpUkE7lEeCHaazSyNbKOA" base_Port="_f_2fQE7lEeCHaazSyNbKOA" serviceName="basestatequery" serverName="SmartPioneerBaseServer" wiringName="baseStateQueryClient">
     <commRequestObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
     <commAnswerObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
   </SmartMARS:SmartQueryClient>
+  <SmartMARS:SmartSendServer xmi:id="_SJVPwJGeEeCJ6P3V2Q1peA" base_Port="_SFsF4JGeEeCJ6P3V2Q1peA" serviceName="movePTU" smartSendHandler="_YZBFIJGeEeCJ6P3V2Q1peA">
+    <commObject href="../../../CommPTUObjects/model/pim/CommPTUObjects_pim.uml#_5pkEgIBJEd-acYooFeoGmw"/>
+  </SmartMARS:SmartSendServer>
+  <SmartMARS:SmartSendHandler xmi:id="_YZBFIJGeEeCJ6P3V2Q1peA" base_Class="_YY034JGeEeCJ6P3V2Q1peA" isActive="true"/>
+  <SmartMARS:SmartEventServer xmi:id="_eyFgAJGeEeCJ6P3V2Q1peA" base_Port="_exEMUJGeEeCJ6P3V2Q1peA" serviceName="goalEvent" smartEventTestHandler="_mDBXAJGeEeCJ6P3V2Q1peA">
+    <eventParameter href="../../../CommPTUObjects/model/pim/CommPTUObjects_pim.uml#_fn_wIJGlEeCJ6P3V2Q1peA"/>
+    <eventResult href="../../../CommPTUObjects/model/pim/CommPTUObjects_pim.uml#_Mny1oJGlEeCJ6P3V2Q1peA"/>
+    <eventState href="../../../CommPTUObjects/model/pim/CommPTUObjects_pim.uml#_68IFIJGkEeCJ6P3V2Q1peA"/>
+  </SmartMARS:SmartEventServer>
+  <SmartMARS:SmartEventTestHandler xmi:id="_mDBXAJGeEeCJ6P3V2Q1peA" base_Class="_mC1w0JGeEeCJ6P3V2Q1peA"/>
+  <SmartMARS:SmartWiringSlave xmi:id="_F_-hMNrwEeCWfcht2nzMXg" base_Port="_F7XG8NrwEeCWfcht2nzMXg"/>
 </xmi:XMI>

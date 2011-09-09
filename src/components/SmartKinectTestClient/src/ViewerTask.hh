@@ -50,9 +50,28 @@
 class ViewerTask: public ViewerTaskCore
 {
 
+private:
+	struct ColPoint3d
+	{
+		ColPoint3d(float x, float y, float z, float r, float g, float b)
+		{
+			this->x = x;
+			this->y = y;
+			this->z = z;
+
+			this->r = r;
+			this->g = g;
+			this->b = b;
+		}
+
+		float x, y, z;
+		float r, g, b;
+	};
+
 public:
 	ViewerTask();
 	int svc();
+
 };
 
 #endif

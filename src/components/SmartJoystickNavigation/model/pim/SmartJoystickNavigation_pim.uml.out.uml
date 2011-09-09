@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124" xmlns:SmartMARS_1="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
   <uml:Model xmi:id="_-4d7MEmgEeClkeIcJ6tU1A" name="SmartJoystickNavigation_pim">
     <elementImport xmi:id="_V4-CYEmhEeClkeIcJ6tU1A">
       <importedElement xmi:type="uml:Class" href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
@@ -55,6 +55,7 @@
     <packagedElement xmi:type="uml:Component" xmi:id="_-4d7MUmgEeClkeIcJ6tU1A" name="SmartJoystickNavigation">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_MwZUUEmhEeClkeIcJ6tU1A" name="joystick_client" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_UE6q0EmhEeClkeIcJ6tU1A" name="navigation_client" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_8SVVANrgEeCafu9Mh-_JFw" name="wiringSlave" aggregation="composite"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_Ho3Z0EmhEeClkeIcJ6tU1A" name="JoystickNavigationThread"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_ZBEmUEmiEeClkeIcJ6tU1A" name="settings">
         <ownedAttribute xmi:id="_ad9bEEmiEeClkeIcJ6tU1A" name="max_velocity" isUnique="false">
@@ -81,21 +82,22 @@
     </profileApplication>
     <profileApplication xmi:id="_-4d7NEmgEeClkeIcJ6tU1A">
       <eAnnotations xmi:id="_-4d7NUmgEeClkeIcJ6tU1A" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw"/>
       </eAnnotations>
       <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
     </profileApplication>
   </uml:Model>
   <SmartMARS:SmartComponent xmi:id="_-6jl4EmgEeClkeIcJ6tU1A" base_Component="_-4d7MUmgEeClkeIcJ6tU1A"/>
   <SmartMARS:SmartTask xmi:id="_Hq-SoEmhEeClkeIcJ6tU1A" base_Class="_Ho3Z0EmhEeClkeIcJ6tU1A"/>
-  <SmartMARS:SmartPushNewestClient xmi:id="_MwjsYEmhEeClkeIcJ6tU1A" serviceName="joystick" base_Port="_MwZUUEmhEeClkeIcJ6tU1A" serverName="SmartJoystickServer">
+  <SmartMARS:SmartPushNewestClient xmi:id="_MwjsYEmhEeClkeIcJ6tU1A" base_Port="_MwZUUEmhEeClkeIcJ6tU1A" serviceName="joystick" serverName="SmartJoystickServer" wiringName="joystick_client">
     <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_284MYEmaEeClkeIcJ6tU1A"/>
   </SmartMARS:SmartPushNewestClient>
-  <SmartMARS:SmartSendClient xmi:id="_UFDNsEmhEeClkeIcJ6tU1A" serviceName="navVel" base_Port="_UE6q0EmhEeClkeIcJ6tU1A" serverName="SmartCdlServer">
+  <SmartMARS:SmartSendClient xmi:id="_UFDNsEmhEeClkeIcJ6tU1A" base_Port="_UE6q0EmhEeClkeIcJ6tU1A" serviceName="navVel" serverName="SmartCdlServer" wiringName="navigation_client">
     <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_t0-UAEV5EeC6tb6-J2zOEA"/>
   </SmartMARS:SmartSendClient>
-  <SmartMARS:SmartIniParameterGroup xmi:id="_kP6SwEmhEeClkeIcJ6tU1A"/>
-  <SmartMARS:SmartIniParameterGroup xmi:id="_srA20EmhEeClkeIcJ6tU1A"/>
-  <SmartMARS:SmartIniParameterGroup xmi:id="_t93l0EmhEeClkeIcJ6tU1A"/>
+  <SmartMARS_1:SmartIniParameterGroup xmi:id="_kP6SwEmhEeClkeIcJ6tU1A"/>
+  <SmartMARS_1:SmartIniParameterGroup xmi:id="_srA20EmhEeClkeIcJ6tU1A"/>
+  <SmartMARS_1:SmartIniParameterGroup xmi:id="_t93l0EmhEeClkeIcJ6tU1A"/>
   <SmartMARS:SmartIniParameterGroup xmi:id="_ZBYvYEmiEeClkeIcJ6tU1A" base_Class="_ZBEmUEmiEeClkeIcJ6tU1A"/>
+  <SmartMARS:SmartWiringSlave xmi:id="_8WZVoNrgEeCafu9Mh-_JFw" base_Port="_8SVVANrgEeCafu9Mh-_JFw"/>
 </xmi:XMI>

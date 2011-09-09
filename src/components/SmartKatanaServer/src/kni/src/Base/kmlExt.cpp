@@ -175,42 +175,6 @@ void CKatana::calibrate() {
 	}
 }
 
-
-
-
-
-////////////
-//LUTZ
-////////////
-void CKatana::calibrate_axis(long axis){
-
-  if(mKatanaType == 300){
-
-        std::cout << "Katana300 calibration singel axis started\n";
-        KNI::sleep(500);
-
-        TMotAPS aps;
-
-        aps.actpos = 0;
-        aps.mcfAPS = MCF_ON;
-        base->GetMOT()->arr[axis].sendAPS(&aps);
-        base->GetMOT()->arr[axis].setCalibrated(false);
-        calibrate(axis, *base->GetMOT()->arr[axis].GetCLB(), *base->GetMOT()->arr[axis].GetSCP(),
-                        *base->GetMOT()->arr[axis].GetDYL());
-        base->GetMOT()->arr[axis].setCalibrated(true);
-
-  } else{
-   std::cout<<"Katana typ not supported for single axis calibration!!\n";
-  }
-}
-
-
-////////////
-//LUTZ
-////////////
-
-
-
 void CKatana::calibrate(long idx, TMotCLB clb, TMotSCP scp, TMotDYL dyl) {
 
 	if (!clb.enable)
@@ -221,8 +185,8 @@ void CKatana::calibrate(long idx, TMotCLB clb, TMotSCP scp, TMotDYL dyl) {
 	TMotAPS aps = { clb.mcf, base->GetMOT()->arr[idx].GetInitialParameters()->encoderOffset };
 	base->GetMOT()->arr[idx].sendAPS(&aps);
 
-	mov(idx, clb.encoderPositionAfter, true, 100, 10000);
-	//mov(idx, clb.encoderPositionAfter, true);
+	//mov(idx, clb.encoderPositionAfter, true, 100, 10000);
+	mov(idx, clb.encoderPositionAfter, true);
 }
 
 
@@ -269,21 +233,15 @@ void CKatana::searchMechStop(long idx, TSearchDir dir,
 
 	double firstSpeedSample = 100, secondSpeedSample = 100;
 
-        //lutz
-	//KNI::Timer poll_t(POLLFREQUENCY);
-	KNI::Timer poll_t(POLLFREQUENCY+200);
-        unsigned int poll_count = 0;
+	KNI::Timer poll_t(POLLFREQUENCY);
 	while(true) {
-                 
 		poll_t.Start();
 		base->GetMOT()->arr[idx].recvPVP();
 		firstSpeedSample = base->GetMOT()->arr[idx].GetPVP()->vel;
-		std::cout<<poll_count << ": " << firstSpeedSample << ", " << secondSpeedSample << std::endl;
 		if( (firstSpeedSample + secondSpeedSample) == 0.0 ) {
 			break; // stopper reached
 		}
 		secondSpeedSample = firstSpeedSample;
-                poll_count++;
 		poll_t.WaitUntilElapsed();
 	}
 	// To avoid a compensation on the motor the actual position is set to 0

@@ -53,7 +53,7 @@ void ImagePushTimedHandler::handlePushTimer(CHS::PushTimedServer<CommVisionObjec
 	CommVisionObjects::CommVideoImage* image = COMP->newestImage;
 	COMP->NewestImageMutex.release();
 
-	if (COMP->componentActive && image != NULL) {
+	if ( image != NULL) {
 		server.put(*image);
 	}
 }

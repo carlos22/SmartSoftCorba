@@ -89,9 +89,10 @@ INI_FILES    =	SmartKinectServer.ini
 ##----------------------------------------------------------------------------
 # PROTECTED REGION ID(CustomUserLibs) ENABLED START
 ## user libs  -- add your own libs here
-USER_CPP_CFLAGS = -I/usr/local/include/libfreenect/
-USER_CPP_LFLAGS =  
-INCLUDES +=		
+#USER_CPP_CFLAGS = -I/usr/local/include/libfreenect/
+USER_CPP_CFLAGS = -I$(HOME)/SOFTWARE/mrpt-0.9.4/libs/hwdrivers/src/libfreenect/ `pkg-config opencv --cflags` `pkg-config --cflags mrpt-slam mrpt-obs mrpt-gui mrpt-detectors mrpt-hmtslam mrpt-base mrpt-reactivenav mrpt-bayes mrpt-hwdrivers mrpt-vision mrpt-scanmatching mrpt-opengl mrpt-topography mrpt-maps`
+USER_CPP_LFLAGS = `pkg-config opencv --libs` `pkg-config opencv --libs` `pkg-config --libs mrpt-slam mrpt-obs mrpt-gui mrpt-detectors mrpt-hmtslam mrpt-base mrpt-reactivenav mrpt-bayes mrpt-hwdrivers mrpt-vision mrpt-scanmatching mrpt-opengl mrpt-topography mrpt-maps` 
+INCLUDES +=	
 # PROTECTED REGION END
 ##----------------------------------------------------------------------------
 
@@ -102,7 +103,7 @@ CPNT =	1
 
 # <asteck, dstampfer> --------------------------------------------------------
 # Include all libs
-ALL_LIBS=  -Xlinker --start-group $(patsubst $(SMART_ROOT)/lib/lib%.a,-l%,$(wildcard $(SMART_ROOT)/lib/lib*)) -lfreenect -Xlinker --end-group
+ALL_LIBS=  -Xlinker --start-group $(patsubst $(SMART_ROOT)/lib/lib%.a,-l%,$(wildcard $(SMART_ROOT)/lib/lib*)) -Xlinker --end-group
 
 CPNT_CFLAGS = 	$(USER_CPP_CFLAGS) 
 CPNT_LFLAGS = 	$(LFLAGS) $(USER_CPP_LFLAGS) $(ALL_LIBS) \

@@ -47,10 +47,12 @@
 
 #include <iostream>
 
-DevicePoseStateTask::DevicePoseStateTask() {
+DevicePoseStateTask::DevicePoseStateTask()
+{
 }
 
-int DevicePoseStateTask::svc() {
+int DevicePoseStateTask::svc()
+{
 	double pan, tilt;
 
 	arma::mat ptuRobotOffset;
@@ -75,18 +77,21 @@ int DevicePoseStateTask::svc() {
 	CommBasicObjects::CommBaseState base_state;
 	CommBasicObjects::CommDevicePoseState device_state;
 
-	while (1) {
+	while (1)
+	{
 		// wait here when the component is not active
 		COMP->stateServer->acquire("active");
 		COMP->stateServer->release("active");
 
 		COMP->newPtuPos.acquire();
 
-		if (COMP->ini.base.on_base) {
+		if (COMP->ini.base.on_base)
+		{
 			CHS::SmartGuard guard(COMP->baseStateTask.base_mutex);
 			base_state = COMP->baseStateTask.base_state;
 			guard.release();
-		} else {
+		} else
+		{
 			// wait until the ptu moves. (because it is a push newest)
 			base_state.set_base_position(default_base_position);
 			base_state.set_base_raw_position(default_base_position);
@@ -97,9 +102,9 @@ int DevicePoseStateTask::svc() {
 		COMP->ptu.getPos(pan, tilt);
 
 		// calculate device pose on robot
-		arma::mat pose(4,4);
+		arma::mat pose(4, 4);
 		pose.zeros();
-		pose(3,3) = 1;
+		pose(3, 3) = 1;
 
 		EulerTransformationMatrices::create_zyx_matrix(pan, -tilt, 0, pose);
 		pose = ptuRobotOffset * pose;

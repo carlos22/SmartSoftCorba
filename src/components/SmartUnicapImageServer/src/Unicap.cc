@@ -153,6 +153,7 @@ void Unicap::init_getAndSetFormatOfCamera() {
 					formats[format_count].size.height = COMP->ini.hardware_properties.height;
 					formats[format_count].size.width = COMP->ini.hardware_properties.width;
 					format = format_count;
+					std::cout << "Format :" << formats[format_count].identifier << "\n";
 					break;
 				}
 			} else {
@@ -510,8 +511,7 @@ void Unicap::showAllProperties() const {
 
 int Unicap::handle_signal(int signum, siginfo_t *, ucontext_t *) {
 	if (signum == SIGINT) {
-		// Has to be set because otherwise the ImageTask will call getImage-Method over and over again
-		COMP->componentActive = false;
+
 		if (_handle != NULL) {
 			unicap_stop_capture(_handle);
 		}
@@ -527,8 +527,7 @@ int Unicap::handle_signal(int signum, siginfo_t *, ucontext_t *) {
 }
 
 Unicap::~Unicap() {
-	// Has to be set because otherwise the ImageTask will call getImage-Method over and over again
-	COMP->componentActive = false;
+
 	if (_handle != NULL) {
 		unicap_stop_capture(_handle);
 	}

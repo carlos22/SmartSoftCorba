@@ -16,7 +16,7 @@
 // delete it before running the code generator.
 //------------------------------------------------------------------------
 //
-//  Copyright (C) 2011 Manuel Wopfner
+//  Copyright (C) 2011 Manuel Wopfner, Matthias Lutz
 //
 //        wopfner@hs-ulm.de
 //
@@ -46,13 +46,14 @@
 #include "gen/SmartKinectServer.hh"
 
 #include "EulerTransformationMatrices.hh"
+#include "../src/utility/openCVHelpers/OpenCVHelpers.hh"
+#include "highgui.h"
 
 #include <iostream>
 #include <armadillo.hh>
 
 ImageTask::ImageTask() {
 	_ring_buffer_index = 0;
-	device = NULL;
 }
 
 ImageTask::~ImageTask() {
@@ -64,27 +65,29 @@ ImageTask::~ImageTask() {
 }
 
 void ImageTask::startCapturing() {
-	CHS::SmartGuard guard(kinectMutex);
-	if (device != NULL) {
-		device->startVideo();
-		device->startDepth();
+	CHS::SmartGuard guard(COMP->kinectMutex);
+	if (COMP->device != NULL) {
+		COMP->device->startVideo();
+		COMP->device->startDepth();
+	}
+	if (COMP->ini.settings.debug_info) {
+		std::cout << "[Image Task] Start capturing\n";
 	}
 }
 void ImageTask::stopCapturing() {
-	CHS::SmartGuard guard(kinectMutex);
-	if (device != NULL) {
-		device->stopVideo();
-		device->stopDepth();
+	CHS::SmartGuard guard(COMP->kinectMutex);
+	if (COMP->device != NULL) {
+		COMP->device->stopVideo();
+		COMP->device->stopDepth();
+	}
+	if (COMP->ini.settings.debug_info) {
+		std::cout << "[Image Task] Stop capturing\n";
 	}
 }
 
 int ImageTask::svc() {
 
-	std::cout << "[Image Task] Starting up camera ...\n";
-	Freenect::Freenect<KinectWrapper> freenect;
-	device = &freenect.createDevice(0);
 
-	std::cout << __LINE__ << std::endl;
 
 	CommBasicObjects::CommBasePosition default_base_position;
 	default_base_position.set_x(COMP->ini.base.x);
@@ -94,53 +97,48 @@ int ImageTask::svc() {
 	default_base_position.set_steer_alpha(COMP->ini.base.steer_a);
 	default_base_position.set_turret_alpha(COMP->ini.base.turret_a);
 
-	std::cout << __LINE__ << std::endl;
-
 	CommBasicObjects::CommBaseVelocity zero_velocity;
 	zero_velocity.set_v(0);
 	zero_velocity.set_omega_base(0);
 	zero_velocity.set_omega_steer(0);
 	zero_velocity.set_omega_turret(0);
 
-	std::cout << __LINE__ << std::endl;
-
 	// Calculate size of the ring_buffer
-	int size = (int) (COMP->ini.component.valid_image_time + 1);
-
-	std::cout << __LINE__ << std::endl;
+	int size = (int) (COMP->ini.settings.valid_image_time + 1);
 
 	_ring_buffer.resize(size);
 
-	std::cout << __LINE__ << std::endl;
-
-	if (COMP->ini.component.debug_info) {
+	if (COMP->ini.settings.debug_info) {
 		std::cout << "[Image Task] Newest: Size of Ring Buffer " << size << std::endl;
 	}
 
-	std::cout << __LINE__ << std::endl;
-
 	// Fill ring_buffer with empty images
 	for (unsigned int i = 0; i < _ring_buffer.size(); i++) {
-		_ring_buffer[i] = new CommVisionObjects::CommKinectImage(COMP->ini.hardware_properties.width,
-				COMP->ini.hardware_properties.height);
+		_ring_buffer[i] = new CommVisionObjects::CommKinectImage;
 	}
-
-	std::cout << __LINE__ << std::endl;
 
 	CommVisionObjects::CommKinectImage* image = NULL;
 	std::cout << "[Image Task] Start image capturing ...\n";
 
-	while (true) {
-		try {
-			COMP->stateServer->acquire("active");
-			COMP->stateServer->release("active");
+	while (true)
+	{
 
-			image = _ring_buffer[_ring_buffer_index];
+		try{
+			CHS::StatusCode statusCode;
+			statusCode = COMP->stateServer->acquire("pushimage");
+			std::cout<< CHS::StatusCodeConversion(statusCode) << std::endl;
+			if(statusCode == CHS::SMART_OK)
+			{
+				//std::cout<<__FILE__<<__LINE__<<std::endl;
+				image = _ring_buffer[_ring_buffer_index];
 
-			// get newest image from Kinect
-			if (COMP->componentActive) {
-				CHS::SmartGuard guard(kinectMutex);
-				device->getImage(*image);
+				// get newest image from Kinect
+				CHS::SmartGuard guard(COMP->kinectMutex);
+				COMP->device->getImage(*image);
+//
+//				IplImage *debugImage = OpenCVHelpers::copyRGBToIplImage((unsigned char*)image->get_rgb_image(), image->get_rgb_height(), image->get_rgb_width());
+//				cvSaveImage("kinect_rgb.jpg", debugImage);
+
 				guard.release();
 
 				image->set_min_distance(COMP->ini.hardware_properties.min_distance);
@@ -154,13 +152,35 @@ int ImageTask::svc() {
 				// set base state
 				CommBasicObjects::CommBaseState base_state;
 
+
+				//////////////
+				if (COMP->ini.base.on_ptu) {
+					CommBasicObjects::CommDevicePoseState devicePoseState;
+					CHS::StatusCode status = COMP->ptuPosePushNewestClient->getUpdate(devicePoseState);
+
+					base_state = devicePoseState.get_base_state();
+					CommBasicObjects::CommPose3d ptuPose = devicePoseState.get_device_pose3d_robot();
+					arma::mat ptuMat = ptuPose.getHomogeneousMatrix();
+
+					sensorMat = ptuMat * sensorMat;
+
+					if (status != CHS::SMART_OK) {
+						std::cerr << "[Image Task] WARNING: failed to get current ptu device state ("
+						<< CHS::StatusCodeConversion(status) << "), pushing invalid image" << std::endl;
+						image->set_data_valid(false);
+					}
+				}
+				//////////////
+
+
+
 				// read base state from base server
 				if (COMP->ini.base.on_base) {
 					CHS::StatusCode status = COMP->basePushTimedClient->getUpdate(base_state);
 
 					if (status != CHS::SMART_OK) {
 						std::cerr << "[Image Task] WARNING: failed to get current base state ("
-								<< CHS::StatusCodeConversion(status) << "), pushing invalid image" << std::endl;
+						<< CHS::StatusCodeConversion(status) << "), pushing invalid image" << std::endl;
 						image->set_data_valid(false);
 					}
 				}
@@ -174,24 +194,41 @@ int ImageTask::svc() {
 				CommBasicObjects::CommPose3d sensorPose(sensorMat);
 				image->set_sensor_pose(sensorPose);
 				image->set_base_state(base_state);
-			}
 
-			// Save the newest image into the global pointer
-			COMP->NewestImageMutex.acquire();
-			COMP->newestImage = image;
-			COMP->NewestImageMutex.release();
 
-			if (COMP->ini.component.push_newest_active) {
+
+
+				// Save the newest image into the global pointer
+				COMP->NewestImageMutex.acquire();
+				COMP->newestImage = image;
+				COMP->NewestImageMutex.release();
+
+				CommVisionObjects::CommVideoImage colorImage(image->get_rgb_width(),image->get_rgb_height(), CommVisionObjects::FormatType::RGB24);
+				colorImage.set_data(image->get_rgb_image());
+				colorImage.set_sequence_counter(image->get_sequence_counter());
+
+
+
+				COMP->colorImagePushNewestServer->put(colorImage);
 				COMP->imagePushNewestServer->put(*image);
-				if (COMP->ini.component.debug_info) {
-					std::cout << "[Image Task] Newest: Image sent!\n";
-				}
-			}
 
-			// calculate new index in the ring_buffer
-			_ring_buffer_index++;
-			if (_ring_buffer_index == _ring_buffer.size())
-				_ring_buffer_index = 0;
+
+				if (COMP->ini.settings.debug_info) {
+					std::cout << "[Image Task] Newest: Image sent!\n";
+					std::cout << "[Image Task] Newest Color: Image sent!\n";
+				}
+
+				// calculate new index in the ring_buffer
+				_ring_buffer_index++;
+				if (_ring_buffer_index == _ring_buffer.size())
+					_ring_buffer_index = 0;
+
+				guard.release();
+				COMP->stateServer->release("pushimage");
+
+			}//			if(COMP->stateServer->acquire("active") == CHS::SMART_OK)
+
+
 		} catch (std::exception e) {
 			std::cerr << "[Image Task] Error in ImageTask::svc() " << e.what() << "\n";
 		} catch (...) {
@@ -199,9 +236,106 @@ int ImageTask::svc() {
 		}
 
 		smart_task_wait_period();
-	}
+	} //while (true)
 
 	return 0;
 }
 
+void ImageTask::visualization(){
+
+	////////////////////////////////////////////
+
+			// Create window and prepare OpenGL object in the scene:
+			// --------------------------------------------------------
+			mrpt::gui::CDisplayWindow3D  win3D("Kinect 3D view",1280,1024);
+
+			win3D.setCameraAzimuthDeg(140);
+			win3D.setCameraElevationDeg(20);
+			win3D.setCameraZoom(8.0);
+			win3D.setFOV(90);
+			win3D.setCameraPointingToPoint(2.5,0,0);
+
+			mrpt::opengl::CPointCloudColouredPtr gl_points = mrpt::opengl::CPointCloudColoured::Create();
+			gl_points->setPointSize(2.5);
+
+			const double aspect_ratio =  480.0 / 640.0; // kinect.getRowCount() / double( kinect.getColCount() );
+
+			opengl::COpenGLViewportPtr viewRange, viewInt; // Extra viewports for the RGB & D images.
+			{
+				mrpt::opengl::COpenGLScenePtr &scene = win3D.get3DSceneAndLock();
+
+				// Create the Opengl object for the point cloud:
+				scene->insert( gl_points );
+				scene->insert( mrpt::opengl::CGridPlaneXY::Create() );
+				scene->insert( mrpt::opengl::stock_objects::CornerXYZ() );
+
+				const int VW_WIDTH = 250;	// Size of the viewport into the window, in pixel units.
+				const int VW_HEIGHT = aspect_ratio*VW_WIDTH;
+				const int VW_GAP = 30;
+
+				// Create the Opengl objects for the planar images, as textured planes, each in a separate viewport:
+				win3D.addTextMessage(30,-25-1*(VW_GAP+VW_HEIGHT),"Range data",TColorf(1,1,1), 1, MRPT_GLUT_BITMAP_HELVETICA_12 );
+				viewRange = scene->createViewport("view2d_range");
+				viewRange->setViewportPosition(5,-10-1*(VW_GAP+VW_HEIGHT), VW_WIDTH,VW_HEIGHT);
+
+				win3D.addTextMessage(30, -25-2*(VW_GAP+VW_HEIGHT),"Intensity data",TColorf(1,1,1), 2, MRPT_GLUT_BITMAP_HELVETICA_12 );
+				viewInt = scene->createViewport("view2d_int");
+				viewInt->setViewportPosition(5, -10-2*(VW_GAP+VW_HEIGHT), VW_WIDTH,VW_HEIGHT );
+
+				win3D.unlockAccess3DScene();
+				win3D.repaint();
+			}
+
+
+			CObservation3DRangeScanPtr  last_obs;
+
+			////////////////////////////////////////////
+
+
+			/////////////
+						//GUI
+
+						// Show ranges as 2D:
+						if (last_obs->hasRangeImage )
+						{
+							mrpt::utils::CImage  img;
+
+							// Normalize the image
+							static CMatrixFloat  range2D;   // Static to save time allocating the matrix in every iteration
+							range2D = last_obs->rangeImage * (1.0/ 5.0); //kinect.getMaxRange());
+
+							img.setFromMatrix(range2D);
+
+							win3D.get3DSceneAndLock();
+								viewRange->setImageView_fast(img);
+							win3D.unlockAccess3DScene();
+						}
+
+						// Show intensity image:
+						if (last_obs->hasIntensityImage )
+						{
+							win3D.get3DSceneAndLock();
+								viewInt->setImageView(last_obs->intensityImage); // This is not "_fast" since the intensity image is used below in the coloured point cloud.
+							win3D.unlockAccess3DScene();
+						}
+
+						// Show 3D points:
+						if (last_obs->hasPoints3D )
+						{
+							//mrpt::slam::CSimplePointsMap  pntsMap;
+							CColouredPointsMap pntsMap;
+							pntsMap.colorScheme.scheme = CColouredPointsMap::cmFromIntensityImage;
+							pntsMap.loadFromRangeScan(*last_obs);
+
+							win3D.get3DSceneAndLock();
+								gl_points->loadFromPointsMap(&pntsMap);
+							win3D.unlockAccess3DScene();
+							win3D.repaint();
+						}
+
+						///////
+
+
+
+}
 

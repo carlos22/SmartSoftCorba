@@ -1,88 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
-  <uml:Model xmi:id="_0hyEwGarEeCO2uZHSTM3Pg" name="SmartPioneerBaseServer_psm">
-    <packagedElement xmi:type="uml:Component" xmi:id="_0hyEwWarEeCO2uZHSTM3Pg" name="SmartPioneerBaseServer">
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_0hyEwmarEeCO2uZHSTM3Pg" name="basePositionUpdateServer"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_0hyEw2arEeCO2uZHSTM3Pg" name="baseQueryServer"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_0hyExGarEeCO2uZHSTM3Pg" name="basePositionServer"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_0hyExWarEeCO2uZHSTM3Pg" name="navigationVelocityServer"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_0hyExmarEeCO2uZHSTM3Pg" name="paramServer"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0hyEx2arEeCO2uZHSTM3Pg" name="BasePositionUpdateHandler"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0hyEyGarEeCO2uZHSTM3Pg" name="BaseStateQueryHandler"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0hyEyWarEeCO2uZHSTM3Pg" name="BaseStateHandler"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0hyEymarEeCO2uZHSTM3Pg" name="NavigationVelocityHandler"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0hyEy2arEeCO2uZHSTM3Pg" name="ParameterHandler"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0hyEzGarEeCO2uZHSTM3Pg" name="robot">
-        <ownedAttribute xmi:id="_0hyEzWarEeCO2uZHSTM3Pg" name="maxVelAcc">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/__Bw8gKlYEeC66fsk0J29Zw/98" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/__Bw8gKlYEeC66fsk0J29Zw/98 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#__DieIKlYEeC66fsk0J29Zw">
+  <uml:Model xmi:id="_haZZYKulEeC8nKcUSvXhvA" name="SmartPioneerBaseServer_psm">
+    <packagedElement xmi:type="uml:Component" xmi:id="_haZZYaulEeC8nKcUSvXhvA" name="SmartPioneerBaseServer">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_haZZYqulEeC8nKcUSvXhvA" name="baseQueryServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_haZZY6ulEeC8nKcUSvXhvA" name="paramServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_haZZZKulEeC8nKcUSvXhvA" name="basePositionUpdateServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_haZZZaulEeC8nKcUSvXhvA" name="navigationVelocityServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_haZZZqulEeC8nKcUSvXhvA" name="basePositionServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_haZZZ6ulEeC8nKcUSvXhvA" name="batteryEventServer"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_haZZaKulEeC8nKcUSvXhvA" name="BaseStateQueryHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_haZZaaulEeC8nKcUSvXhvA" name="ParameterHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_haZZaqulEeC8nKcUSvXhvA" name="BasePositionUpdateHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_haZZa6ulEeC8nKcUSvXhvA" name="NavigationVelocityHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_haZZbKulEeC8nKcUSvXhvA" name="BaseStateHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_haZZbaulEeC8nKcUSvXhvA" name="BatteryEventHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_haZZbqulEeC8nKcUSvXhvA" name="robot">
+        <ownedAttribute xmi:id="_haZZb6ulEeC8nKcUSvXhvA" name="maxRotVelDecel">
           <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
-          <defaultValue xmi:type="uml:LiteralString" xmi:id="_0hyEzmarEeCO2uZHSTM3Pg" value="300"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_haZZcKulEeC8nKcUSvXhvA" value="100"/>
         </ownedAttribute>
-        <ownedAttribute xmi:id="_0hyEz2arEeCO2uZHSTM3Pg" name="maxVelDecel">
+        <ownedAttribute xmi:id="_haZZcaulEeC8nKcUSvXhvA" name="maxVelDecel">
           <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
-          <defaultValue xmi:type="uml:LiteralString" xmi:id="_0hyE0GarEeCO2uZHSTM3Pg" value="300"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_haZZcqulEeC8nKcUSvXhvA" value="300"/>
         </ownedAttribute>
-        <ownedAttribute xmi:id="_0hyE0WarEeCO2uZHSTM3Pg" name="maxVel">
+        <ownedAttribute xmi:id="_haZZc6ulEeC8nKcUSvXhvA" name="maxVel">
           <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
-          <defaultValue xmi:type="uml:LiteralString" xmi:id="_0hyE0marEeCO2uZHSTM3Pg" value="1000"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_haZZdKulEeC8nKcUSvXhvA" value="1000"/>
         </ownedAttribute>
-        <ownedAttribute xmi:id="_0hyE02arEeCO2uZHSTM3Pg" name="enable_motors">
-          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
-          <defaultValue xmi:type="uml:LiteralString" xmi:id="_0hyE1GarEeCO2uZHSTM3Pg" value="true"/>
-        </ownedAttribute>
-        <ownedAttribute xmi:id="_0hyE1WarEeCO2uZHSTM3Pg" name="enable_sonar">
-          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
-          <defaultValue xmi:type="uml:LiteralString" xmi:id="_0hyE1marEeCO2uZHSTM3Pg" value="false"/>
-        </ownedAttribute>
-        <ownedAttribute xmi:id="_0hyE12arEeCO2uZHSTM3Pg" name="maxRotVelDecel">
-          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
-          <defaultValue xmi:type="uml:LiteralString" xmi:id="_0hyE2GarEeCO2uZHSTM3Pg" value="100"/>
-        </ownedAttribute>
-        <ownedAttribute xmi:id="_0hyE2WarEeCO2uZHSTM3Pg" name="serialport">
+        <ownedAttribute xmi:id="_haZZdaulEeC8nKcUSvXhvA" name="serialport">
           <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
-          <defaultValue xmi:type="uml:LiteralString" xmi:id="_0hyE2marEeCO2uZHSTM3Pg" value="/dev/ttyS0"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_haZZdqulEeC8nKcUSvXhvA" value="/dev/ttyS0"/>
         </ownedAttribute>
-        <ownedAttribute xmi:id="_0hyE22arEeCO2uZHSTM3Pg" name="robotType">
+        <ownedAttribute xmi:id="_haZZd6ulEeC8nKcUSvXhvA" name="maxRotVelAcc">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_haZZeKulEeC8nKcUSvXhvA" value="100"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_haZZeaulEeC8nKcUSvXhvA" name="robotType">
           <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_xvvG0IgaEd6Va88Rz-zvaQ"/>
-          <defaultValue xmi:type="uml:LiteralString" xmi:id="_0hyE3GarEeCO2uZHSTM3Pg" value="p3dx"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_haZZequlEeC8nKcUSvXhvA" value="p3dx"/>
         </ownedAttribute>
-        <ownedAttribute xmi:id="_0hyE3WarEeCO2uZHSTM3Pg" name="maxRotVel">
+        <ownedAttribute xmi:id="_haZZe6ulEeC8nKcUSvXhvA" name="maxRotVel">
           <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
-          <defaultValue xmi:type="uml:LiteralString" xmi:id="_0hyE3marEeCO2uZHSTM3Pg" value="300"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_haZZfKulEeC8nKcUSvXhvA" value="300"/>
         </ownedAttribute>
-        <ownedAttribute xmi:id="_0hyE32arEeCO2uZHSTM3Pg" name="maxRotVelAcc">
+        <ownedAttribute xmi:id="_haZZfaulEeC8nKcUSvXhvA" name="maxVelAcc">
           <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_yw8EEIQHEd658-uedLdk2A"/>
-          <defaultValue xmi:type="uml:LiteralString" xmi:id="_0hyE4GarEeCO2uZHSTM3Pg" value="100"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_haZZfqulEeC8nKcUSvXhvA" value="300"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_haZZf6ulEeC8nKcUSvXhvA" name="enable_sonar">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_haZZgKulEeC8nKcUSvXhvA" value="false"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_haZZgaulEeC8nKcUSvXhvA" name="enable_motors">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_MmsrsIQJEd658-uedLdk2A"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_haZZgqulEeC8nKcUSvXhvA" value="true"/>
         </ownedAttribute>
       </packagedElement>
     </packagedElement>
-    <profileApplication xmi:id="_0hyE4WarEeCO2uZHSTM3Pg">
-      <eAnnotations xmi:id="_0hyE4marEeCO2uZHSTM3Pg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+    <profileApplication xmi:id="_haZZg6ulEeC8nKcUSvXhvA">
+      <eAnnotations xmi:id="_haZZhKulEeC8nKcUSvXhvA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#__DieIKlYEeC66fsk0J29Zw"/>
       </eAnnotations>
       <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
     </profileApplication>
   </uml:Model>
-  <CorbaSmartSoft:SmartCorbaComponent xmi:id="_0hyE42arEeCO2uZHSTM3Pg" base_Component="_0hyEwWarEeCO2uZHSTM3Pg"/>
-  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="_0hyE5GarEeCO2uZHSTM3Pg" serviceName="positionUpdate" base_Port="_0hyEwmarEeCO2uZHSTM3Pg" smartSendHandler="_0hyEx2arEeCO2uZHSTM3Pg">
-    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_BQWcsEV8EeC6tb6-J2zOEA"/>
-  </CorbaSmartSoft:SmartCorbaSendServer>
-  <CorbaSmartSoft:SmartCorbaQueryServer xmi:id="_0hyE5WarEeCO2uZHSTM3Pg" serviceName="basestatequery" base_Port="_0hyEw2arEeCO2uZHSTM3Pg" smartQueryHandler="_0hyEyGarEeCO2uZHSTM3Pg">
+  <CorbaSmartSoft:SmartCorbaComponent xmi:id="_haaAcKulEeC8nKcUSvXhvA" base_Component="_haZZYaulEeC8nKcUSvXhvA"/>
+  <CorbaSmartSoft:SmartCorbaQueryServer xmi:id="_haaAcaulEeC8nKcUSvXhvA" base_Port="_haZZYqulEeC8nKcUSvXhvA" serviceName="basestatequery" smartQueryHandler="_haZZaKulEeC8nKcUSvXhvA">
     <commRequestObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
     <commAnswerObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
   </CorbaSmartSoft:SmartCorbaQueryServer>
-  <CorbaSmartSoft:SmartCorbaPushTimedServer xmi:id="_0hyE5marEeCO2uZHSTM3Pg" serviceName="basestate" base_Port="_0hyExGarEeCO2uZHSTM3Pg" smartPushTimedHandler="_0hyEyWarEeCO2uZHSTM3Pg" cycle="0.1">
-    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
-  </CorbaSmartSoft:SmartCorbaPushTimedServer>
-  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="_0hyE52arEeCO2uZHSTM3Pg" serviceName="navigationvelocity" base_Port="_0hyExWarEeCO2uZHSTM3Pg" smartSendHandler="_0hyEymarEeCO2uZHSTM3Pg">
-    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_t0-UAEV5EeC6tb6-J2zOEA"/>
-  </CorbaSmartSoft:SmartCorbaSendServer>
-  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="_0hyE6GarEeCO2uZHSTM3Pg" serviceName="param" base_Port="_0hyExmarEeCO2uZHSTM3Pg" smartSendHandler="_0hyEy2arEeCO2uZHSTM3Pg">
+  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="_haaAcqulEeC8nKcUSvXhvA" base_Port="_haZZY6ulEeC8nKcUSvXhvA" serviceName="param" smartSendHandler="_haZZaaulEeC8nKcUSvXhvA">
     <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_vz0uwEmJEeCfXId88PsX3A"/>
   </CorbaSmartSoft:SmartCorbaSendServer>
-  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="_0hyE6WarEeCO2uZHSTM3Pg" base_Class="_0hyEx2arEeCO2uZHSTM3Pg"/>
-  <CorbaSmartSoft:SmartCorbaQueryHandler xmi:id="_0hyE6marEeCO2uZHSTM3Pg" base_Class="_0hyEyGarEeCO2uZHSTM3Pg"/>
-  <CorbaSmartSoft:SmartCorbaPushTimedHandler xmi:id="_0hyE62arEeCO2uZHSTM3Pg" base_Class="_0hyEyWarEeCO2uZHSTM3Pg"/>
-  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="_0hyE7GarEeCO2uZHSTM3Pg" base_Class="_0hyEymarEeCO2uZHSTM3Pg"/>
-  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="_0hyE7WarEeCO2uZHSTM3Pg" base_Class="_0hyEy2arEeCO2uZHSTM3Pg"/>
-  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_0hyE7marEeCO2uZHSTM3Pg" base_Class="_0hyEzGarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="_haaAc6ulEeC8nKcUSvXhvA" base_Port="_haZZZKulEeC8nKcUSvXhvA" serviceName="positionUpdate" smartSendHandler="_haZZaqulEeC8nKcUSvXhvA">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_BQWcsEV8EeC6tb6-J2zOEA"/>
+  </CorbaSmartSoft:SmartCorbaSendServer>
+  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="_haaAdKulEeC8nKcUSvXhvA" base_Port="_haZZZaulEeC8nKcUSvXhvA" serviceName="navigationvelocity" smartSendHandler="_haZZa6ulEeC8nKcUSvXhvA">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_t0-UAEV5EeC6tb6-J2zOEA"/>
+  </CorbaSmartSoft:SmartCorbaSendServer>
+  <CorbaSmartSoft:SmartCorbaPushTimedServer xmi:id="_haaAdaulEeC8nKcUSvXhvA" base_Port="_haZZZqulEeC8nKcUSvXhvA" serviceName="basestate" smartPushTimedHandler="_haZZbKulEeC8nKcUSvXhvA" cycle="0.1">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
+  </CorbaSmartSoft:SmartCorbaPushTimedServer>
+  <CorbaSmartSoft:SmartCorbaEventServer xmi:id="_haaAdqulEeC8nKcUSvXhvA" base_Port="_haZZZ6ulEeC8nKcUSvXhvA" serviceName="battery" smartEventTestHandler="_haZZbaulEeC8nKcUSvXhvA">
+    <eventParameter href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_qjBHMKZ1EeCdLa25mXpO3A"/>
+    <eventResult href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Iy_iQKZ1EeCdLa25mXpO3A"/>
+    <eventState href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_tiqvMKZ1EeCdLa25mXpO3A"/>
+  </CorbaSmartSoft:SmartCorbaEventServer>
+  <CorbaSmartSoft:SmartCorbaQueryHandler xmi:id="_haaAd6ulEeC8nKcUSvXhvA" base_Class="_haZZaKulEeC8nKcUSvXhvA"/>
+  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="_haaAeKulEeC8nKcUSvXhvA" base_Class="_haZZaaulEeC8nKcUSvXhvA"/>
+  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="_haaAeaulEeC8nKcUSvXhvA" base_Class="_haZZaqulEeC8nKcUSvXhvA"/>
+  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="_haaAequlEeC8nKcUSvXhvA" base_Class="_haZZa6ulEeC8nKcUSvXhvA"/>
+  <CorbaSmartSoft:SmartCorbaPushTimedHandler xmi:id="_haaAe6ulEeC8nKcUSvXhvA" base_Class="_haZZbKulEeC8nKcUSvXhvA"/>
+  <CorbaSmartSoft:SmartCorbaEventTestHandler xmi:id="_haaAfKulEeC8nKcUSvXhvA" base_Class="_haZZbaulEeC8nKcUSvXhvA"/>
+  <CorbaSmartSoft:SmartCorbaIniParameterGroup xmi:id="_haaAfaulEeC8nKcUSvXhvA" base_Class="_haZZbqulEeC8nKcUSvXhvA"/>
 </xmi:XMI>

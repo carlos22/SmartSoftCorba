@@ -42,7 +42,9 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //--------------------------------------------------------------------------
 
-#include <mrpt/core.h>
+#include <mrpt/gui.h>
+#include <mrpt/opengl.h>
+#include <mrpt/utils.h>
 
 #include "ViewerTask.hh"
 #include "gen/SmartKinectTestClient.hh"
@@ -58,15 +60,18 @@ using namespace mrpt;
 using namespace mrpt::gui;
 using namespace mrpt::opengl;
 
-ViewerTask::ViewerTask() {
+ViewerTask::ViewerTask()
+{
 }
 
-int ViewerTask::svc() {
+int ViewerTask::svc()
+{
 	// activate kinect
-	COMP->stateClient->setWaitState("active");
+	//COMP->stateClient->setWaitState("active");
 
 	// create windows
 	CDisplayWindow rgbImage("RGB Image");
+	CDisplayWindow depthImage_Window("Depth Image");
 	CDisplayWindow3D cartesianWindow("Cartesian Points", 640, 480);
 
 	// place windows on screen
@@ -81,9 +86,8 @@ int ViewerTask::svc() {
 
 	COpenGLScenePtr &theScene = cartesianWindow.get3DSceneAndLock();
 
-	opengl::CPointCloudPtr cloud = opengl::CPointCloud::Create();
+	opengl::CPointCloudColouredPtr cloud = opengl::CPointCloudColoured::Create();
 	cloud->setName("cloud");
-	cloud->setColor(mrpt::utils::TColorf(1));
 	cloud->setPointSize(2.0);
 	theScene->insert(cloud);
 
@@ -162,54 +166,154 @@ int ViewerTask::svc() {
 	cartesianWindow.unlockAccess3DScene();
 
 	// ------------------------------------------------------
-	while (!mrpt::system::os::kbhit() && cartesianWindow.isOpen()) {
+	while (!mrpt::system::os::kbhit() && cartesianWindow.isOpen())
+	{
 
+		CommBasicObjects::CommVoid v;
 		CommVisionObjects::CommKinectImage image;
+
 		COMP->imagePushNewestClient->getUpdateWait(image);
+		//COMP->kinectQueryClient->query(v, image);
 
-		if (image.is_data_valid()) {
+		// save file
+		if (image.is_data_valid() && COMP->ini.general.save_to_file)
+		{
+			ofstream myfile(COMP->ini.general.filename.c_str());
+			if (myfile.is_open())
+			{
+				image.save_xml(myfile);
+				myfile.close();
+			}
+		}
 
+		if (image.is_data_valid())
+		{
+
+
+		//{ // write cloud to file
+		//	fstream filestr;
+		//	filestr.open ("kinect_kart_points_sensor.txt", fstream::out);
+		//	double x,y,z;
+		//	CommVisionObjects::Comm3dPointCloud pointCloud = image.get_as_3dPointCloud_sensor();
+		//	for (uint32_t i = 0; i < pointCloud.get_size(); ++i) {
+		//		pointCloud.get_point(i, x, y, z, 1);
+		//		filestr<<x <<" "<<y<<" "<<z<<std::endl;
+		//	}
+		//	filestr.close();
+		//}
+		//{ // write cloud to file
+		//	fstream filestr;
+		//	filestr.open ("kinect_kart_points_robot.txt", fstream::out);
+		//	double x,y,z;
+		//	CommVisionObjects::Comm3dPointCloud pointCloud = image.get_as_3dPointCloud_robot();
+		//	for (uint32_t i = 0; i < pointCloud.get_size(); ++i) {
+		//		pointCloud.get_point(i, x, y, z, 1);
+		//		filestr<<x <<" "<<y<<" "<<z<<std::endl;
+		//	}
+		//	filestr.close();
+		//	char buf[500];
+		//	std::cout << "cin for next image." << std::endl;
+		//	cin >> buf;
+		//}
+	
 			std::cout << "counter: " << image.get_sequence_counter() << "\n";
 			std::cout << "min_distance: " << image.get_min_distance() << "\n";
 			std::cout << "max_distance: " << image.get_max_distance() << "\n";
-			std::cout << "opening_angle_x_axis: " << image.get_opening_angle_x_axis() << "\n";
-			std::cout << "opening_angle_y_axis: " << image.get_opening_angle_y_axis() << "\n";
 
 			//////////////////////////////////////////
 			// show rgb image
 			{
-				CImage dImage(image.get_width(), image.get_height());
+				CImage colorImage(image.get_rgb_width(), image.get_rgb_height());
+				std::cout << "width x height: " << image.get_rgb_width() << "x" << image.get_rgb_height() << std::endl;
 				const uint8_t* imageData = image.get_rgb_image();
-				for (uint32_t i = 0; i < image.get_height(); i++) {
-					for (uint32_t j = 0; j < image.get_width(); j++) {
+				for (uint32_t i = 0; i < image.get_rgb_height(); i++)
+				{
+					for (uint32_t j = 0; j < image.get_rgb_width(); j++)
+					{
 
-						const uint8_t* pixel = (imageData + i * 3* image .get_width() + j * 3);
+						const uint8_t* pixel = (imageData + i * 3* image .get_rgb_width() + j * 3);
 
 						uint8_t r = pixel[0];
 						uint8_t g = pixel[1];
 						uint8_t b = pixel[2];
 
 						TColor color(r, g, b);
-						dImage.setPixel(j, i, color);
+						colorImage.setPixel(j, i, color);
 					}
 				}
-				rgbImage.showImage(dImage);
+				rgbImage.showImage(colorImage);
 			}
+
 			//////////////////////////////////////////
+			// show depth image
+			{
+				CImage depthImage(image.get_distance_width(), image.get_distance_height());
+				std::cout << "depth width x height: " << image.get_distance_width() << "x" << image.get_distance_height() << std::endl;
+				const float* imageData = image.get_distances();
+				for (uint32_t i = 0; i < image.get_distance_height(); i++)
+				{
+					for (uint32_t j = 0; j < image.get_distance_width(); j++)
+					{
+
+						const float* pixel = (imageData + i * image.get_distance_width() + j);
+
+						uint8_t r = pixel[0] / 8* 255 ;
+						uint8_t g = pixel[0] / 8* 255 ;
+						uint8_t b = pixel[0] / 8* 255 ;
+
+						TColor color(r, g, b);
+						depthImage.setPixel(j, i, color);
+					}
+				}
+				depthImage_Window.showImage(depthImage);
+			}
+
+			//////////////////////////////////////////
+
+			// calculate points and colors
+			arma::vec q(4);
+			q(3) = 1;
+
+			double x, y, z;
+			float r = 0, g = 0, b = 0;
+			std::vector<ColPoint3d> points;
+			const arma::mat& project = image.get_color_intrinsic() * image.get_camera_extrinsic();
+			const uint8_t* rgbImg = image.get_rgb_image();
+
+			for (uint32_t w = 0; w < image.get_distance_width(); w++)
+			{
+				for (uint32_t h = 0; h < image.get_distance_height(); h++)
+				{
+					image.get_cartesian_point_sensor(w, h, q(0), q(1), q(2), 1);
+					arma::vec p = project * q;
+					p /= p(2);
+
+					uint32_t px = p(0);
+					uint32_t py = p(1);
+
+					if (px >= 0 && px < image.get_rgb_width() && py >= 0 && py < image.get_rgb_height())
+					{
+
+						r = (rgbImg + 3* image .get_rgb_width() * py)[px * 3];
+						g = (rgbImg + 3* image .get_rgb_width() * py)[px * 3 + 1];
+						b = (rgbImg + 3* image .get_rgb_width() * py)[px * 3 + 2];
+					}
+
+					image.get_cartesian_point_world(w, h, x, y, z, 1);
+					points.push_back(ColPoint3d(x, y, z, r / 255.0, g / 255.0, b / 255.0));
+				}
+			}
 
 			COpenGLScenePtr & theScene = cartesianWindow.get3DSceneAndLock();
 			//////////////////////////////////////////
 			// show coordinates
 			{
 				cloud->clear();
-				double x, y, z;
-
-				for (uint32_t i = 0; i < image.get_width(); i++) {
-					for (uint32_t j = 0; j < image.get_height(); j++) {
-						image.get_cartesian_point_world(i, j, x, y, z, 1);
-						cloud->insertPoint(x, y, z);
-					}
+				for (uint32_t i = 0; i < points.size(); i++)
+				{
+					cloud->push_back(points[i].x, points[i].y, points[i].z, points[i].r, points[i].g, points[i].b);
 				}
+
 			}
 			//////////////////////////////////////////
 
@@ -217,8 +321,7 @@ int ViewerTask::svc() {
 			//////////////////////////////////////////
 			// show robot coordinate system
 			{
-				arma::mat pose_robot =
-						image.get_base_state().get_base_position().get_base_pose3d().getHomogeneousMatrix(1);
+				arma::mat pose_robot = image.get_base_state().get_base_position().get_base_pose3d().getHomogeneousMatrix(1);
 
 				arma::vec origin(4);
 				origin.zeros();
@@ -257,8 +360,7 @@ int ViewerTask::svc() {
 			// show sensor coordinate system
 			{
 				arma::mat pose = image.get_sensor_pose().getHomogeneousMatrix(1);
-				arma::mat pose_robot =
-						image.get_base_state().get_base_position().get_base_pose3d().getHomogeneousMatrix(1);
+				arma::mat pose_robot = image.get_base_state().get_base_position().get_base_pose3d().getHomogeneousMatrix(1);
 
 				arma::vec origin(4);
 				origin.zeros();
@@ -294,7 +396,8 @@ int ViewerTask::svc() {
 			cartesianWindow.unlockAccess3DScene();
 			cartesianWindow.forceRepaint();
 
-		} else {
+		} else
+		{
 			std::cout << "data invalid\n";
 		}
 

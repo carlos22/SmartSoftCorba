@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124" xmlns:SmartMARS_1="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
   <uml:Model xmi:id="_xfg4AIm8Ed-1uYN9VTuVlQ" name="SmartToFClient_pim">
     <elementImport xmi:id="_A06rgF9zEeCsRebhqimSWA">
       <importedElement xmi:type="uml:Class" href="../../../CommVisionObjects/model/pim/CommVisionObjects_pim.uml#_ByxsoFCmEeCKI8aCFSQyHA"/>
@@ -105,22 +105,22 @@
     </profileApplication>
     <profileApplication xmi:id="_xfg4BIm8Ed-1uYN9VTuVlQ">
       <eAnnotations xmi:id="_xfg4BYm8Ed-1uYN9VTuVlQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw"/>
       </eAnnotations>
       <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
     </profileApplication>
   </uml:Model>
   <SmartMARS:SmartComponent xmi:id="_xhWEAIm8Ed-1uYN9VTuVlQ" base_Component="_xfg4AYm8Ed-1uYN9VTuVlQ"/>
   <SmartMARS:SmartTask xmi:id="_1z1M4Im8Ed-1uYN9VTuVlQ" base_Class="_1yLnEIm8Ed-1uYN9VTuVlQ"/>
-  <SmartMARS:SmartQueryClient xmi:id="_-8ZT4Im8Ed-1uYN9VTuVlQ" serviceName="imageQuery" base_Port="_-8HnEIm8Ed-1uYN9VTuVlQ" serverName="SmartPMDServer">
+  <SmartMARS:SmartQueryClient xmi:id="_-8ZT4Im8Ed-1uYN9VTuVlQ" base_Port="_-8HnEIm8Ed-1uYN9VTuVlQ" serviceName="imageQuery" serverName="SmartPMDServer" wiringName="imageQueryClient">
     <commRequestObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
     <commAnswerObject href="../../../CommVisionObjects/model/pim/CommVisionObjects_pim.uml#_k-5BIFkiEeCkYMJtM9_O3A"/>
   </SmartMARS:SmartQueryClient>
-  <SmartMARS:SmartStateClient xmi:id="_3AL5AInBEd-1uYN9VTuVlQ" serviceName="state" base_Port="_2-XUEInBEd-1uYN9VTuVlQ" serverName="SmartPMDServer"/>
-  <SmartMARS:SmartPushTimedClient xmi:id="_PL1LYInHEd-_4NY4VX3A9g" serviceName="pushNewestClient" serverName="SmartPMDServer">
+  <SmartMARS:SmartStateClient xmi:id="_3AL5AInBEd-1uYN9VTuVlQ" base_Port="_2-XUEInBEd-1uYN9VTuVlQ" serviceName="state" serverName="SmartPMDServer" wiringName="stateClient"/>
+  <SmartMARS_1:SmartPushTimedClient xmi:id="_PL1LYInHEd-_4NY4VX3A9g" serviceName="pushNewestClient" serverName="SmartPMDServer">
     <commObject href="../../../CommToFObjects/model/pim/CommToFObjects_pim.uml#_KWs4kIUeEd-Q4rXRgC8nKQ"/>
-  </SmartMARS:SmartPushTimedClient>
-  <SmartMARS:SmartPushNewestClient xmi:id="_XW6WcInHEd-_4NY4VX3A9g" serviceName="imageNewest" base_Port="_XWe4oInHEd-_4NY4VX3A9g" serverName="SmartPMDServer">
+  </SmartMARS_1:SmartPushTimedClient>
+  <SmartMARS:SmartPushNewestClient xmi:id="_XW6WcInHEd-_4NY4VX3A9g" base_Port="_XWe4oInHEd-_4NY4VX3A9g" serviceName="imageNewest" serverName="SmartPMDServer" wiringName="imagePushNewestClient">
     <commObject href="../../../CommVisionObjects/model/pim/CommVisionObjects_pim.uml#_k-5BIFkiEeCkYMJtM9_O3A"/>
   </SmartMARS:SmartPushNewestClient>
 </xmi:XMI>

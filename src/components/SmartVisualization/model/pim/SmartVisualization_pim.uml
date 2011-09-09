@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw">
   <uml:Model xmi:id="_1XqjAGBMEeCrDrhjBZHlsg" name="SmartVisualization_pim">
     <elementImport xmi:id="_V7TNUGBNEeCrDrhjBZHlsg">
       <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
@@ -136,6 +136,24 @@
     <elementImport xmi:id="_xbAuoGGpEeCemYAtzTcjpw">
       <importedElement xmi:type="uml:Class" href="../../../CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_gs_MYFn5EeCMadxcQY1MDw"/>
     </elementImport>
+    <elementImport xmi:id="_8s14MKfGEeCogICVSVLTrg">
+      <importedElement xmi:type="uml:Class" href="../../../CommPersonDetectionObjects/model/pim/CommPersonDetectionObjects_pim.uml#_XVXR4JvcEd-7au64wuT5nw"/>
+    </elementImport>
+    <elementImport xmi:id="_8tO5wKfGEeCogICVSVLTrg">
+      <importedElement xmi:type="uml:Class" href="../../../CommPersonDetectionObjects/model/pim/CommPersonDetectionObjects_pim.uml#_qfwqMJvcEd-7au64wuT5nw"/>
+    </elementImport>
+    <elementImport xmi:id="_8uZ-cKfGEeCogICVSVLTrg">
+      <importedElement xmi:type="uml:Class" href="../../../CommPersonDetectionObjects/model/pim/CommPersonDetectionObjects_pim.uml#_vLRWEJvnEd-7au64wuT5nw"/>
+    </elementImport>
+    <elementImport xmi:id="_8uwjwKfGEeCogICVSVLTrg">
+      <importedElement xmi:type="uml:Class" href="../../../CommPersonDetectionObjects/model/pim/CommPersonDetectionObjects_pim.uml#_vZxsIJvnEd-7au64wuT5nw"/>
+    </elementImport>
+    <elementImport xmi:id="_zqxjoLeREeCfjNNNt6T_EQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommPersonDetectionObjects/model/pim/CommPersonDetectionObjects_pim.uml#_orsYALdyEeChHoUm03geoA"/>
+    </elementImport>
+    <elementImport xmi:id="_zrJXELeREeCfjNNNt6T_EQ">
+      <importedElement xmi:type="uml:Class" href="../../../CommPersonDetectionObjects/model/pim/CommPersonDetectionObjects_pim.uml#_quk_ULd-EeCTpeSOacHXIQ"/>
+    </elementImport>
     <packagedElement xmi:type="uml:Component" xmi:id="_1XrKEGBMEeCrDrhjBZHlsg" name="SmartVisualization">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_HFrc4GBNEeCrDrhjBZHlsg" name="laserClient1" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_aLOKYGBNEeCrDrhjBZHlsg" name="laserClient2" aggregation="composite"/>
@@ -144,6 +162,10 @@
       <ownedAttribute xmi:type="uml:Port" xmi:id="_6zI4cGGlEeCemYAtzTcjpw" name="tofImageClient" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_zT1RcGGpEeCemYAtzTcjpw" name="lmtQueryClient" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_cg9skGWZEeCx1IfAAyxAIA" name="curPushClient" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_oZTtkKfGEeCogICVSVLTrg" name="kinectPushNewestClient" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_t0XBAKfGEeCogICVSVLTrg" name="personDetectionEventClient" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_x613ELeREeCfjNNNt6T_EQ" name="personDetectionQueryClient" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_iN3ycLeSEeCfjNNNt6T_EQ" name="wiringSlave" aggregation="composite"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_HGgt4GBOEeCrDrhjBZHlsg" name="services">
         <ownedAttribute xmi:id="_JPi28GBOEeCrDrhjBZHlsg" name="show_base" visibility="public" isUnique="false">
           <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
@@ -175,6 +197,16 @@
           <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
           <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_oo5HsGWZEeCx1IfAAyxAIA" value="true"/>
         </ownedAttribute>
+        <ownedAttribute xmi:id="_otKTIKfFEeCogICVSVLTrg" name="show_kinect_image" visibility="public" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_QViLgKfGEeCogICVSVLTrg" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_QVcr8KfGEeCogICVSVLTrg" value="1"/>
+          <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_YIi00KfGEeCogICVSVLTrg"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_pU1XIKfFEeCogICVSVLTrg" name="show_person_detection" visibility="public" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_HFxeAIggEd6Va88Rz-zvaQ"/>
+          <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_hgXf0KfGEeCogICVSVLTrg"/>
+        </ownedAttribute>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_buKuYGBOEeCrDrhjBZHlsg" name="BaseTask"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_cBi9YGBOEeCrDrhjBZHlsg" name="Laser1Task"/>
@@ -183,6 +215,8 @@
       <packagedElement xmi:type="uml:Class" xmi:id="_HB7JgGGmEeCemYAtzTcjpw" name="TofTask"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_Ey6XcGGqEeCemYAtzTcjpw" name="LtmTask"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_uINQEGWZEeCx1IfAAyxAIA" name="CurMapTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_aVIdoKfFEeCogICVSVLTrg" name="KinectTask"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_enfDoKfFEeCogICVSVLTrg" name="PersonDetectionTask"/>
     </packagedElement>
     <profileApplication xmi:id="_1XrKEWBMEeCrDrhjBZHlsg">
       <eAnnotations xmi:id="_1XrKEmBMEeCrDrhjBZHlsg" source="http://www.eclipse.org/uml2/2.0.0/UML">
@@ -192,22 +226,22 @@
     </profileApplication>
     <profileApplication xmi:id="_1XrKE2BMEeCrDrhjBZHlsg">
       <eAnnotations xmi:id="_1XrKFGBMEeCrDrhjBZHlsg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw"/>
       </eAnnotations>
       <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
     </profileApplication>
   </uml:Model>
   <SmartMARS:SmartComponent xmi:id="_1cVnoGBMEeCrDrhjBZHlsg" base_Component="_1XrKEGBMEeCrDrhjBZHlsg"/>
-  <SmartMARS:SmartPushNewestClient xmi:id="_HHvSYGBNEeCrDrhjBZHlsg" serviceName="scan" base_Port="_HFrc4GBNEeCrDrhjBZHlsg" serverName="SmartPlayerStageSimulator">
+  <SmartMARS:SmartPushNewestClient xmi:id="_HHvSYGBNEeCrDrhjBZHlsg" base_Port="_HFrc4GBNEeCrDrhjBZHlsg" serviceName="scan" serverName="SmartPlayerStageSimulator" wiringName="laser1">
     <commObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
   </SmartMARS:SmartPushNewestClient>
-  <SmartMARS:SmartPushNewestClient xmi:id="_aLyLEGBNEeCrDrhjBZHlsg" serviceName="" base_Port="_aLOKYGBNEeCrDrhjBZHlsg" serverName="">
+  <SmartMARS:SmartPushNewestClient xmi:id="_aLyLEGBNEeCrDrhjBZHlsg" base_Port="_aLOKYGBNEeCrDrhjBZHlsg" serviceName="scan" serverName="SmartLaserLMS1xxServer" wiringName="laser2">
     <commObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
   </SmartMARS:SmartPushNewestClient>
-  <SmartMARS:SmartPushNewestClient xmi:id="_f6VpUGBNEeCrDrhjBZHlsg" serviceName="" base_Port="_f50E4GBNEeCrDrhjBZHlsg" serverName="">
+  <SmartMARS:SmartPushNewestClient xmi:id="_f6VpUGBNEeCrDrhjBZHlsg" base_Port="_f50E4GBNEeCrDrhjBZHlsg" serviceName="scan" serverName="SmartLaserLMS200Server" wiringName="laser3">
     <commObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
   </SmartMARS:SmartPushNewestClient>
-  <SmartMARS:SmartPushTimedClient xmi:id="_wxRKMGBNEeCrDrhjBZHlsg" serviceName="basestate" base_Port="_ww1sYGBNEeCrDrhjBZHlsg" serverName="SmartPlayerStageSimulator">
+  <SmartMARS:SmartPushTimedClient xmi:id="_wxRKMGBNEeCrDrhjBZHlsg" base_Port="_ww1sYGBNEeCrDrhjBZHlsg" serviceName="basestate" serverName="SmartPlayerStageSimulator" wiringName="base">
     <commObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
   </SmartMARS:SmartPushTimedClient>
   <SmartMARS:SmartIniParameterGroup xmi:id="_HGmNcGBOEeCrDrhjBZHlsg" base_Class="_HGgt4GBOEeCrDrhjBZHlsg"/>
@@ -215,17 +249,31 @@
   <SmartMARS:SmartTask xmi:id="_cBpEAGBOEeCrDrhjBZHlsg" base_Class="_cBi9YGBOEeCrDrhjBZHlsg"/>
   <SmartMARS:SmartTask xmi:id="_cOGLoGBOEeCrDrhjBZHlsg" base_Class="_cN-24GBOEeCrDrhjBZHlsg"/>
   <SmartMARS:SmartTask xmi:id="_cc_jQGBOEeCrDrhjBZHlsg" base_Class="_cctPYGBOEeCrDrhjBZHlsg"/>
-  <SmartMARS:SmartPushNewestClient xmi:id="_62AmQGGlEeCemYAtzTcjpw" serviceName="imageNewest" base_Port="_6zI4cGGlEeCemYAtzTcjpw" serverName="SmartPMDServer">
+  <SmartMARS:SmartPushNewestClient xmi:id="_62AmQGGlEeCemYAtzTcjpw" base_Port="_6zI4cGGlEeCemYAtzTcjpw" serviceName="imageNewest" serverName="SmartPMDServer" wiringName="tofImage">
     <commObject href="../../../CommVisionObjects/model/pim/CommVisionObjects_pim.uml#_k-5BIFkiEeCkYMJtM9_O3A"/>
   </SmartMARS:SmartPushNewestClient>
   <SmartMARS:SmartTask xmi:id="_HCGvsGGmEeCemYAtzTcjpw" base_Class="_HB7JgGGmEeCemYAtzTcjpw"/>
-  <SmartMARS:SmartQueryClient xmi:id="_zWcgkGGpEeCemYAtzTcjpw" serviceName="ltmGridMapQuery" base_Port="_zT1RcGGpEeCemYAtzTcjpw" serverName="SmartMapperGridMap">
+  <SmartMARS:SmartQueryClient xmi:id="_zWcgkGGpEeCemYAtzTcjpw" base_Port="_zT1RcGGpEeCemYAtzTcjpw" serviceName="ltmGridMapQuery" serverName="SmartMapperGridMap" wiringName="ltmGridMap">
     <commRequestObject href="../../../CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_Svv6kEmUEeC-KYWPZCFBzA"/>
     <commAnswerObject href="../../../CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_-s4UEEmREeC-KYWPZCFBzA"/>
   </SmartMARS:SmartQueryClient>
   <SmartMARS:SmartTask xmi:id="_Ey_3AGGqEeCemYAtzTcjpw" base_Class="_Ey6XcGGqEeCemYAtzTcjpw"/>
-  <SmartMARS:SmartPushNewestClient xmi:id="_ck80sGWZEeCx1IfAAyxAIA" serviceName="currentGridMap" base_Port="_cg9skGWZEeCx1IfAAyxAIA" serverName="SmartMapperGridMap">
+  <SmartMARS:SmartPushNewestClient xmi:id="_ck80sGWZEeCx1IfAAyxAIA" base_Port="_cg9skGWZEeCx1IfAAyxAIA" serviceName="currentGridMap" serverName="SmartMapperGridMap" wiringName="currentGridMap">
     <commObject href="../../../CommNavigationObjects/model/pim/CommNavigationObjects_pim.uml#_-s4UEEmREeC-KYWPZCFBzA"/>
   </SmartMARS:SmartPushNewestClient>
   <SmartMARS:SmartTask xmi:id="_uIVL4GWZEeCx1IfAAyxAIA" base_Class="_uINQEGWZEeCx1IfAAyxAIA"/>
+  <SmartMARS:SmartTask xmi:id="_aW70cKfFEeCogICVSVLTrg" base_Class="_aVIdoKfFEeCogICVSVLTrg"/>
+  <SmartMARS:SmartTask xmi:id="_eno0oKfFEeCogICVSVLTrg" base_Class="_enfDoKfFEeCogICVSVLTrg"/>
+  <SmartMARS:SmartPushNewestClient xmi:id="_oa7eMKfGEeCogICVSVLTrg" base_Port="_oZTtkKfGEeCogICVSVLTrg" serviceName="imageNewest" serverName="SmartKinectServer" wiringName="kinect">
+    <commObject href="../../../CommVisionObjects/model/pim/CommVisionObjects_pim.uml#_kqIvsFn_EeCMadxcQY1MDw"/>
+  </SmartMARS:SmartPushNewestClient>
+  <SmartMARS:SmartEventClient xmi:id="_t3gboKfGEeCogICVSVLTrg" base_Port="_t0XBAKfGEeCogICVSVLTrg" serviceName="personEvent" serverName="SmartKinectPersonDetection" wiringName="personDetectionEvent">
+    <eventParameter href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
+    <eventResult href="../../../CommPersonDetectionObjects/model/pim/CommPersonDetectionObjects_pim.uml#_orsYALdyEeChHoUm03geoA"/>
+  </SmartMARS:SmartEventClient>
+  <SmartMARS:SmartQueryClient xmi:id="_x86ToLeREeCfjNNNt6T_EQ" base_Port="_x613ELeREeCfjNNNt6T_EQ" serviceName="person" serverName="SmartKinectPersonDetection" wiringName="personDetectionQuery">
+    <commRequestObject href="../../../CommPersonDetectionObjects/model/pim/CommPersonDetectionObjects_pim.uml#_quk_ULd-EeCTpeSOacHXIQ"/>
+    <commAnswerObject href="../../../CommPersonDetectionObjects/model/pim/CommPersonDetectionObjects_pim.uml#_qfwqMJvcEd-7au64wuT5nw"/>
+  </SmartMARS:SmartQueryClient>
+  <SmartMARS:SmartWiringSlave xmi:id="_iRDpULeSEeCfjNNNt6T_EQ" base_Port="_iN3ycLeSEeCfjNNNt6T_EQ"/>
 </xmi:XMI>

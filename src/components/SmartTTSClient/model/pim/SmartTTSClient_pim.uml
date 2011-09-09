@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw">
   <uml:Model xmi:id="_BLa4QEvxEeCoUthXHMCjWw" name="SmartSpeechOutputClient_pim">
     <elementImport xmi:id="_MF3zoEvxEeCoUthXHMCjWw">
       <importedElement xmi:type="uml:Class" href="../../../CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_BOOw8EvLEeClMZ_R22LoZg"/>
@@ -82,6 +82,7 @@
     <packagedElement xmi:type="uml:Component" xmi:id="_BLa4QUvxEeCoUthXHMCjWw" name="SmartTTSClient">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_FuKDoEvxEeCoUthXHMCjWw" name="sendClient" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_-runoFPQEeC_Kuu1x4s0sA" name="queryClient" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_eH7L4NrgEeCXRLZCF2eW6A" name="wiringSlave" aggregation="composite"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_PVd8IEvxEeCoUthXHMCjWw" name="ConsoleTask"/>
     </packagedElement>
     <profileApplication xmi:id="_BLa4QkvxEeCoUthXHMCjWw">
@@ -92,18 +93,19 @@
     </profileApplication>
     <profileApplication xmi:id="_BLa4REvxEeCoUthXHMCjWw">
       <eAnnotations xmi:id="_BLa4RUvxEeCoUthXHMCjWw" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw"/>
       </eAnnotations>
       <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
     </profileApplication>
   </uml:Model>
   <SmartMARS:SmartComponent xmi:id="_BOI1EEvxEeCoUthXHMCjWw" base_Component="_BLa4QUvxEeCoUthXHMCjWw"/>
-  <SmartMARS:SmartSendClient xmi:id="_FxKUUEvxEeCoUthXHMCjWw" serviceName="text2speech" base_Port="_FuKDoEvxEeCoUthXHMCjWw" serverName="SmartTTSLoquendo">
+  <SmartMARS:SmartSendClient xmi:id="_FxKUUEvxEeCoUthXHMCjWw" base_Port="_FuKDoEvxEeCoUthXHMCjWw" serviceName="text2speech" serverName="SmartTTSLoquendo" wiringName="sendClient">
     <commObject href="../../../CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_WKwIAEvoEeCoUthXHMCjWw"/>
   </SmartMARS:SmartSendClient>
   <SmartMARS:SmartTask xmi:id="_PViNkEvxEeCoUthXHMCjWw" base_Class="_PVd8IEvxEeCoUthXHMCjWw"/>
-  <SmartMARS:SmartQueryClient xmi:id="_-uYTAFPQEeC_Kuu1x4s0sA" serviceName="text2speech" base_Port="_-runoFPQEeC_Kuu1x4s0sA" serverName="SmartTTSLoquendo">
+  <SmartMARS:SmartQueryClient xmi:id="_-uYTAFPQEeC_Kuu1x4s0sA" base_Port="_-runoFPQEeC_Kuu1x4s0sA" serviceName="text2speech" serverName="SmartTTSLoquendo" wiringName="queryClient">
     <commRequestObject href="../../../CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_WKwIAEvoEeCoUthXHMCjWw"/>
     <commAnswerObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_vhHJwEvcEeCoUthXHMCjWw"/>
   </SmartMARS:SmartQueryClient>
+  <SmartMARS:SmartWiringSlave xmi:id="_eKtaINrgEeCXRLZCF2eW6A" base_Port="_eH7L4NrgEeCXRLZCF2eW6A"/>
 </xmi:XMI>

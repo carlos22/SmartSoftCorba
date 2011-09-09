@@ -14,3 +14,4 @@
 (robotControl done);1.0;I am done;robotControl
 (goto shelf);1.0;goto shelf;goto
 (goto diningRoom);1.0;goto dining room;goto
+(interaction name);1.0;Testname;interaction

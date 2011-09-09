@@ -89,7 +89,7 @@ INI_FILES    =	SmartUnicapImageClient.ini
 ##----------------------------------------------------------------------------
 # PROTECTED REGION ID(CustomUserLibs) ENABLED START
 ## user libs  -- add your own libs here
-USER_CPP_CFLAGS = 
+USER_CPP_CFLAGS = -I$(SMART_ROOT)/src/utility/openCVHelpers
 USER_CPP_LFLAGS =  
 INCLUDES +=		
 # PROTECTED REGION END

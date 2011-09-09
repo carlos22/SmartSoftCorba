@@ -57,7 +57,7 @@ void CompHandler::onStartup() {
 
 	// connect to ptu unit
 	if (COMP->ptu.init(COMP->ini.PTU.device)) {
-		std::cout << "\n" << "Device: " << COMP->ini.PTU.device << " successfully connectd!\n";
+		std::cout << "\n" << "Device: " << COMP->ini.PTU.device << " successfully connected!\n";
 	} else {
 		std::cerr << "\n" << "ERROR: device " << COMP->ini.PTU.device << " could not be opened!\n";
 	}

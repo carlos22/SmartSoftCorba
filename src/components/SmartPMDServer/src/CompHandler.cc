@@ -90,14 +90,14 @@ void CompHandler::onStartup() {
 
 	// connect to camera
 	std::cout << "connecting to camera ... \n";
-	COMP->pmd.init(COMP->ini.component.source_plugin, COMP->ini.component.source_parameter,
-			COMP->ini.component.processing_plugin, COMP->ini.component.processing_parameter,
+	COMP->pmd.init(COMP->ini.general.source_plugin, COMP->ini.general.source_parameter,
+			COMP->ini.general.processing_plugin, COMP->ini.general.processing_parameter,
 			COMP->ini.hardware_properties.width, COMP->ini.hardware_properties.height,
 			COMP->ini.hardware_properties.min_distance, COMP->ini.hardware_properties.max_distance,
 			COMP->ini.hardware_properties.opening_angle_x_axis, COMP->ini.hardware_properties.opening_angle_y_axis);
 	std::cout << "initialized. \n";
 
-	if (COMP->ini.component.initialize_camera) {
+	if (COMP->ini.general.initialize_camera) {
 		COMP->pmd.setModulationFrequency(COMP->ini.hardware_properties.modulation_frequency);
 		COMP->pmd.setIntegrationTime(COMP->ini.hardware_properties.integration_time);
 		COMP->pmd.setLenseCalibrationOn(COMP->ini.hardware_properties.activate_lense_calibration);

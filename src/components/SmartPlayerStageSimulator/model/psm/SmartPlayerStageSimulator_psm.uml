@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/_0slFcDEeEd-S3OOmPMmZqQ/91 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ">
-  <uml:Model xmi:id="_1-t80GarEeCO2uZHSTM3Pg" name="SmartPlayerStageSimulator_psm">
-    <packagedElement xmi:type="uml:Component" xmi:id="_1-t80WarEeCO2uZHSTM3Pg" name="SmartPlayerStageSimulator">
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_1-t80marEeCO2uZHSTM3Pg" name="baseStateQueryServer"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_1-t802arEeCO2uZHSTM3Pg" name="basePositionPushTimedServer"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_1-t81GarEeCO2uZHSTM3Pg" name="laserServer"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_1-t81WarEeCO2uZHSTM3Pg" name="navigationVelocitySendServer"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_1-t81marEeCO2uZHSTM3Pg" name="basePositionUpdateSendServer"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_1-t812arEeCO2uZHSTM3Pg" name="BaseStateQueryHandler"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_1-t82GarEeCO2uZHSTM3Pg" name="PlayerPushTimedHandler"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_1-t82WarEeCO2uZHSTM3Pg" name="NavigationVelocitySendServerHandler"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_1-t82marEeCO2uZHSTM3Pg" name="BasePositionUpdateSendHandler"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_1-t822arEeCO2uZHSTM3Pg" name="RobotPosLock"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_1-t83GarEeCO2uZHSTM3Pg" name="PlayerClientMutex"/>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CorbaSmartSoft="http:///schemas/CorbaSmartSoft/__Bw8gKlYEeC66fsk0J29Zw/98" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/CorbaSmartSoft/__Bw8gKlYEeC66fsk0J29Zw/98 pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#__DieIKlYEeC66fsk0J29Zw">
+  <uml:Model xmi:id="__bZTgNrnEeCfGaX5KHyzng" name="SmartPlayerStageSimulator_psm">
+    <packagedElement xmi:type="uml:Component" xmi:id="__bZTgdrnEeCfGaX5KHyzng" name="SmartPlayerStageSimulator">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="__bZTgtrnEeCfGaX5KHyzng" name="basePositionUpdateSendServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="__bZTg9rnEeCfGaX5KHyzng" name="baseStateQueryServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="__bZThNrnEeCfGaX5KHyzng" name="navigationVelocitySendServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="__bZThdrnEeCfGaX5KHyzng" name="basePositionPushTimedServer"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="__bZThtrnEeCfGaX5KHyzng" name="laserServer"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="__bZTh9rnEeCfGaX5KHyzng" name="BasePositionUpdateSendHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="__bZTiNrnEeCfGaX5KHyzng" name="BaseStateQueryHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="__bZTidrnEeCfGaX5KHyzng" name="NavigationVelocitySendServerHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="__bZTitrnEeCfGaX5KHyzng" name="PlayerPushTimedHandler"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="__bZTi9rnEeCfGaX5KHyzng" name="PlayerClientMutex"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="__bZTjNrnEeCfGaX5KHyzng" name="RobotPosLock"/>
     </packagedElement>
-    <profileApplication xmi:id="_1-t83WarEeCO2uZHSTM3Pg">
-      <eAnnotations xmi:id="_1-t83marEeCO2uZHSTM3Pg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_00bZ4DEeEd-S3OOmPMmZqQ"/>
+    <profileApplication xmi:id="__bZTjdrnEeCfGaX5KHyzng">
+      <eAnnotations xmi:id="__bZTjtrnEeCfGaX5KHyzng" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#__DieIKlYEeC66fsk0J29Zw"/>
       </eAnnotations>
       <appliedProfile href="pathmap://CORBASMARTSOFT_PROFILE/CorbaSmartSoft.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
     </profileApplication>
   </uml:Model>
-  <CorbaSmartSoft:SmartCorbaComponent xmi:id="_1-uj4GarEeCO2uZHSTM3Pg" base_Component="_1-t80WarEeCO2uZHSTM3Pg"/>
-  <CorbaSmartSoft:SmartCorbaQueryServer xmi:id="_1-uj4WarEeCO2uZHSTM3Pg" serviceName="basestatequery" base_Port="_1-t80marEeCO2uZHSTM3Pg" smartQueryHandler="_1-t812arEeCO2uZHSTM3Pg">
+  <CorbaSmartSoft:SmartCorbaComponent xmi:id="__bZTj9rnEeCfGaX5KHyzng" base_Component="__bZTgdrnEeCfGaX5KHyzng"/>
+  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="__bZTkNrnEeCfGaX5KHyzng" base_Port="__bZTgtrnEeCfGaX5KHyzng" serviceName="positionUpdate" smartSendHandler="__bZTh9rnEeCfGaX5KHyzng">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_BQWcsEV8EeC6tb6-J2zOEA"/>
+  </CorbaSmartSoft:SmartCorbaSendServer>
+  <CorbaSmartSoft:SmartCorbaQueryServer xmi:id="__bZTkdrnEeCfGaX5KHyzng" base_Port="__bZTg9rnEeCfGaX5KHyzng" serviceName="basestatequery" smartQueryHandler="__bZTiNrnEeCfGaX5KHyzng">
     <commRequestObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
     <commAnswerObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
   </CorbaSmartSoft:SmartCorbaQueryServer>
-  <CorbaSmartSoft:SmartCorbaPushTimedServer xmi:id="_1-uj4marEeCO2uZHSTM3Pg" serviceName="basestate" base_Port="_1-t802arEeCO2uZHSTM3Pg" smartPushTimedHandler="_1-t82GarEeCO2uZHSTM3Pg" cycle="0.025">
-    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
-  </CorbaSmartSoft:SmartCorbaPushTimedServer>
-  <CorbaSmartSoft:SmartCorbaPushNewestServer xmi:id="_1-uj42arEeCO2uZHSTM3Pg" serviceName="scan" base_Port="_1-t81GarEeCO2uZHSTM3Pg">
-    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
-  </CorbaSmartSoft:SmartCorbaPushNewestServer>
-  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="_1-uj5GarEeCO2uZHSTM3Pg" serviceName="navigationvelocity" base_Port="_1-t81WarEeCO2uZHSTM3Pg" smartSendHandler="_1-t82WarEeCO2uZHSTM3Pg">
+  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="__bZTktrnEeCfGaX5KHyzng" base_Port="__bZThNrnEeCfGaX5KHyzng" serviceName="navigationvelocity" smartSendHandler="__bZTidrnEeCfGaX5KHyzng">
     <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_t0-UAEV5EeC6tb6-J2zOEA"/>
   </CorbaSmartSoft:SmartCorbaSendServer>
-  <CorbaSmartSoft:SmartCorbaSendServer xmi:id="_1-uj5WarEeCO2uZHSTM3Pg" serviceName="positionUpdate" base_Port="_1-t81marEeCO2uZHSTM3Pg" smartSendHandler="_1-t82marEeCO2uZHSTM3Pg">
-    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_BQWcsEV8EeC6tb6-J2zOEA"/>
-  </CorbaSmartSoft:SmartCorbaSendServer>
-  <CorbaSmartSoft:SmartCorbaQueryHandler xmi:id="_1-uj5marEeCO2uZHSTM3Pg" base_Class="_1-t812arEeCO2uZHSTM3Pg"/>
-  <CorbaSmartSoft:SmartCorbaPushTimedHandler xmi:id="_1-uj52arEeCO2uZHSTM3Pg" base_Class="_1-t82GarEeCO2uZHSTM3Pg"/>
-  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="_1-uj6GarEeCO2uZHSTM3Pg" base_Class="_1-t82WarEeCO2uZHSTM3Pg"/>
-  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="_1-uj6WarEeCO2uZHSTM3Pg" base_Class="_1-t82marEeCO2uZHSTM3Pg"/>
-  <CorbaSmartSoft:SmartCorbaMutex xmi:id="_1-uj6marEeCO2uZHSTM3Pg" base_Class="_1-t822arEeCO2uZHSTM3Pg"/>
-  <CorbaSmartSoft:SmartCorbaMutex xmi:id="_1-uj62arEeCO2uZHSTM3Pg" base_Class="_1-t83GarEeCO2uZHSTM3Pg"/>
+  <CorbaSmartSoft:SmartCorbaPushTimedServer xmi:id="__bZTk9rnEeCfGaX5KHyzng" base_Port="__bZThdrnEeCfGaX5KHyzng" serviceName="basestate" smartPushTimedHandler="__bZTitrnEeCfGaX5KHyzng" cycle="0.025">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
+  </CorbaSmartSoft:SmartCorbaPushTimedServer>
+  <CorbaSmartSoft:SmartCorbaPushNewestServer xmi:id="__bZTlNrnEeCfGaX5KHyzng" base_Port="__bZThtrnEeCfGaX5KHyzng" serviceName="scan">
+    <commObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
+  </CorbaSmartSoft:SmartCorbaPushNewestServer>
+  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="__bZTldrnEeCfGaX5KHyzng" base_Class="__bZTh9rnEeCfGaX5KHyzng"/>
+  <CorbaSmartSoft:SmartCorbaQueryHandler xmi:id="__bZTltrnEeCfGaX5KHyzng" base_Class="__bZTiNrnEeCfGaX5KHyzng"/>
+  <CorbaSmartSoft:SmartCorbaSendHandler xmi:id="__bZTl9rnEeCfGaX5KHyzng" base_Class="__bZTidrnEeCfGaX5KHyzng"/>
+  <CorbaSmartSoft:SmartCorbaPushTimedHandler xmi:id="__bZTmNrnEeCfGaX5KHyzng" base_Class="__bZTitrnEeCfGaX5KHyzng"/>
+  <CorbaSmartSoft:SmartCorbaMutex xmi:id="__bZTmdrnEeCfGaX5KHyzng" base_Class="__bZTi9rnEeCfGaX5KHyzng"/>
+  <CorbaSmartSoft:SmartCorbaMutex xmi:id="__bZTmtrnEeCfGaX5KHyzng" base_Class="__bZTjNrnEeCfGaX5KHyzng"/>
 </xmi:XMI>

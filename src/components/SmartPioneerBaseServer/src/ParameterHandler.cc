@@ -58,12 +58,24 @@ void ParameterHandler::handleSend(const CommBasicObjects::CommBaseParameter &r) 
 
     r.get(tag,p1,p2,p3,p4,p5);
 
-    switch (tag) {
+    switch (tag)
+    {
       //case Smart::BASE_RESET:
-      case CommBasicObjects::BaseTagType::BASE_RESET: {
+      case CommBasicObjects::BaseTagType::BASE_RESET:
+      {
     	  COMP->robot->resetPosition();
     	  std::cout << "RESET BASE !!!!!!!!!!!!!!\n\n";
+    	  break;
       } // case BASE_RESET
+
+      //case Smart::SONAR:
+      case CommBasicObjects::BaseTagType::BASE_SONAR:
+      {
+    	  //COMP->robot->resetPosition();
+    	  std::cout << "SONAR = " << p1 << std::endl;
+    	  COMP->robot->setSonarState( (bool) p1);
+    	  break;
+      } // case SONAR
 
     } // switch
 }

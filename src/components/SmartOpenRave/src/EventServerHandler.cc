@@ -66,6 +66,7 @@ bool EventServerHandler::testEvent(CommManipulationPlannerObjects::CommManipulat
 		p.set_event(newState);
 		// set result
 		r.set_event(newState);
+		r.set_pose(s.get_pose());
 		result = true;
 	}
 

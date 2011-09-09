@@ -12,7 +12,7 @@
   TODO:
   .Error detection using checksum
   .Obtain timestamp and sychronize with host
-  .Using thread to obtain data from [MD-MS Command] 
+  .Using thread to obtain data from [MD-MS Command]
   .Change all types of Show command to paramater obtaining/storing command
 */
 
@@ -192,7 +192,7 @@ int scip2ShowTime(tPort* aPort)
   }
   if(scipReceiveResEnd(aPort)!=0)
     return -1;
-  // Neglect SUM + LF 
+  // Neglect SUM + LF
   lineEnd=strlen(line)-2;
   if(lineEnd!=4){
     SCIP_TRACE("INVALID TIME-STAMP\n");
@@ -325,12 +325,12 @@ int scip2SetScanSpeed(tPort* aPort, int aRate)
   malloc is used for memory pointer. Set it free after use.
   Return NULL when failed to obtin scan data.
 */
-// TODO: Check for step data MIN, MAX 
+// TODO: Check for step data MIN, MAX
 // TODO: Use of thread
 int** scip2MeasureScan(tPort* aPort, int aStartStep, int aEndStep, int aStepCluster, int aScanInterval, int aScanNum, EncType_t aEncType, int *aStepNum)
 {
   static const char SCIP2_MEASURE_STATUS[]={'9','9','b',LF,'\0'};
-  char cmdCode[2];
+  char cmdCode[3];
   char cmd[CMD_SIZE];
   char line[LINE_SIZE];
   char *encData,*encDataIter;
@@ -339,9 +339,10 @@ int** scip2MeasureScan(tPort* aPort, int aStartStep, int aEndStep, int aStepClus
   int **scan,*pt;
   State_t preState;
 
-  if(aEncType==ENC_2BYTE)
+
+  if(aEncType==ENC_2BYTE) {
     sprintf(cmdCode,"MS");
-  else{  // Default is 3-Character encoding [MD-Command]
+  }else{  // Default is 3-Character encoding [MD-Command]
     sprintf(cmdCode,"MD");
     aEncType=ENC_3BYTE;
   }
@@ -453,7 +454,7 @@ int** scip2MeasureScan(tPort* aPort, int aStartStep, int aEndStep, int aStepClus
         free(encData);
         return NULL;
       }
-      // Judge the end of the received data 
+      // Judge the end of the received data
       if(strcmp(line,LF_STRING)==0){
         if(strlen(encData)==0){  // error
           skipReceiveBuf(aPort->dev);
@@ -468,23 +469,24 @@ int** scip2MeasureScan(tPort* aPort, int aStartStep, int aEndStep, int aStepClus
 #ifdef DEBUG
       SCIP_TRACE("%s",line);
 #endif
-      // Neglect SUM + LF 
+      // Neglect SUM + LF
       lineEnd=strlen(line)-2;
       line[lineEnd]='\0';
       // Combine encode data into single line
-      // TODO: Implementing memccpy() 
+      // TODO: Implementing memccpy()
       strncat(encData,line,64);
     }
 #ifdef DEBUG
     SCIP_TRACE("Encoded data string = \n%s\n",encData);
 #endif
+
     // decode
     encDataIter=encData;
     while(strlen(encDataIter)-aEncType>0){
       *pt=scipDecode(encDataIter,aEncType);
       encDataIter+=aEncType;
       ++pt;
-      if(pt>=scan[i]+(*aStepNum)){  //If memory exceed allocated space -malloc 
+      if(pt>=scan[i]+(*aStepNum)){  //If memory exceed allocated space -malloc
         for(k=0;k<aScanNum;++k)
           free(scan[k]);
         free(scan);
@@ -493,6 +495,7 @@ int** scip2MeasureScan(tPort* aPort, int aStartStep, int aEndStep, int aStepClus
       }
     }
   }
+
   aPort->state=preState;
   free(encData);
   return scan;
@@ -628,7 +631,7 @@ int* scip2GetScan(tPort* aPort, int aStartStep, int aEndStep, int aStepCluster, 
       free(encData);
       return NULL;
     }
-    // Judge the end of the received data 
+    // Judge the end of the received data
     if(strcmp(line,LF_STRING)==0){
       if(strlen(encData)==0){  // error
         skipReceiveBuf(aPort->dev);
@@ -657,7 +660,7 @@ int* scip2GetScan(tPort* aPort, int aStartStep, int aEndStep, int aStepCluster, 
     *pt=scipDecode(encDataIter,aEncType);
     encDataIter+=aEncType;
     ++pt;
-    if(pt>=scan+(*aStepNum)){  // If memory exceed allocated space -malloc 
+    if(pt>=scan+(*aStepNum)){  // If memory exceed allocated space -malloc
       free(scan);
       free(encData);
       return NULL;
@@ -666,7 +669,7 @@ int* scip2GetScan(tPort* aPort, int aStartStep, int aEndStep, int aStepCluster, 
   free(encData);
   return scan;
 }
-//! Free the allocated(malloc) scan data array 
+//! Free the allocated(malloc) scan data array
 /*!
   @param aScan [in] aScan Starting address of the scan data array to be deleted
   param aScanNum [in] Distance data array number (scan count) (0-99)

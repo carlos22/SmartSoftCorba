@@ -67,7 +67,7 @@
 
 #include <CommVisionObjects/comm3dPointCloud.hh>
 
-#include <mrpt/core.h>
+#include <mrpt/math.h>
 
 #include <iostream>
 #include <ctime>
@@ -99,6 +99,7 @@ int TestTask::svc() {
 		std::cout << " 05 - show laser scan (requires opengl window in init file)\n";
 		std::cout << " 06 - show 3d point cloud (requires opengl window in init file)\n";
 		std::cout << " 07 - recognize objects\n";
+		std::cout << " 31 - move to point by user input\n";
 		std::cout << " --- OpenRave -------\n";
 		std::cout << " 08 - change states\n";
 		std::cout << " 09 - save OpenRave\n";
@@ -149,6 +150,10 @@ int TestTask::svc() {
 
 		case 7:
 			recognizeObjects();
+			break;
+
+		case 31:
+			moveToAsByUserInput();
 			break;
 
 		case 8:
@@ -388,7 +393,7 @@ void TestTask::reproduceTrajectory() {
 }
 
 void TestTask::demonstration() {
-	ObjectSet::getInstance().clearAll();
+//	ObjectSet::getInstance().clearAll();
 	COMP->manipulatorStateClient->setWaitState("demonstration");
 	COMP->openRaveStateClient->setWaitState("demonstration");
 
@@ -398,36 +403,36 @@ void TestTask::demonstration() {
 			state.get_manipulator_state().print();
 			std::cout.flush();
 
-			if (COMP->ini.connect_services.continous_scan)
-				ObjectSet::getInstance().clearLines();
-			else
-				ObjectSet::getInstance().clearAll();
-			ObjectSet::getInstance().drawBaseCoord();
+//			if (COMP->ini.connect_services.continous_scan)
+//				ObjectSet::getInstance().clearLines();
+//			else
+//				ObjectSet::getInstance().clearAll();
+//			ObjectSet::getInstance().drawBaseCoord();
 
 			CommBasicObjects::CommPose3d base_pose = state.get_base_state().get_base_position().get_base_pose3d();
-			ObjectSet::getInstance().drawCoord(base_pose, 0.15);
+//			ObjectSet::getInstance().drawCoord(base_pose, 0.15);
 
 			double x, y, z, azimuth, elevation, roll;
 			state.get_manipulator_state().get_pose_manipulator(x, y, z, azimuth, elevation, roll, 1);
 			CommBasicObjects::CommPose3d manipulator_pose(x, y, z, azimuth, elevation, roll, 1);
-			ObjectSet::getInstance().drawCoord(base_pose.getHomogeneousMatrix(1)
-					* manipulator_pose.getHomogeneousMatrix(1), 0.1);
+//			ObjectSet::getInstance().drawCoord(base_pose.getHomogeneousMatrix(1)
+//					* manipulator_pose.getHomogeneousMatrix(1), 0.1);
 
 			state.get_manipulator_state().get_pose_TCP_robot(x, y, z, azimuth, elevation, roll, 1);
 			CommBasicObjects::CommPose3d tcp_pose(x, y, z, azimuth, elevation, roll, 1);
-			//tcp_pose.print();
-			ObjectSet::getInstance().drawCoord(base_pose.getHomogeneousMatrix(1) * tcp_pose.getHomogeneousMatrix(1),
-					0.1);
+			std::cout << tcp_pose;
+//			ObjectSet::getInstance().drawCoord(base_pose.getHomogeneousMatrix(1) * tcp_pose.getHomogeneousMatrix(1),
+//					0.1);
 
-			if (COMP->ini.connect_services.continous_scan) {
-				arma::vec point(4);
-				point[0] = x;
-				point[1] = y;
-				point[2] = z;
-				point[3] = 1;
-				point = base_pose.getHomogeneousMatrix(1) * point;
-				ObjectSet::getInstance().addPoint(point[0], point[1], point[2], Color::SlateBlue1);
-			}
+//			if (COMP->ini.connect_services.continous_scan) {
+//				arma::vec point(4);
+//				point[0] = x;
+//				point[1] = y;
+//				point[2] = z;
+//				point[3] = 1;
+//				point = base_pose.getHomogeneousMatrix(1) * point;
+//				ObjectSet::getInstance().addPoint(point[0], point[1], point[2], Color::SlateBlue1);
+//			}
 
 		} else {
 			std::cerr << "could not read manipulator state\n";
@@ -973,6 +978,239 @@ void TestTask::recognizeObjects() {
 
 }
 
+
+void TestTask::moveToAsByUserInput() {
+	//ObjectSet::getInstance().clearAll();
+	//ObjectSet::getInstance().drawBaseCoord();
+
+	CHS::StatusCode status;
+
+
+
+
+//
+//	{
+//		status = COMP->openRaveStateClient->setWaitState("neutral");
+//		if(status != CHS::SMART_OK) std::cout << "!= CHS::SMART_OK -> " << CHS::StatusCodeConversion(status) << "(line " << __LINE__ << ")" << std::endl;
+//
+//		CommManipulationPlannerObjects::CommManipulationPlannerParameter manipulatorParam;
+//
+//		std::stringstream ss;
+//		ss << "GRASPING_SIMPLE(-0.01)(0.01)(0.01)(-0.01)(-5)(20)(0)(20)";
+//
+//		std::string tmp = ss.str();
+//		manipulatorParam.set(tmp);
+//		status = COMP->openRaveParameterClient->send(manipulatorParam);
+//		if(status != CHS::SMART_OK) std::cout << "!= CHS::SMART_OK -> " << CHS::StatusCodeConversion(status) << "(line " << __LINE__ << ")" << std::endl;
+//
+//		COMP->openRaveStateClient->setWaitState("simulation");
+//		if(status != CHS::SMART_OK) std::cout << "!= CHS::SMART_OK -> " << CHS::StatusCodeConversion(status) << "(line " << __LINE__ << ")" << std::endl;
+//
+//		CommManipulatorObjects::CommManipulatorTrajectory trajectory;
+//		trajectory.set_valid_values(CommManipulatorObjects::ManipulatorTrajectoryFlag::POSES);
+//		trajectory.set_trajectory_size(1);
+//		trajectory.set_wait_until_each_pose_reached(false);
+//
+//		trajectory.set_pose_TCP_robot(0, 0, 250, 636+100, 0, 0, 0);
+//		trajectory.set_gripper_action(CommManipulatorObjects::ManipulatorGripperAction::CLOSE_BEFORE_OPEN_AFTER);
+//		{
+//		double x, y, z, azimuth, elevation, roll;
+//		trajectory.get_pose_TCP_robot(0, x, y, z, azimuth, elevation, roll);
+//		std::cout << "Sending " << x << " " << y << " " << z << " " << azimuth << " " << elevation << " " << roll << std::endl;
+//		}
+//
+//		status = COMP->openRaveTrajectorySendClient->send(trajectory);
+//		if(status != CHS::SMART_OK) std::cout << "!= CHS::SMART_OK -> " << CHS::StatusCodeConversion(status) << "(line " << __LINE__ << ")" << std::endl;
+//
+//		std::cout << "cin for next" << std::endl;
+//		char buf[999];
+//		cin >> buf;
+//	}
+//	{
+//		status = COMP->openRaveStateClient->setWaitState("neutral");
+//		if(status != CHS::SMART_OK) std::cout << "!= CHS::SMART_OK -> " << CHS::StatusCodeConversion(status) << "(line " << __LINE__ << ")" << std::endl;
+//
+//		CommManipulationPlannerObjects::CommManipulationPlannerParameter manipulatorParam;
+//
+//		std::stringstream ss;
+//		ss << "GRASPING_SIMPLE(-0.01)(0.01)(0.01)(-0.01)(-5)(20)(180)(145)";
+//
+//		std::string tmp = ss.str();
+//		manipulatorParam.set(tmp);
+//		status = COMP->openRaveParameterClient->send(manipulatorParam);
+//		if(status != CHS::SMART_OK) std::cout << "!= CHS::SMART_OK -> " << CHS::StatusCodeConversion(status) << "(line " << __LINE__ << ")" << std::endl;
+//
+//		COMP->openRaveStateClient->setWaitState("simulation");
+//		if(status != CHS::SMART_OK) std::cout << "!= CHS::SMART_OK -> " << CHS::StatusCodeConversion(status) << "(line " << __LINE__ << ")" << std::endl;
+//
+//		CommManipulatorObjects::CommManipulatorTrajectory trajectory;
+//		trajectory.set_valid_values(CommManipulatorObjects::ManipulatorTrajectoryFlag::POSES);
+//		trajectory.set_trajectory_size(1);
+//		trajectory.set_wait_until_each_pose_reached(false);
+//
+//		trajectory.set_pose_TCP_robot(0, 0, 250, 636+100, 0, 0, 0);
+//		trajectory.set_gripper_action(CommManipulatorObjects::ManipulatorGripperAction::CLOSE_BEFORE_OPEN_AFTER);
+//		{
+//		double x, y, z, azimuth, elevation, roll;
+//		trajectory.get_pose_TCP_robot(0, x, y, z, azimuth, elevation, roll);
+//		std::cout << "Sending " << x << " " << y << " " << z << " " << azimuth << " " << elevation << " " << roll << std::endl;
+//		}
+//
+//		status = COMP->openRaveTrajectorySendClient->send(trajectory);
+//		if(status != CHS::SMART_OK) std::cout << "!= CHS::SMART_OK -> " << CHS::StatusCodeConversion(status) << "(line " << __LINE__ << ")" << std::endl;
+//
+//		std::cout << "cin for next" << std::endl;
+//		char buf[999];
+//		cin >> buf;
+//	}
+//
+//	exit(0);
+
+
+
+	//////////////////////////////////////////////
+	//////////////////////////////////////////////
+	//////////////////////////////////////////////
+	//////////////////////////////////////////////
+	//////////////////////////////////////////////
+	//////////////////////////////////////////////
+	//////////////////////////////////////////////
+	//////////////////////////////////////////////
+
+for(double y = 250; y > -250; y -= 50) {
+	std::cout << "y=" << y << std::endl;
+
+	status = COMP->openRaveStateClient->setWaitState("neutral");
+	if(status != CHS::SMART_OK) std::cout << "!= CHS::SMART_OK -> " << CHS::StatusCodeConversion(status) << "(line " << __LINE__ << ")" << std::endl;
+
+	CommManipulationPlannerObjects::CommManipulationPlannerParameter manipulatorParam;
+//	std::string tmp;
+
+	// GRASPING_SIMPLE(?lowerHeight)(?upperHeight)(?lowerDepth)(?upperDepth)(?lowerAngle)(?upperAngle)(lowerRoll)(upperRoll)
+	std::stringstream ss;
+	if(y > 0)
+		ss << "GRASPING_SIMPLE(-0.01)(0.01)(0.01)(-0.01)(-5)(20)(0)(20)";
+	else
+		ss << "GRASPING_SIMPLE(-0.01)(0.01)(0.01)(-0.01)(-5)(5)(-180)(-160)";
+
+	std::string tmp = ss.str();
+	//tmp = "GRASPING_SIMPLE(-0.01)(0.01)(0.01)(-0.01)(-5)(30)(90)(90)";   // roll 0.7853
+	manipulatorParam.set(tmp);
+	status = COMP->openRaveParameterClient->send(manipulatorParam);
+	if(status != CHS::SMART_OK) std::cout << "!= CHS::SMART_OK -> " << CHS::StatusCodeConversion(status) << "(line " << __LINE__ << ")" << std::endl;
+
+	status = COMP->manipulatorStateClient->setWaitState("trajectory");
+	if(status != CHS::SMART_OK) std::cout << "!= CHS::SMART_OK -> " << CHS::StatusCodeConversion(status) << std::endl;
+
+	COMP->openRaveStateClient->setWaitState("trajectory");
+	//COMP->openRaveStateClient->setWaitState("simulation");
+	if(status != CHS::SMART_OK) std::cout << "!= CHS::SMART_OK -> " << CHS::StatusCodeConversion(status) << "(line " << __LINE__ << ")" << std::endl;
+
+
+	CommManipulatorObjects::CommManipulatorTrajectory trajectory;
+	trajectory.set_valid_values(CommManipulatorObjects::ManipulatorTrajectoryFlag::POSES);
+	trajectory.set_trajectory_size(1);
+	trajectory.set_wait_until_each_pose_reached(false);
+
+
+	trajectory.set_pose_TCP_robot(0, 13, y, 636+100+50, 0, 0, 0);
+	//trajectory.set_pose_TCP_robot(0, 0, -400, 600, 0, 0, 0);
+	trajectory.set_gripper_action(CommManipulatorObjects::ManipulatorGripperAction::CLOSE_BEFORE_OPEN_AFTER);
+	{
+	double x, y, z, azimuth, elevation, roll;
+	trajectory.get_pose_TCP_robot(0, x, y, z, azimuth, elevation, roll, 1);
+	std::cout << "Sending " << x << " " << y << " " << z << " " << azimuth << " " << elevation << " " << roll << std::endl;
+	}
+
+	status = COMP->openRaveTrajectorySendClient->send(trajectory);
+	if(status != CHS::SMART_OK) std::cout << "!= CHS::SMART_OK -> " << CHS::StatusCodeConversion(status) << "(line " << __LINE__ << ")" << std::endl;
+	//COMP->manipulatorTrajectorySendClient->send(trajectory);
+
+	std::cout << "cin for next" << std::endl;
+	char buf[999];
+	cin >> buf;
+
+}
+
+
+
+
+
+//	std::cout << "Enter TCP pose:\n";
+//
+//	std::cout << "x: " << std::endl;
+//	cin >> x;
+//
+//	std::cout << "y: " << std::endl;
+//	cin >> y;
+//
+//	std::cout << "z: " << std::endl;
+//	cin >> z;
+//
+//	std::cout << "azimuth/yaw: " << std::endl;
+//	cin >> azimuth;
+//
+//	std::cout << "elevation/pitch: " << std::endl;
+//	cin >> elevation;
+//
+//	std::cout << "roll: " << std::endl;
+//	cin >> roll;
+
+
+
+
+	//trajectory.get_pose_TCP_robot(0, x, y, z, azimuth, elevation, roll, 1);
+	//CommBasicObjects::CommPose3d tcp_pose1(x, y, z, azimuth, elevation, roll, 1);
+	//ObjectSet::getInstance().drawCoord(tcp_pose1, 0.1);
+
+
+//
+//
+//	//	sleep(1);
+//
+//	// OpenRave End Point
+//	//	trajectory.set_pose_TCP_robot(0, -60.7063, -1.79866, 1040.53, 1.65256, 0.00620259, -0.260621);
+//	trajectory.set_pose_TCP_robot(0, 55.8827, -484.092, 632.6513, 0.172917, -0.0665965, 1.61083);
+//
+//	trajectory.set_valid_values(CommManipulatorObjects::ManipulatorTrajectoryFlag::JOINT_ANGLES);
+//	trajectory.set_trajectory_size(2);
+//	trajectory.set_joint_count(5);
+//	trajectory.set_wait_until_each_pose_reached(false);
+//	// End Point
+//	trajectory.set_joint_angle(1, 0, 3.10524);
+//	trajectory.set_joint_angle(1, 1, 2.13827);
+//	trajectory.set_joint_angle(1, 2, 0.932138);
+//	trajectory.set_joint_angle(1, 3, 1.11356);
+//	trajectory.set_joint_angle(1, 4, 3.07568);
+//	// Start Point
+//	trajectory.set_joint_angle(0, 0, 3.45499);
+//	trajectory.set_joint_angle(0, 1, 1.12093);
+//	trajectory.set_joint_angle(0, 2, 1.81154);
+//	trajectory.set_joint_angle(0, 3, 2.95507);
+//	trajectory.set_joint_angle(0, 4, 3.15446);
+//	trajectory.set_gripper_action(CommManipulatorObjects::ManipulatorGripperAction::OPEN_BEFORE_CLOSE_AFTER);
+//	COMP->manipulatorTrajectorySendClient->send(trajectory);
+//
+//	return;
+//
+//	trajectory.get_pose_TCP_robot(0, x, y, z, azimuth, elevation, roll, 1);
+//	CommBasicObjects::CommPose3d tcp_pose1(x, y, z, azimuth, elevation, roll, 1);
+//	ObjectSet::getInstance().drawCoord(tcp_pose1, 0.1);
+//
+//	sleep(5);
+//
+//	std::cout << ">> move to point 2\n";
+//	trajectory.set_pose_TCP_robot(0, -112.343, -5.01603, 1030.504, 1.69581, 0.0262978, -0.388376);
+//	trajectory.set_gripper_action(CommManipulatorObjects::ManipulatorGripperAction::NO_OP);
+//	COMP->manipulatorTrajectorySendClient->send(trajectory);
+//
+//	trajectory.get_pose_TCP_robot(0, x, y, z, azimuth, elevation, roll, 1);
+//	CommBasicObjects::CommPose3d tcp_pose2(x, y, z, azimuth, elevation, roll, 1);
+//	ObjectSet::getInstance().drawCoord(tcp_pose2, 0.1);
+
+}
+
+
 void TestTask::learnNewObject() {
 
 	int menuItem = 0;
@@ -1146,7 +1384,7 @@ void TestTask::learnNewObject() {
 
 	} while (menuItem == 1);
 
-	double means[3];
+	vector<double> means(3);
 	CMatrixD covars(3, 3);
 	covariancesAndMean(samples, covars, means);
 

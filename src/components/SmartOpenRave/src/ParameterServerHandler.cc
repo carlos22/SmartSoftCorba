@@ -48,12 +48,26 @@
 
 void ParameterServerHandler::handleSend(const CommManipulationPlannerObjects::CommManipulationPlannerParameter &r) throw() {
 	// Only accept parameters when in demonstration or neutral mode
-	if (!(COMP->stateServer->tryAcquire("nonneutral") == CHS::SMART_OK)) {
-		try {
-			OPENRAVE->setParameter(r);
-		} catch (openrave_exception& e) {
-			ErrorHandler::handleMessage(e.message(), ErrorHandler::ERROR);
-		}
+	if (!(COMP->stateServer->tryAcquire("nonneutral") == CHS::SMART_OK))
+	{
+		COMP->parameterTask.pushParam(r);
+		CommManipulationPlannerObjects::ManipulationPlannerParameterMode tag;
+		int id = 0;
+		double x = 0;
+		double y = 0;
+		double z = 0;
+		double w = 0;
+		double lowerAngle = 0;
+		double upperAngle = 0;
+		double lowerRoll = 0;
+		double upperRoll = 0;
+		std::string type;
+
+		r.get(tag, id, x, y, z, w, lowerAngle, upperAngle, type, lowerRoll, upperRoll);
+
+		std::cout << "PARAMETER pushed " << tag.get_string() << std::endl;
+	} else {
+		ErrorHandler::handleMessage("######## Component in nonneutral state. Parameter ignored! #########", ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);
 	}
 	COMP->stateServer->release("nonneutral");
 	ErrorHandler::handleMessage("ParameterHandler finished.", ErrorHandler::INFO, COMP->ini.OpenRave.debugOpenRave);

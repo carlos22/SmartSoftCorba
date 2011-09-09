@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw">
   <uml:Model xmi:id="_4GiRUFa6EeCSkc4CcwRhew" name="SmartXsensIMUMTiClient_pim">
     <elementImport xmi:id="_VisicFa9EeCSkc4CcwRhew">
       <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
@@ -69,6 +69,7 @@
     </elementImport>
     <packagedElement xmi:type="uml:Component" xmi:id="_4GiRUVa6EeCSkc4CcwRhew" name="SmartXsensIMUMTiClient">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_THBKMFa9EeCSkc4CcwRhew" name="pushTimedDataClient" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_ww0nYNrlEeCb7IjLB3v2fg" name="wiringSlave" aggregation="composite"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_gbdGoFa7EeCSkc4CcwRhew" name="viewer">
         <ownedAttribute xmi:id="_0eiacFa7EeCSkc4CcwRhew" name="imusamplerate" isUnique="false">
           <type xmi:type="uml:PrimitiveType" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NqLqYIgZEd6Va88Rz-zvaQ"/>
@@ -85,7 +86,7 @@
     </profileApplication>
     <profileApplication xmi:id="_4GiRVFa6EeCSkc4CcwRhew">
       <eAnnotations xmi:id="_4GiRVVa6EeCSkc4CcwRhew" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw"/>
       </eAnnotations>
       <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
     </profileApplication>
@@ -93,7 +94,8 @@
   <SmartMARS:SmartComponent xmi:id="_4KdvEFa6EeCSkc4CcwRhew" base_Component="_4GiRUVa6EeCSkc4CcwRhew"/>
   <SmartMARS:SmartIniParameterGroup xmi:id="_gfCmIFa7EeCSkc4CcwRhew" base_Class="_gbdGoFa7EeCSkc4CcwRhew"/>
   <SmartMARS:SmartTask xmi:id="_oTK0UFa8EeCSkc4CcwRhew" base_Class="_oS_OIFa8EeCSkc4CcwRhew"/>
-  <SmartMARS:SmartPushTimedClient xmi:id="_THo1QFa9EeCSkc4CcwRhew" serviceName="imuData" base_Port="_THBKMFa9EeCSkc4CcwRhew" serverName="SmartXsensIMUMTiServer" interval="5">
+  <SmartMARS:SmartPushTimedClient xmi:id="_THo1QFa9EeCSkc4CcwRhew" base_Port="_THBKMFa9EeCSkc4CcwRhew" serviceName="imuData" serverName="SmartXsensIMUMTiServer" wiringName="pushTimedDataClient" interval="5">
     <commObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_MEDhMFYiEeCr0d2zveaPSA"/>
   </SmartMARS:SmartPushTimedClient>
+  <SmartMARS:SmartWiringSlave xmi:id="_wyFysNrlEeCb7IjLB3v2fg" base_Port="_ww0nYNrlEeCb7IjLB3v2fg"/>
 </xmi:XMI>

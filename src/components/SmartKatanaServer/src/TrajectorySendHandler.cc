@@ -60,6 +60,7 @@ void TrajectorySendHandler::handleSend(const CommManipulatorObjects::CommManipul
 	if (COMP->stateServer->tryAcquire("trajectory") == CHS::SMART_OK) {
 		// release trajectory state so a state change can happen
 		COMP->stateServer->release("trajectory");
+		std::cout<<"Got trajectory: "<<r<<std::endl;
 		KATANA->performTrajectory(r);
 	} else {
 		std::cout << ">> component not in trajectory state!\n";

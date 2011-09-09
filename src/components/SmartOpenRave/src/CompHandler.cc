@@ -150,6 +150,7 @@ void CompHandler::onStartup() {
 
 	// Run demonstration task
 	COMP->demonstrationTask.open();
+	COMP->parameterTask.open();
 
 	// Activate OpenRave GUI only if flag is set in ini file.
 	if (COMP->ini.OpenRave.gui_active) {

@@ -43,6 +43,7 @@
 
 #include "ManipulatorEventClientHandler.hh"
 #include "gen/SmartOpenRave.hh"
+#include "OpenRave.hh"
 
 void ManipulatorEventClientHandler::handleEvent(const CHS::EventId id,
 		const CommManipulatorObjects::CommManipulatorEventResult &r) throw() {

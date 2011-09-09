@@ -50,7 +50,9 @@
 //
 // --------------------------------------------------------------------------
 
-#include <mrpt/core.h>
+#include <mrpt/gui.h>
+#include <mrpt/opengl.h>
+#include <mrpt/utils.h>
 
 #include "ViewerTask.hh"
 #include "gen/SmartToFClient.hh"
@@ -198,17 +200,21 @@ int ViewerTask::svc() {
 			//////////////////////////////////////////
 			// show distance image
 			{
-				CImageFloat dImage(image.get_width(), image.get_height());
+
+				Eigen::MatrixXf m(image.get_height(), image.get_width());
 				const float* imageData = image.get_distances();
 				for (uint32_t i = 0; i < image.get_height(); i++) {
 					for (uint32_t j = 0; j < image.get_width(); j++) {
-						*dImage(j, i) = (*(imageData + i * image.get_width() + j)) / image.get_max_distance(1);
+						m(i, j) = (*(imageData + i * image.get_width() + j)) / image.get_max_distance(1);
 					}
 				}
+
+				CImage dImage(image.get_width(), image.get_height(), CH_GRAY);
+				dImage.setFromMatrix(m, true);
 				distanceImage.showImage(dImage);
+
 			}
 			//////////////////////////////////////////
-			std::cout << __LINE__ << std::endl;
 
 			//////////////////////////////////////////
 			// show amplitude image
@@ -222,9 +228,6 @@ int ViewerTask::svc() {
 				amplitudeImage.showImage(dImage);
 			}
 			//////////////////////////////////////////
-
-
-			std::cout << __LINE__ << std::endl;
 
 			//////////////////////////////////////////
 			// show intensity image
@@ -243,8 +246,6 @@ int ViewerTask::svc() {
 				intensityImage.showImage(dImage);
 			}
 			//////////////////////////////////////////
-			std::cout << __LINE__ << std::endl;
-
 
 			COpenGLScenePtr & theScene = cartesianWindow.get3DSceneAndLock();
 			//////////////////////////////////////////
@@ -265,7 +266,6 @@ int ViewerTask::svc() {
 
 			}
 			//////////////////////////////////////////
-			std::cout << __LINE__ << std::endl;
 
 			//////////////////////////////////////////
 			// show robot coordinate system

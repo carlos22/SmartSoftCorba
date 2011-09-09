@@ -44,8 +44,14 @@
 
 #include "SmartKinectServerCore.hh"
 
+
 // constructor
 SmartKinectServerCore::SmartKinectServerCore()
 {
 	std::cout << "constructor SmartKinectServerCore\n";
+
+	std::cout << "[SmartKinectServerCore] Starting up camera ...\n";
+	//Freenect::Freenect<KinectWrapper> freenect;
+	//device = &freenect.createDevice(0);
+	device =  new KinectWrapper();
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw">
   <uml:Model xmi:id="_7hb54FOkEeCB2bqDWF72HA" name="SmartUnicapImageClient_pim">
     <elementImport xmi:id="_QNfDcFOrEeCB2bqDWF72HA">
       <importedElement xmi:type="uml:Class" href="../../../CommVisionObjects/model/pim/CommVisionObjects_pim.uml#_ByxsoFCmEeCKI8aCFSQyHA"/>
@@ -74,6 +74,7 @@
       <ownedAttribute xmi:type="uml:Port" xmi:id="_CpAkEFOmEeCB2bqDWF72HA" name="queryClient" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_7WQSsFOmEeCB2bqDWF72HA" name="pushNewestClient" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_RtCugFOnEeCB2bqDWF72HA" name="pushTimedClient" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_YrYmgNrnEeCuNqgXUSL6Cw" name="wiringSlave" aggregation="composite"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_Qev_UFO7EeCB2bqDWF72HA" name="GuiTask"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_bRcVoFVXEeCpPuTafnRBrg" name="ImageTask"/>
     </packagedElement>
@@ -85,22 +86,23 @@
     </profileApplication>
     <profileApplication xmi:id="_7hcg81OkEeCB2bqDWF72HA">
       <eAnnotations xmi:id="_7hcg9FOkEeCB2bqDWF72HA" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw"/>
       </eAnnotations>
       <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
     </profileApplication>
   </uml:Model>
   <SmartMARS:SmartComponent xmi:id="_7tIzkFOkEeCB2bqDWF72HA" base_Component="_7hcg8FOkEeCB2bqDWF72HA"/>
-  <SmartMARS:SmartQueryClient xmi:id="_CsR6gFOmEeCB2bqDWF72HA" serviceName="imageQuery" base_Port="_CpAkEFOmEeCB2bqDWF72HA" serverName="SmartUnicapImageServer">
+  <SmartMARS:SmartQueryClient xmi:id="_CsR6gFOmEeCB2bqDWF72HA" base_Port="_CpAkEFOmEeCB2bqDWF72HA" serviceName="imageQuery" serverName="SmartUnicapImageServer" wiringName="queryClient">
     <commRequestObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
     <commAnswerObject href="../../../CommVisionObjects/model/pim/CommVisionObjects_pim.uml#_ByxsoFCmEeCKI8aCFSQyHA"/>
   </SmartMARS:SmartQueryClient>
-  <SmartMARS:SmartPushNewestClient xmi:id="_7Wb44FOmEeCB2bqDWF72HA" serviceName="imageNewest" base_Port="_7WQSsFOmEeCB2bqDWF72HA" serverName="SmartUnicapImageServer">
+  <SmartMARS:SmartPushNewestClient xmi:id="_7Wb44FOmEeCB2bqDWF72HA" base_Port="_7WQSsFOmEeCB2bqDWF72HA" serviceName="imageNewest" serverName="SmartUnicapImageServer" wiringName="pushNewestClient">
     <commObject href="../../../CommVisionObjects/model/pim/CommVisionObjects_pim.uml#_ByxsoFCmEeCKI8aCFSQyHA"/>
   </SmartMARS:SmartPushNewestClient>
-  <SmartMARS:SmartPushTimedClient xmi:id="_RtNtoFOnEeCB2bqDWF72HA" serviceName="imageTimed" base_Port="_RtCugFOnEeCB2bqDWF72HA" serverName="SmartUnicapImageServer">
+  <SmartMARS:SmartPushTimedClient xmi:id="_RtNtoFOnEeCB2bqDWF72HA" base_Port="_RtCugFOnEeCB2bqDWF72HA" serviceName="imageTimed" serverName="SmartUnicapImageServer" wiringName="pushTimedClient">
     <commObject href="../../../CommVisionObjects/model/pim/CommVisionObjects_pim.uml#_ByxsoFCmEeCKI8aCFSQyHA"/>
   </SmartMARS:SmartPushTimedClient>
   <SmartMARS:SmartTask xmi:id="_Qe1e4FO7EeCB2bqDWF72HA" base_Class="_Qev_UFO7EeCB2bqDWF72HA"/>
   <SmartMARS:SmartTask xmi:id="_bVnrAFVXEeCpPuTafnRBrg" base_Class="_bRcVoFVXEeCpPuTafnRBrg"/>
+  <SmartMARS:SmartWiringSlave xmi:id="_YvaK4NrnEeCuNqgXUSL6Cw" base_Port="_YrYmgNrnEeCuNqgXUSL6Cw"/>
 </xmi:XMI>

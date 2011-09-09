@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124" xmlns:SmartMARS_1="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
   <uml:Model xmi:id="_5-oBkEvIEeClMZ_R22LoZg" name="SmartTTSLoquendo_pim">
     <elementImport xmi:id="_4szcQEvnEeCoUthXHMCjWw">
       <importedElement xmi:type="uml:Class" href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_BOOw8EvLEeClMZ_R22LoZg"/>
@@ -97,7 +97,7 @@
     </profileApplication>
     <profileApplication xmi:id="_5-oBlEvIEeClMZ_R22LoZg">
       <eAnnotations xmi:id="_5-oBlUvIEeClMZ_R22LoZg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw"/>
       </eAnnotations>
       <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
     </profileApplication>
@@ -105,16 +105,17 @@
   <SmartMARS:SmartComponent xmi:id="_6BvnAEvIEeClMZ_R22LoZg" base_Component="_5-oBkUvIEeClMZ_R22LoZg"/>
   <SmartMARS:SmartIniParameterGroup xmi:id="_NmGc0EvcEeCoUthXHMCjWw" base_Class="_NjWDwEvcEeCoUthXHMCjWw"/>
   <SmartMARS:SmartTask xmi:id="_YQimQEvcEeCoUthXHMCjWw" base_Class="_YQdtwEvcEeCoUthXHMCjWw"/>
-  <SmartMARS:SmartSendServer xmi:id="_sH6_YEvnEeCoUthXHMCjWw" serviceName="text2speech" base_Port="_sHtkAEvnEeCoUthXHMCjWw" smartSendHandler="_zv6rgEvnEeCoUthXHMCjWw">
+  <SmartMARS:SmartSendServer xmi:id="_sH6_YEvnEeCoUthXHMCjWw" base_Port="_sHtkAEvnEeCoUthXHMCjWw" serviceName="text2speech" smartSendHandler="_zv6rgEvnEeCoUthXHMCjWw">
     <commObject href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_WKwIAEvoEeCoUthXHMCjWw"/>
   </SmartMARS:SmartSendServer>
-  <SmartMARS:SmartSendServer xmi:id="_sdsbEEvnEeCoUthXHMCjWw" serviceName="text2speech" smartSendHandler="_zv6rgEvnEeCoUthXHMCjWw">
+  <SmartMARS_1:SmartSendServer xmi:id="_sdsbEEvnEeCoUthXHMCjWw" serviceName="text2speech" smartSendHandler="_zv6rgEvnEeCoUthXHMCjWw">
     <commObject href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_WKwIAEvoEeCoUthXHMCjWw"/>
-  </SmartMARS:SmartSendServer>
+  </SmartMARS_1:SmartSendServer>
   <SmartMARS:SmartSendHandler xmi:id="_zv6rgEvnEeCoUthXHMCjWw" base_Class="_zv1L8EvnEeCoUthXHMCjWw"/>
   <SmartMARS:SmartQueryHandler xmi:id="_1V2HgEvnEeCoUthXHMCjWw" base_Class="_1Vwn8EvnEeCoUthXHMCjWw"/>
-  <SmartMARS:SmartQueryServer xmi:id="_Ixv_MEvrEeCoUthXHMCjWw" serviceName="text2speech" base_Port="_IxHGAEvrEeCoUthXHMCjWw" smartQueryHandler="_1V2HgEvnEeCoUthXHMCjWw">
+  <SmartMARS:SmartQueryServer xmi:id="_Ixv_MEvrEeCoUthXHMCjWw" base_Port="_IxHGAEvrEeCoUthXHMCjWw" serviceName="text2speech" smartQueryHandler="_1V2HgEvnEeCoUthXHMCjWw">
     <commRequestObject href="platform:/resource/CommSpeechObjects/model/pim/CommSpeechObjects_pim.uml#_WKwIAEvoEeCoUthXHMCjWw"/>
     <commAnswerObject href="platform:/resource/CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_vhHJwEvcEeCoUthXHMCjWw"/>
   </SmartMARS:SmartQueryServer>
+  <SmartMARS:SmartWiringSlave xmi:id="_t69qANrkEeCqEfsH6K5Auw"/>
 </xmi:XMI>

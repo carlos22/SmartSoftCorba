@@ -154,6 +154,19 @@ void CompHandler::onStartup() {
 		}
 		std::cout << "connected.\n";
 
+
+		std::cout << "connecting to: " << COMP->ini.manipulatorScan3dQueryClient.serverName << "; "
+				<< COMP->ini.manipulatorScan3dQueryClient.serviceName << std::endl;
+		status = COMP->manipulatorScan3dQueryClient->connect(COMP->ini.manipulatorScan3dQueryClient.serverName,
+				COMP->ini.manipulatorScan3dQueryClient.serviceName);
+		while (status != CHS::SMART_OK) {
+			usleep(500000);
+			status = COMP->manipulatorScan3dQueryClient->connect(COMP->ini.manipulatorScan3dQueryClient.serverName,
+					COMP->ini.manipulatorScan3dQueryClient.serviceName);
+		}
+		std::cout << "connected.\n";
+
+
 		std::cout << "connecting to: " << COMP->ini.manipulatorScanEventClient.serverName << "; "
 				<< COMP->ini.manipulatorScanEventClient.serviceName << std::endl;
 		status = COMP->manipulatorScanEventClient->connect(COMP->ini.manipulatorScanEventClient.serverName,
@@ -285,16 +298,6 @@ void CompHandler::onStartup() {
 
 	}
 
-	std::cout << "connecting to: " << COMP->ini.manipulatorScan3dQueryClient.serverName << "; "
-			<< COMP->ini.manipulatorScan3dQueryClient.serviceName << std::endl;
-	status = COMP->manipulatorScan3dQueryClient->connect(COMP->ini.manipulatorScan3dQueryClient.serverName,
-			COMP->ini.manipulatorScan3dQueryClient.serviceName);
-	while (status != CHS::SMART_OK) {
-		usleep(500000);
-		status = COMP->manipulatorScan3dQueryClient->connect(COMP->ini.manipulatorScan3dQueryClient.serverName,
-				COMP->ini.manipulatorScan3dQueryClient.serviceName);
-	}
-	std::cout << "connected.\n";
 
 	// run all tasks
 	COMP->testTask.open();

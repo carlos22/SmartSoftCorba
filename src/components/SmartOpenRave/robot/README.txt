@@ -1,0 +1,1 @@
+This folder contains model files for the manipulators. The Katana folder contains an update of the L5 joint including the laser ranger and camera. To use it, replace the original L5.wrl with the one to use.

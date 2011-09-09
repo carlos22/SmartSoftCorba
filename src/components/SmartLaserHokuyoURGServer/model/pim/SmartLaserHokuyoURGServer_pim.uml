@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_2KPH4MrkEd688Ztvebp4-A/101" xmlns:SmartMARS_1="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_2KPH4MrkEd688Ztvebp4-A/101 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_2LsgcMrkEd688Ztvebp4-A http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SmartMARS="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124" xmlns:SmartMARS_1="http:///schemas/SmartMARS/_2KPH4MrkEd688Ztvebp4-A/101" xmlns:SmartMARS_2="http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/SmartMARS/_NVDxEKlbEeC66fsk0J29Zw/124 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw http:///schemas/SmartMARS/_2KPH4MrkEd688Ztvebp4-A/101 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_2LsgcMrkEd688Ztvebp4-A http:///schemas/SmartMARS/_1PyBgDEQEd-zJrm3mSSiYQ/119 pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ">
   <uml:Model xmi:id="_tLy84DHUEd-W7cKfHymkbw" name="SmartLaserHokuyoURGServer_pim">
     <elementImport xmi:id="_fewa0FO7EeC4EMfTRLzNqw">
       <importedElement xmi:type="uml:Class" href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
@@ -68,6 +68,7 @@
       <ownedAttribute xmi:type="uml:Port" xmi:id="_95TLADKPEd-6z8hIrFdGMQ" name="laserPushNewestServer" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_jHX6UELaEd-ct70wlBtMaQ" name="stateServer" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_Cype8FKiEd-AxPEv4WCKsg" name="laserPushTimedServer" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_3KeIYK3zEeCWtLKM6tsXAQ" name="wiringSlave" aggregation="composite"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_SbWVwDJvEd-SvN0H3YB-5w" name="scanner">
         <ownedAttribute xmi:id="_Qc0-IDJwEd-SvN0H3YB-5w" name="device" isUnique="false">
           <ownedComment xmi:id="_GRjyEDJyEd-SvN0H3YB-5w" annotatedElement="_Qc0-IDJwEd-SvN0H3YB-5w">
@@ -260,7 +261,7 @@
     </profileApplication>
     <profileApplication xmi:id="_tLy85DHUEd-W7cKfHymkbw">
       <eAnnotations xmi:id="_tLy85THUEd-W7cKfHymkbw" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_1RLvsDEQEd-zJrm3mSSiYQ"/>
+        <references xmi:type="ecore:EPackage" href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_NXWQEKlbEeC66fsk0J29Zw"/>
       </eAnnotations>
       <appliedProfile href="pathmap://SMARTMARS_PROFILE/SmartMARS.profile.uml#_v9mxoC8UEd6sM5axkYt24g"/>
     </profileApplication>
@@ -268,41 +269,42 @@
   <SmartMARS:SmartComponent xmi:id="_tauJsDHUEd-W7cKfHymkbw" base_Component="_tLy84THUEd-W7cKfHymkbw"/>
   <SmartMARS:SmartIniParameterGroup xmi:id="_Sl1ugDJvEd-SvN0H3YB-5w" base_Class="_SbWVwDJvEd-SvN0H3YB-5w"/>
   <SmartMARS:SmartIniParameterGroup xmi:id="_3wRIUDJwEd-SvN0H3YB-5w" base_Class="_3v_bgDJwEd-SvN0H3YB-5w"/>
-  <SmartMARS:SmartPushTimedClient xmi:id="_qGehwDKEEd-6z8hIrFdGMQ" serviceName="basestate" base_Port="_p_5_sDKEEd-6z8hIrFdGMQ" serverName="SmartPioneerBaseServer">
+  <SmartMARS:SmartPushTimedClient xmi:id="_qGehwDKEEd-6z8hIrFdGMQ" base_Port="_p_5_sDKEEd-6z8hIrFdGMQ" serviceName="basestate" serverName="SmartPioneerBaseServer" wiringName="baseClient">
     <commObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Ih-oYB2JEeCEHoCtEL5pNg"/>
   </SmartMARS:SmartPushTimedClient>
   <SmartMARS:SmartQueryHandler xmi:id="_SM5oEDKFEd-6z8hIrFdGMQ" base_Class="_SMta0DKFEd-6z8hIrFdGMQ"/>
-  <SmartMARS:SmartPushTimedClient xmi:id="_rTLPUDKNEd-6z8hIrFdGMQ" serviceName="currentPose" base_Port="_rRxhIDKNEd-6z8hIrFdGMQ" serverName="SmartKatanaServer">
+  <SmartMARS:SmartPushTimedClient xmi:id="_rTLPUDKNEd-6z8hIrFdGMQ" base_Port="_rRxhIDKNEd-6z8hIrFdGMQ" serviceName="currentPose" serverName="SmartKatanaServer" wiringName="manipulatorClient">
     <commObject href="../../../CommManipulatorObjects/model/pim/CommManipulatorObjects_pim.uml#_a_vAsNRAEd6nTeGEf54M4w"/>
   </SmartMARS:SmartPushTimedClient>
   <SmartMARS:SmartMutex xmi:id="_G3GB4DKPEd-6z8hIrFdGMQ" base_Class="_G2ou4DKPEd-6z8hIrFdGMQ"/>
-  <SmartMARS:SmartTask xmi:id="_NoUeEDKPEd-6z8hIrFdGMQ"/>
-  <SmartMARS:SmartMutex xmi:id="_YHrY4DKPEd-6z8hIrFdGMQ"/>
-  <SmartMARS:SmartQueryServer xmi:id="_xCX74DKPEd-6z8hIrFdGMQ" serviceName="scan" base_Port="_MS35oDKFEd-6z8hIrFdGMQ" smartQueryHandler="_SM5oEDKFEd-6z8hIrFdGMQ">
+  <SmartMARS_1:SmartTask xmi:id="_NoUeEDKPEd-6z8hIrFdGMQ"/>
+  <SmartMARS_1:SmartMutex xmi:id="_YHrY4DKPEd-6z8hIrFdGMQ"/>
+  <SmartMARS:SmartQueryServer xmi:id="_xCX74DKPEd-6z8hIrFdGMQ" base_Port="_MS35oDKFEd-6z8hIrFdGMQ" serviceName="scan" smartQueryHandler="_SM5oEDKFEd-6z8hIrFdGMQ">
     <commRequestObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_Oyq1QB2HEeCEHoCtEL5pNg"/>
     <commAnswerObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
   </SmartMARS:SmartQueryServer>
-  <SmartMARS:SmartPushNewestServer xmi:id="_96rrEDKPEd-6z8hIrFdGMQ" serviceName="scan" base_Port="_95TLADKPEd-6z8hIrFdGMQ">
+  <SmartMARS:SmartPushNewestServer xmi:id="_96rrEDKPEd-6z8hIrFdGMQ" base_Port="_95TLADKPEd-6z8hIrFdGMQ" serviceName="scan">
     <commObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
   </SmartMARS:SmartPushNewestServer>
-  <SmartMARS:SmartIniParameterGroup xmi:id="_SmvM8DKcEd-gm7RAOr25aA"/>
-  <SmartMARS:SmartIniParameterGroup xmi:id="_P3yzcDytEd-k451kr4T2rw"/>
-  <SmartMARS:SmartPushTimedHandler xmi:id="_EVtPUDy4Ed-aTfXMddeT8A"/>
+  <SmartMARS_1:SmartIniParameterGroup xmi:id="_SmvM8DKcEd-gm7RAOr25aA"/>
+  <SmartMARS_1:SmartIniParameterGroup xmi:id="_P3yzcDytEd-k451kr4T2rw"/>
+  <SmartMARS_1:SmartPushTimedHandler xmi:id="_EVtPUDy4Ed-aTfXMddeT8A"/>
   <SmartMARS:SmartIniParameterGroup xmi:id="_W6R9wDy4Ed-aTfXMddeT8A" base_Class="_W51R0Dy4Ed-aTfXMddeT8A"/>
-  <SmartMARS:SmartStateServer xmi:id="_jQ30kELaEd-ct70wlBtMaQ" serviceName="stateServer" base_Port="_jHX6UELaEd-ct70wlBtMaQ" smartStateChangeHandler="_kTg9UELaEd-ct70wlBtMaQ"/>
+  <SmartMARS:SmartStateServer xmi:id="_jQ30kELaEd-ct70wlBtMaQ" base_Port="_jHX6UELaEd-ct70wlBtMaQ" serviceName="state" smartStateChangeHandler="_kTg9UELaEd-ct70wlBtMaQ"/>
   <SmartMARS:SmartStateChangeHandler xmi:id="_kTg9UELaEd-ct70wlBtMaQ" base_Class="_kTP3kELaEd-ct70wlBtMaQ"/>
   <SmartMARS:SmartMainState xmi:id="_M3V64ELnEd-ct70wlBtMaQ" base_Class="_MxTkUELnEd-ct70wlBtMaQ" subState="_Pyut8ELnEd-ct70wlBtMaQ"/>
   <SmartMARS:SmartSubState xmi:id="_Pyut8ELnEd-ct70wlBtMaQ" base_Class="_PykV4ELnEd-ct70wlBtMaQ"/>
-  <SmartMARS_1:SmartTask xmi:id="_SyHBwFKhEd-AxPEv4WCKsg"/>
-  <SmartMARS_1:SmartPushTimedServer xmi:id="_CzRxEFKiEd-AxPEv4WCKsg" serviceName="scan" base_Port="_Cype8FKiEd-AxPEv4WCKsg" smartPushTimedHandler="_y0BpoFKiEd-KJcnyqitu7Q" cycle="100" timeUnit="ms">
+  <SmartMARS_2:SmartTask xmi:id="_SyHBwFKhEd-AxPEv4WCKsg"/>
+  <SmartMARS:SmartPushTimedServer xmi:id="_CzRxEFKiEd-AxPEv4WCKsg" base_Port="_Cype8FKiEd-AxPEv4WCKsg" serviceName="scan" smartPushTimedHandler="_y0BpoFKiEd-KJcnyqitu7Q" cycle="100" timeUnit="ms">
     <commObject href="../../../CommBasicObjects/model/pim/CommBasicObjects_pim.uml#_UgKEAEV9EeC6tb6-J2zOEA"/>
-  </SmartMARS_1:SmartPushTimedServer>
-  <SmartMARS_1:SmartPushTimedHandler xmi:id="_TxgMwFKiEd-AxPEv4WCKsg"/>
-  <SmartMARS_1:SmartPushTimedHandler xmi:id="_y0BpoFKiEd-KJcnyqitu7Q" base_Class="_ywRLAFKiEd-KJcnyqitu7Q"/>
-  <SmartMARS_1:SmartMutex xmi:id="_hqv8UGM8Ed-JQMHJ2GmZcQ"/>
-  <SmartMARS_1:SmartConditionMutex xmi:id="_HKny8GNEEd-JQMHJ2GmZcQ" mutex="_KVOtwGNEEd-JQMHJ2GmZcQ"/>
-  <SmartMARS_1:SmartMutex xmi:id="_KVOtwGNEEd-JQMHJ2GmZcQ"/>
-  <SmartMARS_1:SmartMainState xmi:id="_w0azcGPnEd-g_fTB2mw-UA" base_Class="_wydroGPnEd-g_fTB2mw-UA" subState="_xVmN4GPnEd-g_fTB2mw-UA"/>
-  <SmartMARS_1:SmartSubState xmi:id="_xVmN4GPnEd-g_fTB2mw-UA" base_Class="_xVe5IGPnEd-g_fTB2mw-UA"/>
-  <SmartMARS_1:SmartTask xmi:id="_4tWIAJogEd-lwMTz1BA9qQ" base_Class="_4tMXAJogEd-lwMTz1BA9qQ"/>
+  </SmartMARS:SmartPushTimedServer>
+  <SmartMARS_2:SmartPushTimedHandler xmi:id="_TxgMwFKiEd-AxPEv4WCKsg"/>
+  <SmartMARS:SmartPushTimedHandler xmi:id="_y0BpoFKiEd-KJcnyqitu7Q" base_Class="_ywRLAFKiEd-KJcnyqitu7Q"/>
+  <SmartMARS_2:SmartMutex xmi:id="_hqv8UGM8Ed-JQMHJ2GmZcQ"/>
+  <SmartMARS_2:SmartConditionMutex xmi:id="_HKny8GNEEd-JQMHJ2GmZcQ" mutex="_KVOtwGNEEd-JQMHJ2GmZcQ"/>
+  <SmartMARS_2:SmartMutex xmi:id="_KVOtwGNEEd-JQMHJ2GmZcQ"/>
+  <SmartMARS:SmartMainState xmi:id="_w0azcGPnEd-g_fTB2mw-UA" base_Class="_wydroGPnEd-g_fTB2mw-UA" subState="_xVmN4GPnEd-g_fTB2mw-UA"/>
+  <SmartMARS:SmartSubState xmi:id="_xVmN4GPnEd-g_fTB2mw-UA" base_Class="_xVe5IGPnEd-g_fTB2mw-UA"/>
+  <SmartMARS:SmartTask xmi:id="_4tWIAJogEd-lwMTz1BA9qQ" base_Class="_4tMXAJogEd-lwMTz1BA9qQ"/>
+  <SmartMARS:SmartWiringSlave xmi:id="_3L5EsK3zEeCWtLKM6tsXAQ" base_Port="_3KeIYK3zEeCWtLKM6tsXAQ"/>
 </xmi:XMI>

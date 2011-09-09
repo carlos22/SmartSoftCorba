@@ -105,6 +105,8 @@ private:
 	void openRaveMoveBetweenTwoPoints();
 	void openRaveTestSimulation();
 
+	void moveToAsByUserInput();
+
 	int stackMugs();
 
 	bool stackMugs_WaitForOpenRave(CHS::EventId id);

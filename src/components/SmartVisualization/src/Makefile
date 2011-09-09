@@ -91,14 +91,9 @@ INI_FILES    =	SmartVisualization.ini
 ## user libs  -- add your own libs here
 
 # adjust to match local mrpt installation
-MRPT_I = -I$(SMART_ROOT)/src/utility/mrpt-0.9.3/install/include
-export PKG_CONFIG_PATH=$(SMART_ROOT)/src/utility/mrpt-0.9.3/build/pkgconfig
-
-USER_CPP_CFLAGS=`pkg-config --cflags mrpt-base mrpt-opengl mrpt-gui mrpt-maps` $(shell pkg-config --cflags opencv) -D__STDC_FORMAT_MACROS 
-USER_CPP_LFLAGS=`pkg-config --libs mrpt-base mrpt-opengl mrpt-gui mrpt-maps` $(shell pkg-config --libs opencv)
-
-INCLUDES +=	-I$(SMART_ROOT)/src/utility/mrpt-0.9.3/otherlibs/eigen3/
-
+USER_CPP_CFLAGS=`pkg-config --cflags mrpt-base mrpt-opengl mrpt-gui mrpt-maps` `pkg-config --cflags opencv` -D__STDC_FORMAT_MACROS 
+USER_CPP_LFLAGS=`pkg-config --libs mrpt-base mrpt-opengl mrpt-gui mrpt-maps` `pkg-config --libs opencv`
+INCLUDES +=	-I$(SMART_ROOT)/src/utility/mrpt-0.9.3/otherlibs/eigen3/ -I./visualization
 # PROTECTED REGION END
 ##----------------------------------------------------------------------------
 
@@ -122,7 +117,7 @@ CPNT_1_CFLAGS =	$(CPNT_CFLAGS)
 
 # <asteck, dstampfer> --------------------------------------------------------
 # take all *.cc / *.c and build objects
-CPNT_1_OBJ =	$(patsubst %.cc,%.o,$(wildcard *.cc gen/*.cc)) $(patsubst %.c,%.o,$(wildcard *.c))
+CPNT_1_OBJ =	$(patsubst %.cc,%.o,$(wildcard *.cc gen/*.cc visualization/*.cc)) $(patsubst %.c,%.o,$(wildcard *.c))
 ##----------------------------------------------------------------------------
 
 CPNT_1_LFLAGS =	$(CPNT_LFLAGS)
@@ -132,7 +127,7 @@ CPNT_1_BIN =	smartVisualization
 
 
 # <asteck, dstampfer> ------------------------------------------------------------------
-GEN_DIR = $(OBJ_DIR)/gen
+GEN_DIR = $(OBJ_DIR)/gen  $(OBJ_DIR)/visualization
 BIN_DIR = $(SMART_ROOT)/bin
 LIB_DIR = $(SMART_ROOT)/lib
 SRC_DIR = $(SMART_ROOT)/src

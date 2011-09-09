@@ -65,36 +65,51 @@ int ImageTask::svc()
 	{
 
 		CHS::StatusCode req_status;
-		CHS::QueryId id;
 		CommVisionObjects::CommVideoImage image;
 		CommBasicObjects::CommVoid dummy;
-		static unsigned char *buffer = 0;
+		//static unsigned char *buffer = 0;
 
-		std::cout << "[ImageTask] Query ...\n";
+		std::cout << "[ImageTask] Getting Image ...\n";
+
 		req_status = COMP->queryClient->query(dummy,image);
+
+		//CHS::QueryId id;
 		//req_status = COMP->queryClient->queryRequest(dummy,id);
 		//req_status = COMP->queryClient->queryReceiveWait(id,image);
 
-		std::cout <<"[ImageTask] Query: status: "<<CHS::StatusCodeConversion(req_status)<<std::endl;
+		//req_status = COMP->pushNewestClient->getUpdateWait(image);
 
-		//COMP->pushNewestClient->getUpdate(image);
+		std::cout << "[ImageTask] status: " << CHS::StatusCodeConversion(req_status) << std::endl;
 
+		std::cout << "Is data valid?: " << (bool) image.is_data_valid() << std::endl;
+		std::cout << "Height: " << image.get_height() << std::endl;
+		std::cout << "Width: " << image.get_width() << std::endl;
+		std::cout << "Format: " << image.get_format() << std::endl;
 
-		//std::cout<<"Is data valid?: "<<image.is_data_valid()<<std::endl;
-		//std::cout<<"Height: "<<image.get_height()<<std::endl;
 		CHS::SmartGuard imgGuard(COMP->CurrentImageMutex);
 		{
 			cvReleaseImage(&COMP->currentImage);
 			COMP->currentImage = NULL;
-			COMP->currentImage = COMP->convertDataArrayToIplImage(image, cvSize(image.get_width(),image.get_height()));
+			COMP->currentImage = COMP->convertDataArrayToIplImage(image, cvSize(image.get_width(), image.get_height()));
+
+			if (COMP->currentImage == NULL)
+				std::cout << "[ImageTask] Current Image NOT set!" << std::endl;
+			else {
+				std::cout << "[ImageTask] Current Image set!" << std::endl;
+
+
+				std::cout << "Sensor Pose: " << image.get_sensor_pose() << std::endl;
+
+			}
+
 		}
 		imgGuard.release();
 		//	unsigned int size = image.get_size_as_rgb32();
 		//	buffer = new unsigned char[size];
 		//	get_as_rgb32(buffer);
 
-        std::cout << "[ImageTask] sleep ...\n";
-        usleep(20000);
+		std::cout << "[ImageTask] sleep ...\n";
+		usleep(20000);
 
 	}
 	return 0;

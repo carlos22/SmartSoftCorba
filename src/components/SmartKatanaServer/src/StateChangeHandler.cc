@@ -63,7 +63,8 @@ void StateChangeHandler::handleEnterState(const std::string & s) throw()
 		std::cout<<"handleEnterState: "<<__LINE__<<std::endl;
 		COMP->posePushTimedServer->start();
 		std::cout<<"handleEnterState: "<<__LINE__<<std::endl;
-		KATANA->start();
+		//KATANA->start();
+		KATANA->activate();
 		std::cout<<"handleEnterState: "<<__LINE__<<std::endl;
 	}
 }
@@ -80,7 +81,8 @@ void StateChangeHandler::handleQuitState(const std::string & s) throw()
 		std::cout<<"handleQuitState: "<<__LINE__<<std::endl;
 		COMP->posePushTimedServer->stop();
 		std::cout<<"handleQuitState: "<<__LINE__<<std::endl;
-		KATANA->stop();
+		//KATANA->stop();
+		KATANA->deactivate();
 		std::cout<<"handleQuitState: "<<__LINE__<<std::endl;
 	}
 }

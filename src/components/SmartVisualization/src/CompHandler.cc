@@ -62,39 +62,60 @@
 #include <CommNavigationObjects/commGridMap.hh>
 #include <CommNavigationObjects/commGridMapRequest.hh>
 
-void CompHandler::onStartup() {
-	if (COMP->ini.services.show_ltm) {
+void CompHandler::onStartup()
+{
+	if (COMP->ini.services.show_ltm)
+	{
 		COMP->ltmTask.init();
 		COMP->ltmTask.open();
 	}
 
-	if (COMP->ini.services.show_cur_map) {
+	if (COMP->ini.services.show_cur_map)
+	{
 		COMP->curMapTask.init();
 		COMP->curMapTask.open();
 	}
 
-	if (COMP->ini.services.show_laser_1) {
+	if (COMP->ini.services.show_laser_1)
+	{
 		COMP->laser1Task.init();
 		COMP->laser1Task.open();
 	}
 
-	if (COMP->ini.services.show_laser_2) {
+	if (COMP->ini.services.show_laser_2)
+	{
 		COMP->laser2Task.init();
 		COMP->laser2Task.open();
 	}
 
-	if (COMP->ini.services.show_laser_3) {
+	if (COMP->ini.services.show_laser_3)
+	{
 		COMP->laser3Task.init();
 		COMP->laser3Task.open();
 	}
 
-	if (COMP->ini.services.show_tof_image) {
+	if (COMP->ini.services.show_tof_image)
+	{
 		COMP->tofTask.init();
 		COMP->tofTask.open();
 	}
 
-	if (COMP->ini.services.show_base) {
+	if (COMP->ini.services.show_base)
+	{
 		COMP->baseTask.init();
 		COMP->baseTask.open();
 	}
+
+	if (COMP->ini.services.show_kinect_image)
+	{
+		COMP->kinectTask.init();
+		COMP->kinectTask.open();
+	}
+
+	if (COMP->ini.services.show_person_detection)
+	{
+		COMP->personDetectionTask.init();
+		COMP->personDetectionTask.open();
+	}
+
 }

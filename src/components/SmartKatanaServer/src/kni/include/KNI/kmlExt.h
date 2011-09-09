@@ -116,12 +116,6 @@ public:
 			TMotDYL	dyl	//!< dynamic controller parameters
 	);
 
-	////////////
-	//Lutz
-        ///////////
-	void calibrate_axis(long axis);
-
-
 	//------------------------------------------------------------------------------//
 
 	void searchMechStop(long idx,		//!< motor index
