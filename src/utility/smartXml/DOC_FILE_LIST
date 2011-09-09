@@ -1,1 +1,4 @@
-smartXmlOutputStream.hh
+./smartKnuthMorrisPratt.hh
+./dummy.cc
+./testKnuthMorrisPratt.cc
+./smartXmlOutputStream.hh

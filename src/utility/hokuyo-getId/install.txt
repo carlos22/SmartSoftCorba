@@ -1,0 +1,2 @@
+SUBSYSTEMS=="usb", KERNEL=="ttyACM[0-9]*", ATTRS{manufacturer}=="Hokuyo Data Flex for USB", ATTRS{product}=="URG-Series USB Driver", PROGRAM=="/home/zafh/SOFTWARE/smartsoft/bin/getHokuyoID %N q", SYMLINK+="hokuyo_%c"
+

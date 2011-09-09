@@ -38,7 +38,8 @@ class OpenCVHelpers {
 public:
 
 	/**
-	 *
+	 * create grayscale image from float.
+	 * returns IplImage that needs to be cvReleaseImage'ed by the caller.
 	 */
 	static IplImage* copyFloatToIplImage( const float* const floatImage, const int height, const int width) {
 	    CvMat dataMatrix;
@@ -50,6 +51,30 @@ public:
 	    cvCopy(&dataMatrix, ipl_image);
 	    return ipl_image;
     }
+
+
+
+/**
+convert a rgb image to an ipl image. use for example with kinect.get_rgb_image()
+returns IplImage that needs to be cvReleaseImage'ed by the caller.
+*/
+static IplImage* copyRGBToIplImage( unsigned char* arr_image, const int height, const int width) {
+
+		CvMat dataMatrix;
+		IplImage *returnImage;
+		cvInitMatHeader(&dataMatrix, height, width, CV_8UC3, arr_image);
+		returnImage = cvCreateImage(cvSize(width, height), IPL_DEPTH_8U, 3); //IPL_DEPTH_32F
+
+		// copy matrix data into image
+		cvCopy(&dataMatrix, returnImage);
+
+		// swap RGB/BGR as opencv internally stores as BGR
+		cvCvtColor(returnImage, returnImage, CV_RGB2BGR);
+
+		return returnImage;
+}
+
+
 
 	static IplImage* stretchContrast32f(IplImage * src, const double quantile = 0.01, const int histBins = 2048) {
         double min_val = 0.0;

@@ -1,3 +1,8 @@
-smartProperty.hh
-smartPropertyItem.hh
-smartPropertySet.hh
+./testProperty.cc
+./smartProperty.hh
+./smartPropertyItem.hh
+./smartProperty.cc
+./smartPropertySet.hh
+./smartPropertyKey.cc
+./smartPropertySet.cc
+./smartPropertyItem.cc

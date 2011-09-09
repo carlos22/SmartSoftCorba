@@ -1789,7 +1789,7 @@ int main(void)
 
   // <asteck date="18.07.2008">
 
-  polygon.number_of_segments = 8;
+  polygon.number_of_segments = 4;
 
 // exact robot shape P3DX
 /*
@@ -1919,6 +1919,7 @@ int main(void)
 
 
 // exact robot shape RMP50
+/*
   polygon.line[0].x1 =  327.5;polygon.line[0].y1 =  143.0;  // AB
   polygon.line[0].x2 =  327.5;polygon.line[0].y2 = -143.0;
 
@@ -1942,6 +1943,20 @@ int main(void)
 
   polygon.line[6].x1 =  205.0;polygon.line[6].y1 =  281.0;  // HA
   polygon.line[6].x2 =  327.5;polygon.line[6].y2 =  143.0;
+*/
+
+// robot shape for Frauenhofer CareOBot with safety clearance (Width=550+100 Depth=750+100)
+  polygon.line[0].x1 =  425.0;polygon.line[0].y1 =  325.0;  // AB
+  polygon.line[0].x2 =  425.0;polygon.line[0].y2 = -325.0;
+
+  polygon.line[1].x1 =  425.0;polygon.line[1].y1 = -325.0;  // BC
+  polygon.line[1].x2 =  -425.0;polygon.line[1].y2 = -325.0;
+
+  polygon.line[2].x1 =  -425.0;polygon.line[2].y1 = -325.0;  // CD
+  polygon.line[2].x2 =  -425.0;polygon.line[2].y2 = 325.0;
+
+  polygon.line[3].x1 = -425.0;polygon.line[3].y1 = 325.0;  // DE
+  polygon.line[3].x2 = 425.0;polygon.line[3].y2 = 325.0;
 
 // </asteck>
 

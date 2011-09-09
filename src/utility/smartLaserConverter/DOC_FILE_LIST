@@ -1,0 +1,5 @@
+./smartLaserXfig.hh
+./smartConvertibleMobileLaserScan.cc
+./smartConvertibleMobileLaserScan.hh
+./smartLaserConverter.cc
+./smartLaserXfig.cc
