@@ -34,6 +34,11 @@
 
 #include "smartTimerThread.hh"
 
+#ifndef ACE_LIB_TEXT
+#define ACE_LIB_TEXT(STRING) ACE_TEXT(STRING)
+#endif
+
+
 using namespace CHS;
 
 //=============================================================================

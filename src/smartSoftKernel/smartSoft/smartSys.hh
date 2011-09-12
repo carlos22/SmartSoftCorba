@@ -42,7 +42,6 @@
 #include "ace/ACE.h"
 #include "ace/Reactor.h"
 #include "ace/Synch.h"
-#include "ace/Synch_T.h"
 #include "ace/Thread.h"
 #include "ace/Thread_Manager.h"
 #include "ace/Shared_Memory_SV.h"

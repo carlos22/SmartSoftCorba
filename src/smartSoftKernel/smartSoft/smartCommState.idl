@@ -36,9 +36,11 @@ struct SmartStateRequest
   string state_name;
 };
 
+typedef sequence<string> StateListType;
+
 struct SmartStateResponse
 {
   long status;
-  sequence<string> state_list;
+  StateListType state_list;
 };
 
