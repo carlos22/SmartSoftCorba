@@ -239,7 +239,7 @@ int SmartLtmGridMap::clearMap(int value)
 int SmartLtmGridMap::getPartialMap( int partXoffset,int partYoffset,
                                     int partXsize,int partYsize,
                                     int threshold,
-                                    CommNavigationObjectsIDL::CommGridMap::_tao_seq_CORBA_Octet_ &destCell)
+                     CommNavigationObjectsIDL::CommGridMap_cell_type &destCell)
 {
 
   int xCells,yCells;           // number of cells to be copied

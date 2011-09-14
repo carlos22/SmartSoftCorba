@@ -104,8 +104,7 @@ public:
   int getPartialMap( int partXoffset,int partYoffset,
                      int partXsize,int partYsize,
                      int threshold,
-                     CommNavigationObjectsIDL::CommGridMap::_tao_seq_CORBA_Octet_ &destCell);
-
+                     CommNavigationObjectsIDL::CommGridMap_cell_type &destCell);
 
   // write map context to yaml a file and the map data in a pgm image file.
   void save_yaml_pgm(std::ostream &os_yaml, std::string pgmFileName);
