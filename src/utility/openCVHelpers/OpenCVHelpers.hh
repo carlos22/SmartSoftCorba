@@ -166,6 +166,38 @@ static IplImage* copyRGBToIplImage( unsigned char* arr_image, const int height, 
         return GRAY;
 
     }
+
+
+/**
+ * rotates an input ipl image around center coordinate by angle specified in rad.
+ * allocates and returns the rotated image!
+ * returns IplImage that needs to be cvReleaseImage'ed by the caller.
+ */
+static IplImage* rotateCenter(IplImage *srcImg, double angle_rad) {
+	// based on:
+	// http://blog.weisu.org/2007/12/opencv-image-rotate-and-zoom-rotation.html
+
+	IplImage *outImg;
+	outImg = cvCreateImage( cvGetSize( srcImg ), srcImg->depth, srcImg->nChannels );
+
+	float m[6];
+	CvMat M = cvMat(2, 3, CV_32F, m);
+
+	m[0] = (float)(cos(angle_rad));
+	m[1] = (float)(sin(angle_rad));
+	m[3] = -m[1];
+	m[4] = m[0];
+	m[2] = srcImg->width/2;
+	m[5] = srcImg->height/2;
+
+	cvGetQuadrangleSubPix( srcImg, outImg, &M );
+
+	outImg->origin = srcImg->origin;
+
+	return outImg;
+}
+
+
 };
 
 #endif
